@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2992: Number of Self-Divisible Permutations"
-date = "2016-08-16"
+date = "2016-08-18"
 description = "Solution to Leetcode 2992"
 tags = [
     

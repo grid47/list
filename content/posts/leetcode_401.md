@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 401: Binary Watch"
-date = "2023-09-20"
+date = "2023-09-22"
 description = "Solution to Leetcode 401"
 tags = [
     

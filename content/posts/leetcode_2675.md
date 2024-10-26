@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2675: Array of Objects to Matrix"
-date = "2017-06-29"
+date = "2017-07-01"
 description = "Solution to Leetcode 2675"
 tags = [
     

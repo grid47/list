@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 882: Reachable Nodes In Subdivided Graph"
-date = "2022-05-27"
+date = "2022-05-29"
 description = "Solution to Leetcode 882"
 tags = [
     

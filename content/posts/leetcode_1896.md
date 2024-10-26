@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1896: Minimum Cost to Change the Final Value of Expression"
-date = "2019-08-17"
+date = "2019-08-19"
 description = "Solution to Leetcode 1896"
 tags = [
     

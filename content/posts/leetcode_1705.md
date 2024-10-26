@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1705: Maximum Number of Eaten Apples"
-date = "2020-02-24"
+date = "2020-02-26"
 description = "Solution to Leetcode 1705"
 tags = [
     

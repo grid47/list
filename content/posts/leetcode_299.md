@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 299: Bulls and Cows"
-date = "2023-12-31"
+date = "2024-01-02"
 description = "Solution to Leetcode 299"
 tags = [
     

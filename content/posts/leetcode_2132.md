@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2132: Stamping the Grid"
-date = "2018-12-24"
+date = "2018-12-26"
 description = "Solution to Leetcode 2132"
 tags = [
     

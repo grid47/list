@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2804: Array Prototype ForEach"
-date = "2017-02-20"
+date = "2017-02-22"
 description = "Solution to Leetcode 2804"
 tags = [
     

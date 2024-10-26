@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3293: Calculate Product Final Price"
-date = "2015-10-20"
+date = "2015-10-22"
 description = "Solution to Leetcode 3293"
 tags = [
     

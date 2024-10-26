@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 851: Loud and Rich"
-date = "2022-06-27"
+date = "2022-06-29"
 description = "Solution to Leetcode 851"
 tags = [
     

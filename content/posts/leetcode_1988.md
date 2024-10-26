@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1988: Find Cutoff Score for Each School"
-date = "2019-05-17"
+date = "2019-05-19"
 description = "Solution to Leetcode 1988"
 tags = [
     

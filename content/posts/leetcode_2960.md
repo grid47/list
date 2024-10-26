@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2960: Count Tested Devices After Test Operations"
-date = "2016-09-17"
+date = "2016-09-19"
 description = "Solution to Leetcode 2960"
 tags = [
     

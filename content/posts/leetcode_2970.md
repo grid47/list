@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2970: Count the Number of Incremovable Subarrays I"
-date = "2016-09-07"
+date = "2016-09-09"
 description = "Solution to Leetcode 2970"
 tags = [
     

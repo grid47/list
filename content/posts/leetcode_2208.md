@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2208: Minimum Operations to Halve Array Sum"
-date = "2018-10-09"
+date = "2018-10-11"
 description = "Solution to Leetcode 2208"
 tags = [
     

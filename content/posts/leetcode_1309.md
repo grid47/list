@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1309: Decrypt String from Alphabet to Integer Mapping"
-date = "2021-03-26"
+date = "2021-03-28"
 description = "Solution to Leetcode 1309"
 tags = [
     

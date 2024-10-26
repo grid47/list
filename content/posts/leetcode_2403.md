@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2403: Minimum Time to Kill All Monsters"
-date = "2018-03-28"
+date = "2018-03-30"
 description = "Solution to Leetcode 2403"
 tags = [
     

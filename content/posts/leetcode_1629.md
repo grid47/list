@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1629: Slowest Key"
-date = "2020-05-10"
+date = "2020-05-12"
 description = "Solution to Leetcode 1629"
 tags = [
     

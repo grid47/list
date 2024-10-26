@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1864: Minimum Number of Swaps to Make the Binary String Alternating"
-date = "2019-09-18"
+date = "2019-09-20"
 description = "Solution to Leetcode 1864"
 tags = [
     

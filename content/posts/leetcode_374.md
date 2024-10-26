@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 374: Guess Number Higher or Lower"
-date = "2023-10-17"
+date = "2023-10-19"
 description = "Solution to Leetcode 374"
 tags = [
     

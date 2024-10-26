@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 60: Permutation Sequence"
-date = "2024-08-26"
+date = "2024-08-28"
 description = "Solution to Leetcode 60"
 tags = [
     

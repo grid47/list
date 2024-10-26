@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2895: Minimum Processing Time"
-date = "2016-11-21"
+date = "2016-11-23"
 description = "Solution to Leetcode 2895"
 tags = [
     

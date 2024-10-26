@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1185: Day of the Week"
-date = "2021-07-28"
+date = "2021-07-30"
 description = "Solution to Leetcode 1185"
 tags = [
     

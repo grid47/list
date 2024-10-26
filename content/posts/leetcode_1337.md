@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1337: The K Weakest Rows in a Matrix"
-date = "2021-02-26"
+date = "2021-02-28"
 description = "Solution to Leetcode 1337"
 tags = [
     

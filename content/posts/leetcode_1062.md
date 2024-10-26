@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1062: Longest Repeating Substring"
-date = "2021-11-28"
+date = "2021-11-30"
 description = "Solution to Leetcode 1062"
 tags = [
     

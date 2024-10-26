@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1022: Sum of Root To Leaf Binary Numbers"
-date = "2022-01-07"
+date = "2022-01-09"
 description = "Solution to Leetcode 1022"
 tags = [
     

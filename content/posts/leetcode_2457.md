@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2457: Minimum Addition to Make Integer Beautiful"
-date = "2018-02-02"
+date = "2018-02-04"
 description = "Solution to Leetcode 2457"
 tags = [
     

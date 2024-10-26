@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 32: Longest Valid Parentheses"
-date = "2024-09-23"
+date = "2024-09-25"
 description = "Solution to Leetcode 32"
 tags = [
     

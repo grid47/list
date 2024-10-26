@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 254: Factor Combinations"
-date = "2024-02-14"
+date = "2024-02-16"
 description = "Solution to Leetcode 254"
 tags = [
     

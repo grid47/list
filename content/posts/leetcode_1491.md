@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1491: Average Salary Excluding the Minimum and Maximum Salary"
-date = "2020-09-25"
+date = "2020-09-27"
 description = "Solution to Leetcode 1491"
 tags = [
     

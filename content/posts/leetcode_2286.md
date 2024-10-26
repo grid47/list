@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2286: Booking Concert Tickets in Groups"
-date = "2018-07-23"
+date = "2018-07-25"
 description = "Solution to Leetcode 2286"
 tags = [
     

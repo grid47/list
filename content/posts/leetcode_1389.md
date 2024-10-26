@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1389: Create Target Array in the Given Order"
-date = "2021-01-05"
+date = "2021-01-07"
 description = "Solution to Leetcode 1389"
 tags = [
     

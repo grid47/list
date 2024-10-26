@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2267:  Check if There Is a Valid Parentheses String Path"
-date = "2018-08-11"
+date = "2018-08-13"
 description = "Solution to Leetcode 2267"
 tags = [
     

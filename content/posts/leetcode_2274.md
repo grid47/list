@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2274: Maximum Consecutive Floors Without Special Floors"
-date = "2018-08-04"
+date = "2018-08-06"
 description = "Solution to Leetcode 2274"
 tags = [
     

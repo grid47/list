@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2690: Infinite Method Object"
-date = "2017-06-14"
+date = "2017-06-16"
 description = "Solution to Leetcode 2690"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2191: Sort the Jumbled Numbers"
-date = "2018-10-26"
+date = "2018-10-28"
 description = "Solution to Leetcode 2191"
 tags = [
     

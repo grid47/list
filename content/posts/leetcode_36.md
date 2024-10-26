@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 36: Valid Sudoku"
-date = "2024-09-19"
+date = "2024-09-21"
 description = "Solution to Leetcode 36"
 tags = [
     

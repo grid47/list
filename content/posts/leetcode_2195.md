@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2195: Append K Integers With Minimal Sum"
-date = "2018-10-22"
+date = "2018-10-24"
 description = "Solution to Leetcode 2195"
 tags = [
     

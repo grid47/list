@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 778: Swim in Rising Water"
-date = "2022-09-08"
+date = "2022-09-10"
 description = "Solution to Leetcode 778"
 tags = [
     

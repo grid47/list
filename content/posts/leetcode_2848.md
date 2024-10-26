@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2848: Points That Intersect With Cars"
-date = "2017-01-07"
+date = "2017-01-09"
 description = "Solution to Leetcode 2848"
 tags = [
     

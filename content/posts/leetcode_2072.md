@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2072: The Winner University"
-date = "2019-02-22"
+date = "2019-02-24"
 description = "Solution to Leetcode 2072"
 tags = [
     

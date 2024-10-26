@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 56: Merge Intervals"
-date = "2024-08-30"
+date = "2024-09-01"
 description = "Solution to Leetcode 56"
 tags = [
     

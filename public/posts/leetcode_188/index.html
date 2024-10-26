@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-04-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-04-20T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-04-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-04-22T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-04-20T00:00:00Z">
-                April 20, 2024
+              <time datetime="2024-04-22T00:00:00Z">
+                April 22, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,28 @@
         <p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int memo[2][1001][100];
+</span></span><span class="line"><span class="cl">    int dp(int k, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> prices, int buy, int idx, int cnt) {
+</span></span><span class="line"><span class="cl">        if(cnt == k || idx == prices.size()) {
+</span></span><span class="line"><span class="cl">            return 0;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(memo[buy][idx][cnt] != -1) return memo[buy][idx][cnt];
+</span></span><span class="line"><span class="cl">        int res = dp(k, prices, buy, idx + 1, cnt);
+</span></span><span class="line"><span class="cl">        if(buy) {
+</span></span><span class="line"><span class="cl">            res = max(res, -prices[idx] + dp(k, prices, false, idx + 1, cnt));
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            res = max(res, prices[idx] + dp(k, prices, true, idx +1, cnt + 1));            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return memo[buy][idx][cnt] = res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int maxProfit(int k, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> prices) {
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        return dp(k,prices, true, 0, 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

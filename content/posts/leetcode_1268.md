@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1268: Search Suggestions System"
-date = "2021-05-06"
+date = "2021-05-08"
 description = "Solution to Leetcode 1268"
 tags = [
     

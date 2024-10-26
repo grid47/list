@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2518: Number of Great Partitions"
-date = "2017-12-03"
+date = "2017-12-05"
 description = "Solution to Leetcode 2518"
 tags = [
     

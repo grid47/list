@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1354: Construct Target Array With Multiple Sums"
-date = "2021-02-09"
+date = "2021-02-11"
 description = "Solution to Leetcode 1354"
 tags = [
     

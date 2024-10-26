@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1931: Painting a Grid With Three Different Colors"
-date = "2019-07-13"
+date = "2019-07-15"
 description = "Solution to Leetcode 1931"
 tags = [
     

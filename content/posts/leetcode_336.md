@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 336: Palindrome Pairs"
-date = "2023-11-24"
+date = "2023-11-26"
 description = "Solution to Leetcode 336"
 tags = [
     

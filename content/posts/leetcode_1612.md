@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1612: Check If Two Expression Trees are Equivalent"
-date = "2020-05-27"
+date = "2020-05-29"
 description = "Solution to Leetcode 1612"
 tags = [
     

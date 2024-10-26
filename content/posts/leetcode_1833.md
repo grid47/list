@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1833: Maximum Ice Cream Bars"
-date = "2019-10-19"
+date = "2019-10-21"
 description = "Solution to Leetcode 1833"
 tags = [
     

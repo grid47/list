@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2724: Sort By"
-date = "2017-05-11"
+date = "2017-05-13"
 description = "Solution to Leetcode 2724"
 tags = [
     

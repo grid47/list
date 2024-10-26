@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3318: Find X-Sum of All K-Long Subarrays I"
-date = "2015-09-25"
+date = "2015-09-27"
 description = "Solution to Leetcode 3318"
 tags = [
     

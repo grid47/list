@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1925: Count Square Sum Triples"
-date = "2019-07-19"
+date = "2019-07-21"
 description = "Solution to Leetcode 1925"
 tags = [
     

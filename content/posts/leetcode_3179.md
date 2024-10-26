@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3179: Find the N-th Value After K Seconds"
-date = "2016-02-11"
+date = "2016-02-13"
 description = "Solution to Leetcode 3179"
 tags = [
     

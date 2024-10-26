@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2741: Special Permutations"
-date = "2017-04-24"
+date = "2017-04-26"
 description = "Solution to Leetcode 2741"
 tags = [
     

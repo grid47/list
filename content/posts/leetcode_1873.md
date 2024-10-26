@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1873: Calculate Special Bonus"
-date = "2019-09-09"
+date = "2019-09-11"
 description = "Solution to Leetcode 1873"
 tags = [
     

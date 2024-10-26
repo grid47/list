@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1642: Furthest Building You Can Reach"
-date = "2020-04-27"
+date = "2020-04-29"
 description = "Solution to Leetcode 1642"
 tags = [
     

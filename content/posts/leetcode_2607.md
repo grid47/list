@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2607: Make K-Subarray Sums Equal"
-date = "2017-09-05"
+date = "2017-09-07"
 description = "Solution to Leetcode 2607"
 tags = [
     

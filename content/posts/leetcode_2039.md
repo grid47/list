@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2039: The Time When the Network Becomes Idle"
-date = "2019-03-27"
+date = "2019-03-29"
 description = "Solution to Leetcode 2039"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1229: Meeting Scheduler"
-date = "2021-06-14"
+date = "2021-06-16"
 description = "Solution to Leetcode 1229"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1507: Reformat Date"
-date = "2020-09-09"
+date = "2020-09-11"
 description = "Solution to Leetcode 1507"
 tags = [
     

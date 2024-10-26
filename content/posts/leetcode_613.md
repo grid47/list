@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 613: Shortest Distance in a Line"
-date = "2023-02-20"
+date = "2023-02-22"
 description = "Solution to Leetcode 613"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1349: Maximum Students Taking Exam"
-date = "2021-02-14"
+date = "2021-02-16"
 description = "Solution to Leetcode 1349"
 tags = [
     

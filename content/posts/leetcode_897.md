@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 897: Increasing Order Search Tree"
-date = "2022-05-12"
+date = "2022-05-14"
 description = "Solution to Leetcode 897"
 tags = [
     

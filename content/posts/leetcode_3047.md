@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3047: Find the Largest Area of Square Inside Two Rectangles"
-date = "2016-06-22"
+date = "2016-06-24"
 description = "Solution to Leetcode 3047"
 tags = [
     

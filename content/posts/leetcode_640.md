@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 640: Solve the Equation"
-date = "2023-01-24"
+date = "2023-01-26"
 description = "Solution to Leetcode 640"
 tags = [
     

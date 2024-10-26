@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2460: Apply Operations to an Array"
-date = "2018-01-30"
+date = "2018-02-01"
 description = "Solution to Leetcode 2460"
 tags = [
     

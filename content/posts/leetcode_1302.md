@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1302: Deepest Leaves Sum"
-date = "2021-04-02"
+date = "2021-04-04"
 description = "Solution to Leetcode 1302"
 tags = [
     

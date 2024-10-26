@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1747: Leetflex Banned Accounts"
-date = "2020-01-13"
+date = "2020-01-15"
 description = "Solution to Leetcode 1747"
 tags = [
     

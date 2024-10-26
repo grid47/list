@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2249: Count Lattice Points Inside a Circle"
-date = "2018-08-29"
+date = "2018-08-31"
 description = "Solution to Leetcode 2249"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1009: Complement of Base 10 Integer"
-date = "2022-01-20"
+date = "2022-01-22"
 description = "Solution to Leetcode 1009"
 tags = [
     

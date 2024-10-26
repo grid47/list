@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1133: Largest Unique Number"
-date = "2021-09-18"
+date = "2021-09-20"
 description = "Solution to Leetcode 1133"
 tags = [
     

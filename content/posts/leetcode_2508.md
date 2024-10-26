@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2508: Add Edges to Make Degrees of All Nodes Even"
-date = "2017-12-13"
+date = "2017-12-15"
 description = "Solution to Leetcode 2508"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2611: Mice and Cheese"
-date = "2017-09-01"
+date = "2017-09-03"
 description = "Solution to Leetcode 2611"
 tags = [
     

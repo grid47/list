@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 283: Move Zeroes"
-date = "2024-01-16"
+date = "2024-01-18"
 description = "Solution to Leetcode 283"
 tags = [
     
@@ -22,6 +22,17 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int j = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] != 0)
+                swap(nums[i], nums[j]), j++;
+        }
+        while(j < nums.size())
+            nums[j++] = 0;
+    }
+};
 {{< /highlight >}}
 

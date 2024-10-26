@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2615: Sum of Distances"
-date = "2017-08-28"
+date = "2017-08-30"
 description = "Solution to Leetcode 2615"
 tags = [
     

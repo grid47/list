@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3093: Longest Common Suffix Queries"
-date = "2016-05-07"
+date = "2016-05-09"
 description = "Solution to Leetcode 3093"
 tags = [
     

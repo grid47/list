@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2591: Distribute Money to Maximum Children"
-date = "2017-09-21"
+date = "2017-09-23"
 description = "Solution to Leetcode 2591"
 tags = [
     

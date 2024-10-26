@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1769: Minimum Number of Operations to Move All Balls to Each Box"
-date = "2019-12-22"
+date = "2019-12-24"
 description = "Solution to Leetcode 1769"
 tags = [
     

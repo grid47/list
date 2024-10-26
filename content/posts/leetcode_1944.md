@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1944: Number of Visible People in a Queue"
-date = "2019-06-30"
+date = "2019-07-02"
 description = "Solution to Leetcode 1944"
 tags = [
     

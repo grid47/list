@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2811: Check if it is Possible to Split Array"
-date = "2017-02-13"
+date = "2017-02-15"
 description = "Solution to Leetcode 2811"
 tags = [
     

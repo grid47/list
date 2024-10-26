@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1126: Active Businesses"
-date = "2021-09-25"
+date = "2021-09-27"
 description = "Solution to Leetcode 1126"
 tags = [
     

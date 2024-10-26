@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2238: Number of Times a Driver Was a Passenger"
-date = "2018-09-09"
+date = "2018-09-11"
 description = "Solution to Leetcode 2238"
 tags = [
     

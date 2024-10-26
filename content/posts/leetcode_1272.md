@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1272: Remove Interval"
-date = "2021-05-02"
+date = "2021-05-04"
 description = "Solution to Leetcode 1272"
 tags = [
     

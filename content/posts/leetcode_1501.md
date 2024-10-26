@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1501: Countries You Can Safely Invest In"
-date = "2020-09-15"
+date = "2020-09-17"
 description = "Solution to Leetcode 1501"
 tags = [
     

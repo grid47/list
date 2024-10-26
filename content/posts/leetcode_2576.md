@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2576: Find the Maximum Number of Marked Indices"
-date = "2017-10-06"
+date = "2017-10-08"
 description = "Solution to Leetcode 2576"
 tags = [
     

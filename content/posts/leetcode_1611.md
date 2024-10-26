@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1611: Minimum One Bit Operations to Make Integers Zero"
-date = "2020-05-28"
+date = "2020-05-30"
 description = "Solution to Leetcode 1611"
 tags = [
     

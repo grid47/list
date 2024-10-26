@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1742: Maximum Number of Balls in a Box"
-date = "2020-01-18"
+date = "2020-01-20"
 description = "Solution to Leetcode 1742"
 tags = [
     

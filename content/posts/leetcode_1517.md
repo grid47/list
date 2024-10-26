@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1517: Find Users With Valid E-Mails"
-date = "2020-08-30"
+date = "2020-09-01"
 description = "Solution to Leetcode 1517"
 tags = [
     

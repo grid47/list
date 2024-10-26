@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2694: Event Emitter"
-date = "2017-06-10"
+date = "2017-06-12"
 description = "Solution to Leetcode 2694"
 tags = [
     

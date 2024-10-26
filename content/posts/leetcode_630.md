@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 630: Course Schedule III"
-date = "2023-02-03"
+date = "2023-02-05"
 description = "Solution to Leetcode 630"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1386: Cinema Seat Allocation"
-date = "2021-01-08"
+date = "2021-01-10"
 description = "Solution to Leetcode 1386"
 tags = [
     

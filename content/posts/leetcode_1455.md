@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1455: Check If a Word Occurs As a Prefix of Any Word in a Sentence"
-date = "2020-10-31"
+date = "2020-11-02"
 description = "Solution to Leetcode 1455"
 tags = [
     

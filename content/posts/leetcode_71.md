@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 71: Simplify Path"
-date = "2024-08-15"
+date = "2024-08-17"
 description = "Solution to Leetcode 71"
 tags = [
     

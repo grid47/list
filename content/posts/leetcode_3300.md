@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3300: Minimum Element After Replacement With Digit Sum"
-date = "2015-10-13"
+date = "2015-10-15"
 description = "Solution to Leetcode 3300"
 tags = [
     

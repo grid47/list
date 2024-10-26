@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 278: First Bad Version"
-date = "2024-01-21"
+date = "2024-01-23"
 description = "Solution to Leetcode 278"
 tags = [
     
@@ -22,6 +22,21 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
 
+class Solution {
+public:
+    int firstBadVersion(int n) {
+        int s = 1, e = n;
+        while(s < e) {
+            int mid = s + (e - s) / 2;
+            if(isBadVersion(mid))
+                e = mid;
+            else s = mid + 1;
+        }
+        return e;
+    }
+};
 {{< /highlight >}}
 

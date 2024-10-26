@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1065: Index Pairs of a String"
-date = "2021-11-25"
+date = "2021-11-27"
 description = "Solution to Leetcode 1065"
 tags = [
     

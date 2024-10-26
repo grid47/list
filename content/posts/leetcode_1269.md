@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1269: Number of Ways to Stay in the Same Place After Some Steps"
-date = "2021-05-05"
+date = "2021-05-07"
 description = "Solution to Leetcode 1269"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1661: Average Time of Process per Machine"
-date = "2020-04-08"
+date = "2020-04-10"
 description = "Solution to Leetcode 1661"
 tags = [
     

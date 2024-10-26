@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2147: Number of Ways to Divide a Long Corridor"
-date = "2018-12-09"
+date = "2018-12-11"
 description = "Solution to Leetcode 2147"
 tags = [
     

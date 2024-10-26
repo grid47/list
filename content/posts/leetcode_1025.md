@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1025: Divisor Game"
-date = "2022-01-04"
+date = "2022-01-06"
 description = "Solution to Leetcode 1025"
 tags = [
     

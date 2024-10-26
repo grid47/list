@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1124: Longest Well-Performing Interval"
-date = "2021-09-27"
+date = "2021-09-29"
 description = "Solution to Leetcode 1124"
 tags = [
     

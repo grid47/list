@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2888: Reshape Data: Concatenate"
-date = "2016-11-28"
+date = "2016-11-30"
 description = "Solution to Leetcode 2888"
 tags = [
     

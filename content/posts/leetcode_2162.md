@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2162: Minimum Cost to Set Cooking Time"
-date = "2018-11-24"
+date = "2018-11-26"
 description = "Solution to Leetcode 2162"
 tags = [
     

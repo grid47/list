@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1141: User Activity for the Past 30 Days I"
-date = "2021-09-10"
+date = "2021-09-12"
 description = "Solution to Leetcode 1141"
 tags = [
     

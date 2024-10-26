@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2233: Maximum Product After K Increments"
-date = "2018-09-14"
+date = "2018-09-16"
 description = "Solution to Leetcode 2233"
 tags = [
     

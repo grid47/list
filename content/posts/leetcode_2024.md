@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2024: Maximize the Confusion of an Exam"
-date = "2019-04-11"
+date = "2019-04-13"
 description = "Solution to Leetcode 2024"
 tags = [
     

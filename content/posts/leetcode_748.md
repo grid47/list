@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 748: Shortest Completing Word"
-date = "2022-10-08"
+date = "2022-10-10"
 description = "Solution to Leetcode 748"
 tags = [
     

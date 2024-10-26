@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2924: Find Champion II"
-date = "2016-10-23"
+date = "2016-10-25"
 description = "Solution to Leetcode 2924"
 tags = [
     

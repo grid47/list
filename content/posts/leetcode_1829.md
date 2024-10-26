@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1829: Maximum XOR for Each Query"
-date = "2019-10-23"
+date = "2019-10-25"
 description = "Solution to Leetcode 1829"
 tags = [
     

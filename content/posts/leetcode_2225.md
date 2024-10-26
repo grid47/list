@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2225: Find Players With Zero or One Losses"
-date = "2018-09-22"
+date = "2018-09-24"
 description = "Solution to Leetcode 2225"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 505: The Maze II"
-date = "2023-06-08"
+date = "2023-06-10"
 description = "Solution to Leetcode 505"
 tags = [
     

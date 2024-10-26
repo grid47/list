@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1827: Minimum Operations to Make the Array Increasing"
-date = "2019-10-25"
+date = "2019-10-27"
 description = "Solution to Leetcode 1827"
 tags = [
     

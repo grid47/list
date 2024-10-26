@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1001: Grid Illumination"
-date = "2022-01-28"
+date = "2022-01-30"
 description = "Solution to Leetcode 1001"
 tags = [
     

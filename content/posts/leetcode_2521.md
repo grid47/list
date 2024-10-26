@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2521: Distinct Prime Factors of Product of Array"
-date = "2017-11-30"
+date = "2017-12-02"
 description = "Solution to Leetcode 2521"
 tags = [
     

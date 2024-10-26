@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1054: Distant Barcodes"
-date = "2021-12-06"
+date = "2021-12-08"
 description = "Solution to Leetcode 1054"
 tags = [
     

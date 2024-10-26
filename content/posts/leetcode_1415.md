@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1415: The k-th Lexicographical String of All Happy Strings of Length n"
-date = "2020-12-10"
+date = "2020-12-12"
 description = "Solution to Leetcode 1415"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 112: Path Sum"
-date = "2024-07-05"
+date = "2024-07-07"
 description = "Solution to Leetcode 112"
 tags = [
     

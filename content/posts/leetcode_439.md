@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 439: Ternary Expression Parser"
-date = "2023-08-13"
+date = "2023-08-15"
 description = "Solution to Leetcode 439"
 tags = [
     

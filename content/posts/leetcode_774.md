@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 774: Minimize Max Distance to Gas Station"
-date = "2022-09-12"
+date = "2022-09-14"
 description = "Solution to Leetcode 774"
 tags = [
     

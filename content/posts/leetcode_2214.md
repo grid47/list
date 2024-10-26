@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2214: Minimum Health to Beat Game"
-date = "2018-10-03"
+date = "2018-10-05"
 description = "Solution to Leetcode 2214"
 tags = [
     

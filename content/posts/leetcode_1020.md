@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1020: Number of Enclaves"
-date = "2022-01-09"
+date = "2022-01-11"
 description = "Solution to Leetcode 1020"
 tags = [
     

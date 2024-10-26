@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1351: Count Negative Numbers in a Sorted Matrix"
-date = "2021-02-12"
+date = "2021-02-14"
 description = "Solution to Leetcode 1351"
 tags = [
     

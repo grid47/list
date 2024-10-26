@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2814: Minimum Time Takes to Reach Destination Without Drowning"
-date = "2017-02-10"
+date = "2017-02-12"
 description = "Solution to Leetcode 2814"
 tags = [
     

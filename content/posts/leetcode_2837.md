@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2837: Total Traveled Distance"
-date = "2017-01-18"
+date = "2017-01-20"
 description = "Solution to Leetcode 2837"
 tags = [
     

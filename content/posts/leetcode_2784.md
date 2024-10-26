@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2784: Check if Array is Good"
-date = "2017-03-12"
+date = "2017-03-14"
 description = "Solution to Leetcode 2784"
 tags = [
     

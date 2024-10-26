@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1854: Maximum Population Year"
-date = "2019-09-28"
+date = "2019-09-30"
 description = "Solution to Leetcode 1854"
 tags = [
     

@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-06-14T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-06-14T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-06-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-06-16T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-06-14T00:00:00Z">
-                June 14, 2024
+              <time datetime="2024-06-16T00:00:00Z">
+                June 16, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/clone-graph/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/*
+</span></span><span class="line"><span class="cl">// Definition for a Node.
+</span></span><span class="line"><span class="cl">class Node {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int val;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span> neighbors;
+</span></span><span class="line"><span class="cl">    Node() {
+</span></span><span class="line"><span class="cl">        val = 0;
+</span></span><span class="line"><span class="cl">        neighbors = vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span>();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    Node(int _val) {
+</span></span><span class="line"><span class="cl">        val = _val;
+</span></span><span class="line"><span class="cl">        neighbors = vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span>();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    Node(int _val, vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span> _neighbors) {
+</span></span><span class="line"><span class="cl">        val = _val;
+</span></span><span class="line"><span class="cl">        neighbors = _neighbors;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">*/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">Node</span><span class="err">*</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">    Node* cloneGraph(Node* node) {
+</span></span><span class="line"><span class="cl">        if(node == NULL) return node;
+</span></span><span class="line"><span class="cl">        Node * ans;
+</span></span><span class="line"><span class="cl">        ans = copy(node);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    Node* copy(Node* node) {
+</span></span><span class="line"><span class="cl">        if(mp.count(node-&gt;val)) return mp[node-&gt;val];
+</span></span><span class="line"><span class="cl">        Node* ans = new Node(node-&gt;val);
+</span></span><span class="line"><span class="cl">        mp[node-&gt;val] = ans;
+</span></span><span class="line"><span class="cl">        for(auto it: node-&gt;neighbors) {
+</span></span><span class="line"><span class="cl">            Node* n = copy(it);
+</span></span><span class="line"><span class="cl">            ans-&gt;neighbors.push_back(n);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

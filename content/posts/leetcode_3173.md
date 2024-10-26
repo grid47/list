@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3173: Bitwise OR of Adjacent Elements"
-date = "2016-02-17"
+date = "2016-02-19"
 description = "Solution to Leetcode 3173"
 tags = [
     

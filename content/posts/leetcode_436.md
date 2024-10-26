@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 436: Find Right Interval"
-date = "2023-08-16"
+date = "2023-08-18"
 description = "Solution to Leetcode 436"
 tags = [
     

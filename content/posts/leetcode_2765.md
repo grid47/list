@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2765: Longest Alternating Subarray"
-date = "2017-03-31"
+date = "2017-04-02"
 description = "Solution to Leetcode 2765"
 tags = [
     

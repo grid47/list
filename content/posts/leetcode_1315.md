@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1315: Sum of Nodes with Even-Valued Grandparent"
-date = "2021-03-20"
+date = "2021-03-22"
 description = "Solution to Leetcode 1315"
 tags = [
     

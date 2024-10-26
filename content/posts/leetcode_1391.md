@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1391: Check if There is a Valid Path in a Grid"
-date = "2021-01-03"
+date = "2021-01-05"
 description = "Solution to Leetcode 1391"
 tags = [
     

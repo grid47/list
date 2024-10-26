@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 102: Binary Tree Level Order Traversal"
-date = "2024-07-15"
+date = "2024-07-17"
 description = "Solution to Leetcode 102"
 tags = [
     
@@ -22,6 +22,27 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        if(!root) return ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()) {
+            int sz = q.size();
+            vector<int> res;
+            while(sz--) {
+                TreeNode* tmp = q.front();
+                res.push_back(tmp->val);
+                q.pop();
+                if(tmp->left) q.push(tmp->left);
+                if(tmp->right) q.push(tmp->right);
+            }
+            ans.push_back(res);
+        }
+        return ans;
+    }
+};
 {{< /highlight >}}
 

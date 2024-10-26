@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 654: Maximum Binary Tree"
-date = "2023-01-10"
+date = "2023-01-12"
 description = "Solution to Leetcode 654"
 tags = [
     

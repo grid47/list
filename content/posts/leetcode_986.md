@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 986: Interval List Intersections"
-date = "2022-02-12"
+date = "2022-02-14"
 description = "Solution to Leetcode 986"
 tags = [
     

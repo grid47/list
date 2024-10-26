@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2988: Manager of the Largest Department"
-date = "2016-08-20"
+date = "2016-08-22"
 description = "Solution to Leetcode 2988"
 tags = [
     

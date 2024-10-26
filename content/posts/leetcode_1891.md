@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1891: Cutting Ribbons"
-date = "2019-08-22"
+date = "2019-08-24"
 description = "Solution to Leetcode 1891"
 tags = [
     

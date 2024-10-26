@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2680: Maximum OR"
-date = "2017-06-24"
+date = "2017-06-26"
 description = "Solution to Leetcode 2680"
 tags = [
     

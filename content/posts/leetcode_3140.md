@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3140: Consecutive Available Seats II"
-date = "2016-03-21"
+date = "2016-03-23"
 description = "Solution to Leetcode 3140"
 tags = [
     

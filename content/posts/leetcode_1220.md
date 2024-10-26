@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1220: Count Vowels Permutation"
-date = "2021-06-23"
+date = "2021-06-25"
 description = "Solution to Leetcode 1220"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1868: Product of Two Run-Length Encoded Arrays"
-date = "2019-09-14"
+date = "2019-09-16"
 description = "Solution to Leetcode 1868"
 tags = [
     

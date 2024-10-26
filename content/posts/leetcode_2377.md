@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2377: Sort the Olympic Table"
-date = "2018-04-23"
+date = "2018-04-25"
 description = "Solution to Leetcode 2377"
 tags = [
     

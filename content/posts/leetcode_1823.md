@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1823: Find the Winner of the Circular Game"
-date = "2019-10-29"
+date = "2019-10-31"
 description = "Solution to Leetcode 1823"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1874: Minimize Product Sum of Two Arrays"
-date = "2019-09-08"
+date = "2019-09-10"
 description = "Solution to Leetcode 1874"
 tags = [
     

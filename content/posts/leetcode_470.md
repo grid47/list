@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 470: Implement Rand10() Using Rand7()"
-date = "2023-07-13"
+date = "2023-07-15"
 description = "Solution to Leetcode 470"
 tags = [
     

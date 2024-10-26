@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2845: Count of Interesting Subarrays"
-date = "2017-01-10"
+date = "2017-01-12"
 description = "Solution to Leetcode 2845"
 tags = [
     

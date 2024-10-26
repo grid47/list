@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1710: Maximum Units on a Truck"
-date = "2020-02-19"
+date = "2020-02-21"
 description = "Solution to Leetcode 1710"
 tags = [
     

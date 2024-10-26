@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 813: Largest Sum of Averages"
-date = "2022-08-04"
+date = "2022-08-06"
 description = "Solution to Leetcode 813"
 tags = [
     

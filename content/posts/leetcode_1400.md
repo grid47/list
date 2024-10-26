@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1400: Construct K Palindrome Strings"
-date = "2020-12-25"
+date = "2020-12-27"
 description = "Solution to Leetcode 1400"
 tags = [
     

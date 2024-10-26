@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1287: Element Appearing More Than 25% In Sorted Array"
-date = "2021-04-17"
+date = "2021-04-19"
 description = "Solution to Leetcode 1287"
 tags = [
     

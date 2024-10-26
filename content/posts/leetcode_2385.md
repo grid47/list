@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2385: Amount of Time for Binary Tree to Be Infected"
-date = "2018-04-15"
+date = "2018-04-17"
 description = "Solution to Leetcode 2385"
 tags = [
     

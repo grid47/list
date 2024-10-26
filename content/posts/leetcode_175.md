@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 175: Combine Two Tables"
-date = "2024-05-03"
+date = "2024-05-05"
 description = "Solution to Leetcode 175"
 tags = [
     
@@ -22,6 +22,7 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+# Write your MySQL query statement below
+SELECT Person.firstName,Person.lastName,Address.city,Address.state FROM Person LEFT JOIN Address ON Person.personId = Address.personId
 {{< /highlight >}}
 

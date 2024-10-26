@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1719: Number Of Ways To Reconstruct A Tree"
-date = "2020-02-10"
+date = "2020-02-12"
 description = "Solution to Leetcode 1719"
 tags = [
     

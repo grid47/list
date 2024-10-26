@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1952: Three Divisors"
-date = "2019-06-22"
+date = "2019-06-24"
 description = "Solution to Leetcode 1952"
 tags = [
     

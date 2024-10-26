@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 861: Score After Flipping Matrix"
-date = "2022-06-17"
+date = "2022-06-19"
 description = "Solution to Leetcode 861"
 tags = [
     

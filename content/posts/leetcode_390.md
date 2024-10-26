@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 390: Elimination Game"
-date = "2023-10-01"
+date = "2023-10-03"
 description = "Solution to Leetcode 390"
 tags = [
     

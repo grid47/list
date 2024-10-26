@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1447: Simplified Fractions"
-date = "2020-11-08"
+date = "2020-11-10"
 description = "Solution to Leetcode 1447"
 tags = [
     

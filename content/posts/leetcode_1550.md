@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1550: Three Consecutive Odds"
-date = "2020-07-28"
+date = "2020-07-30"
 description = "Solution to Leetcode 1550"
 tags = [
     

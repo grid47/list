@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1226: The Dining Philosophers"
-date = "2021-06-17"
+date = "2021-06-19"
 description = "Solution to Leetcode 1226"
 tags = [
     

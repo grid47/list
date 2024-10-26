@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2864: Maximum Odd Binary Number"
-date = "2016-12-22"
+date = "2016-12-24"
 description = "Solution to Leetcode 2864"
 tags = [
     

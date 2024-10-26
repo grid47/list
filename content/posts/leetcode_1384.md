@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1384: Total Sales Amount by Year"
-date = "2021-01-10"
+date = "2021-01-12"
 description = "Solution to Leetcode 1384"
 tags = [
     

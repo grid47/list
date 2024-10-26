@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1727: Largest Submatrix With Rearrangements"
-date = "2020-02-02"
+date = "2020-02-04"
 description = "Solution to Leetcode 1727"
 tags = [
     

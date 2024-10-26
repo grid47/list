@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2980: Check if Bitwise OR Has Trailing Zeros"
-date = "2016-08-28"
+date = "2016-08-30"
 description = "Solution to Leetcode 2980"
 tags = [
     

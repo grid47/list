@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 481: Magical String"
-date = "2023-07-02"
+date = "2023-07-04"
 description = "Solution to Leetcode 481"
 tags = [
     

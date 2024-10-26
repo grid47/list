@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1444: Number of Ways of Cutting a Pizza"
-date = "2020-11-11"
+date = "2020-11-13"
 description = "Solution to Leetcode 1444"
 tags = [
     

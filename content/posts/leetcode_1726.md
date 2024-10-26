@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1726: Tuple with Same Product"
-date = "2020-02-03"
+date = "2020-02-05"
 description = "Solution to Leetcode 1726"
 tags = [
     

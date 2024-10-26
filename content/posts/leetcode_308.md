@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 308: Range Sum Query 2D - Mutable"
-date = "2023-12-22"
+date = "2023-12-24"
 description = "Solution to Leetcode 308"
 tags = [
     

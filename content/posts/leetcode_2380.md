@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2380: Time Needed to Rearrange a Binary String"
-date = "2018-04-20"
+date = "2018-04-22"
 description = "Solution to Leetcode 2380"
 tags = [
     

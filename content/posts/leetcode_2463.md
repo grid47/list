@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2463: Minimum Total Distance Traveled"
-date = "2018-01-27"
+date = "2018-01-29"
 description = "Solution to Leetcode 2463"
 tags = [
     

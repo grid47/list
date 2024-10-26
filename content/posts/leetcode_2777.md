@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2777: Date Range Generator"
-date = "2017-03-19"
+date = "2017-03-21"
 description = "Solution to Leetcode 2777"
 tags = [
     

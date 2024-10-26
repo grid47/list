@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 339: Nested List Weight Sum"
-date = "2023-11-21"
+date = "2023-11-23"
 description = "Solution to Leetcode 339"
 tags = [
     

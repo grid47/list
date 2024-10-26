@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1227: Airplane Seat Assignment Probability"
-date = "2021-06-16"
+date = "2021-06-18"
 description = "Solution to Leetcode 1227"
 tags = [
     

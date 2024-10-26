@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2619: Array Prototype Last"
-date = "2017-08-24"
+date = "2017-08-26"
 description = "Solution to Leetcode 2619"
 tags = [
     

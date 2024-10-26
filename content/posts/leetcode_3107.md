@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3107: Minimum Operations to Make Median of Array Equal to K"
-date = "2016-04-23"
+date = "2016-04-25"
 description = "Solution to Leetcode 3107"
 tags = [
     

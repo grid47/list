@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2412: Minimum Money Required Before Transactions"
-date = "2018-03-19"
+date = "2018-03-21"
 description = "Solution to Leetcode 2412"
 tags = [
     

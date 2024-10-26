@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1429: First Unique Number"
-date = "2020-11-26"
+date = "2020-11-28"
 description = "Solution to Leetcode 1429"
 tags = [
     

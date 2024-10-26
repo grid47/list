@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1808: Maximize Number of Nice Divisors"
-date = "2019-11-13"
+date = "2019-11-15"
 description = "Solution to Leetcode 1808"
 tags = [
     

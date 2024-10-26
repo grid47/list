@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1436: Destination City"
-date = "2020-11-19"
+date = "2020-11-21"
 description = "Solution to Leetcode 1436"
 tags = [
     

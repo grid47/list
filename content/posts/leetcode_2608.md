@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2608: Shortest Cycle in a Graph"
-date = "2017-09-04"
+date = "2017-09-06"
 description = "Solution to Leetcode 2608"
 tags = [
     

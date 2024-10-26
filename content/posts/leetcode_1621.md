@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1621: Number of Sets of K Non-Overlapping Line Segments"
-date = "2020-05-18"
+date = "2020-05-20"
 description = "Solution to Leetcode 1621"
 tags = [
     

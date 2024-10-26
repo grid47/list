@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2524: Maximum Frequency Score of a Subarray"
-date = "2017-11-27"
+date = "2017-11-29"
 description = "Solution to Leetcode 2524"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 7: Reverse Integer"
-date = "2024-10-18"
+date = "2024-10-20"
 description = "Solution to Leetcode 7"
 tags = [
     

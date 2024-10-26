@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2075: Decode the Slanted Ciphertext"
-date = "2019-02-19"
+date = "2019-02-21"
 description = "Solution to Leetcode 2075"
 tags = [
     

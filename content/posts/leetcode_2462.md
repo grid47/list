@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2462: Total Cost to Hire K Workers"
-date = "2018-01-28"
+date = "2018-01-30"
 description = "Solution to Leetcode 2462"
 tags = [
     

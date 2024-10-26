@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1483: Kth Ancestor of a Tree Node"
-date = "2020-10-03"
+date = "2020-10-05"
 description = "Solution to Leetcode 1483"
 tags = [
     

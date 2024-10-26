@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1824: Minimum Sideway Jumps"
-date = "2019-10-28"
+date = "2019-10-30"
 description = "Solution to Leetcode 1824"
 tags = [
     

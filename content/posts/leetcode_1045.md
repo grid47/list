@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1045: Customers Who Bought All Products"
-date = "2021-12-15"
+date = "2021-12-17"
 description = "Solution to Leetcode 1045"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2552: Count Increasing Quadruplets"
-date = "2017-10-30"
+date = "2017-11-01"
 description = "Solution to Leetcode 2552"
 tags = [
     

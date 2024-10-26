@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1347: Minimum Number of Steps to Make Two Strings Anagram"
-date = "2021-02-16"
+date = "2021-02-18"
 description = "Solution to Leetcode 1347"
 tags = [
     

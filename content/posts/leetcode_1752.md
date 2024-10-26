@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1752: Check if Array Is Sorted and Rotated"
-date = "2020-01-08"
+date = "2020-01-10"
 description = "Solution to Leetcode 1752"
 tags = [
     

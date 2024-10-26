@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1024: Video Stitching"
-date = "2022-01-05"
+date = "2022-01-07"
 description = "Solution to Leetcode 1024"
 tags = [
     

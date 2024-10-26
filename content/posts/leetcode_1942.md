@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1942: The Number of the Smallest Unoccupied Chair"
-date = "2019-07-02"
+date = "2019-07-04"
 description = "Solution to Leetcode 1942"
 tags = [
     

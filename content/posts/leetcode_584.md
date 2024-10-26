@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 584: Find Customer Referee"
-date = "2023-03-21"
+date = "2023-03-23"
 description = "Solution to Leetcode 584"
 tags = [
     

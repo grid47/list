@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number"
-date = "2018-11-09"
+date = "2018-11-11"
 description = "Solution to Leetcode 2177"
 tags = [
     

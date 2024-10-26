@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3246: Premier League Table Ranking"
-date = "2015-12-06"
+date = "2015-12-08"
 description = "Solution to Leetcode 3246"
 tags = [
     

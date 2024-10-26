@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 574: Winning Candidate"
-date = "2023-03-31"
+date = "2023-04-02"
 description = "Solution to Leetcode 574"
 tags = [
     

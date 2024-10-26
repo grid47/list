@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1280: Students and Examinations"
-date = "2021-04-24"
+date = "2021-04-26"
 description = "Solution to Leetcode 1280"
 tags = [
     

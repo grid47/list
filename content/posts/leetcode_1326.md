@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1326: Minimum Number of Taps to Open to Water a Garden"
-date = "2021-03-09"
+date = "2021-03-11"
 description = "Solution to Leetcode 1326"
 tags = [
     

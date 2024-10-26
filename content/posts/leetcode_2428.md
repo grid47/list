@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2428: Maximum Sum of an Hourglass"
-date = "2018-03-03"
+date = "2018-03-05"
 description = "Solution to Leetcode 2428"
 tags = [
     

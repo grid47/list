@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1654: Minimum Jumps to Reach Home"
-date = "2020-04-15"
+date = "2020-04-17"
 description = "Solution to Leetcode 1654"
 tags = [
     

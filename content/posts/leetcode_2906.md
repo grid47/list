@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2906: Construct Product Matrix"
-date = "2016-11-10"
+date = "2016-11-12"
 description = "Solution to Leetcode 2906"
 tags = [
     

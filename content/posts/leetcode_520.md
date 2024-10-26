@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 520: Detect Capital"
-date = "2023-05-24"
+date = "2023-05-26"
 description = "Solution to Leetcode 520"
 tags = [
     

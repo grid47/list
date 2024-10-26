@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1327: List the Products Ordered in a Period"
-date = "2021-03-08"
+date = "2021-03-10"
 description = "Solution to Leetcode 1327"
 tags = [
     

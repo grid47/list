@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1665: Minimum Initial Energy to Finish Tasks"
-date = "2020-04-04"
+date = "2020-04-06"
 description = "Solution to Leetcode 1665"
 tags = [
     

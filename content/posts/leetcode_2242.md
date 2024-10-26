@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2242: Maximum Score of a Node Sequence"
-date = "2018-09-05"
+date = "2018-09-07"
 description = "Solution to Leetcode 2242"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3131: Find the Integer Added to Array I"
-date = "2016-03-30"
+date = "2016-04-01"
 description = "Solution to Leetcode 3131"
 tags = [
     

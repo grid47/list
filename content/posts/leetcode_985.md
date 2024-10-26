@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 985: Sum of Even Numbers After Queries"
-date = "2022-02-13"
+date = "2022-02-15"
 description = "Solution to Leetcode 985"
 tags = [
     

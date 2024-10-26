@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1131: Maximum of Absolute Value Expression"
-date = "2021-09-20"
+date = "2021-09-22"
 description = "Solution to Leetcode 1131"
 tags = [
     

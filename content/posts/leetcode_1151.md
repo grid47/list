@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1151: Minimum Swaps to Group All 1's Together"
-date = "2021-08-31"
+date = "2021-09-02"
 description = "Solution to Leetcode 1151"
 tags = [
     

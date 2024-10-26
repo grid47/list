@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-04-09T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-04-09T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-04-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-04-11T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-04-09T00:00:00Z">
-                April 9, 2024
+              <time datetime="2024-04-11T00:00:00Z">
+                April 11, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/binary-tree-right-side-view/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> rightSideView(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        if(!root) return ans;
+</span></span><span class="line"><span class="cl">        list<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        q.push_back(root);
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">            int sz = q.size();
+</span></span><span class="line"><span class="cl">            while(sz--) {
+</span></span><span class="line"><span class="cl">                auto tmp = q.front();
+</span></span><span class="line"><span class="cl">                q.pop_front();
+</span></span><span class="line"><span class="cl">                res.push_back(tmp-&gt;val);
+</span></span><span class="line"><span class="cl">                if(tmp-&gt;left) q.push_back(tmp-&gt;left);
+</span></span><span class="line"><span class="cl">                if(tmp-&gt;right) q.push_back(tmp-&gt;right);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            ans.push_back(res.back());
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

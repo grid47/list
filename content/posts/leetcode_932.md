@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 932: Beautiful Array"
-date = "2022-04-07"
+date = "2022-04-09"
 description = "Solution to Leetcode 932"
 tags = [
     

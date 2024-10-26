@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2197: Replace Non-Coprime Numbers in Array"
-date = "2018-10-20"
+date = "2018-10-22"
 description = "Solution to Leetcode 2197"
 tags = [
     

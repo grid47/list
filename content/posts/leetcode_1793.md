@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1793: Maximum Score of a Good Subarray"
-date = "2019-11-28"
+date = "2019-11-30"
 description = "Solution to Leetcode 1793"
 tags = [
     

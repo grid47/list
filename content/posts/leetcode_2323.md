@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2323: Find Minimum Time to Finish All Jobs II"
-date = "2018-06-16"
+date = "2018-06-18"
 description = "Solution to Leetcode 2323"
 tags = [
     

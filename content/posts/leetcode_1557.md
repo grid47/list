@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1557: Minimum Number of Vertices to Reach All Nodes"
-date = "2020-07-21"
+date = "2020-07-23"
 description = "Solution to Leetcode 1557"
 tags = [
     

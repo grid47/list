@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 597: Friend Requests I: Overall Acceptance Rate"
-date = "2023-03-08"
+date = "2023-03-10"
 description = "Solution to Leetcode 597"
 tags = [
     

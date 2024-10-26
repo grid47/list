@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1615: Maximal Network Rank"
-date = "2020-05-24"
+date = "2020-05-26"
 description = "Solution to Leetcode 1615"
 tags = [
     

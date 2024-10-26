@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2820: Election Results"
-date = "2017-02-04"
+date = "2017-02-06"
 description = "Solution to Leetcode 2820"
 tags = [
     

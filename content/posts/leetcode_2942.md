@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2942: Find Words Containing Character"
-date = "2016-10-05"
+date = "2016-10-07"
 description = "Solution to Leetcode 2942"
 tags = [
     

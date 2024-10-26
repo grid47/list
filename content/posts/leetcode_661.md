@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 661: Image Smoother"
-date = "2023-01-03"
+date = "2023-01-05"
 description = "Solution to Leetcode 661"
 tags = [
     

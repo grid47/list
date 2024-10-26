@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 572: Subtree of Another Tree"
-date = "2023-04-02"
+date = "2023-04-04"
 description = "Solution to Leetcode 572"
 tags = [
     

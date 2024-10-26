@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2790: Maximum Number of Groups With Increasing Length"
-date = "2017-03-06"
+date = "2017-03-08"
 description = "Solution to Leetcode 2790"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2187: Minimum Time to Complete Trips"
-date = "2018-10-30"
+date = "2018-11-01"
 description = "Solution to Leetcode 2187"
 tags = [
     

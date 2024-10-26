@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2526: Find Consecutive Integers from a Data Stream"
-date = "2017-11-25"
+date = "2017-11-27"
 description = "Solution to Leetcode 2526"
 tags = [
     

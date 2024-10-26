@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2601: Prime Subtraction Operation"
-date = "2017-09-11"
+date = "2017-09-13"
 description = "Solution to Leetcode 2601"
 tags = [
     

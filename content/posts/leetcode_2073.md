@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2073: Time Needed to Buy Tickets"
-date = "2019-02-21"
+date = "2019-02-23"
 description = "Solution to Leetcode 2073"
 tags = [
     

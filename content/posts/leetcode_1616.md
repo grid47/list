@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1616: Split Two Strings to Make Palindrome"
-date = "2020-05-23"
+date = "2020-05-25"
 description = "Solution to Leetcode 1616"
 tags = [
     

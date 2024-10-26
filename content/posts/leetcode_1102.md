@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1102: Path With Maximum Minimum Value"
-date = "2021-10-19"
+date = "2021-10-21"
 description = "Solution to Leetcode 1102"
 tags = [
     

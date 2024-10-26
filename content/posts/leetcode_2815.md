@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2815: Max Pair Sum in an Array"
-date = "2017-02-09"
+date = "2017-02-11"
 description = "Solution to Leetcode 2815"
 tags = [
     

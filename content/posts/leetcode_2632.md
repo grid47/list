@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2632: Curry"
-date = "2017-08-11"
+date = "2017-08-13"
 description = "Solution to Leetcode 2632"
 tags = [
     

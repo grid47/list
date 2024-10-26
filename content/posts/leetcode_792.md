@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 792: Number of Matching Subsequences"
-date = "2022-08-25"
+date = "2022-08-27"
 description = "Solution to Leetcode 792"
 tags = [
     

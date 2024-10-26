@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2346: Compute the Rank as a Percentage"
-date = "2018-05-24"
+date = "2018-05-26"
 description = "Solution to Leetcode 2346"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 418: Sentence Screen Fitting"
-date = "2023-09-03"
+date = "2023-09-05"
 description = "Solution to Leetcode 418"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2459: Sort Array by Moving Items to Empty Space"
-date = "2018-01-31"
+date = "2018-02-02"
 description = "Solution to Leetcode 2459"
 tags = [
     

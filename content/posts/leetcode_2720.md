@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2720: Popularity Percentage"
-date = "2017-05-15"
+date = "2017-05-17"
 description = "Solution to Leetcode 2720"
 tags = [
     

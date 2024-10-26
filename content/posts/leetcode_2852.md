@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2852: Sum of Remoteness of All Cells"
-date = "2017-01-03"
+date = "2017-01-05"
 description = "Solution to Leetcode 2852"
 tags = [
     

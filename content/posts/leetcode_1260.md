@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1260: Shift 2D Grid"
-date = "2021-05-14"
+date = "2021-05-16"
 description = "Solution to Leetcode 1260"
 tags = [
     

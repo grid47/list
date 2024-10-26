@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1201: Ugly Number III"
-date = "2021-07-12"
+date = "2021-07-14"
 description = "Solution to Leetcode 1201"
 tags = [
     

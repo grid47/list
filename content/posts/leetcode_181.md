@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 181: Employees Earning More Than Their Managers"
-date = "2024-04-27"
+date = "2024-04-29"
 description = "Solution to Leetcode 181"
 tags = [
     
@@ -22,6 +22,9 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+SELECT e2.name as Employee
+FROM employee e1
+INNER JOIN employee e2 ON e1.id = e2.managerID
+WHERE e1.salary < e2.salary
 {{< /highlight >}}
 

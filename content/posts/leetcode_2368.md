@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2368: Reachable Nodes With Restrictions"
-date = "2018-05-02"
+date = "2018-05-04"
 description = "Solution to Leetcode 2368"
 tags = [
     

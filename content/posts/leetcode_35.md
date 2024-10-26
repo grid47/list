@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 35: Search Insert Position"
-date = "2024-09-20"
+date = "2024-09-22"
 description = "Solution to Leetcode 35"
 tags = [
     

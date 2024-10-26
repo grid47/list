@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1409: Queries on a Permutation With Key"
-date = "2020-12-16"
+date = "2020-12-18"
 description = "Solution to Leetcode 1409"
 tags = [
     

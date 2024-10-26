@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1519: Number of Nodes in the Sub-Tree With the Same Label"
-date = "2020-08-28"
+date = "2020-08-30"
 description = "Solution to Leetcode 1519"
 tags = [
     

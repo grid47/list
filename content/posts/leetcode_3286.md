@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3286: Find a Safe Walk Through a Grid"
-date = "2015-10-27"
+date = "2015-10-29"
 description = "Solution to Leetcode 3286"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2771: Longest Non-decreasing Subarray From Two Arrays"
-date = "2017-03-25"
+date = "2017-03-27"
 description = "Solution to Leetcode 2771"
 tags = [
     

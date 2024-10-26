@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1643: Kth Smallest Instructions"
-date = "2020-04-26"
+date = "2020-04-28"
 description = "Solution to Leetcode 1643"
 tags = [
     

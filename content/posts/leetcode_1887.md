@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1887: Reduction Operations to Make the Array Elements Equal"
-date = "2019-08-26"
+date = "2019-08-28"
 description = "Solution to Leetcode 1887"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1223: Dice Roll Simulation"
-date = "2021-06-20"
+date = "2021-06-22"
 description = "Solution to Leetcode 1223"
 tags = [
     

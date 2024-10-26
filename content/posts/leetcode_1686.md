@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1686: Stone Game VI"
-date = "2020-03-14"
+date = "2020-03-16"
 description = "Solution to Leetcode 1686"
 tags = [
     

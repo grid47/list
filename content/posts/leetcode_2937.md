@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2937: Make Three Strings Equal"
-date = "2016-10-10"
+date = "2016-10-12"
 description = "Solution to Leetcode 2937"
 tags = [
     

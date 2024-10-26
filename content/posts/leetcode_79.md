@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 79: Word Search"
-date = "2024-08-07"
+date = "2024-08-09"
 description = "Solution to Leetcode 79"
 tags = [
     

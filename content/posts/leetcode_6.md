@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 6: Zigzag Conversion"
-date = "2024-10-19"
+date = "2024-10-21"
 description = "Solution to Leetcode 6"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2180: Count Integers With Even Digit Sum"
-date = "2018-11-06"
+date = "2018-11-08"
 description = "Solution to Leetcode 2180"
 tags = [
     

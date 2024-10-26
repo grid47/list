@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 365: Water and Jug Problem"
-date = "2023-10-26"
+date = "2023-10-28"
 description = "Solution to Leetcode 365"
 tags = [
     

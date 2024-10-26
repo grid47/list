@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 64: Minimum Path Sum"
-date = "2024-08-22"
+date = "2024-08-24"
 description = "Solution to Leetcode 64"
 tags = [
     

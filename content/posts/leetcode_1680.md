@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1680: Concatenation of Consecutive Binary Numbers"
-date = "2020-03-20"
+date = "2020-03-22"
 description = "Solution to Leetcode 1680"
 tags = [
     

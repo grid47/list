@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1029: Two City Scheduling"
-date = "2021-12-31"
+date = "2022-01-02"
 description = "Solution to Leetcode 1029"
 tags = [
     

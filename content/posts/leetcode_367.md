@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 367: Valid Perfect Square"
-date = "2023-10-24"
+date = "2023-10-26"
 description = "Solution to Leetcode 367"
 tags = [
     

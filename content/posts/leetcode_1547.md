@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1547: Minimum Cost to Cut a Stick"
-date = "2020-07-31"
+date = "2020-08-02"
 description = "Solution to Leetcode 1547"
 tags = [
     

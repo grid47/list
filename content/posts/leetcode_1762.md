@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1762: Buildings With an Ocean View"
-date = "2019-12-29"
+date = "2019-12-31"
 description = "Solution to Leetcode 1762"
 tags = [
     

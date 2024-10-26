@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2228: Users With Two Purchases Within Seven Days"
-date = "2018-09-19"
+date = "2018-09-21"
 description = "Solution to Leetcode 2228"
 tags = [
     

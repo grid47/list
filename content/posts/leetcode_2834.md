@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2834: Find the Minimum Possible Sum of a Beautiful Array"
-date = "2017-01-21"
+date = "2017-01-23"
 description = "Solution to Leetcode 2834"
 tags = [
     

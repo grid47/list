@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2198: Number of Single Divisor Triplets"
-date = "2018-10-19"
+date = "2018-10-21"
 description = "Solution to Leetcode 2198"
 tags = [
     

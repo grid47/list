@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1105: Filling Bookcase Shelves"
-date = "2021-10-16"
+date = "2021-10-18"
 description = "Solution to Leetcode 1105"
 tags = [
     

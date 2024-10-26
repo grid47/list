@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1581: Customer Who Visited but Did Not Make Any Transactions"
-date = "2020-06-27"
+date = "2020-06-29"
 description = "Solution to Leetcode 1581"
 tags = [
     

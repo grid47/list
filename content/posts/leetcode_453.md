@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 453: Minimum Moves to Equal Array Elements"
-date = "2023-07-30"
+date = "2023-08-01"
 description = "Solution to Leetcode 453"
 tags = [
     

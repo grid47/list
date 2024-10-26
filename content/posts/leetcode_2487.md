@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2487: Remove Nodes From Linked List"
-date = "2018-01-03"
+date = "2018-01-05"
 description = "Solution to Leetcode 2487"
 tags = [
     

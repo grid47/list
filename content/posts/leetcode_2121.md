@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2121: Intervals Between Identical Elements"
-date = "2019-01-04"
+date = "2019-01-06"
 description = "Solution to Leetcode 2121"
 tags = [
     

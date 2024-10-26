@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2878: Get the Size of a DataFrame"
-date = "2016-12-08"
+date = "2016-12-10"
 description = "Solution to Leetcode 2878"
 tags = [
     

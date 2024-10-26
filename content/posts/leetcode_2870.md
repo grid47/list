@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2870: Minimum Number of Operations to Make Array Empty"
-date = "2016-12-16"
+date = "2016-12-18"
 description = "Solution to Leetcode 2870"
 tags = [
     

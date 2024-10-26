@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2421: Number of Good Paths"
-date = "2018-03-10"
+date = "2018-03-12"
 description = "Solution to Leetcode 2421"
 tags = [
     

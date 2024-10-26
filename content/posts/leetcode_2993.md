@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2993: Friday Purchases I"
-date = "2016-08-15"
+date = "2016-08-17"
 description = "Solution to Leetcode 2993"
 tags = [
     

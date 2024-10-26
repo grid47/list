@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1059: All Paths from Source Lead to Destination"
-date = "2021-12-01"
+date = "2021-12-03"
 description = "Solution to Leetcode 1059"
 tags = [
     

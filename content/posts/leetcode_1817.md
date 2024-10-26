@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1817: Finding the Users Active Minutes"
-date = "2019-11-04"
+date = "2019-11-06"
 description = "Solution to Leetcode 1817"
 tags = [
     

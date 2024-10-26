@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2473: Minimum Cost to Buy Apples"
-date = "2018-01-17"
+date = "2018-01-19"
 description = "Solution to Leetcode 2473"
 tags = [
     

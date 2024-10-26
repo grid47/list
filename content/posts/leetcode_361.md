@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 361: Bomb Enemy"
-date = "2023-10-30"
+date = "2023-11-01"
 description = "Solution to Leetcode 361"
 tags = [
     

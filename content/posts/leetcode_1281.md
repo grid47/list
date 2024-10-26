@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1281: Subtract the Product and Sum of Digits of an Integer"
-date = "2021-04-23"
+date = "2021-04-25"
 description = "Solution to Leetcode 1281"
 tags = [
     

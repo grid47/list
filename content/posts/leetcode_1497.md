@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1497: Check If Array Pairs Are Divisible by k"
-date = "2020-09-19"
+date = "2020-09-21"
 description = "Solution to Leetcode 1497"
 tags = [
     

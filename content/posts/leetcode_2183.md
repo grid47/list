@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2183: Count Array Pairs Divisible by K"
-date = "2018-11-03"
+date = "2018-11-05"
 description = "Solution to Leetcode 2183"
 tags = [
     

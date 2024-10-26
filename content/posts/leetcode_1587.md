@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1587: Bank Account Summary II"
-date = "2020-06-21"
+date = "2020-06-23"
 description = "Solution to Leetcode 1587"
 tags = [
     

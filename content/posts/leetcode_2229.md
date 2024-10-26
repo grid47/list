@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2229: Check if an Array Is Consecutive"
-date = "2018-09-18"
+date = "2018-09-20"
 description = "Solution to Leetcode 2229"
 tags = [
     

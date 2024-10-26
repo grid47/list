@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1173: Immediate Food Delivery I"
-date = "2021-08-09"
+date = "2021-08-11"
 description = "Solution to Leetcode 1173"
 tags = [
     

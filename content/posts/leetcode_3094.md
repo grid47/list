@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3094: Guess the Number Using Bitwise Questions II"
-date = "2016-05-06"
+date = "2016-05-08"
 description = "Solution to Leetcode 3094"
 tags = [
     

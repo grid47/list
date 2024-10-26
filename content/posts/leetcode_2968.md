@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2968: Apply Operations to Maximize Frequency Score"
-date = "2016-09-09"
+date = "2016-09-11"
 description = "Solution to Leetcode 2968"
 tags = [
     

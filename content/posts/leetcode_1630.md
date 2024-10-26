@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1630: Arithmetic Subarrays"
-date = "2020-05-09"
+date = "2020-05-11"
 description = "Solution to Leetcode 1630"
 tags = [
     

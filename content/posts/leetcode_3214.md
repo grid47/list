@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3214: Year on Year Growth Rate"
-date = "2016-01-07"
+date = "2016-01-09"
 description = "Solution to Leetcode 3214"
 tags = [
     

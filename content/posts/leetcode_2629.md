@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2629: Function Composition"
-date = "2017-08-14"
+date = "2017-08-16"
 description = "Solution to Leetcode 2629"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 223: Rectangle Area"
-date = "2024-03-16"
+date = "2024-03-18"
 description = "Solution to Leetcode 223"
 tags = [
     

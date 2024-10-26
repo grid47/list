@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2936: Number of Equal Numbers Blocks"
-date = "2016-10-11"
+date = "2016-10-13"
 description = "Solution to Leetcode 2936"
 tags = [
     

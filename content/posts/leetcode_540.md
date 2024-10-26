@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 540: Single Element in a Sorted Array"
-date = "2023-05-04"
+date = "2023-05-06"
 description = "Solution to Leetcode 540"
 tags = [
     

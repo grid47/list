@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1947: Maximum Compatibility Score Sum"
-date = "2019-06-27"
+date = "2019-06-29"
 description = "Solution to Leetcode 1947"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1298: Maximum Candies You Can Get from Boxes"
-date = "2021-04-06"
+date = "2021-04-08"
 description = "Solution to Leetcode 1298"
 tags = [
     

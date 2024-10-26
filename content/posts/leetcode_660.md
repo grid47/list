@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 660: Remove 9"
-date = "2023-01-04"
+date = "2023-01-06"
 description = "Solution to Leetcode 660"
 tags = [
     

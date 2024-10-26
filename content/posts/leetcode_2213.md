@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2213: Longest Substring of One Repeating Character"
-date = "2018-10-04"
+date = "2018-10-06"
 description = "Solution to Leetcode 2213"
 tags = [
     

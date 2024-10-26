@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 664: Strange Printer"
-date = "2022-12-31"
+date = "2023-01-02"
 description = "Solution to Leetcode 664"
 tags = [
     

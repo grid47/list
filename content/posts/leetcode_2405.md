@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2405: Optimal Partition of String"
-date = "2018-03-26"
+date = "2018-03-28"
 description = "Solution to Leetcode 2405"
 tags = [
     

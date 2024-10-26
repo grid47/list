@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2983: Palindrome Rearrangement Queries"
-date = "2016-08-25"
+date = "2016-08-27"
 description = "Solution to Leetcode 2983"
 tags = [
     

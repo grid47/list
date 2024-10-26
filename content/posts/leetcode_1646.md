@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1646: Get Maximum in Generated Array"
-date = "2020-04-23"
+date = "2020-04-25"
 description = "Solution to Leetcode 1646"
 tags = [
     

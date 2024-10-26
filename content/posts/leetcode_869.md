@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 869: Reordered Power of 2"
-date = "2022-06-09"
+date = "2022-06-11"
 description = "Solution to Leetcode 869"
 tags = [
     

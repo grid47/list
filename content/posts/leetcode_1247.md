@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1247: Minimum Swaps to Make Strings Equal"
-date = "2021-05-27"
+date = "2021-05-29"
 description = "Solution to Leetcode 1247"
 tags = [
     

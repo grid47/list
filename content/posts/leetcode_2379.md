@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2379: Minimum Recolors to Get K Consecutive Black Blocks"
-date = "2018-04-21"
+date = "2018-04-23"
 description = "Solution to Leetcode 2379"
 tags = [
     

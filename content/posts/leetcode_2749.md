@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2749: Minimum Operations to Make the Integer Zero"
-date = "2017-04-16"
+date = "2017-04-18"
 description = "Solution to Leetcode 2749"
 tags = [
     

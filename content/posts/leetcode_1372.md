@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1372: Longest ZigZag Path in a Binary Tree"
-date = "2021-01-22"
+date = "2021-01-24"
 description = "Solution to Leetcode 1372"
 tags = [
     

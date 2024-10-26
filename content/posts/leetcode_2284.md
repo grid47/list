@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2284: Sender With Largest Word Count"
-date = "2018-07-25"
+date = "2018-07-27"
 description = "Solution to Leetcode 2284"
 tags = [
     

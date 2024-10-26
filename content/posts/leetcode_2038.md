@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2038: Remove Colored Pieces if Both Neighbors are the Same Color"
-date = "2019-03-28"
+date = "2019-03-30"
 description = "Solution to Leetcode 2038"
 tags = [
     

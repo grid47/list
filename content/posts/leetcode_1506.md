@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1506: Find Root of N-Ary Tree"
-date = "2020-09-10"
+date = "2020-09-12"
 description = "Solution to Leetcode 1506"
 tags = [
     

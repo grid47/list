@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 276: Paint Fence"
-date = "2024-01-23"
+date = "2024-01-25"
 description = "Solution to Leetcode 276"
 tags = [
     

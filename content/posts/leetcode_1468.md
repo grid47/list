@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1468: Calculate Salaries"
-date = "2020-10-18"
+date = "2020-10-20"
 description = "Solution to Leetcode 1468"
 tags = [
     

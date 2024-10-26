@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1484: Group Sold Products By The Date"
-date = "2020-10-02"
+date = "2020-10-04"
 description = "Solution to Leetcode 1484"
 tags = [
     

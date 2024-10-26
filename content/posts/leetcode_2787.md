@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2787: Ways to Express an Integer as Sum of Powers"
-date = "2017-03-09"
+date = "2017-03-11"
 description = "Solution to Leetcode 2787"
 tags = [
     

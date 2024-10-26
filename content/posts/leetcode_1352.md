@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1352: Product of the Last K Numbers"
-date = "2021-02-11"
+date = "2021-02-13"
 description = "Solution to Leetcode 1352"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2847: Smallest Number With Given Digit Product"
-date = "2017-01-08"
+date = "2017-01-10"
 description = "Solution to Leetcode 2847"
 tags = [
     

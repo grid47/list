@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2767: Partition String Into Minimum Beautiful Substrings"
-date = "2017-03-29"
+date = "2017-03-31"
 description = "Solution to Leetcode 2767"
 tags = [
     

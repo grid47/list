@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2712: Minimum Cost to Make All Characters Equal"
-date = "2017-05-23"
+date = "2017-05-25"
 description = "Solution to Leetcode 2712"
 tags = [
     

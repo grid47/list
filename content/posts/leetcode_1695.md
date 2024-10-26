@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1695: Maximum Erasure Value"
-date = "2020-03-05"
+date = "2020-03-07"
 description = "Solution to Leetcode 1695"
 tags = [
     

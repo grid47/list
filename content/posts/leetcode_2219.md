@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2219: Maximum Sum Score of Array"
-date = "2018-09-28"
+date = "2018-09-30"
 description = "Solution to Leetcode 2219"
 tags = [
     

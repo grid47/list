@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1: Two Sum"
-date = "2024-10-24"
+date = "2024-10-26"
 description = "Solution to Leetcode 1"
 tags = [
     

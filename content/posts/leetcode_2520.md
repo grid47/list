@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2520: Count the Digits That Divide a Number"
-date = "2017-12-01"
+date = "2017-12-03"
 description = "Solution to Leetcode 2520"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1225: Report Contiguous Dates"
-date = "2021-06-18"
+date = "2021-06-20"
 description = "Solution to Leetcode 1225"
 tags = [
     

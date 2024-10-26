@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2093: Minimum Cost to Reach City With Discounts"
-date = "2019-02-01"
+date = "2019-02-03"
 description = "Solution to Leetcode 2093"
 tags = [
     

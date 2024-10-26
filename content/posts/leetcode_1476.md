@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1476: Subrectangle Queries"
-date = "2020-10-10"
+date = "2020-10-12"
 description = "Solution to Leetcode 1476"
 tags = [
     

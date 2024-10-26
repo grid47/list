@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2029: Stone Game IX"
-date = "2019-04-06"
+date = "2019-04-08"
 description = "Solution to Leetcode 2029"
 tags = [
     

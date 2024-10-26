@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1900: The Earliest and Latest Rounds Where Players Compete"
-date = "2019-08-13"
+date = "2019-08-15"
 description = "Solution to Leetcode 1900"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 313: Super Ugly Number"
-date = "2023-12-17"
+date = "2023-12-19"
 description = "Solution to Leetcode 313"
 tags = [
     

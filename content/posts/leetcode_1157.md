@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1157: Online Majority Element In Subarray"
-date = "2021-08-25"
+date = "2021-08-27"
 description = "Solution to Leetcode 1157"
 tags = [
     

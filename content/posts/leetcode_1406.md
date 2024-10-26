@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1406: Stone Game III"
-date = "2020-12-19"
+date = "2020-12-21"
 description = "Solution to Leetcode 1406"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3062: Winner of the Linked List Game"
-date = "2016-06-07"
+date = "2016-06-09"
 description = "Solution to Leetcode 3062"
 tags = [
     

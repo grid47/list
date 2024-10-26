@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1480: Running Sum of 1d Array"
-date = "2020-10-06"
+date = "2020-10-08"
 description = "Solution to Leetcode 1480"
 tags = [
     

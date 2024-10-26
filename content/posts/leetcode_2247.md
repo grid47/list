@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2247: Maximum Cost of Trip With K Highways"
-date = "2018-08-31"
+date = "2018-09-02"
 description = "Solution to Leetcode 2247"
 tags = [
     

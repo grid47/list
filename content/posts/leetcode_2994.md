@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2994: Friday Purchases II "
-date = "2016-08-14"
+date = "2016-08-16"
 description = "Solution to Leetcode 2994"
 tags = [
     

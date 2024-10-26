@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 877: Stone Game"
-date = "2022-06-01"
+date = "2022-06-03"
 description = "Solution to Leetcode 877"
 tags = [
     

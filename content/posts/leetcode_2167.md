@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2167: Minimum Time to Remove All Cars Containing Illegal Goods"
-date = "2018-11-19"
+date = "2018-11-21"
 description = "Solution to Leetcode 2167"
 tags = [
     

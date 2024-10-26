@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 605: Can Place Flowers"
-date = "2023-02-28"
+date = "2023-03-02"
 description = "Solution to Leetcode 605"
 tags = [
     

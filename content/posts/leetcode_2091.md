@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2091: Removing Minimum and Maximum From Array"
-date = "2019-02-03"
+date = "2019-02-05"
 description = "Solution to Leetcode 2091"
 tags = [
     

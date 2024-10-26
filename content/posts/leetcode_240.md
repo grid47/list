@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 240: Search a 2D Matrix II"
-date = "2024-02-28"
+date = "2024-03-01"
 description = "Solution to Leetcode 240"
 tags = [
     

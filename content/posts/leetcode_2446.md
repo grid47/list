@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2446: Determine if Two Events Have Conflict"
-date = "2018-02-13"
+date = "2018-02-15"
 description = "Solution to Leetcode 2446"
 tags = [
     

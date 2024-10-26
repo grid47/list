@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2152: Minimum Number of Lines to Cover Points"
-date = "2018-12-04"
+date = "2018-12-06"
 description = "Solution to Leetcode 2152"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2467: Most Profitable Path in a Tree"
-date = "2018-01-23"
+date = "2018-01-25"
 description = "Solution to Leetcode 2467"
 tags = [
     

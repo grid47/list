@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1700: Number of Students Unable to Eat Lunch"
-date = "2020-02-29"
+date = "2020-03-02"
 description = "Solution to Leetcode 1700"
 tags = [
     

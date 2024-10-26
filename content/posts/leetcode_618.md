@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 618: Students Report By Geography"
-date = "2023-02-15"
+date = "2023-02-17"
 description = "Solution to Leetcode 618"
 tags = [
     

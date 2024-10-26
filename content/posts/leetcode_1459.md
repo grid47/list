@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1459: Rectangles Area"
-date = "2020-10-27"
+date = "2020-10-29"
 description = "Solution to Leetcode 1459"
 tags = [
     

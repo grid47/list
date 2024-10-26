@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1493: Longest Subarray of 1's After Deleting One Element"
-date = "2020-09-23"
+date = "2020-09-25"
 description = "Solution to Leetcode 1493"
 tags = [
     

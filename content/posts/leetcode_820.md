@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 820: Short Encoding of Words"
-date = "2022-07-28"
+date = "2022-07-30"
 description = "Solution to Leetcode 820"
 tags = [
     

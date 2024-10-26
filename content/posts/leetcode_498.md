@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 498: Diagonal Traverse"
-date = "2023-06-15"
+date = "2023-06-17"
 description = "Solution to Leetcode 498"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1885: Count Pairs in Two Arrays"
-date = "2019-08-28"
+date = "2019-08-30"
 description = "Solution to Leetcode 1885"
 tags = [
     

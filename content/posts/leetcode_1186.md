@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1186: Maximum Subarray Sum with One Deletion"
-date = "2021-07-27"
+date = "2021-07-29"
 description = "Solution to Leetcode 1186"
 tags = [
     

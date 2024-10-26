@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2408: Design SQL"
-date = "2018-03-23"
+date = "2018-03-25"
 description = "Solution to Leetcode 2408"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2683: Neighboring Bitwise XOR"
-date = "2017-06-21"
+date = "2017-06-23"
 description = "Solution to Leetcode 2683"
 tags = [
     

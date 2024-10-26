@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2550: Count Collisions of Monkeys on a Polygon"
-date = "2017-11-01"
+date = "2017-11-03"
 description = "Solution to Leetcode 2550"
 tags = [
     

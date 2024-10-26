@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1418: Display Table of Food Orders in a Restaurant"
-date = "2020-12-07"
+date = "2020-12-09"
 description = "Solution to Leetcode 1418"
 tags = [
     

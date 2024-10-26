@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2758: Next Day"
-date = "2017-04-07"
+date = "2017-04-09"
 description = "Solution to Leetcode 2758"
 tags = [
     

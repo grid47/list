@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3211: Generate Binary Strings Without Adjacent Zeros"
-date = "2016-01-10"
+date = "2016-01-12"
 description = "Solution to Leetcode 3211"
 tags = [
     

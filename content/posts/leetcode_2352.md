@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2352: Equal Row and Column Pairs"
-date = "2018-05-18"
+date = "2018-05-20"
 description = "Solution to Leetcode 2352"
 tags = [
     

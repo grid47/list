@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3207: Maximum Points After Enemy Battles"
-date = "2016-01-14"
+date = "2016-01-16"
 description = "Solution to Leetcode 3207"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 874: Walking Robot Simulation"
-date = "2022-06-04"
+date = "2022-06-06"
 description = "Solution to Leetcode 874"
 tags = [
     

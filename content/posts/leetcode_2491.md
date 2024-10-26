@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2491: Divide Players Into Teams of Equal Skill"
-date = "2017-12-30"
+date = "2018-01-01"
 description = "Solution to Leetcode 2491"
 tags = [
     

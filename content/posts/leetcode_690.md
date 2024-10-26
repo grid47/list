@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 690: Employee Importance"
-date = "2022-12-05"
+date = "2022-12-07"
 description = "Solution to Leetcode 690"
 tags = [
     

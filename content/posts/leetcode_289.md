@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 289: Game of Life"
-date = "2024-01-10"
+date = "2024-01-12"
 description = "Solution to Leetcode 289"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1482: Minimum Number of Days to Make m Bouquets"
-date = "2020-10-04"
+date = "2020-10-06"
 description = "Solution to Leetcode 1482"
 tags = [
     

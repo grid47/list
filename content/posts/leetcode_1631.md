@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1631: Path With Minimum Effort"
-date = "2020-05-08"
+date = "2020-05-10"
 description = "Solution to Leetcode 1631"
 tags = [
     

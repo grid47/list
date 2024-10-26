@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3101: Count Alternating Subarrays"
-date = "2016-04-29"
+date = "2016-05-01"
 description = "Solution to Leetcode 3101"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1395: Count Number of Teams"
-date = "2020-12-30"
+date = "2021-01-01"
 description = "Solution to Leetcode 1395"
 tags = [
     

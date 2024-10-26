@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2165: Smallest Value of the Rearranged Number"
-date = "2018-11-21"
+date = "2018-11-23"
 description = "Solution to Leetcode 2165"
 tags = [
     

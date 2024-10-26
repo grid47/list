@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2951: Find the Peaks"
-date = "2016-09-26"
+date = "2016-09-28"
 description = "Solution to Leetcode 2951"
 tags = [
     

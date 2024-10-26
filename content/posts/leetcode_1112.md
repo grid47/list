@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1112: Highest Grade For Each Student"
-date = "2021-10-09"
+date = "2021-10-11"
 description = "Solution to Leetcode 1112"
 tags = [
     

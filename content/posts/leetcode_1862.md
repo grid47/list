@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1862: Sum of Floored Pairs"
-date = "2019-09-20"
+date = "2019-09-22"
 description = "Solution to Leetcode 1862"
 tags = [
     

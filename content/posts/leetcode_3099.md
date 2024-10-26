@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3099: Harshad Number"
-date = "2016-05-01"
+date = "2016-05-03"
 description = "Solution to Leetcode 3099"
 tags = [
     

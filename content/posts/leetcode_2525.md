@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2525: Categorize Box According to Criteria"
-date = "2017-11-26"
+date = "2017-11-28"
 description = "Solution to Leetcode 2525"
 tags = [
     

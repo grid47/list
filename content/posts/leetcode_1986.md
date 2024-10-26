@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1986: Minimum Number of Work Sessions to Finish the Tasks"
-date = "2019-05-19"
+date = "2019-05-21"
 description = "Solution to Leetcode 1986"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2563: Count the Number of Fair Pairs"
-date = "2017-10-19"
+date = "2017-10-21"
 description = "Solution to Leetcode 2563"
 tags = [
     

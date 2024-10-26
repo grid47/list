@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1573: Number of Ways to Split a String"
-date = "2020-07-05"
+date = "2020-07-07"
 description = "Solution to Leetcode 1573"
 tags = [
     

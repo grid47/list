@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1450: Number of Students Doing Homework at a Given Time"
-date = "2020-11-05"
+date = "2020-11-07"
 description = "Solution to Leetcode 1450"
 tags = [
     

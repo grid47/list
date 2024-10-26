@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2798: Number of Employees Who Met the Target"
-date = "2017-02-26"
+date = "2017-02-28"
 description = "Solution to Leetcode 2798"
 tags = [
     

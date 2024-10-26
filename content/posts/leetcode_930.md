@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 930: Binary Subarrays With Sum"
-date = "2022-04-09"
+date = "2022-04-11"
 description = "Solution to Leetcode 930"
 tags = [
     

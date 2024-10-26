@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 728: Self Dividing Numbers"
-date = "2022-10-28"
+date = "2022-10-30"
 description = "Solution to Leetcode 728"
 tags = [
     

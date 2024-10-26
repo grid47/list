@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1021: Remove Outermost Parentheses"
-date = "2022-01-08"
+date = "2022-01-10"
 description = "Solution to Leetcode 1021"
 tags = [
     

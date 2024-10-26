@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2558: Take Gifts From the Richest Pile"
-date = "2017-10-24"
+date = "2017-10-26"
 description = "Solution to Leetcode 2558"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2445: Number of Nodes With Value One"
-date = "2018-02-14"
+date = "2018-02-16"
 description = "Solution to Leetcode 2445"
 tags = [
     

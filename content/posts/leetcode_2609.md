@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2609: Find the Longest Balanced Substring of a Binary String"
-date = "2017-09-03"
+date = "2017-09-05"
 description = "Solution to Leetcode 2609"
 tags = [
     

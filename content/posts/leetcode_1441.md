@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1441: Build an Array With Stack Operations"
-date = "2020-11-14"
+date = "2020-11-16"
 description = "Solution to Leetcode 1441"
 tags = [
     

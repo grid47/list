@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1609: Even Odd Tree"
-date = "2020-05-30"
+date = "2020-06-01"
 description = "Solution to Leetcode 1609"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2317: Maximum XOR After Operations "
-date = "2018-06-22"
+date = "2018-06-24"
 description = "Solution to Leetcode 2317"
 tags = [
     

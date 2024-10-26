@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2940: Find Building Where Alice and Bob Can Meet"
-date = "2016-10-07"
+date = "2016-10-09"
 description = "Solution to Leetcode 2940"
 tags = [
     

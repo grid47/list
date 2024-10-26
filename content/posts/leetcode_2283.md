@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2283: Check if Number Has Equal Digit Count and Digit Value"
-date = "2018-07-26"
+date = "2018-07-28"
 description = "Solution to Leetcode 2283"
 tags = [
     

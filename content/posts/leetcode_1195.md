@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1195: Fizz Buzz Multithreaded"
-date = "2021-07-18"
+date = "2021-07-20"
 description = "Solution to Leetcode 1195"
 tags = [
     

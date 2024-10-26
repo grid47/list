@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1256: Encode Number"
-date = "2021-05-18"
+date = "2021-05-20"
 description = "Solution to Leetcode 1256"
 tags = [
     

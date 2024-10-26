@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1509: Minimum Difference Between Largest and Smallest Value in Three Moves"
-date = "2020-09-07"
+date = "2020-09-09"
 description = "Solution to Leetcode 1509"
 tags = [
     

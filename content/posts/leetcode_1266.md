@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1266: Minimum Time Visiting All Points"
-date = "2021-05-08"
+date = "2021-05-10"
 description = "Solution to Leetcode 1266"
 tags = [
     

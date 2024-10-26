@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1240: Tiling a Rectangle with the Fewest Squares"
-date = "2021-06-03"
+date = "2021-06-05"
 description = "Solution to Leetcode 1240"
 tags = [
     

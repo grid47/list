@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 752: Open the Lock"
-date = "2022-10-04"
+date = "2022-10-06"
 description = "Solution to Leetcode 752"
 tags = [
     

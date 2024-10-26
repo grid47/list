@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1061: Lexicographically Smallest Equivalent String"
-date = "2021-11-29"
+date = "2021-12-01"
 description = "Solution to Leetcode 1061"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2306: Naming a Company"
-date = "2018-07-03"
+date = "2018-07-05"
 description = "Solution to Leetcode 2306"
 tags = [
     

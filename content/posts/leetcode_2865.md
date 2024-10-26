@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2865: Beautiful Towers I"
-date = "2016-12-21"
+date = "2016-12-23"
 description = "Solution to Leetcode 2865"
 tags = [
     

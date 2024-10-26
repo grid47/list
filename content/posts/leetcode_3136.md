@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3136: Valid Word"
-date = "2016-03-25"
+date = "2016-03-27"
 description = "Solution to Leetcode 3136"
 tags = [
     

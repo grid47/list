@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 729: My Calendar I"
-date = "2022-10-27"
+date = "2022-10-29"
 description = "Solution to Leetcode 729"
 tags = [
     

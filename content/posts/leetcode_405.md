@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 405: Convert a Number to Hexadecimal"
-date = "2023-09-16"
+date = "2023-09-18"
 description = "Solution to Leetcode 405"
 tags = [
     

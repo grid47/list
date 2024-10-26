@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1847: Closest Room"
-date = "2019-10-05"
+date = "2019-10-07"
 description = "Solution to Leetcode 1847"
 tags = [
     

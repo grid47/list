@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2499: Minimum Total Cost to Make Arrays Unequal"
-date = "2017-12-22"
+date = "2017-12-24"
 description = "Solution to Leetcode 2499"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2339: All the Matches of the League"
-date = "2018-05-31"
+date = "2018-06-02"
 description = "Solution to Leetcode 2339"
 tags = [
     

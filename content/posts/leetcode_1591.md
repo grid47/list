@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1591: Strange Printer II"
-date = "2020-06-17"
+date = "2020-06-19"
 description = "Solution to Leetcode 1591"
 tags = [
     

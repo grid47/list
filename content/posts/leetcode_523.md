@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 523: Continuous Subarray Sum"
-date = "2023-05-21"
+date = "2023-05-23"
 description = "Solution to Leetcode 523"
 tags = [
     

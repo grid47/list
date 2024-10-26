@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2556: Disconnect Path in a Binary Matrix by at Most One Flip"
-date = "2017-10-26"
+date = "2017-10-28"
 description = "Solution to Leetcode 2556"
 tags = [
     

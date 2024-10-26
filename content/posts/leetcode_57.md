@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 57: Insert Interval"
-date = "2024-08-29"
+date = "2024-08-31"
 description = "Solution to Leetcode 57"
 tags = [
     

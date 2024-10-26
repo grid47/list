@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2511: Maximum Enemy Forts That Can Be Captured"
-date = "2017-12-10"
+date = "2017-12-12"
 description = "Solution to Leetcode 2511"
 tags = [
     

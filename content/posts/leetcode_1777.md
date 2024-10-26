@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1777: Product's Price for Each Store"
-date = "2019-12-14"
+date = "2019-12-16"
 description = "Solution to Leetcode 1777"
 tags = [
     

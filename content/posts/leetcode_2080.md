@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2080: Range Frequency Queries"
-date = "2019-02-14"
+date = "2019-02-16"
 description = "Solution to Leetcode 2080"
 tags = [
     

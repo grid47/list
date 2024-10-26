@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1604: Alert Using Same Key-Card Three or More Times in a One Hour Period"
-date = "2020-06-04"
+date = "2020-06-06"
 description = "Solution to Leetcode 1604"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1658: Minimum Operations to Reduce X to Zero"
-date = "2020-04-11"
+date = "2020-04-13"
 description = "Solution to Leetcode 1658"
 tags = [
     

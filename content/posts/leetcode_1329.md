@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1329: Sort the Matrix Diagonally"
-date = "2021-03-06"
+date = "2021-03-08"
 description = "Solution to Leetcode 1329"
 tags = [
     

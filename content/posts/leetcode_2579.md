@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2579: Count Total Number of Colored Cells"
-date = "2017-10-03"
+date = "2017-10-05"
 description = "Solution to Leetcode 2579"
 tags = [
     

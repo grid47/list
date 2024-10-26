@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2255: Count Prefixes of a Given String"
-date = "2018-08-23"
+date = "2018-08-25"
 description = "Solution to Leetcode 2255"
 tags = [
     

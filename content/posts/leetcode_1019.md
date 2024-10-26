@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1019: Next Greater Node In Linked List"
-date = "2022-01-10"
+date = "2022-01-12"
 description = "Solution to Leetcode 1019"
 tags = [
     

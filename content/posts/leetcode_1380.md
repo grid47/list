@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1380: Lucky Numbers in a Matrix"
-date = "2021-01-14"
+date = "2021-01-16"
 description = "Solution to Leetcode 1380"
 tags = [
     

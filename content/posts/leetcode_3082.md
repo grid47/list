@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3082: Find the Sum of the Power of All Subsequences"
-date = "2016-05-18"
+date = "2016-05-20"
 description = "Solution to Leetcode 3082"
 tags = [
     

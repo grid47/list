@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2797: Partial Function with Placeholders"
-date = "2017-02-27"
+date = "2017-03-01"
 description = "Solution to Leetcode 2797"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2303: Calculate Amount Paid in Taxes"
-date = "2018-07-06"
+date = "2018-07-08"
 description = "Solution to Leetcode 2303"
 tags = [
     

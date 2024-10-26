@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2896: Apply Operations to Make Two Strings Equal"
-date = "2016-11-20"
+date = "2016-11-22"
 description = "Solution to Leetcode 2896"
 tags = [
     

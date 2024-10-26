@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 567: Permutation in String"
-date = "2023-04-07"
+date = "2023-04-09"
 description = "Solution to Leetcode 567"
 tags = [
     

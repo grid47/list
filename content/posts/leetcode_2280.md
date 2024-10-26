@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2280: Minimum Lines to Represent a Line Chart"
-date = "2018-07-29"
+date = "2018-07-31"
 description = "Solution to Leetcode 2280"
 tags = [
     

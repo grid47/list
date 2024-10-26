@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 896: Monotonic Array"
-date = "2022-05-13"
+date = "2022-05-15"
 description = "Solution to Leetcode 896"
 tags = [
     

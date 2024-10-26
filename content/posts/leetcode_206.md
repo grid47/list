@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 206: Reverse Linked List"
-date = "2024-04-02"
+date = "2024-04-04"
 description = "Solution to Leetcode 206"
 tags = [
     
@@ -22,6 +22,28 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* nxt, *prv = NULL;
+        while(head) {
+            nxt = head->next;
+            head->next = prv;
+            prv = head;
+            head = nxt;
+        }
+        return prv;
+    }
+};
 {{< /highlight >}}
 

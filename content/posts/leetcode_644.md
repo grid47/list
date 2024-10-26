@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 644: Maximum Average Subarray II"
-date = "2023-01-20"
+date = "2023-01-22"
 description = "Solution to Leetcode 644"
 tags = [
     

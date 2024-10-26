@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 642: Design Search Autocomplete System"
-date = "2023-01-22"
+date = "2023-01-24"
 description = "Solution to Leetcode 642"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 739: Daily Temperatures"
-date = "2022-10-17"
+date = "2022-10-19"
 description = "Solution to Leetcode 739"
 tags = [
     

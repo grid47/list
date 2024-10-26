@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1473: Paint House III"
-date = "2020-10-13"
+date = "2020-10-15"
 description = "Solution to Leetcode 1473"
 tags = [
     

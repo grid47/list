@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1876: Substrings of Size Three with Distinct Characters"
-date = "2019-09-06"
+date = "2019-09-08"
 description = "Solution to Leetcode 1876"
 tags = [
     

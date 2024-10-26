@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 742: Closest Leaf in a Binary Tree"
-date = "2022-10-14"
+date = "2022-10-16"
 description = "Solution to Leetcode 742"
 tags = [
     

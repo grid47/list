@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1666: Change the Root of a Binary Tree"
-date = "2020-04-03"
+date = "2020-04-05"
 description = "Solution to Leetcode 1666"
 tags = [
     

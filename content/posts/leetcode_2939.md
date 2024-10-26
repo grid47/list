@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2939: Maximum Xor Product"
-date = "2016-10-08"
+date = "2016-10-10"
 description = "Solution to Leetcode 2939"
 tags = [
     

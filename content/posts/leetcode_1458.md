@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1458: Max Dot Product of Two Subsequences"
-date = "2020-10-28"
+date = "2020-10-30"
 description = "Solution to Leetcode 1458"
 tags = [
     

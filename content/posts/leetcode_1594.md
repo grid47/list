@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1594: Maximum Non Negative Product in a Matrix"
-date = "2020-06-14"
+date = "2020-06-16"
 description = "Solution to Leetcode 1594"
 tags = [
     

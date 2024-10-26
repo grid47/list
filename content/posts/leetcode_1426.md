@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1426: Counting Elements"
-date = "2020-11-29"
+date = "2020-12-01"
 description = "Solution to Leetcode 1426"
 tags = [
     

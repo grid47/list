@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1660: Correct a Binary Tree"
-date = "2020-04-09"
+date = "2020-04-11"
 description = "Solution to Leetcode 1660"
 tags = [
     

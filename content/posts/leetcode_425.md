@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 425: Word Squares"
-date = "2023-08-27"
+date = "2023-08-29"
 description = "Solution to Leetcode 425"
 tags = [
     

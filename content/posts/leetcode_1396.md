@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1396: Design Underground System"
-date = "2020-12-29"
+date = "2020-12-31"
 description = "Solution to Leetcode 1396"
 tags = [
     

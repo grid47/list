@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3312: Sorted GCD Pair Queries"
-date = "2015-10-01"
+date = "2015-10-03"
 description = "Solution to Leetcode 3312"
 tags = [
     

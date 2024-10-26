@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1671: Minimum Number of Removals to Make Mountain Array"
-date = "2020-03-29"
+date = "2020-03-31"
 description = "Solution to Leetcode 1671"
 tags = [
     

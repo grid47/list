@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1161: Maximum Level Sum of a Binary Tree"
-date = "2021-08-21"
+date = "2021-08-23"
 description = "Solution to Leetcode 1161"
 tags = [
     

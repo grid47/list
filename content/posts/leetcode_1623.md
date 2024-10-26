@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1623: All Valid Triplets That Can Represent a Country"
-date = "2020-05-16"
+date = "2020-05-18"
 description = "Solution to Leetcode 1623"
 tags = [
     

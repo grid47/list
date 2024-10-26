@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2497: Maximum Star Sum of a Graph"
-date = "2017-12-24"
+date = "2017-12-26"
 description = "Solution to Leetcode 2497"
 tags = [
     

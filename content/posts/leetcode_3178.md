@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3178: Find the Child Who Has the Ball After K Seconds"
-date = "2016-02-12"
+date = "2016-02-14"
 description = "Solution to Leetcode 3178"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2453: Destroy Sequential Targets"
-date = "2018-02-06"
+date = "2018-02-08"
 description = "Solution to Leetcode 2453"
 tags = [
     

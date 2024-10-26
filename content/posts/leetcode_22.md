@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 22: Generate Parentheses"
-date = "2024-10-03"
+date = "2024-10-05"
 description = "Solution to Leetcode 22"
 tags = [
     

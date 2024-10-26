@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3164: Find the Number of Good Pairs II"
-date = "2016-02-26"
+date = "2016-02-28"
 description = "Solution to Leetcode 3164"
 tags = [
     

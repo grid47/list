@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1294: Weather Type in Each Country"
-date = "2021-04-10"
+date = "2021-04-12"
 description = "Solution to Leetcode 1294"
 tags = [
     

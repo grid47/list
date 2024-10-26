@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2336: Smallest Number in Infinite Set"
-date = "2018-06-03"
+date = "2018-06-05"
 description = "Solution to Leetcode 2336"
 tags = [
     

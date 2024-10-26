@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2211: Count Collisions on a Road"
-date = "2018-10-06"
+date = "2018-10-08"
 description = "Solution to Leetcode 2211"
 tags = [
     

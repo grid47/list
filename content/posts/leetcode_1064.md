@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1064: Fixed Point"
-date = "2021-11-26"
+date = "2021-11-28"
 description = "Solution to Leetcode 1064"
 tags = [
     

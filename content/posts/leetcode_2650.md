@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2650: Design Cancellable Function"
-date = "2017-07-24"
+date = "2017-07-26"
 description = "Solution to Leetcode 2650"
 tags = [
     

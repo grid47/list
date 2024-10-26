@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2566: Maximum Difference by Remapping a Digit"
-date = "2017-10-16"
+date = "2017-10-18"
 description = "Solution to Leetcode 2566"
 tags = [
     

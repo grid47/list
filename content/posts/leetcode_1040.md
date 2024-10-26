@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1040: Moving Stones Until Consecutive II"
-date = "2021-12-20"
+date = "2021-12-22"
 description = "Solution to Leetcode 1040"
 tags = [
     

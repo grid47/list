@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2560: House Robber IV"
-date = "2017-10-22"
+date = "2017-10-24"
 description = "Solution to Leetcode 2560"
 tags = [
     

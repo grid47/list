@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2078: Two Furthest Houses With Different Colors"
-date = "2019-02-16"
+date = "2019-02-18"
 description = "Solution to Leetcode 2078"
 tags = [
     

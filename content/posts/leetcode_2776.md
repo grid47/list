@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2776: Convert Callback Based Function to Promise Based Function"
-date = "2017-03-20"
+date = "2017-03-22"
 description = "Solution to Leetcode 2776"
 tags = [
     

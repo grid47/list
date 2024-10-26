@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1006: Clumsy Factorial"
-date = "2022-01-23"
+date = "2022-01-25"
 description = "Solution to Leetcode 1006"
 tags = [
     

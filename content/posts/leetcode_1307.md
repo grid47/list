@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1307: Verbal Arithmetic Puzzle"
-date = "2021-03-28"
+date = "2021-03-30"
 description = "Solution to Leetcode 1307"
 tags = [
     

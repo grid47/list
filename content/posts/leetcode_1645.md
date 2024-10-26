@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1645: Hopper Company Queries II"
-date = "2020-04-24"
+date = "2020-04-26"
 description = "Solution to Leetcode 1645"
 tags = [
     

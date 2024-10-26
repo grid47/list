@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 251: Flatten 2D Vector"
-date = "2024-02-17"
+date = "2024-02-19"
 description = "Solution to Leetcode 251"
 tags = [
     

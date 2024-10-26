@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1997: First Day Where You Have Been in All the Rooms"
-date = "2019-05-08"
+date = "2019-05-10"
 description = "Solution to Leetcode 1997"
 tags = [
     

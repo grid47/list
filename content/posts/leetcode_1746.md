@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1746: Maximum Subarray Sum After One Operation"
-date = "2020-01-14"
+date = "2020-01-16"
 description = "Solution to Leetcode 1746"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3067: Count Pairs of Connectable Servers in a Weighted Tree Network"
-date = "2016-06-02"
+date = "2016-06-04"
 description = "Solution to Leetcode 3067"
 tags = [
     

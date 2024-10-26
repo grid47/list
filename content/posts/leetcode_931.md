@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 931: Minimum Falling Path Sum"
-date = "2022-04-08"
+date = "2022-04-10"
 description = "Solution to Leetcode 931"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 373: Find K Pairs with Smallest Sums"
-date = "2023-10-18"
+date = "2023-10-20"
 description = "Solution to Leetcode 373"
 tags = [
     

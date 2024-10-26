@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 554: Brick Wall"
-date = "2023-04-20"
+date = "2023-04-22"
 description = "Solution to Leetcode 554"
 tags = [
     

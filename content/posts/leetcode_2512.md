@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2512: Reward Top K Students"
-date = "2017-12-09"
+date = "2017-12-11"
 description = "Solution to Leetcode 2512"
 tags = [
     

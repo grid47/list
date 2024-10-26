@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2282: Number of People That Can Be Seen in a Grid"
-date = "2018-07-27"
+date = "2018-07-29"
 description = "Solution to Leetcode 2282"
 tags = [
     

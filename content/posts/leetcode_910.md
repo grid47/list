@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 910: Smallest Range II"
-date = "2022-04-29"
+date = "2022-05-01"
 description = "Solution to Leetcode 910"
 tags = [
     

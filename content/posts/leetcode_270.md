@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 270: Closest Binary Search Tree Value"
-date = "2024-01-29"
+date = "2024-01-31"
 description = "Solution to Leetcode 270"
 tags = [
     

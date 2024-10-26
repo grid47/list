@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2391: Minimum Amount of Time to Collect Garbage"
-date = "2018-04-09"
+date = "2018-04-11"
 description = "Solution to Leetcode 2391"
 tags = [
     

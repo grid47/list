@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2534: Time Taken to Cross the Door"
-date = "2017-11-17"
+date = "2017-11-19"
 description = "Solution to Leetcode 2534"
 tags = [
     

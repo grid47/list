@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 638: Shopping Offers"
-date = "2023-01-26"
+date = "2023-01-28"
 description = "Solution to Leetcode 638"
 tags = [
     

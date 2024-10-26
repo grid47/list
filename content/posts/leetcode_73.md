@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 73: Set Matrix Zeroes"
-date = "2024-08-13"
+date = "2024-08-15"
 description = "Solution to Leetcode 73"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1563: Stone Game V"
-date = "2020-07-15"
+date = "2020-07-17"
 description = "Solution to Leetcode 1563"
 tags = [
     

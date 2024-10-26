@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2707: Extra Characters in a String"
-date = "2017-05-28"
+date = "2017-05-30"
 description = "Solution to Leetcode 2707"
 tags = [
     

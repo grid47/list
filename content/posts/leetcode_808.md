@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 808: Soup Servings"
-date = "2022-08-09"
+date = "2022-08-11"
 description = "Solution to Leetcode 808"
 tags = [
     

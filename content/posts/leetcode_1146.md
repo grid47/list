@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1146: Snapshot Array"
-date = "2021-09-05"
+date = "2021-09-07"
 description = "Solution to Leetcode 1146"
 tags = [
     

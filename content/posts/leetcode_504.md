@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 504: Base 7"
-date = "2023-06-09"
+date = "2023-06-11"
 description = "Solution to Leetcode 504"
 tags = [
     

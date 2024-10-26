@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2498: Frog Jump II"
-date = "2017-12-23"
+date = "2017-12-25"
 description = "Solution to Leetcode 2498"
 tags = [
     

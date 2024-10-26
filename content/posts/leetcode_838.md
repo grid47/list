@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 838: Push Dominoes"
-date = "2022-07-10"
+date = "2022-07-12"
 description = "Solution to Leetcode 838"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3191: Minimum Operations to Make Binary Array Elements Equal to One I"
-date = "2016-01-30"
+date = "2016-02-01"
 description = "Solution to Leetcode 3191"
 tags = [
     

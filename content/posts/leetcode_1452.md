@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1452: People Whose List of Favorite Companies Is Not a Subset of Another List"
-date = "2020-11-03"
+date = "2020-11-05"
 description = "Solution to Leetcode 1452"
 tags = [
     

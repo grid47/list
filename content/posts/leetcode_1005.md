@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1005: Maximize Sum Of Array After K Negations"
-date = "2022-01-24"
+date = "2022-01-26"
 description = "Solution to Leetcode 1005"
 tags = [
     

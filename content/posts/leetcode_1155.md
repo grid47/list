@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1155: Number of Dice Rolls With Target Sum"
-date = "2021-08-27"
+date = "2021-08-29"
 description = "Solution to Leetcode 1155"
 tags = [
     

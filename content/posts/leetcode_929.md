@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 929: Unique Email Addresses"
-date = "2022-04-10"
+date = "2022-04-12"
 description = "Solution to Leetcode 929"
 tags = [
     

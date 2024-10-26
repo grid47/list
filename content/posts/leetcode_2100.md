@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2100: Find Good Days to Rob the Bank"
-date = "2019-01-25"
+date = "2019-01-27"
 description = "Solution to Leetcode 2100"
 tags = [
     

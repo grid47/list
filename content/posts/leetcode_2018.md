@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2018: Check if Word Can Be Placed In Crossword"
-date = "2019-04-17"
+date = "2019-04-19"
 description = "Solution to Leetcode 2018"
 tags = [
     

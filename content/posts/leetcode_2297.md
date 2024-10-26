@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2297: Jump Game VIII"
-date = "2018-07-12"
+date = "2018-07-14"
 description = "Solution to Leetcode 2297"
 tags = [
     

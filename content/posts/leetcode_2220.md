@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2220: Minimum Bit Flips to Convert Number"
-date = "2018-09-27"
+date = "2018-09-29"
 description = "Solution to Leetcode 2220"
 tags = [
     

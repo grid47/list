@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2032: Two Out of Three"
-date = "2019-04-03"
+date = "2019-04-05"
 description = "Solution to Leetcode 2032"
 tags = [
     

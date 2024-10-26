@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3074: Apple Redistribution into Boxes"
-date = "2016-05-26"
+date = "2016-05-28"
 description = "Solution to Leetcode 3074"
 tags = [
     

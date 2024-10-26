@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3282: Reach End of Array With Max Score"
-date = "2015-10-31"
+date = "2015-11-02"
 description = "Solution to Leetcode 3282"
 tags = [
     

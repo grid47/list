@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3212: Count Submatrices With Equal Frequency of X and Y"
-date = "2016-01-09"
+date = "2016-01-11"
 description = "Solution to Leetcode 3212"
 tags = [
     

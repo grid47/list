@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3011: Find if Array Can Be Sorted"
-date = "2016-07-28"
+date = "2016-07-30"
 description = "Solution to Leetcode 3011"
 tags = [
     

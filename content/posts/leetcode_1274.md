@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1274: Number of Ships in a Rectangle"
-date = "2021-04-30"
+date = "2021-05-02"
 description = "Solution to Leetcode 1274"
 tags = [
     

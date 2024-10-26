@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1619: Mean of Array After Removing Some Elements"
-date = "2020-05-20"
+date = "2020-05-22"
 description = "Solution to Leetcode 1619"
 tags = [
     

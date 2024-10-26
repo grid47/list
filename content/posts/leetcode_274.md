@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 274: H-Index"
-date = "2024-01-25"
+date = "2024-01-27"
 description = "Solution to Leetcode 274"
 tags = [
     

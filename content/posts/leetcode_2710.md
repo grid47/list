@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2710: Remove Trailing Zeros From a String"
-date = "2017-05-25"
+date = "2017-05-27"
 description = "Solution to Leetcode 2710"
 tags = [
     

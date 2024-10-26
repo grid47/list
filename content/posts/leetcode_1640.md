@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1640: Check Array Formation Through Concatenation"
-date = "2020-04-29"
+date = "2020-05-01"
 description = "Solution to Leetcode 1640"
 tags = [
     

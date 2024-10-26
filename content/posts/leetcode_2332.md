@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2332: The Latest Time to Catch a Bus"
-date = "2018-06-07"
+date = "2018-06-09"
 description = "Solution to Leetcode 2332"
 tags = [
     

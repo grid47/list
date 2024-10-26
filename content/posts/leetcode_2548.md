@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2548: Maximum Price to Fill a Bag"
-date = "2017-11-03"
+date = "2017-11-05"
 description = "Solution to Leetcode 2548"
 tags = [
     

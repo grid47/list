@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 400: Nth Digit"
-date = "2023-09-21"
+date = "2023-09-23"
 description = "Solution to Leetcode 400"
 tags = [
     

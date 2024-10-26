@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1872: Stone Game VIII"
-date = "2019-09-10"
+date = "2019-09-12"
 description = "Solution to Leetcode 1872"
 tags = [
     

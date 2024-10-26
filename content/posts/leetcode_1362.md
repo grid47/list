@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1362: Closest Divisors"
-date = "2021-02-01"
+date = "2021-02-03"
 description = "Solution to Leetcode 1362"
 tags = [
     

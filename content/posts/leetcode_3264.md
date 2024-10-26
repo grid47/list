@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3264: Final Array State After K Multiplication Operations I"
-date = "2015-11-18"
+date = "2015-11-20"
 description = "Solution to Leetcode 3264"
 tags = [
     

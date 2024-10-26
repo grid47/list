@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1014: Best Sightseeing Pair"
-date = "2022-01-15"
+date = "2022-01-17"
 description = "Solution to Leetcode 1014"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2537: Count the Number of Good Subarrays"
-date = "2017-11-14"
+date = "2017-11-16"
 description = "Solution to Leetcode 2537"
 tags = [
     

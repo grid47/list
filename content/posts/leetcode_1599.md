@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1599: Maximum Profit of Operating a Centennial Wheel"
-date = "2020-06-09"
+date = "2020-06-11"
 description = "Solution to Leetcode 1599"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1262: Greatest Sum Divisible by Three"
-date = "2021-05-12"
+date = "2021-05-14"
 description = "Solution to Leetcode 1262"
 tags = [
     

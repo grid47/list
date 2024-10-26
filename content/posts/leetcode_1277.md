@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1277: Count Square Submatrices with All Ones"
-date = "2021-04-27"
+date = "2021-04-29"
 description = "Solution to Leetcode 1277"
 tags = [
     

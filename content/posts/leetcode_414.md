@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 414: Third Maximum Number"
-date = "2023-09-07"
+date = "2023-09-09"
 description = "Solution to Leetcode 414"
 tags = [
     

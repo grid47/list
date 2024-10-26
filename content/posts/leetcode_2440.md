@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2440: Create Components With Same Value"
-date = "2018-02-19"
+date = "2018-02-21"
 description = "Solution to Leetcode 2440"
 tags = [
     

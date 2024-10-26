@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2258: Escape the Spreading Fire"
-date = "2018-08-20"
+date = "2018-08-22"
 description = "Solution to Leetcode 2258"
 tags = [
     

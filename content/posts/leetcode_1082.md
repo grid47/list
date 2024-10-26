@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1082: Sales Analysis I"
-date = "2021-11-08"
+date = "2021-11-10"
 description = "Solution to Leetcode 1082"
 tags = [
     

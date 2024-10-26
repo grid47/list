@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 66: Plus One"
-date = "2024-08-20"
+date = "2024-08-22"
 description = "Solution to Leetcode 66"
 tags = [
     

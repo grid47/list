@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 536: Construct Binary Tree from String"
-date = "2023-05-08"
+date = "2023-05-10"
 description = "Solution to Leetcode 536"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 564: Find the Closest Palindrome"
-date = "2023-04-10"
+date = "2023-04-12"
 description = "Solution to Leetcode 564"
 tags = [
     

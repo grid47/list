@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2172: Maximum AND Sum of Array"
-date = "2018-11-14"
+date = "2018-11-16"
 description = "Solution to Leetcode 2172"
 tags = [
     

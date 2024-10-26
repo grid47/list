@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2276: Count Integers in Intervals"
-date = "2018-08-02"
+date = "2018-08-04"
 description = "Solution to Leetcode 2276"
 tags = [
     

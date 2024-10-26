@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 483: Smallest Good Base"
-date = "2023-06-30"
+date = "2023-07-02"
 description = "Solution to Leetcode 483"
 tags = [
     

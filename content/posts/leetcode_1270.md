@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1270: All People Report to the Given Manager"
-date = "2021-05-04"
+date = "2021-05-06"
 description = "Solution to Leetcode 1270"
 tags = [
     

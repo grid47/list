@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2465: Number of Distinct Averages"
-date = "2018-01-25"
+date = "2018-01-27"
 description = "Solution to Leetcode 2465"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2415: Reverse Odd Levels of Binary Tree"
-date = "2018-03-16"
+date = "2018-03-18"
 description = "Solution to Leetcode 2415"
 tags = [
     

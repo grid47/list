@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 687: Longest Univalue Path"
-date = "2022-12-08"
+date = "2022-12-10"
 description = "Solution to Leetcode 687"
 tags = [
     

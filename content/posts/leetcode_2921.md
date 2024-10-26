@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2921: Maximum Profitable Triplets With Increasing Prices II"
-date = "2016-10-26"
+date = "2016-10-28"
 description = "Solution to Leetcode 2921"
 tags = [
     

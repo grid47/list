@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3176: Find the Maximum Length of a Good Subsequence I"
-date = "2016-02-14"
+date = "2016-02-16"
 description = "Solution to Leetcode 3176"
 tags = [
     

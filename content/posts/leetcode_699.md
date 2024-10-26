@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 699: Falling Squares"
-date = "2022-11-26"
+date = "2022-11-28"
 description = "Solution to Leetcode 699"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1031: Maximum Sum of Two Non-Overlapping Subarrays"
-date = "2021-12-29"
+date = "2021-12-31"
 description = "Solution to Leetcode 1031"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2941: Maximum GCD-Sum of a Subarray"
-date = "2016-10-06"
+date = "2016-10-08"
 description = "Solution to Leetcode 2941"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1052: Grumpy Bookstore Owner"
-date = "2021-12-08"
+date = "2021-12-10"
 description = "Solution to Leetcode 1052"
 tags = [
     

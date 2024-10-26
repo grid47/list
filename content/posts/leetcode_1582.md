@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1582: Special Positions in a Binary Matrix"
-date = "2020-06-26"
+date = "2020-06-28"
 description = "Solution to Leetcode 1582"
 tags = [
     

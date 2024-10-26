@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1008: Construct Binary Search Tree from Preorder Traversal"
-date = "2022-01-21"
+date = "2022-01-23"
 description = "Solution to Leetcode 1008"
 tags = [
     

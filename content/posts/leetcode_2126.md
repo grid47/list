@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2126: Destroying Asteroids"
-date = "2018-12-30"
+date = "2019-01-01"
 description = "Solution to Leetcode 2126"
 tags = [
     

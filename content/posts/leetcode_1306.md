@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1306: Jump Game III"
-date = "2021-03-29"
+date = "2021-03-31"
 description = "Solution to Leetcode 1306"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 734: Sentence Similarity"
-date = "2022-10-22"
+date = "2022-10-24"
 description = "Solution to Leetcode 734"
 tags = [
     

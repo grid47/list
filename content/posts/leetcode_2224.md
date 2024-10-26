@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2224: Minimum Number of Operations to Convert Time"
-date = "2018-09-23"
+date = "2018-09-25"
 description = "Solution to Leetcode 2224"
 tags = [
     

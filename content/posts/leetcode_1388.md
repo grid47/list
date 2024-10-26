@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1388: Pizza With 3n Slices"
-date = "2021-01-06"
+date = "2021-01-08"
 description = "Solution to Leetcode 1388"
 tags = [
     

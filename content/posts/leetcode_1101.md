@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1101: The Earliest Moment When Everyone Become Friends"
-date = "2021-10-20"
+date = "2021-10-22"
 description = "Solution to Leetcode 1101"
 tags = [
     

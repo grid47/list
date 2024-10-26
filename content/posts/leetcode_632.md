@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 632: Smallest Range Covering Elements from K Lists"
-date = "2023-02-01"
+date = "2023-02-03"
 description = "Solution to Leetcode 632"
 tags = [
     

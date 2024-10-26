@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1857: Largest Color Value in a Directed Graph"
-date = "2019-09-25"
+date = "2019-09-27"
 description = "Solution to Leetcode 1857"
 tags = [
     

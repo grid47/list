@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2610: Convert an Array Into a 2D Array With Conditions"
-date = "2017-09-02"
+date = "2017-09-04"
 description = "Solution to Leetcode 2610"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2448: Minimum Cost to Make Array Equal"
-date = "2018-02-11"
+date = "2018-02-13"
 description = "Solution to Leetcode 2448"
 tags = [
     

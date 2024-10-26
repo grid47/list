@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1741: Find Total Time Spent by Each Employee"
-date = "2020-01-19"
+date = "2020-01-21"
 description = "Solution to Leetcode 1741"
 tags = [
     

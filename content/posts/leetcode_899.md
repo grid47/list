@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 899: Orderly Queue"
-date = "2022-05-10"
+date = "2022-05-12"
 description = "Solution to Leetcode 899"
 tags = [
     

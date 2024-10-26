@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1176: Diet Plan Performance"
-date = "2021-08-06"
+date = "2021-08-08"
 description = "Solution to Leetcode 1176"
 tags = [
     

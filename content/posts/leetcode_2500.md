@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2500: Delete Greatest Value in Each Row"
-date = "2017-12-21"
+date = "2017-12-23"
 description = "Solution to Leetcode 2500"
 tags = [
     

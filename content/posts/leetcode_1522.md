@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1522: Diameter of N-Ary Tree"
-date = "2020-08-25"
+date = "2020-08-27"
 description = "Solution to Leetcode 1522"
 tags = [
     

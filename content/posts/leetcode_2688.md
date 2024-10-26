@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2688: Find Active Users"
-date = "2017-06-16"
+date = "2017-06-18"
 description = "Solution to Leetcode 2688"
 tags = [
     

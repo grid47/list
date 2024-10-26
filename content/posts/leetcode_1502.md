@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1502: Can Make Arithmetic Progression From Sequence"
-date = "2020-09-14"
+date = "2020-09-16"
 description = "Solution to Leetcode 1502"
 tags = [
     

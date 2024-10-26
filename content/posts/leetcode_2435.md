@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2435: Paths in Matrix Whose Sum Is Divisible by K"
-date = "2018-02-24"
+date = "2018-02-26"
 description = "Solution to Leetcode 2435"
 tags = [
     

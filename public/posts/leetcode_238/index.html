@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-03-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-03-01T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-03-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-03T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-03-01T00:00:00Z">
-                March 1, 2024
+              <time datetime="2024-03-03T00:00:00Z">
+                March 3, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,25 @@
         <p><a href="https://leetcode.com/problems/product-of-array-except-self/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> productExceptSelf(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> pre(n, 1), suf(n, 1);
+</span></span><span class="line"><span class="cl">        pre[0] = nums[0];
+</span></span><span class="line"><span class="cl">        suf[n - 1] = nums[n - 1];
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pre</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">pre</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">*</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">n</span> <span class="na">-</span> <span class="na">2</span><span class="err">;</span> <span class="na">i</span> <span class="p">&gt;</span>= 0; i--)
+</span></span><span class="line"><span class="cl">            suf[i] = suf[i + 1] * nums[i];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans(n, 1);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="err">(</span><span class="na">i</span> <span class="p">&gt;</span> 0? pre[i - 1]: 1) * (i <span class="p">&lt;</span> <span class="nt">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">?</span> <span class="na">suf</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span><span class="na">:</span> <span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

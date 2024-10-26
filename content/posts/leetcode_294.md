@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 294: Flip Game II"
-date = "2024-01-05"
+date = "2024-01-07"
 description = "Solution to Leetcode 294"
 tags = [
     

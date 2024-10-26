@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1339: Maximum Product of Splitted Binary Tree"
-date = "2021-02-24"
+date = "2021-02-26"
 description = "Solution to Leetcode 1339"
 tags = [
     

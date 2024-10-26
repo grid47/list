@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1219: Path with Maximum Gold"
-date = "2021-06-24"
+date = "2021-06-26"
 description = "Solution to Leetcode 1219"
 tags = [
     

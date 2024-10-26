@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3234: Count the Number of Substrings With Dominant Ones"
-date = "2015-12-18"
+date = "2015-12-20"
 description = "Solution to Leetcode 3234"
 tags = [
     

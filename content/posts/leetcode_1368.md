@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1368: Minimum Cost to Make at Least One Valid Path in a Grid"
-date = "2021-01-26"
+date = "2021-01-28"
 description = "Solution to Leetcode 1368"
 tags = [
     

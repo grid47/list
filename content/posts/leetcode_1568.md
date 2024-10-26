@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1568: Minimum Number of Days to Disconnect Island"
-date = "2020-07-10"
+date = "2020-07-12"
 description = "Solution to Leetcode 1568"
 tags = [
     

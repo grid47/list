@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 148: Sort List"
-date = "2024-05-30"
+date = "2024-06-01"
 description = "Solution to Leetcode 148"
 tags = [
     

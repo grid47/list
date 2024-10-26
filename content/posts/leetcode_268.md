@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 268: Missing Number"
-date = "2024-01-31"
+date = "2024-02-02"
 description = "Solution to Leetcode 268"
 tags = [
     
@@ -22,6 +22,16 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int sum = nums[0];
+        for(int i = 1; i < nums.size(); i++)
+            sum ^= nums[i];
+        for(int i = 0; i <= nums.size(); i++)
+            sum ^= i;
+        return sum;
+    }
+};
 {{< /highlight >}}
 

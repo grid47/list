@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 824: Goat Latin"
-date = "2022-07-24"
+date = "2022-07-26"
 description = "Solution to Leetcode 824"
 tags = [
     

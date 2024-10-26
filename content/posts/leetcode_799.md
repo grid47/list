@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 799: Champagne Tower"
-date = "2022-08-18"
+date = "2022-08-20"
 description = "Solution to Leetcode 799"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3139: Minimum Cost to Equalize Array"
-date = "2016-03-22"
+date = "2016-03-24"
 description = "Solution to Leetcode 3139"
 tags = [
     

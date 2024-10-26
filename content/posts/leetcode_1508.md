@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1508: Range Sum of Sorted Subarray Sums"
-date = "2020-09-08"
+date = "2020-09-10"
 description = "Solution to Leetcode 1508"
 tags = [
     

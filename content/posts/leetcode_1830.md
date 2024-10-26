@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1830: Minimum Number of Operations to Make String Sorted"
-date = "2019-10-22"
+date = "2019-10-24"
 description = "Solution to Leetcode 1830"
 tags = [
     

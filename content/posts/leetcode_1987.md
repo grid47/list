@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1987: Number of Unique Good Subsequences"
-date = "2019-05-18"
+date = "2019-05-20"
 description = "Solution to Leetcode 1987"
 tags = [
     

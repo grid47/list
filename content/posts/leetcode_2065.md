@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2065: Maximum Path Quality of a Graph"
-date = "2019-03-01"
+date = "2019-03-03"
 description = "Solution to Leetcode 2065"
 tags = [
     

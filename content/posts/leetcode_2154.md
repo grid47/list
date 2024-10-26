@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2154: Keep Multiplying Found Values by Two"
-date = "2018-12-02"
+date = "2018-12-04"
 description = "Solution to Leetcode 2154"
 tags = [
     

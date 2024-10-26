@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1275: Find Winner on a Tic Tac Toe Game"
-date = "2021-04-29"
+date = "2021-05-01"
 description = "Solution to Leetcode 1275"
 tags = [
     

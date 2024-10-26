@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 600: Non-negative Integers without Consecutive Ones"
-date = "2023-03-05"
+date = "2023-03-07"
 description = "Solution to Leetcode 600"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1884: Egg Drop With 2 Eggs and N Floors"
-date = "2019-08-29"
+date = "2019-08-31"
 description = "Solution to Leetcode 1884"
 tags = [
     

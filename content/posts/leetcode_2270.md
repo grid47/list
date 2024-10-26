@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2270: Number of Ways to Split Array"
-date = "2018-08-08"
+date = "2018-08-10"
 description = "Solution to Leetcode 2270"
 tags = [
     

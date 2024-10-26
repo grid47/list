@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1811: Find Interview Candidates"
-date = "2019-11-10"
+date = "2019-11-12"
 description = "Solution to Leetcode 1811"
 tags = [
     

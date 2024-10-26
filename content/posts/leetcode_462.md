@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 462: Minimum Moves to Equal Array Elements II"
-date = "2023-07-21"
+date = "2023-07-23"
 description = "Solution to Leetcode 462"
 tags = [
     

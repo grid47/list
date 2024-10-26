@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1231: Divide Chocolate"
-date = "2021-06-12"
+date = "2021-06-14"
 description = "Solution to Leetcode 1231"
 tags = [
     

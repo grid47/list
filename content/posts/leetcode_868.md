@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 868: Binary Gap"
-date = "2022-06-10"
+date = "2022-06-12"
 description = "Solution to Leetcode 868"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2522: Partition String Into Substrings With Values at Most K"
-date = "2017-11-29"
+date = "2017-12-01"
 description = "Solution to Leetcode 2522"
 tags = [
     

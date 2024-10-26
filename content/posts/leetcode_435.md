@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 435: Non-overlapping Intervals"
-date = "2023-08-17"
+date = "2023-08-19"
 description = "Solution to Leetcode 435"
 tags = [
     

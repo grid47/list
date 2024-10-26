@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2862: Maximum Element-Sum of a Complete Subset of Indices"
-date = "2016-12-24"
+date = "2016-12-26"
 description = "Solution to Leetcode 2862"
 tags = [
     

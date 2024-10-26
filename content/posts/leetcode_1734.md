@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1734: Decode XORed Permutation"
-date = "2020-01-26"
+date = "2020-01-28"
 description = "Solution to Leetcode 1734"
 tags = [
     

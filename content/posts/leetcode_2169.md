@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2169: Count Operations to Obtain Zero"
-date = "2018-11-17"
+date = "2018-11-19"
 description = "Solution to Leetcode 2169"
 tags = [
     

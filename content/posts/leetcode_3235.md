@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3235: Check if the Rectangle Corner Is Reachable"
-date = "2015-12-17"
+date = "2015-12-19"
 description = "Solution to Leetcode 3235"
 tags = [
     

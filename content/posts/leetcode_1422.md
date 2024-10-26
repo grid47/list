@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1422: Maximum Score After Splitting a String"
-date = "2020-12-03"
+date = "2020-12-05"
 description = "Solution to Leetcode 1422"
 tags = [
     

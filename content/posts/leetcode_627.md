@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 627: Swap Salary"
-date = "2023-02-06"
+date = "2023-02-08"
 description = "Solution to Leetcode 627"
 tags = [
     

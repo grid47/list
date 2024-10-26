@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2037: Minimum Number of Moves to Seat Everyone"
-date = "2019-03-29"
+date = "2019-03-31"
 description = "Solution to Leetcode 2037"
 tags = [
     

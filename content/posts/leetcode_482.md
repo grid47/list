@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 482: License Key Formatting"
-date = "2023-07-01"
+date = "2023-07-03"
 description = "Solution to Leetcode 482"
 tags = [
     

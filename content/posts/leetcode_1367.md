@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1367: Linked List in Binary Tree"
-date = "2021-01-27"
+date = "2021-01-29"
 description = "Solution to Leetcode 1367"
 tags = [
     

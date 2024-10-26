@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1583: Count Unhappy Friends"
-date = "2020-06-25"
+date = "2020-06-27"
 description = "Solution to Leetcode 1583"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2304: Minimum Path Cost in a Grid"
-date = "2018-07-05"
+date = "2018-07-07"
 description = "Solution to Leetcode 2304"
 tags = [
     

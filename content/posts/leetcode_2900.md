@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2900: Longest Unequal Adjacent Groups Subsequence I"
-date = "2016-11-16"
+date = "2016-11-18"
 description = "Solution to Leetcode 2900"
 tags = [
     

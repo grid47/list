@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 341: Flatten Nested List Iterator"
-date = "2023-11-19"
+date = "2023-11-21"
 description = "Solution to Leetcode 341"
 tags = [
     

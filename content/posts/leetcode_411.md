@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 411: Minimum Unique Word Abbreviation"
-date = "2023-09-10"
+date = "2023-09-12"
 description = "Solution to Leetcode 411"
 tags = [
     

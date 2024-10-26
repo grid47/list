@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1596: The Most Frequently Ordered Products for Each Customer"
-date = "2020-06-12"
+date = "2020-06-14"
 description = "Solution to Leetcode 1596"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1970: Last Day Where You Can Still Cross"
-date = "2019-06-04"
+date = "2019-06-06"
 description = "Solution to Leetcode 1970"
 tags = [
     

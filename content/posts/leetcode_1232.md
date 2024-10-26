@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1232: Check If It Is a Straight Line"
-date = "2021-06-11"
+date = "2021-06-13"
 description = "Solution to Leetcode 1232"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1071: Greatest Common Divisor of Strings"
-date = "2021-11-19"
+date = "2021-11-21"
 description = "Solution to Leetcode 1071"
 tags = [
     

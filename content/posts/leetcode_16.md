@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 16: 3Sum Closest"
-date = "2024-10-09"
+date = "2024-10-11"
 description = "Solution to Leetcode 16"
 tags = [
     

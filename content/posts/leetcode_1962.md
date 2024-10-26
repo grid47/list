@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1962: Remove Stones to Minimize the Total"
-date = "2019-06-12"
+date = "2019-06-14"
 description = "Solution to Leetcode 1962"
 tags = [
     

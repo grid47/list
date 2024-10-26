@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1252: Cells with Odd Values in a Matrix"
-date = "2021-05-22"
+date = "2021-05-24"
 description = "Solution to Leetcode 1252"
 tags = [
     

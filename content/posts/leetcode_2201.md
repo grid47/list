@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2201: Count Artifacts That Can Be Extracted"
-date = "2018-10-16"
+date = "2018-10-18"
 description = "Solution to Leetcode 2201"
 tags = [
     

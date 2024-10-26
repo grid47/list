@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2894: Divisible and Non-divisible Sums Difference"
-date = "2016-11-22"
+date = "2016-11-24"
 description = "Solution to Leetcode 2894"
 tags = [
     

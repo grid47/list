@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2481: Minimum Cuts to Divide a Circle"
-date = "2018-01-09"
+date = "2018-01-11"
 description = "Solution to Leetcode 2481"
 tags = [
     

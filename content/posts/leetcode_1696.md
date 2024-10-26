@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1696: Jump Game VI"
-date = "2020-03-04"
+date = "2020-03-06"
 description = "Solution to Leetcode 1696"
 tags = [
     

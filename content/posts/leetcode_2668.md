@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2668: Find Latest Salaries"
-date = "2017-07-06"
+date = "2017-07-08"
 description = "Solution to Leetcode 2668"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1753: Maximum Score From Removing Stones"
-date = "2020-01-07"
+date = "2020-01-09"
 description = "Solution to Leetcode 1753"
 tags = [
     

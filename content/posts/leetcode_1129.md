@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1129: Shortest Path with Alternating Colors"
-date = "2021-09-22"
+date = "2021-09-24"
 description = "Solution to Leetcode 1129"
 tags = [
     

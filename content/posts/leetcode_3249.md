@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3249: Count the Number of Good Nodes"
-date = "2015-12-03"
+date = "2015-12-05"
 description = "Solution to Leetcode 3249"
 tags = [
     

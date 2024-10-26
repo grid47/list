@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1085: Sum of Digits in the Minimum Number"
-date = "2021-11-05"
+date = "2021-11-07"
 description = "Solution to Leetcode 1085"
 tags = [
     

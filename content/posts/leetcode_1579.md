@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1579: Remove Max Number of Edges to Keep Graph Fully Traversable"
-date = "2020-06-29"
+date = "2020-07-01"
 description = "Solution to Leetcode 1579"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2449: Minimum Number of Operations to Make Arrays Similar"
-date = "2018-02-10"
+date = "2018-02-12"
 description = "Solution to Leetcode 2449"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 888: Fair Candy Swap"
-date = "2022-05-21"
+date = "2022-05-23"
 description = "Solution to Leetcode 888"
 tags = [
     

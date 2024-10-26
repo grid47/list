@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1175: Prime Arrangements"
-date = "2021-08-07"
+date = "2021-08-09"
 description = "Solution to Leetcode 1175"
 tags = [
     

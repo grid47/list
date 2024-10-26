@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1051: Height Checker"
-date = "2021-12-09"
+date = "2021-12-11"
 description = "Solution to Leetcode 1051"
 tags = [
     

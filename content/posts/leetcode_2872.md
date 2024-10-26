@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2872: Maximum Number of K-Divisible Components"
-date = "2016-12-14"
+date = "2016-12-16"
 description = "Solution to Leetcode 2872"
 tags = [
     

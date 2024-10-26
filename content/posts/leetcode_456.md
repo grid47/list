@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 456: 132 Pattern"
-date = "2023-07-27"
+date = "2023-07-29"
 description = "Solution to Leetcode 456"
 tags = [
     

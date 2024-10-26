@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1701: Average Waiting Time"
-date = "2020-02-28"
+date = "2020-03-01"
 description = "Solution to Leetcode 1701"
 tags = [
     

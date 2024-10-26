@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2701: Consecutive Transactions with Increasing Amounts"
-date = "2017-06-03"
+date = "2017-06-05"
 description = "Solution to Leetcode 2701"
 tags = [
     

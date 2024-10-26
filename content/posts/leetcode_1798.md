@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1798: Maximum Number of Consecutive Values You Can Make"
-date = "2019-11-23"
+date = "2019-11-25"
 description = "Solution to Leetcode 1798"
 tags = [
     

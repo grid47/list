@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1184: Distance Between Bus Stops"
-date = "2021-07-29"
+date = "2021-07-31"
 description = "Solution to Leetcode 1184"
 tags = [
     

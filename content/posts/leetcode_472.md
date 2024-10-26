@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 472: Concatenated Words"
-date = "2023-07-11"
+date = "2023-07-13"
 description = "Solution to Leetcode 472"
 tags = [
     

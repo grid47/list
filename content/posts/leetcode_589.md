@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 589: N-ary Tree Preorder Traversal"
-date = "2023-03-16"
+date = "2023-03-18"
 description = "Solution to Leetcode 589"
 tags = [
     

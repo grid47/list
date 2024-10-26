@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1263: Minimum Moves to Move a Box to Their Target Location"
-date = "2021-05-11"
+date = "2021-05-13"
 description = "Solution to Leetcode 1263"
 tags = [
     

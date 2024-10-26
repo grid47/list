@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1104: Path In Zigzag Labelled Binary Tree"
-date = "2021-10-17"
+date = "2021-10-19"
 description = "Solution to Leetcode 1104"
 tags = [
     

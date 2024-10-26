@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1767: Find the Subtasks That Did Not Execute"
-date = "2019-12-24"
+date = "2019-12-26"
 description = "Solution to Leetcode 1767"
 tags = [
     

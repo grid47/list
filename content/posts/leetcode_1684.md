@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1684: Count the Number of Consistent Strings"
-date = "2020-03-16"
+date = "2020-03-18"
 description = "Solution to Leetcode 1684"
 tags = [
     

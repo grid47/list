@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1845: Seat Reservation Manager"
-date = "2019-10-07"
+date = "2019-10-09"
 description = "Solution to Leetcode 1845"
 tags = [
     

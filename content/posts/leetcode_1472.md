@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1472: Design Browser History"
-date = "2020-10-14"
+date = "2020-10-16"
 description = "Solution to Leetcode 1472"
 tags = [
     

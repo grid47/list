@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2805: Custom Interval"
-date = "2017-02-19"
+date = "2017-02-21"
 description = "Solution to Leetcode 2805"
 tags = [
     

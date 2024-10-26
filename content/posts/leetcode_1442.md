@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1442: Count Triplets That Can Form Two Arrays of Equal XOR"
-date = "2020-11-13"
+date = "2020-11-15"
 description = "Solution to Leetcode 1442"
 tags = [
     

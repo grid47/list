@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2212: Maximum Points in an Archery Competition"
-date = "2018-10-05"
+date = "2018-10-07"
 description = "Solution to Leetcode 2212"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 845: Longest Mountain in Array"
-date = "2022-07-03"
+date = "2022-07-05"
 description = "Solution to Leetcode 845"
 tags = [
     

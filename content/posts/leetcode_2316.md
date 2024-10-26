@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2316: Count Unreachable Pairs of Nodes in an Undirected Graph"
-date = "2018-06-23"
+date = "2018-06-25"
 description = "Solution to Leetcode 2316"
 tags = [
     

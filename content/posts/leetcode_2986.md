@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2986: Find Third Transaction"
-date = "2016-08-22"
+date = "2016-08-24"
 description = "Solution to Leetcode 2986"
 tags = [
     

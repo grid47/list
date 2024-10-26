@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1148: Article Views I"
-date = "2021-09-03"
+date = "2021-09-05"
 description = "Solution to Leetcode 1148"
 tags = [
     

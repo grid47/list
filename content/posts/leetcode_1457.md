@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1457: Pseudo-Palindromic Paths in a Binary Tree"
-date = "2020-10-29"
+date = "2020-10-31"
 description = "Solution to Leetcode 1457"
 tags = [
     

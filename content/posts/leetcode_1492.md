@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1492: The kth Factor of n"
-date = "2020-09-24"
+date = "2020-09-26"
 description = "Solution to Leetcode 1492"
 tags = [
     

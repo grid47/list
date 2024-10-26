@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2241: Design an ATM Machine"
-date = "2018-09-06"
+date = "2018-09-08"
 description = "Solution to Leetcode 2241"
 tags = [
     

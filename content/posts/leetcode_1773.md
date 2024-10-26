@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1773: Count Items Matching a Rule"
-date = "2019-12-18"
+date = "2019-12-20"
 description = "Solution to Leetcode 1773"
 tags = [
     

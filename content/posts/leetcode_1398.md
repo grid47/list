@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1398: Customers Who Bought Products A and B but Not C"
-date = "2020-12-27"
+date = "2020-12-29"
 description = "Solution to Leetcode 1398"
 tags = [
     

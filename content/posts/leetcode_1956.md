@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1956: Minimum Time For K Virus Variants to Spread"
-date = "2019-06-18"
+date = "2019-06-20"
 description = "Solution to Leetcode 1956"
 tags = [
     

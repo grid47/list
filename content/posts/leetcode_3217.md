@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3217: Delete Nodes From Linked List Present in Array"
-date = "2016-01-04"
+date = "2016-01-06"
 description = "Solution to Leetcode 3217"
 tags = [
     

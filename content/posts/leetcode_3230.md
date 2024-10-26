@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3230: Customer Purchasing Behavior Analysis"
-date = "2015-12-22"
+date = "2015-12-24"
 description = "Solution to Leetcode 3230"
 tags = [
     

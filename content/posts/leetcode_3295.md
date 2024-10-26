@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3295: Report Spam Message"
-date = "2015-10-18"
+date = "2015-10-20"
 description = "Solution to Leetcode 3295"
 tags = [
     

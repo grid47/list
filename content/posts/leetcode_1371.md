@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1371: Find the Longest Substring Containing Vowels in Even Counts"
-date = "2021-01-23"
+date = "2021-01-25"
 description = "Solution to Leetcode 1371"
 tags = [
     

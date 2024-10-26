@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 566: Reshape the Matrix"
-date = "2023-04-08"
+date = "2023-04-10"
 description = "Solution to Leetcode 566"
 tags = [
     

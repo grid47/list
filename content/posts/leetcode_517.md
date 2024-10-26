@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 517: Super Washing Machines"
-date = "2023-05-27"
+date = "2023-05-29"
 description = "Solution to Leetcode 517"
 tags = [
     

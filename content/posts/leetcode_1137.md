@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1137: N-th Tribonacci Number"
-date = "2021-09-14"
+date = "2021-09-16"
 description = "Solution to Leetcode 1137"
 tags = [
     

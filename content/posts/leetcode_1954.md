@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1954: Minimum Garden Perimeter to Collect Enough Apples"
-date = "2019-06-20"
+date = "2019-06-22"
 description = "Solution to Leetcode 1954"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1577: Number of Ways Where Square of Number Is Equal to Product of Two Numbers"
-date = "2020-07-01"
+date = "2020-07-03"
 description = "Solution to Leetcode 1577"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 558: Logical OR of Two Binary Grids Represented as Quad-Trees"
-date = "2023-04-16"
+date = "2023-04-18"
 description = "Solution to Leetcode 558"
 tags = [
     

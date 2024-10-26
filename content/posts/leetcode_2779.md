@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2779: Maximum Beauty of an Array After Applying Operation"
-date = "2017-03-17"
+date = "2017-03-19"
 description = "Solution to Leetcode 2779"
 tags = [
     

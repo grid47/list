@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1605: Find Valid Matrix Given Row and Column Sums"
-date = "2020-06-03"
+date = "2020-06-05"
 description = "Solution to Leetcode 1605"
 tags = [
     

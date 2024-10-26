@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1424: Diagonal Traverse II"
-date = "2020-12-01"
+date = "2020-12-03"
 description = "Solution to Leetcode 1424"
 tags = [
     

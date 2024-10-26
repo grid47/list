@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1361: Validate Binary Tree Nodes"
-date = "2021-02-02"
+date = "2021-02-04"
 description = "Solution to Leetcode 1361"
 tags = [
     

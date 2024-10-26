@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1356: Sort Integers by The Number of 1 Bits"
-date = "2021-02-07"
+date = "2021-02-09"
 description = "Solution to Leetcode 1356"
 tags = [
     

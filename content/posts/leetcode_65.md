@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 65: Valid Number"
-date = "2024-08-21"
+date = "2024-08-23"
 description = "Solution to Leetcode 65"
 tags = [
     

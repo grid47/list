@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2677: Chunk Array"
-date = "2017-06-27"
+date = "2017-06-29"
 description = "Solution to Leetcode 2677"
 tags = [
     

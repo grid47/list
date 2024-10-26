@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1515: Best Position for a Service Centre"
-date = "2020-09-01"
+date = "2020-09-03"
 description = "Solution to Leetcode 1515"
 tags = [
     

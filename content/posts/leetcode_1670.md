@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1670: Design Front Middle Back Queue"
-date = "2020-03-30"
+date = "2020-04-01"
 description = "Solution to Leetcode 1670"
 tags = [
     

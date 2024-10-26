@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1552: Magnetic Force Between Two Balls"
-date = "2020-07-26"
+date = "2020-07-28"
 description = "Solution to Leetcode 1552"
 tags = [
     

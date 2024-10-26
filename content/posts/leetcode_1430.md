@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1430: Check If a String Is a Valid Sequence from Root to Leaves Path in a Binary Tree"
-date = "2020-11-25"
+date = "2020-11-27"
 description = "Solution to Leetcode 1430"
 tags = [
     

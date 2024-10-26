@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2990: Loan Types"
-date = "2016-08-18"
+date = "2016-08-20"
 description = "Solution to Leetcode 2990"
 tags = [
     

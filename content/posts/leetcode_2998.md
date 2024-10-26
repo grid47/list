@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2998: Minimum Number of Operations to Make X and Y Equal"
-date = "2016-08-10"
+date = "2016-08-12"
 description = "Solution to Leetcode 2998"
 tags = [
     

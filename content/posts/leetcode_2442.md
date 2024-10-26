@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2442: Count Number of Distinct Integers After Reverse Operations"
-date = "2018-02-17"
+date = "2018-02-19"
 description = "Solution to Leetcode 2442"
 tags = [
     

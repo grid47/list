@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1464: Maximum Product of Two Elements in an Array"
-date = "2020-10-22"
+date = "2020-10-24"
 description = "Solution to Leetcode 1464"
 tags = [
     

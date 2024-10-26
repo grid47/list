@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1465: Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts"
-date = "2020-10-21"
+date = "2020-10-23"
 description = "Solution to Leetcode 1465"
 tags = [
     

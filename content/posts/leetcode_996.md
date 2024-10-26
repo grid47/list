@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 996: Number of Squareful Arrays"
-date = "2022-02-02"
+date = "2022-02-04"
 description = "Solution to Leetcode 996"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1535: Find the Winner of an Array Game"
-date = "2020-08-12"
+date = "2020-08-14"
 description = "Solution to Leetcode 1535"
 tags = [
     

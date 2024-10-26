@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 366: Find Leaves of Binary Tree"
-date = "2023-10-25"
+date = "2023-10-27"
 description = "Solution to Leetcode 366"
 tags = [
     

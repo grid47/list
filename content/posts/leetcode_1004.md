@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1004: Max Consecutive Ones III"
-date = "2022-01-25"
+date = "2022-01-27"
 description = "Solution to Leetcode 1004"
 tags = [
     

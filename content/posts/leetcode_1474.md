@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1474: Delete N Nodes After M Nodes of a Linked List"
-date = "2020-10-12"
+date = "2020-10-14"
 description = "Solution to Leetcode 1474"
 tags = [
     

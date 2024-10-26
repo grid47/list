@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2653: Sliding Subarray Beauty"
-date = "2017-07-21"
+date = "2017-07-23"
 description = "Solution to Leetcode 2653"
 tags = [
     

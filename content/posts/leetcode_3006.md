@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3006: Find Beautiful Indices in the Given Array I"
-date = "2016-08-02"
+date = "2016-08-04"
 description = "Solution to Leetcode 3006"
 tags = [
     

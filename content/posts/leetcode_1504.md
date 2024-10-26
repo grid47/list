@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1504: Count Submatrices With All Ones"
-date = "2020-09-12"
+date = "2020-09-14"
 description = "Solution to Leetcode 1504"
 tags = [
     

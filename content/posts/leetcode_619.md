@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 619: Biggest Single Number"
-date = "2023-02-14"
+date = "2023-02-16"
 description = "Solution to Leetcode 619"
 tags = [
     

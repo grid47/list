@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1637: Widest Vertical Area Between Two Points Containing No Points"
-date = "2020-05-02"
+date = "2020-05-04"
 description = "Solution to Leetcode 1637"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 538: Convert BST to Greater Tree"
-date = "2023-05-06"
+date = "2023-05-08"
 description = "Solution to Leetcode 538"
 tags = [
     

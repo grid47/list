@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2313: Minimum Flips in Binary Tree to Get Result"
-date = "2018-06-26"
+date = "2018-06-28"
 description = "Solution to Leetcode 2313"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1123: Lowest Common Ancestor of Deepest Leaves"
-date = "2021-09-28"
+date = "2021-09-30"
 description = "Solution to Leetcode 1123"
 tags = [
     

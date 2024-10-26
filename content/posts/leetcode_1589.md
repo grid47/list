@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1589: Maximum Sum Obtained of Any Permutation"
-date = "2020-06-19"
+date = "2020-06-21"
 description = "Solution to Leetcode 1589"
 tags = [
     

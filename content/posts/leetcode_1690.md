@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1690: Stone Game VII"
-date = "2020-03-10"
+date = "2020-03-12"
 description = "Solution to Leetcode 1690"
 tags = [
     

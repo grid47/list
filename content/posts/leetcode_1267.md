@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1267: Count Servers that Communicate"
-date = "2021-05-07"
+date = "2021-05-09"
 description = "Solution to Leetcode 1267"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 371: Sum of Two Integers"
-date = "2023-10-20"
+date = "2023-10-22"
 description = "Solution to Leetcode 371"
 tags = [
     

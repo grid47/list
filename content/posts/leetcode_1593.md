@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1593: Split a String Into the Max Number of Unique Substrings"
-date = "2020-06-15"
+date = "2020-06-17"
 description = "Solution to Leetcode 1593"
 tags = [
     

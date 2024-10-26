@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2480: Form a Chemical Bond"
-date = "2018-01-10"
+date = "2018-01-12"
 description = "Solution to Leetcode 2480"
 tags = [
     

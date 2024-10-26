@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1038: Binary Search Tree to Greater Sum Tree"
-date = "2021-12-22"
+date = "2021-12-24"
 description = "Solution to Leetcode 1038"
 tags = [
     

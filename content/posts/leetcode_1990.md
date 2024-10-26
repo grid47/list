@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1990: Count the Number of Experiments"
-date = "2019-05-15"
+date = "2019-05-17"
 description = "Solution to Leetcode 1990"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2735: Collecting Chocolates"
-date = "2017-04-30"
+date = "2017-05-02"
 description = "Solution to Leetcode 2735"
 tags = [
     

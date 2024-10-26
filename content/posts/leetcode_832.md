@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 832: Flipping an Image"
-date = "2022-07-16"
+date = "2022-07-18"
 description = "Solution to Leetcode 832"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2398: Maximum Number of Robots Within Budget"
-date = "2018-04-02"
+date = "2018-04-04"
 description = "Solution to Leetcode 2398"
 tags = [
     

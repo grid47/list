@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 231: Power of Two"
-date = "2024-03-08"
+date = "2024-03-10"
 description = "Solution to Leetcode 231"
 tags = [
     
@@ -22,6 +22,12 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n <= 0) return false;
+        return !(n & (n - 1));
+    }
+};
 {{< /highlight >}}
 

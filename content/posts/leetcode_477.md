@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 477: Total Hamming Distance"
-date = "2023-07-06"
+date = "2023-07-08"
 description = "Solution to Leetcode 477"
 tags = [
     

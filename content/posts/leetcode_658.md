@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 658: Find K Closest Elements"
-date = "2023-01-06"
+date = "2023-01-08"
 description = "Solution to Leetcode 658"
 tags = [
     

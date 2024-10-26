@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1693: Daily Leads and Partners"
-date = "2020-03-07"
+date = "2020-03-09"
 description = "Solution to Leetcode 1693"
 tags = [
     

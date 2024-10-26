@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 502: IPO"
-date = "2023-06-11"
+date = "2023-06-13"
 description = "Solution to Leetcode 502"
 tags = [
     

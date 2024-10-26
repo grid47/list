@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1991: Find the Middle Index in Array"
-date = "2019-05-14"
+date = "2019-05-16"
 description = "Solution to Leetcode 1991"
 tags = [
     

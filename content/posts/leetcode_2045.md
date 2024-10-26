@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2045: Second Minimum Time to Reach Destination"
-date = "2019-03-21"
+date = "2019-03-23"
 description = "Solution to Leetcode 2045"
 tags = [
     

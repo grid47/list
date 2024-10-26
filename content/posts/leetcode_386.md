@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 386: Lexicographical Numbers"
-date = "2023-10-05"
+date = "2023-10-07"
 description = "Solution to Leetcode 386"
 tags = [
     

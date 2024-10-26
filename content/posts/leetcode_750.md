@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 750: Number Of Corner Rectangles"
-date = "2022-10-06"
+date = "2022-10-08"
 description = "Solution to Leetcode 750"
 tags = [
     

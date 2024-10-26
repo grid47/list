@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 895: Maximum Frequency Stack"
-date = "2022-05-14"
+date = "2022-05-16"
 description = "Solution to Leetcode 895"
 tags = [
     

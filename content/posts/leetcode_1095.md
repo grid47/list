@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1095: Find in Mountain Array"
-date = "2021-10-26"
+date = "2021-10-28"
 description = "Solution to Leetcode 1095"
 tags = [
     

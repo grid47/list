@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2033: Minimum Operations to Make a Uni-Value Grid"
-date = "2019-04-02"
+date = "2019-04-04"
 description = "Solution to Leetcode 2033"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2360: Longest Cycle in a Graph"
-date = "2018-05-10"
+date = "2018-05-12"
 description = "Solution to Leetcode 2360"
 tags = [
     

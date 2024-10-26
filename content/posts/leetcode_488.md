@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 488: Zuma Game"
-date = "2023-06-25"
+date = "2023-06-27"
 description = "Solution to Leetcode 488"
 tags = [
     

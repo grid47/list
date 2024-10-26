@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2593: Find Score of an Array After Marking All Elements"
-date = "2017-09-19"
+date = "2017-09-21"
 description = "Solution to Leetcode 2593"
 tags = [
     

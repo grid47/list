@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3073: Maximum Increasing Triplet Value"
-date = "2016-05-27"
+date = "2016-05-29"
 description = "Solution to Leetcode 3073"
 tags = [
     

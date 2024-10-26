@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1251: Average Selling Price"
-date = "2021-05-23"
+date = "2021-05-25"
 description = "Solution to Leetcode 1251"
 tags = [
     

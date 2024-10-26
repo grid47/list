@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1121: Divide Array Into Increasing Sequences"
-date = "2021-09-30"
+date = "2021-10-02"
 description = "Solution to Leetcode 1121"
 tags = [
     

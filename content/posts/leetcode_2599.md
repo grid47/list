@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2599: Make the Prefix Sum Non-negative"
-date = "2017-09-13"
+date = "2017-09-15"
 description = "Solution to Leetcode 2599"
 tags = [
     

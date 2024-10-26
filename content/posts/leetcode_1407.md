@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1407: Top Travellers"
-date = "2020-12-18"
+date = "2020-12-20"
 description = "Solution to Leetcode 1407"
 tags = [
     

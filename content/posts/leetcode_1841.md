@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1841: League Statistics"
-date = "2019-10-11"
+date = "2019-10-13"
 description = "Solution to Leetcode 1841"
 tags = [
     

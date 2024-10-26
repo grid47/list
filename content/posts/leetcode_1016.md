@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1016: Binary String With Substrings Representing 1 To N"
-date = "2022-01-13"
+date = "2022-01-15"
 description = "Solution to Leetcode 1016"
 tags = [
     

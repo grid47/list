@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2355: Maximum Number of Books You Can Take"
-date = "2018-05-15"
+date = "2018-05-17"
 description = "Solution to Leetcode 2355"
 tags = [
     

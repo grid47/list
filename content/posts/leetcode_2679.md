@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2679: Sum in a Matrix"
-date = "2017-06-25"
+date = "2017-06-27"
 description = "Solution to Leetcode 2679"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2353: Design a Food Rating System"
-date = "2018-05-17"
+date = "2018-05-19"
 description = "Solution to Leetcode 2353"
 tags = [
     

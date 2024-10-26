@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1941: Check if All Characters Have Equal Number of Occurrences"
-date = "2019-07-03"
+date = "2019-07-05"
 description = "Solution to Leetcode 1941"
 tags = [
     

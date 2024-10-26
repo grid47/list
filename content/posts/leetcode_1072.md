@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1072: Flip Columns For Maximum Number of Equal Rows"
-date = "2021-11-18"
+date = "2021-11-20"
 description = "Solution to Leetcode 1072"
 tags = [
     

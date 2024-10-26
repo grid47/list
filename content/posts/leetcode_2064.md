@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2064: Minimized Maximum of Products Distributed to Any Store"
-date = "2019-03-02"
+date = "2019-03-04"
 description = "Solution to Leetcode 2064"
 tags = [
     

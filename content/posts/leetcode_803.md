@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 803: Bricks Falling When Hit"
-date = "2022-08-14"
+date = "2022-08-16"
 description = "Solution to Leetcode 803"
 tags = [
     

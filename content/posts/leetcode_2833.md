@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2833: Furthest Point From Origin"
-date = "2017-01-22"
+date = "2017-01-24"
 description = "Solution to Leetcode 2833"
 tags = [
     

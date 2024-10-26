@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2245: Maximum Trailing Zeros in a Cornered Path"
-date = "2018-09-02"
+date = "2018-09-04"
 description = "Solution to Leetcode 2245"
 tags = [
     

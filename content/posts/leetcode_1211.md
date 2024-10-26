@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1211: Queries Quality and Percentage"
-date = "2021-07-02"
+date = "2021-07-04"
 description = "Solution to Leetcode 1211"
 tags = [
     

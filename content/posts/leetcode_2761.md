@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2761: Prime Pairs With Target Sum"
-date = "2017-04-04"
+date = "2017-04-06"
 description = "Solution to Leetcode 2761"
 tags = [
     

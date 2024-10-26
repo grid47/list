@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2638: Count the Number of K-Free Subsets"
-date = "2017-08-05"
+date = "2017-08-07"
 description = "Solution to Leetcode 2638"
 tags = [
     

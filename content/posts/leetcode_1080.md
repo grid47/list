@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1080: Insufficient Nodes in Root to Leaf Paths"
-date = "2021-11-10"
+date = "2021-11-12"
 description = "Solution to Leetcode 1080"
 tags = [
     

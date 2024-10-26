@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2828: Check if a String Is an Acronym of Words"
-date = "2017-01-27"
+date = "2017-01-29"
 description = "Solution to Leetcode 2828"
 tags = [
     

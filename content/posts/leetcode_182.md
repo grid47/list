@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 182: Duplicate Emails"
-date = "2024-04-26"
+date = "2024-04-28"
 description = "Solution to Leetcode 182"
 tags = [
     
@@ -22,6 +22,7 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+# Write your MySQL query statement below
+select email from person group by email having count(*) > 1;
 {{< /highlight >}}
 

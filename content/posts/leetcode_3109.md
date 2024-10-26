@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3109: Find the Index of Permutation"
-date = "2016-04-21"
+date = "2016-04-23"
 description = "Solution to Leetcode 3109"
 tags = [
     

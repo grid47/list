@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 921: Minimum Add to Make Parentheses Valid"
-date = "2022-04-18"
+date = "2022-04-20"
 description = "Solution to Leetcode 921"
 tags = [
     

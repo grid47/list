@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1228: Missing Number In Arithmetic Progression"
-date = "2021-06-15"
+date = "2021-06-17"
 description = "Solution to Leetcode 1228"
 tags = [
     

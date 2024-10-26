@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1846: Maximum Element After Decreasing and Rearranging"
-date = "2019-10-06"
+date = "2019-10-08"
 description = "Solution to Leetcode 1846"
 tags = [
     

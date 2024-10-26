@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 656: Coin Path"
-date = "2023-01-08"
+date = "2023-01-10"
 description = "Solution to Leetcode 656"
 tags = [
     

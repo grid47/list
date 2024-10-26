@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 704: Binary Search"
-date = "2022-11-21"
+date = "2022-11-23"
 description = "Solution to Leetcode 704"
 tags = [
     

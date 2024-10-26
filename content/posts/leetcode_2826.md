@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2826: Sorting Three Groups"
-date = "2017-01-29"
+date = "2017-01-31"
 description = "Solution to Leetcode 2826"
 tags = [
     

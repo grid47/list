@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1672: Richest Customer Wealth"
-date = "2020-03-28"
+date = "2020-03-30"
 description = "Solution to Leetcode 1672"
 tags = [
     

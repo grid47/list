@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3251: Find the Count of Monotonic Pairs II"
-date = "2015-12-01"
+date = "2015-12-03"
 description = "Solution to Leetcode 3251"
 tags = [
     
