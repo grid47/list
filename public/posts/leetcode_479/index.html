@@ -186,7 +186,29 @@
         <p><a href="https://leetcode.com/problems/largest-palindrome-product/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int largestPalindrome(int n) {
+</span></span><span class="line"><span class="cl">        if (n == 1) return 9;
+</span></span><span class="line"><span class="cl">        int upper = pow(10, n) - 1;
+</span></span><span class="line"><span class="cl">        int lower = pow(10, n-1);
+</span></span><span class="line"><span class="cl">        for (int i = upper; i &gt;= lower; i--) {
+</span></span><span class="line"><span class="cl">            long cand = buildPalindrome(i);
+</span></span><span class="line"><span class="cl">            for (long j = upper; j*j &gt;= cand; j--) {
+</span></span><span class="line"><span class="cl">                if (cand % j == 0 <span class="err">&amp;&amp;</span> cand / j <span class="err">&lt;</span>= upper) {
+</span></span><span class="line"><span class="cl">                    return cand % 1337;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return -1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    long buildPalindrome(int n) {
+</span></span><span class="line"><span class="cl">        string s = to_string(n);
+</span></span><span class="line"><span class="cl">        reverse(s.begin(), s.end());
+</span></span><span class="line"><span class="cl">        return stol(to_string(n) + s);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

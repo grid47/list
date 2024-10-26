@@ -186,7 +186,65 @@
         <p><a href="https://leetcode.com/problems/design-circular-queue/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class MyCircularQueue {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">    int frd, bck;
+</span></span><span class="line"><span class="cl">    int sz, cnt;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    MyCircularQueue(int k): sz(k), frd(0), bck(-1), q(k, 0), cnt(0) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool enQueue(int value) {
+</span></span><span class="line"><span class="cl">        if(isFull()) return false;        
+</span></span><span class="line"><span class="cl">        bck = (bck + 1) % sz;
+</span></span><span class="line"><span class="cl">        q[bck] = value;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        cnt++;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool deQueue() {
+</span></span><span class="line"><span class="cl">        if(isEmpty()) return false;        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        frd = (frd +1) %sz;        
+</span></span><span class="line"><span class="cl">        cnt--;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return true;        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int Front() {
+</span></span><span class="line"><span class="cl">        if(isEmpty()) return -1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return q[frd];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int Rear() {
+</span></span><span class="line"><span class="cl">        if(isEmpty()) return -1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return q[bck];        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool isEmpty() {
+</span></span><span class="line"><span class="cl">        return cnt == 0;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool isFull() {
+</span></span><span class="line"><span class="cl">        return cnt == sz;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your MyCircularQueue object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * MyCircularQueue* obj = new MyCircularQueue(k);
+</span></span><span class="line"><span class="cl"> * bool param_1 = obj-&gt;enQueue(value);
+</span></span><span class="line"><span class="cl"> * bool param_2 = obj-&gt;deQueue();
+</span></span><span class="line"><span class="cl"> * int param_3 = obj-&gt;Front();
+</span></span><span class="line"><span class="cl"> * int param_4 = obj-&gt;Rear();
+</span></span><span class="line"><span class="cl"> * bool param_5 = obj-&gt;isEmpty();
+</span></span><span class="line"><span class="cl"> * bool param_6 = obj-&gt;isFull();
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

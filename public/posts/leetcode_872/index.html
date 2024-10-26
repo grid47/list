@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/leaf-similar-trees/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> s1, s2;
+</span></span><span class="line"><span class="cl">        s1.push(root1), s2.push(root2);
+</span></span><span class="line"><span class="cl">        while(!s1.empty() <span class="err">&amp;&amp;</span> !s2.empty())
+</span></span><span class="line"><span class="cl">            if(dfs(s1) != dfs(s2)) return false;
+</span></span><span class="line"><span class="cl">        return s1.empty() <span class="err">&amp;&amp;</span> s2.empty();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dfs(stack<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> <span class="err">&amp;</span>stk) {
+</span></span><span class="line"><span class="cl">        while(true) {
+</span></span><span class="line"><span class="cl">            TreeNode* node = stk.top(); stk.pop();
+</span></span><span class="line"><span class="cl">            if(node-&gt;left) stk.push(node-&gt;left);
+</span></span><span class="line"><span class="cl">            if(node-&gt;right) stk.push(node-&gt;right);
+</span></span><span class="line"><span class="cl">            if(!node-&gt;left <span class="err">&amp;&amp;</span> !node-&gt;right) return node-&gt;val;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

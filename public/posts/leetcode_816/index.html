@@ -186,7 +186,27 @@
         <p><a href="https://leetcode.com/problems/ambiguous-coordinates/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> ambiguousCoordinates(string S) {
+</span></span><span class="line"><span class="cl">        int n = S.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        for (int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span> <span class="na">-</span> <span class="na">2</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span> A = f(S.substr(1, i)), B = f(S.substr(i + 1, n - 2 - i));
+</span></span><span class="line"><span class="cl">            for (auto <span class="err">&amp;</span> a : A) for (auto <span class="err">&amp;</span> b : B) res.push_back(&#34;(&#34; + a + &#34;, &#34; + b + &#34;)&#34;);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> f(string S) {
+</span></span><span class="line"><span class="cl">        int n = S.size();
+</span></span><span class="line"><span class="cl">        if (n == 0 || (n &gt; 1 <span class="err">&amp;&amp;</span> S[0] == &#39;0&#39; <span class="err">&amp;&amp;</span> S[n - 1] == &#39;0&#39;)) return {};
+</span></span><span class="line"><span class="cl">        if (n &gt; 1 <span class="err">&amp;&amp;</span> S[0] == &#39;0&#39;) return {&#34;0.&#34; + S.substr(1)};
+</span></span><span class="line"><span class="cl">        if (n == 1 || S[n - 1] == &#39;0&#39;) return {S};
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> res = {S};
+</span></span><span class="line"><span class="cl">        for (int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="na">res</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">S</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">0</span><span class="err">,</span> <span class="na">i</span><span class="err">)</span> <span class="err">+</span> <span class="err">&#39;.&#39;</span> <span class="err">+</span> <span class="na">S</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

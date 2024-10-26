@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/top-k-frequent-words/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">using tup_t = tuple<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>;
+</span></span><span class="line"><span class="cl">class cmp {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool operator() (const tup_t <span class="err">&amp;</span>p1, const tup_t <span class="err">&amp;</span>p2) {
+</span></span><span class="line"><span class="cl">        if(get<span class="p">&lt;</span><span class="nt">0</span><span class="p">&gt;</span>(p1) == get<span class="p">&lt;</span><span class="nt">0</span><span class="p">&gt;</span>(p2)) return get<span class="p">&lt;</span><span class="nt">1</span><span class="p">&gt;</span>(p1) &gt; get<span class="p">&lt;</span><span class="nt">1</span><span class="p">&gt;</span>(p2);
+</span></span><span class="line"><span class="cl">        else return get<span class="p">&lt;</span><span class="nt">0</span><span class="p">&gt;</span>(p1) <span class="p">&lt;</span> <span class="nt">get</span><span class="err">&lt;</span><span class="na">0</span><span class="p">&gt;</span>(p2);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> topKFrequent(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words, int k) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">        for(string str: words)
+</span></span><span class="line"><span class="cl">            mp[str]++;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">tup_t</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">tup_t</span><span class="p">&gt;</span>, cmp&gt; pq;
+</span></span><span class="line"><span class="cl">        for(auto it: mp) {
+</span></span><span class="line"><span class="cl">            auto tp = make_tuple(it.second, it.first);
+</span></span><span class="line"><span class="cl">            pq.push(tp);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        while(k-- &gt; 0) {
+</span></span><span class="line"><span class="cl">            auto e = pq.top();
+</span></span><span class="line"><span class="cl">            ans.push_back(get<span class="p">&lt;</span><span class="nt">1</span><span class="p">&gt;</span>(e));
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

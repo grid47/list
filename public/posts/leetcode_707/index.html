@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,82 @@
         <p><a href="https://leetcode.com/problems/design-linked-list/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Node {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">        int val;
+</span></span><span class="line"><span class="cl">        Node* next;
+</span></span><span class="line"><span class="cl">    Node(int x): val(x), next(nullptr) {}
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">class MyLinkedList {
+</span></span><span class="line"><span class="cl">    int sz;
+</span></span><span class="line"><span class="cl">    Node* head;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    MyLinkedList(): sz(0), head(nullptr) { }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int get(int index) {
+</span></span><span class="line"><span class="cl">        if(index <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">index</span> <span class="p">&gt;</span>= sz)
+</span></span><span class="line"><span class="cl">        return -1;
+</span></span><span class="line"><span class="cl">        else {
+</span></span><span class="line"><span class="cl">            Node* curr = head;
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">index</span><span class="err">;</span><span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">curr </span><span class="o">=</span> <span class="s">curr-</span><span class="p">&gt;</span>next;
+</span></span><span class="line"><span class="cl">            return curr-&gt;val;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void addAtHead(int val) {
+</span></span><span class="line"><span class="cl">        addAtIndex(0, val);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void addAtTail(int val) {
+</span></span><span class="line"><span class="cl">        addAtIndex(sz, val);        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void addAtIndex(int index, int val) {
+</span></span><span class="line"><span class="cl">        if(index &gt; sz || index <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="na">return</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">Node</span><span class="err">*</span> <span class="na">cur </span><span class="o">=</span> <span class="s">head;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">Node</span><span class="err">*</span> <span class="na">new_node </span><span class="o">=</span> <span class="s">new</span> <span class="na">Node</span><span class="err">(</span><span class="na">val</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">index </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">new_node-</span><span class="p">&gt;</span>next = head;
+</span></span><span class="line"><span class="cl">            head = new_node;
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">index</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cur </span><span class="o">=</span> <span class="s">cur-</span><span class="p">&gt;</span>next;
+</span></span><span class="line"><span class="cl">            new_node-&gt;next = cur-&gt;next;
+</span></span><span class="line"><span class="cl">            cur-&gt;next = new_node;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        sz++;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void deleteAtIndex(int index) {
+</span></span><span class="line"><span class="cl">        if(index &gt;= sz || index <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="na">return</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">index </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">Node</span><span class="err">*</span> <span class="na">nxt </span><span class="o">=</span> <span class="s">head-</span><span class="p">&gt;</span>next;
+</span></span><span class="line"><span class="cl">            delete head;
+</span></span><span class="line"><span class="cl">            head = nxt;
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            Node* cur = head;
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">index</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cur </span><span class="o">=</span> <span class="s">cur-</span><span class="p">&gt;</span>next;
+</span></span><span class="line"><span class="cl">            Node* nxt = cur-&gt;next-&gt;next;
+</span></span><span class="line"><span class="cl">            delete cur-&gt;next;
+</span></span><span class="line"><span class="cl">            cur-&gt;next = nxt;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        sz--;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your MyLinkedList object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * MyLinkedList* obj = new MyLinkedList();
+</span></span><span class="line"><span class="cl"> * int param_1 = obj-&gt;get(index);
+</span></span><span class="line"><span class="cl"> * obj-&gt;addAtHead(val);
+</span></span><span class="line"><span class="cl"> * obj-&gt;addAtTail(val);
+</span></span><span class="line"><span class="cl"> * obj-&gt;addAtIndex(index,val);
+</span></span><span class="line"><span class="cl"> * obj-&gt;deleteAtIndex(index);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

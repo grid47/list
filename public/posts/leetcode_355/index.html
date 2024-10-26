@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,125 @@
         <p><a href="https://leetcode.com/problems/design-twitter/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Tweet {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int id;
+</span></span><span class="line"><span class="cl">    int time;
+</span></span><span class="line"><span class="cl">    Tweet* next;
+</span></span><span class="line"><span class="cl">    Tweet(int id, int time) {
+</span></span><span class="line"><span class="cl">        this-&gt;id = id;
+</span></span><span class="line"><span class="cl">        this-&gt;time = time;
+</span></span><span class="line"><span class="cl">        next = NULL;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class User {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int id;
+</span></span><span class="line"><span class="cl">    set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> followed;
+</span></span><span class="line"><span class="cl">    Tweet* tweet_head;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    User(int id) {
+</span></span><span class="line"><span class="cl">        id = id;
+</span></span><span class="line"><span class="cl">        follow(id); // follow self;
+</span></span><span class="line"><span class="cl">        tweet_head = NULL;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void follow(int id) {
+</span></span><span class="line"><span class="cl">        followed.insert(id);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void unfollow(int id) {
+</span></span><span class="line"><span class="cl">        followed.erase(id);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void post(int id, int times) {
+</span></span><span class="line"><span class="cl">        Tweet* t = new Tweet(id, times);
+</span></span><span class="line"><span class="cl">        t-&gt;next = tweet_head;
+</span></span><span class="line"><span class="cl">        tweet_head = t;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Twitter {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int timeStamp = 0;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">User</span><span class="err">*</span><span class="p">&gt;</span> userMap;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    Twitter() {
+</span></span><span class="line"><span class="cl">        // user map init
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void postTweet(int userId, int tweetId) {
+</span></span><span class="line"><span class="cl">        if(!userMap.count(userId)) {
+</span></span><span class="line"><span class="cl">            User* u = new User(userId);
+</span></span><span class="line"><span class="cl">            userMap[userId] = u;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        userMap[userId]-&gt;post(tweetId, timeStamp++);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    struct compare {
+</span></span><span class="line"><span class="cl">        bool operator()(const Tweet* l, const Tweet* r) {
+</span></span><span class="line"><span class="cl">            return l-&gt;time <span class="p">&lt;</span> <span class="nt">r-</span><span class="p">&gt;</span>time;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> getNewsFeed(int userId) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        if(!userMap.count(userId)) {
+</span></span><span class="line"><span class="cl">            return res;
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> users = userMap[userId]-&gt;followed;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">Tweet</span><span class="err">*,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">Tweet</span><span class="err">*</span><span class="p">&gt;</span>, compare&gt; pq;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int user: users) {
+</span></span><span class="line"><span class="cl">            Tweet* t = userMap[user]-&gt;tweet_head;
+</span></span><span class="line"><span class="cl">            if(t != NULL)
+</span></span><span class="line"><span class="cl">                pq.push(t);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int n = 0;
+</span></span><span class="line"><span class="cl">        while(!pq.empty() <span class="err">&amp;&amp;</span> n <span class="p">&lt;</span> <span class="nt">10</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">Tweet</span><span class="err">*</span> <span class="na">t </span><span class="o">=</span> <span class="s">pq.top();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">t-</span><span class="p">&gt;</span>id);
+</span></span><span class="line"><span class="cl">            n++;
+</span></span><span class="line"><span class="cl">            if(t-&gt;next != NULL)
+</span></span><span class="line"><span class="cl">                pq.push(t-&gt;next);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span><span class="na">-</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">follow</span><span class="err">(</span><span class="na">int</span> <span class="na">followerId</span><span class="err">,</span> <span class="na">int</span> <span class="na">followeeId</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(!</span><span class="na">userMap</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">followerId</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">User</span><span class="err">*</span> <span class="na">u </span><span class="o">=</span> <span class="s">new</span> <span class="na">User</span><span class="err">(</span><span class="na">followerId</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">userMap</span><span class="err">[</span><span class="na">followerId</span><span class="err">]</span> <span class="err">=</span> <span class="na">u</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(!</span><span class="na">userMap</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">followeeId</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">User</span><span class="err">*</span> <span class="na">u </span><span class="o">=</span> <span class="s">new</span> <span class="na">User</span><span class="err">(</span><span class="na">followeeId</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">userMap</span><span class="err">[</span><span class="na">followeeId</span><span class="err">]</span> <span class="err">=</span> <span class="na">u</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>        
+</span></span><span class="line"><span class="cl">        <span class="na">userMap</span><span class="err">[</span><span class="na">followerId</span><span class="err">]</span><span class="na">-</span><span class="p">&gt;</span>follow(followeeId);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void unfollow(int followerId, int followeeId) {
+</span></span><span class="line"><span class="cl">        if(userMap.count(followerId) <span class="err">&amp;&amp;</span> followerId == followeeId)
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">            userMap[followerId]-&gt;unfollow(followeeId);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your Twitter object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * Twitter* obj = new Twitter();
+</span></span><span class="line"><span class="cl"> * obj-&gt;postTweet(userId,tweetId);
+</span></span><span class="line"><span class="cl"> * vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> param_2 = obj-&gt;getNewsFeed(userId);
+</span></span><span class="line"><span class="cl"> * obj-&gt;follow(followerId,followeeId);
+</span></span><span class="line"><span class="cl"> * obj-&gt;unfollow(followerId,followeeId);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

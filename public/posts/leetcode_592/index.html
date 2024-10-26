@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/fraction-addition-and-subtraction/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string fractionAddition(string expression) {
+</span></span><span class="line"><span class="cl">        istringstream in(expression);
+</span></span><span class="line"><span class="cl">        int A = 0, B = 1, a, b;
+</span></span><span class="line"><span class="cl">        char _;
+</span></span><span class="line"><span class="cl">        while(in &gt;&gt; a &gt;&gt; _ &gt;&gt; b) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">a</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;</span><span class="na">-</span><span class="err">&#39;</span> <span class="err">&lt;&lt;</span> <span class="na">b</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;\</span><span class="na">n</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">A </span><span class="o">=</span> <span class="s">A</span> <span class="err">*</span> <span class="na">b</span> <span class="err">+</span> <span class="na">a</span> <span class="err">*</span> <span class="na">B</span><span class="err">;</span>  <span class="err">//</span> <span class="na">numerator</span> <span class="na">in</span> <span class="na">A</span> <span class="na">denomiator</span> <span class="na">in</span> <span class="na">B</span>
+</span></span><span class="line"><span class="cl">            <span class="na">B </span><span class="o">=</span> <span class="s">B*b;</span> <span class="err">//</span><span class="na">b</span><span class="err">*</span><span class="na">B</span>      <span class="err">//</span> <span class="na">A</span> <span class="err">/</span> <span class="na">B</span> <span class="err">+</span> <span class="na">a</span><span class="err">/</span><span class="na">b</span>
+</span></span><span class="line"><span class="cl">                                <span class="err">//</span> <span class="na">0</span><span class="err">/</span><span class="na">1</span> <span class="err">+</span> <span class="na">a</span><span class="err">/</span><span class="na">b</span>
+</span></span><span class="line"><span class="cl">                                <span class="err">//</span> <span class="err">(</span><span class="na">A</span><span class="err">*</span><span class="na">b</span><span class="err">+</span><span class="na">a</span><span class="err">*</span><span class="na">B</span><span class="err">)/</span><span class="na">bB</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">A</span> <span class="na">hold</span> <span class="na">small</span> <span class="na">a</span><span class="err">,</span> <span class="na">B</span> <span class="na">hold</span> <span class="na">b</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">But</span> <span class="na">cancel</span> <span class="na">their</span> <span class="na">greatest</span> <span class="na">common</span> <span class="na">divisor</span><span class="err">.</span>
+</span></span><span class="line"><span class="cl">            <span class="err">/*</span>
+</span></span><span class="line"><span class="cl">            <span class="na">a </span><span class="o">=</span> <span class="s">-1/2</span>
+</span></span><span class="line"><span class="cl">            <span class="na">b </span><span class="o">=</span>  <span class="s">1/2</span>
+</span></span><span class="line"><span class="cl">            <span class="na">A </span><span class="o">=</span> <span class="s">0</span> <span class="err">*</span> <span class="na">1</span><span class="err">/</span><span class="na">2</span> <span class="err">+</span> <span class="na">-1</span><span class="err">/</span><span class="na">2</span> <span class="err">*</span> <span class="na">1 </span><span class="o">=</span> <span class="s">-1/2</span>
+</span></span><span class="line"><span class="cl">            <span class="na">B </span><span class="o">=</span> <span class="s">1/2</span>
+</span></span><span class="line"><span class="cl">            <span class="err">*/</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">g </span><span class="o">=</span> <span class="s">abs(__gcd(A,</span> <span class="na">B</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">            <span class="na">cout</span><span class="err">&lt;&lt;</span> <span class="err">&#34;</span><span class="na">-0</span><span class="err">&lt;&#34;&lt;&lt;</span> <span class="na">g</span><span class="err">&lt;&lt;</span> <span class="err">&#34;</span><span class="p">&gt;</span>0-&#34;<span class="err">&lt;&lt;</span> &#39;\n&#39;;
+</span></span><span class="line"><span class="cl">            A /= g;
+</span></span><span class="line"><span class="cl">            B /= g;
+</span></span><span class="line"><span class="cl">            cout<span class="err">&lt;&lt;</span> &#34;-0{&#34;<span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">A</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;}</span><span class="na">0-</span><span class="err">&#34;&lt;&lt;</span> <span class="err">&#39;\</span><span class="na">n</span><span class="err">&#39;;</span>            
+</span></span><span class="line"><span class="cl">            <span class="na">cout</span><span class="err">&lt;&lt;</span> <span class="err">&#34;</span><span class="na">-0</span><span class="err">{&#34;&lt;&lt;</span> <span class="na">B</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;}</span><span class="na">0-</span><span class="err">&#34;&lt;&lt;</span> <span class="err">&#39;\</span><span class="na">n</span><span class="err">&#39;;</span>                        
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">to_string</span><span class="err">(</span><span class="na">A</span><span class="err">)</span> <span class="err">+</span> <span class="err">&#34;/&#34;</span> <span class="err">+</span> <span class="na">to_string</span><span class="err">(</span><span class="na">B</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

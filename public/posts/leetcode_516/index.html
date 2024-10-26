@@ -186,7 +186,32 @@
         <p><a href="https://leetcode.com/problems/longest-palindromic-subsequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string str;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; memo;
+</span></span><span class="line"><span class="cl">    int dp(int i, int j) {
+</span></span><span class="line"><span class="cl">        if(i == j) return 1;
+</span></span><span class="line"><span class="cl">        if(i == j - 1) return str[i] == str[j]? 2: 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[i][j] != -1) return memo[i][j];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        if(str[i] == str[j]) {
+</span></span><span class="line"><span class="cl">            ans = 2 + dp(i + 1, j - 1);
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            ans = max(dp(i + 1, j), dp(i, j - 1));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return memo[i][j] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int longestPalindromeSubseq(string s) {
+</span></span><span class="line"><span class="cl">        str = s;
+</span></span><span class="line"><span class="cl">        int n = s.size();
+</span></span><span class="line"><span class="cl">        memo.resize(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, -1));
+</span></span><span class="line"><span class="cl">        return dp(0, n - 1);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,30 @@
         <p><a href="https://leetcode.com/problems/largest-sum-of-averages/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    double memo[200][200];
+</span></span><span class="line"><span class="cl">    double largestSumOfAverages(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) {
+</span></span><span class="line"><span class="cl">        memset(memo, 0, sizeof(memo));
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">        double cur = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">cur</span> <span class="err">+=</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">memo</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">cur</span> <span class="err">/</span> <span class="err">(</span><span class="na">i</span><span class="err">+</span> <span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">search</span><span class="err">(</span><span class="na">n</span><span class="err">,</span> <span class="na">k</span><span class="err">,</span> <span class="na">nums</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="na">double</span> <span class="na">search</span><span class="err">(</span><span class="na">int</span> <span class="na">n</span><span class="err">,</span> <span class="na">int</span> <span class="na">k</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>nums) {
+</span></span><span class="line"><span class="cl">        if(memo[n][k] &gt; 0) return memo[n][k];
+</span></span><span class="line"><span class="cl">        double cur = 0;
+</span></span><span class="line"><span class="cl">        for(int i = n - 1; i &gt; 0; i--) {
+</span></span><span class="line"><span class="cl">            cur += nums[i];
+</span></span><span class="line"><span class="cl">            memo[n][k] = max(memo[n][k], search(i, k - 1, nums) + cur / (n - i));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return memo[n][k];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

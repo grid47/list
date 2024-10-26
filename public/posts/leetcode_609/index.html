@@ -186,7 +186,32 @@
         <p><a href="https://leetcode.com/problems/find-duplicate-file-in-system/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; findDuplicate(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> paths) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; result;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(auto path: paths) {
+</span></span><span class="line"><span class="cl">            stringstream ss(path);
+</span></span><span class="line"><span class="cl">            string root;
+</span></span><span class="line"><span class="cl">            string s;
+</span></span><span class="line"><span class="cl">            getline(ss, root, &#39; &#39;);
+</span></span><span class="line"><span class="cl">            while(getline(ss, s, &#39; &#39;)) {
+</span></span><span class="line"><span class="cl">                string fileName = root + &#39;/&#39; + s.substr(0, s.find(&#39;(&#39;));
+</span></span><span class="line"><span class="cl">                string fileContent = s.substr(s.find(&#39;(&#39;) + 1, s.find(&#39;)&#39;) - s.find(&#39;(&#39;)-1);
+</span></span><span class="line"><span class="cl">                mp[fileContent].push_back(fileName);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for (auto file : mp) {
+</span></span><span class="line"><span class="cl">            if(file.second.size() &gt; 1)
+</span></span><span class="line"><span class="cl">            result.push_back(file.second);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return result;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

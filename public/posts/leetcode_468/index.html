@@ -186,7 +186,64 @@
         <p><a href="https://leetcode.com/problems/validate-ip-address/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string validIPAddress(string queryIP) {
+</span></span><span class="line"><span class="cl">        for(char ch: queryIP) {
+</span></span><span class="line"><span class="cl">            if (ch == &#39;.&#39;) {
+</span></span><span class="line"><span class="cl">                if(checkIPv4(queryIP))
+</span></span><span class="line"><span class="cl">                    return &#34;IPv4&#34;;
+</span></span><span class="line"><span class="cl">                return &#34;Neither&#34;;
+</span></span><span class="line"><span class="cl">            } else if (ch == &#39;:&#39;) {
+</span></span><span class="line"><span class="cl">                if(checkIPv6(queryIP))                
+</span></span><span class="line"><span class="cl">                    return &#34;IPv6&#34;;
+</span></span><span class="line"><span class="cl">                return &#34;Neither&#34;;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return &#34;Neither&#34;;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    bool checkIPv4(string s) {
+</span></span><span class="line"><span class="cl">        s += &#39;.&#39;;
+</span></span><span class="line"><span class="cl">        stringstream ss(s);
+</span></span><span class="line"><span class="cl">        string str;
+</span></span><span class="line"><span class="cl">        int n_mark = 0;
+</span></span><span class="line"><span class="cl">        while(getline(ss, str, &#39;.&#39;)) {
+</span></span><span class="line"><span class="cl">            if(str.size() <span class="p">&lt;</span> <span class="nt">1</span> <span class="err">||</span> <span class="na">str</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="p">&gt;</span> 3) return false;
+</span></span><span class="line"><span class="cl">            for(char ip: str) {
+</span></span><span class="line"><span class="cl">                if(ip<span class="err">&lt;</span>=&#39;9&#39; <span class="err">&amp;&amp;</span> ip &gt;= &#39;0&#39;) continue;
+</span></span><span class="line"><span class="cl">                else return false;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if((str[0] == &#39;0&#39; <span class="err">&amp;&amp;</span> str[1] == &#39;0&#39;) || (str[0] == &#39;0&#39; <span class="err">&amp;&amp;</span> str[1] &gt;= &#39;0&#39; <span class="err">&amp;&amp;</span> str[1] <span class="err">&lt;</span>= &#39;9&#39;))
+</span></span><span class="line"><span class="cl">            return false;
+</span></span><span class="line"><span class="cl">            if(stoi(str) &gt; 255) return false;
+</span></span><span class="line"><span class="cl">            n_mark++;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(n_mark != 4) return false;
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    bool checkIPv6(string s) {
+</span></span><span class="line"><span class="cl">        s += &#39;:&#39;;
+</span></span><span class="line"><span class="cl">        stringstream ss(s);
+</span></span><span class="line"><span class="cl">        string str;
+</span></span><span class="line"><span class="cl">        int n_mark = 0;
+</span></span><span class="line"><span class="cl">        while(getline(ss, str, &#39;:&#39;)) {
+</span></span><span class="line"><span class="cl">            if(str.size() <span class="p">&lt;</span> <span class="nt">1</span> <span class="err">||</span> <span class="na">str</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="p">&gt;</span> 4)
+</span></span><span class="line"><span class="cl">            return false;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            for(char ip: str) {
+</span></span><span class="line"><span class="cl">                if((ip &gt;= &#39;0&#39; <span class="err">&amp;&amp;</span> ip <span class="err">&lt;</span>= &#39;9&#39;) || (ip &gt;= &#39;a&#39; <span class="err">&amp;&amp;</span> ip <span class="err">&lt;</span>= &#39;f&#39;) || (ip&gt;= &#39;A&#39; <span class="err">&amp;&amp;</span> ip<span class="err">&lt;</span>=&#39;F&#39;))
+</span></span><span class="line"><span class="cl">                continue;
+</span></span><span class="line"><span class="cl">                else return false;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            n_mark++;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(n_mark != 8) return false;
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,25 @@
         <p><a href="https://leetcode.com/problems/champagne-tower/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    double champagneTower(int poured, int query_row, int query_glass) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">double</span><span class="p">&gt;</span> currRow(1, poured);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="err">&lt;</span>= query_row; i++) {
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">double</span><span class="p">&gt;</span> nextrow(i + 2, 0);
+</span></span><span class="line"><span class="cl">            for(int j = 0; j <span class="err">&lt;</span>= i; j++) {
+</span></span><span class="line"><span class="cl">                if(currRow[j] &gt;= 1) {
+</span></span><span class="line"><span class="cl">                    nextrow[j]      += (currRow[j] - 1)/2.0;
+</span></span><span class="line"><span class="cl">                    nextrow[j + 1]  += (currRow[j] - 1)/2.0;
+</span></span><span class="line"><span class="cl">                    currRow[j]       = 1;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if(i != query_row) currRow = nextrow;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return currRow[query_glass];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

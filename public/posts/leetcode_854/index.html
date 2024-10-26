@@ -186,7 +186,51 @@
         <p><a href="https://leetcode.com/problems/k-similar-strings/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int kSimilarity(string s1, string s2) {
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        q.push(s1);
+</span></span><span class="line"><span class="cl">        int level = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        unordered_set<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> seen;
+</span></span><span class="line"><span class="cl">        seen.insert(s1);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            int sz = q.size();
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">sz</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="na">string</span> <span class="na">node </span><span class="o">=</span> <span class="s">q.front();</span> <span class="na">q</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">node </span><span class="o">=</span><span class="s">=</span> <span class="na">s2</span><span class="err">)</span> <span class="na">return</span> <span class="na">level</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">nbr</span> <span class="na">:</span> <span class="na">next</span><span class="err">(</span><span class="na">node</span><span class="err">,</span> <span class="na">s2</span><span class="err">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">seen</span><span class="err">.</span><span class="na">find</span><span class="err">(</span><span class="na">nbr</span><span class="err">)</span> <span class="err">==</span> <span class="na">seen</span><span class="err">.</span><span class="na">end</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">seen</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">nbr</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">nbr</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">level</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">level</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">unordered_set</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span> next(string a, string b) {
+</span></span><span class="line"><span class="cl">        int i = 0;
+</span></span><span class="line"><span class="cl">        for(; i <span class="p">&lt;</span> <span class="nt">a.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="na">b</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="na">break</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">unordered_set</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        for(int j = i + 1; j <span class="p">&lt;</span> <span class="nt">a.size</span><span class="err">();</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">b</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">swap</span><span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">a</span><span class="err">[</span><span class="na">j</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">a</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">swap</span><span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">a</span><span class="err">[</span><span class="na">j</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

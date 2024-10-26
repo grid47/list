@@ -186,7 +186,45 @@
         <p><a href="https://leetcode.com/problems/implement-magic-dictionary/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class MagicDictionary {
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span>&gt;&gt; mp;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    MagicDictionary() {
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void buildDict(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> dict) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(string s: dict) {
+</span></span><span class="line"><span class="cl">            int n = s.length();            
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="na">string</span> <span class="na">t </span><span class="o">=</span> <span class="s">s.substr(0,</span> <span class="na">i</span><span class="err">)</span> <span class="err">+</span> <span class="na">s</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i</span><span class="err">+</span><span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span> p(i, s[i]);                
+</span></span><span class="line"><span class="cl">                mp[t].push_back(p);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool search(string word) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">word.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">string</span> <span class="na">key </span><span class="o">=</span> <span class="s">word.substr(0,</span> <span class="na">i</span><span class="err">)</span> <span class="err">+</span> <span class="na">word</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i</span><span class="err">+</span><span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span> sk : mp[key])
+</span></span><span class="line"><span class="cl">            if(sk.first == i <span class="err">&amp;&amp;</span> sk.second!=word[i])
+</span></span><span class="line"><span class="cl">                return true;             
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return false;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your MagicDictionary object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * MagicDictionary* obj = new MagicDictionary();
+</span></span><span class="line"><span class="cl"> * obj-&gt;buildDict(dictionary);
+</span></span><span class="line"><span class="cl"> * bool param_2 = obj-&gt;search(searchWord);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

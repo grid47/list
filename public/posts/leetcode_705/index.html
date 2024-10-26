@@ -186,7 +186,82 @@
         <p><a href="https://leetcode.com/problems/design-hashset/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">// class ListNode {
+</span></span><span class="line"><span class="cl">//     public:
+</span></span><span class="line"><span class="cl">//     int val;
+</span></span><span class="line"><span class="cl">//     ListNode* next;
+</span></span><span class="line"><span class="cl">//     ListNode(int val, ListNode* nxt) {
+</span></span><span class="line"><span class="cl">//         this-&gt;val = val
+</span></span><span class="line"><span class="cl">//         this-&gt;next = nxt;
+</span></span><span class="line"><span class="cl">//     }
+</span></span><span class="line"><span class="cl">// };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class MyHashSet {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int sz = 10000;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">ListNode</span><span class="err">*</span><span class="p">&gt;</span> lst;
+</span></span><span class="line"><span class="cl">    MyHashSet() {
+</span></span><span class="line"><span class="cl">        lst.resize(sz, NULL);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void add(int key) {
+</span></span><span class="line"><span class="cl">        int num = key%sz;
+</span></span><span class="line"><span class="cl">        if(lst[num] == NULL) {
+</span></span><span class="line"><span class="cl">            lst[num] = new ListNode(key, NULL);
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        ListNode* cur = lst[num], *prv = NULL;
+</span></span><span class="line"><span class="cl">        while(cur) {
+</span></span><span class="line"><span class="cl">            if(cur-&gt;val == key) return;
+</span></span><span class="line"><span class="cl">            prv = cur;
+</span></span><span class="line"><span class="cl">            cur = cur-&gt;next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        prv-&gt;next = new ListNode(key, NULL);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void remove(int key) {
+</span></span><span class="line"><span class="cl">        int num = key%sz;
+</span></span><span class="line"><span class="cl">        if(lst[num] == NULL) {
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(lst[num]-&gt;val == key) {
+</span></span><span class="line"><span class="cl">            auto it = lst[num];
+</span></span><span class="line"><span class="cl">            lst[num] = lst[num]-&gt;next;
+</span></span><span class="line"><span class="cl">            it-&gt;next = NULL;            
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        ListNode* cur = lst[num]-&gt;next, *prv = lst[num];
+</span></span><span class="line"><span class="cl">        while(cur) {
+</span></span><span class="line"><span class="cl">            if(cur-&gt;val == key) {
+</span></span><span class="line"><span class="cl">                prv-&gt;next = cur-&gt;next;
+</span></span><span class="line"><span class="cl">                cur-&gt;next = NULL;
+</span></span><span class="line"><span class="cl">                return;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            prv = cur;
+</span></span><span class="line"><span class="cl">            cur = cur-&gt;next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool contains(int key) {
+</span></span><span class="line"><span class="cl">        int num = key%sz;
+</span></span><span class="line"><span class="cl">        ListNode* cur = lst[num];
+</span></span><span class="line"><span class="cl">        while(cur) {
+</span></span><span class="line"><span class="cl">            if(cur-&gt;val == key) {
+</span></span><span class="line"><span class="cl">                return true;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            cur = cur-&gt;next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return false;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your MyHashSet object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * MyHashSet* obj = new MyHashSet();
+</span></span><span class="line"><span class="cl"> * obj-&gt;add(key);
+</span></span><span class="line"><span class="cl"> * obj-&gt;remove(key);
+</span></span><span class="line"><span class="cl"> * bool param_3 = obj-&gt;contains(key);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,54 @@
         <p><a href="https://leetcode.com/problems/split-linked-list-in-parts/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for singly-linked list.
+</span></span><span class="line"><span class="cl"> * struct ListNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     ListNode *next;
+</span></span><span class="line"><span class="cl"> *     ListNode() : val(0), next(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     ListNode(int x) : val(x), next(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">ListNode</span><span class="err">*</span><span class="p">&gt;</span> splitListToParts(ListNode* head, int k) {
+</span></span><span class="line"><span class="cl">        int len = 0;
+</span></span><span class="line"><span class="cl">        ListNode* temp = head;
+</span></span><span class="line"><span class="cl">        while(temp) {
+</span></span><span class="line"><span class="cl">            len++;
+</span></span><span class="line"><span class="cl">            temp = temp-&gt;next;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int numNodes = len/k;
+</span></span><span class="line"><span class="cl">        int ext = len % k;
+</span></span><span class="line"><span class="cl">        int i = 0;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">ListNode</span><span class="err">*</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        temp = head;
+</span></span><span class="line"><span class="cl">        while(temp) {
+</span></span><span class="line"><span class="cl">            res.push_back(temp);
+</span></span><span class="line"><span class="cl">            int curLen = 1;
+</span></span><span class="line"><span class="cl">            while(curLen <span class="p">&lt;</span> <span class="nt">numNodes</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">temp </span><span class="o">=</span>  <span class="s">temp-</span><span class="p">&gt;</span>next;
+</span></span><span class="line"><span class="cl">                curLen++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if(ext &gt; 0 <span class="err">&amp;&amp;</span> len &gt; k) {
+</span></span><span class="line"><span class="cl">                temp = temp-&gt;next;
+</span></span><span class="line"><span class="cl">                ext--;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            ListNode* x = temp-&gt;next;
+</span></span><span class="line"><span class="cl">            temp-&gt;next = NULL;
+</span></span><span class="line"><span class="cl">            temp = x;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        while(len <span class="p">&lt;</span> <span class="nt">k</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">NULL</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">len</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

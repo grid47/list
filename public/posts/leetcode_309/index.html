@@ -186,7 +186,29 @@
         <p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int memo[5001][2][2];
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums;
+</span></span><span class="line"><span class="cl">    int dp(int idx, bool buy, bool cool) {
+</span></span><span class="line"><span class="cl">        if(idx == nums.size()) return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[idx][buy][cool] != -1) return memo[idx][buy][cool];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int res = dp(idx + 1, buy, false);
+</span></span><span class="line"><span class="cl">        if(buy <span class="err">&amp;&amp;</span> !cool) {
+</span></span><span class="line"><span class="cl">            res = max(res, dp(idx + 1, false, false) - nums[idx]);
+</span></span><span class="line"><span class="cl">        } else if(!buy) {
+</span></span><span class="line"><span class="cl">            res = max(res, dp(idx + 1, true, true) + nums[idx]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return memo[idx][buy][cool] = res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int maxProfit(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> prices) {
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        this-&gt;nums = prices;
+</span></span><span class="line"><span class="cl">        return dp(0, true, false);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

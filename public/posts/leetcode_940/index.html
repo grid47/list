@@ -186,7 +186,16 @@
         <p><a href="https://leetcode.com/problems/distinct-subsequences-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int distinctSubseqII(string S) {
+</span></span><span class="line"><span class="cl">        int endsWith[26] = {}, mod = 1e9 + 7;
+</span></span><span class="line"><span class="cl">        auto lambda = [<span class="err">&amp;</span>](int s, int i) {return (s + i) % mod; };
+</span></span><span class="line"><span class="cl">        for (char c : S)
+</span></span><span class="line"><span class="cl">            endsWith[c - &#39;a&#39;] = accumulate(begin(endsWith), end(endsWith), 1, lambda);
+</span></span><span class="line"><span class="cl">        return accumulate(begin(endsWith), end(endsWith), 0, lambda);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

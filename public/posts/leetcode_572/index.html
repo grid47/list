@@ -186,7 +186,34 @@
         <p><a href="https://leetcode.com/problems/subtree-of-another-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+</span></span><span class="line"><span class="cl">        if(!root) return false;
+</span></span><span class="line"><span class="cl">        if(match(root, subRoot)) return true;
+</span></span><span class="line"><span class="cl">        return isSubtree(root-&gt;left, subRoot) ||
+</span></span><span class="line"><span class="cl">                isSubtree(root-&gt;right, subRoot);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool match(TreeNode* r1, TreeNode* r2) {
+</span></span><span class="line"><span class="cl">        if(!r1 <span class="err">&amp;&amp;</span> !r2) return true;
+</span></span><span class="line"><span class="cl">        if(!r1 || !r2) return false;
+</span></span><span class="line"><span class="cl">        if(r1-&gt;val != r2-&gt;val) return false;
+</span></span><span class="line"><span class="cl">        return match(r1-&gt;left, r2-&gt;left) <span class="err">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            match(r1-&gt;right, r2-&gt;right);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

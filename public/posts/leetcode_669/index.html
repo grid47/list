@@ -186,7 +186,33 @@
         <p><a href="https://leetcode.com/problems/trim-a-binary-search-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    TreeNode* trimBST(TreeNode* root, int low, int high) {
+</span></span><span class="line"><span class="cl">        if(root == NULL) return NULL;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       if(root-&gt;val <span class="p">&lt;</span> <span class="nt">low</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">           <span class="na">return</span> <span class="na">trimBST</span><span class="err">(</span><span class="na">root-</span><span class="p">&gt;</span>right, low, high);
+</span></span><span class="line"><span class="cl">       } else if(root-&gt;val &gt; high) {
+</span></span><span class="line"><span class="cl">            return trimBST(root-&gt;left, low, high);
+</span></span><span class="line"><span class="cl">       }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        root-&gt;left = trimBST(root-&gt;left, low, high);
+</span></span><span class="line"><span class="cl">        root-&gt;right= trimBST(root-&gt;right, low, high);
+</span></span><span class="line"><span class="cl">        return root;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

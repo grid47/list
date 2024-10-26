@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,67 @@
         <p><a href="https://leetcode.com/problems/mini-parser/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * // This is the interface that allows for creating nested lists.
+</span></span><span class="line"><span class="cl"> * // You should not implement it, or speculate about its implementation
+</span></span><span class="line"><span class="cl"> * class NestedInteger {
+</span></span><span class="line"><span class="cl"> *   public:
+</span></span><span class="line"><span class="cl"> *     // Constructor initializes an empty nested list.
+</span></span><span class="line"><span class="cl"> *     NestedInteger();
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> *     // Constructor initializes a single integer.
+</span></span><span class="line"><span class="cl"> *     NestedInteger(int value);
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.
+</span></span><span class="line"><span class="cl"> *     bool isInteger() const;
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer
+</span></span><span class="line"><span class="cl"> *     // The result is undefined if this NestedInteger holds a nested list
+</span></span><span class="line"><span class="cl"> *     int getInteger() const;
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> *     // Set this NestedInteger to hold a single integer.
+</span></span><span class="line"><span class="cl"> *     void setInteger(int value);
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> *     // Set this NestedInteger to hold a nested list and adds a nested integer to it.
+</span></span><span class="line"><span class="cl"> *     void add(const NestedInteger <span class="ni">&amp;ni);</span>
+</span></span><span class="line"><span class="cl"> *
+</span></span><span class="line"><span class="cl"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list
+</span></span><span class="line"><span class="cl"> *     // The result is undefined if this NestedInteger holds a single integer
+</span></span><span class="line"><span class="cl"> *     const vector<span class="p">&lt;</span><span class="nt">NestedInteger</span><span class="p">&gt;</span> <span class="err">&amp;</span>getList() const;
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    NestedInteger deserialize(string s) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        function<span class="p">&lt;</span><span class="nt">bool</span><span class="err">(</span><span class="na">char</span><span class="err">)</span><span class="p">&gt;</span> isnumber = [](char c) { return (c == &#39;-&#39;) || isdigit(c); };
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">NestedInteger</span><span class="p">&gt;</span> stk;
+</span></span><span class="line"><span class="cl">        stk.push(NestedInteger());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(auto it = s.begin(); it != s.end();) {
+</span></span><span class="line"><span class="cl">            const char <span class="err">&amp;</span>c = *it;
+</span></span><span class="line"><span class="cl">            if(isnumber(c)) {
+</span></span><span class="line"><span class="cl">                auto it2 = find_if_not(it, s.end(), isnumber);
+</span></span><span class="line"><span class="cl">                int val = stoi(string(it, it2));
+</span></span><span class="line"><span class="cl">                stk.top().add(NestedInteger(val));
+</span></span><span class="line"><span class="cl">                it = it2;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            else {
+</span></span><span class="line"><span class="cl">                if(c == &#39;[&#39;) {
+</span></span><span class="line"><span class="cl">                    stk.push(NestedInteger());
+</span></span><span class="line"><span class="cl">                } else if (c == &#39;]&#39;) {
+</span></span><span class="line"><span class="cl">                    NestedInteger ni = stk.top();
+</span></span><span class="line"><span class="cl">                    stk.pop();
+</span></span><span class="line"><span class="cl">                    stk.top().add(ni);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                it++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        NestedInteger res = stk.top().getList().front();
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

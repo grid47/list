@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/all-possible-full-binary-trees/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> allPossibleFBT(int n) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">TreeNode</span><span class="err">*</span><span class="p">&gt;</span>&gt; dp(n + 1);
+</span></span><span class="line"><span class="cl">        dp[1].push_back(new TreeNode(0));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 3; i <span class="err">&lt;</span>= n; i += 2) {
+</span></span><span class="line"><span class="cl">            for(int l = 1; l <span class="p">&lt;</span> <span class="nt">i</span><span class="err">;</span> <span class="na">l</span> <span class="err">+=</span> <span class="na">2</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">l</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">it:</span> <span class="na">dp</span><span class="err">[</span><span class="na">l</span><span class="err">])</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">it2:</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">l</span> <span class="na">-</span> <span class="na">1</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">TreeNode</span><span class="err">*</span> <span class="na">node </span><span class="o">=</span> <span class="s">new</span> <span class="na">TreeNode</span><span class="err">(</span><span class="na">0</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">node-</span><span class="p">&gt;</span>left = it;
+</span></span><span class="line"><span class="cl">                    node-&gt;right = it2;
+</span></span><span class="line"><span class="cl">                    dp[i].push_back(node);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return dp[n];        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

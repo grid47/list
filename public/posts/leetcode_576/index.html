@@ -186,7 +186,32 @@
         <p><a href="https://leetcode.com/problems/out-of-boundary-paths/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int findPaths(int m, int n, int mv, int i, int j) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; mm(mv + 1, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;(m, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, -1)));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return dfs(m, n, mv, 0, i, j, mm);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dfs(int m, int n, int mx, int mv, int x, int y, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; <span class="err">&amp;</span> mm) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if (x <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">x</span> <span class="p">&gt;</span>= m || y &gt;= n) return 1;
+</span></span><span class="line"><span class="cl">        if (mv == mx)                           return 0;
+</span></span><span class="line"><span class="cl">        if (mm[mv][x][y] &gt; -1)                  return mm[mv][x][y];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int res = 0;
+</span></span><span class="line"><span class="cl">        res = ( res + dfs(m, n, mx, mv + 1, x + 1, y, mm) ) % mod;
+</span></span><span class="line"><span class="cl">        res = ( res + dfs(m, n, mx, mv + 1, x - 1, y, mm) ) % mod;
+</span></span><span class="line"><span class="cl">        res = ( res + dfs(m, n, mx, mv + 1, x, y + 1, mm) ) % mod;
+</span></span><span class="line"><span class="cl">        res = ( res + dfs(m, n, mx, mv + 1, x, y - 1, mm) ) % mod;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return mm[mv][x][y] = (res % mod);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

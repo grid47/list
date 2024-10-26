@@ -186,7 +186,51 @@
         <p><a href="https://leetcode.com/problems/shortest-path-to-get-all-keys/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int shortestPathAllKeys(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">    int m=grid.size(), n=m?grid[0].size():0;
+</span></span><span class="line"><span class="cl">    if(!m || !n) return 0;
+</span></span><span class="line"><span class="cl">    int path=0, K=0;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dirs={0,-1,0,1,0};
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">bool</span><span class="p">&gt;</span>&gt;&gt; visited(m,vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">bool</span><span class="p">&gt;</span>&gt;(n,vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span>(64,0))); //at most 6 keys, using bitmap 111111
+</span></span><span class="line"><span class="cl">    queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt; q; //<span class="p">&lt;</span><span class="nt">postion</span><span class="err">,</span> <span class="na">hold</span> <span class="na">keys</span> <span class="na">mapping</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    for(int i=0;i<span class="p">&lt;</span><span class="nt">m</span><span class="err">;</span><span class="na">i</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j</span><span class="o">=</span><span class="s">0;j&lt;n;j++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]==&#39;@&#39;){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">({</span><span class="na">i</span><span class="err">*</span><span class="na">n</span><span class="err">+</span><span class="na">j</span><span class="err">,</span><span class="na">0</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">                <span class="na">visited</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">][</span><span class="na">0</span><span class="err">]=</span><span class="na">1</span><span class="err">;</span>                    
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span><span class="p">&gt;</span>=&#39;A&#39; <span class="err">&amp;&amp;</span> grid[i][j]<span class="err">&lt;</span>=&#39;F&#39;) K++; //total alpha number
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    while(!q.empty()){
+</span></span><span class="line"><span class="cl">        int size=q.size();
+</span></span><span class="line"><span class="cl">        for(int i=0;i<span class="p">&lt;</span><span class="nt">size</span><span class="err">;</span><span class="na">i</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">a</span><span class="o">=</span><span class="s">q.front().first/n,</span> <span class="na">b</span><span class="o">=</span><span class="s">q.front().first%n;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">carry</span><span class="o">=</span><span class="s">q.front().second;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">q</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>        
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">carry</span><span class="o">=</span><span class="s">=((1&lt;&lt;K)-1))</span> <span class="na">return</span> <span class="na">path</span><span class="err">;</span> <span class="err">//</span><span class="na">if</span> <span class="na">all</span> <span class="na">keys</span> <span class="na">hold</span><span class="err">,</span> <span class="na">just</span> <span class="na">return</span> 
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j</span><span class="o">=</span><span class="s">0;j&lt;4;j++){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">int</span> <span class="na">x</span><span class="o">=</span><span class="s">a+dirs[j],</span> <span class="na">y</span><span class="o">=</span><span class="s">b+dirs[j+1],</span> <span class="na">k</span><span class="o">=</span><span class="s">carry;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">x</span><span class="err">&lt;</span><span class="na">0</span> <span class="err">||</span> <span class="na">x</span><span class="p">&gt;</span>=m || y<span class="p">&lt;</span><span class="nt">0</span> <span class="err">||</span> <span class="na">y</span><span class="p">&gt;</span>=n || grid[x][y]==&#39;#&#39;) continue;
+</span></span><span class="line"><span class="cl">                if(grid[x][y]&gt;=&#39;a&#39; <span class="err">&amp;&amp;</span> grid[x][y]<span class="err">&lt;</span>=&#39;f&#39;){
+</span></span><span class="line"><span class="cl">                    k=carry|(1<span class="err">&lt;&lt;</span>(grid[x][y]-&#39;a&#39;)); //update hold keys
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                else if(grid[x][y]&gt;=&#39;A&#39; <span class="err">&amp;&amp;</span> grid[x][y]<span class="err">&lt;</span>=&#39;F&#39;){
+</span></span><span class="line"><span class="cl">                    if(!(carry <span class="err">&amp;</span> (1<span class="err">&lt;&lt;</span>(grid[x][y]-&#39;A&#39;)))) continue;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                if(!visited[x][y][k]){
+</span></span><span class="line"><span class="cl">                    visited[x][y][k]=1;
+</span></span><span class="line"><span class="cl">                    q.push({x*n+y,k});
+</span></span><span class="line"><span class="cl">               }                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        path++;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    return -1;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

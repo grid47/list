@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/falling-squares/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> fallingSquares(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> pos) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; past;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        int h = 0;  
+</span></span><span class="line"><span class="cl">        for(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> i: pos) {
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cur = {i[0], i[0] + i[1] - 1, i[1]};
+</span></span><span class="line"><span class="cl">            int res = search(past, cur);
+</span></span><span class="line"><span class="cl">            h = max(h, res);
+</span></span><span class="line"><span class="cl">            ans.push_back(h);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int search(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>past, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>cur) {
+</span></span><span class="line"><span class="cl">        int mx = 0;
+</span></span><span class="line"><span class="cl">        for(auto i: past) {
+</span></span><span class="line"><span class="cl">            if(cur[1] <span class="p">&lt;</span> <span class="nt">i</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">||</span> <span class="na">cur</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="p">&gt;</span> i[1]) continue;
+</span></span><span class="line"><span class="cl">            mx = max(mx, i[2]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        cur[2] += mx;
+</span></span><span class="line"><span class="cl">        past.push_back(cur);
+</span></span><span class="line"><span class="cl">        return cur[2];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,47 @@
         <p><a href="https://leetcode.com/problems/minimum-cost-to-merge-stones/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> prefix;
+</span></span><span class="line"><span class="cl">    int k;
+</span></span><span class="line"><span class="cl">    long memo[101][101][31];
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    long dp(int i, int j, int m) {
+</span></span><span class="line"><span class="cl">        if((j - i + 1 - m) % (k - 1))
+</span></span><span class="line"><span class="cl">            return INT_MAX;
+</span></span><span class="line"><span class="cl">        else if(i == j) {
+</span></span><span class="line"><span class="cl">            if(m == 1) {
+</span></span><span class="line"><span class="cl">                return 0;
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                return INT_MAX;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(memo[i][j][m] != -1) return memo[i][j][m];
+</span></span><span class="line"><span class="cl">        if(m == 1)
+</span></span><span class="line"><span class="cl">            return dp(i, j, k) + prefix[j + 1] - prefix[i];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        long ans = INT_MAX;
+</span></span><span class="line"><span class="cl">        for(int p = i; p <span class="p">&lt;</span> <span class="nt">j</span><span class="err">;</span> <span class="na">p</span> <span class="err">+=</span> <span class="na">k</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans </span><span class="o">=</span> <span class="s">min(ans,</span> <span class="na">dp</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">p</span><span class="err">,</span> <span class="na">1</span><span class="err">)</span> <span class="err">+</span> <span class="na">dp</span><span class="err">(</span><span class="na">p</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">j</span><span class="err">,</span> <span class="na">m</span> <span class="na">-</span> <span class="na">1</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">][</span><span class="na">m</span><span class="err">]</span> <span class="err">=</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">mergeStones</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> stones, int k) {
+</span></span><span class="line"><span class="cl">        this-&gt;k = k;
+</span></span><span class="line"><span class="cl">        int n = stones.size();
+</span></span><span class="line"><span class="cl">        prefix.resize(n + 1, 0);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">prefix</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">prefix</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+</span> <span class="na">stones</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">memset</span><span class="err">(</span><span class="na">memo</span><span class="err">,</span> <span class="na">-1</span><span class="err">,</span> <span class="na">sizeof</span><span class="err">(</span><span class="na">memo</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">ans </span><span class="o">=</span> <span class="s">dp(0,</span> <span class="na">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">,</span> <span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span> <span class="p">&gt;</span>= INT_MAX? -1: ans;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

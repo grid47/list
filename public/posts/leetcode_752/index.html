@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/open-the-lock/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int openLock(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> deadends, string target) {
+</span></span><span class="line"><span class="cl">        unordered_set<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> dead(deadends.begin(), deadends.end());
+</span></span><span class="line"><span class="cl">        if (dead.count(&#34;0000&#34;)) return -1;
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> q({&#34;0000&#34;});
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int turn = 0;!q.empty(); turn++) {
+</span></span><span class="line"><span class="cl">            for(int i = q.size(); i &gt; 0; i--) {
+</span></span><span class="line"><span class="cl">                auto curr = q.front(); q.pop();
+</span></span><span class="line"><span class="cl">                cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">curr</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;</span> <span class="err">&#39;</span> <span class="err">&lt;&lt;</span> <span class="na">target</span> <span class="err">&lt;&lt;</span> <span class="na">endl</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">(</span><span class="na">curr </span><span class="o">=</span><span class="s">=</span> <span class="na">target</span><span class="err">)</span> <span class="na">return</span> <span class="na">turn</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">it</span> <span class="na">:</span> <span class="na">neighbours</span><span class="err">(</span><span class="na">curr</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">dead</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">it</span><span class="err">))</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">dead</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">it</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">it</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">-1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span> neighbours(const string <span class="err">&amp;</span>code) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">4</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">diff </span><span class="o">=</span> <span class="s">-1;</span> <span class="na">diff</span> <span class="err">&lt;=</span> <span class="na">1</span><span class="err">;</span> <span class="na">diff</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">string</span> <span class="na">nei </span><span class="o">=</span> <span class="s">code;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">nei</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="err">(</span><span class="na">nei</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">0</span><span class="err">&#39;</span> <span class="err">+</span> <span class="na">diff</span> <span class="err">+</span> <span class="na">10</span><span class="err">)</span> <span class="err">%</span> <span class="na">10</span> <span class="err">+</span> <span class="err">&#39;</span><span class="na">0</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">nei</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

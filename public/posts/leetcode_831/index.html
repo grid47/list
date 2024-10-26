@@ -186,7 +186,20 @@
         <p><a href="https://leetcode.com/problems/masking-personal-information/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> country = {&#34;&#34;, &#34;+*-&#34;, &#34;+**-&#34;, &#34;+***-&#34;};
+</span></span><span class="line"><span class="cl">    string maskPII(string s) {
+</span></span><span class="line"><span class="cl">        string res;
+</span></span><span class="line"><span class="cl">        int at = s.find(&#39;@&#39;);
+</span></span><span class="line"><span class="cl">        if(at != string::npos) {
+</span></span><span class="line"><span class="cl">            transform(s.begin(), s.end(), s.begin(), ::tolower);
+</span></span><span class="line"><span class="cl">            return s.substr(0, 1) + &#34;*****&#34; + s.substr(at - 1);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        s = regex_replace(s, regex(&#34;[^0-9]&#34;), &#34;&#34;);
+</span></span><span class="line"><span class="cl">        return country[s.size() - 10]  + &#34;***-***-&#34; + s.substr(s.size() - 4);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/find-mode-in-binary-search-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maxFreq = 0, currFreq = 0, precursor = INT_MIN;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> findMode(TreeNode *root)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        inorderTraversal(root);
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void inorderTraversal(TreeNode *root)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        if (root == NULL) return; // Stop condition
+</span></span><span class="line"><span class="cl">        inorderTraversal(root-&gt;left); // Traverse left subtree
+</span></span><span class="line"><span class="cl">        if (precursor == root-&gt;val) currFreq++;
+</span></span><span class="line"><span class="cl">        else currFreq = 1;
+</span></span><span class="line"><span class="cl">        if (currFreq &gt; maxFreq)
+</span></span><span class="line"><span class="cl">        {// Current node value has higher frequency than any previous visited
+</span></span><span class="line"><span class="cl">            res.clear();
+</span></span><span class="line"><span class="cl">            maxFreq = currFreq;
+</span></span><span class="line"><span class="cl">            res.push_back(root-&gt;val);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        else if (currFreq == maxFreq)
+</span></span><span class="line"><span class="cl">        {// Current node value has a frequency equal to the highest of previous visited
+</span></span><span class="line"><span class="cl">            res.push_back(root-&gt;val);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        precursor = root-&gt;val; // Update the precursor
+</span></span><span class="line"><span class="cl">        inorderTraversal(root-&gt;right); // Traverse right subtree
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

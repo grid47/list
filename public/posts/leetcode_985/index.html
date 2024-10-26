@@ -186,7 +186,22 @@
         <p><a href="https://leetcode.com/problems/sum-of-even-numbers-after-queries/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> sumEvenAfterQueries(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> A, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> qs) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res = {};
+</span></span><span class="line"><span class="cl">        int sum = accumulate(begin(A), end(A), 0, [](int s, int a) {
+</span></span><span class="line"><span class="cl">            return s + (a % 2 == 0? a : 0);
+</span></span><span class="line"><span class="cl">        });
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>q: qs) {
+</span></span><span class="line"><span class="cl">            if(A[q[1]] %2 == 0) sum-=A[q[1]];
+</span></span><span class="line"><span class="cl">            A[q[1]] += q[0];
+</span></span><span class="line"><span class="cl">            if(A[q[1]]%2 == 0) sum+=A[q[1]];
+</span></span><span class="line"><span class="cl">            res.push_back(sum);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

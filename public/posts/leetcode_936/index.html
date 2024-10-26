@@ -186,7 +186,34 @@
         <p><a href="https://leetcode.com/problems/stamping-the-sequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> movesToStamp(string stamp, string target) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int turns = -1, net = 0;
+</span></span><span class="line"><span class="cl">        while(turns) {
+</span></span><span class="line"><span class="cl">            turns = 0;
+</span></span><span class="line"><span class="cl">            for(int sz = stamp.size(); sz &gt; 0; sz--) {
+</span></span><span class="line"><span class="cl">                for(int i = 0; i <span class="err">&lt;</span>= stamp.size() - sz; i++) {
+</span></span><span class="line"><span class="cl">                    string key = string(i, &#39;*&#39;) + stamp.substr(i, sz) + string(stamp.size() - sz - i, &#39;*&#39;);
+</span></span><span class="line"><span class="cl">                    auto pos = target.find(key);
+</span></span><span class="line"><span class="cl">                    while(pos != string::npos) {
+</span></span><span class="line"><span class="cl">                        res.push_back(pos);
+</span></span><span class="line"><span class="cl">                        turns += sz;
+</span></span><span class="line"><span class="cl">                        fill(target.begin() + pos, target.begin() + pos + stamp.size(), &#39;*&#39;);
+</span></span><span class="line"><span class="cl">                        pos = target.find(key);
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">turns</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">net</span> <span class="err">+=</span> <span class="na">turns</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">reverse</span><span class="err">(</span><span class="na">res</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">res</span><span class="err">.</span><span class="na">end</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">net </span><span class="o">=</span><span class="s">=</span> <span class="na">target</span><span class="err">.</span><span class="na">size</span><span class="err">()?</span> <span class="na">res:</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>{};
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,33 @@
         <p><a href="https://leetcode.com/problems/check-completeness-of-a-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool isCompleteTree(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        q.push_back(root);
+</span></span><span class="line"><span class="cl">        int i = 0;
+</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">q.size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">q</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">]</span><span class="na">-</span><span class="p">&gt;</span>left);
+</span></span><span class="line"><span class="cl">            q.push_back(q[i]-&gt;right);
+</span></span><span class="line"><span class="cl">            i++;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">q.size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="err">!</span><span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">])</span>
+</span></span><span class="line"><span class="cl">            <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">i </span><span class="o">=</span><span class="s">=</span> <span class="na">q</span><span class="err">.</span><span class="na">size</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

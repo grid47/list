@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/print-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; printTree(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        int h = get_height(root), w = get_width(root);
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; ans(h, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span>(w, &#34;&#34;));
+</span></span><span class="line"><span class="cl">        helper(ans, root, 0, 0, w - 1);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int get_height(TreeNode *p) {
+</span></span><span class="line"><span class="cl">        if(!p) return 0;
+</span></span><span class="line"><span class="cl">        int left = get_height(p-&gt;left);
+</span></span><span class="line"><span class="cl">        int right = get_height(p-&gt;right);
+</span></span><span class="line"><span class="cl">        return max(left , right) + 1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int get_width(TreeNode *p) {
+</span></span><span class="line"><span class="cl">        if(!p) return 0;
+</span></span><span class="line"><span class="cl">        int left = get_width(p-&gt;left);
+</span></span><span class="line"><span class="cl">        int right = get_width(p-&gt;right);
+</span></span><span class="line"><span class="cl">        return max(left, right)*2 + 1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void helper(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>ans, TreeNode *p, int level, int l, int r) {
+</span></span><span class="line"><span class="cl">        if(!p) return;
+</span></span><span class="line"><span class="cl">        int mid = l + (r - l)/ 2;
+</span></span><span class="line"><span class="cl">        ans[level][mid] = to_string(p-&gt;val);
+</span></span><span class="line"><span class="cl">        helper(ans, p-&gt;left, level + 1, l, mid - 1);
+</span></span><span class="line"><span class="cl">        helper(ans, p-&gt;right, level + 1, mid + 1, r);        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

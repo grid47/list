@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,60 @@
         <p><a href="https://leetcode.com/problems/count-of-range-sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int cnt = 0, lower, upper;
+</span></span><span class="line"><span class="cl">    int countRangeSum(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int lower, int upper) {
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">        this-&gt;lower = lower;
+</span></span><span class="line"><span class="cl">        this-&gt;upper = upper;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">long</span><span class="p">&gt;</span> sum(n + 1, 0), tmp(n + 1, 0);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="na">sum</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">sum</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">merge_sort</span><span class="err">(</span><span class="na">sum</span><span class="err">,</span> <span class="na">0</span><span class="err">,</span> <span class="na">n</span><span class="err">,</span> <span class="na">tmp</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">cnt</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">merge_sort</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">long</span><span class="p">&gt;</span> <span class="err">&amp;</span>sum, int left, int right, vector<span class="p">&lt;</span><span class="nt">long</span><span class="p">&gt;</span> <span class="err">&amp;</span>tmp) {
+</span></span><span class="line"><span class="cl">        if(left &gt;= right) return;
+</span></span><span class="line"><span class="cl">        long mid = (left + right) / 2;
+</span></span><span class="line"><span class="cl">        merge_sort(sum, left, mid, tmp);
+</span></span><span class="line"><span class="cl">        merge_sort(sum, mid + 1, right, tmp);
+</span></span><span class="line"><span class="cl">        merge(sum, left, right, mid, tmp);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void merge(vector<span class="p">&lt;</span><span class="nt">long</span><span class="p">&gt;</span> <span class="err">&amp;</span>sum, int left, int right, int mid, vector<span class="p">&lt;</span><span class="nt">long</span><span class="p">&gt;</span> <span class="err">&amp;</span>tmp) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int k = mid + 1, j = mid + 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int high = mid + 1, common = left;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        // Merge [left, right] on tmp;
+</span></span><span class="line"><span class="cl">        for(int low = left; low <span class="err">&lt;</span>= mid; low++) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            while (k <span class="err">&lt;</span>= right <span class="err">&amp;&amp;</span> sum[k] - sum[low] <span class="p">&lt;</span>  <span class="nt">lower</span><span class="err">)</span> <span class="na">k</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">/*</span>
+</span></span><span class="line"><span class="cl">            <span class="na">low</span> <span class="na">is</span> <span class="na">i</span> <span class="na">in</span> <span class="na">the</span> <span class="na">question</span><span class="err">,</span> <span class="na">use</span> <span class="na">of</span> <span class="na">k</span> <span class="na">is</span> <span class="na">just</span> <span class="na">to</span> <span class="na">count</span>
+</span></span><span class="line"><span class="cl">            <span class="na">how</span> <span class="na">many</span> <span class="na">j</span><span class="err">&#39;</span><span class="na">s</span> <span class="na">are</span> <span class="na">there</span> <span class="na">which</span> <span class="na">satified</span> <span class="na">the</span> <span class="na">condition</span> <span class="na">given</span> <span class="na">in</span> <span class="na">question</span><span class="err">.</span>
+</span></span><span class="line"><span class="cl">            <span class="na">note</span> <span class="na">that</span> <span class="na">i</span><span class="err">(</span><span class="na">low</span><span class="err">)</span> <span class="na">is</span> <span class="na">from</span> <span class="na">first</span> <span class="na">part</span> <span class="na">of</span> <span class="na">the</span> <span class="na">merge</span> <span class="na">slice</span>
+</span></span><span class="line"><span class="cl">            <span class="na">and</span> <span class="na">j</span> <span class="na">is</span> <span class="na">from</span> <span class="na">second</span> <span class="na">part</span><span class="err">.</span>
+</span></span><span class="line"><span class="cl">            <span class="err">*/</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span> <span class="err">(</span><span class="na">j</span> <span class="err">&lt;=</span> <span class="na">right</span> <span class="err">&amp;&amp;</span> <span class="na">sum</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="na">-</span> <span class="na">sum</span><span class="err">[</span><span class="na">low</span><span class="err">]</span> <span class="err">&lt;=</span> <span class="na">upper</span><span class="err">)</span> <span class="na">j</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">cnt</span> <span class="err">+=</span> <span class="na">j</span> <span class="na">-</span> <span class="na">k</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">high</span> <span class="err">&lt;=</span> <span class="na">right</span> <span class="err">&amp;&amp;</span> <span class="na">sum</span><span class="err">[</span><span class="na">high</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">sum</span><span class="err">[</span><span class="na">low</span><span class="err">])</span> <span class="na">tmp</span><span class="err">[</span><span class="na">common</span><span class="err">++]</span> <span class="err">=</span> <span class="na">sum</span><span class="err">[</span><span class="na">high</span><span class="err">++];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">tmp</span><span class="err">[</span><span class="na">common</span><span class="err">++]</span> <span class="err">=</span> <span class="na">sum</span><span class="err">[</span><span class="na">low</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">high</span> <span class="err">&lt;=</span> <span class="na">right</span><span class="err">)</span> <span class="na">tmp</span><span class="err">[</span><span class="na">common</span><span class="err">++]</span> <span class="err">=</span> <span class="na">sum</span><span class="err">[</span><span class="na">high</span><span class="err">++];</span>        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">Set</span> <span class="na">sum</span> <span class="na">slice</span> <span class="na">with</span> <span class="na">sorted</span> <span class="na">piece</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">pos </span><span class="o">=</span> <span class="s">left;</span> <span class="na">pos</span> <span class="err">&lt;=</span> <span class="na">right</span><span class="err">;</span> <span class="na">pos</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">sum</span><span class="err">[</span><span class="na">pos</span><span class="err">]</span> <span class="err">=</span> <span class="na">tmp</span><span class="err">[</span><span class="na">pos</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

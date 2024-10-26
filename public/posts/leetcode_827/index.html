@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,104 @@
         <p><a href="https://leetcode.com/problems/making-a-large-island/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class uf {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> par, sz;
+</span></span><span class="line"><span class="cl">    uf(int n) {
+</span></span><span class="line"><span class="cl">        par.resize(n);
+</span></span><span class="line"><span class="cl">        sz.resize(n, 1);        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">par</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">join</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">,</span> <span class="na">int</span> <span class="na">y</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">find(x);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">q </span><span class="o">=</span> <span class="s">find(y);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">p</span> <span class="err">!=</span> <span class="na">q</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">sz</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">sz</span><span class="err">[</span><span class="na">q</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">par</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">=</span> <span class="na">q</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">sz</span><span class="err">[</span><span class="na">q</span><span class="err">]</span> <span class="err">+=</span> <span class="na">sz</span><span class="err">[</span><span class="na">p</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">par</span><span class="err">[</span><span class="na">q</span><span class="err">]</span> <span class="err">=</span> <span class="na">p</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">sz</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">+=</span> <span class="na">sz</span><span class="err">[</span><span class="na">q</span><span class="err">];</span>                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">find</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">x </span><span class="o">=</span><span class="s">=</span> <span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">])</span> <span class="na">return</span> <span class="na">x</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">=</span> <span class="na">find</span><span class="err">(</span><span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">]);</span>        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">size</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">y </span><span class="o">=</span> <span class="s">find(x);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">sz</span><span class="err">[</span><span class="na">y</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">uf</span><span class="err">*</span> <span class="na">UF</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">dfs</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid, int i, int j, int p, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> vis) {
+</span></span><span class="line"><span class="cl">        if(i <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">i</span> <span class="p">&gt;</span>= grid.size() || j &gt;= grid[0].size() || grid[i][j] == 0 || vis[i][j] == 1)
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">        vis[i][j] = 1;
+</span></span><span class="line"><span class="cl">        UF-&gt;join(j + i * grid.size(), p);
+</span></span><span class="line"><span class="cl">        dfs(grid, i + 1, j, p, vis);
+</span></span><span class="line"><span class="cl">        dfs(grid, i, j + 1, p, vis);
+</span></span><span class="line"><span class="cl">        dfs(grid, i - 1, j, p, vis);
+</span></span><span class="line"><span class="cl">        dfs(grid, i, j - 1, p, vis);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int largestIsland(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        int n = grid.size();
+</span></span><span class="line"><span class="cl">        UF = new uf(n * n);
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; vis(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, 0));
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> 
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">1</span> <span class="err">&amp;&amp;</span> <span class="na">vis</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">dfs</span><span class="err">(</span><span class="na">grid</span><span class="err">,</span> <span class="na">i</span><span class="err">,</span> <span class="na">j</span><span class="err">,</span> <span class="na">i</span> <span class="err">*</span> <span class="na">n</span><span class="err">+</span> <span class="na">j</span><span class="err">,</span> <span class="na">vis</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">mx </span><span class="o">=</span> <span class="s">0,</span> <span class="na">ch </span><span class="o">=</span> <span class="s">false;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> 
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ch </span><span class="o">=</span> <span class="s">true;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">int</span> <span class="na">tmp </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> par;
+</span></span><span class="line"><span class="cl">                if(i &gt; 0 <span class="err">&amp;&amp;</span> grid[i - 1][j] == 1) {
+</span></span><span class="line"><span class="cl">                    tmp += UF-&gt;size((i - 1) * n+ j);
+</span></span><span class="line"><span class="cl">                    par.insert(UF-&gt;find((i - 1) * n+ j));
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                if(j &gt; 0 <span class="err">&amp;&amp;</span> grid[i][j - 1] == 1) {
+</span></span><span class="line"><span class="cl">                    int x = UF-&gt;find(i * n + j - 1);
+</span></span><span class="line"><span class="cl">                    if(!par.count(x)) {
+</span></span><span class="line"><span class="cl">                        tmp += UF-&gt;size(i * n + j - 1);
+</span></span><span class="line"><span class="cl">                        par.insert(x);
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                if(i <span class="err">&lt;</span> (n - 1) <span class="err">&amp;&amp;</span> grid[i + 1][j] == 1) {
+</span></span><span class="line"><span class="cl">                    int x = UF-&gt;find((i + 1) * n + j);
+</span></span><span class="line"><span class="cl">                    if(!par.count(x)) {
+</span></span><span class="line"><span class="cl">                        tmp += UF-&gt;size((i + 1) * n + j);
+</span></span><span class="line"><span class="cl">                        par.insert(x);
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                if(j <span class="err">&lt;</span> (n - 1) <span class="err">&amp;&amp;</span> grid[i][j + 1] == 1) {
+</span></span><span class="line"><span class="cl">                    int x = UF-&gt;find((i) * n + j + 1);
+</span></span><span class="line"><span class="cl">                    if(!par.count(x)) {
+</span></span><span class="line"><span class="cl">                        tmp += UF-&gt;size((i) * n + j + 1);
+</span></span><span class="line"><span class="cl">                        par.insert(x);
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                mx = max(mx, 1 + tmp);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        return ch? mx: n * n;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

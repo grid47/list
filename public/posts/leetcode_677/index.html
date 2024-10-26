@@ -186,7 +186,68 @@
         <p><a href="https://leetcode.com/problems/map-sum-pairs/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class TrieNode {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">TrieNode</span><span class="err">*</span><span class="p">&gt;</span> next;
+</span></span><span class="line"><span class="cl">    int sum = 0;
+</span></span><span class="line"><span class="cl">    string s;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    TrieNode() {
+</span></span><span class="line"><span class="cl">        s = &#34;&#34;;
+</span></span><span class="line"><span class="cl">        sum = 0;
+</span></span><span class="line"><span class="cl">        next.resize(26, NULL);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    void add(string key, int val) {
+</span></span><span class="line"><span class="cl">        TrieNode* root = this;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">key.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">idx </span><span class="o">=</span> <span class="s">key[i]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">root-</span><span class="p">&gt;</span>next[idx] == NULL)
+</span></span><span class="line"><span class="cl">                root-&gt;next[idx] = new TrieNode();
+</span></span><span class="line"><span class="cl">            root = root-&gt;next[idx];
+</span></span><span class="line"><span class="cl">            root-&gt;sum += val;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        root-&gt;s = key;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int val(string key) {
+</span></span><span class="line"><span class="cl">        TrieNode* root = this;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">key.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">idx </span><span class="o">=</span> <span class="s">key[i]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">root-</span><span class="p">&gt;</span>next[idx] == NULL)
+</span></span><span class="line"><span class="cl">                return 0;
+</span></span><span class="line"><span class="cl">            root = root-&gt;next[idx];
+</span></span><span class="line"><span class="cl">        }        
+</span></span><span class="line"><span class="cl">        return root-&gt;sum;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class MapSum {
+</span></span><span class="line"><span class="cl">    TrieNode* root;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> store;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    MapSum() {
+</span></span><span class="line"><span class="cl">        root = new TrieNode();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void insert(string key, int val) {
+</span></span><span class="line"><span class="cl">        int x = val;
+</span></span><span class="line"><span class="cl">        if(store[key] &gt; 0)
+</span></span><span class="line"><span class="cl">            val = val - store[key];
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        root-&gt;add(key, val);
+</span></span><span class="line"><span class="cl">        store[key] = x;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int sum(string prefix) {
+</span></span><span class="line"><span class="cl">        return root-&gt;val(prefix);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your MapSum object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * MapSum* obj = new MapSum();
+</span></span><span class="line"><span class="cl"> * obj-&gt;insert(key,val);
+</span></span><span class="line"><span class="cl"> * int param_2 = obj-&gt;sum(prefix);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

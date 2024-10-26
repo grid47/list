@@ -186,7 +186,37 @@
         <p><a href="https://leetcode.com/problems/encode-and-decode-tinyurl/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    const string charset = &#34;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#34;;
+</span></span><span class="line"><span class="cl">    random_device rd;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> url_code, code_url;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Encodes a URL to a shortened URL.
+</span></span><span class="line"><span class="cl">    string encode(string longUrl) {
+</span></span><span class="line"><span class="cl">        string code;
+</span></span><span class="line"><span class="cl">        if(!url_code.count(longUrl)) {
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">6</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">code</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">charset</span><span class="err">[</span><span class="na">rd</span><span class="err">()%</span><span class="na">charset</span><span class="err">.</span><span class="na">size</span><span class="err">()]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">url_code</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>(longUrl, code));
+</span></span><span class="line"><span class="cl">            code_url.insert(pair<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>(code, longUrl));                
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            code = url_code[longUrl];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return &#34;http://tinyurl.com/&#34; + code;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Decodes a shortened URL to its original URL.
+</span></span><span class="line"><span class="cl">    string decode(string shortUrl) {
+</span></span><span class="line"><span class="cl">        if(shortUrl.size() != 25 || !code_url.count(shortUrl.substr(19,6)))
+</span></span><span class="line"><span class="cl">        return &#34;&#34;;
+</span></span><span class="line"><span class="cl">        return code_url[shortUrl.substr(19,6)];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// Your Solution object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl">// Solution solution;
+</span></span><span class="line"><span class="cl">// solution.decode(solution.encode(url));</span></span></code></pre></div>
 
       </div>
 

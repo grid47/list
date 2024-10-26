@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/complete-binary-tree-inserter/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class CBTInserter {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> tree;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    CBTInserter(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        tree.push_back(root);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">tree.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">tree</span><span class="err">[</span><span class="na">i</span><span class="err">]</span><span class="na">-</span><span class="p">&gt;</span>left) tree.push_back(tree[i]-&gt;left);
+</span></span><span class="line"><span class="cl">            if(tree[i]-&gt;right) tree.push_back(tree[i]-&gt;right);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int insert(int val) {
+</span></span><span class="line"><span class="cl">        int N = tree.size();
+</span></span><span class="line"><span class="cl">        TreeNode* node = new TreeNode(val);
+</span></span><span class="line"><span class="cl">        tree.push_back(node);
+</span></span><span class="line"><span class="cl">        if(N%2) tree[(N-1)/2]-&gt;left = node;
+</span></span><span class="line"><span class="cl">        else    tree[(N-1)/2]-&gt;right= node;
+</span></span><span class="line"><span class="cl">        return tree[(N-1)/2]-&gt;val;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    TreeNode* get_root() {
+</span></span><span class="line"><span class="cl">        return tree[0];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your CBTInserter object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * CBTInserter* obj = new CBTInserter(root);
+</span></span><span class="line"><span class="cl"> * int param_1 = obj-&gt;insert(val);
+</span></span><span class="line"><span class="cl"> * TreeNode* param_2 = obj-&gt;get_root();
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

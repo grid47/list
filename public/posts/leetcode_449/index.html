@@ -186,7 +186,61 @@
         <p><a href="https://leetcode.com/problems/serialize-and-deserialize-bst/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Codec {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Encodes a tree to a single string.
+</span></span><span class="line"><span class="cl">    string serialize(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        string str;
+</span></span><span class="line"><span class="cl">        serial(str, root);
+</span></span><span class="line"><span class="cl">        return str;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void serial(string<span class="err">&amp;</span> ss, TreeNode* root) {
+</span></span><span class="line"><span class="cl">        if (!root) return;
+</span></span><span class="line"><span class="cl">        char c[4];
+</span></span><span class="line"><span class="cl">        memcpy(c, <span class="err">&amp;</span>(root-&gt;val), sizeof(int));
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">4</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="na">ss</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">c</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">serial</span><span class="err">(</span><span class="na">ss</span><span class="err">,</span> <span class="na">root-</span><span class="p">&gt;</span>left );
+</span></span><span class="line"><span class="cl">        serial(ss, root-&gt;right);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    // Decodes your encoded data to tree.
+</span></span><span class="line"><span class="cl">    TreeNode* deserialize(string data) {
+</span></span><span class="line"><span class="cl">        int pos = 0;
+</span></span><span class="line"><span class="cl">        return deserial(data, pos, INT_MIN, INT_MAX);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    TreeNode* deserial(string<span class="err">&amp;</span> data, int<span class="err">&amp;</span> pos, int left, int right) {
+</span></span><span class="line"><span class="cl">        if (pos &gt;= data.size()) return NULL;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int val;
+</span></span><span class="line"><span class="cl">        memcpy(<span class="err">&amp;</span>val, <span class="err">&amp;</span>(data[pos]), sizeof(int));
+</span></span><span class="line"><span class="cl">        if (val <span class="p">&lt;</span> <span class="nt">left</span> <span class="err">||</span> <span class="na">val</span> <span class="p">&gt;</span> right) return NULL;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        TreeNode* root = new TreeNode(val);
+</span></span><span class="line"><span class="cl">        pos += sizeof(int);
+</span></span><span class="line"><span class="cl">        root-&gt;left  = deserial ( data, pos, left,   val );
+</span></span><span class="line"><span class="cl">        root-&gt;right = deserial ( data, pos,  val, right );
+</span></span><span class="line"><span class="cl">        return root;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// Your Codec object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl">// Codec* ser = new Codec();
+</span></span><span class="line"><span class="cl">// Codec* deser = new Codec();
+</span></span><span class="line"><span class="cl">// string tree = ser-&gt;serialize(root);
+</span></span><span class="line"><span class="cl">// TreeNode* ans = deser-&gt;deserialize(tree);
+</span></span><span class="line"><span class="cl">// return ans;</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,32 @@
         <p><a href="https://leetcode.com/problems/remove-9/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; imageSmoother(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> M) {
+</span></span><span class="line"><span class="cl">        int m = M.size(), n = M[0].size();
+</span></span><span class="line"><span class="cl">        if (m == 0 || n == 0) return {{}};
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dirs = {{0,1},{0,-1},{1,0},{-1,0},{-1,-1},{1,1},{-1,1},{1,-1}};
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">int</span> <span class="na">sum </span><span class="o">=</span> <span class="s">M[i][j],</span> <span class="na">cnt </span><span class="o">=</span> <span class="s">1;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">k </span><span class="o">=</span> <span class="s">0;</span> <span class="na">k</span> <span class="err">&lt;</span> <span class="na">dirs</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">k</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">int</span> <span class="na">x </span><span class="o">=</span> <span class="s">i</span> <span class="err">+</span> <span class="na">dirs</span><span class="err">[</span><span class="na">k</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">y </span><span class="o">=</span> <span class="s">j</span> <span class="err">+</span> <span class="na">dirs</span><span class="err">[</span><span class="na">k</span><span class="err">][</span><span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span> <span class="err">(</span><span class="na">x</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">x</span> <span class="p">&gt;</span> m - 1 || y <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="p">&gt;</span> n - 1) continue;
+</span></span><span class="line"><span class="cl">                    sum += (M[x][y] <span class="err">&amp;</span> 0xFF);
+</span></span><span class="line"><span class="cl">                    cnt++;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                M[i][j] |= ((sum / cnt) <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">8</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">         <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">M</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="p">&gt;</span>&gt;= 8;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">         }
+</span></span><span class="line"><span class="cl">        return M;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,28 @@
         <p><a href="https://leetcode.com/problems/stone-game/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> p;
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt; memo;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool dp(int i, int j) {
+</span></span><span class="line"><span class="cl">        if(i == j) return p[i];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo.count(i) <span class="err">&amp;&amp;</span> memo[i].count(j)) return memo[i][j];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return memo[i][j] = max(p[i] - dp(i + 1, j), p[j] - dp(i, j - 1)) ;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool stoneGame(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> piles) {
+</span></span><span class="line"><span class="cl">        this-&gt;p = piles;
+</span></span><span class="line"><span class="cl">        n = piles.size();
+</span></span><span class="line"><span class="cl">        return dp(0, n - 1) &gt;= 0;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/longest-univalue-path/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    int maxi;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int longestUnivaluePath(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        maxi = 0;
+</span></span><span class="line"><span class="cl">        if((root == NULL) || (root-&gt;left == NULL <span class="err">&amp;&amp;</span> root-&gt;right == NULL)  )
+</span></span><span class="line"><span class="cl">        return 0;
+</span></span><span class="line"><span class="cl">        dfs(root);
+</span></span><span class="line"><span class="cl">        return maxi;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int dfs(TreeNode *root) {
+</span></span><span class="line"><span class="cl">        if(root == NULL) return 0;
+</span></span><span class="line"><span class="cl">        int l = 0, r = 0;
+</span></span><span class="line"><span class="cl">        int lft = dfs(root-&gt;left);
+</span></span><span class="line"><span class="cl">        int rgt = dfs(root-&gt;right);
+</span></span><span class="line"><span class="cl">        if((root-&gt;left != NULL) <span class="err">&amp;&amp;</span> (root-&gt;left-&gt;val == root-&gt;val))
+</span></span><span class="line"><span class="cl">        l = lft;
+</span></span><span class="line"><span class="cl">        if((root-&gt;right != NULL) <span class="err">&amp;&amp;</span> (root-&gt;right-&gt;val == root-&gt;val))
+</span></span><span class="line"><span class="cl">        r = rgt;        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        maxi = max(maxi, l + r);
+</span></span><span class="line"><span class="cl">        return 1 + max(l, r);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

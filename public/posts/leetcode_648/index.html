@@ -186,7 +186,60 @@
         <p><a href="https://leetcode.com/problems/replace-words/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class TrieNode {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    TrieNode* child[26];
+</span></span><span class="line"><span class="cl">    bool isEnd;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    TrieNode() {
+</span></span><span class="line"><span class="cl">        isEnd = false;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">26</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">child</span><span class="err">[</span><span class="na">i</span><span class="err">]=</span> <span class="na">NULL</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">TrieNode</span><span class="err">*</span> <span class="na">root</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">insert</span><span class="err">(</span><span class="na">string</span> <span class="na">w</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">TrieNode</span><span class="err">*</span> <span class="na">st </span><span class="o">=</span> <span class="s">root;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">char</span> <span class="na">c:</span> <span class="na">w</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(!</span><span class="na">st-</span><span class="p">&gt;</span>child[c - &#39;a&#39;]) st-&gt;child[c - &#39;a&#39;] = new TrieNode();
+</span></span><span class="line"><span class="cl">            st = st-&gt;child[c - &#39;a&#39;];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        st-&gt;isEnd = true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    string check(string w) {
+</span></span><span class="line"><span class="cl">        TrieNode* st = root;
+</span></span><span class="line"><span class="cl">        string s = &#34;&#34;;
+</span></span><span class="line"><span class="cl">        for(char c: w) {
+</span></span><span class="line"><span class="cl">            if(st-&gt;child[c - &#39;a&#39;]) st = st-&gt;child[c - &#39;a&#39;];
+</span></span><span class="line"><span class="cl">            else break;
+</span></span><span class="line"><span class="cl">            s += c;
+</span></span><span class="line"><span class="cl">            if(st-&gt;isEnd) return s;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return w;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    string replaceWords(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> dictionary, string sentence) {
+</span></span><span class="line"><span class="cl">        root = new TrieNode();
+</span></span><span class="line"><span class="cl">        for(auto w: dictionary) insert(w);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        istringstream ss(sentence);
+</span></span><span class="line"><span class="cl">        string word = &#34;&#34;, ans = &#34;&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(; ss&gt;&gt;word;) {
+</span></span><span class="line"><span class="cl">            ans += check(word);
+</span></span><span class="line"><span class="cl">            ans += &#39; &#39;;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ans.pop_back();
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

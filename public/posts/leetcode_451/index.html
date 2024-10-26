@@ -186,7 +186,29 @@
         <p><a href="https://leetcode.com/problems/sort-characters-by-frequency/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string frequencySort(string s) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span> freq;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> bucket(s.size()+1, &#34;&#34;);
+</span></span><span class="line"><span class="cl">        string res;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //count frequency of each character
+</span></span><span class="line"><span class="cl">        for(char c:s) freq[c]++;
+</span></span><span class="line"><span class="cl">        //put character into frequency bucket
+</span></span><span class="line"><span class="cl">        for(auto<span class="err">&amp;</span> it:freq) {
+</span></span><span class="line"><span class="cl">            int n = it.second;
+</span></span><span class="line"><span class="cl">            char c = it.first;
+</span></span><span class="line"><span class="cl">            bucket[n].append(n, c);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        //form descending sorted string
+</span></span><span class="line"><span class="cl">        for(int i=s.size(); i&gt;0; i--) {
+</span></span><span class="line"><span class="cl">            if(bucket[i].size())
+</span></span><span class="line"><span class="cl">                res.append(bucket[i]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

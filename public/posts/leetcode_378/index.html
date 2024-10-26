@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int kthSmallest(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> mtx, int k) {
+</span></span><span class="line"><span class="cl">        int m = mtx.size(), n = mtx[0].size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;, greater<span class="err">&lt;</span>&gt;&gt; pq;
+</span></span><span class="line"><span class="cl">        for(int r = 0; r <span class="p">&lt;</span> <span class="nt">min</span><span class="err">(</span><span class="na">m</span><span class="err">,</span> <span class="na">k</span><span class="err">);</span> <span class="na">r</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">({</span><span class="na">mtx</span><span class="err">[</span><span class="na">r</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">r</span><span class="err">,</span> <span class="na">0</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> cur;
+</span></span><span class="line"><span class="cl">        while(k-- &gt; 1 <span class="err">&amp;&amp;</span> !pq.empty()) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            cur = pq.top();
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(cur[2] + 1 <span class="p">&lt;</span> <span class="nt">n</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">({</span> <span class="na">mtx</span><span class="err">[</span><span class="na">cur</span><span class="err">[</span><span class="na">1</span><span class="err">]][</span><span class="na">cur</span><span class="err">[</span><span class="na">2</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">],</span> <span class="na">cur</span><span class="err">[</span><span class="na">1</span><span class="err">],</span> <span class="na">cur</span><span class="err">[</span><span class="na">2</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span> <span class="err">});</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">cur </span><span class="o">=</span> <span class="s">pq.top();</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">cur</span><span class="err">[</span><span class="na">0</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

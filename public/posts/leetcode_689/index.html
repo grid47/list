@@ -186,7 +186,37 @@
         <p><a href="https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> maxSumOfThreeSubarrays(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> sum = {0};
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="na">sum</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">sum</span><span class="err">.</span><span class="na">back</span><span class="err">()</span> <span class="err">+</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt;&gt; dp(4, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt;(n));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">4</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">mx </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">groupLeft </span><span class="o">=</span> <span class="s">3</span> <span class="na">-</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">n</span> <span class="na">-</span> <span class="na">i</span> <span class="err">*</span> <span class="na">k</span><span class="err">;</span> <span class="na">j</span> <span class="p">&gt;</span>= groupLeft * k; j--) {
+</span></span><span class="line"><span class="cl">                int rest = j + k &gt;= n? 0: dp[i - 1][j + k].first;
+</span></span><span class="line"><span class="cl">                int amnt = rest + sum[j + k] - sum[j];
+</span></span><span class="line"><span class="cl">                if(amnt &gt;= mx) {
+</span></span><span class="line"><span class="cl">                    if(i &gt; 1) dp[i][j].second = dp[i - 1][j + k].second;
+</span></span><span class="line"><span class="cl">                    dp[i][j].second.push_back(j);
+</span></span><span class="line"><span class="cl">                    dp[i][j].first = amnt;
+</span></span><span class="line"><span class="cl">                    mx = amnt;
+</span></span><span class="line"><span class="cl">                } else dp[i][j] = dp[i][j+1];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        reverse(dp[3][0].second.begin(), dp[3][0].second.end());
+</span></span><span class="line"><span class="cl">        return dp[3][0].second;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

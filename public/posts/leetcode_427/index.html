@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,75 @@
         <p><a href="https://leetcode.com/problems/construct-quad-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/*
+</span></span><span class="line"><span class="cl">// Definition for a QuadTree node.
+</span></span><span class="line"><span class="cl">class Node {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool val;
+</span></span><span class="line"><span class="cl">    bool isLeaf;
+</span></span><span class="line"><span class="cl">    Node* topLeft;
+</span></span><span class="line"><span class="cl">    Node* topRight;
+</span></span><span class="line"><span class="cl">    Node* bottomLeft;
+</span></span><span class="line"><span class="cl">    Node* bottomRight;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    Node() {
+</span></span><span class="line"><span class="cl">        val = false;
+</span></span><span class="line"><span class="cl">        isLeaf = false;
+</span></span><span class="line"><span class="cl">        topLeft = NULL;
+</span></span><span class="line"><span class="cl">        topRight = NULL;
+</span></span><span class="line"><span class="cl">        bottomLeft = NULL;
+</span></span><span class="line"><span class="cl">        bottomRight = NULL;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    Node(bool _val, bool _isLeaf) {
+</span></span><span class="line"><span class="cl">        val = _val;
+</span></span><span class="line"><span class="cl">        isLeaf = _isLeaf;
+</span></span><span class="line"><span class="cl">        topLeft = NULL;
+</span></span><span class="line"><span class="cl">        topRight = NULL;
+</span></span><span class="line"><span class="cl">        bottomLeft = NULL;
+</span></span><span class="line"><span class="cl">        bottomRight = NULL;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    Node(bool _val, bool _isLeaf, Node* _topLeft, Node* _topRight, Node* _bottomLeft, Node* _bottomRight) {
+</span></span><span class="line"><span class="cl">        val = _val;
+</span></span><span class="line"><span class="cl">        isLeaf = _isLeaf;
+</span></span><span class="line"><span class="cl">        topLeft = _topLeft;
+</span></span><span class="line"><span class="cl">        topRight = _topRight;
+</span></span><span class="line"><span class="cl">        bottomLeft = _bottomLeft;
+</span></span><span class="line"><span class="cl">        bottomRight = _bottomRight;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">*/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    Node* construct(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        return helper(grid, 0, 0, grid.size());
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Node* helper(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>grid, int x, int y, int sz) {
+</span></span><span class="line"><span class="cl">        if(sz == 1) return new Node(grid[x][y] != 0, true, NULL, NULL, NULL, NULL);
+</span></span><span class="line"><span class="cl">        Node* res = new Node();
+</span></span><span class="line"><span class="cl">        Node* topRight    = helper(grid, x , y+sz/2, sz / 2);
+</span></span><span class="line"><span class="cl">        Node* topLeft     = helper(grid, x , y, sz / 2);
+</span></span><span class="line"><span class="cl">        Node* bottomRight = helper(grid, x +sz/2, y+sz/2, sz / 2);
+</span></span><span class="line"><span class="cl">        Node* bottomLeft  = helper(grid, x +sz/2, y, sz / 2);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(topRight-&gt;isLeaf <span class="err">&amp;&amp;</span> topLeft-&gt;isLeaf <span class="err">&amp;&amp;</span> bottomRight-&gt;isLeaf <span class="err">&amp;&amp;</span> bottomLeft-&gt;isLeaf <span class="err">&amp;&amp;</span> 
+</span></span><span class="line"><span class="cl">        topLeft-&gt;val == topRight-&gt;val <span class="err">&amp;&amp;</span> topRight-&gt;val == bottomRight-&gt;val <span class="err">&amp;&amp;</span> bottomRight-&gt;val == bottomLeft-&gt;val) {
+</span></span><span class="line"><span class="cl">            res-&gt;val = topLeft-&gt;val;
+</span></span><span class="line"><span class="cl">            res-&gt; isLeaf = true;
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">             res-&gt;topRight    = topRight;   
+</span></span><span class="line"><span class="cl">             res-&gt;topLeft     = topLeft;   
+</span></span><span class="line"><span class="cl">             res-&gt;bottomRight = bottomRight;   
+</span></span><span class="line"><span class="cl">             res-&gt;bottomLeft  = bottomLeft;       
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

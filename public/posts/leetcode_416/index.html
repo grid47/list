@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/partition-equal-subset-sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums;
+</span></span><span class="line"><span class="cl">    int memo[201][10001];
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool dp(int idx, int sum) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(idx == nums.size()) return sum == 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[idx][sum] != -1) return memo[idx][sum];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        bool res = dp(idx + 1, sum);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(sum &gt;= nums[idx])
+</span></span><span class="line"><span class="cl">            res |= dp(idx + 1, sum - nums[idx]);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return memo[idx][sum] = res;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool canPartition(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        this-&gt;nums = nums;
+</span></span><span class="line"><span class="cl">        int sum = 0;
+</span></span><span class="line"><span class="cl">        for(int x: nums)
+</span></span><span class="line"><span class="cl">            sum += x;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(sum <span class="err">&amp;</span> 1) return false;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        sum = sum / 2;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return dp(0, sum);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,56 @@
         <p><a href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*,</span> <span class="na">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">    set<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> st;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void parents(TreeNode* node) {
+</span></span><span class="line"><span class="cl">        if(!node) return;
+</span></span><span class="line"><span class="cl">        if(node-&gt;left) {
+</span></span><span class="line"><span class="cl">            mp[node-&gt;left] = node;
+</span></span><span class="line"><span class="cl">            parents(node-&gt;left);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(node-&gt;right) {
+</span></span><span class="line"><span class="cl">            mp[node-&gt;right] = node;
+</span></span><span class="line"><span class="cl">            parents(node-&gt;right);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> distanceK(TreeNode* root, TreeNode* target, int k) {
+</span></span><span class="line"><span class="cl">        if(!root) return {};
+</span></span><span class="line"><span class="cl">        parents(root);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        dfs(target, k);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void dfs(TreeNode* node, int k) {
+</span></span><span class="line"><span class="cl">        if(st.count(node)) return;
+</span></span><span class="line"><span class="cl">        st.insert(node);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(k == 0) {
+</span></span><span class="line"><span class="cl">            ans.push_back(node-&gt;val);
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(node-&gt;left) dfs(node-&gt;left, k - 1);
+</span></span><span class="line"><span class="cl">        if(node-&gt;right) dfs(node-&gt;right, k - 1);
+</span></span><span class="line"><span class="cl">        if(mp[node]) dfs(mp[node], k - 1);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

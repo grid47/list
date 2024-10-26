@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/coin-change/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> coin;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; memo;
+</span></span><span class="line"><span class="cl">    static bool cmp(int a, int b) {
+</span></span><span class="line"><span class="cl">        return a &gt; b;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx, int amnt) {
+</span></span><span class="line"><span class="cl">        if(idx == coin.size()) return amnt == 0? 0: INT_MAX-1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[idx][amnt] != -1) return memo[idx][amnt];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int res;
+</span></span><span class="line"><span class="cl">        if(amnt &gt;= coin[idx]) {
+</span></span><span class="line"><span class="cl">            int r1 = 1 + dp(idx, amnt - coin[idx]);            
+</span></span><span class="line"><span class="cl">            int r2 = dp(idx + 1, amnt);
+</span></span><span class="line"><span class="cl">            res = min(r1, r2);
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            res = dp(idx + 1, amnt);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return memo[idx][amnt] = res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int coinChange(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> coins, int amount) {
+</span></span><span class="line"><span class="cl">        sort(coins.begin(), coins.end(), cmp);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        this-&gt;coin = coins;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        memo.resize(coin.size(),vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(amount + 1, -1) );
+</span></span><span class="line"><span class="cl">        int ans = dp(0, amount);
+</span></span><span class="line"><span class="cl">        return ans == INT_MAX-1?-1: ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

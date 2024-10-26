@@ -186,7 +186,51 @@
         <p><a href="https://leetcode.com/problems/bus-routes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int numBusesToDestination(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> routes, int source, int target) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">unordered_set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int n = routes.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; bus(n);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">x:</span> <span class="na">routes</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(!</span><span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">].</span><span class="na">count</span><span class="err">(</span><span class="na">i</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">it:</span> <span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">bus</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">push_back</span><span class="err">(</span><span class="na">it</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">bus</span><span class="err">[</span><span class="na">it</span><span class="err">].</span><span class="na">push_back</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">].</span><span class="na">insert</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">source </span><span class="o">=</span><span class="s">=</span> <span class="na">target</span><span class="err">)</span> <span class="na">return</span> <span class="na">0</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">cnt </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">queue</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> vis;
+</span></span><span class="line"><span class="cl">        for(int it: mp[source]) {
+</span></span><span class="line"><span class="cl">            q.push(it);
+</span></span><span class="line"><span class="cl">            vis.insert(it);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            cnt++;
+</span></span><span class="line"><span class="cl">            int sz = q.size();
+</span></span><span class="line"><span class="cl">            while(sz--) {
+</span></span><span class="line"><span class="cl">                int x = q.front();
+</span></span><span class="line"><span class="cl">                q.pop();
+</span></span><span class="line"><span class="cl">                if(mp[target].count(x)) return cnt;
+</span></span><span class="line"><span class="cl">                for(auto it: bus[x]) {
+</span></span><span class="line"><span class="cl">                    if(vis.count(it)) continue;
+</span></span><span class="line"><span class="cl">                    vis.insert(it);
+</span></span><span class="line"><span class="cl">                    q.push(it);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return -1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

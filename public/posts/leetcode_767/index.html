@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/reorganize-string/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string reorganizeString(string s) {
+</span></span><span class="line"><span class="cl">        int mfq = 0, i = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> frq(26, 0);
+</span></span><span class="line"><span class="cl">        for(char c: s)
+</span></span><span class="line"><span class="cl">            if (++frq[c - &#39;a&#39;] &gt; frq[mfq])
+</span></span><span class="line"><span class="cl">                mfq = c - &#39;a&#39;;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        // if mfq over bounds return &#34;&#34;
+</span></span><span class="line"><span class="cl">        if(2 * frq[mfq] - 1 &gt; s.size()) return &#34;&#34;;
+</span></span><span class="line"><span class="cl">        /*  dist mfq across
+</span></span><span class="line"><span class="cl">            dist rest across */
+</span></span><span class="line"><span class="cl">        while(frq[mfq]) {
+</span></span><span class="line"><span class="cl">            s[i] = &#39;a&#39; + mfq;
+</span></span><span class="line"><span class="cl">            i += 2;
+</span></span><span class="line"><span class="cl">            frq[mfq]--;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int j = 0; j <span class="p">&lt;</span> <span class="nt">26</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">frq</span><span class="err">[</span><span class="na">j</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="p">&gt;</span>= s.size()) i = 1;
+</span></span><span class="line"><span class="cl">                s[i] = &#39;a&#39; + j;
+</span></span><span class="line"><span class="cl">                frq[j]--;
+</span></span><span class="line"><span class="cl">                i += 2;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return s;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

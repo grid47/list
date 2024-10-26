@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/find-duplicate-subtrees/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> findDuplicateSubtrees(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">TreeNode</span><span class="err">*</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">        serialise(mp, root);
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        for(auto it: mp) {
+</span></span><span class="line"><span class="cl">            if(it.second.size() &gt; 1)
+</span></span><span class="line"><span class="cl">            res.push_back(it.second[0]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    string serialise(unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">TreeNode</span><span class="err">*</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>mp, TreeNode* root) {
+</span></span><span class="line"><span class="cl">        if(root == NULL) return &#34;&#34;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        string s = &#34;(&#34; + serialise(mp, root-&gt;left) + to_string(root-&gt;val) + serialise(mp, root-&gt;right) + &#34;)&#34;;
+</span></span><span class="line"><span class="cl">        mp[s].push_back(root);
+</span></span><span class="line"><span class="cl">        return s;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

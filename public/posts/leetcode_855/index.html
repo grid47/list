@@ -186,7 +186,54 @@
         <p><a href="https://leetcode.com/problems/exam-room/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class ExamRoom {
+</span></span><span class="line"><span class="cl">    int N;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> L;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    ExamRoom(int n) {
+</span></span><span class="line"><span class="cl">        N = n;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int seat() {
+</span></span><span class="line"><span class="cl">        if(L.size() == 0) {
+</span></span><span class="line"><span class="cl">            L.push_back(0);
+</span></span><span class="line"><span class="cl">            return 0;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int d = max(L[0], N - 1 - L[L.size() - 1]);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">L.size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="na">d </span><span class="o">=</span> <span class="s">max(d,</span> <span class="err">(</span><span class="na">L</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="na">-</span> <span class="na">L</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">/</span><span class="na">2</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">L</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">==</span> <span class="na">d</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">L</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">L</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">0</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">L</span><span class="err">[</span><span class="na">0</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">L</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">L</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="na">-</span> <span class="na">L</span><span class="err">[</span><span class="na">i</span><span class="err">])/</span><span class="na">2 </span><span class="o">=</span><span class="s">=</span> <span class="na">d</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">L</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">L</span><span class="err">.</span><span class="na">begin</span><span class="err">()</span> <span class="err">+</span> <span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="err">(</span><span class="na">L</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+</span> <span class="na">L</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span><span class="na">1</span><span class="err">])/</span><span class="na">2</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">L</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">         <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">            <span class="na">L</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">N</span> <span class="na">-</span> <span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">N</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">leave</span><span class="err">(</span><span class="na">int</span> <span class="na">p</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">L</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="na">if</span><span class="err">(</span><span class="na">L</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">p</span><span class="err">)</span> <span class="na">L</span><span class="err">.</span><span class="na">erase</span><span class="err">(</span><span class="na">L</span><span class="err">.</span><span class="na">begin</span><span class="err">()</span> <span class="err">+</span> <span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Your</span> <span class="na">ExamRoom</span> <span class="na">object</span> <span class="na">will</span> <span class="na">be</span> <span class="na">instantiated</span> <span class="na">and</span> <span class="na">called</span> <span class="na">as</span> <span class="na">such:</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">ExamRoom</span><span class="err">*</span> <span class="na">obj </span><span class="o">=</span> <span class="s">new</span> <span class="na">ExamRoom</span><span class="err">(</span><span class="na">n</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">int</span> <span class="na">param_1 </span><span class="o">=</span> <span class="s">obj-</span><span class="p">&gt;</span>seat();
+</span></span><span class="line"><span class="cl"> * obj-&gt;leave(p);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

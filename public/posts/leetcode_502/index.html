@@ -186,7 +186,50 @@
         <p><a href="https://leetcode.com/problems/ipo/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int findMaximizedCapital(int k, int w, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> profit, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> capital) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; arr;
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> pq;
+</span></span><span class="line"><span class="cl">        int n = capital.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">capital</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&lt;=</span> <span class="na">w</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">profit</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">arr</span><span class="err">.</span><span class="na">push_back</span><span class="err">({</span><span class="na">capital</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">profit</span><span class="err">[</span><span class="na">i</span><span class="err">]});</span>                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">arr</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">arr</span><span class="err">.</span><span class="na">end</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">sum </span><span class="o">=</span> <span class="s">w;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">k--</span> <span class="err">&amp;&amp;</span> <span class="err">!</span><span class="na">pq</span><span class="err">.</span><span class="na">empty</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">sum</span> <span class="err">+=</span> <span class="na">pq</span><span class="err">.</span><span class="na">top</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">arr</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">first</span> <span class="err">&lt;=</span> <span class="na">sum</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">second</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">sum</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">/*</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">            <span class="na">i</span> <span class="na">have</span> <span class="na">a</span> <span class="na">current</span> <span class="na">capital</span>
+</span></span><span class="line"><span class="cl">            <span class="na">i</span> <span class="na">can</span> <span class="na">pick</span> <span class="na">all</span> <span class="na">the</span> <span class="na">the</span> <span class="na">projects</span> <span class="na">with</span> <span class="na">lesser</span> <span class="na">capital</span> <span class="na">required</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">from</span> <span class="na">set</span> <span class="na">of</span> <span class="na">all</span> <span class="na">projects</span> <span class="na">available</span> <span class="na">to</span> <span class="na">pick</span>
+</span></span><span class="line"><span class="cl">            <span class="na">choose</span> <span class="na">the</span> <span class="na">one</span> <span class="na">with</span> <span class="na">highest</span> <span class="na">profit</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="na">that</span> <span class="na">adds</span> <span class="na">more</span> <span class="na">possibilities</span> <span class="na">expand</span> <span class="na">the</span> <span class="na">serach</span> <span class="na">space</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">then</span> <span class="na">again</span> <span class="na">choose</span> <span class="na">the</span> <span class="na">top</span> <span class="na">guy</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">repeat</span> <span class="na">last</span> <span class="na">two</span> <span class="na">steps</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="err">*/</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

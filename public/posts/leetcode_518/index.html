@@ -186,7 +186,32 @@
         <p><a href="https://leetcode.com/problems/coin-change-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int memo[5001][301];
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums;
+</span></span><span class="line"><span class="cl">    int dp(int amnt, int idx) {
+</span></span><span class="line"><span class="cl">        if(idx == nums.size()) return amnt == 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(memo[amnt][idx] != -1) return memo[amnt][idx];
+</span></span><span class="line"><span class="cl">        // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">amnt</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">idx</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span><span class="err">]&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">res </span><span class="o">=</span> <span class="s">dp(amnt,</span> <span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">amnt</span> <span class="p">&gt;</span>= nums[idx])
+</span></span><span class="line"><span class="cl">        res += dp(amnt - nums[idx], idx);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return memo[amnt][idx] = res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    static bool cmp(int a, int b) {
+</span></span><span class="line"><span class="cl">        return b <span class="p">&lt;</span> <span class="nt">a</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">change</span><span class="err">(</span><span class="na">int</span> <span class="na">amount</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> coins) {
+</span></span><span class="line"><span class="cl">        this-&gt;nums = coins;
+</span></span><span class="line"><span class="cl">        sort(nums.begin(), nums.end(), cmp);
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        return dp(amount, 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

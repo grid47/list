@@ -22,6 +22,30 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& mtx, int k) {
+        int m = mtx.size(), n = mtx[0].size();
+        
+        priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;
+        for(int r = 0; r < min(m, k); r++)
+            pq.push({mtx[r][0], r, 0});
+        
+        vector<int> cur;
+        while(k-- > 1 && !pq.empty()) {
+            
+            cur = pq.top();
+            pq.pop();
+            
+            if(cur[2] + 1 < n)
+            pq.push({ mtx[cur[1]][cur[2] + 1], cur[1], cur[2] + 1 });
+            
+        }
+        
+        cur = pq.top();
+        
+        return cur[0];
+    }
+};
 {{< /highlight >}}
 

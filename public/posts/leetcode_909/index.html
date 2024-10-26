@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/snakes-and-ladders/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    void getCoordinate(int n, int s, int <span class="err">&amp;</span>row, int <span class="err">&amp;</span>col) {
+</span></span><span class="line"><span class="cl">        row = n-1-(s-1)/n;
+</span></span><span class="line"><span class="cl">        col = (s-1)%n;
+</span></span><span class="line"><span class="cl">        if((n%2 ==1 <span class="err">&amp;&amp;</span> row%2==1) || (n%2==0 <span class="err">&amp;&amp;</span> row%2==0))
+</span></span><span class="line"><span class="cl">            col= n-1-col;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int snakesAndLadders(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> board) {
+</span></span><span class="line"><span class="cl">        int n = board.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> seen(n*n+1, false);
+</span></span><span class="line"><span class="cl">        seen[1] = true;
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; q;
+</span></span><span class="line"><span class="cl">        q.push({1, 0});
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> p = q.front();
+</span></span><span class="line"><span class="cl">            q.pop();
+</span></span><span class="line"><span class="cl">            int row, col, s = p.first, dist = p.second;
+</span></span><span class="line"><span class="cl">            if(s == n*n) 
+</span></span><span class="line"><span class="cl">                return dist;
+</span></span><span class="line"><span class="cl">            for(int i = 1; s+i<span class="err">&lt;</span>= n *n <span class="err">&amp;&amp;</span> i<span class="err">&lt;</span>=6;i++) {
+</span></span><span class="line"><span class="cl">                getCoordinate(n, s+i, row, col);
+</span></span><span class="line"><span class="cl">                int sfinal = board[row][col] == -1? s+i:board[row][col];
+</span></span><span class="line"><span class="cl">                if(seen[sfinal] == false) {
+</span></span><span class="line"><span class="cl">                    seen[sfinal] = true;
+</span></span><span class="line"><span class="cl">                    q.push({sfinal, dist + 1});
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return -1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

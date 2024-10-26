@@ -186,7 +186,58 @@
         <p><a href="https://leetcode.com/problems/shortest-path-visiting-all-nodes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Node {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int mask, cur, cost;
+</span></span><span class="line"><span class="cl">    Node(int msk, int cu, int cos) {
+</span></span><span class="line"><span class="cl">        mask = msk;
+</span></span><span class="line"><span class="cl">        cur = cu;
+</span></span><span class="line"><span class="cl">        cost = cos;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int eq(Node *n) {
+</span></span><span class="line"><span class="cl">        return n-&gt;mask == this-&gt;mask <span class="err">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">             n-&gt;cur == this-&gt;cur <span class="err">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">             n-&gt;cost == this-&gt;cost;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int hash() {
+</span></span><span class="line"><span class="cl">        return 1331 * this-&gt;mask+ 
+</span></span><span class="line"><span class="cl">               7193 * this-&gt;cur + 
+</span></span><span class="line"><span class="cl">                727 * this-&gt;cost;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int shortestPathLength(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> gph) {
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> s;
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">gph.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">Node</span><span class="err">*</span> <span class="na">tmp </span><span class="o">=</span> <span class="s">new</span> <span class="na">Node</span><span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">i</span><span class="err">,</span> <span class="na">i</span><span class="err">,</span> <span class="na">0</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">s</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">tmp-</span><span class="p">&gt;</span>hash());
+</span></span><span class="line"><span class="cl">            q.push(tmp);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            Node* tmp = q.front();
+</span></span><span class="line"><span class="cl">            q.pop();
+</span></span><span class="line"><span class="cl">            if(tmp-&gt;mask == (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">gph.size</span><span class="err">())</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">tmp-</span><span class="p">&gt;</span>cost;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            for(auto x : gph[tmp-&gt;cur]) {
+</span></span><span class="line"><span class="cl">                int msk = tmp-&gt;mask;
+</span></span><span class="line"><span class="cl">                msk |= (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">x</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">Node</span><span class="err">*</span> <span class="na">t </span><span class="o">=</span> <span class="s">new</span> <span class="na">Node</span><span class="err">(</span><span class="na">msk</span><span class="err">,</span> <span class="na">x</span><span class="err">,</span> <span class="na">0</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(!</span><span class="na">s</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">t-</span><span class="p">&gt;</span>hash())) {
+</span></span><span class="line"><span class="cl">                    q.push(new Node(msk, x, tmp-&gt;cost + 1));
+</span></span><span class="line"><span class="cl">                    s.insert(t-&gt;hash());
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return -1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

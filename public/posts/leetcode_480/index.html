@@ -186,7 +186,34 @@
         <p><a href="https://leetcode.com/problems/sliding-window-median/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">double</span><span class="p">&gt;</span> medianSlidingWindow(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) {
+</span></span><span class="line"><span class="cl">        multiset<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> win(nums.begin(), nums.begin() + k);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        auto mid = next(win.begin(), k/2);
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">double</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = k; ; i++) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            double med =  ((double)*mid + (double)*prev(mid, 1 - k%2)) / 2;
+</span></span><span class="line"><span class="cl">            ans.push_back(med);
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(i == nums.size()) return ans;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            win.insert(nums[i]);
+</span></span><span class="line"><span class="cl">            if(nums[i] <span class="err">&lt;</span> *mid) // mutiset insertion happens from upper end
+</span></span><span class="line"><span class="cl">                mid--;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if(nums[i - k] <span class="err">&lt;</span>= *mid)
+</span></span><span class="line"><span class="cl">                mid++;
+</span></span><span class="line"><span class="cl">            win.erase(win.lower_bound(nums[i - k]));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

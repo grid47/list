@@ -186,7 +186,24 @@
         <p><a href="https://leetcode.com/problems/ones-and-zeroes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int findMaxForm(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> strs, int zeros, int ones) {
+</span></span><span class="line"><span class="cl">        int i, j, p = strs.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dp(zeros + 1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(ones+1));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>s : strs) {
+</span></span><span class="line"><span class="cl">            int currOne = count(s.begin(), s.end(), &#39;1&#39;);
+</span></span><span class="line"><span class="cl">            int currZero = s.size() - currOne;
+</span></span><span class="line"><span class="cl">            for(int j = ones ; j &gt;= currOne; j--) 
+</span></span><span class="line"><span class="cl">            for(int i = zeros; i &gt;= currZero; i--) {
+</span></span><span class="line"><span class="cl">               dp[i][j] = max(dp[i][j], 1 + dp[i- currZero ][j-currOne]);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return dp[zeros][ones];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

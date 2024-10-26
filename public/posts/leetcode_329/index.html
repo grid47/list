@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int m, n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mtx, vis, memo;
+</span></span><span class="line"><span class="cl">    int dfs(int i, int j) {
+</span></span><span class="line"><span class="cl">        if(memo[i][j] != -1) return memo[i][j];
+</span></span><span class="line"><span class="cl">        int res = 1;
+</span></span><span class="line"><span class="cl">        vis[i][j] = 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    if(i &gt; 0 <span class="err">&amp;&amp;</span> !vis[i - 1][j] <span class="err">&amp;&amp;</span> mtx[i - 1][j] &gt; mtx[i][j]) res = max(res, 1 + dfs(i - 1, j));
+</span></span><span class="line"><span class="cl">    if(j &gt; 0 <span class="err">&amp;&amp;</span> !vis[i][j - 1] <span class="err">&amp;&amp;</span> mtx[i][j - 1] &gt; mtx[i][j]) res = max(res, 1 + dfs(i, j - 1));
+</span></span><span class="line"><span class="cl">if(i <span class="p">&lt;</span> <span class="nt">m</span> <span class="na">-</span> <span class="na">1</span> <span class="err">&amp;&amp;</span> <span class="err">!</span><span class="na">vis</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="na">mtx</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="p">&gt;</span> mtx[i][j]) res = max(res, 1 + dfs(i + 1, j));
+</span></span><span class="line"><span class="cl">if(j <span class="p">&lt;</span> <span class="nt">n</span> <span class="na">-</span> <span class="na">1</span> <span class="err">&amp;&amp;</span> <span class="err">!</span><span class="na">vis</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="na">mtx</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span> mtx[i][j]) res = max(res, 1 + dfs(i, j + 1));        
+</span></span><span class="line"><span class="cl">        vis[i][j] = 0;
+</span></span><span class="line"><span class="cl">        return memo[i][j] = res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int longestIncreasingPath(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> mtx) {
+</span></span><span class="line"><span class="cl">        this-&gt;m = mtx.size();
+</span></span><span class="line"><span class="cl">        this-&gt;n = mtx[0].size();
+</span></span><span class="line"><span class="cl">        this-&gt;mtx = mtx;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            memo.resize(m, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, -1));        
+</span></span><span class="line"><span class="cl">        int res = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">vis</span><span class="err">.</span><span class="na">resize</span><span class="err">(</span><span class="na">m</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>(n, 0));
+</span></span><span class="line"><span class="cl">            res = max(res, dfs(i, j));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

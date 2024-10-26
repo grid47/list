@@ -186,7 +186,44 @@
         <p><a href="https://leetcode.com/problems/accounts-merge/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; accountsMerge(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> acc) {
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">set</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; gph;
+</span></span><span class="line"><span class="cl">        for(auto ac: acc) {
+</span></span><span class="line"><span class="cl">            for(int i = 1; i <span class="p">&lt;</span> <span class="nt">ac.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">[</span><span class="na">ac</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">=</span> <span class="na">ac</span><span class="err">[</span><span class="na">0</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                <span class="na">gph</span><span class="err">[</span><span class="na">ac</span><span class="err">[</span><span class="na">i</span><span class="err">]].</span><span class="na">insert</span><span class="err">(</span><span class="na">ac</span><span class="err">[</span><span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">gph</span><span class="err">[</span><span class="na">ac</span><span class="err">[</span><span class="na">1</span><span class="err">]].</span><span class="na">insert</span><span class="err">(</span><span class="na">ac</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">set</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span> seen;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; ans;
+</span></span><span class="line"><span class="cl">        for(auto it: mp) {
+</span></span><span class="line"><span class="cl">            if(seen.count(it.first)) continue;
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> tmp;
+</span></span><span class="line"><span class="cl">            dfs(tmp, gph, seen, it.first);
+</span></span><span class="line"><span class="cl">            sort(tmp.begin(), tmp.end());
+</span></span><span class="line"><span class="cl">            tmp.insert(tmp.begin(), it.second);
+</span></span><span class="line"><span class="cl">            ans.push_back(tmp);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void dfs(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="err">&amp;</span>tmp, map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">set</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>gph, set<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="err">&amp;</span>seen, string node) {
+</span></span><span class="line"><span class="cl">        tmp.push_back(node);
+</span></span><span class="line"><span class="cl">        seen.insert(node);
+</span></span><span class="line"><span class="cl">        for(auto it: gph[node]) {
+</span></span><span class="line"><span class="cl">            if(!seen.count(it)) {
+</span></span><span class="line"><span class="cl">                dfs(tmp, gph, seen, it);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

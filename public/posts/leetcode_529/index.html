@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/minesweeper/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt; updateBoard(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> board, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> click) {
+</span></span><span class="line"><span class="cl">        int m = board.size(), n = board[0].size();
+</span></span><span class="line"><span class="cl">        int row = click[0], col = click[1];
+</span></span><span class="line"><span class="cl">        if(board[row][col] == &#39;M&#39;) {
+</span></span><span class="line"><span class="cl">            board[row][col] = &#39;X&#39;;
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            int cnt = 0;
+</span></span><span class="line"><span class="cl">            for(int i = -1; i <span class="err">&lt;</span>= 1; i++)
+</span></span><span class="line"><span class="cl">            for(int j = -1; j <span class="err">&lt;</span>= 1; j++) {
+</span></span><span class="line"><span class="cl">                if(i == 0 <span class="err">&amp;&amp;</span> j == 0) continue;
+</span></span><span class="line"><span class="cl">                int x = row + i, y = col + j;
+</span></span><span class="line"><span class="cl">                if(x <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">x</span> <span class="p">&gt;</span>= m || y &gt;= n)    continue;
+</span></span><span class="line"><span class="cl">                if(board[x][y] == &#39;M&#39; || board[x][y] == &#39;X&#39;) cnt++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if (cnt &gt; 0) board[row][col] = &#39;0&#39; + cnt;
+</span></span><span class="line"><span class="cl">            else {
+</span></span><span class="line"><span class="cl">                board[row][col] = &#39;B&#39;;
+</span></span><span class="line"><span class="cl">                for(int i = -1; i <span class="err">&lt;</span>= 1; i++)
+</span></span><span class="line"><span class="cl">                for(int j = -1; j <span class="err">&lt;</span>= 1; j++) {
+</span></span><span class="line"><span class="cl">                    if(i == 0 <span class="err">&amp;&amp;</span> j == 0) continue;
+</span></span><span class="line"><span class="cl">                    int x = row + i, y = col + j;
+</span></span><span class="line"><span class="cl">                    if(x <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">x</span> <span class="p">&gt;</span>= m || y &gt;= n)    continue;
+</span></span><span class="line"><span class="cl">                    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> arr;
+</span></span><span class="line"><span class="cl">                    arr.push_back(x);
+</span></span><span class="line"><span class="cl">                    arr.push_back(y);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    if(board[x][y] == &#39;E&#39;) updateBoard(board, arr);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return board;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,54 @@
         <p><a href="https://leetcode.com/problems/similar-string-groups/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class UF {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> par;
+</span></span><span class="line"><span class="cl">    int grp;
+</span></span><span class="line"><span class="cl">    UF(int n) {
+</span></span><span class="line"><span class="cl">        grp = n;
+</span></span><span class="line"><span class="cl">        par.resize(n);
+</span></span><span class="line"><span class="cl">        for(int i =0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">par</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">join</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">,</span> <span class="na">int</span> <span class="na">y</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">find(x);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">q </span><span class="o">=</span> <span class="s">find(y);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">p</span> <span class="err">!=</span> <span class="na">q</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">grp--</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">par</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">=</span> <span class="na">q</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">find</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">x </span><span class="o">=</span><span class="s">=</span> <span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">])</span> <span class="na">return</span> <span class="na">x</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">=</span> <span class="na">find</span><span class="err">(</span><span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl"><span class="na">bool</span> <span class="na">similar</span><span class="err">(</span><span class="na">string</span> <span class="err">&amp;</span><span class="na">a</span><span class="err">,</span> <span class="na">string</span> <span class="err">&amp;</span><span class="na">b</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">n </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">a</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span> <span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="na">b</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="err">++</span><span class="na">n</span> <span class="p">&gt;</span> 2)
+</span></span><span class="line"><span class="cl">            return false;
+</span></span><span class="line"><span class="cl">    return true;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int numSimilarGroups(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> A) {
+</span></span><span class="line"><span class="cl">    UF ds(A.size());
+</span></span><span class="line"><span class="cl">    for (int i = 0; i <span class="p">&lt;</span> <span class="nt">A.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">A</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">(</span><span class="na">similar</span><span class="err">(</span><span class="na">A</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">A</span><span class="err">[</span><span class="na">j</span><span class="err">]))</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ds</span><span class="err">.</span><span class="na">join</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">j</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="na">return</span> <span class="na">ds</span><span class="err">.</span><span class="na">grp</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

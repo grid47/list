@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/sum-of-distances-in-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; gph;    
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> sumOfDistancesInTree(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        gph.resize(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> edge: edges) {
+</span></span><span class="line"><span class="cl">            gph[edge[0]].push_back(edge[1]);
+</span></span><span class="line"><span class="cl">            gph[edge[1]].push_back(edge[0]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        res.resize(n, 0);
+</span></span><span class="line"><span class="cl">        cnt.resize(n, 0);
+</span></span><span class="line"><span class="cl">        dfs1(0, -1);
+</span></span><span class="line"><span class="cl">        dfs2(0, -1);        
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void dfs1(int cur, int pre) {
+</span></span><span class="line"><span class="cl">        for (int nxt : gph[cur]) {
+</span></span><span class="line"><span class="cl">            if (pre == nxt) 
+</span></span><span class="line"><span class="cl">                continue;
+</span></span><span class="line"><span class="cl">            dfs1(nxt, cur);
+</span></span><span class="line"><span class="cl">            cnt[cur] += cnt[nxt];
+</span></span><span class="line"><span class="cl">            res[cur] += res[nxt] + cnt[nxt];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        cnt[cur]++;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void dfs2(int cur, int pre) {
+</span></span><span class="line"><span class="cl">        for (int nxt : gph[cur]) {
+</span></span><span class="line"><span class="cl">            if (pre == nxt) continue;
+</span></span><span class="line"><span class="cl">            res[nxt] = res[cur] - cnt[nxt] + cnt.size() - cnt[nxt];
+</span></span><span class="line"><span class="cl">            dfs2(nxt, cur);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

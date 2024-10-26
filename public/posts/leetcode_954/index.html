@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/array-of-doubled-pairs/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool canReorderDoubled(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> arr) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> c;
+</span></span><span class="line"><span class="cl">        for(int i : arr)
+</span></span><span class="line"><span class="cl">            c[i]++;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> keys;
+</span></span><span class="line"><span class="cl">        for(auto it: c)
+</span></span><span class="line"><span class="cl">            keys.push_back(it.first);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        sort(keys.begin(), keys.end(), [<span class="err">&amp;</span>](int a, int b){
+</span></span><span class="line"><span class="cl">            return abs(a) <span class="p">&lt;</span> <span class="nt">abs</span><span class="err">(</span><span class="na">b</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">});</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">x:</span> <span class="na">keys</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">c</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="p">&gt;</span> c[2 * x])
+</span></span><span class="line"><span class="cl">                return false;
+</span></span><span class="line"><span class="cl">            c[2 * x] -= c[x];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

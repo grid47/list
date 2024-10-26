@@ -186,7 +186,60 @@
         <p><a href="https://leetcode.com/problems/guess-the-word/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * // This is the Master&#39;s API interface.
+</span></span><span class="line"><span class="cl"> * // You should not implement it, or speculate about its implementation
+</span></span><span class="line"><span class="cl"> * class Master {
+</span></span><span class="line"><span class="cl"> *   public:
+</span></span><span class="line"><span class="cl"> *     int guess(string word);
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int overlap(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="err">&amp;</span>words) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; prob(6, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(26, 0));
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">words.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">6</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">prob</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;]++;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">idx </span><span class="o">=</span> <span class="s">-1;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">long</span> <span class="na">long</span> <span class="na">mx </span><span class="o">=</span> <span class="s">-1;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">words</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">long</span> <span class="na">long</span> <span class="na">cur </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">6</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cur</span> <span class="err">+=</span> <span class="na">prob</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;];</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">cur</span> <span class="p">&gt;</span> mx) {
+</span></span><span class="line"><span class="cl">                idx = i;
+</span></span><span class="line"><span class="cl">                mx = cur;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return idx;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int tally(string <span class="err">&amp;</span>a, string <span class="err">&amp;</span>b) {
+</span></span><span class="line"><span class="cl">        int res = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0;i <span class="p">&lt;</span> <span class="nt">6</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res</span> <span class="err">+=</span> <span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">b</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">findSecretWord</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words, Master<span class="err">&amp;</span> master) {
+</span></span><span class="line"><span class="cl">        int match = 0, j = 0;
+</span></span><span class="line"><span class="cl">        while(match != 6) {
+</span></span><span class="line"><span class="cl">            j++;
+</span></span><span class="line"><span class="cl">            int i = overlap(words);
+</span></span><span class="line"><span class="cl">            match = master.guess(words[i]);
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> tmp;
+</span></span><span class="line"><span class="cl">            for(auto it: words)
+</span></span><span class="line"><span class="cl">                if(match == tally(it, words[i])) {
+</span></span><span class="line"><span class="cl">                    tmp.push_back(it);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            words = tmp;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

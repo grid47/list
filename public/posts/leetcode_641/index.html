@@ -186,7 +186,87 @@
         <p><a href="https://leetcode.com/problems/design-circular-deque/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class MyCircularDeque {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> buf;
+</span></span><span class="line"><span class="cl">    int frd, bck;
+</span></span><span class="line"><span class="cl">    int sz, cnt;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    MyCircularDeque(int k) : sz(k), buf(k, 0), bck(0), frd(k - 1), cnt(0) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool insertFront(int value) {
+</span></span><span class="line"><span class="cl">        if(isFull()) return false;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        buf[frd] = value;
+</span></span><span class="line"><span class="cl">        frd = (frd -1 + sz) % sz;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        ++cnt;
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool insertLast(int value) {
+</span></span><span class="line"><span class="cl">        if(isFull()) return false;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        buf[bck] = value;        
+</span></span><span class="line"><span class="cl">        bck = (bck + 1) % sz;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        ++cnt;
+</span></span><span class="line"><span class="cl">        return true;        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool deleteFront() {
+</span></span><span class="line"><span class="cl">        if(isEmpty()) return false;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        frd = (frd + 1) % sz;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        --cnt;
+</span></span><span class="line"><span class="cl">        return true;        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool deleteLast() {
+</span></span><span class="line"><span class="cl">        if(isEmpty()) return false;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        bck = (bck - 1 + sz) % sz;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        --cnt;
+</span></span><span class="line"><span class="cl">        return true;        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int getFront() {
+</span></span><span class="line"><span class="cl">        if(isEmpty()) return -1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return buf[(frd + 1) % sz];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int getRear() {
+</span></span><span class="line"><span class="cl">        if(isEmpty()) return -1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return buf[(bck - 1 + sz) % sz];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool isEmpty() {
+</span></span><span class="line"><span class="cl">        return cnt == 0;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool isFull() {
+</span></span><span class="line"><span class="cl">        return  cnt == sz;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your MyCircularDeque object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * MyCircularDeque* obj = new MyCircularDeque(k);
+</span></span><span class="line"><span class="cl"> * bool param_1 = obj-&gt;insertFront(value);
+</span></span><span class="line"><span class="cl"> * bool param_2 = obj-&gt;insertLast(value);
+</span></span><span class="line"><span class="cl"> * bool param_3 = obj-&gt;deleteFront();
+</span></span><span class="line"><span class="cl"> * bool param_4 = obj-&gt;deleteLast();
+</span></span><span class="line"><span class="cl"> * int param_5 = obj-&gt;getFront();
+</span></span><span class="line"><span class="cl"> * int param_6 = obj-&gt;getRear();
+</span></span><span class="line"><span class="cl"> * bool param_7 = obj-&gt;isEmpty();
+</span></span><span class="line"><span class="cl"> * bool param_8 = obj-&gt;isFull();
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,45 @@
         <p><a href="https://leetcode.com/problems/most-frequent-subtree-sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    int mx;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> findFrequentTreeSum(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        mx = 0;
+</span></span><span class="line"><span class="cl">        dfs(root, mp, ans);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dfs(TreeNode* root, map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> mp, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> ans) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if (root == NULL) return 0;
+</span></span><span class="line"><span class="cl">        int res;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        if (root-&gt;left  == NULL <span class="err">&amp;&amp;</span> 
+</span></span><span class="line"><span class="cl">            root-&gt;right == NULL)
+</span></span><span class="line"><span class="cl">             { res = root-&gt;val; }
+</span></span><span class="line"><span class="cl">        else {
+</span></span><span class="line"><span class="cl">            int l = dfs(root-&gt;left , mp, ans);
+</span></span><span class="line"><span class="cl">            int r = dfs(root-&gt;right, mp, ans);
+</span></span><span class="line"><span class="cl">            res = l + r + root-&gt;val;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        mp[res] += 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(mx <span class="p">&lt;</span> <span class="nt">mp</span><span class="err">[</span><span class="na">res</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">.</span><span class="na">clear</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">res</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">mx </span><span class="o">=</span> <span class="s">mp[res];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="na">if</span><span class="err">(</span><span class="na">mx </span><span class="o">=</span><span class="s">=</span> <span class="na">mp</span><span class="err">[</span><span class="na">res</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">res</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

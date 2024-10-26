@@ -186,7 +186,25 @@
         <p><a href="https://leetcode.com/problems/profitable-schemes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7;
+</span></span><span class="line"><span class="cl">    int profitableSchemes(int n, int mnp, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> group, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> profit) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dp(mnp + 1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n + 1, 0));
+</span></span><span class="line"><span class="cl">        dp[0][0] = 1;
+</span></span><span class="line"><span class="cl">        for(int k = 0; k <span class="p">&lt;</span> <span class="nt">profit.size</span><span class="err">();</span> <span class="na">k</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">profit[k],</span> <span class="na">g </span><span class="o">=</span> <span class="s">group[k];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">mnp;</span> <span class="na">i</span> <span class="p">&gt;</span>= 0; i--)
+</span></span><span class="line"><span class="cl">            for(int j= n - g; j &gt;= 0; j--)
+</span></span><span class="line"><span class="cl">                dp[min(i + p, mnp)][j + g] = (dp[min(i + p, mnp)][j + g] + dp[i][j]) % mod;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int ret = 0;
+</span></span><span class="line"><span class="cl">        for(int x: dp[mnp]) ret = (ret + x) % mod;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ret;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

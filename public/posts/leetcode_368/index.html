@@ -186,7 +186,49 @@
         <p><a href="https://leetcode.com/problems/largest-divisible-subset/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> largestDivisibleSubset(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        if(nums.size() == 0) return nums;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        sort(nums.begin(), nums.end()); 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int n = nums.size();       
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dp(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(2, 0));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = n - 1; i &gt;= 0; i--) {
+</span></span><span class="line"><span class="cl">            dp[i][0] = 0;
+</span></span><span class="line"><span class="cl">            dp[i][1] = i;
+</span></span><span class="line"><span class="cl">            for(int j = i + 1; j <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">((</span><span class="na">nums</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">%</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">dp</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">0</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="err">=</span> <span class="na">dp</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">0</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">j</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">mx </span><span class="o">=</span> <span class="s">0,</span> <span class="na">mxi </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">mx</span> <span class="err">&lt;=</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mxi </span><span class="o">=</span> <span class="s">i;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mx </span><span class="o">=</span> <span class="s">dp[i][0];</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        int i = mxi;
+</span></span><span class="line"><span class="cl">        ans.push_back(nums[i]);
+</span></span><span class="line"><span class="cl">        while(dp[i][1] != i) {
+</span></span><span class="line"><span class="cl">            i = dp[i][1];
+</span></span><span class="line"><span class="cl">            ans.push_back(nums[i]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

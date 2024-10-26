@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/time-based-key-value-store/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class TimeMap {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt;&gt; mp;
+</span></span><span class="line"><span class="cl">    TimeMap() {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void set(string key, string value, int timestamp) {
+</span></span><span class="line"><span class="cl">        mp[key].push_back(make_pair(timestamp, value));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    string get(string key, int ts) {
+</span></span><span class="line"><span class="cl">        if(!mp.count(key)) return &#34;&#34;;
+</span></span><span class="line"><span class="cl">        // vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt; v = <span class="ni">&amp;mp[key];</span>
+</span></span><span class="line"><span class="cl">        int l = 0, r = mp[key].size() - 1;
+</span></span><span class="line"><span class="cl">        while(l <span class="err">&lt;</span>= r) {
+</span></span><span class="line"><span class="cl">            int m = l + (r - l) / 2;
+</span></span><span class="line"><span class="cl">            if(ts &gt; mp[key][m].first) {
+</span></span><span class="line"><span class="cl">                if(m == r || ts <span class="p">&lt;</span> <span class="nt">mp</span><span class="err">[</span><span class="na">key</span><span class="err">][</span><span class="na">m</span> <span class="err">+</span> <span class="na">1</span><span class="err">].</span><span class="na">first</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">return</span> <span class="na">mp</span><span class="err">[</span><span class="na">key</span><span class="err">][</span><span class="na">m</span><span class="err">].</span><span class="na">second</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">l </span><span class="o">=</span> <span class="s">m</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="na">if</span><span class="err">(</span><span class="na">ts</span> <span class="err">&lt;</span> <span class="na">mp</span><span class="err">[</span><span class="na">key</span><span class="err">][</span><span class="na">m</span><span class="err">].</span><span class="na">first</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">r </span><span class="o">=</span> <span class="s">m</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">else</span> <span class="na">return</span> <span class="na">mp</span><span class="err">[</span><span class="na">key</span><span class="err">][</span><span class="na">m</span><span class="err">].</span><span class="na">second</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="err">&#34;&#34;;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Your</span> <span class="na">TimeMap</span> <span class="na">object</span> <span class="na">will</span> <span class="na">be</span> <span class="na">instantiated</span> <span class="na">and</span> <span class="na">called</span> <span class="na">as</span> <span class="na">such:</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">TimeMap</span><span class="err">*</span> <span class="na">obj </span><span class="o">=</span> <span class="s">new</span> <span class="na">TimeMap</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">obj-</span><span class="p">&gt;</span>set(key,value,timestamp);
+</span></span><span class="line"><span class="cl"> * string param_2 = obj-&gt;get(key,timestamp);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

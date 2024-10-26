@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/longest-turbulent-subarray/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maxTurbulenceSize(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> arr) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dp(2, 1);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int res = 1, n = arr.size(), prv = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">((</span><span class="na">prv </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span> <span class="err">||</span> <span class="na">prv </span><span class="o">=</span><span class="s">=</span> <span class="na">-1</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="na">arr</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">dp</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">=</span> <span class="na">dp</span><span class="err">[</span><span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">res </span><span class="o">=</span> <span class="s">max(res,</span> <span class="na">dp</span><span class="err">[</span><span class="na">0</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">prv </span><span class="o">=</span> <span class="s">1;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="na">if</span> <span class="err">((</span><span class="na">prv </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span> <span class="err">||</span> <span class="na">prv </span><span class="o">=</span><span class="s">=</span> <span class="na">1</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="na">arr</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span> arr[i] ) {
+</span></span><span class="line"><span class="cl">                dp[1] = dp[0] + 1;
+</span></span><span class="line"><span class="cl">                res = max(res, dp[1]);
+</span></span><span class="line"><span class="cl">                prv = -1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            else if (arr[i - 1] == arr[i] ) {
+</span></span><span class="line"><span class="cl">                dp[0] = 1;
+</span></span><span class="line"><span class="cl">                dp[1] = 1;
+</span></span><span class="line"><span class="cl">                prv = 0;
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                dp[0] = 2;
+</span></span><span class="line"><span class="cl">                dp[1] = 2;
+</span></span><span class="line"><span class="cl">                prv = (arr[i - 1] <span class="p">&lt;</span> <span class="nt">arr</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">?</span> <span class="na">1</span> <span class="na">:</span> <span class="na">-1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

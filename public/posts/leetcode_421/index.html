@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class TrieNode {
+</span></span><span class="line"><span class="cl">    TrieNode* children[2] = {};
+</span></span><span class="line"><span class="cl">public:    
+</span></span><span class="line"><span class="cl">    void add(int num) {
+</span></span><span class="line"><span class="cl">        TrieNode* cur = this;
+</span></span><span class="line"><span class="cl">        for(int i = 31; i &gt;= 0; i--) {
+</span></span><span class="line"><span class="cl">            int bit = (num &gt;&gt; i) <span class="err">&amp;</span> 1;
+</span></span><span class="line"><span class="cl">            if (cur-&gt;children[bit] == nullptr)
+</span></span><span class="line"><span class="cl">                cur-&gt;children[bit] = new TrieNode();
+</span></span><span class="line"><span class="cl">            cur = cur-&gt;children[bit];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int max(int num) {
+</span></span><span class="line"><span class="cl">        TrieNode* cur = this;
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 31; i &gt;= 0; i--) {
+</span></span><span class="line"><span class="cl">            int bit = (num &gt;&gt; i) <span class="err">&amp;</span> 1;
+</span></span><span class="line"><span class="cl">            if (cur-&gt;children[1 - bit] != nullptr) {
+</span></span><span class="line"><span class="cl">                cur = cur-&gt;children[1 - bit];
+</span></span><span class="line"><span class="cl">                ans |= (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span>  <span class="na">cur </span><span class="o">=</span> <span class="s">cur-</span><span class="p">&gt;</span>children[bit];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }    
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int findMaximumXOR(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        TrieNode* root = new TrieNode();
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">root-</span><span class="p">&gt;</span>add(nums[i]);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int res = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res </span><span class="o">=</span> <span class="s">max(res,</span> <span class="na">root-</span><span class="p">&gt;</span>max(nums[i]));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

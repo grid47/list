@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/task-scheduler/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int leastInterval(vector<span class="p">&lt;</span><span class="nt">char</span><span class="p">&gt;</span><span class="err">&amp;</span> tasks, int n) {
+</span></span><span class="line"><span class="cl">        // if(n == 0) return tasks.size();
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">        for(char x: tasks)
+</span></span><span class="line"><span class="cl">            mp[x]++;
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span>&gt; pq;
+</span></span><span class="line"><span class="cl">        for(auto it: mp) {
+</span></span><span class="line"><span class="cl">            pq.push({it.second, it.first});
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int time = 0, net = 0;
+</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span>&gt; tmp;
+</span></span><span class="line"><span class="cl">            time = 0;
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(!</span><span class="na">pq</span><span class="err">.</span><span class="na">empty</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">//</span> <span class="na">cout</span><span class="err">&lt;&lt;</span><span class="na">pq</span><span class="err">.</span><span class="na">top</span><span class="err">().</span><span class="na">first</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">tmp</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">pq</span><span class="err">.</span><span class="na">top</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">time</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">it:</span> <span class="na">tmp</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">it</span><span class="err">.</span><span class="na">first--</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">it</span><span class="err">.</span><span class="na">first</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">it</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">net</span> <span class="err">+=</span> <span class="err">!</span><span class="na">pq</span><span class="err">.</span><span class="na">empty</span><span class="err">()?</span> <span class="na">n</span> <span class="err">+</span> <span class="na">1:</span> <span class="na">time</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">net</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

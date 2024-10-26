@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string s1, s2;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mem;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int i, int j) {
+</span></span><span class="line"><span class="cl">        if(i == s1.size() || j == s2.size()) return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(mem[i][j] != -1) return mem[i][j];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = max(dp(i + 1, j), dp(i, j + 1));
+</span></span><span class="line"><span class="cl">        if(s1[i] == s2[j]) {
+</span></span><span class="line"><span class="cl">            ans = max(ans, dp(i + 1, j + 1) + s1[i]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return mem[i][j] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int minimumDeleteSum(string s1, string s2) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        this-&gt;s1 = s1;
+</span></span><span class="line"><span class="cl">        this-&gt;s2 = s2;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">s1.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span> <span class="err">+=</span> <span class="na">s1</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">s2</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span> <span class="err">+=</span> <span class="na">s2</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">mem</span><span class="err">.</span><span class="na">resize</span><span class="err">(</span><span class="na">s1</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>(s2.size(), -1));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans - 2 * dp(0, 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

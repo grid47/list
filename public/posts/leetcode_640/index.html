@@ -186,7 +186,54 @@
         <p><a href="https://leetcode.com/problems/solve-the-equation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string solveEquation(string eqn) {
+</span></span><span class="line"><span class="cl">        int i = 0;
+</span></span><span class="line"><span class="cl">        int para = 0, xpara = 0;
+</span></span><span class="line"><span class="cl">        int flag = 1;
+</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">eqn.size</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">sgn </span><span class="o">=</span> <span class="s">1;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">tmp </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;=&#39;)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">flag </span><span class="o">=</span> <span class="s">-1;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> 
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span><span class="na">-</span><span class="err">&#39;)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">sgn </span><span class="o">=</span> <span class="s">-1;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;+&#39;)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">sgn </span><span class="o">=</span> <span class="s">1;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">isdigit</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">while</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">eqn</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">isdigit</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">tmp </span><span class="o">=</span> <span class="s">tmp</span> <span class="err">*</span> <span class="na">10</span> <span class="err">+</span> <span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">0</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">eqn</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span><span class="na">x</span><span class="err">&#39;)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">xpara</span> <span class="err">+=</span> <span class="na">flag</span> <span class="err">*</span> <span class="na">sgn</span> <span class="err">*</span> <span class="na">tmp</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="na">else</span> <span class="na">para</span> <span class="err">+=</span> <span class="na">flag</span> <span class="err">*</span> <span class="na">sgn</span> <span class="err">*</span> <span class="na">tmp</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">xpara</span> <span class="err">+=</span> <span class="na">flag</span> <span class="err">*</span> <span class="na">sgn</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">string</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">para</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;</span><span class="na">-</span><span class="err">&#39;&lt;&lt;</span> <span class="na">xpara</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">para </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span> <span class="err">&amp;&amp;</span> <span class="na">xpara </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res </span><span class="o">=</span> <span class="s">&#34;Infinite solutions&#34;</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">else</span> <span class="na">if</span> <span class="err">(</span><span class="na">xpara </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res </span><span class="o">=</span> <span class="s">&#34;No solution&#34;</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">else</span> <span class="na">res </span><span class="o">=</span> <span class="s">&#34;x=&#34;</span> <span class="err">+</span> <span class="na">to_string</span><span class="err">(</span><span class="na">para</span><span class="err">/</span><span class="na">xpara</span><span class="err">*</span><span class="na">-1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

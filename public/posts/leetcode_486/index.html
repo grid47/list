@@ -186,7 +186,37 @@
         <p><a href="https://leetcode.com/problems/predict-the-winner/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt; memo;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int l, int r, int net) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(l == r) return nums[l];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[l][r].count(net)) return memo[l][r][net];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = net - dp(l + 1, r, net - nums[l]);
+</span></span><span class="line"><span class="cl">        ans = max(ans, net - dp(l, r - 1, net - nums[r]));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return memo[l][r][net] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool predictTheWinner(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        this-&gt;nums = nums;
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">        memo.resize(n + 1, vector<span class="p">&lt;</span><span class="nt">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt;(n + 1));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int net = accumulate(nums.begin(), nums.end(), 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ret = dp(0, n - 1, net);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return ret &gt;= net - ret;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

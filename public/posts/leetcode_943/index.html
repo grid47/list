@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,78 @@
         <p><a href="https://leetcode.com/problems/find-the-shortest-superstring/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int calc(string <span class="err">&amp;</span>a, string <span class="err">&amp;</span>b) {
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">a.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">b</span><span class="err">.</span><span class="na">rfind</span><span class="err">(</span><span class="na">a</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i</span><span class="err">),</span> <span class="na">0</span><span class="err">)</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">b</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">a</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">+</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">b</span><span class="err">.</span><span class="na">size</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">string</span> <span class="na">shortestSuperstring</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words) {
+</span></span><span class="line"><span class="cl">        int n = words.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; grid(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, 0));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">=</span> <span class="na">calc</span><span class="err">(</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">words</span><span class="err">[</span><span class="na">j</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">grid</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">calc</span><span class="err">(</span><span class="na">words</span><span class="err">[</span><span class="na">j</span><span class="err">],</span> <span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dp(1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">n</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>(n, INT_MAX)), path(1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">n</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>(n, 0));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int last = 1, mn = INT_MAX;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="err">&lt;</span> (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">n</span><span class="err">);</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">((</span><span class="na">i</span> <span class="err">&amp;</span> <span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">j</span><span class="err">))</span> <span class="p">&gt;</span> 0) {
+</span></span><span class="line"><span class="cl">                    int prv = i - (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">j</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">prv </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">=</span> <span class="na">words</span><span class="err">[</span><span class="na">j</span><span class="err">].</span><span class="na">size</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">k </span><span class="o">=</span> <span class="s">0;</span> <span class="na">k</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">k</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="na">if</span><span class="err">(</span> <span class="na">dp</span><span class="err">[</span><span class="na">prv</span><span class="err">][</span><span class="na">k</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">INT_MAX</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">dp</span><span class="err">[</span><span class="na">prv</span><span class="err">][</span><span class="na">k</span><span class="err">]</span> <span class="err">+</span> <span class="na">grid</span><span class="err">[</span><span class="na">k</span><span class="err">][</span><span class="na">j</span><span class="err">])</span> <span class="err">&lt;</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">=</span> <span class="na">dp</span><span class="err">[</span><span class="na">prv</span><span class="err">][</span><span class="na">k</span><span class="err">]</span> <span class="err">+</span> <span class="na">grid</span><span class="err">[</span><span class="na">k</span><span class="err">][</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                                <span class="na">path</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">=</span> <span class="na">k</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">((</span><span class="na">i </span><span class="o">=</span><span class="s">=</span> <span class="err">((</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">n</span><span class="err">)</span> <span class="na">-1</span><span class="err">))</span> <span class="err">&amp;&amp;</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">mn</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">mn </span><span class="o">=</span> <span class="s">dp[i][j];</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">last </span><span class="o">=</span> <span class="s">j;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">cur </span><span class="o">=</span> <span class="s">(1</span> <span class="err">&lt;&lt;</span> <span class="na">n</span><span class="err">)</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">stack</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> stk;
+</span></span><span class="line"><span class="cl">        while( cur &gt; 0 ) {
+</span></span><span class="line"><span class="cl">            stk.push(last);
+</span></span><span class="line"><span class="cl">            int tmp = cur;
+</span></span><span class="line"><span class="cl">            cur -= (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">last</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">last </span><span class="o">=</span> <span class="s">path[tmp][last];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">stk.top();</span>
+</span></span><span class="line"><span class="cl">        <span class="na">stk</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">        <span class="na">string</span> <span class="na">res </span><span class="o">=</span> <span class="s">words[i];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(!</span><span class="na">stk</span><span class="err">.</span><span class="na">empty</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">stk.top();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">stk</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">words</span><span class="err">[</span><span class="na">j</span><span class="err">].</span><span class="na">size</span><span class="err">()</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res</span> <span class="err">+=</span> <span class="na">words</span><span class="err">[</span><span class="na">j</span><span class="err">].</span><span class="na">substr</span><span class="err">(</span><span class="na">words</span><span class="err">[</span><span class="na">j</span><span class="err">].</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">i </span><span class="o">=</span> <span class="s">j;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/random-point-in-non-overlapping-rectangles/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> v;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; rect;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int area(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> r) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return (r[2] - r[0] +1) * (r[3] - r[1] +1);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    Solution(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> r) {
+</span></span><span class="line"><span class="cl">        rect = r;
+</span></span><span class="line"><span class="cl">        for(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> re : r) {
+</span></span><span class="line"><span class="cl">            v.push_back(area(re) + (v.empty()? 0 : v.back()));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> pick() {
+</span></span><span class="line"><span class="cl">        int d = rand() % v.back();
+</span></span><span class="line"><span class="cl">        int idz = upper_bound(v.begin(), v.end(), d) - v.begin();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> r = rect[idz];
+</span></span><span class="line"><span class="cl">        return {
+</span></span><span class="line"><span class="cl">            rand() % (r[2] - r[0] +1) + r[0],
+</span></span><span class="line"><span class="cl">            rand() % (r[3] - r[1] +1) + r[1]
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your Solution object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * Solution* obj = new Solution(rects);
+</span></span><span class="line"><span class="cl"> * vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> param_1 = obj-&gt;pick();
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

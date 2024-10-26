@@ -186,7 +186,33 @@
         <p><a href="https://leetcode.com/problems/pyramid-transition-matrix/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    unordered_set<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> invalid;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  bool pyramidTransition(string bottom, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> allowed) {
+</span></span><span class="line"><span class="cl">      invalid.clear();
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt; m;
+</span></span><span class="line"><span class="cl">    for(auto<span class="err">&amp;</span> s:allowed) m[s.substr(0, 2)].push_back(s.back());
+</span></span><span class="line"><span class="cl">    return helper(bottom, m, 0, &#34;&#34;);
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  bool helper(string bottom, unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> m, int start, string next){
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    if(bottom.size() == 1) return true;
+</span></span><span class="line"><span class="cl">    else if(invalid.find(bottom) != invalid.end()) return false;
+</span></span><span class="line"><span class="cl">    else if(start == (int)bottom.size() - 1) {
+</span></span><span class="line"><span class="cl">           bool res = helper(next, m, 0, &#34;&#34;);
+</span></span><span class="line"><span class="cl">           if (!res) { invalid.insert(next); }
+</span></span><span class="line"><span class="cl">           return res;
+</span></span><span class="line"><span class="cl">       }
+</span></span><span class="line"><span class="cl">    for(char c : m[bottom.substr(start, 2)])
+</span></span><span class="line"><span class="cl">      if(helper(bottom, m, start+1, next+c)) return true;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    return false;
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

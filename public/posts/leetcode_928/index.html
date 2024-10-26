@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,80 @@
         <p><a href="https://leetcode.com/problems/minimize-malware-spread-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class UF {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> par, rnk;
+</span></span><span class="line"><span class="cl">    UF(int n) {
+</span></span><span class="line"><span class="cl">        par.resize(n, 0);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">par</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">rnk</span><span class="err">.</span><span class="na">resize</span><span class="err">(</span><span class="na">n</span><span class="err">,</span> <span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">join</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">,</span> <span class="na">int</span> <span class="na">y</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">find(x);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">q </span><span class="o">=</span> <span class="s">find(y);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">p </span><span class="o">=</span><span class="s">=</span> <span class="na">q</span><span class="err">)</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">rnk</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">rnk</span><span class="err">[</span><span class="na">q</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">par</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">=</span> <span class="na">q</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">rnk</span><span class="err">[</span><span class="na">q</span><span class="err">]</span> <span class="err">+=</span> <span class="na">rnk</span><span class="err">[</span><span class="na">p</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">par</span><span class="err">[</span><span class="na">q</span><span class="err">]</span> <span class="err">=</span> <span class="na">p</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">rnk</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">+=</span> <span class="na">rnk</span><span class="err">[</span><span class="na">q</span><span class="err">];</span>            
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">find</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">==</span> <span class="na">x</span><span class="err">)</span> <span class="na">return</span> <span class="na">x</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">=</span> <span class="na">find</span><span class="err">(</span><span class="na">par</span><span class="err">[</span><span class="na">x</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">size</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">rnk</span><span class="err">[</span><span class="na">find</span><span class="err">(</span><span class="na">x</span><span class="err">)];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">minMalwareSpread</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> mw) {
+</span></span><span class="line"><span class="cl">        int n = grid.size();        
+</span></span><span class="line"><span class="cl">        UF* uf = new UF(n);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> bad(mw.begin(), mw.end()), good;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(!</span><span class="na">bad</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">i</span><span class="err">))</span> <span class="na">good</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span> <span class="na">:</span> <span class="na">good</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j</span> <span class="na">:</span> <span class="na">good</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">!=</span> <span class="na">j</span> <span class="err">&amp;&amp;</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">])</span> <span class="na">uf-</span><span class="p">&gt;</span>join(i, j);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mwg;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> deg;
+</span></span><span class="line"><span class="cl">        for(int m: bad) {
+</span></span><span class="line"><span class="cl">            for(int n: good)
+</span></span><span class="line"><span class="cl">                if(grid[m][n]) {
+</span></span><span class="line"><span class="cl">                    mwg[m].insert(uf-&gt;find(n));
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            for(int it: mwg[m])
+</span></span><span class="line"><span class="cl">            deg[it]++;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int node = mw[0], res = -1;
+</span></span><span class="line"><span class="cl">        // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">mwg.size</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">mlw:</span> <span class="na">mwg</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">cnt </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">g:</span> <span class="na">mlw</span><span class="err">.</span><span class="na">second</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">g</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">deg</span><span class="err">[</span><span class="na">g</span><span class="err">]</span> <span class="err">==</span> <span class="na">1</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">cnt</span> <span class="err">+=</span> <span class="na">uf-</span><span class="p">&gt;</span>size(g);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if(cnt &gt; res || (cnt == res <span class="err">&amp;&amp;</span> mlw.first <span class="p">&lt;</span> <span class="nt">node</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">node </span><span class="o">=</span> <span class="s">mlw.first;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">res </span><span class="o">=</span> <span class="s">cnt;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">node</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

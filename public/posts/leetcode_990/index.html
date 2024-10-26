@@ -186,7 +186,54 @@
         <p><a href="https://leetcode.com/problems/satisfiability-of-equality-equations/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class UF {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> chd;
+</span></span><span class="line"><span class="cl">    int cnt;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    UF(int n) {
+</span></span><span class="line"><span class="cl">        chd.resize(n, 0);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">chd</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cnt </span><span class="o">=</span> <span class="s">n;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">uni</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">,</span> <span class="na">int</span> <span class="na">y</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">find(x);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">find(y);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">!=</span> <span class="na">j</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">chd</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">j</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">cnt--</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">find</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">x </span><span class="o">=</span><span class="s">=</span> <span class="na">chd</span><span class="err">[</span><span class="na">x</span><span class="err">])</span> <span class="na">return</span> <span class="na">x</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">chd</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">=</span> <span class="na">find</span><span class="err">(</span><span class="na">chd</span><span class="err">[</span><span class="na">x</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">equationsPossible</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span><span class="err">&amp;</span> eqn) {
+</span></span><span class="line"><span class="cl">        UF* uf = new UF(26);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">eqn.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">a </span><span class="o">=</span> <span class="s">eqn[i][0]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">b </span><span class="o">=</span> <span class="s">eqn[i][3]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;=&#39;)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">uf-</span><span class="p">&gt;</span>uni(a, b);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">eqn.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">a </span><span class="o">=</span> <span class="s">eqn[i][0]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">b </span><span class="o">=</span> <span class="s">eqn[i][3]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;!&#39;)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">uf-</span><span class="p">&gt;</span>find(a) == uf-&gt;find(b))
+</span></span><span class="line"><span class="cl">                    return false;
+</span></span><span class="line"><span class="cl">        }        
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

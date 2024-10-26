@@ -186,7 +186,64 @@
         <p><a href="https://leetcode.com/problems/parse-lisp-expression/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int evaluate(string expression) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span> myMap;
+</span></span><span class="line"><span class="cl">        return help(expression,myMap);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int help(string expression,unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span> myMap) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if ((expression[0] == &#39;-&#39;) || (expression[0] &gt;= &#39;0&#39; <span class="err">&amp;&amp;</span> expression[0] <span class="err">&lt;</span>= &#39;9&#39;))
+</span></span><span class="line"><span class="cl">            return stoi(expression);
+</span></span><span class="line"><span class="cl">        else if (expression[0] != &#39;(&#39;)
+</span></span><span class="line"><span class="cl">            return myMap[expression];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        string s = expression.substr(1,expression.size()-2);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int start = 0;
+</span></span><span class="line"><span class="cl">        string word = parse(s,start);
+</span></span><span class="line"><span class="cl">        if (word == &#34;let&#34;) {
+</span></span><span class="line"><span class="cl">            while (true) {
+</span></span><span class="line"><span class="cl">                string variable = parse(s,start);
+</span></span><span class="line"><span class="cl">                //if there is no more expression, simply evaluate the variable
+</span></span><span class="line"><span class="cl">                if (start &gt; s.size())
+</span></span><span class="line"><span class="cl">                    return help(variable,myMap);
+</span></span><span class="line"><span class="cl">                string temp = parse(s,start);
+</span></span><span class="line"><span class="cl">                myMap[variable] = help(temp,myMap);                    
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        else if (word == &#34;add&#34;) 
+</span></span><span class="line"><span class="cl">            return help(parse(s,start),myMap) + help(parse(s,start),myMap);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        else if (word == &#34;mult&#34;) 
+</span></span><span class="line"><span class="cl">            return help(parse(s,start),myMap) * help(parse(s,start),myMap);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return 0;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    //function to seperate each expression
+</span></span><span class="line"><span class="cl">    string parse(string <span class="err">&amp;</span>s,int <span class="err">&amp;</span>start) {
+</span></span><span class="line"><span class="cl">        int end = start+1, temp = start, count = 1;
+</span></span><span class="line"><span class="cl">        if (s[start] == &#39;(&#39;) {
+</span></span><span class="line"><span class="cl">            while (count != 0) {
+</span></span><span class="line"><span class="cl">                if (s[end] == &#39;(&#39;)
+</span></span><span class="line"><span class="cl">                    count++;
+</span></span><span class="line"><span class="cl">                else if (s[end] == &#39;)&#39;)
+</span></span><span class="line"><span class="cl">                    count--;
+</span></span><span class="line"><span class="cl">                end++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        else {
+</span></span><span class="line"><span class="cl">            while (end <span class="p">&lt;</span> <span class="nt">s.size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">end</span><span class="err">]</span> <span class="err">!=</span> <span class="err">&#39;</span> <span class="err">&#39;)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">end</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">start </span><span class="o">=</span> <span class="s">end+1;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">s</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">temp</span><span class="err">,</span><span class="na">end-temp</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

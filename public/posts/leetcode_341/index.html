@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/flatten-nested-list-iterator/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class NestedIterator {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    NestedIterator(vector<span class="p">&lt;</span><span class="nt">NestedInteger</span><span class="p">&gt;</span> <span class="err">&amp;</span>nestedList) {
+</span></span><span class="line"><span class="cl">        begins.push(nestedList.begin());
+</span></span><span class="line"><span class="cl">        ends.push(nestedList.end());
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int next() {
+</span></span><span class="line"><span class="cl">        hasNext();
+</span></span><span class="line"><span class="cl">        return (begins.top()++)-&gt;getInteger();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    bool hasNext() {
+</span></span><span class="line"><span class="cl">        while (begins.size()) {
+</span></span><span class="line"><span class="cl">            if (begins.top() == ends.top()) {
+</span></span><span class="line"><span class="cl">                begins.pop();
+</span></span><span class="line"><span class="cl">                ends.pop();
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                auto x = begins.top();
+</span></span><span class="line"><span class="cl">                if (x-&gt;isInteger())
+</span></span><span class="line"><span class="cl">                    return true;
+</span></span><span class="line"><span class="cl">                begins.top()++;
+</span></span><span class="line"><span class="cl">                begins.push(x-&gt;getList().begin());
+</span></span><span class="line"><span class="cl">                ends.push(x-&gt;getList().end());
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return false;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">private:
+</span></span><span class="line"><span class="cl">    stack<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">NestedInteger</span><span class="p">&gt;</span>::iterator&gt; begins, ends;
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

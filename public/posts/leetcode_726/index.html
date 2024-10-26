@@ -186,7 +186,63 @@
         <p><a href="https://leetcode.com/problems/number-of-atoms/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void merge(map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>to, map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>from, int mul) {
+</span></span><span class="line"><span class="cl">        for(auto [key, val]: from) {
+</span></span><span class="line"><span class="cl">            to[key] += val * mul;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    string atom(string <span class="err">&amp;</span>eqn, int <span class="err">&amp;</span>i) {
+</span></span><span class="line"><span class="cl">        int i1 = i++;
+</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">islower</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">eqn</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i1</span><span class="err">,</span> <span class="na">i</span> <span class="na">-</span> <span class="na">i1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">num</span><span class="err">(</span><span class="na">string</span> <span class="err">&amp;</span><span class="na">eqn</span><span class="err">,</span> <span class="na">int</span> <span class="err">&amp;</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">i1 </span><span class="o">=</span> <span class="s">i;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span> <span class="err">&amp;&amp;</span> <span class="na">isdigit</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">i1 </span><span class="o">=</span><span class="s">=</span> <span class="na">i</span><span class="err">?</span> <span class="na">1:</span> <span class="na">stoi</span><span class="err">(</span><span class="na">eqn</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i1</span><span class="err">,</span> <span class="na">i</span> <span class="na">-</span> <span class="na">i1</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">map</span><span class="err">&lt;</span><span class="na">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> unit(string <span class="err">&amp;</span>eqn, int <span class="err">&amp;</span>i) {
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> cnt;
+</span></span><span class="line"><span class="cl">        if(eqn[i] == &#39;(&#39;) {
+</span></span><span class="line"><span class="cl">            map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> cur = formula(eqn, ++i);
+</span></span><span class="line"><span class="cl">            int frq = num(eqn, ++i);
+</span></span><span class="line"><span class="cl">            merge(cnt, cur, frq);
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            string str = atom(eqn, i);
+</span></span><span class="line"><span class="cl">            int frq = num(eqn, i);
+</span></span><span class="line"><span class="cl">            cnt[str] = frq;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return cnt;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> formula(string <span class="err">&amp;</span>eqn, int <span class="err">&amp;</span>i) {
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> cnt;
+</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="err">&#39;)&#39;)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">map</span><span class="err">&lt;</span><span class="na">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> res = unit(eqn, i);
+</span></span><span class="line"><span class="cl">            int mul = num(eqn, i);
+</span></span><span class="line"><span class="cl">            merge(cnt, res, mul);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return cnt;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    string countOfAtoms(string eqn) {
+</span></span><span class="line"><span class="cl">        n = eqn.size();
+</span></span><span class="line"><span class="cl">        string ans = &#34;&#34;;
+</span></span><span class="line"><span class="cl">        int i = 0;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp = formula(eqn, i);
+</span></span><span class="line"><span class="cl">        for(auto [key, val]: mp) {
+</span></span><span class="line"><span class="cl">            ans += (key + ((val == 1)? &#34;&#34; : to_string(val)));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 
