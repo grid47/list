@@ -186,7 +186,52 @@
         <p><a href="https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">#define ll long long
+</span></span><span class="line"><span class="cl">#define pll pair<span class="p">&lt;</span><span class="nt">ll</span><span class="err">,</span> <span class="na">ll</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int countPaths(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> rds) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">pll</span><span class="p">&gt;</span>&gt; gph(n);
+</span></span><span class="line"><span class="cl">        for(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>e : rds) {
+</span></span><span class="line"><span class="cl">            int u = e[0], v = e[1], time = e[2];
+</span></span><span class="line"><span class="cl">            gph[u].push_back({v, time});
+</span></span><span class="line"><span class="cl">            gph[v].push_back({u, time});
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">ll</span><span class="p">&gt;</span> ways(n, 0), dst(n, LLONG_MAX);
+</span></span><span class="line"><span class="cl">        ways[0] = 1;
+</span></span><span class="line"><span class="cl">         dst[0] = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pll</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">pll</span><span class="p">&gt;</span>, greater<span class="err">&lt;</span>&gt;&gt; pq;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        pq.push({0, 0});
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">          auto [d, u] = pq.top();
+</span></span><span class="line"><span class="cl">          pq.pop();
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">   for(pll nb : gph[u]) {
+</span></span><span class="line"><span class="cl">              int nxt = nb.first, t = nb.second;
+</span></span><span class="line"><span class="cl">       if(dst[nxt] &gt; d + t) {
+</span></span><span class="line"><span class="cl">           
+</span></span><span class="line"><span class="cl">           dst[nxt] = d + t;
+</span></span><span class="line"><span class="cl">           ways[nxt] = ways[u];
+</span></span><span class="line"><span class="cl">           pq.push({d + t, nxt});
+</span></span><span class="line"><span class="cl">       } else if (dst[nxt] == d + t) {
+</span></span><span class="line"><span class="cl">           ways[nxt] = (ways[nxt] + ways[u]) % 1000000007;
+</span></span><span class="line"><span class="cl">       }
+</span></span><span class="line"><span class="cl">       
+</span></span><span class="line"><span class="cl">   }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ways[n - 1];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

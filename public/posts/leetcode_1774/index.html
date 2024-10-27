@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/closest-dessert-cost/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int target;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> top;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int closestCost(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> base, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> top, int target) {
+</span></span><span class="line"><span class="cl">        this-&gt;target = target;
+</span></span><span class="line"><span class="cl">        this-&gt;top = top;
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">base.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans </span><span class="o">=</span> <span class="s">close(ans,</span> <span class="na">dfs</span><span class="err">(</span><span class="na">0</span><span class="err">,</span> <span class="na">base</span><span class="err">[</span><span class="na">i</span><span class="err">]));</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">dfs</span><span class="err">(</span><span class="na">int</span> <span class="na">idx</span><span class="err">,</span> <span class="na">int</span> <span class="na">sum</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">idx</span> <span class="p">&gt;</span>= top.size()) return sum;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int a = dfs(idx + 1, sum + top[idx]);
+</span></span><span class="line"><span class="cl">        int b = dfs(idx + 1, sum + 2 * top[idx]);
+</span></span><span class="line"><span class="cl">        int c = dfs(idx + 1, sum);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return close(a, close(b, c));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int close(int a, int b) {
+</span></span><span class="line"><span class="cl">        if(a == 0) return b;
+</span></span><span class="line"><span class="cl">        if(b == 0) return a;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(abs(target - a) == abs(target - b))
+</span></span><span class="line"><span class="cl">            return a <span class="p">&lt;</span> <span class="nt">b</span><span class="err">?</span> <span class="na">a:</span> <span class="na">b</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">abs</span><span class="err">(</span><span class="na">target</span> <span class="na">-</span> <span class="na">a</span><span class="err">)</span> <span class="err">&lt;</span> <span class="na">abs</span><span class="err">(</span><span class="na">target</span> <span class="na">-</span> <span class="na">b</span><span class="err">)</span> <span class="err">?</span> <span class="na">a:</span> <span class="na">b</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

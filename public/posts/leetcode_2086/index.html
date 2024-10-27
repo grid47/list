@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/minimum-number-of-food-buckets-to-feed-the-hamsters/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> memo;
+</span></span><span class="line"><span class="cl">    int dp(int idx, string <span class="err">&amp;</span>ham) {
+</span></span><span class="line"><span class="cl">        if(idx &gt;= ham.size()) {
+</span></span><span class="line"><span class="cl">            // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">ham</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">0</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">!=</span> <span class="na">-1</span><span class="err">)</span> <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">ans </span><span class="o">=</span> <span class="s">100001;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">ham</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span><span class="na">H</span><span class="err">&#39;)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span> <span class="err">&lt;</span> <span class="na">ham</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">ham</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;.&#39;)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="err">//</span> <span class="na">ham</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="err">&#39;</span><span class="na">C</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">min(ans,</span> <span class="na">1</span> <span class="err">+</span> <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">3</span><span class="err">,</span> <span class="na">ham</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">                <span class="err">//</span> <span class="na">ham</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="err">&#39;.&#39;;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">idx</span> <span class="na">-</span> <span class="na">1</span> <span class="p">&gt;</span>= 0 <span class="err">&amp;&amp;</span> (ham[idx - 1] == &#39;.&#39;)) {
+</span></span><span class="line"><span class="cl">                // ham[idx - 1] = &#39;C&#39;;
+</span></span><span class="line"><span class="cl">                ans = min(ans, 1 + dp(idx + 1, ham));
+</span></span><span class="line"><span class="cl">                // ham[idx - 1] = &#39;.&#39;;                    
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            ans = dp(idx + 1, ham);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return memo[idx] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int minimumBuckets(string ham) {
+</span></span><span class="line"><span class="cl">        int n = ham.size();
+</span></span><span class="line"><span class="cl">        memo.resize(n, -1);
+</span></span><span class="line"><span class="cl">        int ans = dp(0, ham);
+</span></span><span class="line"><span class="cl">        return ans &gt;= 100001? -1: ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

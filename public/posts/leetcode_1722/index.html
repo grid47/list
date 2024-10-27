@@ -186,7 +186,59 @@
         <p><a href="https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> parent, rnk;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minimumHammingDistance(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> src, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> dst, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> swp) {
+</span></span><span class="line"><span class="cl">        int n = src.size();
+</span></span><span class="line"><span class="cl">        parent.resize(n, 0);
+</span></span><span class="line"><span class="cl">        rnk.resize(n, 0);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">parent</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> s: swp) {
+</span></span><span class="line"><span class="cl">            int x = find(s[0]);
+</span></span><span class="line"><span class="cl">            int y = find(s[1]);
+</span></span><span class="line"><span class="cl">            if(rnk[x] <span class="p">&lt;</span> <span class="nt">rnk</span><span class="err">[</span><span class="na">y</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">parent</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">=</span> <span class="na">y</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">rnk</span><span class="err">[</span><span class="na">y</span><span class="err">]++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">parent</span><span class="err">[</span><span class="na">y</span><span class="err">]</span> <span class="err">=</span> <span class="na">x</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">rnk</span><span class="err">[</span><span class="na">x</span><span class="err">]++;</span>                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">unordered_map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">unordered_map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">find(i);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">auto</span> <span class="err">&amp;</span><span class="na">m </span><span class="o">=</span> <span class="s">mp[p];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">m</span><span class="err">[</span><span class="na">src</span><span class="err">[</span><span class="na">i</span><span class="err">]]++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">res </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">find(i);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">auto</span> <span class="err">&amp;</span><span class="na">m </span><span class="o">=</span> <span class="s">mp[p];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">m</span><span class="err">[</span><span class="na">dst</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span><span class="na">--</span><span class="err">)</span> <span class="err">&lt;=</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">res</span> <span class="err">+=</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">find</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">y </span><span class="o">=</span> <span class="s">parent[x];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">y</span> <span class="err">!=</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">parent</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">=</span> <span class="na">find</span><span class="err">(</span><span class="na">y</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">parent</span><span class="err">[</span><span class="na">x</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

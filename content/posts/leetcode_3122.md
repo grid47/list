@@ -22,6 +22,39 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    
+    int m, n;
+    vector<vector<int>> frq, mem;
+    
+    int dp(int i, int prv) {
+        if(i == frq.size()) return 0;
+        if(mem[i][prv + 1] != -1) return mem[i][prv + 1];
 
+        int ans = INT_MAX;
+        for(int j = 0; j <= 9; j++) {
+            if(j == prv) continue;
+            ans = min(ans, m - frq[i][j] + dp(i + 1, j));
+        }
+
+        return mem[i][prv + 1] = ans;
+    }
+    
+    int minimumOperations(vector<vector<int>>& grid) {
+        
+        m = grid.size(), n = grid[0].size();
+        
+        frq.resize(n, vector<int>(10, 0));
+        mem.resize(n, vector<int>(11, -1));
+        
+        for(int i = 0; i < n; i++)
+        for(int j = 0; j < m; j++) {
+            frq[i][grid[j][i]]++;
+        }
+        
+        return dp(0, -1);
+    }
+};
 {{< /highlight >}}
 

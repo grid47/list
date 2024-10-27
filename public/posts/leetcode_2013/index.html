@@ -186,7 +186,37 @@
         <p><a href="https://leetcode.com/problems/detect-squares/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class DetectSquares {
+</span></span><span class="line"><span class="cl">    int cnt[1001][1001] = {};
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; pts;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    DetectSquares() {
+</span></span><span class="line"><span class="cl">       // cnt.resize(10001, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(10001));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void add(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> point) {
+</span></span><span class="line"><span class="cl">        cnt[point[0]][point[1]]++;
+</span></span><span class="line"><span class="cl">        pts.emplace_back(point[0], point[1]);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int count(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> point) {
+</span></span><span class="line"><span class="cl">        int x1 = point[0], y1 = point[1];
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        for(auto [x3, y3] : pts) {
+</span></span><span class="line"><span class="cl">            if(abs(x3 - x1) == 0 || abs(x1 - x3) != abs(y1 - y3))
+</span></span><span class="line"><span class="cl">                continue;
+</span></span><span class="line"><span class="cl">            ans += cnt[x1][y3] * cnt[x3][y1];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your DetectSquares object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * DetectSquares* obj = new DetectSquares();
+</span></span><span class="line"><span class="cl"> * obj-&gt;add(point);
+</span></span><span class="line"><span class="cl"> * int param_2 = obj-&gt;count(point);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

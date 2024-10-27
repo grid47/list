@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/construct-string-with-repeat-limit/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string repeatLimitedString(string s, int repeatLimit) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> freq(26, 0);
+</span></span><span class="line"><span class="cl">        for(char ch: s) freq[ch - &#39;a&#39;]++;
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; pq;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">26</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">freq</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="p">&gt;</span> 0) pq.push(make_pair((char) &#39;a&#39; + i, freq[i]));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        string ans = &#34;&#34;;
+</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
+</span></span><span class="line"><span class="cl">            pair<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> p = pq.top();
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">            int cnt = p.second;
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">repeatLimit</span> <span class="err">&amp;&amp;</span> <span class="na">cnt--</span> <span class="p">&gt;</span> 0; i++) ans.push_back(p.first);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if(cnt &gt; 0 <span class="err">&amp;&amp;</span> !pq.empty()) {
+</span></span><span class="line"><span class="cl">                pair<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> sp = pq.top();
+</span></span><span class="line"><span class="cl">                pq.pop();
+</span></span><span class="line"><span class="cl">                ans.push_back(sp.first);
+</span></span><span class="line"><span class="cl">                if(sp.second &gt; 1) {
+</span></span><span class="line"><span class="cl">                    sp.second--;
+</span></span><span class="line"><span class="cl">                    pq.push(sp);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                p.second = cnt;
+</span></span><span class="line"><span class="cl">                pq.push(p);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/closest-nodes-queries-in-a-binary-search-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> v;
+</span></span><span class="line"><span class="cl">    void traverse(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        if(root != nullptr) {
+</span></span><span class="line"><span class="cl">            traverse(root-&gt;left);
+</span></span><span class="line"><span class="cl">            if(v.empty() || v.back() <span class="p">&lt;</span> <span class="nt">root-</span><span class="p">&gt;</span>val)
+</span></span><span class="line"><span class="cl">                v.push_back(root-&gt;val);
+</span></span><span class="line"><span class="cl">            traverse(root-&gt;right);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; closestNodes(TreeNode* root, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> queries) {
+</span></span><span class="line"><span class="cl">        traverse(root);
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; res;
+</span></span><span class="line"><span class="cl">        for(int q: queries) {
+</span></span><span class="line"><span class="cl">            auto it = lower_bound(begin(v), end(v), q);
+</span></span><span class="line"><span class="cl">            if(it != end(v) <span class="err">&amp;&amp;</span> *it==q)
+</span></span><span class="line"><span class="cl">            res.push_back({q, q});
+</span></span><span class="line"><span class="cl">            else
+</span></span><span class="line"><span class="cl">            res.push_back({it == begin(v)? -1: *prev(it), it == end(v)? -1: *it});
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

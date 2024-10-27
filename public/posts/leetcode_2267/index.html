@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/check-if-there-is-a-valid-parentheses-string-path/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int m, n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; mem;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt; grid;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dfs(int i, int j, int cnt) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int ans = grid[i][j] == &#39;)&#39;? -1: 1;        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(cnt <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">((</span><span class="na">i </span><span class="o">=</span><span class="s">=</span> <span class="na">m</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">j </span><span class="o">=</span><span class="s">=</span> <span class="na">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">))</span> <span class="na">return</span> <span class="err">(</span><span class="na">cnt</span> <span class="err">+</span> <span class="na">ans</span><span class="err">)</span> <span class="err">==</span> <span class="na">0</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">mem</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">][</span><span class="na">cnt</span> <span class="err">+</span> <span class="na">220</span><span class="err">]</span> <span class="err">!=</span> <span class="na">-1</span><span class="err">)</span> <span class="na">return</span> <span class="na">mem</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">][</span><span class="na">cnt</span> <span class="err">+</span> <span class="na">220</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span> <span class="err">&lt;</span> <span class="na">m</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">dfs</span><span class="err">(</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">j</span><span class="err">,</span> <span class="na">cnt</span> <span class="err">+</span> <span class="na">ans</span><span class="err">))</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">j</span> <span class="err">+</span> <span class="na">1</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">)</span>        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">dfs</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">cnt</span> <span class="err">+</span> <span class="na">ans</span><span class="err">))</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">mem</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">][</span><span class="na">cnt</span> <span class="err">+</span> <span class="na">220</span><span class="err">]</span> <span class="err">=</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">hasValidPath</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        m = grid.size();
+</span></span><span class="line"><span class="cl">        n = grid[0].size();
+</span></span><span class="line"><span class="cl">        mem.resize(m, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n + m + 1 + 220, -1)));
+</span></span><span class="line"><span class="cl">        this-&gt;grid = grid;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return dfs(0, 0, 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

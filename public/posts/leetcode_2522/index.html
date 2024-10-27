@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/partition-string-into-substrings-with-values-at-most-k/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string str;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; mem;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx, int k, int num) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(idx == str.size()) return 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(mem[idx].count(num)) return mem[idx][num];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int ans = 1 + dp(idx + 1, k, str[idx] - &#39;0&#39;);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        long long net = (long long)num * 10 + (str[idx] - &#39;0&#39;);
+</span></span><span class="line"><span class="cl">        if(net <span class="err">&lt;</span>= k) {
+</span></span><span class="line"><span class="cl">            ans = min(ans, dp(idx + 1, k, net));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return mem[idx][num] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int minimumPartition(string s, int k) {
+</span></span><span class="line"><span class="cl">        str = s;
+</span></span><span class="line"><span class="cl">        for(char x: s)
+</span></span><span class="line"><span class="cl">            if(x - &#39;0&#39; &gt; k) return -1;
+</span></span><span class="line"><span class="cl">        mem.resize(s.size());
+</span></span><span class="line"><span class="cl">        int ans = dp(0, k, 0);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

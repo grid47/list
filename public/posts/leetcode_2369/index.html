@@ -186,7 +186,40 @@
         <p><a href="https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums, memo;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool dp(int idx) {
+</span></span><span class="line"><span class="cl">        if(idx == n) return true;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[idx] != -1) return memo[idx];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(idx + 1 <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">==</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">2</span><span class="err">))</span> <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">=</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">2</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">==</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">==</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">2</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">3</span><span class="err">))</span> <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">=</span> <span class="na">true</span><span class="err">;</span>                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">nums</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">==</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">2</span><span class="err">]</span> <span class="err">==</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">+</span> <span class="na">2</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">3</span><span class="err">))</span> <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">=</span><span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">=</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">validPartition</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        this-&gt;nums = nums;
+</span></span><span class="line"><span class="cl">        n = nums.size();
+</span></span><span class="line"><span class="cl">        memo.resize(n, -1);
+</span></span><span class="line"><span class="cl">        return dp(0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

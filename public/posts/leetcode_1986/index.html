@@ -186,7 +186,43 @@
         <p><a href="https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> task;
+</span></span><span class="line"><span class="cl">    // map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; memo; map is costly
+</span></span><span class="line"><span class="cl">    int memo[1<span class="err">&lt;</span><span class="p">&lt;</span><span class="nt">15</span><span class="err">][</span><span class="na">16</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">minSessions</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> tasks, int sessionTime) {
+</span></span><span class="line"><span class="cl">        this-&gt;task = tasks;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">        int mask = 0;
+</span></span><span class="line"><span class="cl">        int tgt = ~(~0u <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">task.size</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">        <span class="na">memset</span><span class="err">(</span><span class="na">memo</span><span class="err">,</span> <span class="na">-1</span><span class="err">,</span> <span class="na">sizeof</span><span class="err">(</span><span class="na">memo</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">task</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span>     <span class="na">tgt</span> <span class="err">|=</span> <span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">bt</span><span class="err">(</span><span class="na">tgt</span><span class="err">,</span> <span class="na">0</span><span class="err">,</span> <span class="na">sessionTime</span><span class="err">,</span> <span class="na">mask</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">bt</span><span class="err">(</span><span class="na">int</span> <span class="na">tgt</span><span class="err">,</span> <span class="na">int</span> <span class="na">net</span><span class="err">,</span> <span class="na">int</span> <span class="na">st</span><span class="err">,</span> <span class="na">int</span> <span class="na">mask</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">tgt </span><span class="o">=</span><span class="s">=</span> <span class="na">mask</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">memo</span><span class="err">[</span><span class="na">mask</span><span class="err">][</span><span class="na">net</span><span class="err">]</span> <span class="err">!=</span> <span class="na">-1</span><span class="err">)</span> <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">mask</span><span class="err">][</span><span class="na">net</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">ans </span><span class="o">=</span> <span class="s">task.size();</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">task</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">mask</span> <span class="p">&gt;</span>&gt; i) <span class="err">&amp;</span> 1) continue;
+</span></span><span class="line"><span class="cl">            mask |= (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">net</span> <span class="err">+</span> <span class="na">task</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="p">&gt;</span> st)
+</span></span><span class="line"><span class="cl">                ans = min(ans, 1 + bt(tgt, task[i], st, mask));
+</span></span><span class="line"><span class="cl">            else
+</span></span><span class="line"><span class="cl">                ans = min(ans, bt(tgt, net + task[i], st, mask));
+</span></span><span class="line"><span class="cl">            mask ^= (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">mask</span><span class="err">][</span><span class="na">net</span><span class="err">]</span> <span class="err">=</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

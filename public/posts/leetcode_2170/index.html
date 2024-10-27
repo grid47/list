@@ -186,7 +186,26 @@
         <p><a href="https://leetcode.com/problems/minimum-operations-to-make-the-array-alternating/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">3</span><span class="p">&gt;</span> top2Freq(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int start) {
+</span></span><span class="line"><span class="cl">        int first = 0, second = 0, cnt[100001] = {};
+</span></span><span class="line"><span class="cl">        for(int i = start; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">();</span> <span class="na">i</span> <span class="err">+=</span> <span class="na">2</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(++</span><span class="na">cnt</span><span class="err">[</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="p">&gt;</span>= cnt[first]) {
+</span></span><span class="line"><span class="cl">                if(nums[i] != first)
+</span></span><span class="line"><span class="cl">                    second = first;
+</span></span><span class="line"><span class="cl">                first = nums[i];
+</span></span><span class="line"><span class="cl">            } else if(cnt[nums[i]] &gt; cnt[second]) second = nums[i];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return {first, cnt[first], cnt[second] };
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int minimumOperations(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        auto ev = top2Freq(nums, 0), od = top2Freq(nums, 1);
+</span></span><span class="line"><span class="cl">        return nums.size() - (ev[0] != od[0]? ev[1] + od[1] : max(ev[1]+ od[2], ev[2] + od[1]));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

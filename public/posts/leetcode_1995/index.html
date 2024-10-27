@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/count-special-quadruplets/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int countQuadruplets(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        const auto n = nums.size();
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> freq;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        freq[nums[n - 1]] = 1;
+</span></span><span class="line"><span class="cl">        size_t answ = 0;
+</span></span><span class="line"><span class="cl">        for (int i = n - 2; i &gt; 1; --i)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            for (int j = i - 1; j &gt; 0; --j)
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                for (int k = j - 1; k &gt;= 0; --k)
+</span></span><span class="line"><span class="cl">                {
+</span></span><span class="line"><span class="cl">                    if (freq.count(nums[i] + nums[j] + nums[k]))
+</span></span><span class="line"><span class="cl">                    {
+</span></span><span class="line"><span class="cl">                        answ += freq[nums[i] + nums[j] + nums[k]];
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            freq[nums[i]] += 1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return answ;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

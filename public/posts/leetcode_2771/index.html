@@ -186,7 +186,60 @@
         <p><a href="https://leetcode.com/problems/longest-non-decreasing-subarray-from-two-arrays/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int Boom(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums2) {
+</span></span><span class="line"><span class="cl">        int n = nums1.size();
+</span></span><span class="line"><span class="cl">        int ans = 1;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dp1(n, 1), dp2(n, 1);
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>         
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">i</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">nums1</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="p">&gt;</span>= nums1[j]) {
+</span></span><span class="line"><span class="cl">                    dp1[i] = max(dp1[i], dp1[j] + 1);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                if(nums1[i] &gt;= nums2[j]) {
+</span></span><span class="line"><span class="cl">                   dp1[i] = max(dp1[i], dp2[j] + 1);                    
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                if(nums2[i] &gt;= nums1[j]) {
+</span></span><span class="line"><span class="cl">                    dp2[i] = max(dp2[i], dp1[j] + 1);                    
+</span></span><span class="line"><span class="cl">                }                 
+</span></span><span class="line"><span class="cl">                if(nums2[i] &gt;= nums2[j]) {
+</span></span><span class="line"><span class="cl">                    dp2[i] = max(dp2[i], dp2[j] + 1);                                        
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            ans = max(ans, max(dp1[i], dp2[i]));          
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int maxNonDecreasingLength(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums2) {
+</span></span><span class="line"><span class="cl">        int n = nums1.size();
+</span></span><span class="line"><span class="cl">        int ans = 1;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dp1(n, 1), dp2(n, 1);
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>         
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">nums1</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="p">&gt;</span>= nums1[i - 1]) {
+</span></span><span class="line"><span class="cl">                dp1[i] = max(dp1[i], dp1[i - 1] + 1);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if(nums1[i] &gt;= nums2[i - 1]) {
+</span></span><span class="line"><span class="cl">               dp1[i] = max(dp1[i], dp2[i - 1] + 1);                    
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if(nums2[i] &gt;= nums1[i - 1]) {
+</span></span><span class="line"><span class="cl">                dp2[i] = max(dp2[i], dp1[i - 1] + 1);                    
+</span></span><span class="line"><span class="cl">            }                 
+</span></span><span class="line"><span class="cl">            if(nums2[i] &gt;= nums2[i - 1]) {
+</span></span><span class="line"><span class="cl">                dp2[i] = max(dp2[i], dp2[i - 1] + 1);                                        
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            ans = max(ans, max(dp1[i], dp2[i]));          
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

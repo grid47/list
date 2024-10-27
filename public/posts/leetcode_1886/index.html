@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool findRotation(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> mat, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> target) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">4</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">match</span><span class="err">(</span><span class="na">mat</span><span class="err">,</span> <span class="na">target</span><span class="err">))</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">rotate</span><span class="err">(</span><span class="na">mat</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">rotate</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> mtx) {
+</span></span><span class="line"><span class="cl">        int n= mtx.size();
+</span></span><span class="line"><span class="cl">        int i = 0, j = n - 1;
+</span></span><span class="line"><span class="cl">        while(i <span class="err">&lt;</span>= j)
+</span></span><span class="line"><span class="cl">            swap(mtx[i++], mtx[j--]);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">swap</span><span class="err">(</span><span class="na">mtx</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">],</span> <span class="na">mtx</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">match</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> mtx1, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> mtx2) {
+</span></span><span class="line"><span class="cl">        int n = mtx1.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">mtx1</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">!=</span> <span class="na">mtx2</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">])</span>
+</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

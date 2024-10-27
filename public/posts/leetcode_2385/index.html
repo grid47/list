@@ -186,7 +186,60 @@
         <p><a href="https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int amountOfTime(TreeNode* root, int start) {
+</span></span><span class="line"><span class="cl">        graph(root);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        q.push(start);
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">bool</span><span class="p">&gt;</span> seen;
+</span></span><span class="line"><span class="cl">        seen[start] = true;
+</span></span><span class="line"><span class="cl">        int timer = 0;
+</span></span><span class="line"><span class="cl">        for(; q.size(); timer++) {
+</span></span><span class="line"><span class="cl">            int n = q.size();
+</span></span><span class="line"><span class="cl">            while(n--) {
+</span></span><span class="line"><span class="cl">                auto node = q.front();
+</span></span><span class="line"><span class="cl">                q.pop();
+</span></span><span class="line"><span class="cl">                for(int i: mp[node]) {
+</span></span><span class="line"><span class="cl">                    if(!seen[i]) {
+</span></span><span class="line"><span class="cl">                        seen[i] = true;
+</span></span><span class="line"><span class="cl">                        q.push(i);
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return timer-1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void graph(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">TreeNode</span><span class="err">*,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; q;
+</span></span><span class="line"><span class="cl">        q.push({root, -1});
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            auto [node, parent] = q.front();
+</span></span><span class="line"><span class="cl">            q.pop();
+</span></span><span class="line"><span class="cl">            if(parent != -1) {
+</span></span><span class="line"><span class="cl">                mp[parent].push_back(node-&gt;val);
+</span></span><span class="line"><span class="cl">                mp[node-&gt;val].push_back(parent);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if(node-&gt;left) q.push({node-&gt;left, node-&gt;val});
+</span></span><span class="line"><span class="cl">            if(node-&gt;right) q.push({node-&gt;right, node-&gt;val});
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

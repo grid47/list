@@ -186,7 +186,43 @@
         <p><a href="https://leetcode.com/problems/seat-reservation-manager/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class SeatManager {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int i, n;
+</span></span><span class="line"><span class="cl">    priority_queue<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, greater<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>&gt; pq;
+</span></span><span class="line"><span class="cl">    SeatManager(int n) {
+</span></span><span class="line"><span class="cl">        i = 1;
+</span></span><span class="line"><span class="cl">        this-&gt;n = n;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int reserve() {
+</span></span><span class="line"><span class="cl">        if(pq.empty() <span class="err">&amp;&amp;</span> i &gt; n) {
+</span></span><span class="line"><span class="cl">            return -1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(pq.empty()) {
+</span></span><span class="line"><span class="cl">            i++;
+</span></span><span class="line"><span class="cl">            return i - 1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int tmp = pq.top();
+</span></span><span class="line"><span class="cl">        pq.pop();
+</span></span><span class="line"><span class="cl">        return tmp;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void unreserve(int no) {
+</span></span><span class="line"><span class="cl">        if(no == i - 1) {
+</span></span><span class="line"><span class="cl">            i--;
+</span></span><span class="line"><span class="cl">            return;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        pq.push(no);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your SeatManager object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * SeatManager* obj = new SeatManager(n);
+</span></span><span class="line"><span class="cl"> * int param_1 = obj-&gt;reserve();
+</span></span><span class="line"><span class="cl"> * obj-&gt;unreserve(seatNumber);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

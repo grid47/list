@@ -186,7 +186,35 @@
         <p><a href="https://leetcode.com/problems/sum-of-beauty-in-the-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int sumOfBeauties(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt; left(n), right(n);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        left[0] = make_pair(nums[0], 0);
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="p">&gt;</span>= left[i - 1].first) {
+</span></span><span class="line"><span class="cl">                left[i] = make_pair(nums[i], i);
+</span></span><span class="line"><span class="cl">            } else left[i] = left[i - 1];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        right[n-1] = make_pair(nums[n - 1], n - 1);
+</span></span><span class="line"><span class="cl">        for(int i = n - 2; i &gt;= 0; i--)
+</span></span><span class="line"><span class="cl">            if(nums[i] <span class="err">&lt;</span>= right[i + 1].first) {
+</span></span><span class="line"><span class="cl">                right[i] = make_pair(nums[i], i);
+</span></span><span class="line"><span class="cl">            } else right[i] = right[i + 1];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int sum = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">left</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">].</span><span class="na">first</span> <span class="err">&lt;</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="na">right</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">].</span><span class="na">first</span> <span class="p">&gt;</span> nums[i])
+</span></span><span class="line"><span class="cl">                sum += 2;
+</span></span><span class="line"><span class="cl">            else if(nums[i-1] <span class="p">&lt;</span> <span class="nt">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span> nums[i])
+</span></span><span class="line"><span class="cl">                sum += 1;
+</span></span><span class="line"><span class="cl">            else sum += 0;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return sum;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

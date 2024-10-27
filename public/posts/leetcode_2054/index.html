@@ -186,7 +186,66 @@
         <p><a href="https://leetcode.com/problems/two-best-non-overlapping-events/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; eve;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">unordered_map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt; memo;
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx, int end, int k) {
+</span></span><span class="line"><span class="cl">        if(idx &gt;= n || k == 0) return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[idx][k].count(end)) return memo[idx][k][end];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = dp(idx + 1, end, k);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int l = idx + 1, r = n - 1, res = n;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(l <span class="err">&lt;</span>= r) {
+</span></span><span class="line"><span class="cl">            int mid = l + (r - l + 1) / 2;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(eve[mid][0] &gt; eve[idx][1]) {
+</span></span><span class="line"><span class="cl">                res = mid;
+</span></span><span class="line"><span class="cl">                r = mid - 1;
+</span></span><span class="line"><span class="cl">            } else l = mid + 1;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        ans = max(ans, eve[idx][2] + dp(res, eve[idx][1], k - 1));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return memo[idx][k][end] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int ma(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> events) {
+</span></span><span class="line"><span class="cl">        sort(events.begin(), events.end());
+</span></span><span class="line"><span class="cl">        eve = events;
+</span></span><span class="line"><span class="cl">        n = eve.size();
+</span></span><span class="line"><span class="cl">        memo.resize(n, vector<span class="p">&lt;</span><span class="nt">unordered_map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;(3));
+</span></span><span class="line"><span class="cl">        return dp(0, 0, 2);        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int maxTwoEvents(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> events) {
+</span></span><span class="line"><span class="cl">        sort(events.begin(), events.end());
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = 0, mx = 0;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int size = events.size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(size--) {
+</span></span><span class="line"><span class="cl">            auto it = mp.upper_bound(events[size][1]);
+</span></span><span class="line"><span class="cl">            mx = max(mx, events[size][2]);
+</span></span><span class="line"><span class="cl">            mp[events[size][0]] = mx;
+</span></span><span class="line"><span class="cl">            if(it == mp.end()) {
+</span></span><span class="line"><span class="cl">                ans = max(ans, mx);
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                ans = max(ans, events[size][2] + it-&gt;second);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

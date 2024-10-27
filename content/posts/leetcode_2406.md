@@ -22,6 +22,31 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int minGroups(vector<vector<int>>& list) {
+        sort(list.begin(), list.end());
+        
+        int res = 1, cnt = 1;
+        priority_queue<int, vector<int>, greater<int>> pq;
+                
+        int n = list.size();
+        
+        pq.push(list[0][1]);
+        
+        if(n == 1) return 1;
+        for(int i = 1; i < n; i++) {
+            int next = list[i][0];            
+            while(!pq.empty() && next > pq.top()) {
+                pq.pop();
+                cnt--;
+            }
+            pq.push(list[i][1]);
+            cnt++;
+            res = max(res, cnt);
+        }
+        return res;
+    }
+};
 {{< /highlight >}}
 

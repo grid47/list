@@ -186,7 +186,37 @@
         <p><a href="https://leetcode.com/problems/substring-with-largest-variance/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int largestVariance(string s) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        unordered_set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> num(s.begin(), s.end());
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(char a: num)
+</span></span><span class="line"><span class="cl">        for(char b: num) {
+</span></span><span class="line"><span class="cl">            int var = 0, first_b = 0, has_b = 0;
+</span></span><span class="line"><span class="cl">            for(char c: s) {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                var += c == a;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if(c == b) {
+</span></span><span class="line"><span class="cl">                    has_b = true;
+</span></span><span class="line"><span class="cl">                    if(first_b <span class="err">&amp;&amp;</span> var &gt;= 0)
+</span></span><span class="line"><span class="cl">                        first_b = false;
+</span></span><span class="line"><span class="cl">                    else if(--var <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">var </span><span class="o">=</span> <span class="s">-1;</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">first_b </span><span class="o">=</span> <span class="s">true;</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">max(ans,</span> <span class="na">has_b</span><span class="err">?</span> <span class="na">var:</span> <span class="na">0</span><span class="err">);</span>                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

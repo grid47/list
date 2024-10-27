@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minimizeMax(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int p) {
+</span></span><span class="line"><span class="cl">        sort(nums.begin(), nums.end());
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int n = nums.size(), l = 0, r = nums[n - 1] - nums[0], ans = nums[n - 1] - nums[0];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(l <span class="err">&lt;</span>= r) {
+</span></span><span class="line"><span class="cl">            int mid = l + (r - l) / 2;
+</span></span><span class="line"><span class="cl">            int k = p;
+</span></span><span class="line"><span class="cl">            for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">k</span> <span class="p">&gt;</span> 0; i++) {
+</span></span><span class="line"><span class="cl">                if(nums[i] - nums[i - 1] <span class="err">&lt;</span>= mid) {
+</span></span><span class="line"><span class="cl">                    k--;
+</span></span><span class="line"><span class="cl">                    i++;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if(k == 0) {
+</span></span><span class="line"><span class="cl">                ans = mid;
+</span></span><span class="line"><span class="cl">                r = mid - 1;
+</span></span><span class="line"><span class="cl">            } else l = mid + 1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

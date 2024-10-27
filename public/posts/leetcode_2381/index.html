@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/shifting-letters-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string shiftingLetters(string s, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> sh) {
+</span></span><span class="line"><span class="cl">        int n = s.length();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> net(n, 0);
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>x: sh) {
+</span></span><span class="line"><span class="cl">            int k = x[2] == 1? 1 : -1;
+</span></span><span class="line"><span class="cl">            net[x[0]] += k;
+</span></span><span class="line"><span class="cl">           // net[x[0]] %= 26;
+</span></span><span class="line"><span class="cl">            if(x[1] + 1 <span class="p">&lt;</span> <span class="nt">n</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">net</span><span class="err">[</span><span class="na">x</span><span class="err">[</span><span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="na">-</span><span class="o">=</span> <span class="s">k;</span>
+</span></span><span class="line"><span class="cl">           <span class="err">//</span> <span class="na">net</span><span class="err">[</span><span class="na">x</span><span class="err">[</span><span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">%=</span> <span class="na">26</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">partial_sum</span><span class="err">(</span><span class="na">net</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">net</span><span class="err">.</span><span class="na">end</span><span class="err">(),</span> <span class="na">net</span><span class="err">.</span><span class="na">begin</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">char</span> <span class="err">&amp;</span><span class="na">c</span> <span class="na">:</span> <span class="na">s</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">res </span><span class="o">=</span> <span class="s">((c</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;)</span> <span class="err">+</span> <span class="na">net</span><span class="err">[</span><span class="na">i</span><span class="err">])%</span> <span class="na">26</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                     <span class="na">res </span><span class="o">=</span> <span class="s">(res</span> <span class="err">+</span> <span class="na">26</span><span class="err">)%</span><span class="na">26</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">c </span><span class="o">=</span> <span class="s">&#39;a&#39;</span> <span class="err">+</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">s</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

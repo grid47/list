@@ -186,7 +186,43 @@
         <p><a href="https://leetcode.com/problems/minimum-number-of-visited-cells-in-a-grid/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int minimumVisitedCells(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int m = grid.size(), n = grid[0].size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dist(m, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, INT_MAX));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt;, greater<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt;&gt; pq;
+</span></span><span class="line"><span class="cl">        pq.push({1, {0, 0}});
+</span></span><span class="line"><span class="cl">        dist[0][0] = 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
+</span></span><span class="line"><span class="cl">            int d = pq.top().first;
+</span></span><span class="line"><span class="cl">            int i = pq.top().second.first;
+</span></span><span class="line"><span class="cl">            int j = pq.top().second.second;
+</span></span><span class="line"><span class="cl">            if(i == m - 1 <span class="err">&amp;&amp;</span> j == n - 1) return d;
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">            for(int k = j + 1; k <span class="err">&lt;</span>= min(n - 1, j + grid[i][j]); k++) {
+</span></span><span class="line"><span class="cl">                if(dist[i][k] &gt; d + 1) {
+</span></span><span class="line"><span class="cl">                    dist[i][k] = d + 1;
+</span></span><span class="line"><span class="cl">                    pq.push({d + 1, {i, k}});
+</span></span><span class="line"><span class="cl">                    if(i == m - 1 <span class="err">&amp;&amp;</span> k == n - 1) return d + 1;                    
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            for(int k = i + 1; k <span class="err">&lt;</span>= min(m - 1, i + grid[i][j]); k++) {
+</span></span><span class="line"><span class="cl">                if(dist[k][j] &gt; d + 1) {
+</span></span><span class="line"><span class="cl">                    dist[k][j] = d + 1;
+</span></span><span class="line"><span class="cl">                    pq.push({d + 1, {k, j}});
+</span></span><span class="line"><span class="cl">                    if(k == m - 1 <span class="err">&amp;&amp;</span> j == n - 1) return d + 1;                     
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return -1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

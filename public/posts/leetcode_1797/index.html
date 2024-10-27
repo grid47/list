@@ -186,7 +186,54 @@
         <p><a href="https://leetcode.com/problems/design-authentication-manager/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class AuthenticationManager {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt;, greater<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt;&gt; pq;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">    int ttl;
+</span></span><span class="line"><span class="cl">    AuthenticationManager(int timeToLive) {
+</span></span><span class="line"><span class="cl">        ttl = timeToLive;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void generate(string tokenId, int currentTime) {
+</span></span><span class="line"><span class="cl">        while(!pq.empty() <span class="err">&amp;&amp;</span> currentTime &gt;= pq.top().first) {
+</span></span><span class="line"><span class="cl">            mp[pq.top().second]--;
+</span></span><span class="line"><span class="cl">            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        pq.push({currentTime + ttl, tokenId});
+</span></span><span class="line"><span class="cl">        mp[tokenId]++;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void renew(string tokenId, int currentTime) {
+</span></span><span class="line"><span class="cl">        while(!pq.empty() <span class="err">&amp;&amp;</span> currentTime &gt;= pq.top().first) {
+</span></span><span class="line"><span class="cl">            mp[pq.top().second]--;
+</span></span><span class="line"><span class="cl">            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(mp.count(tokenId)) {
+</span></span><span class="line"><span class="cl">            pq.push({currentTime + ttl, tokenId});            
+</span></span><span class="line"><span class="cl">            mp[tokenId]++;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int countUnexpiredTokens(int currentTime) {
+</span></span><span class="line"><span class="cl">        while(!pq.empty() <span class="err">&amp;&amp;</span> currentTime &gt;= pq.top().first) {
+</span></span><span class="line"><span class="cl">            mp[pq.top().second]--;
+</span></span><span class="line"><span class="cl">            if(mp[pq.top().second] == 0) mp.erase(pq.top().second);
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return mp.size();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your AuthenticationManager object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * AuthenticationManager* obj = new AuthenticationManager(timeToLive);
+</span></span><span class="line"><span class="cl"> * obj-&gt;generate(tokenId,currentTime);
+</span></span><span class="line"><span class="cl"> * obj-&gt;renew(tokenId,currentTime);
+</span></span><span class="line"><span class="cl"> * int param_3 = obj-&gt;countUnexpiredTokens(currentTime);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,45 @@
         <p><a href="https://leetcode.com/problems/cyclically-rotating-a-grid/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; rotateGrid(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid, int k) {
+</span></span><span class="line"><span class="cl">        int m = grid.size(), n = grid[0].size();
+</span></span><span class="line"><span class="cl">        // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">m</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">n</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">k </span><span class="o">=</span> <span class="s">k</span> <span class="err">%</span> <span class="err">(</span><span class="na">m</span> <span class="err">*</span> <span class="na">n</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">min</span><span class="err">(</span><span class="na">m</span><span class="err">,</span> <span class="na">n</span><span class="err">)</span> <span class="err">/</span> <span class="na">2</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>            
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">l </span><span class="o">=</span> <span class="s">i</span> <span class="err">+</span> <span class="na">0</span><span class="err">,</span> <span class="na">r </span><span class="o">=</span> <span class="s">n</span> <span class="na">-</span> <span class="na">1</span> <span class="na">-</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">t </span><span class="o">=</span> <span class="s">i</span> <span class="err">+</span> <span class="na">0</span><span class="err">,</span> <span class="na">b </span><span class="o">=</span> <span class="s">m</span> <span class="na">-</span> <span class="na">1</span> <span class="na">-</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">total </span><span class="o">=</span> <span class="s">2</span> <span class="err">*</span> <span class="err">(</span><span class="na">r</span> <span class="na">-</span> <span class="na">l</span><span class="err">)</span> <span class="err">+</span> <span class="na">2</span> <span class="err">*</span> <span class="err">(</span><span class="na">b</span> <span class="na">-</span> <span class="na">t</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">rot </span><span class="o">=</span> <span class="s">k</span> <span class="err">%</span> <span class="na">total</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">l</span> <span class="err">&lt;</span> <span class="na">r</span> <span class="err">&amp;&amp;</span> <span class="na">t</span> <span class="err">&lt;</span> <span class="na">b</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">rot</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="na">int</span> <span class="na">tmp </span><span class="o">=</span> <span class="s">grid[t][l];</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">l;</span> <span class="na">p</span> <span class="err">&lt;</span> <span class="na">r</span><span class="err">;</span> <span class="na">p</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">grid</span><span class="err">[</span><span class="na">t</span><span class="err">][</span><span class="na">p</span><span class="err">]</span> <span class="err">=</span> <span class="na">grid</span><span class="err">[</span><span class="na">t</span><span class="err">][</span><span class="na">p</span> <span class="err">+</span> <span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">t;</span> <span class="na">p</span> <span class="err">&lt;</span> <span class="na">b</span><span class="err">;</span> <span class="na">p</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">grid</span><span class="err">[</span><span class="na">p</span><span class="err">][</span><span class="na">r</span><span class="err">]</span> <span class="err">=</span> <span class="na">grid</span><span class="err">[</span><span class="na">p</span> <span class="err">+</span> <span class="na">1</span><span class="err">][</span><span class="na">r</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">r;</span> <span class="na">p</span> <span class="p">&gt;</span> l; p--)
+</span></span><span class="line"><span class="cl">                        grid[b][p] = grid[b][p-1];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    for(int p = b; p &gt; t; p--)
+</span></span><span class="line"><span class="cl">                        grid[p][l] = grid[p-1][l];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    grid[t + 1][l] = tmp;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return grid;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

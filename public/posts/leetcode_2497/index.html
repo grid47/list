@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/maximum-star-sum-of-a-graph/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maxStarSum(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> vals, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges, int k) {
+</span></span><span class="line"><span class="cl">        int n = vals.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">priority_queue</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; grid(n);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(auto it: edges) {
+</span></span><span class="line"><span class="cl">            grid[it[0]].push(vals[it[1]]);
+</span></span><span class="line"><span class="cl">            grid[it[1]].push(vals[it[0]]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int sum = INT_MIN;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">net </span><span class="o">=</span> <span class="s">vals[i];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">tmp </span><span class="o">=</span> <span class="s">k;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">sum </span><span class="o">=</span> <span class="s">max(net,</span> <span class="na">sum</span><span class="err">);</span>            
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">tmp--</span> <span class="err">&amp;&amp;</span> <span class="err">!</span><span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">empty</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">net</span> <span class="err">+=</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">top</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">                <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">                <span class="na">sum </span><span class="o">=</span> <span class="s">max(net,</span> <span class="na">sum</span><span class="err">);</span>                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">sum</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

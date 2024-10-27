@@ -186,7 +186,57 @@
         <p><a href="https://leetcode.com/problems/design-memory-allocator/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Allocator {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> mem;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; mp;
+</span></span><span class="line"><span class="cl">    Allocator(int n) {
+</span></span><span class="line"><span class="cl">        mem.resize(n, 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int allocate(int size, int mID) {
+</span></span><span class="line"><span class="cl">        int idx = 0;
+</span></span><span class="line"><span class="cl">        int cnt = 0;
+</span></span><span class="line"><span class="cl">        while(idx <span class="p">&lt;</span> <span class="nt">mem.size</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">idx;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">j</span> <span class="err">&lt;</span> <span class="na">mem</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">mem</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">0</span> <span class="err">&amp;&amp;</span> <span class="na">cnt</span> <span class="err">&lt;</span> <span class="na">size</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cnt</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">j</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">cnt </span><span class="o">=</span><span class="s">=</span> <span class="na">size</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">idx;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">idx</span> <span class="err">+</span> <span class="na">size</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">mem</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">[</span><span class="na">mID</span><span class="err">].</span><span class="na">push_back</span><span class="err">({</span><span class="na">idx</span><span class="err">,</span> <span class="na">size</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">idx</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">j</span> <span class="err">&lt;</span> <span class="na">mem</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">mem</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">1</span><span class="err">)</span> <span class="na">j</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">cnt </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">idx </span><span class="o">=</span> <span class="s">j;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">-1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">free</span><span class="err">(</span><span class="na">int</span> <span class="na">mID</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">cnt </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">mp</span><span class="err">[</span><span class="na">mID</span><span class="err">].</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">auto</span> <span class="na">it </span><span class="o">=</span> <span class="s">mp[mID][i];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">it[0];</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">it</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">+</span> <span class="na">it</span><span class="err">[</span><span class="na">1</span><span class="err">];</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mem</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">=</span> <span class="na">0</span><span class="err">;</span>                
+</span></span><span class="line"><span class="cl">                <span class="na">cnt</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">mp</span><span class="err">.</span><span class="na">erase</span><span class="err">(</span><span class="na">mID</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">cnt</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Your</span> <span class="na">Allocator</span> <span class="na">object</span> <span class="na">will</span> <span class="na">be</span> <span class="na">instantiated</span> <span class="na">and</span> <span class="na">called</span> <span class="na">as</span> <span class="na">such:</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Allocator</span><span class="err">*</span> <span class="na">obj </span><span class="o">=</span> <span class="s">new</span> <span class="na">Allocator</span><span class="err">(</span><span class="na">n</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">int</span> <span class="na">param_1 </span><span class="o">=</span> <span class="s">obj-</span><span class="p">&gt;</span>allocate(size,mID);
+</span></span><span class="line"><span class="cl"> * int param_2 = obj-&gt;free(mID);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

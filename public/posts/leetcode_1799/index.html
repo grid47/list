@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/maximize-score-after-n-operations/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums;
+</span></span><span class="line"><span class="cl">    int memo[8][20000] = {};
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx, int msk) {
+</span></span><span class="line"><span class="cl">        if(idx == n) return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[idx][msk] != -1) return memo[idx][msk];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(((</span><span class="na">msk</span> <span class="p">&gt;</span>&gt; i) <span class="err">&amp;</span> 1) == 1) continue;
+</span></span><span class="line"><span class="cl">            for(int j = 0; j <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">();</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">i </span><span class="o">=</span><span class="s">=</span> <span class="na">j</span><span class="err">)</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(((</span><span class="na">msk</span> <span class="p">&gt;</span>&gt; j) <span class="err">&amp;</span> 1) == 1) continue;
+</span></span><span class="line"><span class="cl">                msk ^= (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">msk</span> <span class="err">^=</span> <span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">j</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">max(ans,</span> <span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">)</span> <span class="err">*</span> <span class="na">__gcd</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">nums</span><span class="err">[</span><span class="na">j</span><span class="err">])</span> <span class="err">+</span> <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">msk</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">                <span class="na">msk</span> <span class="err">^=</span> <span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">msk</span> <span class="err">^=</span> <span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">j</span><span class="err">);</span>                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">msk</span><span class="err">]</span> <span class="err">=</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">maxScore</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        n = nums.size() / 2;
+</span></span><span class="line"><span class="cl">        this-&gt;nums = nums;
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        return dp(0, 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

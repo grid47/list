@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/detonate-the-maximum-bombs/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    #define ll long long int
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maximumDetonation(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> bombs) {
+</span></span><span class="line"><span class="cl">        int n = bombs.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; gph(n);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">ll</span> <span class="na">x1 </span><span class="o">=</span> <span class="s">bombs[i][0];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ll</span> <span class="na">y1 </span><span class="o">=</span> <span class="s">bombs[i][1];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ll</span> <span class="na">r1 </span><span class="o">=</span> <span class="s">bombs[i][2];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">!=</span> <span class="na">j</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">ll</span> <span class="na">x2 </span><span class="o">=</span> <span class="s">abs(x1</span> <span class="na">-</span> <span class="na">bombs</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">0</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">ll</span> <span class="na">y2 </span><span class="o">=</span> <span class="s">abs(y1</span> <span class="na">-</span> <span class="na">bombs</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">x2</span> <span class="err">*</span> <span class="na">x2</span> <span class="err">+</span> <span class="na">y2</span> <span class="err">*</span> <span class="na">y2</span> <span class="err">&lt;=</span> <span class="na">r1</span> <span class="err">*</span> <span class="na">r1</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">gph</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">push_back</span><span class="err">(</span><span class="na">j</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">ans </span><span class="o">=</span> <span class="s">INT_MIN;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">c </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">bool</span><span class="p">&gt;</span> vistd(n, false);
+</span></span><span class="line"><span class="cl">            dfs(gph, vistd, c, i);
+</span></span><span class="line"><span class="cl">            ans = max(ans, c);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void dfs(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>gph, vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> <span class="err">&amp;</span>vstd, int <span class="err">&amp;</span>c, int i) {
+</span></span><span class="line"><span class="cl">        if(vstd[i]) return;
+</span></span><span class="line"><span class="cl">        vstd[i] = true;
+</span></span><span class="line"><span class="cl">        c++;
+</span></span><span class="line"><span class="cl">        for(int j: gph[i])
+</span></span><span class="line"><span class="cl">            if(!vstd[j])
+</span></span><span class="line"><span class="cl">            dfs(gph, vstd, c, j);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

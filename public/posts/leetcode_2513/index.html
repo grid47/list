@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/minimize-the-maximum-of-two-arrays/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool isPossible(long long mx, long long div1, long long div2, long long unq1, long long unq2) {
+</span></span><span class="line"><span class="cl">        long long a = mx / div1;
+</span></span><span class="line"><span class="cl">        long long a_ = mx - a;
+</span></span><span class="line"><span class="cl">        long long b = mx / div2;
+</span></span><span class="line"><span class="cl">        long long b_ = mx - b;
+</span></span><span class="line"><span class="cl">        long long aib = mx / (long long)lcm(div1, div2);
+</span></span><span class="line"><span class="cl">        long long aub = a + b - aib;
+</span></span><span class="line"><span class="cl">        long long a_ib_ = mx - aub;
+</span></span><span class="line"><span class="cl">        long long neededA = (a_ - a_ib_ &gt;= unq1) ? 0: unq1 - (a_ - a_ib_);
+</span></span><span class="line"><span class="cl">        long long neededB = (b_ - a_ib_ &gt;= unq2) ? 0: unq2 - (b_ - a_ib_);        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return a_ib_ &gt;= neededA + neededB;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int minimizeSet(int div1, int div2, int unq1, int unq2) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        long long l = 1, r = (long long) pow(10, 17), ans = 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(l <span class="err">&lt;</span>= r) {
+</span></span><span class="line"><span class="cl">            long long mid = l + (r - l + 1) / 2;
+</span></span><span class="line"><span class="cl">            if(isPossible(mid, div1, div2, unq1, unq2)) {
+</span></span><span class="line"><span class="cl">                ans = mid;
+</span></span><span class="line"><span class="cl">                r = mid - 1;
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                l = mid + 1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

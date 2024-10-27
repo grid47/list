@@ -186,7 +186,62 @@
         <p><a href="https://leetcode.com/problems/count-the-number-of-complete-components/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class UF {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> par, edge, rnk;
+</span></span><span class="line"><span class="cl">    UF(int n) {
+</span></span><span class="line"><span class="cl">        par.resize(n, 0);
+</span></span><span class="line"><span class="cl">        iota(par.begin(), par.end(), 0);
+</span></span><span class="line"><span class="cl">        edge.resize(n, 0);
+</span></span><span class="line"><span class="cl">        rnk.resize(n, 1);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool join(int i, int j) {
+</span></span><span class="line"><span class="cl">        int p = find(i);
+</span></span><span class="line"><span class="cl">        int q = find(j);
+</span></span><span class="line"><span class="cl">        if(p != q) {
+</span></span><span class="line"><span class="cl">            if(rnk[p] &gt; rnk[q]) {
+</span></span><span class="line"><span class="cl">                rnk[p]+=rnk[q];
+</span></span><span class="line"><span class="cl">                par[q] = p;
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                rnk[q]+=rnk[p];
+</span></span><span class="line"><span class="cl">                par[p] = q;         
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            int e = edge[p]+edge[q] + 1;
+</span></span><span class="line"><span class="cl">            edge[p] =e; // dge[q] + 1;
+</span></span><span class="line"><span class="cl">            edge[q] =e; // dge[p] + 1;            
+</span></span><span class="line"><span class="cl">            return true;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        edge[q]++;
+</span></span><span class="line"><span class="cl">        return false;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int find(int p) {
+</span></span><span class="line"><span class="cl">        if(p == par[p]) return p;
+</span></span><span class="line"><span class="cl">        return par[p] = find(par[p]);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int countCompleteComponents(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges) {
+</span></span><span class="line"><span class="cl">        UF uf = UF(n);
+</span></span><span class="line"><span class="cl">        for(auto e: edges) {
+</span></span><span class="line"><span class="cl">            uf.join(e[0], e[1]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> pk;
+</span></span><span class="line"><span class="cl">        int res = 0;
+</span></span><span class="line"><span class="cl">            // cout <span class="err">&lt;&lt;</span> &#34;edges membercnt edgescal \n&#34;;         
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">par </span><span class="o">=</span> <span class="s">uf.find(i);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">pk</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">par</span><span class="err">))</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pk</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">par</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">cnt </span><span class="o">=</span> <span class="s">uf.edge[par];</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">cnt</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">uf</span><span class="err">.</span><span class="na">rnk</span><span class="err">[</span><span class="na">par</span><span class="err">]</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">uf</span><span class="err">.</span><span class="na">rnk</span><span class="err">[</span><span class="na">par</span><span class="err">]</span> <span class="err">*</span> <span class="err">(</span><span class="na">uf</span><span class="err">.</span><span class="na">rnk</span><span class="err">[</span><span class="na">par</span><span class="err">]</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">/</span> <span class="na">2</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">uf</span><span class="err">.</span><span class="na">rnk</span><span class="err">[</span><span class="na">par</span><span class="err">]</span> <span class="err">*</span> <span class="err">(</span><span class="na">uf</span><span class="err">.</span><span class="na">rnk</span><span class="err">[</span><span class="na">par</span><span class="err">]</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">/</span> <span class="na">2 </span><span class="o">=</span><span class="s">=</span> <span class="na">cnt</span><span class="err">)</span> <span class="na">res</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

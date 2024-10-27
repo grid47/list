@@ -186,7 +186,68 @@
         <p><a href="https://leetcode.com/problems/maximum-xor-with-an-element-from-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class TrieNode {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    TrieNode* bin[2] = {};
+</span></span><span class="line"><span class="cl">    int prefixVal;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void add(int num) {
+</span></span><span class="line"><span class="cl">        TrieNode* cur = this;
+</span></span><span class="line"><span class="cl">        for(int i = 31; i &gt;= 0; i--) {
+</span></span><span class="line"><span class="cl">            int bit = (num &gt;&gt; i) <span class="err">&amp;</span> 1;
+</span></span><span class="line"><span class="cl">            if(cur-&gt;bin[bit] == nullptr) cur-&gt;bin[bit] = new TrieNode();
+</span></span><span class="line"><span class="cl">            cur = cur-&gt;bin[bit];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        cur-&gt;prefixVal = num;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int max(int num) {
+</span></span><span class="line"><span class="cl">        TrieNode* cur = this;
+</span></span><span class="line"><span class="cl">        for(int i = 31; i &gt;= 0; i--) {
+</span></span><span class="line"><span class="cl">            int bit = (num &gt;&gt; i) <span class="err">&amp;</span> 1;
+</span></span><span class="line"><span class="cl">            if(cur-&gt;bin[1 - bit] != nullptr)
+</span></span><span class="line"><span class="cl">                 cur = cur-&gt;bin[1- bit];
+</span></span><span class="line"><span class="cl">            else cur = cur-&gt;bin[bit];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return cur-&gt;prefixVal ^ num;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> maximizeXor(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> q) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int sz = q.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">array</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">3</span><span class="p">&gt;</span>&gt; tmp(sz);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">sz</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">tmp</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="err">{</span> <span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">],</span> <span class="na">i</span> <span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">nums</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">nums</span><span class="err">.</span><span class="na">end</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">tmp</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">tmp</span><span class="err">.</span><span class="na">end</span><span class="err">(),</span> <span class="err">[](</span><span class="na">array</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">3</span><span class="p">&gt;</span> a, array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">3</span><span class="p">&gt;</span> b) { return a[1] <span class="p">&lt;</span> <span class="nt">b</span><span class="err">[</span><span class="na">1</span><span class="err">];</span> <span class="err">});</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> res(sz, 0);
+</span></span><span class="line"><span class="cl">        TrieNode* root = new TrieNode();        
+</span></span><span class="line"><span class="cl">        int idx = 0;
+</span></span><span class="line"><span class="cl">        for(array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">3</span><span class="p">&gt;</span> qu : tmp) {
+</span></span><span class="line"><span class="cl">            while(idx <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">nums</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">&lt;=</span> <span class="na">qu</span><span class="err">[</span><span class="na">1</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">root-</span><span class="p">&gt;</span>add(nums[idx]);
+</span></span><span class="line"><span class="cl">                idx++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            int ans = -1;
+</span></span><span class="line"><span class="cl">            if(idx != 0)
+</span></span><span class="line"><span class="cl">            ans = root-&gt;max(qu[0]);
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            res[qu[2]] = ans;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

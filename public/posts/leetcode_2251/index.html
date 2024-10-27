@@ -186,7 +186,47 @@
         <p><a href="https://leetcode.com/problems/number-of-flowers-in-full-bloom/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> fullBloomFlowers(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> flo, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> peo) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        sort(flo.begin(), flo.end());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; pp;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">peo.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pp</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">make_pair</span><span class="err">(</span><span class="na">peo</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">i</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">pp</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">pp</span><span class="err">.</span><span class="na">end</span><span class="err">());</span>        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> ans(peo.size(), 0);
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, greater<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>&gt; pq;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int j = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">peo.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(!</span><span class="na">pq</span><span class="err">.</span><span class="na">empty</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">pp</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">first</span> <span class="p">&gt;</span> pq.top()) {
+</span></span><span class="line"><span class="cl">                // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">pq.top</span><span class="err">()</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;,&#39;;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;</span><span class="na">-</span><span class="err">&#39;;</span>            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">j</span> <span class="err">&lt;</span> <span class="na">flo</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">pp</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">first</span> <span class="p">&gt;</span>= flo[j][0]) {
+</span></span><span class="line"><span class="cl">                // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">flo</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;,&#39;;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">(</span><span class="na">pp</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">first</span> <span class="err">&lt;=</span> <span class="na">flo</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">1</span><span class="err">])</span>
+</span></span><span class="line"><span class="cl">                <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">flo</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">j</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;</span><span class="na">_</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">pp</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">first</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="err">&#39;\</span><span class="na">n</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">[</span><span class="na">pp</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">second</span><span class="err">]</span> <span class="err">=</span> <span class="na">pq</span><span class="err">.</span><span class="na">size</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

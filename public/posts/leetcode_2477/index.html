@@ -186,7 +186,29 @@
         <p><a href="https://leetcode.com/problems/minimum-fuel-cost-to-report-to-the-capital/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    long long ans;
+</span></span><span class="line"><span class="cl">    int s;
+</span></span><span class="line"><span class="cl">    long long minimumFuelCost(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> roads, int seats) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; graph(roads.size()+1);s = seats;
+</span></span><span class="line"><span class="cl">        for (vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> r: roads){
+</span></span><span class="line"><span class="cl">            graph[r[0]].push_back(r[1]);
+</span></span><span class="line"><span class="cl">                      graph[r[1]].push_back(r[0]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        dfs(0, 0, graph);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int dfs(int i, int prev, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>graph) {
+</span></span><span class="line"><span class="cl">        int people = 1;
+</span></span><span class="line"><span class="cl">        for(int <span class="err">&amp;</span>x: graph[i]) {
+</span></span><span class="line"><span class="cl">            if (x == prev) continue;
+</span></span><span class="line"><span class="cl">            people += dfs(x,i, graph);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(i != 0) ans += (s + people - 1)/s;
+</span></span><span class="line"><span class="cl">        return people;
+</span></span><span class="line"><span class="cl">     }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

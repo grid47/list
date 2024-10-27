@@ -186,7 +186,54 @@
         <p><a href="https://leetcode.com/problems/reward-top-k-students/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class cmp {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    bool operator()(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>a, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>b) {
+</span></span><span class="line"><span class="cl">        if(a[0] == b[0]) return a[1] &gt; b[1];
+</span></span><span class="line"><span class="cl">        return a[0] <span class="p">&lt;</span> <span class="nt">b</span><span class="err">[</span><span class="na">0</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> topStudents(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> pos, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> neg, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> report, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> id, int k) {
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> p, n;
+</span></span><span class="line"><span class="cl">        for(auto it: pos) {
+</span></span><span class="line"><span class="cl">            p.insert(it);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        for(auto it: neg) {
+</span></span><span class="line"><span class="cl">            n.insert(it);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;, cmp&gt; pq;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int sz = report.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">sz</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">string</span> <span class="na">s </span><span class="o">=</span> <span class="s">report[i];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">prv </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">sum </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span> <span class="err">&#39;</span> <span class="err">||</span> <span class="na">j </span><span class="o">=</span><span class="s">=</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">string</span> <span class="na">str </span><span class="o">=</span> <span class="s">s.substr(prv,</span> <span class="err">(</span><span class="na">j </span><span class="o">=</span><span class="s">=</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">?</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span><span class="na">:</span> <span class="na">j</span><span class="err">)</span> <span class="na">-</span> <span class="na">prv</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">str</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">prv </span><span class="o">=</span> <span class="s">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">p</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">str</span><span class="err">))</span> <span class="na">sum</span> <span class="err">+=</span> <span class="na">3</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">n</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">str</span><span class="err">))</span> <span class="na">sum</span> <span class="na">-</span><span class="o">=</span> <span class="s">1;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">sum</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">id</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">({</span><span class="na">sum</span><span class="err">,</span> <span class="na">id</span><span class="err">[</span><span class="na">i</span><span class="err">]});</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        while(!pq.empty() <span class="err">&amp;&amp;</span> k--) {
+</span></span><span class="line"><span class="cl">            cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">pq.top</span><span class="err">()[</span><span class="na">0</span><span class="err">]</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">pq</span><span class="err">.</span><span class="na">top</span><span class="err">()[</span><span class="na">1</span><span class="err">]</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">pq</span><span class="err">.</span><span class="na">top</span><span class="err">()[</span><span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

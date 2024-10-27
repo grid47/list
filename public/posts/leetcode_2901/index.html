@@ -186,7 +186,46 @@
         <p><a href="https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> getWordsInLongestSubsequence(int n, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> groups) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dp(n);
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">push_back</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">longest_length </span><span class="o">=</span> <span class="s">1;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">1;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">i</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">(</span><span class="na">groups</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">groups</span><span class="err">[</span><span class="na">j</span><span class="err">])</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">(</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">size</span><span class="err">()</span> <span class="err">!=</span> <span class="na">words</span><span class="err">[</span><span class="na">j</span><span class="err">].</span><span class="na">size</span><span class="err">())</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">(</span><span class="na">getHammingDistance</span><span class="err">(</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">words</span><span class="err">[</span><span class="na">j</span><span class="err">])</span> <span class="err">!=</span> <span class="na">1</span><span class="err">)</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">((</span><span class="na">dp</span><span class="err">[</span><span class="na">j</span><span class="err">].</span><span class="na">size</span><span class="err">()</span> <span class="err">+</span> <span class="na">1</span><span class="err">)</span> <span class="p">&gt;</span> dp[i].size()) {
+</span></span><span class="line"><span class="cl">                    dp[i] = dp[j];
+</span></span><span class="line"><span class="cl">                    dp[i].push_back(i);
+</span></span><span class="line"><span class="cl">                    longest_length = max(longest_length, int(dp[i].size()));
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> result;
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">(</span><span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">size</span><span class="err">()</span> <span class="err">==</span> <span class="na">longest_length</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span> <span class="err">(</span><span class="na">const</span> <span class="na">int</span><span class="err">&amp;</span> <span class="na">x</span> <span class="na">:</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="na">result</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">words</span><span class="err">[</span><span class="na">x</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">break</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">result</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">private:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">getHammingDistance</span><span class="err">(</span><span class="na">const</span> <span class="na">string</span><span class="err">&amp;</span> <span class="na">s</span><span class="err">,</span> <span class="na">const</span> <span class="na">string</span><span class="err">&amp;</span> <span class="na">t</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">dist </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">k </span><span class="o">=</span> <span class="s">s.size();</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">k</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="na">t</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="na">dist</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">dist</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

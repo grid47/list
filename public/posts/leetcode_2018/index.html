@@ -186,7 +186,52 @@
         <p><a href="https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool same(vector<span class="p">&lt;</span><span class="nt">char</span><span class="p">&gt;</span> <span class="err">&amp;</span>row, int start, int end, string <span class="err">&amp;</span>s) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(end - start + 1 != s.size()) return false;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int i = 0, n = s.size();
+</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">row</span><span class="err">[</span><span class="na">start</span> <span class="err">+</span> <span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span> <span class="err">&#39;</span> <span class="err">||</span> <span class="na">row</span><span class="err">[</span><span class="na">start</span> <span class="err">+</span> <span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">i </span><span class="o">=</span><span class="s">=</span> <span class="na">n</span><span class="err">)</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">i </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">row</span><span class="err">[</span><span class="na">end</span> <span class="na">-</span> <span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span> <span class="err">&#39;</span> <span class="err">||</span> <span class="na">row</span><span class="err">[</span><span class="na">end</span> <span class="na">-</span> <span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span>
+</span></span><span class="line"><span class="cl">              <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">i </span><span class="o">=</span><span class="s">=</span> <span class="na">n</span><span class="err">)</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>             
+</span></span><span class="line"><span class="cl">             
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">match</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>mtx, string <span class="err">&amp;</span>word) {
+</span></span><span class="line"><span class="cl">        int n = mtx[0].size();
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>row: mtx) {
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">int</span> <span class="na">start</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">while</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span> <span class="err">&amp;&amp;</span> <span class="na">row</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;#&#39;)</span> <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">start </span><span class="o">=</span> <span class="s">i;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">while</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span> <span class="err">&amp;&amp;</span> <span class="na">row</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="err">&#39;#&#39;)</span> <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">same</span><span class="err">(</span><span class="na">row</span><span class="err">,</span> <span class="na">start</span><span class="err">,</span> <span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">,</span> <span class="na">word</span><span class="err">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">placeWordInCrossword</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> board, string word) {
+</span></span><span class="line"><span class="cl">        int m = board.size(), n = board[0].size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt; trns(n, vector<span class="p">&lt;</span><span class="nt">char</span><span class="p">&gt;</span>(m));
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">trns</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">board</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">match</span><span class="err">(</span><span class="na">trns</span><span class="err">,</span> <span class="na">word</span><span class="err">)</span> <span class="err">||</span> <span class="na">match</span><span class="err">(</span><span class="na">board</span><span class="err">,</span> <span class="na">word</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

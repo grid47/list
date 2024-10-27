@@ -186,7 +186,32 @@
         <p><a href="https://leetcode.com/problems/maximum-running-time-of-n-computers/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool mx(int n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> bat, long long mid) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        long long net = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">bat.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">net</span> <span class="err">+=</span> <span class="na">min</span><span class="err">((</span><span class="na">long</span> <span class="na">long</span><span class="err">)</span><span class="na">bat</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">mid</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">net</span> <span class="p">&gt;</span>= mid * n;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    long long maxRunTime(int n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> bat) {
+</span></span><span class="line"><span class="cl">        long long sum = accumulate(bat.rbegin(), bat.rend(), 0L);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        long long l = 0, r = sum / n, ans = 0;
+</span></span><span class="line"><span class="cl">        while(l <span class="err">&lt;</span>= r) {
+</span></span><span class="line"><span class="cl">            long long mid = l + (r - l + 1) / 2;
+</span></span><span class="line"><span class="cl">            if (mx(n, bat, mid)) {
+</span></span><span class="line"><span class="cl">                ans = mid;
+</span></span><span class="line"><span class="cl">                l = mid + 1;
+</span></span><span class="line"><span class="cl">            } else r = mid - 1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

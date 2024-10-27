@@ -186,7 +186,72 @@
         <p><a href="https://leetcode.com/problems/most-profitable-path-in-a-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; adj;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> par, dis;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void dfs(int u, int p = 0, int d = 0) {
+</span></span><span class="line"><span class="cl">        dis[u] = d;
+</span></span><span class="line"><span class="cl">        par[u] = p;
+</span></span><span class="line"><span class="cl">        for(int v : adj[u]) {
+</span></span><span class="line"><span class="cl">            if (v == p) continue;
+</span></span><span class="line"><span class="cl">            dfs(v, u, d +1);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">     
+</span></span><span class="line"><span class="cl">    int dfs2(int u,vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span>amount,int p= 0){
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int ret = amount[u];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int mxc = -INT_MAX;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int v:adj[u]){
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if(v!=p){
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                mxc= max(mxc,dfs2(v,amount,u));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		//if the node is leaf we just return its amount
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(mxc==-INT_MAX)return ret;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        else return ret+mxc;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int mostProfitablePath(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges, int bob, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> amount) {
+</span></span><span class="line"><span class="cl">        int n = amount.size();
+</span></span><span class="line"><span class="cl">        adj.resize(n,vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>());
+</span></span><span class="line"><span class="cl">        for(auto<span class="err">&amp;</span>e:edges){
+</span></span><span class="line"><span class="cl">            adj[e[0]].push_back(e[1]);
+</span></span><span class="line"><span class="cl">            adj[e[1]].push_back(e[0]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        par.resize(n);
+</span></span><span class="line"><span class="cl">        dis.resize(n);
+</span></span><span class="line"><span class="cl">        dfs(0);
+</span></span><span class="line"><span class="cl">        int cur = bob;
+</span></span><span class="line"><span class="cl">        int bob_dis = 0;
+</span></span><span class="line"><span class="cl">		//update the path of from Bob to 0
+</span></span><span class="line"><span class="cl">        while(cur!=0){
+</span></span><span class="line"><span class="cl">            if(dis[cur]&gt;bob_dis){
+</span></span><span class="line"><span class="cl">                amount[cur] = 0;
+</span></span><span class="line"><span class="cl">            }else if(dis[cur]==bob_dis){
+</span></span><span class="line"><span class="cl">                amount[cur]/=2;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            cur = par[cur];
+</span></span><span class="line"><span class="cl">            bob_dis++;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return dfs2(0,amount);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

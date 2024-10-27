@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/count-words-obtained-after-adding-a-letter/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int wordCount(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> start, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> end) {
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> bit;
+</span></span><span class="line"><span class="cl">        for(auto it: start) {
+</span></span><span class="line"><span class="cl">            int mask = 0;
+</span></span><span class="line"><span class="cl">            for(char x: it)
+</span></span><span class="line"><span class="cl">                mask |= 1 <span class="err">&lt;&lt;</span> (x - &#39;a&#39;);
+</span></span><span class="line"><span class="cl">            bit.insert(mask);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int cnt = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(auto it: end) {
+</span></span><span class="line"><span class="cl">            int mask = 0;
+</span></span><span class="line"><span class="cl">            for(char x: it)
+</span></span><span class="line"><span class="cl">                mask |= 1 <span class="err">&lt;&lt;</span> (x - &#39;a&#39;);
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">26</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(((</span><span class="na">mask</span> <span class="p">&gt;</span>&gt; i) <span class="err">&amp;</span> 1) == 0) continue;
+</span></span><span class="line"><span class="cl">                int tmp = (mask ^ (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">i</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">bit</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">tmp</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">cnt</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">break</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">cnt</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

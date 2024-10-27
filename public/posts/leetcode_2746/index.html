@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/decremental-string-concatenation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public: 
+</span></span><span class="line"><span class="cl">    int n ; 
+</span></span><span class="line"><span class="cl">    int dp[1010][26][26] ;  
+</span></span><span class="line"><span class="cl">    int rec(int level , int first , int last , vector <span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> arr){
+</span></span><span class="line"><span class="cl">        if(level == n){
+</span></span><span class="line"><span class="cl">            return 0 ; 
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(dp[level][first][last] != -1){
+</span></span><span class="line"><span class="cl">            return dp[level][first][last] ; 
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int ans = 1e9 ;
+</span></span><span class="line"><span class="cl">        int t = (int)arr[level].size() ; 
+</span></span><span class="line"><span class="cl">        if(arr[level][t-1] - &#39;a&#39; == first){
+</span></span><span class="line"><span class="cl">            ans = min(ans , t-1 + rec(level+1 , arr[level][0] - &#39;a&#39; , last , arr) ) ; 
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        ans = min(ans , t + rec(level+1 , arr[level][0] - &#39;a&#39; , last , arr)) ; 
+</span></span><span class="line"><span class="cl">        if(arr[level][0] - &#39;a&#39; == last){
+</span></span><span class="line"><span class="cl">            ans = min(ans , t-1 + rec(level+1 , first , arr[level][t-1] - &#39;a&#39; , arr)) ; 
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        ans = min(ans , t + rec(level+1 , first , arr[level][t-1] - &#39;a&#39; , arr)) ; 
+</span></span><span class="line"><span class="cl">        return dp[level][first][last] = ans ; 
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int minimizeConcatenatedLength(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words) {
+</span></span><span class="line"><span class="cl">        n = (int)words.size() ; 
+</span></span><span class="line"><span class="cl">        memset(dp , -1 , sizeof(dp)) ; 
+</span></span><span class="line"><span class="cl">        int t = (int)words[0].size() ; 
+</span></span><span class="line"><span class="cl">        int ans = t + rec(1 , words[0][0] -&#39;a&#39; , words[0][t-1]-&#39;a&#39; , words) ; 
+</span></span><span class="line"><span class="cl">        return ans ; 
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

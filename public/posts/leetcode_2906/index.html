@@ -186,7 +186,50 @@
         <p><a href="https://leetcode.com/problems/construct-product-matrix/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; constructProductMatrix(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int n = grid.size();
+</span></span><span class="line"><span class="cl">        int m = grid[0].size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;ans(n,vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(m));
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;xx(n,vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(m));
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;yy(n,vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(m));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int mod = 12345;
+</span></span><span class="line"><span class="cl">        long long p = 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i=0; i<span class="p">&lt;</span><span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j</span><span class="o">=</span><span class="s">0;</span> <span class="na">j</span><span class="err">&lt;</span><span class="na">m</span><span class="err">;</span> <span class="na">j</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">xx</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">=</span> <span class="na">p</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">p</span> <span class="err">*=</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                <span class="na">p</span> <span class="err">%=</span> <span class="na">mod</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">p </span><span class="o">=</span> <span class="s">1;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="o">=</span><span class="s">n-1;</span> <span class="na">i</span><span class="p">&gt;</span>=0; i--){
+</span></span><span class="line"><span class="cl">            for(int j=m-1; j&gt;=0; j--){
+</span></span><span class="line"><span class="cl">                yy[i][j] = p;
+</span></span><span class="line"><span class="cl">                p *= grid[i][j];
+</span></span><span class="line"><span class="cl">                p %= mod;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i=0; i<span class="p">&lt;</span><span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j</span><span class="o">=</span><span class="s">0;</span> <span class="na">j</span><span class="err">&lt;</span><span class="na">m</span><span class="err">;</span> <span class="na">j</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">long</span> <span class="na">long</span> <span class="na">mul </span><span class="o">=</span> <span class="s">xx[i][j]</span> <span class="err">*</span> <span class="na">yy</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="na">ans</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">=</span> <span class="na">mul</span><span class="err">%</span><span class="na">mod</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

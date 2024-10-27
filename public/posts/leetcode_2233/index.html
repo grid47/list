@@ -186,7 +186,27 @@
         <p><a href="https://leetcode.com/problems/maximum-product-after-k-increments/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maximumProduct(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) {
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, greater<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>&gt; pq(nums.begin(), nums.end());
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(k--) {
+</span></span><span class="line"><span class="cl">            int mini = pq.top();
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">            pq.push(mini + 1);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        long long ans = 1, mod = (long) 1e9 + 7;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
+</span></span><span class="line"><span class="cl">            ans = ((ans % mod) * (pq.top() % mod)) % mod;
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/maximum-number-of-removable-characters/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int isSubseq(string <span class="err">&amp;</span>s, string <span class="err">&amp;</span>p, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> mp, int k) {
+</span></span><span class="line"><span class="cl">        int i = 0, j = 0;
+</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">s.size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">p</span><span class="err">.</span><span class="na">size</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&lt;=</span> <span class="na">k</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">p</span><span class="err">[</span><span class="na">j</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">j</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">j </span><span class="o">=</span><span class="s">=</span> <span class="na">p</span><span class="err">.</span><span class="na">size</span><span class="err">())</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">maximumRemovals</span><span class="err">(</span><span class="na">string</span> <span class="na">s</span><span class="err">,</span> <span class="na">string</span> <span class="na">p</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> rm) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> mp(s.size(), INT_MAX);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">rm.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">mp</span><span class="err">[</span><span class="na">rm</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">l </span><span class="o">=</span> <span class="s">0,</span> <span class="na">r </span><span class="o">=</span> <span class="s">rm.size()</span> <span class="na">-</span> <span class="na">1</span><span class="err">,</span> <span class="na">ans </span><span class="o">=</span> <span class="s">-1;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">l</span> <span class="err">&lt;=</span> <span class="na">r</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">mid </span><span class="o">=</span> <span class="s">l</span> <span class="err">+</span> <span class="err">(</span><span class="na">r</span> <span class="na">-</span> <span class="na">l</span> <span class="err">+</span> <span class="na">1</span><span class="err">)</span> <span class="err">/</span> <span class="na">2</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">isSubseq</span><span class="err">(</span><span class="na">s</span><span class="err">,</span> <span class="na">p</span><span class="err">,</span> <span class="na">mp</span><span class="err">,</span> <span class="na">mid</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">mid;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">l </span><span class="o">=</span> <span class="s">mid</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">r </span><span class="o">=</span> <span class="s">mid</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

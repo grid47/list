@@ -186,7 +186,40 @@
         <p><a href="https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int longestBeautifulSubstring(string s) {
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> idx;
+</span></span><span class="line"><span class="cl">        idx[&#39;a&#39;] = 0;
+</span></span><span class="line"><span class="cl">        idx[&#39;e&#39;] = 1;
+</span></span><span class="line"><span class="cl">        idx[&#39;i&#39;] = 2;
+</span></span><span class="line"><span class="cl">        idx[&#39;o&#39;] = 3;
+</span></span><span class="line"><span class="cl">        idx[&#39;u&#39;] = 4;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int j = 0, res = 0, n = s.size();
+</span></span><span class="line"><span class="cl">        int id = -1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">id</span> <span class="err">!=</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>                 
+</span></span><span class="line"><span class="cl">                    <span class="na">j </span><span class="o">=</span> <span class="s">i;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="na">id </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span><span class="na">else</span> <span class="na">if</span><span class="err">((</span><span class="na">idx</span><span class="err">[</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">&lt;</span> <span class="na">id</span><span class="err">)</span> <span class="err">||</span> <span class="err">(</span><span class="na">idx</span><span class="err">[</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="na">-</span> <span class="na">id</span> <span class="p">&gt;</span> 1)) {
+</span></span><span class="line"><span class="cl">                id = -1;
+</span></span><span class="line"><span class="cl">                j = i;
+</span></span><span class="line"><span class="cl">            } else if(idx[s[i]] - id == 1) {
+</span></span><span class="line"><span class="cl">                id = idx[s[i]];
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(id == 4) {
+</span></span><span class="line"><span class="cl">                res = max(res, i - j + 1);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

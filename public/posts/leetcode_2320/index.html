@@ -186,7 +186,35 @@
         <p><a href="https://leetcode.com/problems/count-number-of-ways-to-place-houses/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    long long mod = 1000000007;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    typedef long long ll;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dp;
+</span></span><span class="line"><span class="cl">    int countHousePlacements(int n) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        dp.resize(n + 1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> (2, -1));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        ll res = ( rec(n, 0) + rec(n, 1) ) % mod;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return (res * res ) % mod;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int rec(int n, bool filled) {
+</span></span><span class="line"><span class="cl">        if(n == 1) return 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(dp[n][filled] != -1)
+</span></span><span class="line"><span class="cl">            return dp[n][filled];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(filled)  return dp[n][filled] = rec(n - 1, !filled);
+</span></span><span class="line"><span class="cl">        else        return dp[n][filled] = ( rec(n - 1, filled) + rec(n - 1, !filled) ) % mod;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,25 @@
         <p><a href="https://leetcode.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minTrioDegree(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; al(n + 1);
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt(n + 1);
+</span></span><span class="line"><span class="cl">    int res = INT_MAX;
+</span></span><span class="line"><span class="cl">    for (auto <span class="err">&amp;</span>e: edges) {
+</span></span><span class="line"><span class="cl">        al[min(e[0], e[1])].insert(max(e[0], e[1]));
+</span></span><span class="line"><span class="cl">        ++cnt[e[0]];
+</span></span><span class="line"><span class="cl">        ++cnt[e[1]];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    for (auto t1 = 1; t1 <span class="err">&lt;</span>= n; ++t1)
+</span></span><span class="line"><span class="cl">        for (auto it2 = begin(al[t1]); it2 != end(al[t1]); ++it2)
+</span></span><span class="line"><span class="cl">            for (auto it3 = next(it2); it3 != end(al[t1]); ++it3)
+</span></span><span class="line"><span class="cl">                if (al[*it2].count(*it3))
+</span></span><span class="line"><span class="cl">                    res = min(res, cnt[t1] + cnt[*it2] + cnt[*it3] - 6);
+</span></span><span class="line"><span class="cl">    return res == INT_MAX ? -1 : res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/make-number-of-distinct-characters-equal/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool isItPossible(string w1, string w2) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> ma1, ma2;
+</span></span><span class="line"><span class="cl">        for(int x: w1)
+</span></span><span class="line"><span class="cl">            ma1[x]++;
+</span></span><span class="line"><span class="cl">        for(int x: w2)
+</span></span><span class="line"><span class="cl">            ma2[x]++;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(auto it1: ma1) {
+</span></span><span class="line"><span class="cl">            for(auto it2: ma2) {
+</span></span><span class="line"><span class="cl">                map<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> d1 = ma1, d2 = ma2;
+</span></span><span class="line"><span class="cl">                d1[it2.first]++;
+</span></span><span class="line"><span class="cl">                d2[it1.first]++;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                d1[it1.first]--;
+</span></span><span class="line"><span class="cl">                d2[it2.first]--;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if(d1[it1.first] == 0)
+</span></span><span class="line"><span class="cl">                    d1.erase(it1.first);
+</span></span><span class="line"><span class="cl">                if(d2[it2.first] == 0)
+</span></span><span class="line"><span class="cl">                    d2.erase(it2.first);
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if(d1.size() == d2.size()) return true;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return false;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

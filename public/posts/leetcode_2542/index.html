@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/maximum-subsequence-score/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; nums;
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    priority_queue<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, greater<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>&gt; pq;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    long long maxScore(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums2, int k) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        n = nums2.size(); 
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">nums</span><span class="err">.</span><span class="na">push_back</span><span class="err">({</span><span class="na">nums2</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">nums1</span><span class="err">[</span><span class="na">i</span><span class="err">]});</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">nums</span><span class="err">.</span><span class="na">rbegin</span><span class="err">(),</span> <span class="na">nums</span><span class="err">.</span><span class="na">rend</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">long</span> <span class="na">long</span> <span class="na">score </span><span class="o">=</span> <span class="s">0,</span> <span class="na">sum </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">auto</span><span class="err">&amp;</span> <span class="err">[</span><span class="na">n2</span><span class="err">,</span> <span class="na">n1</span><span class="err">]</span><span class="na">:</span> <span class="na">nums</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">n1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">sum</span> <span class="err">+=</span> <span class="na">n1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">pq</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="p">&gt;</span> k) {
+</span></span><span class="line"><span class="cl">                sum -= pq.top();
+</span></span><span class="line"><span class="cl">                pq.pop();
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(pq.size() == k)
+</span></span><span class="line"><span class="cl">            score = max(score, sum * n2);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return score;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

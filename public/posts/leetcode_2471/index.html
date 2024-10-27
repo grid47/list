@@ -186,7 +186,44 @@
         <p><a href="https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    int minimumOperations(TreeNode* root) {
+</span></span><span class="line"><span class="cl">        int cnt = 0;
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        q.push(root);
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            int sz = q.size();
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> arr, idx(sz);
+</span></span><span class="line"><span class="cl">            while(sz--) {
+</span></span><span class="line"><span class="cl">                auto it = q.front();
+</span></span><span class="line"><span class="cl">                q.pop();
+</span></span><span class="line"><span class="cl">                arr.push_back(it-&gt;val);
+</span></span><span class="line"><span class="cl">                if(it-&gt;left != NULL) q.push(it-&gt;left);
+</span></span><span class="line"><span class="cl">                if(it-&gt;right!= NULL) q.push(it-&gt;right);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">sz</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">iota</span><span class="err">(</span><span class="na">idx</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">idx</span><span class="err">.</span><span class="na">end</span><span class="err">(),</span> <span class="na">0</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">sort</span><span class="err">(</span><span class="na">idx</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">idx</span><span class="err">.</span><span class="na">end</span><span class="err">(),</span> <span class="err">[&amp;](</span><span class="na">int</span> <span class="na">i</span><span class="err">,</span> <span class="na">int</span> <span class="na">j</span><span class="err">)</span> <span class="err">{</span> <span class="na">return</span> <span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">arr</span><span class="err">[</span><span class="na">j</span><span class="err">];</span> <span class="err">});</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">idx</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(;</span> <span class="na">idx</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="na">i</span><span class="err">;</span> <span class="na">cnt</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">swap</span><span class="err">(</span><span class="na">idx</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">idx</span><span class="err">[</span><span class="na">idx</span><span class="err">[</span><span class="na">i</span><span class="err">]]);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">cnt</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

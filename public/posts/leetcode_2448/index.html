@@ -186,7 +186,40 @@
         <p><a href="https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    long long fn(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> cost, int x) {
+</span></span><span class="line"><span class="cl">        long long res = 0;
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res</span> <span class="err">+=</span> <span class="err">(</span><span class="na">long</span> <span class="na">long</span><span class="err">)</span><span class="na">abs</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="na">-</span> <span class="na">x</span><span class="err">)</span> <span class="err">*</span> <span class="na">cost</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="na">long</span> <span class="na">long</span> <span class="na">minCost</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> cost) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int l = nums[0], r = nums[0];
+</span></span><span class="line"><span class="cl">        for(int x: nums) {
+</span></span><span class="line"><span class="cl">            l = min(x, l);
+</span></span><span class="line"><span class="cl">            r = max(x, r);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        long long ans = fn(nums, cost, nums[0]);
+</span></span><span class="line"><span class="cl">        while(l <span class="err">&lt;</span>= r) {
+</span></span><span class="line"><span class="cl">            long long mid   = l + (r - l + 1) / 2;
+</span></span><span class="line"><span class="cl">            long long y1    = fn(nums, cost, mid    );
+</span></span><span class="line"><span class="cl">            long long y2    = fn(nums, cost, mid + 1);
+</span></span><span class="line"><span class="cl">            ans = min(y1, y2);
+</span></span><span class="line"><span class="cl">            if(y1 <span class="p">&lt;</span> <span class="nt">y2</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">r </span><span class="o">=</span> <span class="s">mid</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">l </span><span class="o">=</span> <span class="s">mid</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

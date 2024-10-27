@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int longestPalindrome(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words) {
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        int unpaired = 0;
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(string w: words) {
+</span></span><span class="line"><span class="cl">            if(w[0] == w[1]) {
+</span></span><span class="line"><span class="cl">                if(mp[w] &gt; 0) {
+</span></span><span class="line"><span class="cl">                    unpaired--;
+</span></span><span class="line"><span class="cl">                    ans += 4;
+</span></span><span class="line"><span class="cl">                    mp[w]--;
+</span></span><span class="line"><span class="cl">                } else {
+</span></span><span class="line"><span class="cl">                    unpaired++;
+</span></span><span class="line"><span class="cl">                    mp[w]++;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                string rev = w;
+</span></span><span class="line"><span class="cl">                reverse(rev.begin(), rev.end());
+</span></span><span class="line"><span class="cl">                if(mp[rev] &gt; 0) {
+</span></span><span class="line"><span class="cl">                    ans += 4;
+</span></span><span class="line"><span class="cl">                    mp[rev]--;
+</span></span><span class="line"><span class="cl">                } else mp[w]++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if (unpaired &gt; 0) ans += 2;
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

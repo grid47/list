@@ -22,6 +22,29 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int countCompleteSubarrays(vector<int>& nums) {
+        int cnt = 0;
+        set<int> dist;
+        map<int, int> mp;
+        for(int x: nums)
+            dist.insert(x);
+        int cur = 0, req = dist.size();
+        int j = 0, n = nums.size();
+        for(int i = 0; i < n; i++) {
+            mp[nums[i]]++;
+            if(mp.size() < req) continue;
+            while(mp.size() >= req) {
+                cnt+= (n - i);
+                mp[nums[j]]--;
+                if(mp[nums[j]] == 0)
+                    mp.erase(nums[j]);
+                j++;
+            }
+        }
+        return cnt;
+    }
+};
 {{< /highlight >}}
 

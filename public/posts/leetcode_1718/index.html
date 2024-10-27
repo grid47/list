@@ -186,7 +186,53 @@
         <p><a href="https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> constructDistancedSequence(int n) {
+</span></span><span class="line"><span class="cl">        this-&gt; n = n;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans(2 * n - 1, 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> vis(n + 1, 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        bt(ans, vis, 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool bt(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>ans, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>vis, int idx) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(idx == ans.size()) return true;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(ans[idx] != 0) return bt(ans, vis, idx + 1);
+</span></span><span class="line"><span class="cl">        else {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            for(int i = n; i &gt;= 1; i--) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                if(vis[i]) continue;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                vis[i] = 1;
+</span></span><span class="line"><span class="cl">                ans[idx] = i;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if(i == 1) {
+</span></span><span class="line"><span class="cl">                    if(bt(ans, vis, idx + 1)) return true;
+</span></span><span class="line"><span class="cl">                } else if (idx + i <span class="p">&lt;</span> <span class="nt">ans.size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">ans</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">ans</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">bt</span><span class="err">(</span><span class="na">ans</span><span class="err">,</span> <span class="na">vis</span><span class="err">,</span> <span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">))</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">ans</span><span class="err">[</span><span class="na">idx</span> <span class="err">+</span> <span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">0</span><span class="err">;</span>                    
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">=</span> <span class="na">0</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">vis</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">0</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

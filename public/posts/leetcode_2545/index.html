@@ -186,7 +186,50 @@
         <p><a href="https://leetcode.com/problems/sort-the-students-by-their-kth-score/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int k;
+</span></span><span class="line"><span class="cl">    int partition(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> score, int low, int high) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      // select the rightmost element as pivot
+</span></span><span class="line"><span class="cl">      vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> pivot = score[high];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      // pointer for greater element
+</span></span><span class="line"><span class="cl">      int i = (low - 1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      // traverse each element of the array
+</span></span><span class="line"><span class="cl">      // compare them with the pivot
+</span></span><span class="line"><span class="cl">      for (int j = low; j <span class="p">&lt;</span> <span class="nt">high</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span> <span class="err">(</span><span class="na">score</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">k</span><span class="err">]</span> <span class="p">&gt;</span> pivot[k]) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          // if element smaller than pivot is found
+</span></span><span class="line"><span class="cl">          // swap it with the greater element pointed by i
+</span></span><span class="line"><span class="cl">          i++;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">          // swap element at i with element at j
+</span></span><span class="line"><span class="cl">          swap(score[i], score[j]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      // swap pivot with the greater element at i
+</span></span><span class="line"><span class="cl">      swap(score[i + 1], score[high]);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      // return the partition point
+</span></span><span class="line"><span class="cl">      return (i + 1);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    void quickSort(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> score, int low, int high) {
+</span></span><span class="line"><span class="cl">        if (low <span class="p">&lt;</span> <span class="nt">high</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">pi </span><span class="o">=</span> <span class="s">partition(score,</span> <span class="na">low</span><span class="err">,</span> <span class="na">high</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">quickSort</span><span class="err">(</span><span class="na">score</span><span class="err">,</span> <span class="na">low</span><span class="err">,</span> <span class="na">pi</span> <span class="na">-</span> <span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">quickSort</span><span class="err">(</span><span class="na">score</span><span class="err">,</span> <span class="na">pi</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">high</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; sortTheStudents(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> score, int k) {
+</span></span><span class="line"><span class="cl">        this-&gt;k = k;
+</span></span><span class="line"><span class="cl">        quickSort(score, 0, score.size() - 1);
+</span></span><span class="line"><span class="cl">        return score;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

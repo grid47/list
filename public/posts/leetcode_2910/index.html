@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/minimum-number-of-groups-to-create-a-valid-assignment/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int split(unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>cnt, int g1) {
+</span></span><span class="line"><span class="cl">        int groups = 0, g = g1 - 1;
+</span></span><span class="line"><span class="cl">        for (const auto <span class="err">&amp;</span>[_, c] : cnt) {
+</span></span><span class="line"><span class="cl">            int group_cnt = c / g1, last_group = c % g1;
+</span></span><span class="line"><span class="cl">            if (last_group <span class="err">&amp;&amp;</span> last_group + group_cnt <span class="p">&lt;</span> <span class="nt">g</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">INT_MAX</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">groups</span> <span class="err">+=</span> <span class="na">group_cnt</span> <span class="err">+</span> <span class="err">(</span><span class="na">last_group</span> <span class="p">&gt;</span> 0);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return groups;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int minGroupsForValidAssignment(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> cnt;
+</span></span><span class="line"><span class="cl">        for (auto n : nums)
+</span></span><span class="line"><span class="cl">            ++cnt[n];
+</span></span><span class="line"><span class="cl">        int g = min_element(begin(cnt), end(cnt), [](const auto <span class="err">&amp;</span>p1, const auto <span class="err">&amp;</span>p2){
+</span></span><span class="line"><span class="cl">            return p1.second <span class="p">&lt;</span> <span class="nt">p2.second</span><span class="err">;})</span><span class="na">-</span><span class="p">&gt;</span>second;
+</span></span><span class="line"><span class="cl">        for (; split(cnt, g + 1) == INT_MAX; --g) ;
+</span></span><span class="line"><span class="cl">        return split(cnt, g + 1);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,71 @@
         <p><a href="https://leetcode.com/problems/minimize-the-total-price-of-the-trips/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> frq;
+</span></span><span class="line"><span class="cl">    int totalCost = 0;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; grid;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> price;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool dfs(int og, int ed, int par) {
+</span></span><span class="line"><span class="cl">        if(og == ed) {
+</span></span><span class="line"><span class="cl">            return true;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        for(int x: grid[og]) {
+</span></span><span class="line"><span class="cl">            if(x != par <span class="err">&amp;&amp;</span> dfs(x, ed, og)) {
+</span></span><span class="line"><span class="cl">                frq[x]++;
+</span></span><span class="line"><span class="cl">                totalCost += price[x];
+</span></span><span class="line"><span class="cl">                return true;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return false;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int memo[52][52][2];
+</span></span><span class="line"><span class="cl">    int dp(int node, int par, bool canReduce) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(memo[node][par + 1][canReduce] != -1) return memo[node][par + 1][canReduce];
+</span></span><span class="line"><span class="cl">        int res = 0;
+</span></span><span class="line"><span class="cl">        if(canReduce)
+</span></span><span class="line"><span class="cl">            res += (price[node]/2) * frq[node];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int x: grid[node]) {
+</span></span><span class="line"><span class="cl">            int cur = 0;
+</span></span><span class="line"><span class="cl">            if(x != par) {
+</span></span><span class="line"><span class="cl">                if(canReduce) {
+</span></span><span class="line"><span class="cl">                    cur = dp(x, node, false);                    
+</span></span><span class="line"><span class="cl">                } else {
+</span></span><span class="line"><span class="cl">                    cur = max(dp(x, node, true), dp(x, node, false));                                        
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                res += cur;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return memo[node][par + 1][canReduce] = res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int minimumTotalPrice(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> price, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> trips) {
+</span></span><span class="line"><span class="cl">        this-&gt;price = price;
+</span></span><span class="line"><span class="cl">        frq.resize(n, 0);
+</span></span><span class="line"><span class="cl">        grid.resize(n);
+</span></span><span class="line"><span class="cl">        for(auto e: edges) {
+</span></span><span class="line"><span class="cl">            grid[e[0]].insert(e[1]);
+</span></span><span class="line"><span class="cl">            grid[e[1]].insert(e[0]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        for(auto t: trips) {
+</span></span><span class="line"><span class="cl">            frq[t[0]]++;
+</span></span><span class="line"><span class="cl">            totalCost += price[t[0]];
+</span></span><span class="line"><span class="cl">            dfs(t[0], t[1], -1);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        int red = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">red </span><span class="o">=</span> <span class="s">max(red,</span> <span class="na">max</span><span class="err">(</span><span class="na">dp</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">-1</span><span class="err">,</span> <span class="na">false</span><span class="err">),</span> <span class="na">dp</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">-1</span><span class="err">,</span> <span class="na">true</span><span class="err">)));</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">totalCost</span> <span class="na">-</span> <span class="na">red</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

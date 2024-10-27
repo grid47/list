@@ -22,6 +22,11 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int findDelayedArrivalTime(int at, int dt) {
+        return (at + dt) % 24;
+    }
+};
 {{< /highlight >}}
 

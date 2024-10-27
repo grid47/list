@@ -186,7 +186,50 @@
         <p><a href="https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-subsequences/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    string p;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool pal(string <span class="err">&amp;</span>s) {
+</span></span><span class="line"><span class="cl">        int i = 0, j = s.size() - 1;
+</span></span><span class="line"><span class="cl">        while(i <span class="err">&lt;</span>= j) {
+</span></span><span class="line"><span class="cl">            if(s[i] != s[j]) return false;
+</span></span><span class="line"><span class="cl">            i++; j--;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx, string <span class="err">&amp;</span>s1, string <span class="err">&amp;</span>s2) {
+</span></span><span class="line"><span class="cl">        if(idx == n) {
+</span></span><span class="line"><span class="cl">            if(pal(s1) <span class="err">&amp;&amp;</span> pal(s2)) {
+</span></span><span class="line"><span class="cl">                return s1.size() * s2.size();
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            return 0;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        s1.push_back(p[idx]);
+</span></span><span class="line"><span class="cl">        int ans = dp(idx + 1, s1, s2);
+</span></span><span class="line"><span class="cl">        s1.pop_back();        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        s2.push_back(p[idx]);        
+</span></span><span class="line"><span class="cl">        ans = max(ans, dp(idx + 1, s1, s2));
+</span></span><span class="line"><span class="cl">        s2.pop_back();        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        ans = max(ans, dp(idx + 1, s1, s2));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        // return mp[idx][s1][s2] = ans;
+</span></span><span class="line"><span class="cl">        return ans;        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int maxProduct(string s) {
+</span></span><span class="line"><span class="cl">        p = s;
+</span></span><span class="line"><span class="cl">        n = s.size();
+</span></span><span class="line"><span class="cl">        string s1 = &#34;&#34;, s2 = &#34;&#34;;
+</span></span><span class="line"><span class="cl">        return dp(0, s1, s2);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

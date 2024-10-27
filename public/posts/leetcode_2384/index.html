@@ -186,7 +186,29 @@
         <p><a href="https://leetcode.com/problems/largest-palindromic-number/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string largestPalindromic(string num) {
+</span></span><span class="line"><span class="cl">        int cnt[10] = {}, mid = -1;
+</span></span><span class="line"><span class="cl">        string s;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(char c: num) cnt[c - &#39;0&#39;]++;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 9; i &gt; 0; i--) {
+</span></span><span class="line"><span class="cl">            if(cnt[i] == 0) continue;
+</span></span><span class="line"><span class="cl">            s.append(cnt[i]/2, i + &#39;0&#39;);
+</span></span><span class="line"><span class="cl">            if(mid == -1 <span class="err">&amp;&amp;</span> (cnt[i]<span class="err">&amp;</span>1))
+</span></span><span class="line"><span class="cl">                    mid = i;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(s.size() <span class="err">&amp;&amp;</span> cnt[0]) s.append(cnt[0]/2, &#39;0&#39;);
+</span></span><span class="line"><span class="cl">        mid = mid == -1 <span class="err">&amp;&amp;</span> (cnt[0] <span class="err">&amp;</span> 1)? 0: mid;
+</span></span><span class="line"><span class="cl">        if(mid != -1) s.push_back(mid + &#39;0&#39;);
+</span></span><span class="line"><span class="cl">        s.insert(s.end(), s.rbegin() + (mid == -1? 0:1), s.rend());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return s != &#34;&#34;? s : &#34;0&#34;;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

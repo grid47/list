@@ -186,7 +186,57 @@
         <p><a href="https://leetcode.com/problems/meeting-rooms-iii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">bool cmp(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>a, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>b) {
+</span></span><span class="line"><span class="cl">    return a[0] <span class="p">&lt;</span> <span class="nt">b</span><span class="err">[</span><span class="na">0</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">mostBooked</span><span class="err">(</span><span class="na">int</span> <span class="na">n</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> meets) {
+</span></span><span class="line"><span class="cl">        sort(meets.begin(), meets.end(), cmp);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;, greater<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt; rvd;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, greater<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>&gt; free;
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> frq(n, 0);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">free</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="err">&amp;</span><span class="na">t</span> <span class="na">:</span> <span class="na">meets</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">s </span><span class="o">=</span> <span class="s">t[0],</span> <span class="na">e </span><span class="o">=</span> <span class="s">t[1];</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(!</span><span class="na">rvd</span><span class="err">.</span><span class="na">empty</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">rvd</span><span class="err">.</span><span class="na">top</span><span class="err">().</span><span class="na">first</span> <span class="err">&lt;=</span> <span class="na">s</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">free</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">rvd</span><span class="err">.</span><span class="na">top</span><span class="err">().</span><span class="na">second</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">rvd</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">free</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="p">&gt;</span> 0) {
+</span></span><span class="line"><span class="cl">                int room = free.top();
+</span></span><span class="line"><span class="cl">                free.pop();
+</span></span><span class="line"><span class="cl">                rvd.push({e, room});
+</span></span><span class="line"><span class="cl">                frq[room]++;
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                long long newHalt = rvd.top().first + (e - s);
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                int room = rvd.top().second;
+</span></span><span class="line"><span class="cl">                rvd.pop();
+</span></span><span class="line"><span class="cl">                rvd.push({newHalt, room});
+</span></span><span class="line"><span class="cl">                frq[room]++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int mxi = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">frq</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="p">&gt;</span> frq[mxi])
+</span></span><span class="line"><span class="cl">                mxi = i;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return mxi;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

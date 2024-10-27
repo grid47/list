@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/find-the-maximum-divisibility-score/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maxDivScore(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> div) {
+</span></span><span class="line"><span class="cl">        int n = div.size();
+</span></span><span class="line"><span class="cl">        int m = nums.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt(n, 0);
+</span></span><span class="line"><span class="cl">        int mx = 0, idx = *min_element(div.begin(), div.end());
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">x:</span> <span class="na">mp</span><span class="err">[</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">cnt</span><span class="err">[</span><span class="na">x</span><span class="err">]++;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">cnt</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="p">&gt;</span> mx || (cnt[x] == mx <span class="err">&amp;&amp;</span> div[x] <span class="p">&lt;</span> <span class="nt">div</span><span class="err">[</span><span class="na">idx</span><span class="err">]))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">mx </span><span class="o">=</span> <span class="s">cnt[x];</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">idx </span><span class="o">=</span> <span class="s">x;</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">%</span> <span class="na">div</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">mp</span><span class="err">[</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]].</span><span class="na">push_back</span><span class="err">(</span><span class="na">j</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">cnt</span><span class="err">[</span><span class="na">j</span><span class="err">]++;</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">if</span><span class="err">(</span><span class="na">cnt</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="p">&gt;</span> mx || (cnt[j] == mx <span class="err">&amp;&amp;</span> div[j] <span class="p">&lt;</span> <span class="nt">div</span><span class="err">[</span><span class="na">idx</span><span class="err">]))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="na">mx </span><span class="o">=</span> <span class="s">cnt[j];</span>
+</span></span><span class="line"><span class="cl">                            <span class="na">idx </span><span class="o">=</span> <span class="s">j;</span>
+</span></span><span class="line"><span class="cl">                        <span class="err">}</span>                        
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">mx </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">?</span> <span class="na">idx:div</span><span class="err">[</span><span class="na">idx</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

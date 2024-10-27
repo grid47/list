@@ -186,7 +186,47 @@
         <p><a href="https://leetcode.com/problems/maximum-or/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    long long maximumOr(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) 
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        //prefix or
+</span></span><span class="line"><span class="cl">        //suffix or
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span>prefixor;
+</span></span><span class="line"><span class="cl">        for(int i = 0 ; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">()</span> <span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span> <span class="na">prefixor</span><span class="err">.</span><span class="na">push_back</span><span class="err">((</span><span class="na">1LL</span> <span class="err">*</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]));</span>
+</span></span><span class="line"><span class="cl">            <span class="na">else</span> <span class="na">prefixor</span><span class="err">.</span><span class="na">push_back</span><span class="err">(((</span><span class="na">1LL</span><span class="err">*</span><span class="na">prefixor</span><span class="err">.</span><span class="na">back</span><span class="err">())</span> <span class="err">|</span> <span class="err">(</span><span class="na">1LL</span><span class="err">*</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">])));</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="p">&gt;</span>suffixor;
+</span></span><span class="line"><span class="cl">        for(int i = nums.size() - 1; i &gt;= 0; i--)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            if(i == (nums.size()-1))  suffixor.push_back((1LL * nums[i]));
+</span></span><span class="line"><span class="cl">            else suffixor.push_back(((1LL*suffixor.back()) | (1LL*nums[i])));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        reverse(suffixor.begin(),suffixor.end());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        long long ans = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0 ; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">()</span> <span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="err">{</span> 
+</span></span><span class="line"><span class="cl">            <span class="na">long</span> <span class="na">long</span> <span class="na">int</span> <span class="na">left </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">long</span> <span class="na">long</span> <span class="na">int</span> <span class="na">self</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">long</span> <span class="na">long</span> <span class="na">int</span> <span class="na">right </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">i-1</span><span class="err">)</span> <span class="p">&gt;</span>= 0)
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                left = prefixor[i-1];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            self = (nums[i] * pow(2,k));
+</span></span><span class="line"><span class="cl">            if((i+1) <span class="err">&lt;</span>= nums.size()-1)
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                right = suffixor[i+1];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            ans = max(ans , left | self | right);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

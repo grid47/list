@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    long long kthLargestLevelSum(TreeNode* root, int k) {
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="p">&gt;</span>, greater<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span>&gt; pq;
+</span></span><span class="line"><span class="cl">        if(!root) return 0;
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        q.push(root);
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            int sz = q.size();
+</span></span><span class="line"><span class="cl">            long long sum = 0;
+</span></span><span class="line"><span class="cl">            while(sz--) {
+</span></span><span class="line"><span class="cl">                auto it = q.front();
+</span></span><span class="line"><span class="cl">                sum += it-&gt;val;
+</span></span><span class="line"><span class="cl">                q.pop();
+</span></span><span class="line"><span class="cl">                if(it-&gt;left) q.push(it-&gt;left);
+</span></span><span class="line"><span class="cl">                if(it-&gt;right) q.push(it-&gt;right);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            pq.push(sum);
+</span></span><span class="line"><span class="cl">            if(pq.size() &gt; k) pq.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(pq.size() <span class="p">&lt;</span> <span class="nt">k</span><span class="err">)</span> <span class="na">return</span> <span class="na">-1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">pq</span><span class="err">.</span><span class="na">top</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

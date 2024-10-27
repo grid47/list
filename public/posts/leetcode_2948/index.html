@@ -186,7 +186,41 @@
         <p><a href="https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> lexicographicallySmallestArray(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int limit) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; b;
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">b</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">make_pair</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">i</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">b</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">b</span><span class="err">.</span><span class="na">end</span><span class="err">(),</span> <span class="err">[](</span><span class="na">const</span> <span class="na">auto</span><span class="err">&amp;</span> <span class="na">x</span><span class="err">,</span> <span class="na">const</span> <span class="na">auto</span><span class="err">&amp;</span> <span class="na">y</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">x</span><span class="err">.</span><span class="na">first</span> <span class="err">&lt;</span> <span class="na">y</span><span class="err">.</span><span class="na">first</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">});</span>
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt; c = {{b[0]}};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for (int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">(</span><span class="na">b</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">first</span> <span class="na">-</span> <span class="na">b</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">].</span><span class="na">first</span> <span class="err">&lt;=</span> <span class="na">limit</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">c</span><span class="err">.</span><span class="na">back</span><span class="err">().</span><span class="na">push_back</span><span class="err">(</span><span class="na">b</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">else</span>
+</span></span><span class="line"><span class="cl">                <span class="na">c</span><span class="err">.</span><span class="na">push_back</span><span class="err">({</span><span class="na">b</span><span class="err">[</span><span class="na">i</span><span class="err">]});</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">internal</span> <span class="na">sorting</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span> <span class="err">(</span><span class="na">const</span> <span class="na">auto</span><span class="err">&amp;</span> <span class="na">t</span> <span class="na">:</span> <span class="na">c</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> ind;
+</span></span><span class="line"><span class="cl">            for (const auto<span class="err">&amp;</span> p : t)
+</span></span><span class="line"><span class="cl">                ind.push_back(p.second);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            sort(ind.begin(), ind.end());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            for (int i = 0; i <span class="p">&lt;</span> <span class="nt">ind.size</span><span class="err">();</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">nums</span><span class="err">[</span><span class="na">ind</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">=</span> <span class="na">t</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">first</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">nums</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

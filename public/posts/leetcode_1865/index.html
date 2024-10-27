@@ -186,7 +186,43 @@
         <p><a href="https://leetcode.com/problems/finding-pairs-with-a-certain-sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class FindSumPairs {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums1, nums2;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mtx;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">    int m, n;
+</span></span><span class="line"><span class="cl">    FindSumPairs(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums2) {
+</span></span><span class="line"><span class="cl">        this-&gt;nums1 = nums1;
+</span></span><span class="line"><span class="cl">        this-&gt;nums2 = nums2;
+</span></span><span class="line"><span class="cl">        m = nums2.size(), n = nums1.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">nums2.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">[</span><span class="na">nums2</span><span class="err">[</span><span class="na">i</span><span class="err">]]++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">add</span><span class="err">(</span><span class="na">int</span> <span class="na">index</span><span class="err">,</span> <span class="na">int</span> <span class="na">val</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">key </span><span class="o">=</span> <span class="s">nums2[index];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">nums2</span><span class="err">[</span><span class="na">index</span><span class="err">]</span> <span class="err">+=</span> <span class="na">val</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">mp</span><span class="err">[</span><span class="na">key</span><span class="err">]</span><span class="na">--</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">mp</span><span class="err">[</span><span class="na">nums2</span><span class="err">[</span><span class="na">index</span><span class="err">]]++;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">count</span><span class="err">(</span><span class="na">int</span> <span class="na">tot</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">res </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res</span> <span class="err">+=</span> <span class="na">mp</span><span class="err">[</span><span class="na">tot</span> <span class="na">-</span> <span class="na">nums1</span><span class="err">[</span><span class="na">i</span><span class="err">]];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Your</span> <span class="na">FindSumPairs</span> <span class="na">object</span> <span class="na">will</span> <span class="na">be</span> <span class="na">instantiated</span> <span class="na">and</span> <span class="na">called</span> <span class="na">as</span> <span class="na">such:</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">FindSumPairs</span><span class="err">*</span> <span class="na">obj </span><span class="o">=</span> <span class="s">new</span> <span class="na">FindSumPairs</span><span class="err">(</span><span class="na">nums1</span><span class="err">,</span> <span class="na">nums2</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">obj-</span><span class="p">&gt;</span>add(index,val);
+</span></span><span class="line"><span class="cl"> * int param_2 = obj-&gt;count(tot);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

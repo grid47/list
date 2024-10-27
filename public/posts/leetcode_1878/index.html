@@ -186,7 +186,34 @@
         <p><a href="https://leetcode.com/problems/get-biggest-three-rhombus-sums-in-a-grid/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    typedef long long ll;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> getBiggestThree(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        int m = grid.size(), n = grid[0].size();
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> s;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">sz </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">+</span> <span class="na">sz</span> <span class="err">&lt;</span> <span class="na">m</span> <span class="err">&amp;&amp;</span> <span class="na">i</span> <span class="na">-</span> <span class="na">sz</span> <span class="p">&gt;</span>= 0 <span class="err">&amp;&amp;</span> j + 2 * sz <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">sz</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    
+</span></span><span class="line"><span class="cl">                    <span class="na">ll</span> <span class="na">x </span><span class="o">=</span> <span class="s">i,</span> <span class="na">y </span><span class="o">=</span> <span class="s">j,</span> <span class="na">rsum </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">do</span> <span class="na">rsum</span> <span class="err">+=</span> <span class="na">grid</span><span class="err">[</span><span class="na">x</span><span class="err">++][</span><span class="na">y</span><span class="err">++];</span> <span class="na">while</span><span class="err">(</span><span class="na">x</span> <span class="err">&lt;</span> <span class="na">i</span> <span class="err">+</span> <span class="na">sz</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">sz</span> <span class="p">&gt;</span> 0) {
+</span></span><span class="line"><span class="cl">                        
+</span></span><span class="line"><span class="cl">                        do rsum += grid[x--][y++]; while(y <span class="p">&lt;</span> <span class="nt">j</span> <span class="err">+</span> <span class="na">2</span> <span class="err">*</span> <span class="na">sz</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">do</span> <span class="na">rsum</span> <span class="err">+=</span> <span class="na">grid</span><span class="err">[</span><span class="na">x--</span><span class="err">][</span><span class="na">y--</span><span class="err">];</span> <span class="na">while</span><span class="err">(</span><span class="na">x</span> <span class="p">&gt;</span> i - sz);
+</span></span><span class="line"><span class="cl">                        do rsum += grid[x++][y--]; while(x <span class="p">&lt;</span> <span class="nt">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                        
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">s</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">rsum</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="p">&gt;</span> 3) {
+</span></span><span class="line"><span class="cl">                        s.erase(begin(s));}
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        return vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(rbegin(s), rend(s));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

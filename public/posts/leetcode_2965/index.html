@@ -186,7 +186,74 @@
         <p><a href="https://leetcode.com/problems/find-missing-and-repeated-values/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> findMissingAndRepeatedValues(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        int first = 0;
+</span></span><span class="line"><span class="cl">        int sec = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int n = grid.size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        //xor from 1 to n^2
+</span></span><span class="line"><span class="cl">        for(int i=1;i<span class="err">&lt;</span>=n*n;i++){
+</span></span><span class="line"><span class="cl">            first = first ^ i;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        //xor all element from array
+</span></span><span class="line"><span class="cl">        for(int i=0;i<span class="p">&lt;</span><span class="nt">n</span><span class="err">;</span><span class="na">i</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j</span><span class="o">=</span><span class="s">0;j&lt;n;j++){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">sec </span><span class="o">=</span> <span class="s">sec</span> <span class="err">^</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">xorboth </span><span class="o">=</span> <span class="s">first</span> <span class="err">^</span> <span class="na">sec</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">diff_bit_pos </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span><span class="na">find</span> <span class="na">differentiating</span> <span class="na">bit</span> <span class="na">postion</span> <span class="na">from</span> <span class="na">back</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="o">=</span><span class="s">0;i&lt;32;i++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">xorboth</span> <span class="err">&amp;</span> <span class="err">(</span><span class="na">1</span><span class="err">&lt;&lt;</span><span class="na">i</span><span class="err">)))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">diff_bit_pos </span><span class="o">=</span> <span class="s">i;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">break</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">ans0 </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">ans1 </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">//</span><span class="na">differentiate</span> <span class="na">the</span> <span class="na">both</span> <span class="na">according</span> <span class="na">to</span> <span class="na">the</span> <span class="na">diff_bit_pos</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="o">=</span><span class="s">1;i&lt;=n*n;i++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">&amp;</span> <span class="err">(</span><span class="na">1</span><span class="err">&lt;&lt;</span><span class="na">diff_bit_pos</span><span class="err">)){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans0</span> <span class="err">^=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">else</span><span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans1</span> <span class="err">^=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="o">=</span><span class="s">0;i&lt;n;i++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j</span><span class="o">=</span><span class="s">0;j&lt;n;j++){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">&amp;</span> <span class="err">(</span><span class="na">1</span><span class="err">&lt;&lt;</span><span class="na">diff_bit_pos</span><span class="err">)){</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">ans0</span> <span class="err">^=</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="na">else</span><span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">ans1</span> <span class="err">^=</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">//</span><span class="na">finding</span> <span class="na">the</span> <span class="na">order</span> <span class="na">of</span> <span class="na">answer</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="o">=</span><span class="s">0;i&lt;n;i++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j</span><span class="o">=</span><span class="s">0;j&lt;n;j++){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">ans0</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">//</span><span class="na">if</span> <span class="na">ans0</span> <span class="na">is</span> <span class="na">found</span> <span class="na">then</span> <span class="na">its</span> <span class="na">repeating</span> <span class="na">number</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">return</span> <span class="err">{</span><span class="na">ans0</span> <span class="err">,</span> <span class="na">ans1</span><span class="err">};</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">//</span><span class="na">if</span> <span class="na">ans0</span> <span class="na">is</span> <span class="na">found</span> <span class="na">then</span> <span class="na">its</span> <span class="na">not</span> <span class="na">a</span> <span class="na">repeating</span> <span class="na">number</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="err">{</span><span class="na">ans1</span> <span class="err">,</span> <span class="na">ans0</span><span class="err">};</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

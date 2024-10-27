@@ -186,7 +186,65 @@
         <p><a href="https://leetcode.com/problems/number-of-orders-in-the-backlog/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int getNumberOfBacklogOrders(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> orders) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int mod = (int) (1e9 + 7);
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt;, greater<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; sell;
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt;, less<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; buy;        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(auto it: orders) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(it[2] == 0) { // For a buy order
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> top;
+</span></span><span class="line"><span class="cl">                while(!sell.empty() <span class="err">&amp;&amp;</span> sell.top().first <span class="err">&lt;</span>= it[0] <span class="err">&amp;&amp;</span> it[1]) {
+</span></span><span class="line"><span class="cl">                    top = sell.top();
+</span></span><span class="line"><span class="cl">                    sell.pop();
+</span></span><span class="line"><span class="cl">                    if(top.second &gt; it[1]) {
+</span></span><span class="line"><span class="cl">                        top.second -= it[1];
+</span></span><span class="line"><span class="cl">                        it[1] = 0;
+</span></span><span class="line"><span class="cl">                        sell.push(top);
+</span></span><span class="line"><span class="cl">                    } else {
+</span></span><span class="line"><span class="cl">                        it[1] -= top.second;
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                if(it[1] &gt; 0) buy.push({it[0], it[1]});
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            } else if(it[2] == 1) {
+</span></span><span class="line"><span class="cl">                pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> top;
+</span></span><span class="line"><span class="cl">                while(!buy.empty() <span class="err">&amp;&amp;</span> buy.top().first &gt;= it[0] <span class="err">&amp;&amp;</span> it[1]) {
+</span></span><span class="line"><span class="cl">                    top = buy.top();
+</span></span><span class="line"><span class="cl">                    buy.pop();
+</span></span><span class="line"><span class="cl">                    if(top.second &gt; it[1]) {
+</span></span><span class="line"><span class="cl">                        top.second -= it[1];
+</span></span><span class="line"><span class="cl">                        it[1] = 0;
+</span></span><span class="line"><span class="cl">                        buy.push(top);
+</span></span><span class="line"><span class="cl">                    } else {
+</span></span><span class="line"><span class="cl">                        it[1] -= top.second;
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                if(it[1] &gt; 0) sell.push({it[0], it[1]});              
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int cnt = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!sell.empty()) {
+</span></span><span class="line"><span class="cl">            auto top = sell.top();
+</span></span><span class="line"><span class="cl">            cnt = (cnt + top.second) % mod;
+</span></span><span class="line"><span class="cl">            sell.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        while(!buy.empty()) {
+</span></span><span class="line"><span class="cl">            auto top = buy.top();
+</span></span><span class="line"><span class="cl">            cnt = (cnt + top.second) % mod;
+</span></span><span class="line"><span class="cl">            buy.pop();
+</span></span><span class="line"><span class="cl">        }        
+</span></span><span class="line"><span class="cl">        return cnt;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

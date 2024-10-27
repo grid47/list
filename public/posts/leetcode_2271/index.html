@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/maximum-white-tiles-covered-by-a-carpet/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maximumWhiteTiles(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> t, int len) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int n = t.size(), res = 0,
+</span></span><span class="line"><span class="cl">            cover = 0, j = 0, partial = 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        sort(t.begin(), t.end());
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">res</span> <span class="err">&lt;</span> <span class="na">len</span> <span class="err">;</span> <span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">t</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="err">+</span> <span class="na">len</span> <span class="p">&gt;</span> t[i][1]) {
+</span></span><span class="line"><span class="cl">                cover += t[i][1] - t[i][0] + 1;
+</span></span><span class="line"><span class="cl">                res = max(res, cover);               
+</span></span><span class="line"><span class="cl">                i++;
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                partial = max(0, t[j][0] + len - t[i][0]);
+</span></span><span class="line"><span class="cl">                res = max(res, cover + partial);
+</span></span><span class="line"><span class="cl">                cover -= (t[j][1] - t[j][0] + 1);
+</span></span><span class="line"><span class="cl">                j++;
+</span></span><span class="line"><span class="cl">            }            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return res;        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

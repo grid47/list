@@ -186,7 +186,34 @@
         <p><a href="https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int m, n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums, mul;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mem;
+</span></span><span class="line"><span class="cl">    int maximumScore(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> mul) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        this-&gt;nums = nums;
+</span></span><span class="line"><span class="cl">        this-&gt;mul = mul;
+</span></span><span class="line"><span class="cl">        n = nums.size();
+</span></span><span class="line"><span class="cl">        m = mul.size();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        mem.resize(m + 1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>((m + 1) + 1000 * (m + 1), -1));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return dp(0, 0, n - 1);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int dp(int idx, int l, int r) {
+</span></span><span class="line"><span class="cl">        if(idx == m || l &gt; r) return 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(mem[idx][(l) + 1000 * (n - r)] != -1) return mem[idx][(l) + 1000 * (n - r)];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int res = mul[idx] * nums[l] + dp(idx + 1, l + 1, r);
+</span></span><span class="line"><span class="cl">        res = max(res, mul[idx] * nums[r] + dp(idx + 1, l, r - 1));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return mem[idx][(l) + 1000 * (n - r)] = res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

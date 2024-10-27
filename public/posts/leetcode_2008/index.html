@@ -186,7 +186,53 @@
         <p><a href="https://leetcode.com/problems/maximum-earnings-from-taxi/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; rides;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span> memo;
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    long long dp(int idx) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(idx == rides.size()) return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[idx] != -1) return memo[idx];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        long long ans = dp(idx + 1);
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int end = rides[idx][1];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int l = idx + 1, r = rides.size() - 1;
+</span></span><span class="line"><span class="cl">        int pos = rides.size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(l <span class="err">&lt;</span>= r) {
+</span></span><span class="line"><span class="cl">            int mid = l + (r - l + 1) / 2;
+</span></span><span class="line"><span class="cl">            if(rides[mid][0] &gt;= end) {
+</span></span><span class="line"><span class="cl">                pos = mid;
+</span></span><span class="line"><span class="cl">                r = mid - 1;
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                l = mid + 1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        ans = max(ans, dp(pos) + rides[idx][2]);        
+</span></span><span class="line"><span class="cl">        return memo[idx] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    long long maxTaxiEarnings(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> ride) {
+</span></span><span class="line"><span class="cl">        this-&gt;n = n;
+</span></span><span class="line"><span class="cl">        rides = ride;
+</span></span><span class="line"><span class="cl">        sort(rides.begin(), rides.end());
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">rides.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">rides</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">2</span><span class="err">]</span> <span class="err">+=</span> <span class="na">rides</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="na">-</span> <span class="na">rides</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">memo</span><span class="err">.</span><span class="na">resize</span><span class="err">(</span><span class="na">rides</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">-1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">dp</span><span class="err">(</span><span class="na">0</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

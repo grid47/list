@@ -186,7 +186,22 @@
         <p><a href="https://leetcode.com/problems/minimum-absolute-difference-between-elements-with-constraint/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minAbsoluteDifference(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int x) {
+</span></span><span class="line"><span class="cl">    set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> s;
+</span></span><span class="line"><span class="cl">    int res = INT_MAX;
+</span></span><span class="line"><span class="cl">    for (int i = x; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">res</span> <span class="p">&gt;</span> 0; ++i) {
+</span></span><span class="line"><span class="cl">        s.insert(nums[i - x]);
+</span></span><span class="line"><span class="cl">        auto it = s.upper_bound(nums[i]);
+</span></span><span class="line"><span class="cl">        if (it != begin(s))
+</span></span><span class="line"><span class="cl">            res = min(res, nums[i] - *prev(it));
+</span></span><span class="line"><span class="cl">        if (it != end(s))
+</span></span><span class="line"><span class="cl">            res = min(res, *it - nums[i]);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

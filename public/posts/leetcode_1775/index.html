@@ -186,7 +186,34 @@
         <p><a href="https://leetcode.com/problems/equal-sum-arrays-with-minimum-number-of-operations/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minOperations(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums2) {
+</span></span><span class="line"><span class="cl">        if( nums1.size() &gt; 6*nums2.size() || 
+</span></span><span class="line"><span class="cl">            nums2.size() &gt; 6*nums1.size())
+</span></span><span class="line"><span class="cl">            return -1;
+</span></span><span class="line"><span class="cl">        int sum1 = accumulate(nums1.begin(), nums1.end(), 0);
+</span></span><span class="line"><span class="cl">        int sum2 = accumulate(nums2.begin(), nums2.end(), 0);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(sum1 &gt; sum2) return minOperations(nums2, nums1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        sort(nums1.begin(), nums1.end());
+</span></span><span class="line"><span class="cl">        sort(nums2.begin(), nums2.end());
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int i = 0, j = nums2.size() - 1, ops = 0;
+</span></span><span class="line"><span class="cl">        while(sum2 &gt; sum1) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if(j <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">nums1</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">6</span> <span class="na">-</span> <span class="na">nums1</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="p">&gt;</span> nums2[j] - 1) {
+</span></span><span class="line"><span class="cl">                sum1 += 6 - nums1[i++];
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">                sum2 -= nums2[j--] - 1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            ++ops;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ops;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

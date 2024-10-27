@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/count-total-number-of-colored-cells/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    long long coloredCells(int n) {
+</span></span><span class="line"><span class="cl">        long long x = 1;
+</span></span><span class="line"><span class="cl">        long long y = 4;
+</span></span><span class="line"><span class="cl">        while(--n) {
+</span></span><span class="line"><span class="cl">            x += y;
+</span></span><span class="line"><span class="cl">            y += 4;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        // 0 4 8 12
+</span></span><span class="line"><span class="cl">        return x;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; q;
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">unordered_map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">        long long cnt = 1;
+</span></span><span class="line"><span class="cl">        q.push({0,0});
+</span></span><span class="line"><span class="cl">        mp[0][0] = true;
+</span></span><span class="line"><span class="cl">        int dir[] = {0,1,0,-1,0};
+</span></span><span class="line"><span class="cl">        while(--n) {
+</span></span><span class="line"><span class="cl">            int sz = q.size();
+</span></span><span class="line"><span class="cl">            while(sz--) {
+</span></span><span class="line"><span class="cl">                auto it = q.front();
+</span></span><span class="line"><span class="cl">                q.pop();
+</span></span><span class="line"><span class="cl">                // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">it.first</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">it</span><span class="err">.</span><span class="na">second</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">4</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">int</span> <span class="na">x </span><span class="o">=</span> <span class="s">it.first</span> <span class="err">+</span> <span class="na">dir</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">y </span><span class="o">=</span> <span class="s">it.second</span> <span class="err">+</span> <span class="na">dir</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">x</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">].</span><span class="na">count</span><span class="err">(</span><span class="na">y</span><span class="err">))</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">][</span><span class="na">y</span><span class="err">]</span> <span class="err">=</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">cnt</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">({</span><span class="na">x</span><span class="err">,</span> <span class="na">y</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">cnt</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

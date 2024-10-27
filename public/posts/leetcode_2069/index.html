@@ -186,7 +186,59 @@
         <p><a href="https://leetcode.com/problems/walking-robot-simulation-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Robot {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int w, h, i, j, dir, per;
+</span></span><span class="line"><span class="cl">    Robot(int width, int height) {
+</span></span><span class="line"><span class="cl">        w = width;
+</span></span><span class="line"><span class="cl">        h = height;
+</span></span><span class="line"><span class="cl">        i = 0;
+</span></span><span class="line"><span class="cl">        j = 0;
+</span></span><span class="line"><span class="cl">        dir = 0;
+</span></span><span class="line"><span class="cl">        per = 2 * (w + h - 2);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void step(int num) {
+</span></span><span class="line"><span class="cl">        if(num &gt; per) {
+</span></span><span class="line"><span class="cl">            num %= per;
+</span></span><span class="line"><span class="cl">            if(i == 0 <span class="err">&amp;&amp;</span> j == 0 <span class="err">&amp;&amp;</span> dir == 0) dir = 3;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int mo[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+</span></span><span class="line"><span class="cl">        while(num) {
+</span></span><span class="line"><span class="cl">            int x = i + mo[dir][0], y = j + mo[dir][1];
+</span></span><span class="line"><span class="cl">            if(x &gt;= w || y &gt;= h || x <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">dir </span><span class="o">=</span> <span class="s">(dir</span> <span class="err">+</span> <span class="na">1</span><span class="err">)</span> <span class="err">%</span> <span class="na">4</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">i </span><span class="o">=</span> <span class="s">x;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">j </span><span class="o">=</span> <span class="s">y;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">num--</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> getPos() {
+</span></span><span class="line"><span class="cl">        return {i, j};
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    string getDir() {
+</span></span><span class="line"><span class="cl">        switch(dir) {
+</span></span><span class="line"><span class="cl">            case 0: return &#34;East&#34;   ; break;
+</span></span><span class="line"><span class="cl">            case 1: return &#34;North&#34;  ; break;    
+</span></span><span class="line"><span class="cl">            case 2: return &#34;West&#34;   ; break;    
+</span></span><span class="line"><span class="cl">            case 3: return &#34;South&#34;  ; break;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return &#34;&#34;;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your Robot object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * Robot* obj = new Robot(width, height);
+</span></span><span class="line"><span class="cl"> * obj-&gt;step(num);
+</span></span><span class="line"><span class="cl"> * vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> param_2 = obj-&gt;getPos();
+</span></span><span class="line"><span class="cl"> * string param_3 = obj-&gt;getDir();
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,59 @@
         <p><a href="https://leetcode.com/problems/count-sub-islands/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int countSubIslands(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid1, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid2) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int m =grid2.size(), n = grid2[0].size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">grid2</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">1</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">dfs</span><span class="err">(</span><span class="na">grid2</span><span class="err">,</span> <span class="na">i</span><span class="err">,</span> <span class="na">j</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">res </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">grid2</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="na">2</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">res</span> <span class="err">+=</span> <span class="na">find</span><span class="err">(</span><span class="na">grid1</span><span class="err">,</span> <span class="na">grid2</span><span class="err">,</span> <span class="na">i</span><span class="err">,</span> <span class="na">j</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">dfs</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid2, int i, int j) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int m = grid2.size(), n = grid2[0].size();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if (i <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">i</span> <span class="p">&gt;</span>= m || j &gt;= n || grid2[i][j] != 1) return;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        grid2[i][j] = 2;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        dfs(grid2, i, j + 1);
+</span></span><span class="line"><span class="cl">        dfs(grid2, i + 1, j);
+</span></span><span class="line"><span class="cl">        dfs(grid2, i - 1, j);
+</span></span><span class="line"><span class="cl">        dfs(grid2, i, j - 1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    bool find(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid1, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid2, int i, int j) {
+</span></span><span class="line"><span class="cl">        int m = grid2.size(), n = grid2[0].size();
+</span></span><span class="line"><span class="cl">        if (i <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">i</span> <span class="p">&gt;</span>= m || j &gt;= n || grid2[i][j] != 2) return true;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        bool res = true;
+</span></span><span class="line"><span class="cl">        if (grid1[i][j] != 1) res = false;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        grid2[i][j] = 3;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        res <span class="err">&amp;</span>= find(grid1, grid2, i, j + 1);
+</span></span><span class="line"><span class="cl">        res <span class="err">&amp;</span>= find(grid1, grid2, i + 1, j);
+</span></span><span class="line"><span class="cl">        res <span class="err">&amp;</span>= find(grid1, grid2, i - 1, j);
+</span></span><span class="line"><span class="cl">        res <span class="err">&amp;</span>= find(grid1, grid2, i, j - 1);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

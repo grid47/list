@@ -186,7 +186,27 @@
         <p><a href="https://leetcode.com/problems/find-players-with-zero-or-one-losses/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; findWinners(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> matches) {
+</span></span><span class="line"><span class="cl">        unordered_set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> u;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> ff;
+</span></span><span class="line"><span class="cl">        int n = matches.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">u</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">matches</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">u</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">matches</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ff</span><span class="err">[</span><span class="na">matches</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]]++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; arr(2);
+</span></span><span class="line"><span class="cl">        for(auto it = u.begin(); it != u.end(); it++) {
+</span></span><span class="line"><span class="cl">            if(!ff.count(*it)) arr[0].push_back(*it);
+</span></span><span class="line"><span class="cl">            else if(ff[*it] == 1) arr[1].push_back(*it);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        sort(arr[0].begin(), arr[0].end());
+</span></span><span class="line"><span class="cl">        sort(arr[1].begin(), arr[1].end());
+</span></span><span class="line"><span class="cl">        return arr;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

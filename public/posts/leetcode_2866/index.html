@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/beautiful-towers-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    long long maximumSumOfHeights(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> A) {
+</span></span><span class="line"><span class="cl">        int n = A.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span> left(n), stack = {-1};
+</span></span><span class="line"><span class="cl">        long long res = 0, cur = 0;
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span> <span class="err">(</span><span class="na">stack</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="p">&gt;</span> 1 <span class="err">&amp;&amp;</span> A[stack.back()] &gt; A[i]) {
+</span></span><span class="line"><span class="cl">                int j = stack.back();
+</span></span><span class="line"><span class="cl">                stack.pop_back();
+</span></span><span class="line"><span class="cl">                cur -= 1L * (j - stack.back()) * A[j];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            cur += 1L * (i - stack.back()) * A[i];
+</span></span><span class="line"><span class="cl">            stack.push_back(i);
+</span></span><span class="line"><span class="cl">            left[i] = cur;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        stack = {n};
+</span></span><span class="line"><span class="cl">        cur = 0;
+</span></span><span class="line"><span class="cl">        for (int i = n - 1; i &gt;= 0; i--) {
+</span></span><span class="line"><span class="cl">            while (stack.size() &gt; 1 <span class="err">&amp;&amp;</span> A[stack.back()] &gt; A[i]) {
+</span></span><span class="line"><span class="cl">                int j = stack.back();
+</span></span><span class="line"><span class="cl">                stack.pop_back();
+</span></span><span class="line"><span class="cl">                cur -= 1L * -(j - stack.back()) * A[j];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            cur += 1L * -(i - stack.back()) * A[i];
+</span></span><span class="line"><span class="cl">            stack.push_back(i);
+</span></span><span class="line"><span class="cl">            res = max(res, left[i] + cur - A[i]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

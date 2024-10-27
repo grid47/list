@@ -186,7 +186,29 @@
         <p><a href="https://leetcode.com/problems/find-palindrome-with-fixed-length/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    long long reverse(long long n, int skip) {
+</span></span><span class="line"><span class="cl">        long long res = 0;
+</span></span><span class="line"><span class="cl">        for(n = skip?n/10: n; n &gt; 0; n/=10)
+</span></span><span class="line"><span class="cl">            res = res * 10 + n % 10;
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span> kthPalindrome(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> queries, int sz) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        long long start = pow(10, (sz + 1)/2-1), end = pow(10, (sz + 1)/2), mul= pow(10, sz/2);
+</span></span><span class="line"><span class="cl">        for(auto q: queries)
+</span></span><span class="line"><span class="cl">            if(start + q &gt; end)
+</span></span><span class="line"><span class="cl">                ans.push_back(-1);
+</span></span><span class="line"><span class="cl">            else {
+</span></span><span class="line"><span class="cl">                long long res = (start + q - 1) * mul + reverse(start + q - 1, sz % 2);
+</span></span><span class="line"><span class="cl">                ans.push_back(res);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,35 @@
         <p><a href="https://leetcode.com/problems/count-array-pairs-divisible-by-k/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    public long countPairs(int[] nums, int k) {
+</span></span><span class="line"><span class="cl">        long res = 0;
+</span></span><span class="line"><span class="cl">        HashMap<span class="p">&lt;</span><span class="nt">Integer</span><span class="err">,</span> <span class="na">Integer</span><span class="p">&gt;</span> gm = new HashMap<span class="err">&lt;</span>&gt;();
+</span></span><span class="line"><span class="cl">        for(int num: nums) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            int gcd = findGCD(num, k);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            for(int node: gm.keySet()) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                if((long) gcd * node % k == 0) 
+</span></span><span class="line"><span class="cl">                    res += gm.get(node);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            gm.put(gcd, gm.getOrDefault(gcd, 0) + 1);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    private int findGCD(int x, int y) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if (x <span class="p">&lt;</span> <span class="nt">y</span><span class="err">)</span> <span class="na">return</span> <span class="na">findGCD</span><span class="err">(</span><span class="na">y</span><span class="err">,</span> <span class="na">x</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">y </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span> <span class="err">?</span> <span class="na">x</span> <span class="na">:</span> <span class="na">findGCD</span><span class="err">(</span><span class="na">y</span><span class="err">,</span> <span class="na">x</span> <span class="err">%</span> <span class="na">y</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span></span></span></code></pre></div>
 
       </div>
 

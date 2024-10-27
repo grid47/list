@@ -186,7 +186,27 @@
         <p><a href="https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    bool find(TreeNode* n, int val, string <span class="err">&amp;</span>path) {
+</span></span><span class="line"><span class="cl">        if(n-&gt;val == val) return true;
+</span></span><span class="line"><span class="cl">             if (n-&gt;left  <span class="err">&amp;&amp;</span> find(n-&gt;left,  val, path)) path.push_back(&#39;L&#39;);
+</span></span><span class="line"><span class="cl">        else if (n-&gt;right <span class="err">&amp;&amp;</span> find(n-&gt;right, val, path)) path.push_back(&#39;R&#39;);
+</span></span><span class="line"><span class="cl">        return !path.empty();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    string getDirections(TreeNode* root, int startValue, int destValue) {
+</span></span><span class="line"><span class="cl">        string sp, dp;
+</span></span><span class="line"><span class="cl">        find(root, startValue, sp);
+</span></span><span class="line"><span class="cl">        find(root,  destValue, dp);
+</span></span><span class="line"><span class="cl">        while(!sp.empty() <span class="err">&amp;&amp;</span> !dp.empty() <span class="err">&amp;&amp;</span> sp.back() == dp.back()) {
+</span></span><span class="line"><span class="cl">            sp.pop_back();
+</span></span><span class="line"><span class="cl">            dp.pop_back();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return string(sp.size(), &#39;U&#39;) + string(rbegin(dp), rend(dp));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

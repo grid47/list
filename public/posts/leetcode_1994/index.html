@@ -186,7 +186,46 @@
         <p><a href="https://leetcode.com/problems/the-number-of-good-subsets/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7;
+</span></span><span class="line"><span class="cl">    set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> bad = {4, 8, 9, 12, 16, 18, 20, 24, 25, 27, 28 };
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> msk;    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt;    
+</span></span><span class="line"><span class="cl">    int two(int x) {
+</span></span><span class="line"><span class="cl">        if(x == 0) return 1;
+</span></span><span class="line"><span class="cl">        return ((long long)2 * two(x - 1)) % mod;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int mask, int num) {
+</span></span><span class="line"><span class="cl">        if(num == 1) return 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        long long ans = dp(mask, num - 1);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(!bad.count(num) <span class="err">&amp;&amp;</span> ((mask | msk[num]) == mask))
+</span></span><span class="line"><span class="cl">            ans = (ans + (long long) dp(mask ^ msk[num], num - 1) * cnt[num]) % mod;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans % mod;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int numberOfGoodSubsets(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> p = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">31</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">m </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">p</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">((</span><span class="na">i</span> <span class="err">%</span> <span class="na">p</span><span class="err">[</span><span class="na">j</span><span class="err">])</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">m</span> <span class="err">|=</span> <span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">j</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">msk</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">m</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cnt</span><span class="err">.</span><span class="na">resize</span><span class="err">(</span><span class="na">31</span><span class="err">,</span> <span class="na">0</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">x:</span> <span class="na">nums</span><span class="err">)</span> <span class="na">cnt</span><span class="err">[</span><span class="na">x</span><span class="err">]++;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="err">((</span><span class="na">long</span> <span class="na">long</span><span class="err">)</span> <span class="err">(</span><span class="na">dp</span><span class="err">(</span><span class="na">1023</span><span class="err">,</span> <span class="na">30</span><span class="err">)</span> <span class="na">-</span> <span class="na">1</span> <span class="err">+</span> <span class="na">mod</span><span class="err">)%</span><span class="na">mod</span> <span class="err">*</span> <span class="na">two</span><span class="err">(</span><span class="na">cnt</span><span class="err">[</span><span class="na">1</span><span class="err">]))</span> <span class="err">%</span> <span class="na">mod</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

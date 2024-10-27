@@ -186,7 +186,61 @@
         <p><a href="https://leetcode.com/problems/sequentially-ordinal-rank-tracker/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class CmpMn {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    bool operator()(pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="err">&amp;</span>a, pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="err">&amp;</span>b) {
+</span></span><span class="line"><span class="cl">        bool ans = false;
+</span></span><span class="line"><span class="cl">        if(a.first != b.first) ans = a.first <span class="p">&lt;</span> <span class="nt">b.first</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">else</span> <span class="na">ans </span><span class="o">=</span> <span class="s">a.second</span> <span class="p">&gt;</span> b.second;
+</span></span><span class="line"><span class="cl">        return !ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class CmpMx {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    bool operator()(pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="err">&amp;</span>a, pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> <span class="err">&amp;</span>b) {
+</span></span><span class="line"><span class="cl">        if(a.first != b.first) return a.first <span class="p">&lt;</span> <span class="nt">b.first</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">a</span><span class="err">.</span><span class="na">second</span> <span class="p">&gt;</span> b.second;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class SORTracker {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int i = 1;
+</span></span><span class="line"><span class="cl">    priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt;, CmpMx&gt; mx;
+</span></span><span class="line"><span class="cl">    priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt;, CmpMn&gt; mn;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    SORTracker() {
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void add(string name, int score) {
+</span></span><span class="line"><span class="cl">        mx.push({score, name});
+</span></span><span class="line"><span class="cl">        mn.push(mx.top());
+</span></span><span class="line"><span class="cl">        mx.pop();
+</span></span><span class="line"><span class="cl">        if (mn.size() &gt; i) {
+</span></span><span class="line"><span class="cl">            mx.push(mn.top());
+</span></span><span class="line"><span class="cl">            mn.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    string get() {
+</span></span><span class="line"><span class="cl">        // cout<span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">mn.top</span><span class="err">().</span><span class="na">first</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">mn</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&lt;</span> <span class="na">i</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">mn</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">mx</span><span class="err">.</span><span class="na">top</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">            <span class="na">mx</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">i</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">mn</span><span class="err">.</span><span class="na">top</span><span class="err">().</span><span class="na">second</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Your</span> <span class="na">SORTracker</span> <span class="na">object</span> <span class="na">will</span> <span class="na">be</span> <span class="na">instantiated</span> <span class="na">and</span> <span class="na">called</span> <span class="na">as</span> <span class="na">such:</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">SORTracker</span><span class="err">*</span> <span class="na">obj </span><span class="o">=</span> <span class="s">new</span> <span class="na">SORTracker</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">obj-</span><span class="p">&gt;</span>add(name,score);
+</span></span><span class="line"><span class="cl"> * string param_2 = obj-&gt;get();
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,28 @@
         <p><a href="https://leetcode.com/problems/maximum-average-pass-ratio/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    double maxAverageRatio(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> classes, int extraStudents) {
+</span></span><span class="line"><span class="cl">        auto profit = [<span class="err">&amp;</span>](double pass, double total) {
+</span></span><span class="line"><span class="cl">            return (pass + 1)/(total +1) -(pass/ total);
+</span></span><span class="line"><span class="cl">        };
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        double total = 0;
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">double</span><span class="err">,</span> <span class="na">array</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span>&gt;&gt; pq;
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>c: classes) {
+</span></span><span class="line"><span class="cl">            total += (double) c[0]/c[1];
+</span></span><span class="line"><span class="cl">            pq.push({profit(c[0], c[1]), {c[0], c[1]}});
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        while(extraStudents--) {
+</span></span><span class="line"><span class="cl">            auto [addedProfit, c] = pq.top(); pq.pop();
+</span></span><span class="line"><span class="cl">            total += addedProfit;
+</span></span><span class="line"><span class="cl">            pq.push({profit(c[0] + 1, c[1] + 1), {c[0] +1, c[1] +1}});
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return total/ classes.size();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

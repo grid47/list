@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/minimum-time-to-finish-the-race/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int mx_lap = 0;
+</span></span><span class="line"><span class="cl">    int dp[1001] = {}, best[1001] = {};
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dfs(int lap, int cT) {
+</span></span><span class="line"><span class="cl">        if(lap == 0) return -cT;
+</span></span><span class="line"><span class="cl">        if(dp[lap]) return dp[lap];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = INT_MAX;
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="err">&lt;</span>= min(mx_lap, lap); i++) {
+</span></span><span class="line"><span class="cl">            ans = min(ans, best[i] + cT + dfs(lap - i, cT));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return dp[lap] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int minimumFinishTime(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> tires, int cT, int numLaps) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(auto it: tires) {
+</span></span><span class="line"><span class="cl">            long long time = it[0], exp = it[0];
+</span></span><span class="line"><span class="cl">            for(int lap = 1; lap <span class="err">&lt;</span>= numLaps <span class="err">&amp;&amp;</span> exp <span class="p">&lt;</span> <span class="nt">it</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">+</span> <span class="na">cT</span><span class="err">;</span> <span class="na">lap</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="na">mx_lap </span><span class="o">=</span> <span class="s">max(mx_lap,</span> <span class="na">lap</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">best</span><span class="err">[</span><span class="na">lap</span><span class="err">]</span> <span class="err">==</span> <span class="na">0</span> <span class="err">||</span> <span class="na">best</span><span class="err">[</span><span class="na">lap</span><span class="err">]</span> <span class="p">&gt;</span> time)
+</span></span><span class="line"><span class="cl">                    best[lap] = time;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                exp *= it[1];
+</span></span><span class="line"><span class="cl">                time += exp;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return dfs(numLaps, cT);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

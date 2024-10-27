@@ -186,7 +186,32 @@
         <p><a href="https://leetcode.com/problems/number-of-ways-to-earn-points/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7;
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; types, memo;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx, int hit) {
+</span></span><span class="line"><span class="cl">        if(idx == n) return hit == 0? 1: 0;
+</span></span><span class="line"><span class="cl">        if(hit == 0) return 1;
+</span></span><span class="line"><span class="cl">        if(memo[idx][hit] != -1) return memo[idx][hit];
+</span></span><span class="line"><span class="cl">        long ans = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="err">&lt;</span>= types[idx][0]; i++) {
+</span></span><span class="line"><span class="cl">            if(hit &gt;= types[idx][1] * i) {
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(idx + 1, hit - types[idx][1] * i)) % mod;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return memo[idx][hit] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int waysToReachTarget(int target, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> types) {
+</span></span><span class="line"><span class="cl">        n = types.size();
+</span></span><span class="line"><span class="cl">        memo.resize(51, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(1001, -1));
+</span></span><span class="line"><span class="cl">        this-&gt;types = types;
+</span></span><span class="line"><span class="cl">        return dp(0, target);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

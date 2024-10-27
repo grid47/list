@@ -186,7 +186,49 @@
         <p><a href="https://leetcode.com/problems/count-the-number-of-square-free-subsets/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7, n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums, prime;
+</span></span><span class="line"><span class="cl">    int memo[1001][1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">11</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">getMask</span><span class="err">(</span><span class="na">int</span> <span class="na">num</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">mask </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">prime</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">cnt </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">num</span> <span class="err">%</span> <span class="na">prime</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cnt</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">num</span> <span class="err">/=</span> <span class="na">prime</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">cnt</span> <span class="p">&gt;</span> 1) return -1;
+</span></span><span class="line"><span class="cl">            if(cnt == 1) {
+</span></span><span class="line"><span class="cl">                mask |= (1 <span class="err">&lt;&lt;</span> (i + 1));                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return mask;
+</span></span><span class="line"><span class="cl">    }    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int dp(int idx, int mask) {
+</span></span><span class="line"><span class="cl">        if(idx == n) return 1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(memo[idx][mask] != -1) return memo[idx][mask];        
+</span></span><span class="line"><span class="cl">        int ans = dp(idx + 1, mask);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int nmask = getMask(nums[idx]);
+</span></span><span class="line"><span class="cl">        if((nmask != -1) <span class="err">&amp;&amp;</span> ((nmask <span class="err">&amp;</span> mask) == 0)) {
+</span></span><span class="line"><span class="cl">            ans = (ans + dp(idx + 1, nmask | mask)) % mod;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return memo[idx][mask] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int squareFreeSubsets(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+</span></span><span class="line"><span class="cl">        n = nums.size();
+</span></span><span class="line"><span class="cl">        this-&gt;nums = nums;
+</span></span><span class="line"><span class="cl">        prime = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof memo);
+</span></span><span class="line"><span class="cl">        return (dp(0, 0) - 1 + mod) % mod;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/minimum-skips-to-arrive-at-meeting-on-time/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int s;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dist;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; memo;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx, int k) {
+</span></span><span class="line"><span class="cl">        if(idx <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="na">return</span> <span class="na">0</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">k</span><span class="err">]</span> <span class="err">!=</span> <span class="na">-1</span><span class="err">)</span> <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">k</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">res </span><span class="o">=</span> <span class="s">(dp(idx</span> <span class="na">-</span> <span class="na">1</span><span class="err">,</span> <span class="na">k</span><span class="err">)</span> <span class="err">+</span> <span class="na">dist</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">+</span> <span class="na">s</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">/</span> <span class="na">s</span> <span class="err">*</span> <span class="na">s</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">k</span> <span class="p">&gt;</span> 0) res = min(res, dp(idx - 1, k - 1) + dist[idx]);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return memo[idx][k] = res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int minSkips(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> A, int s, int target) {
+</span></span><span class="line"><span class="cl">        int n = A.size();
+</span></span><span class="line"><span class="cl">        this-&gt;s = s;
+</span></span><span class="line"><span class="cl">        this-&gt;dist = A;
+</span></span><span class="line"><span class="cl">        memo.resize(n + 1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n + 1, -1));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int k = 0; k <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">k</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">dp</span><span class="err">(</span><span class="na">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">,</span> <span class="na">k</span><span class="err">)</span> <span class="err">&lt;=</span> <span class="err">(</span><span class="na">long</span> <span class="na">long</span><span class="err">)</span><span class="na">s</span> <span class="err">*</span> <span class="na">target</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">k</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">-1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

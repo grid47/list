@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,76 @@
         <p><a href="https://leetcode.com/problems/k-highest-ranked-items-within-a-price-range/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class cmp {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    bool operator()(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>a, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>b) {
+</span></span><span class="line"><span class="cl">        if((a[0] == b[0]) <span class="err">&amp;&amp;</span> (a[1] == b[1]) <span class="err">&amp;&amp;</span> (a[2] == b[2])) {
+</span></span><span class="line"><span class="cl">            return (a[3] <span class="p">&lt;</span> <span class="nt">b</span><span class="err">[</span><span class="na">3</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="na">if</span><span class="err">((</span><span class="na">a</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">==</span> <span class="na">b</span><span class="err">[</span><span class="na">0</span><span class="err">])</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">1</span><span class="err">]</span> <span class="err">==</span> <span class="na">b</span><span class="err">[</span><span class="na">1</span><span class="err">]))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">2</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">b</span><span class="err">[</span><span class="na">2</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="na">if</span><span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">==</span> <span class="na">b</span><span class="err">[</span><span class="na">0</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">1</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">b</span><span class="err">[</span><span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="na">return</span> <span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">b</span><span class="err">[</span><span class="na">0</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; highestRankedKItems(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> price, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> start, int k) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int m = grid.size(), n = grid[0].size();
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; q;
+</span></span><span class="line"><span class="cl">        q.push(start);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int dist = 0;
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;, greater<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; pq;        
+</span></span><span class="line"><span class="cl">        if(grid[start[0]][start[1]] &gt;= price[0] <span class="err">&amp;&amp;</span> grid[start[0]][start[1]] <span class="err">&lt;</span>= price[1])
+</span></span><span class="line"><span class="cl">            pq.push({dist, grid[start[0]][start[1]], start[0], start[1]});
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        grid[start[0]][start[1]] = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int dir[] = {0, 1, 0, -1, 0};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        while(!q.empty() <span class="err">&amp;&amp;</span> pq.size() <span class="p">&lt;</span> <span class="nt">k</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">sz </span><span class="o">=</span> <span class="s">q.size();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dist</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">sz--</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="na">auto</span> <span class="na">it </span><span class="o">=</span> <span class="s">q.front();</span>
+</span></span><span class="line"><span class="cl">                <span class="err">//</span> <span class="na">grid</span><span class="err">[</span><span class="na">it</span><span class="err">[</span><span class="na">0</span><span class="err">]][</span><span class="na">it</span><span class="err">[</span><span class="na">1</span><span class="err">]]</span> <span class="err">=</span> <span class="na">0</span><span class="err">;</span>                
+</span></span><span class="line"><span class="cl">                <span class="na">q</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">4</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">int</span> <span class="na">x </span><span class="o">=</span> <span class="s">it[0]</span> <span class="err">+</span> <span class="na">dir</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">y </span><span class="o">=</span> <span class="s">it[1]</span> <span class="err">+</span> <span class="na">dir</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">x</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">x</span> <span class="p">&gt;</span>= m || y &gt;= n || grid[x][y] == 0)
+</span></span><span class="line"><span class="cl">                        continue;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    if(grid[x][y] &gt; 1 <span class="err">&amp;&amp;</span> grid[x][y] &gt;= price[0] <span class="err">&amp;&amp;</span> grid[x][y] <span class="err">&lt;</span>= price[1]) {
+</span></span><span class="line"><span class="cl">                        pq.push({dist, grid[x][y], x, y});
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                    q.push({x, y});
+</span></span><span class="line"><span class="cl">                    grid[x][y] = 0;                                        
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; ans;        
+</span></span><span class="line"><span class="cl">        while((ans.size() <span class="p">&lt;</span> <span class="nt">k</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="err">!</span><span class="na">pq</span><span class="err">.</span><span class="na">empty</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">auto</span> <span class="na">it </span><span class="o">=</span> <span class="s">pq.top();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">.</span><span class="na">push_back</span><span class="err">({</span><span class="na">it</span><span class="err">[</span><span class="na">2</span><span class="err">],</span> <span class="na">it</span><span class="err">[</span><span class="na">3</span><span class="err">]});</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>                
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

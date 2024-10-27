@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/number-of-excellent-pairs/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    long long countExcellentPairs(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int n = nums.size();
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> arr;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">cnt</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">arr</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">__builtin_popcount</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]));</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cnt</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">arr</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">arr</span><span class="err">.</span><span class="na">end</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">        <span class="na">long</span> <span class="na">long</span> <span class="na">ans </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">arr</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">*</span> <span class="na">2</span> <span class="p">&gt;</span>= k) {
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                ans += 2 * (arr.size() - (i + 1));
+</span></span><span class="line"><span class="cl">                ans++;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            } else {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                int x = k - arr[i];
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                auto it = lower_bound(arr.begin(), arr.end(), x);
+</span></span><span class="line"><span class="cl">                if(it == arr.end()) continue;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                int y = arr.end() - it;
+</span></span><span class="line"><span class="cl">                ans += 2 * y;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(arr.back() * 2 &gt;= k) ans++;
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

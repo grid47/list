@@ -22,6 +22,11 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int minBitFlips(int start, int goal) {
+        return __builtin_popcount(start^goal);
+    }
+};
 {{< /highlight >}}
 

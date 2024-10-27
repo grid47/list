@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,75 @@
         <p><a href="https://leetcode.com/problems/design-an-atm-machine/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class ATM {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span> note;
+</span></span><span class="line"><span class="cl">    ATM() {
+</span></span><span class="line"><span class="cl">        note.resize(5, 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void deposit(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt) {
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">5</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">note</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+=</span> <span class="na">cnt</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> withdraw(int amnt) {
+</span></span><span class="line"><span class="cl">        int cnt500 = 0, cnt200 = 0, cnt100 = 0, cnt50 = 0, cnt20 = 0;
+</span></span><span class="line"><span class="cl">        int taken = 0;
+</span></span><span class="line"><span class="cl">        if(amnt &gt;= 500) {
+</span></span><span class="line"><span class="cl">            cnt500 = amnt / 500;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(cnt500 &gt; note[4]) {
+</span></span><span class="line"><span class="cl">                cnt500 = note[4];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            amnt -= (cnt500 * 500);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(amnt &gt;= 200) {
+</span></span><span class="line"><span class="cl">            cnt200 = amnt / 200;
+</span></span><span class="line"><span class="cl">            if(cnt200 &gt; note[3]) {
+</span></span><span class="line"><span class="cl">                cnt200 = note[3];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            amnt -= (cnt200 * 200);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(amnt &gt;= 100) {
+</span></span><span class="line"><span class="cl">            cnt100 = amnt / 100;
+</span></span><span class="line"><span class="cl">            if(cnt100 &gt; note[2]) {
+</span></span><span class="line"><span class="cl">                cnt100 = note[2];                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            amnt -= (cnt100 * 100);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(amnt &gt;= 50) {
+</span></span><span class="line"><span class="cl">            cnt50 = amnt / 50;
+</span></span><span class="line"><span class="cl">            if(cnt50 &gt; note[1]) {
+</span></span><span class="line"><span class="cl">                cnt50 = note[1];                                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            amnt -= (cnt50 * 50);
+</span></span><span class="line"><span class="cl">        }        
+</span></span><span class="line"><span class="cl">        if(amnt &gt;= 20) {
+</span></span><span class="line"><span class="cl">            cnt20 = amnt / 20;
+</span></span><span class="line"><span class="cl">            if(cnt20 &gt; note[0]) {
+</span></span><span class="line"><span class="cl">                cnt20 = note[0];                                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            amnt -= (cnt20 * 20);
+</span></span><span class="line"><span class="cl">        }       
+</span></span><span class="line"><span class="cl">        if(amnt != 0) return vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>{-1};
+</span></span><span class="line"><span class="cl">        note[4] -= cnt500;
+</span></span><span class="line"><span class="cl">        note[3] -= cnt200;
+</span></span><span class="line"><span class="cl">        note[2] -= cnt100;
+</span></span><span class="line"><span class="cl">        note[1] -= cnt50;
+</span></span><span class="line"><span class="cl">        note[0] -= cnt20;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>{cnt20, cnt50, cnt100, cnt200, cnt500};
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your ATM object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * ATM* obj = new ATM();
+</span></span><span class="line"><span class="cl"> * obj-&gt;deposit(banknotesCount);
+</span></span><span class="line"><span class="cl"> * vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> param_2 = obj-&gt;withdraw(amount);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

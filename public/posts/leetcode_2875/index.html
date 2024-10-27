@@ -186,7 +186,24 @@
         <p><a href="https://leetcode.com/problems/minimum-size-subarray-in-infinite-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minSizeSubarray(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> A, int target) {
+</span></span><span class="line"><span class="cl">        long sumA = accumulate(A.begin(), A.end(), 0L), su = 0;
+</span></span><span class="line"><span class="cl">        int n = A.size(), k = target / sumA, res = n;
+</span></span><span class="line"><span class="cl">        target %= sumA;
+</span></span><span class="line"><span class="cl">        if (target == 0)
+</span></span><span class="line"><span class="cl">            return k * n;
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">long</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> dp{{0L, -1}};
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">2</span> <span class="err">*</span> <span class="na">n</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">su</span> <span class="err">+=</span> <span class="na">A</span><span class="err">[</span><span class="na">i</span> <span class="err">%</span> <span class="na">n</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">(</span><span class="na">dp</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">su</span> <span class="na">-</span> <span class="na">target</span><span class="err">))</span>
+</span></span><span class="line"><span class="cl">                <span class="na">res </span><span class="o">=</span> <span class="s">min(res,</span> <span class="na">i</span> <span class="na">-</span> <span class="na">dp</span><span class="err">[</span><span class="na">su</span> <span class="na">-</span> <span class="na">target</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dp</span><span class="err">[</span><span class="na">su</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span> <span class="err">&lt;</span> <span class="na">n</span> <span class="err">?</span> <span class="na">res</span> <span class="err">+</span> <span class="na">k</span> <span class="err">*</span> <span class="na">n</span> <span class="na">:</span> <span class="na">-1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

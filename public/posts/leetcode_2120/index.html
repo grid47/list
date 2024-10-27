@@ -186,7 +186,21 @@
         <p><a href="https://leetcode.com/problems/execution-of-all-suffix-instructions-staying-in-a-grid/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> executeInstructions(int n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> st, string s) {
+</span></span><span class="line"><span class="cl">        int m = s.size(), h = m + n, v = m + n;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> hor((h + m) * 2, m), ver((h +m) * 2, m), res(m);
+</span></span><span class="line"><span class="cl">        for(int i = m - 1; i &gt;= 0; i--) {
+</span></span><span class="line"><span class="cl">            hor[h] = ver[v] = i;
+</span></span><span class="line"><span class="cl">            h += s[i] == &#39;L&#39; ? 1 : s[i] == &#39;R&#39;? -1 : 0;
+</span></span><span class="line"><span class="cl">            v += s[i] == &#39;U&#39; ? 1 : s[i] == &#39;D&#39;? -1 : 0;
+</span></span><span class="line"><span class="cl">            res[i] = min({  m, hor[h - st[1] - 1], hor[h - st[1] + n],
+</span></span><span class="line"><span class="cl">                               ver[v - st[0] - 1], ver[v - st[0] + n]  }) - i;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

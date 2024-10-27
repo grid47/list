@@ -186,7 +186,47 @@
         <p><a href="https://leetcode.com/problems/simple-bank-system/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Bank {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span> bal;
+</span></span><span class="line"><span class="cl">    Bank(vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span><span class="err">&amp;</span> balance) {
+</span></span><span class="line"><span class="cl">        bal = balance;
+</span></span><span class="line"><span class="cl">        n = bal.size();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool transfer(int acc1, int acc2, long long money) {
+</span></span><span class="line"><span class="cl">        int ac1 = acc1 - 1 , ac2 = acc2 - 1;
+</span></span><span class="line"><span class="cl">        if(ac1 <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">ac1</span> <span class="p">&gt;</span>= n || ac2 <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">ac2</span> <span class="p">&gt;</span>= n || bal[ac1] <span class="p">&lt;</span> <span class="nt">money</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">bal</span><span class="err">[</span><span class="na">ac1</span><span class="err">]</span> <span class="na">-</span><span class="o">=</span> <span class="s">money;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">bal</span><span class="err">[</span><span class="na">ac2</span><span class="err">]</span> <span class="err">+=</span> <span class="na">money</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">deposit</span><span class="err">(</span><span class="na">int</span> <span class="na">acc</span><span class="err">,</span> <span class="na">long</span> <span class="na">long</span> <span class="na">money</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">acc</span> <span class="err">&lt;</span> <span class="na">1</span> <span class="err">||</span> <span class="na">acc</span> <span class="p">&gt;</span> n) return false;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        bal[acc - 1] += money;
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool withdraw(int acc, long long money) {
+</span></span><span class="line"><span class="cl">        if(acc <span class="p">&lt;</span> <span class="nt">1</span> <span class="err">||</span> <span class="na">acc</span> <span class="p">&gt;</span> n || bal[acc - 1] <span class="p">&lt;</span> <span class="nt">money</span><span class="err">)</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>        
+</span></span><span class="line"><span class="cl">        <span class="na">bal</span><span class="err">[</span><span class="na">acc</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="na">-</span><span class="o">=</span> <span class="s">money;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Your</span> <span class="na">Bank</span> <span class="na">object</span> <span class="na">will</span> <span class="na">be</span> <span class="na">instantiated</span> <span class="na">and</span> <span class="na">called</span> <span class="na">as</span> <span class="na">such:</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Bank</span><span class="err">*</span> <span class="na">obj </span><span class="o">=</span> <span class="s">new</span> <span class="na">Bank</span><span class="err">(</span><span class="na">balance</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">bool</span> <span class="na">param_1 </span><span class="o">=</span> <span class="s">obj-</span><span class="p">&gt;</span>transfer(account1,account2,money);
+</span></span><span class="line"><span class="cl"> * bool param_2 = obj-&gt;deposit(account,money);
+</span></span><span class="line"><span class="cl"> * bool param_3 = obj-&gt;withdraw(account,money);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

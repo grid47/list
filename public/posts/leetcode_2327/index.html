@@ -186,7 +186,23 @@
         <p><a href="https://leetcode.com/problems/number-of-people-aware-of-a-secret/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int peopleAwareOfSecret(int n, int delay, int forget) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int res = 0, share = 0;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">long</span><span class="p">&gt;</span> dp(n + 2, 0);
+</span></span><span class="line"><span class="cl">        dp[1] = 1;
+</span></span><span class="line"><span class="cl">        int mod = 1e9 + 7;
+</span></span><span class="line"><span class="cl">        for(int i = 2; i <span class="err">&lt;</span>= n; i++)
+</span></span><span class="line"><span class="cl">            dp[i] = share = (share + dp[max(i - delay, 0)] - dp[max(i - forget, 0)] + mod) % mod;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = n + 1 - forget; i <span class="err">&lt;</span>= n; i++)
+</span></span><span class="line"><span class="cl">            res = (res + dp[i]) % mod;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

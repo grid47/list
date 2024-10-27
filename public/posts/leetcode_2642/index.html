@@ -186,7 +186,61 @@
         <p><a href="https://leetcode.com/problems/design-graph-with-shortest-path-calculator/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Graph {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt; grid;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int diji(int n1, int n2) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dis(n, INT_MAX);
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;, greater<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt; pq;
+</span></span><span class="line"><span class="cl">        pq.push({0, n1});
+</span></span><span class="line"><span class="cl">        dis[n1] = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
+</span></span><span class="line"><span class="cl">            auto it = pq.top();
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">            int node = it.second;
+</span></span><span class="line"><span class="cl">            for(auto x: grid[node]) {
+</span></span><span class="line"><span class="cl">                int nxt = x.first;
+</span></span><span class="line"><span class="cl">                int w = x.second;
+</span></span><span class="line"><span class="cl">                if(dis[node] + w <span class="p">&lt;</span> <span class="nt">dis</span><span class="err">[</span><span class="na">nxt</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">dis</span><span class="err">[</span><span class="na">nxt</span><span class="err">]</span> <span class="err">=</span> <span class="na">dis</span><span class="err">[</span><span class="na">node</span><span class="err">]</span> <span class="err">+</span> <span class="na">w</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">({</span><span class="na">dis</span><span class="err">[</span><span class="na">nxt</span><span class="err">],</span> <span class="na">nxt</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">dis</span><span class="err">[</span><span class="na">n2</span><span class="err">]</span> <span class="err">==</span> <span class="na">INT_MAX</span><span class="err">)</span> <span class="na">return</span> <span class="na">-1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">dis</span><span class="err">[</span><span class="na">n2</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">Graph</span><span class="err">(</span><span class="na">int</span> <span class="na">n</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges) {
+</span></span><span class="line"><span class="cl">        this-&gt;n = n;
+</span></span><span class="line"><span class="cl">        grid.resize(n);
+</span></span><span class="line"><span class="cl">        for(auto e: edges) {
+</span></span><span class="line"><span class="cl">            grid[e[0]].push_back({e[1], e[2]});
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void addEdge(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> e) {
+</span></span><span class="line"><span class="cl">            grid[e[0]].push_back({e[1], e[2]});
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int shortestPath(int node1, int node2) {
+</span></span><span class="line"><span class="cl">        return diji(node1, node2);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your Graph object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * Graph* obj = new Graph(n, edges);
+</span></span><span class="line"><span class="cl"> * obj-&gt;addEdge(edge);
+</span></span><span class="line"><span class="cl"> * int param_2 = obj-&gt;shortestPath(node1,node2);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

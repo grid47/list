@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/using-a-robot-to-print-the-lexicographically-smallest-string/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    char low(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>frq) {
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">26</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">frq</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="na">0</span><span class="err">)</span> <span class="na">return</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;+</span><span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="err">&#39;</span><span class="na">z</span><span class="err">&#39;;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">string</span> <span class="na">robotWithString</span><span class="err">(</span><span class="na">string</span> <span class="na">s</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> frq(26, 0);
+</span></span><span class="line"><span class="cl">        for(char c: s)
+</span></span><span class="line"><span class="cl">            frq[c - &#39;a&#39;]++;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> t;
+</span></span><span class="line"><span class="cl">        string ans = &#34;&#34;;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(char c : s) {
+</span></span><span class="line"><span class="cl">            t.push(c);
+</span></span><span class="line"><span class="cl">            frq[c - &#39;a&#39;]--;
+</span></span><span class="line"><span class="cl">            while(!t.empty() <span class="err">&amp;&amp;</span> t.top() <span class="err">&lt;</span>= low(frq)) {
+</span></span><span class="line"><span class="cl">                ans += t.top();
+</span></span><span class="line"><span class="cl">                t.pop();
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

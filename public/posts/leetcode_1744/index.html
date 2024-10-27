@@ -186,7 +186,30 @@
         <p><a href="https://leetcode.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> canEat(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> q) {
+</span></span><span class="line"><span class="cl">        typedef long long ll;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">ll</span><span class="p">&gt;</span> cnt(nums.size() +1, 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">()</span> <span class="err">+</span><span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">cnt</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+=</span> <span class="na">cnt</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span> <span class="na">-1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">bool</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span> v : q) {
+</span></span><span class="line"><span class="cl">            ll type = v[0], day = v[1], cap = v[2];
+</span></span><span class="line"><span class="cl">            ll mn = cnt[type] / cap;
+</span></span><span class="line"><span class="cl">            ll mx = cnt[type + 1] - 1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (mn <span class="err">&lt;</span>= day <span class="err">&amp;&amp;</span> day <span class="err">&lt;</span>= mx) {
+</span></span><span class="line"><span class="cl">    res.push_back(true); }
+</span></span><span class="line"><span class="cl">            else {
+</span></span><span class="line"><span class="cl">                res.push_back(false);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

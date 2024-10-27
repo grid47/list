@@ -186,7 +186,51 @@
         <p><a href="https://leetcode.com/problems/maximum-points-in-an-archery-competition/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> bob, alice;
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    int mask;
+</span></span><span class="line"><span class="cl">    int ans;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void dp(int idx, int rm, int pts, int msk) {
+</span></span><span class="line"><span class="cl">        // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">idx</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">rm</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">pts</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;\</span><span class="na">n</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">((</span><span class="na">rm</span> <span class="err">&lt;=</span> <span class="na">0</span><span class="err">)</span> <span class="err">||</span> <span class="err">(</span><span class="na">idx </span><span class="o">=</span><span class="s">=</span> <span class="na">n</span><span class="err">)){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">ans</span> <span class="err">&lt;</span> <span class="na">pts</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">pts;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mask </span><span class="o">=</span> <span class="s">msk;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>        
+</span></span><span class="line"><span class="cl">        <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">rm</span><span class="err">,</span> <span class="na">pts</span><span class="err">,</span> <span class="na">msk</span><span class="err">);</span>        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">rm</span> <span class="p">&gt;</span> alice[idx]) {
+</span></span><span class="line"><span class="cl">            msk |= (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">idx</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">rm</span> <span class="na">-</span> <span class="na">alice</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="na">-</span> <span class="na">1</span><span class="err">,</span> <span class="na">pts</span> <span class="err">+</span> <span class="na">idx</span><span class="err">,</span> <span class="na">msk</span><span class="err">);</span>            
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> maximumBobPoints(int net, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> alice) {
+</span></span><span class="line"><span class="cl">        n = alice.size();
+</span></span><span class="line"><span class="cl">        this-&gt;alice = alice;
+</span></span><span class="line"><span class="cl">        bob.resize(n, 0);
+</span></span><span class="line"><span class="cl">        int idx = 0;
+</span></span><span class="line"><span class="cl">        int pts = 0;
+</span></span><span class="line"><span class="cl">        mask = 0;
+</span></span><span class="line"><span class="cl">        ans = 0;
+</span></span><span class="line"><span class="cl">        dp(idx, net, pts, 0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = n - 1; i &gt;= 0; i--) {
+</span></span><span class="line"><span class="cl">            if((mask &gt;&gt; i) <span class="err">&amp;</span> 1) {
+</span></span><span class="line"><span class="cl">                bob[i] = alice[i] + 1;
+</span></span><span class="line"><span class="cl">                net -= bob[i];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(net &gt; 0) bob[0] += net;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return bob;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,33 @@
         <p><a href="https://leetcode.com/problems/find-a-peak-element-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> findPeakGrid(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> mat) {
+</span></span><span class="line"><span class="cl">        int m = mat.size(), n = mat[0].size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int l = 0, r = n - 1;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(l <span class="err">&lt;</span>= r) {
+</span></span><span class="line"><span class="cl">            int mid = l + (r - l + 1) / 2;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            int row = 0;
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">row </span><span class="o">=</span> <span class="s">mat[i][mid]</span> <span class="p">&gt;</span>= mat[row][mid]? i: row;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            int isRightLarger = mid + 1 <span class="err">&lt;</span>= r ? mat[row][mid + 1] &gt; mat[row][mid]: false;
+</span></span><span class="line"><span class="cl">            int isLeftLarger = mid - 1 &gt;= l  ? mat[row][mid - 1] &gt; mat[row][mid]: false;            
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(!isRightLarger <span class="err">&amp;&amp;</span> !isLeftLarger)
+</span></span><span class="line"><span class="cl">                return vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>{row, mid};
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(isRightLarger) l = mid + 1;
+</span></span><span class="line"><span class="cl">            else             r = mid - 1;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>{-1, -1};
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

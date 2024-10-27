@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/the-latest-time-to-catch-a-bus/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int latestTimeCatchTheBus(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> buses, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> passengers, int capacity) {
+</span></span><span class="line"><span class="cl">        sort(buses.begin(), buses.end());
+</span></span><span class="line"><span class="cl">        sort(passengers.begin(), passengers.end());
+</span></span><span class="line"><span class="cl">        int n = buses.size();
+</span></span><span class="line"><span class="cl">        int m = passengers.size();
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> st;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(auto a: passengers) {
+</span></span><span class="line"><span class="cl">            q.push(a);
+</span></span><span class="line"><span class="cl">            st.insert(a);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">curbus </span><span class="o">=</span> <span class="s">buses[i];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">count </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">x</span> <span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(!</span><span class="na">q</span><span class="err">.</span><span class="na">empty</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">count</span> <span class="err">&lt;</span> <span class="na">capacity</span> <span class="err">&amp;&amp;</span> <span class="na">q</span><span class="err">.</span><span class="na">front</span><span class="err">()</span> <span class="err">&lt;=</span> <span class="na">curbus</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">x </span><span class="o">=</span> <span class="s">q.front();</span>
+</span></span><span class="line"><span class="cl">                <span class="na">q</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">st</span><span class="err">.</span><span class="na">find</span><span class="err">(</span><span class="na">x</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">==</span> <span class="na">st</span><span class="err">.</span><span class="na">end</span><span class="err">())</span> <span class="na">ans </span><span class="o">=</span> <span class="s">x</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">count</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">count</span> <span class="err">&lt;</span> <span class="na">capacity</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">while</span><span class="err">(</span><span class="na">st</span><span class="err">.</span><span class="na">find</span><span class="err">(</span><span class="na">curbus</span><span class="err">)</span> <span class="err">!=</span> <span class="na">st</span><span class="err">.</span><span class="na">end</span><span class="err">())</span>
+</span></span><span class="line"><span class="cl">                 <span class="na">curbus--</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">max(ans,</span> <span class="na">curbus</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

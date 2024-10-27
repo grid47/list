@@ -186,7 +186,40 @@
         <p><a href="https://leetcode.com/problems/design-a-food-rating-system/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class FoodRatings {
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">set</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt;&gt; cus_itm;
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> fd_cus;
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> fd_rat;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    FoodRatings(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> fd, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> cus, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> rat) {
+</span></span><span class="line"><span class="cl">        int n = fd.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">cus_itm</span><span class="err">[</span><span class="na">cus</span><span class="err">[</span><span class="na">i</span><span class="err">]].</span><span class="na">insert</span><span class="err">(</span><span class="na">pair</span><span class="err">(</span><span class="na">-rat</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">fd</span><span class="err">[</span><span class="na">i</span><span class="err">]));</span>
+</span></span><span class="line"><span class="cl">            <span class="na">fd_cus</span><span class="err">[</span><span class="na">fd</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">=</span> <span class="na">cus</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">fd_rat</span><span class="err">[</span><span class="na">fd</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">=</span> <span class="na">rat</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">changeRating</span><span class="err">(</span><span class="na">string</span> <span class="na">fd</span><span class="err">,</span> <span class="na">int</span> <span class="na">rat</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">string</span> <span class="na">cus </span><span class="o">=</span> <span class="s">fd_cus[fd];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">r </span><span class="o">=</span> <span class="s">fd_rat[fd];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cus_itm</span><span class="err">[</span><span class="na">cus</span><span class="err">].</span><span class="na">erase</span><span class="err">({</span><span class="na">-r</span><span class="err">,</span> <span class="na">fd</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cus_itm</span><span class="err">[</span><span class="na">cus</span><span class="err">].</span><span class="na">insert</span><span class="err">({</span><span class="na">-rat</span><span class="err">,</span> <span class="na">fd</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">        <span class="na">fd_rat</span><span class="err">[</span><span class="na">fd</span><span class="err">]</span> <span class="err">=</span> <span class="na">rat</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">string</span> <span class="na">highestRated</span><span class="err">(</span><span class="na">string</span> <span class="na">cus</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">begin</span><span class="err">(</span><span class="na">cus_itm</span><span class="err">[</span><span class="na">cus</span><span class="err">])</span><span class="na">-</span><span class="p">&gt;</span>second;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your FoodRatings object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * FoodRatings* obj = new FoodRatings(foods, cuisines, ratings);
+</span></span><span class="line"><span class="cl"> * obj-&gt;changeRating(food,newRating);
+</span></span><span class="line"><span class="cl"> * string param_2 = obj-&gt;highestRated(cuisine);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

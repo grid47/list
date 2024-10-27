@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/maximum-score-from-removing-substrings/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maximumGain(string s, int x, int y, char a = &#39;a&#39;, char b = &#39;b&#39;) {
+</span></span><span class="line"><span class="cl">        if(y &gt; x) {
+</span></span><span class="line"><span class="cl">            swap(a, b);
+</span></span><span class="line"><span class="cl">            swap(x, y);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        auto s1 = greedy(s, a, b), s2 = greedy(s1,  b, a);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ((s.size() - s1.size()) / 2) * x + ((s1.size() - s2.size()) / 2) * y;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    string greedy(string s, char a, char b) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        string st;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(char c : s) {
+</span></span><span class="line"><span class="cl">            if(!st.empty() <span class="err">&amp;&amp;</span> st.back() == a <span class="err">&amp;&amp;</span> c == b)
+</span></span><span class="line"><span class="cl">                st.pop_back();
+</span></span><span class="line"><span class="cl">            else st.push_back(c);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return st;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

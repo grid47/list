@@ -186,7 +186,20 @@
         <p><a href="https://leetcode.com/problems/count-pairs-of-points-with-distance-k/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int countPairs(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> coordinates, int k) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">unordered_map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; count;
+</span></span><span class="line"><span class="cl">        int res = 0;
+</span></span><span class="line"><span class="cl">        for (auto<span class="err">&amp;</span> c : coordinates) {
+</span></span><span class="line"><span class="cl">            for (int x = 0; x <span class="err">&lt;</span>= k; x++)
+</span></span><span class="line"><span class="cl">                if (count[c[0] ^ x].count(c[1] ^ (k - x)))
+</span></span><span class="line"><span class="cl">                    res += count[c[0] ^ x][c[1] ^ (k - x)];
+</span></span><span class="line"><span class="cl">            count[c[0]][c[1]]++;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

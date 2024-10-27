@@ -186,7 +186,46 @@
         <p><a href="https://leetcode.com/problems/maximum-number-of-alloys/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">using ll = long long;
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool func(ll mid, int budget, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> composition, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> stock, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> cost)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        ll minCost = INT_MAX;
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">composition.size</span><span class="err">();</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">        <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ll</span> <span class="na">currCost </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">composition</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">size</span><span class="err">();</span> <span class="err">++</span><span class="na">j</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">            <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ll</span> <span class="na">curr </span><span class="o">=</span> <span class="s">mid</span> <span class="err">*</span> <span class="na">composition</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">(</span><span class="na">stock</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="p">&gt;</span>= curr)
+</span></span><span class="line"><span class="cl">                    continue;
+</span></span><span class="line"><span class="cl">                else
+</span></span><span class="line"><span class="cl">                {
+</span></span><span class="line"><span class="cl">                    ll extra = (curr - stock[j]) * cost[j];
+</span></span><span class="line"><span class="cl">                    currCost += extra;
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            minCost = min(currCost, minCost);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return (minCost <span class="err">&lt;</span>= budget);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int maxNumberOfAlloys(int n, int k, int budget, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> composition, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> stock, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> cost) {
+</span></span><span class="line"><span class="cl">        ll low = 0, high = 1e9, ans = 0;
+</span></span><span class="line"><span class="cl">        while (low <span class="err">&lt;</span>= high)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            ll mid = low + (high - low) / 2;
+</span></span><span class="line"><span class="cl">            if (func(mid, budget, composition, stock, cost))
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                ans = mid;
+</span></span><span class="line"><span class="cl">                low = mid + 1;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            else
+</span></span><span class="line"><span class="cl">                high = mid - 1;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

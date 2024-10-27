@@ -186,7 +186,49 @@
         <p><a href="https://leetcode.com/problems/find-all-people-with-secret/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class UnionFind {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> id;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    UnionFind(int n) : id(n) {
+</span></span><span class="line"><span class="cl">        iota(begin(id), end(id), 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    void connect(int a, int b) {
+</span></span><span class="line"><span class="cl">        id[find(b)] = find(a);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    int find(int a) {
+</span></span><span class="line"><span class="cl">        return id[a] == a ? a : (id[a] = find(id[a]));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    bool connected(int a, int b) {
+</span></span><span class="line"><span class="cl">        return find(a) == find(b);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    void reset(int a) { id[a] = a; }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> findAllPeople(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> A, int firstPerson) {
+</span></span><span class="line"><span class="cl">        sort(begin(A), end(A), [](auto <span class="err">&amp;</span>a, auto <span class="err">&amp;</span>b) { return a[2] <span class="p">&lt;</span> <span class="nt">b</span><span class="err">[</span><span class="na">2</span><span class="err">];</span> <span class="err">});</span>
+</span></span><span class="line"><span class="cl">        <span class="na">UnionFind</span> <span class="na">uf</span><span class="err">(</span><span class="na">n</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">uf</span><span class="err">.</span><span class="na">connect</span><span class="err">(</span><span class="na">0</span><span class="err">,</span> <span class="na">firstPerson</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> ppl;
+</span></span><span class="line"><span class="cl">        for (int i = 0, M = A.size(); i <span class="p">&lt;</span> <span class="nt">M</span><span class="err">;</span> <span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ppl</span><span class="err">.</span><span class="na">clear</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">time </span><span class="o">=</span> <span class="s">A[i][2];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span> <span class="err">(;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">M</span> <span class="err">&amp;&amp;</span> <span class="na">A</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">2</span><span class="err">]</span> <span class="err">==</span> <span class="na">time</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">uf</span><span class="err">.</span><span class="na">connect</span><span class="err">(</span><span class="na">A</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">A</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ppl</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">A</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ppl</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">A</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">n</span> <span class="na">:</span> <span class="na">ppl</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">(!</span><span class="na">uf</span><span class="err">.</span><span class="na">connected</span><span class="err">(</span><span class="na">0</span><span class="err">,</span> <span class="na">n</span><span class="err">))</span> <span class="na">uf</span><span class="err">.</span><span class="na">reset</span><span class="err">(</span><span class="na">n</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">(</span><span class="na">uf</span><span class="err">.</span><span class="na">connected</span><span class="err">(</span><span class="na">0</span><span class="err">,</span> <span class="na">i</span><span class="err">))</span> <span class="na">ans</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

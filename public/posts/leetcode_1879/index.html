@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/minimum-xor-sum-of-two-arrays/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> n1, n2;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int memo[15][(1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">14</span><span class="err">)</span> <span class="na">-</span> <span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">dp</span><span class="err">(</span><span class="na">int</span> <span class="na">idx</span><span class="err">,</span> <span class="na">int</span> <span class="na">mask</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">idx </span><span class="o">=</span><span class="s">=</span> <span class="na">n1</span><span class="err">.</span><span class="na">size</span><span class="err">())</span> <span class="na">return</span> <span class="na">0</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">mask</span><span class="err">]</span> <span class="err">!=</span> <span class="na">-1</span><span class="err">)</span> <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">mask</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">ans </span><span class="o">=</span> <span class="s">INT_MAX;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n1</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">mask</span> <span class="err">&amp;</span> <span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">i</span><span class="err">))</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">min(ans,</span> <span class="err">(</span><span class="na">n1</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">^</span> <span class="na">n2</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">+</span> <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">mask</span> <span class="err">+</span> <span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">i</span><span class="err">)));</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">mask</span><span class="err">]</span> <span class="err">=</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">minimumXORSum</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums2) {
+</span></span><span class="line"><span class="cl">        n1 = nums1;
+</span></span><span class="line"><span class="cl">        n2 = nums2;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return dp(0, 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

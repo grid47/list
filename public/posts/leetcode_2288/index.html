@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/apply-discount-to-prices/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    string discountPrices(string sentence, int discount) {
+</span></span><span class="line"><span class="cl">        auto doit = [<span class="err">&amp;</span>](string word) {
+</span></span><span class="line"><span class="cl">            int n = word.size();
+</span></span><span class="line"><span class="cl">            if( n == 1 || word[0] != &#39;$&#39;)
+</span></span><span class="line"><span class="cl">            return word;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            long long num = 0;
+</span></span><span class="line"><span class="cl">            for(int i = 1; i <span class="p">&lt;</span> <span class="nt">word.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(!</span><span class="na">isdigit</span><span class="err">(</span><span class="na">word</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="na">return</span> <span class="na">word</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">num </span><span class="o">=</span> <span class="s">num</span> <span class="err">*</span> <span class="na">10</span> <span class="err">+</span> <span class="err">(</span><span class="na">word</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">0</span><span class="err">&#39;);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">stringstream</span> <span class="na">ss2</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">double</span> <span class="na">discountPercentag </span><span class="o">=</span> <span class="s">(100</span> <span class="na">-</span> <span class="na">discount</span><span class="err">)</span> <span class="err">/</span> <span class="na">100</span><span class="err">.</span><span class="na">00</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ss2</span> <span class="err">&lt;&lt;</span> <span class="na">fixed</span> <span class="err">&lt;&lt;</span> <span class="na">setprecision</span><span class="err">(</span><span class="na">2</span><span class="err">)</span> <span class="err">&lt;&lt;</span> <span class="err">(</span><span class="na">discountPercentag</span> <span class="err">*</span> <span class="na">num</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="err">&#34;$&#34;</span> <span class="err">+</span> <span class="na">ss2</span><span class="err">.</span><span class="na">str</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">string</span> <span class="na">res</span><span class="err">,</span> <span class="na">word</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">stringstream</span> <span class="na">ss</span><span class="err">(</span><span class="na">sentence</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">ss</span> <span class="p">&gt;</span>&gt; word) {
+</span></span><span class="line"><span class="cl">            res += doit(word) + &#34; &#34;;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        res.pop_back();
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

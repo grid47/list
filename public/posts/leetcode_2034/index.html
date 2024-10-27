@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/stock-price-fluctuation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class StockPrice {
+</span></span><span class="line"><span class="cl">    set<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; strm, ord;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    StockPrice() {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void update(int ts, int pc) {
+</span></span><span class="line"><span class="cl">        if(mp.count(ts)) {
+</span></span><span class="line"><span class="cl">            strm.erase(pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(ts, mp[ts]));
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            ord.erase(pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(mp[ts], ts));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        mp[ts] = pc;
+</span></span><span class="line"><span class="cl">        strm.insert(pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>(ts, pc));
+</span></span><span class="line"><span class="cl">        ord.insert(pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>(pc, ts));
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int current() {
+</span></span><span class="line"><span class="cl">       cout<span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">strm.size</span><span class="err">()</span> <span class="err">&lt;&lt;</span><span class="na">endl</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">rbegin</span><span class="err">(</span><span class="na">strm</span><span class="err">)</span><span class="na">-</span><span class="p">&gt;</span>second;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int maximum() {
+</span></span><span class="line"><span class="cl">        return rbegin(ord)-&gt;first;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int minimum() {
+</span></span><span class="line"><span class="cl">        return begin(ord)-&gt;first;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your StockPrice object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * StockPrice* obj = new StockPrice();
+</span></span><span class="line"><span class="cl"> * obj-&gt;update(timestamp,price);
+</span></span><span class="line"><span class="cl"> * int param_2 = obj-&gt;current();
+</span></span><span class="line"><span class="cl"> * int param_3 = obj-&gt;maximum();
+</span></span><span class="line"><span class="cl"> * int param_4 = obj-&gt;minimum();
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

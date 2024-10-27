@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/minimum-number-of-people-to-teach/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int minimumTeachings(int k, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> lang, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> frnd) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">			int n = lang.size();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			vector<span class="p">&lt;</span><span class="nt">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; langs;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">				<span class="na">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> s(begin(lang[i]), end(lang[i]));
+</span></span><span class="line"><span class="cl">				langs.push_back(s);
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ntk;
+</span></span><span class="line"><span class="cl">			for(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> frd: frnd) {
+</span></span><span class="line"><span class="cl">				int u = frd[0] - 1;
+</span></span><span class="line"><span class="cl">				int v = frd[1] - 1;
+</span></span><span class="line"><span class="cl">				set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> s1 = langs[u];
+</span></span><span class="line"><span class="cl">				set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> s2 = langs[v];				
+</span></span><span class="line"><span class="cl">				set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">				set_intersection(s1.begin(), s1.end(), s2.begin(), s2.end(), inserter(res, res.begin()));
+</span></span><span class="line"><span class="cl">				if (res.size() &gt; 0) continue;
+</span></span><span class="line"><span class="cl">				ntk.insert(u);
+</span></span><span class="line"><span class="cl">				ntk.insert(v);
+</span></span><span class="line"><span class="cl">			}
+</span></span><span class="line"><span class="cl">            if (ntk.size() == 0) return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> lg(k + 1, 0);
+</span></span><span class="line"><span class="cl">			for (int f : ntk)
+</span></span><span class="line"><span class="cl">            for (int l : langs[f]) lg[l]++;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">            int mx = lg[0];
+</span></span><span class="line"><span class="cl">            for (int c : lg) {
+</span></span><span class="line"><span class="cl">                mx = max(mx, c);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">			return ntk.size() - mx;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

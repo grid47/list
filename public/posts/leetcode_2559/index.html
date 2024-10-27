@@ -186,7 +186,23 @@
         <p><a href="https://leetcode.com/problems/count-vowel-strings-in-ranges/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> vowelStrings(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> q) {
+</span></span><span class="line"><span class="cl">        int n = words.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt(n, 0), ans(q.size(), 0);
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">char</span><span class="p">&gt;</span> ch = {&#39;a&#39;, &#39;e&#39;, &#39;i&#39;, &#39;o&#39;, &#39;u&#39;};
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">ch</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">])</span> <span class="err">&amp;&amp;</span> <span class="na">ch</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">size</span><span class="err">()</span> <span class="na">-1</span><span class="err">]))</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cnt</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="p">&gt;</span> 0) cnt[i] += cnt[i - 1];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        for(int i= 0; i <span class="p">&lt;</span> <span class="nt">q.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">cnt</span><span class="err">[</span><span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]]</span> <span class="na">-</span> <span class="err">((</span><span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="p">&gt;</span> 0)? cnt[q[i][0] - 1]: 0);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

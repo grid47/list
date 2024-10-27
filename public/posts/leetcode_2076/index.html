@@ -186,7 +186,78 @@
         <p><a href="https://leetcode.com/problems/process-restricted-friend-requests/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class UF {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dads;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    UF(int n) {
+</span></span><span class="line"><span class="cl">        dads.resize(n, 0);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dads</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">print</span><span class="err">()</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">dads</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">dads</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cout</span><span class="err">&lt;&lt;</span> <span class="na">endl</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">join</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">,</span> <span class="na">int</span> <span class="na">y</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">find(x);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">q </span><span class="o">=</span> <span class="s">find(y);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">p</span> <span class="err">!=</span> <span class="na">q</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dads</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">=</span> <span class="na">q</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">find</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">dads</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">==</span> <span class="na">x</span><span class="err">?</span> <span class="na">x</span> <span class="na">:</span> <span class="err">(</span><span class="na">dads</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">=</span> <span class="na">find</span><span class="err">(</span><span class="na">dads</span><span class="err">[</span><span class="na">x</span><span class="err">]));</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">pairs</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">,</span> <span class="na">int</span> <span class="na">y</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">find</span><span class="err">(</span><span class="na">x</span><span class="err">)</span> <span class="err">==</span> <span class="na">find</span><span class="err">(</span><span class="na">y</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">bool</span><span class="p">&gt;</span> friendRequests(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> rxns, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> reqs) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        // UF rxn = UF(n);
+</span></span><span class="line"><span class="cl">        UF req = UF(n);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        // for(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> node : rxns)
+</span></span><span class="line"><span class="cl">        // rxn.join(node[0], node[1]);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        // rxn.print();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> ans(reqs.size(), false);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">reqs.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> node = reqs[i];
+</span></span><span class="line"><span class="cl">            bool valid = true;
+</span></span><span class="line"><span class="cl">            if(!req.pairs(node[0], node[1]))
+</span></span><span class="line"><span class="cl">            {
+</span></span><span class="line"><span class="cl">                int p = req.find(node[0]);
+</span></span><span class="line"><span class="cl">                int q = req.find(node[1]);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                for(auto<span class="err">&amp;</span> e : rxns) {
+</span></span><span class="line"><span class="cl">                    int x = req.find(e[0]);
+</span></span><span class="line"><span class="cl">                    int y = req.find(e[1]);
+</span></span><span class="line"><span class="cl">                    
+</span></span><span class="line"><span class="cl">                    if ((x == p <span class="err">&amp;&amp;</span> y == q) ||
+</span></span><span class="line"><span class="cl">                        (y == p <span class="err">&amp;&amp;</span> x == q) ) {
+</span></span><span class="line"><span class="cl">                        valid = false;
+</span></span><span class="line"><span class="cl">                        break;
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            ans[i] = valid;
+</span></span><span class="line"><span class="cl">            if(valid) req.join(node[0], node[1]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return ans;        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

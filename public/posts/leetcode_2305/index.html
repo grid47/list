@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/fair-distribution-of-cookies/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int k, ans = INT_MAX;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cook, dist;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx) {
+</span></span><span class="line"><span class="cl">        if(idx == cook.size()) {            
+</span></span><span class="line"><span class="cl">            int sol = dist[0];
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">k</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">sol </span><span class="o">=</span> <span class="s">max(sol,</span> <span class="na">dist</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans </span><span class="o">=</span> <span class="s">min(ans,</span> <span class="na">sol</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">sol</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">ans </span><span class="o">=</span> <span class="s">INT_MAX;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">k</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dist</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+=</span> <span class="na">cook</span><span class="err">[</span><span class="na">idx</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans </span><span class="o">=</span> <span class="s">min(ans,</span> <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dist</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="na">-</span><span class="o">=</span> <span class="s">cook[idx];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">distributeCookies</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> cook, int k) {
+</span></span><span class="line"><span class="cl">        this-&gt;k = k;
+</span></span><span class="line"><span class="cl">        dist.resize(k, 0);
+</span></span><span class="line"><span class="cl">        this-&gt;cook = cook;
+</span></span><span class="line"><span class="cl">        dp(0);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

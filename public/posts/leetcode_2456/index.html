@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/most-popular-video-creator/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">#define ll long long
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    static bool cmp(pair<span class="p">&lt;</span><span class="nt">ll</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> p1, pair<span class="p">&lt;</span><span class="nt">ll</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> p2) {
+</span></span><span class="line"><span class="cl">        if(p1.first == p2.first) return p1.second <span class="p">&lt;</span> <span class="nt">p2.second</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">else</span> <span class="na">return</span> <span class="na">p1</span><span class="err">.</span><span class="na">first</span> <span class="p">&gt;</span> p2.first;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; mostPopularCreator(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> creators, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> ids, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> views) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; ans;
+</span></span><span class="line"><span class="cl">        long long n = creators.size(), maxi = INT_MIN;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">ll</span><span class="p">&gt;</span> m1;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">ll</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt;&gt; m2;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">m1</span><span class="err">[</span><span class="na">creators</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">+=</span> <span class="na">views</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">m2</span><span class="err">[</span><span class="na">creators</span><span class="err">[</span><span class="na">i</span><span class="err">]].</span><span class="na">push_back</span><span class="err">(</span><span class="na">make_pair</span><span class="err">(</span><span class="na">views</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">ids</span><span class="err">[</span><span class="na">i</span><span class="err">]));</span>
+</span></span><span class="line"><span class="cl">            <span class="na">maxi </span><span class="o">=</span> <span class="s">max(maxi,</span> <span class="na">m1</span><span class="err">[</span><span class="na">creators</span><span class="err">[</span><span class="na">i</span><span class="err">]]);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="err">&amp;[</span><span class="na">l</span><span class="err">,</span> <span class="na">r</span><span class="err">]</span> <span class="na">:</span> <span class="na">m1</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">r </span><span class="o">=</span><span class="s">=</span> <span class="na">maxi</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">sort</span><span class="err">(</span><span class="na">m2</span><span class="err">[</span><span class="na">l</span><span class="err">].</span><span class="na">begin</span><span class="err">(),</span> <span class="na">m2</span><span class="err">[</span><span class="na">l</span><span class="err">].</span><span class="na">end</span><span class="err">(),</span> <span class="na">cmp</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans</span><span class="err">.</span><span class="na">push_back</span><span class="err">({</span><span class="na">l</span><span class="err">,</span> <span class="na">m2</span><span class="err">[</span><span class="na">l</span><span class="err">].</span><span class="na">front</span><span class="err">().</span><span class="na">second</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

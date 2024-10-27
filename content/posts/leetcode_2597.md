@@ -22,6 +22,30 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    vector<int> cnt, nums;
+    
+    int dp(int idx, int k) {
+        if(idx == nums.size()) return 1;
+        int ans = 0;
+        if(nums[idx] - k >= 0 && (cnt[nums[idx] - k] > 0)) {
+            ans += dp(idx + 1, k);
+        } else {
+            ans += dp(idx + 1, k);
+            cnt[nums[idx]]++;
+            ans += dp(idx + 1, k);
+            cnt[nums[idx]]--;            
+        }
+        return ans;
+    }
+    
+    int beautifulSubsets(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        cnt.resize(1001, 0);
+        this->nums = nums;
+        return dp(0, k) - 1; // exluding none selected
+    }
+};
 {{< /highlight >}}
 

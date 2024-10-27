@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,99 @@
         <p><a href="https://leetcode.com/problems/operations-on-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class LockingTree {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nodes;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; chd;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    LockingTree(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> parent) {
+</span></span><span class="line"><span class="cl">        nodes = parent;
+</span></span><span class="line"><span class="cl">        // chd.resize(parent.size(), vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>());
+</span></span><span class="line"><span class="cl">        // for(int i = 1; i <span class="p">&lt;</span> <span class="nt">parent.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> 
+</span></span><span class="line"><span class="cl">        <span class="err">//</span>     <span class="na">chd</span><span class="err">[</span><span class="na">parent</span><span class="err">[</span><span class="na">i</span><span class="err">]].</span><span class="na">push_back</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;temp(parent.size());
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i=1;i<span class="p">&lt;</span><span class="nt">parent.size</span><span class="err">();</span><span class="na">i</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">temp</span><span class="err">[</span><span class="na">parent</span><span class="err">[</span><span class="na">i</span><span class="err">]].</span><span class="na">push_back</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">chd</span><span class="o">=</span><span class="s">temp;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">lock</span><span class="err">(</span><span class="na">int</span> <span class="na">num</span><span class="err">,</span> <span class="na">int</span> <span class="na">user</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">find</span><span class="err">(</span><span class="na">num</span><span class="err">)==</span><span class="na">mp</span><span class="err">.</span><span class="na">end</span><span class="err">()){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">mp</span><span class="err">[</span><span class="na">num</span><span class="err">]=</span><span class="na">user</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="err">//</span>  <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">num</span><span class="err">))</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">       <span class="err">//</span>  
+</span></span><span class="line"><span class="cl">       <span class="err">//</span>  <span class="na">mp</span><span class="err">[</span><span class="na">num</span><span class="err">]</span> <span class="err">=</span> <span class="na">user</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">       <span class="err">//</span>  <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">unlock</span><span class="err">(</span><span class="na">int</span> <span class="na">num</span><span class="err">,</span> <span class="na">int</span> <span class="na">user</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">find</span><span class="err">(</span><span class="na">num</span><span class="err">)!=</span><span class="na">mp</span><span class="err">.</span><span class="na">end</span><span class="err">()){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">[</span><span class="na">num</span><span class="err">]==</span><span class="na">user</span><span class="err">){</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">.</span><span class="na">erase</span><span class="err">(</span><span class="na">num</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>        
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">if</span><span class="err">(!</span><span class="na">mp</span><span class="err">[</span><span class="na">num</span><span class="err">])</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">[</span><span class="na">num</span><span class="err">]</span> <span class="err">!=</span> <span class="na">user</span><span class="err">)</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">mp</span><span class="err">.</span><span class="na">erase</span><span class="err">(</span><span class="na">num</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">check</span><span class="err">(</span><span class="na">int</span> <span class="na">num</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">cout</span><span class="err">&lt;&lt;</span> <span class="na">num</span> <span class="err">&lt;&lt;</span> <span class="na">mp</span><span class="err">[</span><span class="na">num</span><span class="err">];</span>        
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">find</span><span class="err">(</span><span class="na">num</span><span class="err">)!=</span><span class="na">mp</span><span class="err">.</span><span class="na">end</span><span class="err">())</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">num</span><span class="err">))</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">cout</span><span class="err">&lt;&lt;</span> <span class="na">num</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span><span class="na">-</span><span class="err">&#34;&lt;&lt;</span> <span class="na">nodes</span><span class="err">[</span><span class="na">num</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">nodes</span><span class="err">[</span><span class="na">num</span><span class="err">]</span> <span class="err">!=</span> <span class="na">-1</span> <span class="err">&amp;&amp;</span> <span class="na">check</span><span class="err">(</span><span class="na">nodes</span><span class="err">[</span><span class="na">num</span><span class="err">]))</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">desc</span><span class="err">(</span><span class="na">int</span> <span class="na">num</span><span class="err">,</span> <span class="na">int</span> <span class="err">&amp;</span><span class="na">total</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">n</span> <span class="na">:</span> <span class="na">chd</span><span class="err">[</span><span class="na">num</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">n</span><span class="err">))</span> 
+</span></span><span class="line"><span class="cl">            <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">.</span><span class="na">erase</span><span class="err">(</span><span class="na">n</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">total</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">desc</span><span class="err">(</span><span class="na">n</span><span class="err">,</span> <span class="na">total</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">upgrade</span><span class="err">(</span><span class="na">int</span> <span class="na">num</span><span class="err">,</span> <span class="na">int</span> <span class="na">user</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">.</span><span class="na">find</span><span class="err">(</span><span class="na">num</span><span class="err">)!=</span><span class="na">mp</span><span class="err">.</span><span class="na">end</span><span class="err">())</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">cout</span><span class="err">&lt;&lt;</span> <span class="err">&#34;</span><span class="na">hi</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">check</span><span class="err">(</span><span class="na">num</span><span class="err">))</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cout</span><span class="err">&lt;&lt;</span> <span class="err">&#34;</span><span class="na">hi1</span><span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">total </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">desc</span><span class="err">(</span><span class="na">num</span><span class="err">,</span> <span class="na">total</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">total </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">mp</span><span class="err">[</span><span class="na">num</span><span class="err">]</span> <span class="err">=</span> <span class="na">user</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">Your</span> <span class="na">LockingTree</span> <span class="na">object</span> <span class="na">will</span> <span class="na">be</span> <span class="na">instantiated</span> <span class="na">and</span> <span class="na">called</span> <span class="na">as</span> <span class="na">such:</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">LockingTree</span><span class="err">*</span> <span class="na">obj </span><span class="o">=</span> <span class="s">new</span> <span class="na">LockingTree</span><span class="err">(</span><span class="na">parent</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl"> <span class="err">*</span> <span class="na">bool</span> <span class="na">param_1 </span><span class="o">=</span> <span class="s">obj-</span><span class="p">&gt;</span>lock(num,user);
+</span></span><span class="line"><span class="cl"> * bool param_2 = obj-&gt;unlock(num,user);
+</span></span><span class="line"><span class="cl"> * bool param_3 = obj-&gt;upgrade(num,user);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

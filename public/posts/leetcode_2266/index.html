@@ -186,7 +186,29 @@
         <p><a href="https://leetcode.com/problems/count-number-of-texts/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    int mod = 1e9 + 7;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int countTexts(string s) {
+</span></span><span class="line"><span class="cl">        int n = s.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dp(n + 1, 0);
+</span></span><span class="line"><span class="cl">        dp[0] = 1;
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="err">&lt;</span>= n; i++) {
+</span></span><span class="line"><span class="cl">            dp[i] = dp[i - 1] % mod;
+</span></span><span class="line"><span class="cl">            if(i &gt; 1 <span class="err">&amp;&amp;</span> s[i - 1] == s[i - 2]) {
+</span></span><span class="line"><span class="cl">                dp[i] = (dp[i] + dp[i - 2]) % mod;
+</span></span><span class="line"><span class="cl">                if(i &gt; 2 <span class="err">&amp;&amp;</span> s[i - 1] == s[i - 3]) {
+</span></span><span class="line"><span class="cl">                    dp[i] = (dp[i] + dp[i - 3]) % mod;
+</span></span><span class="line"><span class="cl">                    if(i &gt; 3 <span class="err">&amp;&amp;</span> (s[i-1]==&#39;7&#39; || s[i-1]==&#39;9&#39;) <span class="err">&amp;&amp;</span> s[i - 1] == s[i - 4]) {
+</span></span><span class="line"><span class="cl">                        dp[i] = (dp[i] + dp[i - 4]) % mod;                        
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return dp[n];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

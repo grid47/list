@@ -186,7 +186,64 @@
         <p><a href="https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">#define pii pair<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int countRestrictedPaths(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> es) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">pii</span><span class="p">&gt;</span>&gt; gph(n + 1);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">es.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">u </span><span class="o">=</span> <span class="s">es[i][0],</span> <span class="na">v </span><span class="o">=</span> <span class="s">es[i][1],</span> <span class="na">d </span><span class="o">=</span> <span class="s">es[i][2];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">gph</span><span class="err">[</span><span class="na">u</span><span class="err">].</span><span class="na">push_back</span><span class="err">({</span><span class="na">d</span><span class="err">,</span> <span class="na">v</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">            <span class="na">gph</span><span class="err">[</span><span class="na">v</span><span class="err">].</span><span class="na">push_back</span><span class="err">({</span><span class="na">d</span><span class="err">,</span> <span class="na">u</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> dst(n + 1, INT_MAX);
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pii</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">pii</span><span class="p">&gt;</span>, greater<span class="err">&lt;</span>&gt;&gt; pq;
+</span></span><span class="line"><span class="cl">        pq.push({0, n});
+</span></span><span class="line"><span class="cl">        dst[n] = 0;
+</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            auto [d, u] = pq.top();
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            for(auto <span class="err">&amp;</span> x: gph[u]) {
+</span></span><span class="line"><span class="cl">                int nxt = x.second, t = x.first;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">               // if(t != dst[nxt]) continue;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if(dst[nxt] &gt; t + d) {
+</span></span><span class="line"><span class="cl">                    dst[nxt] = t + d;
+</span></span><span class="line"><span class="cl">                    pq.push({t + d, nxt});
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dp(n + 1, -1);
+</span></span><span class="line"><span class="cl">        return dfs(gph, dst, n, dp);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dfs(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">pii</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>gph, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>dst, int s, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>dp) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if (s == 1) return 1;
+</span></span><span class="line"><span class="cl">        if (dp[s] != -1) return dp[s];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int mod = 1e9 + 7;
+</span></span><span class="line"><span class="cl">        int sum = 0, w = 0, val = 0;
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>v : gph[s]) {
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            w = dst[s];
+</span></span><span class="line"><span class="cl">            val = dst[v.second];
+</span></span><span class="line"><span class="cl">            if (val &gt; w) {
+</span></span><span class="line"><span class="cl">                sum = (sum % mod+ dfs(gph, dst, v.second, dp) % mod) % mod;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return dp[s] = sum % mod;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

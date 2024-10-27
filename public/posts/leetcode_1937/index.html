@@ -174,7 +174,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,58 @@
         <p><a href="https://leetcode.com/problems/maximum-number-of-points-with-cost/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; pts;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">long</span> <span class="na">long</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">    long long dp(int idx, int prv) {
+</span></span><span class="line"><span class="cl">        if(idx == pts.size()) return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(mp.count(idx) <span class="err">&amp;&amp;</span> mp[idx].count(prv)) return mp[idx][prv];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        long long ans = LLONG_MIN;
+</span></span><span class="line"><span class="cl">        if(prv == -1) {
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">pts</span><span class="err">[</span><span class="na">0</span><span class="err">].</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">max(ans,</span> <span class="na">pts</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">i</span><span class="err">]</span> <span class="err">+</span> <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">i</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">pts</span><span class="err">[</span><span class="na">0</span><span class="err">].</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">max(ans,</span> <span class="na">pts</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">i</span><span class="err">]</span> <span class="na">-</span> <span class="na">abs</span><span class="err">(</span><span class="na">i</span> <span class="na">-</span> <span class="na">prv</span><span class="err">)</span> <span class="err">+</span> <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">i</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">mp</span><span class="err">[</span><span class="na">idx</span><span class="err">][</span><span class="na">prv</span><span class="err">]</span> <span class="err">=</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">long</span> <span class="na">long</span> <span class="na">maxPoints</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> points) {
+</span></span><span class="line"><span class="cl">        pts = points;
+</span></span><span class="line"><span class="cl">        int m = pts.size(), n = pts[0].size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span> prv(n);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="na">prv</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">pts</span><span class="err">[</span><span class="na">0</span><span class="err">][</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">m</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="p">&gt;</span> left(n, 0), right(n, 0), cur(n, 0);
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            left[0] = prv[0];
+</span></span><span class="line"><span class="cl">            right[n - 1] = prv[n - 1];
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">left</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">max</span><span class="err">(</span><span class="na">left</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="na">-</span> <span class="na">1</span><span class="err">,</span> <span class="na">prv</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">n</span> <span class="na">-</span> <span class="na">2</span><span class="err">;</span> <span class="na">i</span> <span class="p">&gt;</span>= 0; i--)
+</span></span><span class="line"><span class="cl">                right[i] = max(right[i + 1] - 1, prv[i]);
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cur</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">max</span><span class="err">(</span><span class="na">left</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">right</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">+</span> <span class="na">pts</span><span class="err">[</span><span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">][</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">prv </span><span class="o">=</span> <span class="s">cur;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">long</span> <span class="na">long</span> <span class="na">ans </span><span class="o">=</span> <span class="s">LLONG_MIN;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans </span><span class="o">=</span> <span class="s">max(ans,</span> <span class="na">prv</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

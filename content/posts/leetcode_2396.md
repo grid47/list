@@ -22,6 +22,11 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    bool isStrictlyPalindromic(int n) {
+        return false;
+    }
+};
 {{< /highlight >}}
 

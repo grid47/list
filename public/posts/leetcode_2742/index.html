@@ -186,7 +186,85 @@
         <p><a href="https://leetcode.com/problems/painting-the-walls/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class cmp {
+</span></span><span class="line"><span class="cl">    public:
+</span></span><span class="line"><span class="cl">    bool operator()(vector<span class="p">&lt;</span><span class="nt">float</span><span class="p">&gt;</span> <span class="err">&amp;</span>a, vector<span class="p">&lt;</span><span class="nt">float</span><span class="p">&gt;</span> <span class="err">&amp;</span>b) {
+</span></span><span class="line"><span class="cl">        if(a[0] == b[0]) {
+</span></span><span class="line"><span class="cl">            return a[1] <span class="p">&lt;</span> <span class="nt">b</span><span class="err">[</span><span class="na">1</span><span class="err">];</span> <span class="err">//</span> <span class="na">longer</span> <span class="na">time</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">a</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="p">&gt;</span> b[0];
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class PQ {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int paintWalls(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> cost, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> time) {
+</span></span><span class="line"><span class="cl">        /*
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        min cost
+</span></span><span class="line"><span class="cl">        max time
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        cost / time less
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if equal, max time should get preference
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        */
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">float</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">float</span><span class="p">&gt;</span>&gt;, cmp&gt; pq;
+</span></span><span class="line"><span class="cl">        int n = cost.size();
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">({(</span><span class="na">float</span><span class="err">)</span><span class="na">cost</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">/</span> <span class="na">time</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="err">(</span><span class="na">float</span><span class="err">)</span><span class="na">time</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="err">(</span><span class="na">float</span><span class="err">)</span><span class="na">cost</span><span class="err">[</span><span class="na">i</span><span class="err">]});</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">res </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">n</span> <span class="p">&gt;</span> 0) {
+</span></span><span class="line"><span class="cl">            auto cur = pq.top();
+</span></span><span class="line"><span class="cl">            res += (int)cur[2];
+</span></span><span class="line"><span class="cl">            n--;
+</span></span><span class="line"><span class="cl">            n -= (int)cur[1];
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cost;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> time;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mem;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int dp(int i, int rm) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(rm <span class="err">&lt;</span>= 0) return 0;
+</span></span><span class="line"><span class="cl">        if(i == n) return INT_MAX;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(mem[i][rm] != -1) return mem[i][rm];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = dp(i + 1, rm);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ret = dp(i + 1, rm - 1 - time[i]);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        ans = min(ans, ret == INT_MAX? ret: ret + cost[i]);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return mem[i][rm] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int paintWalls(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> cost, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> time) {
+</span></span><span class="line"><span class="cl">        n = cost.size();
+</span></span><span class="line"><span class="cl">        this-&gt;cost = cost;
+</span></span><span class="line"><span class="cl">        this-&gt;time = time;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        // PQ a1 = new PQ();
+</span></span><span class="line"><span class="cl">        // return a1.paintWalls(cost, time);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        mem.resize(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n + 1, -1));
+</span></span><span class="line"><span class="cl">        return dp(0, n);
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

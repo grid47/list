@@ -186,7 +186,33 @@
         <p><a href="https://leetcode.com/problems/maximum-number-of-eaten-apples/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int eatenApples(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> apples, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> days) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int n = days.size();
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;, greater<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; pq;
+</span></span><span class="line"><span class="cl">        int res = 0, i = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">||</span> <span class="err">!</span><span class="na">pq</span><span class="err">.</span><span class="na">empty</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span> <span class="err">&amp;&amp;</span> <span class="na">apples</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="p">&gt;</span> 0) pq.push({i + days[i] - 1, apples[i]});
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            while(!pq.empty() <span class="err">&amp;&amp;</span> pq.top()[0] <span class="p">&lt;</span> <span class="nt">i</span><span class="err">)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(!</span><span class="na">pq</span><span class="err">.</span><span class="na">empty</span><span class="err">())</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">auto</span> <span class="na">it </span><span class="o">=</span> <span class="s">pq.top();</span>
+</span></span><span class="line"><span class="cl">                <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">it</span><span class="err">[</span><span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span> 1) pq.push({it[0], it[1] - 1});
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            i++;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

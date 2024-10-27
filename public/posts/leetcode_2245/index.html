@@ -186,7 +186,46 @@
         <p><a href="https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> operator+(const array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> <span class="err">&amp;</span>r1, const array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> <span class="err">&amp;</span>r2) { return { r1[0] + r2[0], r1[1] + r2[1] }; }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> operator-(const array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> <span class="err">&amp;</span>r1, const array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> <span class="err">&amp;</span>r2) { return { r1[0] - r2[0], r1[1] - r2[1] }; }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">int pairs (const array<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> <span class="err">&amp;</span>p) { return min(p[0], p[1]); }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int fact(int i, int j) {
+</span></span><span class="line"><span class="cl">        return i % j ? 0 : 1 + fact(i/j, j);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int maxTrailingZeros(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        int m = grid.size(), n = grid[0].size(), res = 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">array</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span>&gt;&gt; h(m, vector<span class="p">&lt;</span><span class="nt">array</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span>&gt;(n + 1)), v(m+1, vector<span class="p">&lt;</span><span class="nt">array</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span>&gt;(n));
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">int</span> <span class="na">t </span><span class="o">=</span> <span class="s">grid[i][j];</span>
+</span></span><span class="line"><span class="cl">                <span class="na">array</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> node = { fact(t, 2), fact(t, 5) };
+</span></span><span class="line"><span class="cl">                h[i][j + 1] = h[i][j] + node;
+</span></span><span class="line"><span class="cl">                v[i + 1][j] = v[i][j] + node;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">m</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="na">array</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">2</span><span class="p">&gt;</span> h1 = h[i][j], 
+</span></span><span class="line"><span class="cl">                h2 = h[i][n] - h[i][j+1],
+</span></span><span class="line"><span class="cl">                v1 = v[i+1][j],
+</span></span><span class="line"><span class="cl">                v2 = v[m][j] - v[i][j];
+</span></span><span class="line"><span class="cl">                res = max({res, pairs(v1+h1), pairs(v1+h2), pairs(v2+h1), pairs(v2+h2)});
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

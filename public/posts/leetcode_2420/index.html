@@ -186,7 +186,24 @@
         <p><a href="https://leetcode.com/problems/find-all-good-indices/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> goodIndices(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> a, int k) {
+</span></span><span class="line"><span class="cl">        int n = a.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dp1(n + 1, 1), dp2(n + 1, 1), ans;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">a</span><span class="err">[</span><span class="na">i</span> <span class="na">-1</span><span class="err">]</span> <span class="p">&gt;</span>= a[i]) dp1[i] = dp1[i - 1]+1;
+</span></span><span class="line"><span class="cl">        for(int i = n -2; i &gt; 0; i--)
+</span></span><span class="line"><span class="cl">            if(a[i] <span class="err">&lt;</span>= a[i +1]) dp2[i] = dp2[i +1]+1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = k; i<span class="p">&lt;</span> <span class="nt">n-k</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">dp1</span><span class="err">[</span><span class="na">i-1</span><span class="err">]</span> <span class="p">&gt;</span>= k <span class="err">&amp;&amp;</span> dp2[i+1] &gt;=k)
+</span></span><span class="line"><span class="cl">        ans.push_back(i);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/reachable-nodes-with-restrictions/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    int ans;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    void solve(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> gph, vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> <span class="err">&amp;</span>vis, int i) {
+</span></span><span class="line"><span class="cl">        vis[i] = true;
+</span></span><span class="line"><span class="cl">        for(int n: gph[i]) {
+</span></span><span class="line"><span class="cl">            if(!vis[n]) {
+</span></span><span class="line"><span class="cl">                ans++;
+</span></span><span class="line"><span class="cl">                vis[n] = true;
+</span></span><span class="line"><span class="cl">                solve(gph, vis, n);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int reachableNodes(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> restricted) {
+</span></span><span class="line"><span class="cl">        ans = 1;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; gph(n);
+</span></span><span class="line"><span class="cl">        for(auto e: edges) {
+</span></span><span class="line"><span class="cl">            int u = e[0], v = e[1];
+</span></span><span class="line"><span class="cl">            gph[u].push_back(v);
+</span></span><span class="line"><span class="cl">            gph[v].push_back(u);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> vis(n, false);
+</span></span><span class="line"><span class="cl">        for(auto i: restricted) vis[i] = true;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        solve(gph, vis, 0);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

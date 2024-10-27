@@ -186,7 +186,31 @@
         <p><a href="https://leetcode.com/problems/the-number-of-beautiful-subsets/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt, nums;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx, int k) {
+</span></span><span class="line"><span class="cl">        if(idx == nums.size()) return 1;
+</span></span><span class="line"><span class="cl">        int ans = 0;
+</span></span><span class="line"><span class="cl">        if(nums[idx] - k &gt;= 0 <span class="err">&amp;&amp;</span> (cnt[nums[idx] - k] &gt; 0)) {
+</span></span><span class="line"><span class="cl">            ans += dp(idx + 1, k);
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            ans += dp(idx + 1, k);
+</span></span><span class="line"><span class="cl">            cnt[nums[idx]]++;
+</span></span><span class="line"><span class="cl">            ans += dp(idx + 1, k);
+</span></span><span class="line"><span class="cl">            cnt[nums[idx]]--;            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int beautifulSubsets(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) {
+</span></span><span class="line"><span class="cl">        sort(nums.begin(), nums.end());
+</span></span><span class="line"><span class="cl">        cnt.resize(1001, 0);
+</span></span><span class="line"><span class="cl">        this-&gt;nums = nums;
+</span></span><span class="line"><span class="cl">        return dp(0, k) - 1; // exluding none selected
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

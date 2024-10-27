@@ -186,7 +186,45 @@
         <p><a href="https://leetcode.com/problems/longest-cycle-in-a-graph/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int ans = -1;
+</span></span><span class="line"><span class="cl">    int longestCycle(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> edges) {
+</span></span><span class="line"><span class="cl">        int n = edges.size();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> vis(n, 0);        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">vis</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> store;
+</span></span><span class="line"><span class="cl">            dfs(i, vis, edges, store);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return ans; 
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void dfs(int cur, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>vis, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>grid, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>store) {
+</span></span><span class="line"><span class="cl">        if(cur == -1) return;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(vis[cur]) {
+</span></span><span class="line"><span class="cl">            int pt = -1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">store.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">store</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">cur</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">pt </span><span class="o">=</span> <span class="s">i;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">break</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">pt </span><span class="o">=</span><span class="s">=</span> <span class="na">-1</span><span class="err">)</span> <span class="na">return</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans </span><span class="o">=</span> <span class="s">max(ans,</span> <span class="err">(</span><span class="na">int</span><span class="err">)</span><span class="na">store</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">pt</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">vis</span><span class="err">[</span><span class="na">cur</span><span class="err">]</span> <span class="err">=</span> <span class="na">true</span><span class="err">;</span>            
+</span></span><span class="line"><span class="cl">            <span class="na">store</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">cur</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">dfs</span><span class="err">(</span><span class="na">grid</span><span class="err">[</span><span class="na">cur</span><span class="err">],</span> <span class="na">vis</span><span class="err">,</span> <span class="na">grid</span><span class="err">,</span> <span class="na">store</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

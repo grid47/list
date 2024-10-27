@@ -186,7 +186,53 @@
         <p><a href="https://leetcode.com/problems/count-number-of-possible-root-nodes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; grid;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; guess;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> par;
+</span></span><span class="line"><span class="cl">    int ans = 0, k;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void fill_par(int node, int dad) {
+</span></span><span class="line"><span class="cl">        par[node] = dad;
+</span></span><span class="line"><span class="cl">        for(int it: grid[node]) {
+</span></span><span class="line"><span class="cl">            if(it != dad) fill_par(it, node);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void dfs(int node, int dad, int cnt) {
+</span></span><span class="line"><span class="cl">        if(guess[node].count(dad)) cnt++;
+</span></span><span class="line"><span class="cl">        if(guess[dad].count(node)) cnt--;
+</span></span><span class="line"><span class="cl">        if(cnt &gt;= k) ans++;
+</span></span><span class="line"><span class="cl">        for(int x: grid[node]) {
+</span></span><span class="line"><span class="cl">            if(x != dad) dfs(x, node, cnt);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int rootCount(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> guesses, int k) {
+</span></span><span class="line"><span class="cl">        this-&gt;k = k;
+</span></span><span class="line"><span class="cl">        int n = edges.size() + 1;
+</span></span><span class="line"><span class="cl">        grid.resize(n);
+</span></span><span class="line"><span class="cl">        for(auto e: edges) {
+</span></span><span class="line"><span class="cl">            grid[e[0]].push_back(e[1]);
+</span></span><span class="line"><span class="cl">            grid[e[1]].push_back(e[0]);            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        guess.resize(n);
+</span></span><span class="line"><span class="cl">        for(auto g: guesses) {
+</span></span><span class="line"><span class="cl">            guess[g[0]].insert(g[1]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        par.resize(n, 0);
+</span></span><span class="line"><span class="cl">        int cnt = 0;
+</span></span><span class="line"><span class="cl">        fill_par(0, -1);
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">dad </span><span class="o">=</span> <span class="s">par[i];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">guess</span><span class="err">[</span><span class="na">dad</span><span class="err">].</span><span class="na">count</span><span class="err">(</span><span class="na">i</span><span class="err">))</span> <span class="na">cnt</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">cnt</span> <span class="p">&gt;</span>= k) ans++;
+</span></span><span class="line"><span class="cl">        for(int x: grid[0]) dfs(x, 0, cnt);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

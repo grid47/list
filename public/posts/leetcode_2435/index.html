@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/paths-in-matrix-whose-sum-is-divisible-by-k/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; memo;    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; grid;
+</span></span><span class="line"><span class="cl">    int m, n, k;
+</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int i, int j, int sum) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if((i == (m - 1)) <span class="err">&amp;&amp;</span> (j == (n - 1))) return (sum % k) == 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[i][j][sum] != -1) return memo[i][j][sum];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        long long ans = 0;
+</span></span><span class="line"><span class="cl">        if(i + 1 <span class="p">&lt;</span> <span class="nt">m</span><span class="err">)</span> <span class="na">ans</span> <span class="err">+=</span> <span class="na">dp</span><span class="err">(</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">j</span><span class="err">,</span> <span class="err">(</span><span class="na">sum</span> <span class="err">+</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">][</span><span class="na">j</span><span class="err">])</span> <span class="err">%</span> <span class="na">k</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">j</span> <span class="err">+</span> <span class="na">1</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">)</span> <span class="na">ans</span> <span class="err">+=</span> <span class="na">dp</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="err">(</span><span class="na">sum</span> <span class="err">+</span> <span class="na">grid</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">])</span> <span class="err">%</span> <span class="na">k</span><span class="err">);</span>        
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">][</span><span class="na">sum</span><span class="err">]</span> <span class="err">=</span> <span class="na">ans</span> <span class="err">%</span> <span class="na">mod</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">numberOfPaths</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid, int k) {
+</span></span><span class="line"><span class="cl">        this-&gt;grid = grid;
+</span></span><span class="line"><span class="cl">        m = grid.size(), n = grid[0].size();
+</span></span><span class="line"><span class="cl">        this-&gt;k = k;
+</span></span><span class="line"><span class="cl">        memo.resize(m, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(50, -1)));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return dp(0, 0, grid[0][0] % k);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

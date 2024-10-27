@@ -186,7 +186,52 @@
         <p><a href="https://leetcode.com/problems/extra-characters-in-a-string/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    set<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> dic;
+</span></span><span class="line"><span class="cl">    string str;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> memo;
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dp(int idx) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(idx == n) return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(memo[idx] != -1) return memo[idx];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = INT_MAX;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int len = 1;
+</span></span><span class="line"><span class="cl">        for(int i = idx; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">string</span> <span class="na">s </span><span class="o">=</span> <span class="s">str.substr(idx,</span> <span class="na">len</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">dic</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">s</span><span class="err">))</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">min(ans,</span> <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">len</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">ans </span><span class="o">=</span> <span class="s">min(ans,</span> <span class="na">len</span> <span class="err">+</span> <span class="na">dp</span><span class="err">(</span><span class="na">idx</span> <span class="err">+</span> <span class="na">len</span><span class="err">));</span>                
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">len</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span> <span class="err">=</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">minExtraChar</span><span class="err">(</span><span class="na">string</span> <span class="na">s</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span><span class="err">&amp;</span> dictionary) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        n = s.size();
+</span></span><span class="line"><span class="cl">        str = s;
+</span></span><span class="line"><span class="cl">        memo.resize(n, -1);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(auto x: dictionary) {
+</span></span><span class="line"><span class="cl">            dic.insert(x);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return dp(0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

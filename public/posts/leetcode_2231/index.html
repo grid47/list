@@ -186,7 +186,33 @@
         <p><a href="https://leetcode.com/problems/largest-number-after-digit-swaps-by-parity/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int largestInteger(int num) {
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> p; // priority queue to store odd digits in descending order
+</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> q; // priority queue to store even digits in descending order
+</span></span><span class="line"><span class="cl">        string nums=to_string(num); // converting num to a string for easy access of the digits
+</span></span><span class="line"><span class="cl">        int n=nums.size(); // n stores the number of digits in num
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i=0;i<span class="p">&lt;</span><span class="nt">n</span><span class="err">;</span><span class="na">i</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">digit</span><span class="o">=</span><span class="s">nums[i]-&#39;0&#39;;</span> 
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">digit</span><span class="err">)%</span><span class="na">2</span><span class="err">)</span> <span class="err">//</span> <span class="na">if</span> <span class="na">digit</span> <span class="na">is</span> <span class="na">odd</span><span class="err">,</span> <span class="na">push</span> <span class="na">it</span> <span class="na">into</span> <span class="na">priority</span> <span class="na">queue</span> <span class="na">p</span>
+</span></span><span class="line"><span class="cl">                <span class="na">p</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">digit</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">else</span>
+</span></span><span class="line"><span class="cl">                <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">digit</span><span class="err">);</span> <span class="err">//</span> <span class="na">if</span> <span class="na">digit</span> <span class="na">is</span> <span class="na">even</span><span class="err">,</span> <span class="na">push</span> <span class="na">it</span> <span class="na">into</span> <span class="na">priority</span> <span class="na">queue</span> <span class="na">q</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">answer</span><span class="o">=</span><span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="o">=</span><span class="s">0;</span> <span class="na">i</span><span class="err">&lt;</span><span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++){</span>
+</span></span><span class="line"><span class="cl">            <span class="na">answer</span><span class="o">=</span><span class="s">answer*10;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">((</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]</span><span class="na">-</span><span class="err">&#39;</span><span class="na">0</span><span class="err">&#39;)%</span><span class="na">2</span><span class="err">)</span> <span class="err">//</span> <span class="na">if</span> <span class="na">the</span> <span class="na">digit</span> <span class="na">is</span> <span class="na">odd</span><span class="err">,</span> <span class="na">add</span> <span class="na">the</span> <span class="na">largest</span> <span class="na">odd</span> <span class="na">digit</span> <span class="na">of</span> <span class="na">p</span> <span class="na">into</span> <span class="na">the</span> <span class="na">answer</span>
+</span></span><span class="line"><span class="cl">                <span class="err">{</span><span class="na">answer</span><span class="err">+=</span><span class="na">p</span><span class="err">.</span><span class="na">top</span><span class="err">();</span><span class="na">p</span><span class="err">.</span><span class="na">pop</span><span class="err">();}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">else</span>
+</span></span><span class="line"><span class="cl">                <span class="err">{</span><span class="na">answer</span><span class="err">+=</span><span class="na">q</span><span class="err">.</span><span class="na">top</span><span class="err">();</span><span class="na">q</span><span class="err">.</span><span class="na">pop</span><span class="err">();}</span> <span class="err">//</span> <span class="na">if</span> <span class="na">the</span> <span class="na">digit</span> <span class="na">is</span> <span class="na">even</span><span class="err">,</span> <span class="na">add</span> <span class="na">the</span> <span class="na">largest</span> <span class="na">even</span> <span class="na">digit</span> <span class="na">of</span> <span class="na">q</span> <span class="na">into</span> <span class="na">the</span> <span class="na">answer</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">answer</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

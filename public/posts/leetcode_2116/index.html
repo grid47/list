@@ -186,7 +186,36 @@
         <p><a href="https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    bool canBeValid(string s, string lck) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return (s.size() % 2) == 0 <span class="err">&amp;&amp;</span> check(s, lck, &#39;(&#39;) <span class="err">&amp;&amp;</span> check(s, lck, &#39;)&#39;);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool check(string s, string lck, char op) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int blk = 0, wild = 0;
+</span></span><span class="line"><span class="cl">        int n = s.size();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int st  =  ( op == &#39;(&#39; ) ? 0 :  n - 1;
+</span></span><span class="line"><span class="cl">        int nd  =  ( op == &#39;(&#39; ) ? n - 1:  0;
+</span></span><span class="line"><span class="cl">        int dir =  ( op == &#39;(&#39; ) ? 1 : -1;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = st; (i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">i</span> <span class="p">&gt;</span>= 0); i += dir) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if(lck[i] == &#39;1&#39;) blk += (s[i] == op) ? 1: -1;
+</span></span><span class="line"><span class="cl">            else              wild++;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if(blk + wild <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">blk</span> <span class="err">&lt;=</span> <span class="na">wild</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 
