@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-06-10T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-06-10T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-06-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-06-11T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-06-10T00:00:00Z">
-                June 10, 2020
+              <time datetime="2020-06-11T00:00:00Z">
+                June 11, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/throne-inheritance/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class ThroneInheritance {
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">bool</span><span class="p">&gt;</span> dead;   // Just to keep track of alive people
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; family;  
+</span></span><span class="line"><span class="cl">    string root;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    ThroneInheritance(string kingName) {
+</span></span><span class="line"><span class="cl">        root = kingName;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void birth(string parentName, string childName) {
+</span></span><span class="line"><span class="cl">        family[parentName].push_back(childName);    // Appending at the end takes care of oldest to yongest 
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void death(string name) {
+</span></span><span class="line"><span class="cl">        dead[name] = true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void dfs(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> <span class="err">&amp;</span>ans, string root) {
+</span></span><span class="line"><span class="cl">        if (!dead[root]) {           // Just check if dead before inserting into the order.
+</span></span><span class="line"><span class="cl">            ans.push_back(root);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        for (string child: family[root]) {
+</span></span><span class="line"><span class="cl">            dfs(ans, child);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> getInheritanceOrder() {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">        dfs(ans, root);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

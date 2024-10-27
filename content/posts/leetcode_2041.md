@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2041: Accepted Candidates From the Interviews"
-date = "2019-03-27"
+date = "2019-03-28"
 description = "Solution to Leetcode 2041"
 tags = [
     

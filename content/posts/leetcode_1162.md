@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1162: As Far from Land as Possible"
-date = "2021-08-22"
+date = "2021-08-23"
 description = "Solution to Leetcode 1162"
 tags = [
     
@@ -22,6 +22,37 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int maxDistance(vector<vector<int>>& grid) {
+        int n = grid.size();
+        queue<pair<int, int>> q;
+        for(int i = 0; i < n; i++)
+        for(int j = 0; j < n; j++)
+            if(grid[i][j] == 1) {
+                q.push(make_pair(i, j));
+                grid[i][j] = 0;
+            } else grid[i][j] = -1;
 
+        if(q.empty() || q.size() == n * n) return -1;
+        
+        int dir[] = {0, 1, 0, -1, 0};
+        int mx = 1;
+        while(!q.empty()) {
+            pair<int, int> tmp = q.front();
+            q.pop();
+            for(int i = 0; i < 4; i++) {
+                int x = tmp.first + dir[i], y = tmp.second + dir[i + 1];
+                if(x < 0 || y < 0 || x == n || y == n || grid[x][y] != -1)
+                    continue;
+                cout << grid[tmp.first][tmp.second] << " ";
+                grid[x][y] = grid[tmp.first][tmp.second] + 1;
+                q.push(make_pair(x, y));
+                mx = max(mx, grid[x][y]);
+            }
+        }
+        return mx;
+    }
+};
 {{< /highlight >}}
 

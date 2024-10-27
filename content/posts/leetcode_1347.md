@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1347: Minimum Number of Steps to Make Two Strings Anagram"
-date = "2021-02-18"
+date = "2021-02-19"
 description = "Solution to Leetcode 1347"
 tags = [
     
@@ -22,6 +22,19 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int minSteps(string s, string t) {
+        vector<int> count(26, 0);
+        for(int i = 0; i < s.length(); i++) {
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
+        }
+        int step = 0;
+        for(int num : count)
+            if(num > 0) step += num;
+        return step;
+    }
+};
 {{< /highlight >}}
 

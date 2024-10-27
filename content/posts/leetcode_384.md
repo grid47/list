@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 384: Shuffle an Array"
-date = "2023-10-09"
+date = "2023-10-10"
 description = "Solution to Leetcode 384"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 878: Nth Magical Number"
-date = "2022-06-02"
+date = "2022-06-03"
 description = "Solution to Leetcode 878"
 tags = [
     

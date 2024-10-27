@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 670: Maximum Swap"
-date = "2022-12-27"
+date = "2022-12-28"
 description = "Solution to Leetcode 670"
 tags = [
     

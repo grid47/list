@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 922: Sort Array By Parity II"
-date = "2022-04-19"
+date = "2022-04-20"
 description = "Solution to Leetcode 922"
 tags = [
     

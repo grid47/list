@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 580: Count Student Number in Departments"
-date = "2023-03-27"
+date = "2023-03-28"
 description = "Solution to Leetcode 580"
 tags = [
     

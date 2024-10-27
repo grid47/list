@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 780: Reaching Points"
-date = "2022-09-08"
+date = "2022-09-09"
 description = "Solution to Leetcode 780"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1214: Two Sum BSTs"
-date = "2021-07-01"
+date = "2021-07-02"
 description = "Solution to Leetcode 1214"
 tags = [
     

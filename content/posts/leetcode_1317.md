@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1317: Convert Integer to the Sum of Two No-Zero Integers"
-date = "2021-03-20"
+date = "2021-03-21"
 description = "Solution to Leetcode 1317"
 tags = [
     

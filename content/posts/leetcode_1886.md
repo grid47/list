@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1886: Determine Whether Matrix Can Be Obtained By Rotation"
-date = "2019-08-29"
+date = "2019-08-30"
 description = "Solution to Leetcode 1886"
 tags = [
     

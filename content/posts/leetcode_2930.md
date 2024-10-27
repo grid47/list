@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2930: Number of Strings Which Can Be Rearranged to Contain Substring"
-date = "2016-10-19"
+date = "2016-10-20"
 description = "Solution to Leetcode 2930"
 tags = [
     

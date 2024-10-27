@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2810: Faulty Keyboard"
-date = "2017-02-16"
+date = "2017-02-17"
 description = "Solution to Leetcode 2810"
 tags = [
     

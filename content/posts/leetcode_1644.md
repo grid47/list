@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1644: Lowest Common Ancestor of a Binary Tree II"
-date = "2020-04-27"
+date = "2020-04-28"
 description = "Solution to Leetcode 1644"
 tags = [
     

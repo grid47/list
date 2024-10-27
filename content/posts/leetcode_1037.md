@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1037: Valid Boomerang"
-date = "2021-12-25"
+date = "2021-12-26"
 description = "Solution to Leetcode 1037"
 tags = [
     

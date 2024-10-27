@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2955: Number of Same-End Substrings"
-date = "2016-09-24"
+date = "2016-09-25"
 description = "Solution to Leetcode 2955"
 tags = [
     

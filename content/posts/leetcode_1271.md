@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1271: Hexspeak"
-date = "2021-05-05"
+date = "2021-05-06"
 description = "Solution to Leetcode 1271"
 tags = [
     

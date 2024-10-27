@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3225: Maximum Score From Grid Operations"
-date = "2015-12-29"
+date = "2015-12-30"
 description = "Solution to Leetcode 3225"
 tags = [
     

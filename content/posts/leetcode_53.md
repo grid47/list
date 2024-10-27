@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 53: Maximum Subarray"
-date = "2024-09-04"
+date = "2024-09-05"
 description = "Solution to Leetcode 53"
 tags = [
     

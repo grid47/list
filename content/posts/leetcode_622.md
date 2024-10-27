@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 622: Design Circular Queue"
-date = "2023-02-13"
+date = "2023-02-14"
 description = "Solution to Leetcode 622"
 tags = [
     

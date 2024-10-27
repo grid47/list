@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2523: Closest Prime Numbers in Range"
-date = "2017-11-30"
+date = "2017-12-01"
 description = "Solution to Leetcode 2523"
 tags = [
     

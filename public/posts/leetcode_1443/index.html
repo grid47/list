@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-11-14T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-11-14T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-11-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-11-15T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-11-14T00:00:00Z">
-                November 14, 2020
+              <time datetime="2020-11-15T00:00:00Z">
+                November 15, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,34 @@
         <p><a href="https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; gph;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> visited;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> hasApple;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minTime(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges, vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span><span class="err">&amp;</span> hasApple) {
+</span></span><span class="line"><span class="cl">        this-&gt;hasApple = hasApple;
+</span></span><span class="line"><span class="cl">        for(auto x: edges) {
+</span></span><span class="line"><span class="cl">            gph[x[0]].push_back(x[1]);
+</span></span><span class="line"><span class="cl">            gph[x[1]].push_back(x[0]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return dfs(0, 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int dfs(int mycost, int node) {
+</span></span><span class="line"><span class="cl">        if(visited[node]) return 0;
+</span></span><span class="line"><span class="cl">        visited[node] = true;
+</span></span><span class="line"><span class="cl">        int childcost = 0;
+</span></span><span class="line"><span class="cl">        for(int x: gph[node]) {
+</span></span><span class="line"><span class="cl">            childcost += dfs(2, x);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        if(childcost == 0 <span class="err">&amp;&amp;</span> hasApple[node] == false)
+</span></span><span class="line"><span class="cl">            return 0;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return childcost + mycost;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

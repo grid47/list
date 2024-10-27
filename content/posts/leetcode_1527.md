@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1527: Patients With a Condition"
-date = "2020-08-22"
+date = "2020-08-23"
 description = "Solution to Leetcode 1527"
 tags = [
     
@@ -22,6 +22,7 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+# Write your MySQL query statement below
+SELECT * FROM Patients WHERE REGEXP_LIKE(conditions,'\\bDIAB1');
 {{< /highlight >}}
 

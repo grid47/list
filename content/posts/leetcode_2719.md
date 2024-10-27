@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2719: Count of Integers"
-date = "2017-05-18"
+date = "2017-05-19"
 description = "Solution to Leetcode 2719"
 tags = [
     

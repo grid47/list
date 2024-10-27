@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2920: Maximum Points After Collecting Coins From All Nodes"
-date = "2016-10-29"
+date = "2016-10-30"
 description = "Solution to Leetcode 2920"
 tags = [
     

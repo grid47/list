@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3306: Count of Substrings Containing Every Vowel and K Consonants II"
-date = "2015-10-09"
+date = "2015-10-10"
 description = "Solution to Leetcode 3306"
 tags = [
     

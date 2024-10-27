@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2253: Dynamic Unpivoting of a Table"
-date = "2018-08-27"
+date = "2018-08-28"
 description = "Solution to Leetcode 2253"
 tags = [
     

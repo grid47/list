@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 671: Second Minimum Node In a Binary Tree"
-date = "2022-12-26"
+date = "2022-12-27"
 description = "Solution to Leetcode 671"
 tags = [
     

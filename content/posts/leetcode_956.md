@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 956: Tallest Billboard"
-date = "2022-03-16"
+date = "2022-03-17"
 description = "Solution to Leetcode 956"
 tags = [
     

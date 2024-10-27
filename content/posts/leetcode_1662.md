@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1662: Check If Two String Arrays are Equivalent"
-date = "2020-04-09"
+date = "2020-04-10"
 description = "Solution to Leetcode 1662"
 tags = [
     
@@ -22,6 +22,20 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+        string a,b;
+        for(auto x:word1)
+            a += x;
+        for(auto x:word2)
+            b += x;
+       
+        if(a == b)
+            return 1;
+        
+        return 0;
+    }
+};
 {{< /highlight >}}
 

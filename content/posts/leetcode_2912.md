@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2912: Number of Ways to Reach Destination in the Grid"
-date = "2016-11-06"
+date = "2016-11-07"
 description = "Solution to Leetcode 2912"
 tags = [
     

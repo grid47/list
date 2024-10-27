@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1232: Check If It Is a Straight Line"
-date = "2021-06-13"
+date = "2021-06-14"
 description = "Solution to Leetcode 1232"
 tags = [
     
@@ -22,6 +22,16 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& cord) {
+        double slopt = (cord[1][0] - cord[0][0]) == 0? INT_MAX: (double)(cord[1][1] - cord[0][1]) / (double)(cord[1][0] - cord[0][0]);
+        for(int i = 2; i < cord.size(); i++) {
+            double slp = (cord[i][0] - cord[0][0]) == 0?INT_MAX: (double)(cord[i][1] - cord[0][1]) / (double)(cord[i][0] - cord[0][0]);
+            if(slp != slopt) return false;
+        }
+        return true;
+    }
+};
 {{< /highlight >}}
 

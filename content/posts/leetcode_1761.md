@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1761: Minimum Degree of a Connected Trio in a Graph"
-date = "2020-01-01"
+date = "2020-01-02"
 description = "Solution to Leetcode 1761"
 tags = [
     

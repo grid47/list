@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 9: Palindrome Number"
-date = "2024-10-18"
+date = "2024-10-19"
 description = "Solution to Leetcode 9"
 tags = [
     

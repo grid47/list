@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2964: Number of Divisible Triplet Sums"
-date = "2016-09-15"
+date = "2016-09-16"
 description = "Solution to Leetcode 2964"
 tags = [
     

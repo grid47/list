@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1132: Reported Posts II"
-date = "2021-09-21"
+date = "2021-09-22"
 description = "Solution to Leetcode 1132"
 tags = [
     

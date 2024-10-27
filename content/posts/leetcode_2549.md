@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2549: Count Distinct Numbers on Board"
-date = "2017-11-04"
+date = "2017-11-05"
 description = "Solution to Leetcode 2549"
 tags = [
     

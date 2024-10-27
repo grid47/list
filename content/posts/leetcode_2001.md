@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2001: Number of Pairs of Interchangeable Rectangles"
-date = "2019-05-06"
+date = "2019-05-07"
 description = "Solution to Leetcode 2001"
 tags = [
     

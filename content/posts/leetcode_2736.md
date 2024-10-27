@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2736: Maximum Sum Queries"
-date = "2017-05-01"
+date = "2017-05-02"
 description = "Solution to Leetcode 2736"
 tags = [
     

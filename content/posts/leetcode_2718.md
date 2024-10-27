@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2718: Sum of Matrix After Queries"
-date = "2017-05-19"
+date = "2017-05-20"
 description = "Solution to Leetcode 2718"
 tags = [
     

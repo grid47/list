@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1469: Find All The Lonely Nodes"
-date = "2020-10-19"
+date = "2020-10-20"
 description = "Solution to Leetcode 1469"
 tags = [
     

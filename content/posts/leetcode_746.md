@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 746: Min Cost Climbing Stairs"
-date = "2022-10-12"
+date = "2022-10-13"
 description = "Solution to Leetcode 746"
 tags = [
     

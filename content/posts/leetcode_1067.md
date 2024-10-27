@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1067: Digit Count in Range"
-date = "2021-11-25"
+date = "2021-11-26"
 description = "Solution to Leetcode 1067"
 tags = [
     

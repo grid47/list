@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 387: First Unique Character in a String"
-date = "2023-10-06"
+date = "2023-10-07"
 description = "Solution to Leetcode 387"
 tags = [
     

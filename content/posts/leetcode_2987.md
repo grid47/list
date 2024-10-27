@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2987: Find Expensive Cities"
-date = "2016-08-23"
+date = "2016-08-24"
 description = "Solution to Leetcode 2987"
 tags = [
     

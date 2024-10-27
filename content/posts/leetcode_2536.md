@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2536: Increment Submatrices by One"
-date = "2017-11-17"
+date = "2017-11-18"
 description = "Solution to Leetcode 2536"
 tags = [
     

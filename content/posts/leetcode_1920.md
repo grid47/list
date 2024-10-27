@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1920: Build Array from Permutation"
-date = "2019-07-26"
+date = "2019-07-27"
 description = "Solution to Leetcode 1920"
 tags = [
     

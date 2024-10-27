@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 831: Masking Personal Information"
-date = "2022-07-19"
+date = "2022-07-20"
 description = "Solution to Leetcode 831"
 tags = [
     

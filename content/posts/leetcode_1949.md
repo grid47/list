@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1949: Strong Friendship"
-date = "2019-06-27"
+date = "2019-06-28"
 description = "Solution to Leetcode 1949"
 tags = [
     

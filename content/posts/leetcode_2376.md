@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2376: Count Special Integers"
-date = "2018-04-26"
+date = "2018-04-27"
 description = "Solution to Leetcode 2376"
 tags = [
     

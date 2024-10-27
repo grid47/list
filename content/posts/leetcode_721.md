@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 721: Accounts Merge"
-date = "2022-11-06"
+date = "2022-11-07"
 description = "Solution to Leetcode 721"
 tags = [
     

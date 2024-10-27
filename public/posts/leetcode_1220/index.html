@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-06-25T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-06-25T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-06-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-06-26T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,13 +168,13 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-06-25T00:00:00Z">
-                June 25, 2021
+              <time datetime="2021-06-26T00:00:00Z">
+                June 26, 2021
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -186,7 +186,69 @@
         <p><a href="https://leetcode.com/problems/count-vowels-permutation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n, mod = (int) 1e9 + 7;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mem;
+</span></span><span class="line"><span class="cl">    int dp(int prv, int cur) {
+</span></span><span class="line"><span class="cl">        if(cur == n) return 1;
+</span></span><span class="line"><span class="cl">        if(mem[prv][cur] != -1) return mem[prv][cur];
+</span></span><span class="line"><span class="cl">        long ans = 0;
+</span></span><span class="line"><span class="cl">        switch(prv) {
+</span></span><span class="line"><span class="cl">            case 0:
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(1, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(2, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(3, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(4, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(5, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">            break;
+</span></span><span class="line"><span class="cl">            case 1:
+</span></span><span class="line"><span class="cl">        /*  a -&gt; xeixu  e -&gt; axixx  i -&gt; xexox  o -&gt; xxixx  u -&gt; xxiox  */            
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(1, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(2, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(3, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(4, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(5, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">            break;
+</span></span><span class="line"><span class="cl">            case 2:
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(1, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(2, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(3, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(4, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(5, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">            break;
+</span></span><span class="line"><span class="cl">            case 3:
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(1, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(2, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(3, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(4, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(5, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">            break;
+</span></span><span class="line"><span class="cl">            case 4:
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(1, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(2, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(3, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(4, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(5, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">            break;
+</span></span><span class="line"><span class="cl">            case 5:
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(1, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(2, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(3, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                ans = (ans + dp(4, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">                // ans = (ans + dp(5, cur + 1)) % mod;
+</span></span><span class="line"><span class="cl">            break;                                                                        
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return mem[prv][cur] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int countVowelPermutation(int n) {
+</span></span><span class="line"><span class="cl">        this-&gt;n = n;
+</span></span><span class="line"><span class="cl">        mem.resize(8, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n + 1, -1));
+</span></span><span class="line"><span class="cl">        return dp(0, 0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

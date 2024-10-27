@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 104: Maximum Depth of Binary Tree"
-date = "2024-07-15"
+date = "2024-07-16"
 description = "Solution to Leetcode 104"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 994: Rotting Oranges"
-date = "2022-02-06"
+date = "2022-02-07"
 description = "Solution to Leetcode 994"
 tags = [
     

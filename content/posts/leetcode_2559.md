@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2559: Count Vowel Strings in Ranges"
-date = "2017-10-25"
+date = "2017-10-26"
 description = "Solution to Leetcode 2559"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2587: Rearrange Array to Maximize Prefix Score"
-date = "2017-09-27"
+date = "2017-09-28"
 description = "Solution to Leetcode 2587"
 tags = [
     

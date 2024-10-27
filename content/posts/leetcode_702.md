@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 702: Search in a Sorted Array of Unknown Size"
-date = "2022-11-25"
+date = "2022-11-26"
 description = "Solution to Leetcode 702"
 tags = [
     

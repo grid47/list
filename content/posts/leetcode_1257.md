@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1257: Smallest Common Region"
-date = "2021-05-19"
+date = "2021-05-20"
 description = "Solution to Leetcode 1257"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level"
-date = "2018-01-21"
+date = "2018-01-22"
 description = "Solution to Leetcode 2471"
 tags = [
     

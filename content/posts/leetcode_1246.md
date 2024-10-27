@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1246: Palindrome Removal"
-date = "2021-05-30"
+date = "2021-05-31"
 description = "Solution to Leetcode 1246"
 tags = [
     

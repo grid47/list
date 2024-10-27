@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2020: Number of Accounts That Did Not Stream"
-date = "2019-04-17"
+date = "2019-04-18"
 description = "Solution to Leetcode 2020"
 tags = [
     

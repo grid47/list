@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 178: Rank Scores"
-date = "2024-05-02"
+date = "2024-05-03"
 description = "Solution to Leetcode 178"
 tags = [
     

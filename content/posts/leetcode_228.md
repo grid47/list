@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 228: Summary Ranges"
-date = "2024-03-13"
+date = "2024-03-14"
 description = "Solution to Leetcode 228"
 tags = [
     

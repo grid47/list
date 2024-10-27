@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2943: Maximize Area of Square Hole in Grid"
-date = "2016-10-06"
+date = "2016-10-07"
 description = "Solution to Leetcode 2943"
 tags = [
     

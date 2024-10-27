@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1894: Find the Student that Will Replace the Chalk"
-date = "2019-08-21"
+date = "2019-08-22"
 description = "Solution to Leetcode 1894"
 tags = [
     

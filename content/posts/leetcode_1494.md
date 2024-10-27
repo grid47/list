@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1494: Parallel Courses II"
-date = "2020-09-24"
+date = "2020-09-25"
 description = "Solution to Leetcode 1494"
 tags = [
     

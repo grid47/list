@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2596: Check Knight Tour Configuration"
-date = "2017-09-18"
+date = "2017-09-19"
 description = "Solution to Leetcode 2596"
 tags = [
     

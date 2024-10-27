@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3272: Find the Count of Good Integers"
-date = "2015-11-12"
+date = "2015-11-13"
 description = "Solution to Leetcode 3272"
 tags = [
     

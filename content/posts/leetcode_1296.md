@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1296: Divide Array in Sets of K Consecutive Numbers"
-date = "2021-04-10"
+date = "2021-04-11"
 description = "Solution to Leetcode 1296"
 tags = [
     
@@ -22,6 +22,28 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    bool isPossibleDivide(vector<int>& nums, int k) {
 
+        map<int, int> cnt;
+        int n = nums.size();
+        for(int num : nums)
+            cnt[num]++;
+        
+        for(auto it : cnt) {
+            int frq = it.second;
+            if(frq > 0)
+            for(int i = 0; i < k; i++) {
+
+                  if(cnt[it.first + i] < frq) return false;
+                else cnt[it.first + i] -= frq;
+
+            }
+        }
+        
+        return true;
+    }
+};
 {{< /highlight >}}
 

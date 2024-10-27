@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 676: Implement Magic Dictionary"
-date = "2022-12-21"
+date = "2022-12-22"
 description = "Solution to Leetcode 676"
 tags = [
     

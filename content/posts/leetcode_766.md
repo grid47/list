@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 766: Toeplitz Matrix"
-date = "2022-09-22"
+date = "2022-09-23"
 description = "Solution to Leetcode 766"
 tags = [
     

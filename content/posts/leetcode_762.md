@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 762: Prime Number of Set Bits in Binary Representation"
-date = "2022-09-26"
+date = "2022-09-27"
 description = "Solution to Leetcode 762"
 tags = [
     

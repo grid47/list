@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 446: Arithmetic Slices II - Subsequence"
-date = "2023-08-08"
+date = "2023-08-09"
 description = "Solution to Leetcode 446"
 tags = [
     

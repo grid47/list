@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1079: Letter Tile Possibilities"
-date = "2021-11-13"
+date = "2021-11-14"
 description = "Solution to Leetcode 1079"
 tags = [
     
@@ -22,6 +22,27 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int numTilePossibilities(string tiles) {
+        set<string> ans;
+        set<int> seen;
 
+        gen(tiles, 0, "", ans, seen);
+        return ans.size();
+    }
+
+    void gen(string tiles, int idx, string res, set<string> &ans, set<int> &vis ) {
+        if(idx == tiles.size()) return;
+        for(int i = 0; i < tiles.size(); i++) {
+            if(!vis.count(i)) {
+                vis.insert(i);
+                ans.insert(res + tiles[i]);
+    gen(tiles, idx + 1, res + tiles[i], ans, vis);
+                vis.erase(i);
+            }
+        }
+    }
+};
 {{< /highlight >}}
 

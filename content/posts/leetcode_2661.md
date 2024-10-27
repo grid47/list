@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2661: First Completely Painted Row or Column"
-date = "2017-07-15"
+date = "2017-07-16"
 description = "Solution to Leetcode 2661"
 tags = [
     

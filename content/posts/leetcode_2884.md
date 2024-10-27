@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2884: Modify Columns"
-date = "2016-12-04"
+date = "2016-12-05"
 description = "Solution to Leetcode 2884"
 tags = [
     

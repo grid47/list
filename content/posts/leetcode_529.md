@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 529: Minesweeper"
-date = "2023-05-17"
+date = "2023-05-18"
 description = "Solution to Leetcode 529"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2350: Shortest Impossible Sequence of Rolls"
-date = "2018-05-22"
+date = "2018-05-23"
 description = "Solution to Leetcode 2350"
 tags = [
     

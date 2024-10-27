@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2035: Partition Array Into Two Arrays to Minimize Sum Difference"
-date = "2019-04-02"
+date = "2019-04-03"
 description = "Solution to Leetcode 2035"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1128: Number of Equivalent Domino Pairs"
-date = "2021-09-25"
+date = "2021-09-26"
 description = "Solution to Leetcode 1128"
 tags = [
     

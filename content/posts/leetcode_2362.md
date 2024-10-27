@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2362: Generate the Invoice"
-date = "2018-05-10"
+date = "2018-05-11"
 description = "Solution to Leetcode 2362"
 tags = [
     

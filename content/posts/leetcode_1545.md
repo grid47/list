@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1545: Find Kth Bit in Nth Binary String"
-date = "2020-08-04"
+date = "2020-08-05"
 description = "Solution to Leetcode 1545"
 tags = [
     
@@ -22,6 +22,24 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    char findKthBit(int n, int k) {
 
+        string s = "0";
+        
+        for(int i = 2; i <= n; i++) {
+            string tmp = s;
+            s += '1';
+            for(int j = tmp.size() - 1; j >= 0; j--) {
+                
+                s += (tmp[j] == '0') ? '1':'0';
+                
+            }
+        }
+
+        return s[k-1];
+    }
+};
 {{< /highlight >}}
 

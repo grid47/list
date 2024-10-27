@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1625: Lexicographically Smallest String After Applying Operations"
-date = "2020-05-16"
+date = "2020-05-17"
 description = "Solution to Leetcode 1625"
 tags = [
     
@@ -22,6 +22,51 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
 
+    string ans;
+    int a, b;
+    int n;
+    unordered_set<string> seen;
+
+    bool isVisited(string s) {
+        return seen.find(s) != seen.end();
+    }
+
+    void visit(string s) {
+        ans = min(ans, s);
+        seen.insert(s);
+    }    
+
+    string rotate(string s, int x) {
+        reverse(s.begin(), s.end());
+        reverse(s.begin(), s.begin()+x);
+        reverse(s.begin()+x, s.end());
+        return s;
+    }
+
+     string add(string s, int x) {
+        for (int i=1; i<n; i += 2) {
+            char &c = s[i];
+            c = '0' + (c-'0'+x)%10;
+        }
+        return s;
+    }
+public:
+    string findLexSmallestString(string s, int a, int b) {
+        ans = s;
+        this->a = a;
+        this->b = b;
+        n = s.size();
+        dfs(s);
+        return ans;
+    }
+    void dfs(string s){
+        if(isVisited(s)) return;
+        visit(s);
+        dfs(rotate(s, b));
+        dfs(add(s, a));
+    }
+};
 {{< /highlight >}}
 

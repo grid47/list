@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 672: Bulb Switcher II"
-date = "2022-12-25"
+date = "2022-12-26"
 description = "Solution to Leetcode 672"
 tags = [
     

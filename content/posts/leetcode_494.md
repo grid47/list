@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 494: Target Sum"
-date = "2023-06-21"
+date = "2023-06-22"
 description = "Solution to Leetcode 494"
 tags = [
     

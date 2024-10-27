@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2363: Merge Similar Items"
-date = "2018-05-09"
+date = "2018-05-10"
 description = "Solution to Leetcode 2363"
 tags = [
     

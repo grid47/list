@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-05-31T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-05-31T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-06-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-06-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-05-31T00:00:00Z">
-                May 31, 2020
+              <time datetime="2020-06-01T00:00:00Z">
+                June 1, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,45 @@
         <p><a href="https://leetcode.com/problems/maximum-number-of-visible-points/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int visiblePoints(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> pts, int angle, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> loc) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">double</span><span class="p">&gt;</span> arr;
+</span></span><span class="line"><span class="cl">        int cnt = 0;
+</span></span><span class="line"><span class="cl">        for(auto it: pts) {
+</span></span><span class="line"><span class="cl">            int x2 = it[0], y2 = it[1];
+</span></span><span class="line"><span class="cl">            int x1 = loc[0], y1 = loc[1];
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            double dx = x2 - x1, dy = y2 - y1;
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(dy == 0 <span class="err">&amp;&amp;</span> dx == 0) {
+</span></span><span class="line"><span class="cl">                cnt++;
+</span></span><span class="line"><span class="cl">                continue;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            double ang = atan2(dy, dx) * 180/M_PI;
+</span></span><span class="line"><span class="cl">            // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">ang</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">arr</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">ang</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">cout</span><span class="err">&lt;&lt;</span> <span class="na">M_PI</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">arr</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">arr</span><span class="err">.</span><span class="na">end</span><span class="err">());</span>
+</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">double</span><span class="p">&gt;</span> tmp(arr.begin(), arr.end());
+</span></span><span class="line"><span class="cl">        // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">tmp.size</span><span class="err">()</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">arr</span><span class="err">.</span><span class="na">size</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">arr</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">tmp</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+</span> <span class="na">360</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">arr </span><span class="o">=</span> <span class="s">tmp;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">mx </span><span class="o">=</span> <span class="s">cnt;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">tmp</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;</span> <span class="err">&lt;&lt;</span> <span class="na">arr</span><span class="err">.</span><span class="na">size</span><span class="err">();</span>        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">arr</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="na">-</span> <span class="na">arr</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="p">&gt;</span> angle) j++;
+</span></span><span class="line"><span class="cl">            mx = max(mx, cnt + i - j + 1);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return mx;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

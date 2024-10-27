@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1786: Number of Restricted Paths From First to Last Node"
-date = "2019-12-07"
+date = "2019-12-08"
 description = "Solution to Leetcode 1786"
 tags = [
     

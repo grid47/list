@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 510: Inorder Successor in BST II"
-date = "2023-06-05"
+date = "2023-06-06"
 description = "Solution to Leetcode 510"
 tags = [
     

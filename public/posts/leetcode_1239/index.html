@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-06-06T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-06-06T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-06-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-06-07T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-06-06T00:00:00Z">
-                June 6, 2021
+              <time datetime="2021-06-07T00:00:00Z">
+                June 7, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,28 @@
         <p><a href="https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int maxLength(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> arr) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">bitset</span><span class="err">&lt;</span><span class="na">26</span><span class="p">&gt;</span>&gt; dp = {bitset<span class="p">&lt;</span><span class="nt">26</span><span class="p">&gt;</span>()};
+</span></span><span class="line"><span class="cl">        int res = 0;
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>s: arr) {
+</span></span><span class="line"><span class="cl">            bitset<span class="p">&lt;</span><span class="nt">26</span><span class="p">&gt;</span> a;
+</span></span><span class="line"><span class="cl">            for(char x: s)
+</span></span><span class="line"><span class="cl">                a.set(x-&#39;a&#39;);
+</span></span><span class="line"><span class="cl">            int n = a.count();
+</span></span><span class="line"><span class="cl">            if(n <span class="p">&lt;</span> <span class="nt">s.size</span><span class="err">())</span> <span class="na">continue</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">dp.size()</span> <span class="na">-1</span><span class="err">;</span> <span class="na">i</span> <span class="p">&gt;</span>= 0; i--) {
+</span></span><span class="line"><span class="cl">                bitset c = dp[i];
+</span></span><span class="line"><span class="cl">                if ((c<span class="err">&amp;</span>a).any()) continue;
+</span></span><span class="line"><span class="cl">                dp.push_back(c|a);
+</span></span><span class="line"><span class="cl">                res = max(res, (int) c.count()+n);
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

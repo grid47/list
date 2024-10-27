@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 307: Range Sum Query - Mutable"
-date = "2023-12-25"
+date = "2023-12-26"
 description = "Solution to Leetcode 307"
 tags = [
     

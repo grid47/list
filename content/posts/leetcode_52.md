@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 52: N-Queens II"
-date = "2024-09-05"
+date = "2024-09-06"
 description = "Solution to Leetcode 52"
 tags = [
     

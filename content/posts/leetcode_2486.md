@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2486: Append Characters to String to Make Subsequence"
-date = "2018-01-06"
+date = "2018-01-07"
 description = "Solution to Leetcode 2486"
 tags = [
     

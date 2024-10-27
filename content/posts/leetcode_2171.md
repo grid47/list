@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2171: Removing Minimum Number of Magic Beans"
-date = "2018-11-17"
+date = "2018-11-18"
 description = "Solution to Leetcode 2171"
 tags = [
     

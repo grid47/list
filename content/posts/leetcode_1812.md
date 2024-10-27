@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1812: Determine Color of a Chessboard Square"
-date = "2019-11-11"
+date = "2019-11-12"
 description = "Solution to Leetcode 1812"
 tags = [
     

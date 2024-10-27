@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 162: Find Peak Element"
-date = "2024-05-18"
+date = "2024-05-19"
 description = "Solution to Leetcode 162"
 tags = [
     

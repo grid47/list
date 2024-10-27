@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1446: Consecutive Characters"
-date = "2020-11-11"
+date = "2020-11-12"
 description = "Solution to Leetcode 1446"
 tags = [
     

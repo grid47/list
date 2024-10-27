@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3102: Minimize Manhattan Distances"
-date = "2016-04-30"
+date = "2016-05-01"
 description = "Solution to Leetcode 3102"
 tags = [
     

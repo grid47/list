@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 27: Remove Element"
-date = "2024-09-30"
+date = "2024-10-01"
 description = "Solution to Leetcode 27"
 tags = [
     

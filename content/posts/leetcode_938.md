@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 938: Range Sum of BST"
-date = "2022-04-03"
+date = "2022-04-04"
 description = "Solution to Leetcode 938"
 tags = [
     

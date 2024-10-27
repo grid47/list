@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2160: Minimum Sum of Four Digit Number After Splitting Digits"
-date = "2018-11-28"
+date = "2018-11-29"
 description = "Solution to Leetcode 2160"
 tags = [
     

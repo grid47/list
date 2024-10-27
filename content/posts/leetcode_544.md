@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 544: Output Contest Matches"
-date = "2023-05-02"
+date = "2023-05-03"
 description = "Solution to Leetcode 544"
 tags = [
     

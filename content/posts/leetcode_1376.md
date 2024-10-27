@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1376: Time Needed to Inform All Employees"
-date = "2021-01-20"
+date = "2021-01-21"
 description = "Solution to Leetcode 1376"
 tags = [
     
@@ -22,6 +22,26 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
+        map<int, vector<int>> gph;
+        for(int i = 0; i < manager.size(); i++)
+        gph[manager[i]].push_back(i);
+        
+        return dfs(headID, gph, informTime);
+    }
+    
+    int dfs(int cur, map<int, vector<int>> &gph, vector<int> &it) {
+        if(!gph.count(cur)) return 0;
+        
+        int mx = 0;
+        for(auto x: gph[cur])
+            mx = max(mx, dfs(x, gph, it));
+        
+        return mx + it[cur];
+    }
+    
+};
 {{< /highlight >}}
 

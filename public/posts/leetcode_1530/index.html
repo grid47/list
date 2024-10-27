@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-08-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-08-19T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-08-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-08-20T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-08-19T00:00:00Z">
-                August 19, 2020
+              <time datetime="2020-08-20T00:00:00Z">
+                August 20, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,52 @@
         <p><a href="https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
+</span></span><span class="line"><span class="cl"> * struct TreeNode {
+</span></span><span class="line"><span class="cl"> *     int val;
+</span></span><span class="line"><span class="cl"> *     TreeNode *left;
+</span></span><span class="line"><span class="cl"> *     TreeNode *right;
+</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span><span class="line"><span class="cl"> * };
+</span></span><span class="line"><span class="cl"> */
+</span></span><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int ans = 0;
+</span></span><span class="line"><span class="cl">    int countPairs(TreeNode* root, int dist) {
+</span></span><span class="line"><span class="cl">        dfs(root, dist);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dfs(TreeNode* root, int dist) {
+</span></span><span class="line"><span class="cl">        if(!root) {
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res(dist + 1, 0);
+</span></span><span class="line"><span class="cl">            return res;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(root-&gt;left == NULL <span class="err">&amp;&amp;</span> root-&gt;right == NULL) {
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res(dist + 1, 0);
+</span></span><span class="line"><span class="cl">            res[1]++;
+</span></span><span class="line"><span class="cl">            return res;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> left = dfs(root-&gt;left, dist);
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> right = dfs(root-&gt;right, dist);
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="err">&lt;</span>= dist - 1; i++) {
+</span></span><span class="line"><span class="cl">            for(int j = dist - 1; j &gt;= 1; j--) {
+</span></span><span class="line"><span class="cl">                if(i + j <span class="err">&lt;</span>= dist)
+</span></span><span class="line"><span class="cl">                ans += left[i] * right[j];
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res(dist + 1, 0);
+</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="err">&lt;</span>= dist - 2; i++ ) {
+</span></span><span class="line"><span class="cl">            res[i + 1] = left[i] + right[i];
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

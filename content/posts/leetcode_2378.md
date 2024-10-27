@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2378: Choose Edges to Maximize Score in a Tree"
-date = "2018-04-24"
+date = "2018-04-25"
 description = "Solution to Leetcode 2378"
 tags = [
     

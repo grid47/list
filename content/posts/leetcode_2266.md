@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2266: Count Number of Texts"
-date = "2018-08-14"
+date = "2018-08-15"
 description = "Solution to Leetcode 2266"
 tags = [
     

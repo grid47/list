@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 679: 24 Game"
-date = "2022-12-18"
+date = "2022-12-19"
 description = "Solution to Leetcode 679"
 tags = [
     

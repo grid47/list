@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 24: Swap Nodes in Pairs"
-date = "2024-10-03"
+date = "2024-10-04"
 description = "Solution to Leetcode 24"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1318: Minimum Flips to Make a OR b Equal to c"
-date = "2021-03-19"
+date = "2021-03-20"
 description = "Solution to Leetcode 1318"
 tags = [
     
@@ -22,6 +22,35 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    
+    int bit(int n, int i) {
+        return (n >> i) & 1;
+    }
+    
+    int minFlips(int a, int b, int c) {
+        // (a|b) has zero and c has 1 required change is one
+        // (a|b) has one and c has zero required change is one(if one of them have 1) or two (if both have one)
+        
+        /*
+            0   0   1       1
+            0   1   0       1
+            1   0   0       1
+            1   1   0       2
+        */
+        int cnt = 0;
+        for(int i = 0; i < 31; i++) {
+            if((!bit(a, i) && !bit(b, i) && bit(c, i)) ||
+               (!bit(a, i) && bit(b, i) && !bit(c, i)) ||
+               (bit(a, i) && !bit(b, i) && !bit(c, i)) ) {
+                cnt++;
+            } else if((bit(a, i) && bit(b, i) && !bit(c, i))) {
+                cnt += 2;
+            }
+        }
+        return cnt;
+    }
+};
 {{< /highlight >}}
 

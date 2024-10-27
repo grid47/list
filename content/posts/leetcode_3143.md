@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3143: Maximum Points Inside the Square"
-date = "2016-03-20"
+date = "2016-03-21"
 description = "Solution to Leetcode 3143"
 tags = [
     

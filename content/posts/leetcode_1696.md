@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1696: Jump Game VI"
-date = "2020-03-06"
+date = "2020-03-07"
 description = "Solution to Leetcode 1696"
 tags = [
     
@@ -22,6 +22,26 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int maxResult(vector<int>& nums, int k) {
+        int n = nums.size();
+        
+        deque<int> dq = {0};
+        
+        for(int i = 1; i < n; i++) {
+            
+            nums[i] = nums[dq.front()] + nums[i];
+            while(!dq.empty() && nums[dq.back()] <= nums[i])
+                dq.pop_back();
+            dq.push_back(i);
+            
+            if(i - dq.front() >= k) dq.pop_front();
+            
+        }
+        
+        return nums[n - 1];
+    }
+};
 {{< /highlight >}}
 

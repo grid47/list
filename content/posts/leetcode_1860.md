@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1860: Incremental Memory Leak"
-date = "2019-09-24"
+date = "2019-09-25"
 description = "Solution to Leetcode 1860"
 tags = [
     

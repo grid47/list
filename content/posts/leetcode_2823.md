@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2823: Deep Object Filter"
-date = "2017-02-03"
+date = "2017-02-04"
 description = "Solution to Leetcode 2823"
 tags = [
     

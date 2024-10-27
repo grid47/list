@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2084: Drop Type 1 Orders for Customers With Type 0 Orders"
-date = "2019-02-12"
+date = "2019-02-13"
 description = "Solution to Leetcode 2084"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 533: Lonely Pixel II"
-date = "2023-05-13"
+date = "2023-05-14"
 description = "Solution to Leetcode 533"
 tags = [
     

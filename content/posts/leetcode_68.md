@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 68: Text Justification"
-date = "2024-08-20"
+date = "2024-08-21"
 description = "Solution to Leetcode 68"
 tags = [
     

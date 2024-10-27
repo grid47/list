@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 970: Powerful Integers"
-date = "2022-03-02"
+date = "2022-03-03"
 description = "Solution to Leetcode 970"
 tags = [
     

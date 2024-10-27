@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1248: Count Number of Nice Subarrays"
-date = "2021-05-28"
+date = "2021-05-29"
 description = "Solution to Leetcode 1248"
 tags = [
     
@@ -22,6 +22,25 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        return atmost(nums, k) - atmost(nums, k - 1);
+    }
+    
+    int atmost(vector<int> &nums, int k) {
+        int cnt[2] = {};
+        int res = 0, j = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            cnt[nums[i]%2]++;
+            while(cnt[1] > k) {
+                cnt[nums[j]%2]--;
+                j++;
+            }
+            res += (i - j + 1);
+        }
+        return res;
+    }
+};
 {{< /highlight >}}
 

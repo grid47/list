@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3133: Minimum Array End"
-date = "2016-03-30"
+date = "2016-03-31"
 description = "Solution to Leetcode 3133"
 tags = [
     

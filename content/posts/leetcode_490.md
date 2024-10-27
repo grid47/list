@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 490: The Maze"
-date = "2023-06-25"
+date = "2023-06-26"
 description = "Solution to Leetcode 490"
 tags = [
     

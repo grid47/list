@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2639: Find the Width of Columns of a Grid"
-date = "2017-08-06"
+date = "2017-08-07"
 description = "Solution to Leetcode 2639"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2335: Minimum Amount of Time to Fill Cups"
-date = "2018-06-06"
+date = "2018-06-07"
 description = "Solution to Leetcode 2335"
 tags = [
     

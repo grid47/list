@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2573: Find the String with LCP"
-date = "2017-10-11"
+date = "2017-10-12"
 description = "Solution to Leetcode 2573"
 tags = [
     

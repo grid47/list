@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1464: Maximum Product of Two Elements in an Array"
-date = "2020-10-24"
+date = "2020-10-25"
 description = "Solution to Leetcode 1464"
 tags = [
     
@@ -22,6 +22,23 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int max1 = INT_MIN;
+        int max2 = INT_MIN;
 
+        for (int num : nums) {
+            if (num >= max1) {
+                max2 = max1;
+                max1 = num;
+            } else if (num > max2) {
+                max2 = num;
+            }
+        }
+
+        return (max1 - 1) * (max2 - 1);
+    }
+};
 {{< /highlight >}}
 

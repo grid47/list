@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2922: Market Analysis III"
-date = "2016-10-27"
+date = "2016-10-28"
 description = "Solution to Leetcode 2922"
 tags = [
     

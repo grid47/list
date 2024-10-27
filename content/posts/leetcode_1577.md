@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1577: Number of Ways Where Square of Number Is Equal to Product of Two Numbers"
-date = "2020-07-03"
+date = "2020-07-04"
 description = "Solution to Leetcode 1577"
 tags = [
     
@@ -22,6 +22,32 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int numTriplets(vector<int>& nums1, vector<int>& nums2) {
+        long res = 0;
 
+        for(int v: nums1)
+            res += twoProd((long)v * v, nums2);
+        for(int v: nums2)
+            res += twoProd((long)v * v, nums1);
+
+        return res;
+    }
+    
+    
+    long twoProd(long i, vector<int> &nums) {
+        map<long, long> mp;
+        
+        int cnt = 0;
+        for(int n : nums) {
+            if(i % n == 0)
+                cnt += mp[i / n];
+            mp[n]++;
+        }
+        
+        return cnt;
+    }
+};
 {{< /highlight >}}
 

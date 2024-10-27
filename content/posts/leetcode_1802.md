@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1802: Maximum Value at a Given Index in a Bounded Array"
-date = "2019-11-21"
+date = "2019-11-22"
 description = "Solution to Leetcode 1802"
 tags = [
     

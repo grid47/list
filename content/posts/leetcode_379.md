@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 379: Design Phone Directory"
-date = "2023-10-14"
+date = "2023-10-15"
 description = "Solution to Leetcode 379"
 tags = [
     

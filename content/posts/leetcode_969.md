@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 969: Pancake Sorting"
-date = "2022-03-03"
+date = "2022-03-04"
 description = "Solution to Leetcode 969"
 tags = [
     

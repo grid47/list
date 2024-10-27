@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1525: Number of Good Ways to Split a String"
-date = "2020-08-24"
+date = "2020-08-25"
 description = "Solution to Leetcode 1525"
 tags = [
     
@@ -22,6 +22,25 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int numSplits(string s) {
+        map<char, int> left, right;
+        
+        int n = s.size();
+        for(int i = 0; i < n; i++)
+            right[s[i]]++;
+        
+        int cnt = 0;
+        for(int i = 0; i < n; i++) {
+            left[s[i]]++;
+            right[s[i]]--;
+            if(right[s[i]] == 0) right.erase(s[i]);
+            if(left.size() == right.size()) cnt++;
+        }
+        
+        return cnt;
+    }
+};
 {{< /highlight >}}
 

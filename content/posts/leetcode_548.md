@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 548: Split Array with Equal Sum"
-date = "2023-04-28"
+date = "2023-04-29"
 description = "Solution to Leetcode 548"
 tags = [
     

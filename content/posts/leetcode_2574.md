@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2574: Left and Right Sum Differences"
-date = "2017-10-10"
+date = "2017-10-11"
 description = "Solution to Leetcode 2574"
 tags = [
     

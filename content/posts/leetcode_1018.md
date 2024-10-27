@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1018: Binary Prefix Divisible By 5"
-date = "2022-01-13"
+date = "2022-01-14"
 description = "Solution to Leetcode 1018"
 tags = [
     

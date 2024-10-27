@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2806: Account Balance After Rounded Purchase"
-date = "2017-02-20"
+date = "2017-02-21"
 description = "Solution to Leetcode 2806"
 tags = [
     

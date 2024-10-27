@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2850: Minimum Moves to Spread Stones Over Grid"
-date = "2017-01-07"
+date = "2017-01-08"
 description = "Solution to Leetcode 2850"
 tags = [
     

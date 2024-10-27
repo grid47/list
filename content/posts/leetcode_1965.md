@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1965: Employees With Missing Information"
-date = "2019-06-11"
+date = "2019-06-12"
 description = "Solution to Leetcode 1965"
 tags = [
     

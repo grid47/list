@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 683: K Empty Slots"
-date = "2022-12-14"
+date = "2022-12-15"
 description = "Solution to Leetcode 683"
 tags = [
     

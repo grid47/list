@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-06-11T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-06-11T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-06-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-06-12T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-06-11T00:00:00Z">
-                June 11, 2020
+              <time datetime="2020-06-12T00:00:00Z">
+                June 12, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,43 @@
         <p><a href="https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minOperationsMaxProfit(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> cust, int boardingCost, int runningCost) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        /*
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        4gondolas
+</span></span><span class="line"><span class="cl">        couter clockwise
+</span></span><span class="line"><span class="cl">        running cost
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        */
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int n = cust.size();
+</span></span><span class="line"><span class="cl">        int wait = 0;
+</span></span><span class="line"><span class="cl">        int profit = 0, rot = 0;
+</span></span><span class="line"><span class="cl">        int mx = INT_MIN;
+</span></span><span class="line"><span class="cl">        int idx = 0;
+</span></span><span class="line"><span class="cl">        while(idx <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">||</span> <span class="na">wait</span> <span class="p">&gt;</span> 0) {
+</span></span><span class="line"><span class="cl">            wait += idx <span class="p">&lt;</span> <span class="nt">n</span><span class="err">?</span> <span class="na">cust</span><span class="err">[</span><span class="na">idx</span><span class="err">]</span><span class="na">:0</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">cout</span> <span class="err">&lt;&lt;</span> <span class="na">wait</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">wait</span> <span class="p">&gt;</span> 4) {
+</span></span><span class="line"><span class="cl">                profit += 4 * boardingCost - runningCost;
+</span></span><span class="line"><span class="cl">                wait -= 4;
+</span></span><span class="line"><span class="cl">            } else if(wait &gt; 0) {
+</span></span><span class="line"><span class="cl">                profit += wait * boardingCost - runningCost;
+</span></span><span class="line"><span class="cl">                wait = 0;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            if(mx <span class="p">&lt;</span> <span class="nt">profit</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">mx </span><span class="o">=</span> <span class="s">profit;</span>
+</span></span><span class="line"><span class="cl">                <span class="na">rot </span><span class="o">=</span> <span class="s">idx</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="na">idx</span><span class="err">++;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">mx</span> <span class="err">&lt;=</span> <span class="na">0</span><span class="err">?</span> <span class="na">-1:</span> <span class="na">rot</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-12-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-12-19T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-12-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-12-20T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-12-19T00:00:00Z">
-                December 19, 2021
+              <time datetime="2021-12-20T00:00:00Z">
+                December 20, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,29 @@
         <p><a href="https://leetcode.com/problems/partition-array-for-maximum-sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> memo;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> arr;
+</span></span><span class="line"><span class="cl">    int k;
+</span></span><span class="line"><span class="cl">    int dp(int i) {
+</span></span><span class="line"><span class="cl">        if(i == arr.size()) return 0;
+</span></span><span class="line"><span class="cl">        if(memo[i] != -1) return memo[i];
+</span></span><span class="line"><span class="cl">        int res = 0, mx = 0;
+</span></span><span class="line"><span class="cl">        for(int j = i; j <span class="p">&lt;</span> <span class="nt">min</span><span class="err">((</span><span class="na">int</span><span class="err">)</span><span class="na">arr</span><span class="err">.</span><span class="na">size</span><span class="err">(),</span> <span class="na">i</span> <span class="err">+</span> <span class="na">k</span><span class="err">);</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">mx </span><span class="o">=</span> <span class="s">max(mx,</span> <span class="na">arr</span><span class="err">[</span><span class="na">j</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="na">res </span><span class="o">=</span> <span class="s">max(res,</span> <span class="na">mx</span> <span class="err">*</span> <span class="err">(</span><span class="na">j</span> <span class="na">-</span> <span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">)</span> <span class="err">+</span> <span class="na">dp</span><span class="err">(</span><span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">));</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">maxSumAfterPartitioning</span><span class="err">(</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span><span class="err">&amp;</span> arr, int k) {
+</span></span><span class="line"><span class="cl">        this-&gt;arr = arr;
+</span></span><span class="line"><span class="cl">        this-&gt;k = k;
+</span></span><span class="line"><span class="cl">        memo.resize(arr.size(), -1);
+</span></span><span class="line"><span class="cl">        return dp(0);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2693: Call Function with Custom Context"
-date = "2017-06-13"
+date = "2017-06-14"
 description = "Solution to Leetcode 2693"
 tags = [
     

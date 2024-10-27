@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 291: Word Pattern II"
-date = "2024-01-10"
+date = "2024-01-11"
 description = "Solution to Leetcode 291"
 tags = [
     

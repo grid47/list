@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 879: Profitable Schemes"
-date = "2022-06-01"
+date = "2022-06-02"
 description = "Solution to Leetcode 879"
 tags = [
     

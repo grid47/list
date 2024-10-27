@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 575: Distribute Candies"
-date = "2023-04-01"
+date = "2023-04-02"
 description = "Solution to Leetcode 575"
 tags = [
     

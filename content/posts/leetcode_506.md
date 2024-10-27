@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 506: Relative Ranks"
-date = "2023-06-09"
+date = "2023-06-10"
 description = "Solution to Leetcode 506"
 tags = [
     

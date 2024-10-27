@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1996: The Number of Weak Characters in the Game"
-date = "2019-05-11"
+date = "2019-05-12"
 description = "Solution to Leetcode 1996"
 tags = [
     

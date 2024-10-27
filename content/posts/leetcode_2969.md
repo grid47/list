@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2969: Minimum Number of Coins for Fruits II"
-date = "2016-09-10"
+date = "2016-09-11"
 description = "Solution to Leetcode 2969"
 tags = [
     

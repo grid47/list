@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2843:   Count Symmetric Integers"
-date = "2017-01-14"
+date = "2017-01-15"
 description = "Solution to Leetcode 2843"
 tags = [
     

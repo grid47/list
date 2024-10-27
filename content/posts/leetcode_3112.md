@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3112: Minimum Time to Visit Disappearing Nodes"
-date = "2016-04-20"
+date = "2016-04-21"
 description = "Solution to Leetcode 3112"
 tags = [
     

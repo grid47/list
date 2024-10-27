@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3175: Find The First Player to win K Games in a Row"
-date = "2016-02-17"
+date = "2016-02-18"
 description = "Solution to Leetcode 3175"
 tags = [
     

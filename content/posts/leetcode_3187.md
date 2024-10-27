@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3187: Peaks in Array"
-date = "2016-02-05"
+date = "2016-02-06"
 description = "Solution to Leetcode 3187"
 tags = [
     

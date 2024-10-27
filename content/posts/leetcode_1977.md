@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1977: Number of Ways to Separate Numbers"
-date = "2019-05-30"
+date = "2019-05-31"
 description = "Solution to Leetcode 1977"
 tags = [
     

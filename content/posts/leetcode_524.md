@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 524: Longest Word in Dictionary through Deleting"
-date = "2023-05-22"
+date = "2023-05-23"
 description = "Solution to Leetcode 524"
 tags = [
     

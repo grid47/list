@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2042: Check if Numbers Are Ascending in a Sentence"
-date = "2019-03-26"
+date = "2019-03-27"
 description = "Solution to Leetcode 2042"
 tags = [
     

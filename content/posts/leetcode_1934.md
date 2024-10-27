@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1934: Confirmation Rate"
-date = "2019-07-12"
+date = "2019-07-13"
 description = "Solution to Leetcode 1934"
 tags = [
     

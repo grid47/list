@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 317: Shortest Distance from All Buildings"
-date = "2023-12-15"
+date = "2023-12-16"
 description = "Solution to Leetcode 317"
 tags = [
     

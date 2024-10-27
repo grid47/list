@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 419: Battleships in a Board"
-date = "2023-09-04"
+date = "2023-09-05"
 description = "Solution to Leetcode 419"
 tags = [
     

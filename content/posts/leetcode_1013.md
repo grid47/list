@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1013: Partition Array Into Three Parts With Equal Sum"
-date = "2022-01-18"
+date = "2022-01-19"
 description = "Solution to Leetcode 1013"
 tags = [
     

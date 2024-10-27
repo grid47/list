@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2153: The Number of Passengers in Each Bus II"
-date = "2018-12-05"
+date = "2018-12-06"
 description = "Solution to Leetcode 2153"
 tags = [
     

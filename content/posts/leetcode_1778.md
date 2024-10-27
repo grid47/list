@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1778: Shortest Path in a Hidden Grid"
-date = "2019-12-15"
+date = "2019-12-16"
 description = "Solution to Leetcode 1778"
 tags = [
     

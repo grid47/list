@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2150: Find All Lonely Numbers in the Array"
-date = "2018-12-08"
+date = "2018-12-09"
 description = "Solution to Leetcode 2150"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2027: Minimum Moves to Convert String"
-date = "2019-04-10"
+date = "2019-04-11"
 description = "Solution to Leetcode 2027"
 tags = [
     

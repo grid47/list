@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 761: Special Binary String"
-date = "2022-09-27"
+date = "2022-09-28"
 description = "Solution to Leetcode 761"
 tags = [
     

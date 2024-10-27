@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2751: Robot Collisions"
-date = "2017-04-16"
+date = "2017-04-17"
 description = "Solution to Leetcode 2751"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2307: Check for Contradictions in Equations"
-date = "2018-07-04"
+date = "2018-07-05"
 description = "Solution to Leetcode 2307"
 tags = [
     

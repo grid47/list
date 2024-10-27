@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-05-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-05-20T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-05-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-05-21T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-05-20T00:00:00Z">
-                May 20, 2020
+              <time datetime="2020-05-21T00:00:00Z">
+                May 21, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,33 @@
         <p><a href="https://leetcode.com/problems/number-of-sets-of-k-non-overlapping-line-segments/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int n;
+</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7;
+</span></span><span class="line"><span class="cl">    int memo[1001][1001][2];
+</span></span><span class="line"><span class="cl">    int dp(int idx, int seg, bool startHere) {
+</span></span><span class="line"><span class="cl">        if(seg == 0) return 1;
+</span></span><span class="line"><span class="cl">        if(idx == n) return 0;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if(memo[idx][seg][startHere] != -1) return memo[idx][seg][startHere];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int ans = dp(idx + 1, seg, startHere); // will start on next or continue the seg
+</span></span><span class="line"><span class="cl">        if(startHere) {
+</span></span><span class="line"><span class="cl">            ans = (ans + dp(idx + 1, seg, false)) % mod; // stared new line            
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            ans = (ans + dp(idx, seg - 1, true)) % mod; // end the line here            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return memo[idx][seg][startHere] = ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    int numberOfSets(int n, int k) {
+</span></span><span class="line"><span class="cl">        this-&gt;n = n;
+</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        return dp(0, k, true);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 684: Redundant Connection"
-date = "2022-12-13"
+date = "2022-12-14"
 description = "Solution to Leetcode 684"
 tags = [
     

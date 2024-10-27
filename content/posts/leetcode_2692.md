@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2692: Make Object Immutable"
-date = "2017-06-14"
+date = "2017-06-15"
 description = "Solution to Leetcode 2692"
 tags = [
     

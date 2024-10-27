@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1602: Find Nearest Right Node in Binary Tree"
-date = "2020-06-08"
+date = "2020-06-09"
 description = "Solution to Leetcode 1602"
 tags = [
     

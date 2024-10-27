@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2290: Minimum Obstacle Removal to Reach Corner"
-date = "2018-07-21"
+date = "2018-07-22"
 description = "Solution to Leetcode 2290"
 tags = [
     

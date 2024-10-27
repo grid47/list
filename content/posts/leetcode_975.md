@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 975: Odd Even Jump"
-date = "2022-02-25"
+date = "2022-02-26"
 description = "Solution to Leetcode 975"
 tags = [
     

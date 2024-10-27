@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2706: Buy Two Chocolates"
-date = "2017-05-31"
+date = "2017-06-01"
 description = "Solution to Leetcode 2706"
 tags = [
     

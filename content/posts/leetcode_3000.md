@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3000: Maximum Area of Longest Diagonal Rectangle"
-date = "2016-08-10"
+date = "2016-08-11"
 description = "Solution to Leetcode 3000"
 tags = [
     

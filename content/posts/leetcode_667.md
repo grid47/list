@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 667: Beautiful Arrangement II"
-date = "2022-12-30"
+date = "2022-12-31"
 description = "Solution to Leetcode 667"
 tags = [
     

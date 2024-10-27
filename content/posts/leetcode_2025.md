@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2025: Maximum Number of Ways to Partition an Array"
-date = "2019-04-12"
+date = "2019-04-13"
 description = "Solution to Leetcode 2025"
 tags = [
     

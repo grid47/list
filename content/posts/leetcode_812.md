@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 812: Largest Triangle Area"
-date = "2022-08-07"
+date = "2022-08-08"
 description = "Solution to Leetcode 812"
 tags = [
     

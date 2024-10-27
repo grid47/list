@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1924: Erect the Fence II"
-date = "2019-07-22"
+date = "2019-07-23"
 description = "Solution to Leetcode 1924"
 tags = [
     

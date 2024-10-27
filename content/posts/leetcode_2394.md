@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2394: Employees With Deductions"
-date = "2018-04-08"
+date = "2018-04-09"
 description = "Solution to Leetcode 2394"
 tags = [
     

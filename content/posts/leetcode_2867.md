@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2867: Count Valid Paths in a Tree"
-date = "2016-12-21"
+date = "2016-12-22"
 description = "Solution to Leetcode 2867"
 tags = [
     

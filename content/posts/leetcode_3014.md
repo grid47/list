@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3014: Minimum Number of Pushes to Type Word I"
-date = "2016-07-27"
+date = "2016-07-28"
 description = "Solution to Leetcode 3014"
 tags = [
     

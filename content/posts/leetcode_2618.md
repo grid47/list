@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2618: Check if Object Instance of Class"
-date = "2017-08-27"
+date = "2017-08-28"
 description = "Solution to Leetcode 2618"
 tags = [
     

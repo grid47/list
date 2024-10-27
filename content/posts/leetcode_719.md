@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 719: Find K-th Smallest Pair Distance"
-date = "2022-11-08"
+date = "2022-11-09"
 description = "Solution to Leetcode 719"
 tags = [
     

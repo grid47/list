@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2205: The Number of Users That Are Eligible for Discount"
-date = "2018-10-14"
+date = "2018-10-15"
 description = "Solution to Leetcode 2205"
 tags = [
     

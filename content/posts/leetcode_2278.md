@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2278: Percentage of Letter in String"
-date = "2018-08-02"
+date = "2018-08-03"
 description = "Solution to Leetcode 2278"
 tags = [
     

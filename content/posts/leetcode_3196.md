@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3196: Maximize Total Cost of Alternating Subarrays"
-date = "2016-01-27"
+date = "2016-01-28"
 description = "Solution to Leetcode 3196"
 tags = [
     

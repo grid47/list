@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2331: Evaluate Boolean Binary Tree"
-date = "2018-06-10"
+date = "2018-06-11"
 description = "Solution to Leetcode 2331"
 tags = [
     

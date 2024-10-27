@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3001: Minimum Moves to Capture The Queen"
-date = "2016-08-09"
+date = "2016-08-10"
 description = "Solution to Leetcode 3001"
 tags = [
     

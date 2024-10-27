@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1414: Find the Minimum Number of Fibonacci Numbers Whose Sum Is K"
-date = "2020-12-13"
+date = "2020-12-14"
 description = "Solution to Leetcode 1414"
 tags = [
     
@@ -22,6 +22,24 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int findMinFibonacciNumbers(int k) {
+        vector<int> arr = {1, 1};
+        while(arr[arr.size() - 1] + arr[arr.size() - 2] <= k) {
+            arr.push_back(arr[arr.size() - 1] + arr[arr.size() - 2]);
+        }
 
+        set<int> cnt;
+        int i = arr.size() -1;
+        while(k > 0) {
+            while(i >= 0 && arr[i] > k) i--;
+            if(i == -1) break;
+            k -= arr[i];
+            cnt.insert(arr[i]);
+        }
+        return cnt.size();
+    }
+};
 {{< /highlight >}}
 

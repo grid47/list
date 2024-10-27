@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1182: Shortest Distance to Target Color"
-date = "2021-08-02"
+date = "2021-08-03"
 description = "Solution to Leetcode 1182"
 tags = [
     

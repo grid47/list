@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1242: Web Crawler Multithreaded"
-date = "2021-06-03"
+date = "2021-06-04"
 description = "Solution to Leetcode 1242"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 349: Intersection of Two Arrays"
-date = "2023-11-13"
+date = "2023-11-14"
 description = "Solution to Leetcode 349"
 tags = [
     

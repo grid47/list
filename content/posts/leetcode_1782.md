@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1782: Count Pairs Of Nodes"
-date = "2019-12-11"
+date = "2019-12-12"
 description = "Solution to Leetcode 1782"
 tags = [
     

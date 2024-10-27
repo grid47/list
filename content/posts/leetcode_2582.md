@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2582: Pass the Pillow"
-date = "2017-10-02"
+date = "2017-10-03"
 description = "Solution to Leetcode 2582"
 tags = [
     

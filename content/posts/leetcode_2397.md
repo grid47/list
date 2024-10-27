@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2397: Maximum Rows Covered by Columns"
-date = "2018-04-05"
+date = "2018-04-06"
 description = "Solution to Leetcode 2397"
 tags = [
     

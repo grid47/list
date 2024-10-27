@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3263: Convert Doubly Linked List to Array I"
-date = "2015-11-21"
+date = "2015-11-22"
 description = "Solution to Leetcode 3263"
 tags = [
     

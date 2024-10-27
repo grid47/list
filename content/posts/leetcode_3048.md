@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3048: Earliest Second to Mark Indices I"
-date = "2016-06-23"
+date = "2016-06-24"
 description = "Solution to Leetcode 3048"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1571: Warehouse Manager"
-date = "2020-07-09"
+date = "2020-07-10"
 description = "Solution to Leetcode 1571"
 tags = [
     

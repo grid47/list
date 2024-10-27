@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1393: Capital Gain/Loss"
-date = "2021-01-03"
+date = "2021-01-04"
 description = "Solution to Leetcode 1393"
 tags = [
     

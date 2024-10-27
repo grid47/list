@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2257: Count Unguarded Cells in the Grid"
-date = "2018-08-23"
+date = "2018-08-24"
 description = "Solution to Leetcode 2257"
 tags = [
     

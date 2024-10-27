@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 149: Max Points on a Line"
-date = "2024-05-31"
+date = "2024-06-01"
 description = "Solution to Leetcode 149"
 tags = [
     

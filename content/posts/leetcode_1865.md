@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1865: Finding Pairs With a Certain Sum"
-date = "2019-09-19"
+date = "2019-09-20"
 description = "Solution to Leetcode 1865"
 tags = [
     

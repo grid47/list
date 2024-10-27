@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 284: Peeking Iterator"
-date = "2024-01-17"
+date = "2024-01-18"
 description = "Solution to Leetcode 284"
 tags = [
     

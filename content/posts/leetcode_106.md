@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 106: Construct Binary Tree from Inorder and Postorder Traversal"
-date = "2024-07-13"
+date = "2024-07-14"
 description = "Solution to Leetcode 106"
 tags = [
     

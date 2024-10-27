@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 116: Populating Next Right Pointers in Each Node"
-date = "2024-07-03"
+date = "2024-07-04"
 description = "Solution to Leetcode 116"
 tags = [
     

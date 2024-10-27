@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 631: Design Excel Sum Formula"
-date = "2023-02-04"
+date = "2023-02-05"
 description = "Solution to Leetcode 631"
 tags = [
     

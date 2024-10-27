@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1861: Rotating the Box"
-date = "2019-09-23"
+date = "2019-09-24"
 description = "Solution to Leetcode 1861"
 tags = [
     

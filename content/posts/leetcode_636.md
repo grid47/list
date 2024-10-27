@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 636: Exclusive Time of Functions"
-date = "2023-01-30"
+date = "2023-01-31"
 description = "Solution to Leetcode 636"
 tags = [
     

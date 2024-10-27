@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1321: Restaurant Growth"
-date = "2021-03-16"
+date = "2021-03-17"
 description = "Solution to Leetcode 1321"
 tags = [
     

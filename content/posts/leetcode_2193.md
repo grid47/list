@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2193: Minimum Number of Moves to Make Palindrome"
-date = "2018-10-26"
+date = "2018-10-27"
 description = "Solution to Leetcode 2193"
 tags = [
     

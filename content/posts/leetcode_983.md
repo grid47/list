@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 983: Minimum Cost For Tickets"
-date = "2022-02-17"
+date = "2022-02-18"
 description = "Solution to Leetcode 983"
 tags = [
     

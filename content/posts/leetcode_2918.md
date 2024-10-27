@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2918: Minimum Equal Sum of Two Arrays After Replacing Zeros"
-date = "2016-10-31"
+date = "2016-11-01"
 description = "Solution to Leetcode 2918"
 tags = [
     

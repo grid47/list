@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3126: Server Utilization Time"
-date = "2016-04-06"
+date = "2016-04-07"
 description = "Solution to Leetcode 3126"
 tags = [
     

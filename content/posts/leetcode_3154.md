@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3154: Find Number of Ways to Reach the K-th Stair"
-date = "2016-03-09"
+date = "2016-03-10"
 description = "Solution to Leetcode 3154"
 tags = [
     

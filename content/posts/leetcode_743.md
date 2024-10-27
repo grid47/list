@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 743: Network Delay Time"
-date = "2022-10-15"
+date = "2022-10-16"
 description = "Solution to Leetcode 743"
 tags = [
     

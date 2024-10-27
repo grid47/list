@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1227: Airplane Seat Assignment Probability"
-date = "2021-06-18"
+date = "2021-06-19"
 description = "Solution to Leetcode 1227"
 tags = [
     
@@ -22,6 +22,12 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    double nthPersonGetsNthSeat(int n) {
+        if(n == 1) return 1;
+        return 1/2.0;
+    }
+};
 {{< /highlight >}}
 

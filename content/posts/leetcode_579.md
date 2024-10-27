@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 579: Find Cumulative Salary of an Employee"
-date = "2023-03-28"
+date = "2023-03-29"
 description = "Solution to Leetcode 579"
 tags = [
     

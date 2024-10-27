@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2763: Sum of Imbalance Numbers of All Subarrays"
-date = "2017-04-04"
+date = "2017-04-05"
 description = "Solution to Leetcode 2763"
 tags = [
     

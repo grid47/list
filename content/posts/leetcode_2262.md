@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2262: Total Appeal of A String"
-date = "2018-08-18"
+date = "2018-08-19"
 description = "Solution to Leetcode 2262"
 tags = [
     

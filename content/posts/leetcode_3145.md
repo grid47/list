@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3145: Find Products of Elements of Big Array"
-date = "2016-03-18"
+date = "2016-03-19"
 description = "Solution to Leetcode 3145"
 tags = [
     

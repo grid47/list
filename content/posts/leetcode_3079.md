@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3079: Find the Sum of Encrypted Integers"
-date = "2016-05-23"
+date = "2016-05-24"
 description = "Solution to Leetcode 3079"
 tags = [
     

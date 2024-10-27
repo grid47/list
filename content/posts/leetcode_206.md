@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 206: Reverse Linked List"
-date = "2024-04-04"
+date = "2024-04-05"
 description = "Solution to Leetcode 206"
 tags = [
     

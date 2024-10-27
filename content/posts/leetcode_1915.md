@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1915: Number of Wonderful Substrings"
-date = "2019-07-31"
+date = "2019-08-01"
 description = "Solution to Leetcode 1915"
 tags = [
     

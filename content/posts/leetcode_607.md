@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 607: Sales Person"
-date = "2023-02-28"
+date = "2023-03-01"
 description = "Solution to Leetcode 607"
 tags = [
     

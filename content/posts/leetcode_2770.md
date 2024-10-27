@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2770: Maximum Number of Jumps to Reach the Last Index"
-date = "2017-03-28"
+date = "2017-03-29"
 description = "Solution to Leetcode 2770"
 tags = [
     

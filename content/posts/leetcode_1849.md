@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1849: Splitting a String Into Descending Consecutive Values"
-date = "2019-10-05"
+date = "2019-10-06"
 description = "Solution to Leetcode 1849"
 tags = [
     

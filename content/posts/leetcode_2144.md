@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2144: Minimum Cost of Buying Candies With Discount"
-date = "2018-12-14"
+date = "2018-12-15"
 description = "Solution to Leetcode 2144"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3042: Count Prefix and Suffix Pairs I"
-date = "2016-06-29"
+date = "2016-06-30"
 description = "Solution to Leetcode 3042"
 tags = [
     

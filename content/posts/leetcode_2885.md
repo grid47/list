@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2885: Rename Columns"
-date = "2016-12-03"
+date = "2016-12-04"
 description = "Solution to Leetcode 2885"
 tags = [
     

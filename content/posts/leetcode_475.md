@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 475: Heaters"
-date = "2023-07-10"
+date = "2023-07-11"
 description = "Solution to Leetcode 475"
 tags = [
     

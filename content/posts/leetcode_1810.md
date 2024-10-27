@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1810: Minimum Path Cost in a Hidden Grid"
-date = "2019-11-13"
+date = "2019-11-14"
 description = "Solution to Leetcode 1810"
 tags = [
     

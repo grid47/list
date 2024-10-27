@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2564: Substring XOR Queries"
-date = "2017-10-20"
+date = "2017-10-21"
 description = "Solution to Leetcode 2564"
 tags = [
     

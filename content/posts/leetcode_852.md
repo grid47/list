@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 852: Peak Index in a Mountain Array"
-date = "2022-06-28"
+date = "2022-06-29"
 description = "Solution to Leetcode 852"
 tags = [
     

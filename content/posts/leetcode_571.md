@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 571: Find Median Given Frequency of Numbers"
-date = "2023-04-05"
+date = "2023-04-06"
 description = "Solution to Leetcode 571"
 tags = [
     

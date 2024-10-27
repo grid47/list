@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3228: Maximum Number of Operations to Move Ones to the End"
-date = "2015-12-26"
+date = "2015-12-27"
 description = "Solution to Leetcode 3228"
 tags = [
     

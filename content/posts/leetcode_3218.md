@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3218: Minimum Cost for Cutting Cake I"
-date = "2016-01-05"
+date = "2016-01-06"
 description = "Solution to Leetcode 3218"
 tags = [
     

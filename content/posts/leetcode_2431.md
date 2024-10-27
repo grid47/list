@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2431: Maximize Total Tastiness of Purchased Fruits"
-date = "2018-03-02"
+date = "2018-03-03"
 description = "Solution to Leetcode 2431"
 tags = [
     

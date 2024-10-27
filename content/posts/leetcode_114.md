@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 114: Flatten Binary Tree to Linked List"
-date = "2024-07-05"
+date = "2024-07-06"
 description = "Solution to Leetcode 114"
 tags = [
     

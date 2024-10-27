@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1933: Check if String Is Decomposable Into Value-Equal Substrings"
-date = "2019-07-13"
+date = "2019-07-14"
 description = "Solution to Leetcode 1933"
 tags = [
     

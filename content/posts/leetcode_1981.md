@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1981: Minimize the Difference Between Target and Chosen Elements"
-date = "2019-05-26"
+date = "2019-05-27"
 description = "Solution to Leetcode 1981"
 tags = [
     

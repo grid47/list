@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1012: Numbers With Repeated Digits"
-date = "2022-01-19"
+date = "2022-01-20"
 description = "Solution to Leetcode 1012"
 tags = [
     

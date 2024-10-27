@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 744: Find Smallest Letter Greater Than Target"
-date = "2022-10-14"
+date = "2022-10-15"
 description = "Solution to Leetcode 744"
 tags = [
     

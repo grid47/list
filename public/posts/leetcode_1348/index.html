@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-02-17T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-02-17T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-02-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-02-18T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-02-17T00:00:00Z">
-                February 17, 2021
+              <time datetime="2021-02-18T00:00:00Z">
+                February 18, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/tweet-counts-per-frequency/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class TweetCounts {
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">    unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> frq = {
+</span></span><span class="line"><span class="cl">        {&#34;minute&#34;, 60}, {&#34;hour&#34;, 3600}, {&#34;day&#34;, 86400}
+</span></span><span class="line"><span class="cl">    };
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    TweetCounts() {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void recordTweet(string name, int time) {
+</span></span><span class="line"><span class="cl">        mp[name].push_back(time);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> getTweetCountsPerFrequency(string fq, string name, int start, int end) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="err">&lt;</span>= (end - start) / frq[fq]; i++)
+</span></span><span class="line"><span class="cl">            res.push_back(0);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">mp</span><span class="err">[</span><span class="na">name</span><span class="err">].</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">t </span><span class="o">=</span> <span class="s">mp[name][i];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">t</span> <span class="p">&gt;</span>= start <span class="err">&amp;&amp;</span> t <span class="err">&lt;</span>= end) {
+</span></span><span class="line"><span class="cl">            int idx = (t - start) / frq[fq];
+</span></span><span class="line"><span class="cl">            res[idx]++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your TweetCounts object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * TweetCounts* obj = new TweetCounts();
+</span></span><span class="line"><span class="cl"> * obj-&gt;recordTweet(tweetName,time);
+</span></span><span class="line"><span class="cl"> * vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> param_2 = obj-&gt;getTweetCountsPerFrequency(freq,tweetName,startTime,endTime);
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

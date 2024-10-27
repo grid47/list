@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1206: Design Skiplist"
-date = "2021-07-09"
+date = "2021-07-10"
 description = "Solution to Leetcode 1206"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1411: Number of Ways to Paint N × 3 Grid"
-date = "2020-12-16"
+date = "2020-12-17"
 description = "Solution to Leetcode 1411"
 tags = [
     

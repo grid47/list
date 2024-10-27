@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2400: Number of Ways to Reach a Position After Exactly k Steps"
-date = "2018-04-02"
+date = "2018-04-03"
 description = "Solution to Leetcode 2400"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3091: Apply Operations to Make Sum of Array Greater Than or Equal to k"
-date = "2016-05-11"
+date = "2016-05-12"
 description = "Solution to Leetcode 3091"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 763: Partition Labels"
-date = "2022-09-25"
+date = "2022-09-26"
 description = "Solution to Leetcode 763"
 tags = [
     

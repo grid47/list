@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1961: Check If String Is a Prefix of Array"
-date = "2019-06-15"
+date = "2019-06-16"
 description = "Solution to Leetcode 1961"
 tags = [
     

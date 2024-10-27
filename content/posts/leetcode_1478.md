@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1478: Allocate Mailboxes"
-date = "2020-10-10"
+date = "2020-10-11"
 description = "Solution to Leetcode 1478"
 tags = [
     

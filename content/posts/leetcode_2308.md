@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2308: Arrange Table by Gender"
-date = "2018-07-03"
+date = "2018-07-04"
 description = "Solution to Leetcode 2308"
 tags = [
     

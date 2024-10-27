@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2161: Partition Array According to Given Pivot"
-date = "2018-11-27"
+date = "2018-11-28"
 description = "Solution to Leetcode 2161"
 tags = [
     

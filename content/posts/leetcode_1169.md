@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1169: Invalid Transactions"
-date = "2021-08-15"
+date = "2021-08-16"
 description = "Solution to Leetcode 1169"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2622: Cache With Time Limit"
-date = "2017-08-23"
+date = "2017-08-24"
 description = "Solution to Leetcode 2622"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 144: Binary Tree Preorder Traversal"
-date = "2024-06-05"
+date = "2024-06-06"
 description = "Solution to Leetcode 144"
 tags = [
     

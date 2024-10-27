@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1268: Search Suggestions System"
-date = "2021-05-08"
+date = "2021-05-09"
 description = "Solution to Leetcode 1268"
 tags = [
     
@@ -22,6 +22,29 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    vector<vector<string>> suggestedProducts(vector<string>& A, string w) {
+        auto it = A.begin();
+        sort(it, A.end());
+        vector<vector<string>> res;
+        string cur = "";
+        for (char c : w) {
+            cur += c;
+            vector<string> sdg;
+            it = lower_bound(it, A.end(), cur);
+for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
+                
+        string& s = *(i + it);
+        if(s.find(cur)) break;
+        sdg.push_back(s);
+                
+            }
+            res.push_back(sdg);
+        }
+        
+        return res;
+    }
+};
 {{< /highlight >}}
 

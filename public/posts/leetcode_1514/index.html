@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-09-04T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-09-04T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-09-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-09-05T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-09-04T00:00:00Z">
-                September 4, 2020
+              <time datetime="2020-09-05T00:00:00Z">
+                September 5, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,42 @@
         <p><a href="https://leetcode.com/problems/path-with-maximum-probability/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">double</span><span class="p">&gt;</span>&gt;&gt; grid;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> vis;
+</span></span><span class="line"><span class="cl">    double ans = 0;
+</span></span><span class="line"><span class="cl">    double maxProbability(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges, vector<span class="p">&lt;</span><span class="nt">double</span><span class="p">&gt;</span><span class="err">&amp;</span> prob, int start, int end) {
+</span></span><span class="line"><span class="cl">        grid.resize(n);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">edges.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">grid</span><span class="err">[</span><span class="na">edges</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]].</span><span class="na">push_back</span><span class="err">({</span><span class="na">edges</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">prob</span><span class="err">[</span><span class="na">i</span><span class="err">]});</span>            
+</span></span><span class="line"><span class="cl">            <span class="na">grid</span><span class="err">[</span><span class="na">edges</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]].</span><span class="na">push_back</span><span class="err">({</span><span class="na">edges</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">],</span> <span class="na">prob</span><span class="err">[</span><span class="na">i</span><span class="err">]});</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">priority_queue</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">double</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; pq;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">double</span><span class="p">&gt;</span> mx(n, 0);
+</span></span><span class="line"><span class="cl">        mx[start] = 1;
+</span></span><span class="line"><span class="cl">        vis.resize(n, false);
+</span></span><span class="line"><span class="cl">        // vis[start] = true;
+</span></span><span class="line"><span class="cl">        pq.push({1.0, start});
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
+</span></span><span class="line"><span class="cl">            auto it = pq.top();
+</span></span><span class="line"><span class="cl">            pq.pop();
+</span></span><span class="line"><span class="cl">            if(!vis[it.second]) {
+</span></span><span class="line"><span class="cl">                vis[it.second] = true;
+</span></span><span class="line"><span class="cl">                for(auto x: grid[it.second]) {
+</span></span><span class="line"><span class="cl">                    if(mx[x.first] <span class="p">&lt;</span> <span class="nt">it.first</span> <span class="err">*</span> <span class="na">x</span><span class="err">.</span><span class="na">second</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">mx</span><span class="err">[</span><span class="na">x</span><span class="err">.</span><span class="na">first</span><span class="err">]</span> <span class="err">=</span> <span class="na">it</span><span class="err">.</span><span class="na">first</span> <span class="err">*</span> <span class="na">x</span><span class="err">.</span><span class="na">second</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">({</span><span class="na">it</span><span class="err">.</span><span class="na">first</span> <span class="err">*</span> <span class="na">x</span><span class="err">.</span><span class="na">second</span><span class="err">,</span> <span class="na">x</span><span class="err">.</span><span class="na">first</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">mx</span><span class="err">[</span><span class="na">end</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

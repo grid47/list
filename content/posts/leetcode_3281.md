@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3281: Maximize Score of Numbers in Ranges"
-date = "2015-11-03"
+date = "2015-11-04"
 description = "Solution to Leetcode 3281"
 tags = [
     

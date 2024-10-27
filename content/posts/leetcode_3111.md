@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3111: Minimum Rectangles to Cover Points"
-date = "2016-04-21"
+date = "2016-04-22"
 description = "Solution to Leetcode 3111"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 96: Unique Binary Search Trees"
-date = "2024-07-23"
+date = "2024-07-24"
 description = "Solution to Leetcode 96"
 tags = [
     

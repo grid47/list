@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1440: Evaluate Boolean Expression"
-date = "2020-11-17"
+date = "2020-11-18"
 description = "Solution to Leetcode 1440"
 tags = [
     

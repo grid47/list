@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2277: Closest Node to Path in Tree"
-date = "2018-08-03"
+date = "2018-08-04"
 description = "Solution to Leetcode 2277"
 tags = [
     

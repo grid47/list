@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 55: Jump Game"
-date = "2024-09-02"
+date = "2024-09-03"
 description = "Solution to Leetcode 55"
 tags = [
     

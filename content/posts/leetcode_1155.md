@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1155: Number of Dice Rolls With Target Sum"
-date = "2021-08-29"
+date = "2021-08-30"
 description = "Solution to Leetcode 1155"
 tags = [
     
@@ -22,6 +22,17 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int dp[31][1001] = {};
+    int numRollsToTarget(int d, int f, int target, int res = 0) {
+        if (d == 0 || target <= 0) return d == target;
+        if (dp[d][target]) return dp[d][target] - 1;
+        for (auto i = 1; i <= f; ++i)
+            res = (res + numRollsToTarget(d - 1, f, target - i)) % 1000000007;
+        dp[d][target] = res + 1;
+        return res;
+    }
+};
 {{< /highlight >}}
 

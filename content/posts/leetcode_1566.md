@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1566: Detect Pattern of Length M Repeated K or More Times"
-date = "2020-07-14"
+date = "2020-07-15"
 description = "Solution to Leetcode 1566"
 tags = [
     

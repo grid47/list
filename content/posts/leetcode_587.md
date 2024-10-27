@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 587: Erect the Fence"
-date = "2023-03-20"
+date = "2023-03-21"
 description = "Solution to Leetcode 587"
 tags = [
     

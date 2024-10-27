@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 608: Tree Node"
-date = "2023-02-27"
+date = "2023-02-28"
 description = "Solution to Leetcode 608"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 753: Cracking the Safe"
-date = "2022-10-05"
+date = "2022-10-06"
 description = "Solution to Leetcode 753"
 tags = [
     

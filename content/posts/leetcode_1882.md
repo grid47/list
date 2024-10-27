@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1882: Process Tasks Using Servers"
-date = "2019-09-02"
+date = "2019-09-03"
 description = "Solution to Leetcode 1882"
 tags = [
     

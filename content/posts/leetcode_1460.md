@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1460: Make Two Arrays Equal by Reversing Subarrays"
-date = "2020-10-28"
+date = "2020-10-29"
 description = "Solution to Leetcode 1460"
 tags = [
     

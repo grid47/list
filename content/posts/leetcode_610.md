@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 610: Triangle Judgement"
-date = "2023-02-25"
+date = "2023-02-26"
 description = "Solution to Leetcode 610"
 tags = [
     

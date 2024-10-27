@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-04-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-04-01T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-04-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-04-02T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-04-01T00:00:00Z">
-                April 1, 2020
+              <time datetime="2020-04-02T00:00:00Z">
+                April 2, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,85 @@
         <p><a href="https://leetcode.com/problems/design-front-middle-back-queue/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class FrontMiddleBackQueue {
+</span></span><span class="line"><span class="cl">    deque<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> a, b;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void a2b() {
+</span></span><span class="line"><span class="cl">        if (a.size() <span class="err">&lt;</span>= b.size()) return;
+</span></span><span class="line"><span class="cl">        b.push_front(a.back());
+</span></span><span class="line"><span class="cl">        a.pop_back();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    /* keep operations around front of b and back of a */
+</span></span><span class="line"><span class="cl">    void b2a() {
+</span></span><span class="line"><span class="cl">        if (b.size() <span class="err">&lt;</span>= a.size() + 1) return;
+</span></span><span class="line"><span class="cl">        a.push_back(b.front());
+</span></span><span class="line"><span class="cl">        b.pop_front();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    FrontMiddleBackQueue() {}
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void pushFront(int val) {
+</span></span><span class="line"><span class="cl">        a.push_front(val);
+</span></span><span class="line"><span class="cl">        a2b();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void pushMiddle(int val) {
+</span></span><span class="line"><span class="cl">        a.push_back(val);
+</span></span><span class="line"><span class="cl">        a2b();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void pushBack(int val) {
+</span></span><span class="line"><span class="cl">        b.push_back(val);
+</span></span><span class="line"><span class="cl">        b2a();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int popFront() {
+</span></span><span class="line"><span class="cl">        if(a.empty() <span class="err">&amp;&amp;</span> b.empty()) return -1;
+</span></span><span class="line"><span class="cl">        int ans;
+</span></span><span class="line"><span class="cl">        if(a.empty()) {
+</span></span><span class="line"><span class="cl">            ans = b.front();
+</span></span><span class="line"><span class="cl">            b.pop_front();
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            ans = a.front();
+</span></span><span class="line"><span class="cl">            a.pop_front();
+</span></span><span class="line"><span class="cl">            b2a();          
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int popMiddle() {
+</span></span><span class="line"><span class="cl">        if(a.empty() <span class="err">&amp;&amp;</span> b.empty()) return -1;
+</span></span><span class="line"><span class="cl">        int ans;
+</span></span><span class="line"><span class="cl">        if(a.size() == b.size()) {
+</span></span><span class="line"><span class="cl">            ans = a.back();
+</span></span><span class="line"><span class="cl">            a.pop_back();
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            ans = b.front();
+</span></span><span class="line"><span class="cl">            b.pop_front();      
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return ans;        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    int popBack() {
+</span></span><span class="line"><span class="cl">        if(a.empty() <span class="err">&amp;&amp;</span> b.empty()) return -1;
+</span></span><span class="line"><span class="cl">        int ans = b.back();
+</span></span><span class="line"><span class="cl">        b.pop_back();
+</span></span><span class="line"><span class="cl">        a2b();
+</span></span><span class="line"><span class="cl">        return ans;       
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/**
+</span></span><span class="line"><span class="cl"> * Your FrontMiddleBackQueue object will be instantiated and called as such:
+</span></span><span class="line"><span class="cl"> * FrontMiddleBackQueue* obj = new FrontMiddleBackQueue();
+</span></span><span class="line"><span class="cl"> * obj-&gt;pushFront(val);
+</span></span><span class="line"><span class="cl"> * obj-&gt;pushMiddle(val);
+</span></span><span class="line"><span class="cl"> * obj-&gt;pushBack(val);
+</span></span><span class="line"><span class="cl"> * int param_4 = obj-&gt;popFront();
+</span></span><span class="line"><span class="cl"> * int param_5 = obj-&gt;popMiddle();
+</span></span><span class="line"><span class="cl"> * int param_6 = obj-&gt;popBack();
+</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
 
       </div>
 

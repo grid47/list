@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2468: Split Message Based on Limit"
-date = "2018-01-24"
+date = "2018-01-25"
 description = "Solution to Leetcode 2468"
 tags = [
     

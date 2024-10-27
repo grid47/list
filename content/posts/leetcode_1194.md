@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1194: Tournament Winners"
-date = "2021-07-21"
+date = "2021-07-22"
 description = "Solution to Leetcode 1194"
 tags = [
     

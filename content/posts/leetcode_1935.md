@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1935: Maximum Number of Words You Can Type"
-date = "2019-07-11"
+date = "2019-07-12"
 description = "Solution to Leetcode 1935"
 tags = [
     

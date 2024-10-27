@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2502: Design Memory Allocator"
-date = "2017-12-21"
+date = "2017-12-22"
 description = "Solution to Leetcode 2502"
 tags = [
     

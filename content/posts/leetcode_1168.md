@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1168: Optimize Water Distribution in a Village"
-date = "2021-08-16"
+date = "2021-08-17"
 description = "Solution to Leetcode 1168"
 tags = [
     

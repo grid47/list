@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3296: Minimum Number of Seconds to Make Mountain Height Zero"
-date = "2015-10-19"
+date = "2015-10-20"
 description = "Solution to Leetcode 3296"
 tags = [
     

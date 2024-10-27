@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 318: Maximum Product of Word Lengths"
-date = "2023-12-14"
+date = "2023-12-15"
 description = "Solution to Leetcode 318"
 tags = [
     

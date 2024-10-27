@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2809: Minimum Time to Make Array Sum At Most x"
-date = "2017-02-17"
+date = "2017-02-18"
 description = "Solution to Leetcode 2809"
 tags = [
     

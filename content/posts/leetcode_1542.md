@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1542: Find Longest Awesome Substring"
-date = "2020-08-07"
+date = "2020-08-08"
 description = "Solution to Leetcode 1542"
 tags = [
     
@@ -22,6 +22,31 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int longestAwesome(string s) {
+        map<int, int> mp;
+        int msk = 0;
+        int n = s.size();
+        int j = 0, ans = 1;
+        mp[0] = -1;
+        for(int i = 0; i < s.size(); i++) {
+            msk ^= (1 << (s[i] - '0'));
 
+            if(mp.count(msk)) ans = max(ans, i - mp[msk]);
+            for(int j = 0; j < 10; j++) {
+                // if((msk & (1 << j)) == 0) continue;
+                msk ^= (1 << j);
+                if(mp.count(msk)) ans = max(ans, i - mp[msk]);
+                msk ^= (1 << j);                
+            }
+
+            if(!mp.count(msk)) mp[msk] = i;
+        }
+
+        return ans;
+
+    }
+};
 {{< /highlight >}}
 

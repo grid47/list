@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 953: Verifying an Alien Dictionary"
-date = "2022-03-19"
+date = "2022-03-20"
 description = "Solution to Leetcode 953"
 tags = [
     

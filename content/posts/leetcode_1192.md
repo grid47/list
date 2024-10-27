@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1192: Critical Connections in a Network"
-date = "2021-07-23"
+date = "2021-07-24"
 description = "Solution to Leetcode 1192"
 tags = [
     

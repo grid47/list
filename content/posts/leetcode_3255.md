@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3255: Find the Power of K-Size Subarrays II"
-date = "2015-11-29"
+date = "2015-11-30"
 description = "Solution to Leetcode 3255"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 280: Wiggle Sort"
-date = "2024-01-21"
+date = "2024-01-22"
 description = "Solution to Leetcode 280"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2746: Decremental String Concatenation"
-date = "2017-04-21"
+date = "2017-04-22"
 description = "Solution to Leetcode 2746"
 tags = [
     

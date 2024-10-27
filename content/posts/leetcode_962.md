@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 962: Maximum Width Ramp"
-date = "2022-03-10"
+date = "2022-03-11"
 description = "Solution to Leetcode 962"
 tags = [
     

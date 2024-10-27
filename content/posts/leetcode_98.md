@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 98: Validate Binary Search Tree"
-date = "2024-07-21"
+date = "2024-07-22"
 description = "Solution to Leetcode 98"
 tags = [
     

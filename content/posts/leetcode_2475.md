@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2475: Number of Unequal Triplets in Array"
-date = "2018-01-17"
+date = "2018-01-18"
 description = "Solution to Leetcode 2475"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2482: Difference Between Ones and Zeros in Row and Column"
-date = "2018-01-10"
+date = "2018-01-11"
 description = "Solution to Leetcode 2482"
 tags = [
     

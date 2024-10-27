@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 167: Two Sum II - Input Array Is Sorted"
-date = "2024-05-13"
+date = "2024-05-14"
 description = "Solution to Leetcode 167"
 tags = [
     

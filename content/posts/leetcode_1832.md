@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1832: Check if the Sentence Is Pangram"
-date = "2019-10-22"
+date = "2019-10-23"
 description = "Solution to Leetcode 1832"
 tags = [
     

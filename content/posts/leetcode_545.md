@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 545: Boundary of Binary Tree"
-date = "2023-05-01"
+date = "2023-05-02"
 description = "Solution to Leetcode 545"
 tags = [
     

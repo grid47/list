@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 320: Generalized Abbreviation"
-date = "2023-12-12"
+date = "2023-12-13"
 description = "Solution to Leetcode 320"
 tags = [
     

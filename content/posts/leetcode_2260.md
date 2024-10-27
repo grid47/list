@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2260: Minimum Consecutive Cards to Pick Up"
-date = "2018-08-20"
+date = "2018-08-21"
 description = "Solution to Leetcode 2260"
 tags = [
     

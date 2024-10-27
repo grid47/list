@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 207: Course Schedule"
-date = "2024-04-03"
+date = "2024-04-04"
 description = "Solution to Leetcode 207"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2540: Minimum Common Value"
-date = "2017-11-13"
+date = "2017-11-14"
 description = "Solution to Leetcode 2540"
 tags = [
     

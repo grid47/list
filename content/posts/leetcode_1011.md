@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1011: Capacity To Ship Packages Within D Days"
-date = "2022-01-20"
+date = "2022-01-21"
 description = "Solution to Leetcode 1011"
 tags = [
     
@@ -22,6 +22,24 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int shipWithinDays(vector<int>& weights, int days) {
+        int left = 0, right = 25000000;
+        for(int w: weights)
+        left = max(left, w);
 
+        while(left < right) {
+            int mid = (left + right) / 2;
+            int need =1, cur = 0;
+            for(int i = 0; i <  weights.size() && need <= days; cur += weights[i++])
+                if(cur + weights[i] > mid)
+                cur = 0, need++;
+            if(need > days) left = mid + 1;
+            else right = mid;
+        }
+        return left;
+    }
+};
 {{< /highlight >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1086: High Five"
-date = "2021-11-06"
+date = "2021-11-07"
 description = "Solution to Leetcode 1086"
 tags = [
     

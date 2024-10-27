@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1826: Faulty Sensor"
-date = "2019-10-28"
+date = "2019-10-29"
 description = "Solution to Leetcode 1826"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2168: Unique Substrings With Equal Digit Frequency"
-date = "2018-11-20"
+date = "2018-11-21"
 description = "Solution to Leetcode 2168"
 tags = [
     

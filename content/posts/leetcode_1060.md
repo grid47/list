@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1060: Missing Element in Sorted Array"
-date = "2021-12-02"
+date = "2021-12-03"
 description = "Solution to Leetcode 1060"
 tags = [
     

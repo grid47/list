@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3297: Count Substrings That Can Be Rearranged to Contain a String I"
-date = "2015-10-18"
+date = "2015-10-19"
 description = "Solution to Leetcode 3297"
 tags = [
     

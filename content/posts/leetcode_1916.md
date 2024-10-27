@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1916: Count Ways to Build Rooms in an Ant Colony"
-date = "2019-07-30"
+date = "2019-07-31"
 description = "Solution to Leetcode 1916"
 tags = [
     

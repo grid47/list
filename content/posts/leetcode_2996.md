@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2996: Smallest Missing Integer Greater Than Sequential Prefix Sum"
-date = "2016-08-14"
+date = "2016-08-15"
 description = "Solution to Leetcode 2996"
 tags = [
     

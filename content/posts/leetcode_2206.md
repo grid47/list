@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2206: Divide Array Into Equal Pairs"
-date = "2018-10-13"
+date = "2018-10-14"
 description = "Solution to Leetcode 2206"
 tags = [
     

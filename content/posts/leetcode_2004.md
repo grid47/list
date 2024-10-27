@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2004: The Number of Seniors and Juniors to Join the Company"
-date = "2019-05-03"
+date = "2019-05-04"
 description = "Solution to Leetcode 2004"
 tags = [
     

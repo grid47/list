@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1295: Find Numbers with Even Number of Digits"
-date = "2021-04-11"
+date = "2021-04-12"
 description = "Solution to Leetcode 1295"
 tags = [
     

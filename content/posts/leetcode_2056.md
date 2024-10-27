@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2056: Number of Valid Move Combinations On Chessboard"
-date = "2019-03-12"
+date = "2019-03-13"
 description = "Solution to Leetcode 2056"
 tags = [
     

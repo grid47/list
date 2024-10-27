@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2978: Symmetric Coordinates"
-date = "2016-09-01"
+date = "2016-09-02"
 description = "Solution to Leetcode 2978"
 tags = [
     

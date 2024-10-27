@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1737: Change Minimum Characters to Satisfy One of Three Conditions"
-date = "2020-01-25"
+date = "2020-01-26"
 description = "Solution to Leetcode 1737"
 tags = [
     

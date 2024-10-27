@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1047: Remove All Adjacent Duplicates In String"
-date = "2021-12-15"
+date = "2021-12-16"
 description = "Solution to Leetcode 1047"
 tags = [
     

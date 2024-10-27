@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1739: Building Boxes"
-date = "2020-01-23"
+date = "2020-01-24"
 description = "Solution to Leetcode 1739"
 tags = [
     

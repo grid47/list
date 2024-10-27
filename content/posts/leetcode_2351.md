@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2351: First Letter to Appear Twice"
-date = "2018-05-21"
+date = "2018-05-22"
 description = "Solution to Leetcode 2351"
 tags = [
     

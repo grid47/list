@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-04-30T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-04-30T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-05-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-05-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-04-30T00:00:00Z">
-                April 30, 2021
+              <time datetime="2021-05-01T00:00:00Z">
+                May 1, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,44 @@
         <p><a href="https://leetcode.com/problems/number-of-burgers-with-no-waste-of-ingredients/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">bool</span><span class="p">&gt;</span>&gt; mp;
+</span></span><span class="line"><span class="cl">    bool dp(int tmt, int chs, int one, int two) {
+</span></span><span class="line"><span class="cl">        if(tmt <span class="err">&lt;</span>= 0 || chs <span class="err">&lt;</span>= 0) {
+</span></span><span class="line"><span class="cl">            if(tmt == 0 <span class="err">&amp;&amp;</span> chs == 0) {
+</span></span><span class="line"><span class="cl">                ans = {one, two};
+</span></span><span class="line"><span class="cl">                return true;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            return false;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(mp.count(tmt) <span class="err">&amp;&amp;</span> mp[tmt].count(chs)) return mp[tmt][chs];
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(tmt &gt;= 4 <span class="err">&amp;&amp;</span> chs &gt;= 1) {
+</span></span><span class="line"><span class="cl">            if(dp(tmt - 4, chs -1, one + 1, two))
+</span></span><span class="line"><span class="cl">                return mp[tmt][chs] = true;
+</span></span><span class="line"><span class="cl">            if(dp(tmt - 2, chs -1, one, two + 1))
+</span></span><span class="line"><span class="cl">                return mp[tmt][chs] = true;
+</span></span><span class="line"><span class="cl">        } else if(tmt &gt;= 2 <span class="err">&amp;&amp;</span> chs &gt;= 1) {
+</span></span><span class="line"><span class="cl">            if(dp(tmt - 2, chs -1, one, two + 1))
+</span></span><span class="line"><span class="cl">                return mp[tmt][chs] = true;            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return mp[tmt][chs] = false;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> numOfBurgers(int tmt, int chs) {
+</span></span><span class="line"><span class="cl">        ans = {};
+</span></span><span class="line"><span class="cl">        // dp(tmt, chs, 0, 0);
+</span></span><span class="line"><span class="cl">        int net = chs;
+</span></span><span class="line"><span class="cl">        int jumbo = (tmt - 2 * chs ) / 2;
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">        if(((tmt - 2 * chs ) <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="err">||</span> <span class="err">((</span><span class="na">tmt</span> <span class="na">-</span> <span class="na">2</span> <span class="err">*</span> <span class="na">chs</span> <span class="err">)</span> <span class="err">%</span> <span class="na">2</span><span class="err">)</span> <span class="err">||</span> <span class="err">(</span><span class="na">net</span> <span class="na">-</span> <span class="na">jumbo</span> <span class="err">&lt;</span> <span class="na">0</span><span class="err">))</span> <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="err">{</span><span class="na">jumbo</span><span class="err">,</span> <span class="na">net</span> <span class="na">-</span> <span class="na">jumbo</span><span class="err">};</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

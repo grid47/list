@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2021: Brightest Position on Street"
-date = "2019-04-16"
+date = "2019-04-17"
 description = "Solution to Leetcode 2021"
 tags = [
     

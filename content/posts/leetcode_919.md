@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 919: Complete Binary Tree Inserter"
-date = "2022-04-22"
+date = "2022-04-23"
 description = "Solution to Leetcode 919"
 tags = [
     

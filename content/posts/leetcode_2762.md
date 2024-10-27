@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2762: Continuous Subarrays"
-date = "2017-04-05"
+date = "2017-04-06"
 description = "Solution to Leetcode 2762"
 tags = [
     

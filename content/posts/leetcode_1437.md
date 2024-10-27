@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1437: Check If All 1's Are at Least Length K Places Away"
-date = "2020-11-20"
+date = "2020-11-21"
 description = "Solution to Leetcode 1437"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 412: Fizz Buzz"
-date = "2023-09-11"
+date = "2023-09-12"
 description = "Solution to Leetcode 412"
 tags = [
     

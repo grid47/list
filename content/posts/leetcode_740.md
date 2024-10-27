@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 740: Delete and Earn"
-date = "2022-10-18"
+date = "2022-10-19"
 description = "Solution to Leetcode 740"
 tags = [
     

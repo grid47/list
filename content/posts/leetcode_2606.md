@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2606: Find the Substring With Maximum Cost"
-date = "2017-09-08"
+date = "2017-09-09"
 description = "Solution to Leetcode 2606"
 tags = [
     

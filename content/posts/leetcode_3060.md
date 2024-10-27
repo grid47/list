@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3060: User Activities within Time Bounds"
-date = "2016-06-11"
+date = "2016-06-12"
 description = "Solution to Leetcode 3060"
 tags = [
     

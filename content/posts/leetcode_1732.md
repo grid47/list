@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1732: Find the Highest Altitude"
-date = "2020-01-30"
+date = "2020-01-31"
 description = "Solution to Leetcode 1732"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2945: Find Maximum Non-decreasing Array Length"
-date = "2016-10-04"
+date = "2016-10-05"
 description = "Solution to Leetcode 2945"
 tags = [
     

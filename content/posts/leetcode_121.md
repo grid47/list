@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 121: Best Time to Buy and Sell Stock"
-date = "2024-06-28"
+date = "2024-06-29"
 description = "Solution to Leetcode 121"
 tags = [
     

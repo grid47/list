@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1799: Maximize Score After N Operations"
-date = "2019-11-24"
+date = "2019-11-25"
 description = "Solution to Leetcode 1799"
 tags = [
     

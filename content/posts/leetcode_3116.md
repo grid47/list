@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3116: Kth Smallest Amount With Single Denomination Combination"
-date = "2016-04-16"
+date = "2016-04-17"
 description = "Solution to Leetcode 3116"
 tags = [
     

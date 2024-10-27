@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 866: Prime Palindrome"
-date = "2022-06-14"
+date = "2022-06-15"
 description = "Solution to Leetcode 866"
 tags = [
     

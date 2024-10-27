@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1364: Number of Trusted Contacts of a Customer"
-date = "2021-02-01"
+date = "2021-02-02"
 description = "Solution to Leetcode 1364"
 tags = [
     

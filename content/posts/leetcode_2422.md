@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2422: Merge Operations to Turn Array Into a Palindrome"
-date = "2018-03-11"
+date = "2018-03-12"
 description = "Solution to Leetcode 2422"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 582: Kill Process"
-date = "2023-03-25"
+date = "2023-03-26"
 description = "Solution to Leetcode 582"
 tags = [
     

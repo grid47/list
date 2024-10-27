@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2898: Maximum Linear Stock Score"
-date = "2016-11-20"
+date = "2016-11-21"
 description = "Solution to Leetcode 2898"
 tags = [
     

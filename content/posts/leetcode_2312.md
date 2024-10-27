@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2312: Selling Pieces of Wood"
-date = "2018-06-29"
+date = "2018-06-30"
 description = "Solution to Leetcode 2312"
 tags = [
     

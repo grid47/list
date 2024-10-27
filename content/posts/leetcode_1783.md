@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1783: Grand Slam Titles"
-date = "2019-12-10"
+date = "2019-12-11"
 description = "Solution to Leetcode 1783"
 tags = [
     

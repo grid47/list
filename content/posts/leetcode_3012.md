@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3012: Minimize Length of Array Using Operations"
-date = "2016-07-29"
+date = "2016-07-30"
 description = "Solution to Leetcode 3012"
 tags = [
     

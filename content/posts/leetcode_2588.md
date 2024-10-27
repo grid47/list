@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2588: Count the Number of Beautiful Subarrays"
-date = "2017-09-26"
+date = "2017-09-27"
 description = "Solution to Leetcode 2588"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 688: Knight Probability in Chessboard"
-date = "2022-12-09"
+date = "2022-12-10"
 description = "Solution to Leetcode 688"
 tags = [
     

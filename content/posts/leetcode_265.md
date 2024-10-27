@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 265: Paint House II"
-date = "2024-02-05"
+date = "2024-02-06"
 description = "Solution to Leetcode 265"
 tags = [
     

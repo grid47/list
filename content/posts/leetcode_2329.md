@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2329: Product Sales Analysis V"
-date = "2018-06-12"
+date = "2018-06-13"
 description = "Solution to Leetcode 2329"
 tags = [
     

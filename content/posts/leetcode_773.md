@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 773: Sliding Puzzle"
-date = "2022-09-15"
+date = "2022-09-16"
 description = "Solution to Leetcode 773"
 tags = [
     

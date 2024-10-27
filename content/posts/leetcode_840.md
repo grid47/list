@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 840: Magic Squares In Grid"
-date = "2022-07-10"
+date = "2022-07-11"
 description = "Solution to Leetcode 840"
 tags = [
     

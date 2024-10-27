@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2310: Sum of Numbers With Units Digit K"
-date = "2018-07-01"
+date = "2018-07-02"
 description = "Solution to Leetcode 2310"
 tags = [
     

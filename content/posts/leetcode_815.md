@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 815: Bus Routes"
-date = "2022-08-04"
+date = "2022-08-05"
 description = "Solution to Leetcode 815"
 tags = [
     

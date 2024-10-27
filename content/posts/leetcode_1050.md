@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1050: Actors and Directors Who Cooperated At Least Three Times"
-date = "2021-12-12"
+date = "2021-12-13"
 description = "Solution to Leetcode 1050"
 tags = [
     
@@ -22,6 +22,7 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+# Write your MySQL query statement below
+SELECt actor_id, director_id FROM ActorDirector GROUP BY actor_id, director_id HAVING COUNT(timestamp) >= 3;
 {{< /highlight >}}
 

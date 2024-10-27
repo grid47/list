@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3050: Pizza Toppings Cost Analysis"
-date = "2016-06-21"
+date = "2016-06-22"
 description = "Solution to Leetcode 3050"
 tags = [
     

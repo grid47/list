@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2070: Most Beautiful Item for Each Query"
-date = "2019-02-26"
+date = "2019-02-27"
 description = "Solution to Leetcode 2070"
 tags = [
     

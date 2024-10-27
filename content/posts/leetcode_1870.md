@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1870: Minimum Speed to Arrive on Time"
-date = "2019-09-14"
+date = "2019-09-15"
 description = "Solution to Leetcode 1870"
 tags = [
     

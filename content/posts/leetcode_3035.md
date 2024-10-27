@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3035: Maximum Palindromes After Operations"
-date = "2016-07-06"
+date = "2016-07-07"
 description = "Solution to Leetcode 3035"
 tags = [
     

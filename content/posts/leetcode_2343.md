@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2343: Query Kth Smallest Trimmed Number"
-date = "2018-05-29"
+date = "2018-05-30"
 description = "Solution to Leetcode 2343"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1265: Print Immutable Linked List in Reverse"
-date = "2021-05-11"
+date = "2021-05-12"
 description = "Solution to Leetcode 1265"
 tags = [
     

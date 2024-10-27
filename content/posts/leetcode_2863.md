@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2863: Maximum Length of Semi-Decreasing Subarrays"
-date = "2016-12-25"
+date = "2016-12-26"
 description = "Solution to Leetcode 2863"
 tags = [
     

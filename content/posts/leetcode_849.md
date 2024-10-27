@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 849: Maximize Distance to Closest Person"
-date = "2022-07-01"
+date = "2022-07-02"
 description = "Solution to Leetcode 849"
 tags = [
     

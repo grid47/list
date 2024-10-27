@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1167: Minimum Cost to Connect Sticks"
-date = "2021-08-17"
+date = "2021-08-18"
 description = "Solution to Leetcode 1167"
 tags = [
     

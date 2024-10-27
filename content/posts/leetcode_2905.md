@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2905: Find Indices With Index and Value Difference II"
-date = "2016-11-13"
+date = "2016-11-14"
 description = "Solution to Leetcode 2905"
 tags = [
     

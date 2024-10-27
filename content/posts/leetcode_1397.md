@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1397: Find All Good Strings"
-date = "2020-12-30"
+date = "2020-12-31"
 description = "Solution to Leetcode 1397"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2079: Watering Plants"
-date = "2019-02-17"
+date = "2019-02-18"
 description = "Solution to Leetcode 2079"
 tags = [
     

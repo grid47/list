@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2450: Number of Distinct Binary Strings After Applying Operations"
-date = "2018-02-11"
+date = "2018-02-12"
 description = "Solution to Leetcode 2450"
 tags = [
     

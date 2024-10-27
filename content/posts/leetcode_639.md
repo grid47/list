@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 639: Decode Ways II"
-date = "2023-01-27"
+date = "2023-01-28"
 description = "Solution to Leetcode 639"
 tags = [
     

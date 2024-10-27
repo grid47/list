@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1467: Probability of a Two Boxes Having The Same Number of Distinct Balls"
-date = "2020-10-21"
+date = "2020-10-22"
 description = "Solution to Leetcode 1467"
 tags = [
     

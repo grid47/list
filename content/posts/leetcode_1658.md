@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1658: Minimum Operations to Reduce X to Zero"
-date = "2020-04-13"
+date = "2020-04-14"
 description = "Solution to Leetcode 1658"
 tags = [
     
@@ -22,6 +22,28 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int minOperations(vector<int>& nums, int x) {
+        int res = -1;
+        long sum = -x;
+        for(int y: nums) sum += y;
+        int n = nums.size();
+        if (sum == 0) return n;
+        
+        map<int, int> mp;
+        mp[0] = -1;
+        int s = 0;
+        for(int i = 0; i < n; i++) {
+            s += nums[i];
+            if(mp.count(s - sum)) {
+                res = max(res, i - mp[s - sum]);
+            }
+            mp[s] = i;
+        }
+        
+        return res == -1? res :n - res;        
+    }
+};
 {{< /highlight >}}
 

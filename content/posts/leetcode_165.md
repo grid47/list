@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 165: Compare Version Numbers"
-date = "2024-05-15"
+date = "2024-05-16"
 description = "Solution to Leetcode 165"
 tags = [
     

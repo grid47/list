@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 409: Longest Palindrome"
-date = "2023-09-14"
+date = "2023-09-15"
 description = "Solution to Leetcode 409"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 682: Baseball Game"
-date = "2022-12-15"
+date = "2022-12-16"
 description = "Solution to Leetcode 682"
 tags = [
     

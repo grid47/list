@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-10-09T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-10-09T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-10-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-10-10T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-10-09T00:00:00Z">
-                October 9, 2021
+              <time datetime="2021-10-10T00:00:00Z">
+                October 10, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/print-in-order/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Foo {
+</span></span><span class="line"><span class="cl">    int curVal;
+</span></span><span class="line"><span class="cl">    std::mutex mtx;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    Foo() {
+</span></span><span class="line"><span class="cl">        curVal = 1;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void first(function<span class="p">&lt;</span><span class="nt">void</span><span class="err">()</span><span class="p">&gt;</span> printFirst) {
+</span></span><span class="line"><span class="cl">        mtx.lock();
+</span></span><span class="line"><span class="cl">        // printFirst() outputs &#34;first&#34;. Do not change or remove this line.
+</span></span><span class="line"><span class="cl">        printFirst();
+</span></span><span class="line"><span class="cl">        curVal++;
+</span></span><span class="line"><span class="cl">        mtx.unlock();
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void second(function<span class="p">&lt;</span><span class="nt">void</span><span class="err">()</span><span class="p">&gt;</span> printSecond) {
+</span></span><span class="line"><span class="cl">        mtx.lock();
+</span></span><span class="line"><span class="cl">        while(curVal != 2)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            mtx.unlock();
+</span></span><span class="line"><span class="cl">            mtx.lock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        mtx.unlock();
+</span></span><span class="line"><span class="cl">        // printSecond() outputs &#34;second&#34;. Do not change or remove this line.
+</span></span><span class="line"><span class="cl">        printSecond();
+</span></span><span class="line"><span class="cl">        curVal++ ;       
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    void third(function<span class="p">&lt;</span><span class="nt">void</span><span class="err">()</span><span class="p">&gt;</span> printThird) {
+</span></span><span class="line"><span class="cl">        mtx.lock();
+</span></span><span class="line"><span class="cl">        while(curVal != 3)
+</span></span><span class="line"><span class="cl">        {
+</span></span><span class="line"><span class="cl">            mtx.unlock();
+</span></span><span class="line"><span class="cl">            mtx.lock();
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        mtx.unlock();
+</span></span><span class="line"><span class="cl">        // printThird() outputs &#34;third&#34;. Do not change or remove this line.
+</span></span><span class="line"><span class="cl">        printThird();
+</span></span><span class="line"><span class="cl">        curVal++;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

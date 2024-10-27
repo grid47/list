@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 262: Trips and Users"
-date = "2024-02-08"
+date = "2024-02-09"
 description = "Solution to Leetcode 262"
 tags = [
     

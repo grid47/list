@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1756: Design Most Recently Used Queue"
-date = "2020-01-06"
+date = "2020-01-07"
 description = "Solution to Leetcode 1756"
 tags = [
     

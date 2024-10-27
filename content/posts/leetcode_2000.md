@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2000: Reverse Prefix of Word"
-date = "2019-05-07"
+date = "2019-05-08"
 description = "Solution to Leetcode 2000"
 tags = [
     

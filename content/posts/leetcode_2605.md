@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2605: Form Smallest Number From Two Digit Arrays"
-date = "2017-09-09"
+date = "2017-09-10"
 description = "Solution to Leetcode 2605"
 tags = [
     

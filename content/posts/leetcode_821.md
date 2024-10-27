@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 821: Shortest Distance to a Character"
-date = "2022-07-29"
+date = "2022-07-30"
 description = "Solution to Leetcode 821"
 tags = [
     

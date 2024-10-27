@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 380: Insert Delete GetRandom O(1)"
-date = "2023-10-13"
+date = "2023-10-14"
 description = "Solution to Leetcode 380"
 tags = [
     

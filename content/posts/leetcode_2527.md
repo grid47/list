@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2527: Find Xor-Beauty of Array"
-date = "2017-11-26"
+date = "2017-11-27"
 description = "Solution to Leetcode 2527"
 tags = [
     

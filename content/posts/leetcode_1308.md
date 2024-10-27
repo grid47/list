@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1308: Running Total for Different Genders"
-date = "2021-03-29"
+date = "2021-03-30"
 description = "Solution to Leetcode 1308"
 tags = [
     

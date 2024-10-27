@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2840: Check if Strings Can be Made Equal With Operations II"
-date = "2017-01-17"
+date = "2017-01-18"
 description = "Solution to Leetcode 2840"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2141: Maximum Running Time of N Computers"
-date = "2018-12-17"
+date = "2018-12-18"
 description = "Solution to Leetcode 2141"
 tags = [
     

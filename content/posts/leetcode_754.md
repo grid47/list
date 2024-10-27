@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 754: Reach a Number"
-date = "2022-10-04"
+date = "2022-10-05"
 description = "Solution to Leetcode 754"
 tags = [
     

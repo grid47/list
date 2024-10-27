@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-01-05T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-01-05T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-01-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-01-06T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-01-05T00:00:00Z">
-                January 5, 2021
+              <time datetime="2021-01-06T00:00:00Z">
+                January 6, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,59 @@
         <p><a href="https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; dir{    { { 0, 1}, { 0, -1} },
+</span></span><span class="line"><span class="cl">                       { { 1, 0}, {-1,  0} },
+</span></span><span class="line"><span class="cl">                       { { 0,-1}, { 1,  0} },
+</span></span><span class="line"><span class="cl">                       { { 0, 1}, { 1,  0} },
+</span></span><span class="line"><span class="cl">                       { {0, -1}, {-1,  0} },
+</span></span><span class="line"><span class="cl">                       { { 0, 1}, {-1,  0} },
+</span></span><span class="line"><span class="cl">                  };
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool hasValidPath(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int m = grid.size(), n = grid[0].size();
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">bool</span><span class="p">&gt;</span>&gt; visited(m, vector(n, false));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; q;
+</span></span><span class="line"><span class="cl">        q.push(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>{0, 0});
+</span></span><span class="line"><span class="cl">        visited[0][0] = true;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            int sz = q.size();
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">sz</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> cur = q.front();
+</span></span><span class="line"><span class="cl">                q.pop();
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                if(cur[0] == m - 1 <span class="err">&amp;&amp;</span> cur[1] == n - 1) return true;
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                int num = grid[cur[0]][cur[1]];
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                for(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> go : dir[num - 1]) {
+</span></span><span class="line"><span class="cl">                    int x = cur[0] + go[0], y = cur[1] + go[1];
+</span></span><span class="line"><span class="cl">                    
+</span></span><span class="line"><span class="cl">                    if (x <span class="p">&lt;</span>  <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span>  <span class="na">0</span> <span class="err">||</span>
+</span></span><span class="line"><span class="cl">                        <span class="na">x</span> <span class="p">&gt;</span>= m || y &gt;= n || visited[x][y])
+</span></span><span class="line"><span class="cl">                        continue;
+</span></span><span class="line"><span class="cl">                    
+</span></span><span class="line"><span class="cl">                    int ret = grid[x][y];
+</span></span><span class="line"><span class="cl">                    for(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> rev : dir[ret - 1]) {
+</span></span><span class="line"><span class="cl">                        if((cur[0] == x + rev[0] <span class="err">&amp;&amp;</span> cur[1] == y + rev[1]) ||
+</span></span><span class="line"><span class="cl">                           (cur[1] == x + rev[0] <span class="err">&amp;&amp;</span> cur[0] == y + rev[1])) {
+</span></span><span class="line"><span class="cl">                            q.push(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>{x, y});
+</span></span><span class="line"><span class="cl">                            visited[x][y] = true;
+</span></span><span class="line"><span class="cl">                        }
+</span></span><span class="line"><span class="cl">                    }   
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return false;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

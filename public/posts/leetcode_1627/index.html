@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-05-14T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-05-14T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-05-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-05-15T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-05-14T00:00:00Z">
-                May 14, 2020
+              <time datetime="2020-05-15T00:00:00Z">
+                May 15, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,48 @@
         <p><a href="https://leetcode.com/problems/graph-connectivity-with-threshold/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class UF {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> node;
+</span></span><span class="line"><span class="cl">    UF(int n) {
+</span></span><span class="line"><span class="cl">        node.resize(n + 1);
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">node</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">join</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">,</span> <span class="na">int</span> <span class="na">y</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">find(x);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">q </span><span class="o">=</span> <span class="s">find(y);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">p </span><span class="o">=</span><span class="s">=</span> <span class="na">q</span><span class="err">)</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">node</span><span class="err">[</span><span class="na">p</span><span class="err">]</span> <span class="err">=</span> <span class="na">q</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">find</span><span class="err">(</span><span class="na">int</span> <span class="na">x</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">p </span><span class="o">=</span> <span class="s">node[x];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">p </span><span class="o">=</span><span class="s">=</span> <span class="na">x</span><span class="err">)</span> <span class="na">return</span> <span class="na">p</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">node</span><span class="err">[</span><span class="na">x</span><span class="err">]</span> <span class="err">=</span> <span class="na">find</span><span class="err">(</span><span class="na">p</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="err">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">class</span> <span class="na">Solution</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">public:</span>
+</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">bool</span><span class="p">&gt;</span> areConnected(int n, int thq, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> q) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> ans(q.size(), false);
+</span></span><span class="line"><span class="cl">        UF* uf = new UF(n);
+</span></span><span class="line"><span class="cl">        for(int i = thq + 1; i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">m </span><span class="o">=</span> <span class="s">1;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">i</span> <span class="err">*</span> <span class="na">m</span> <span class="err">&lt;=</span> <span class="na">n</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">uf-</span><span class="p">&gt;</span>join(i, i * m++);                
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">q.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">uf-</span><span class="p">&gt;</span>find(q[i][0]) == uf-&gt;find(q[i][1]);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

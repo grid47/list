@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 120: Triangle"
-date = "2024-06-29"
+date = "2024-06-30"
 description = "Solution to Leetcode 120"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 204: Count Primes"
-date = "2024-04-06"
+date = "2024-04-07"
 description = "Solution to Leetcode 204"
 tags = [
     

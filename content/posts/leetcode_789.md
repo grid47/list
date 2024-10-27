@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 789: Escape The Ghosts"
-date = "2022-08-30"
+date = "2022-08-31"
 description = "Solution to Leetcode 789"
 tags = [
     

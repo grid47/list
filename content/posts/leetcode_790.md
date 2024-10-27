@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 790: Domino and Tromino Tiling"
-date = "2022-08-29"
+date = "2022-08-30"
 description = "Solution to Leetcode 790"
 tags = [
     

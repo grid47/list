@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-04-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-04-24T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-04-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-04-25T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-04-24T00:00:00Z">
-                April 24, 2020
+              <time datetime="2020-04-25T00:00:00Z">
+                April 25, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,32 @@
         <p><a href="https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    int minDeletions(string s) {
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">        int n= s.size();
+</span></span><span class="line"><span class="cl">        for(char x: s)
+</span></span><span class="line"><span class="cl">            mp[x]++;
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span>&gt; arr;
+</span></span><span class="line"><span class="cl">        for(auto it: mp) {
+</span></span><span class="line"><span class="cl">            arr.push_back({it.second, it.first});
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        sort(arr.begin(), arr.end());
+</span></span><span class="line"><span class="cl">        n = arr.size();
+</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt;
+</span></span><span class="line"><span class="cl">        int del = 0;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">tmp </span><span class="o">=</span> <span class="s">arr[i].first;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">tmp</span> <span class="p">&gt;</span> 0 <span class="err">&amp;&amp;</span> cnt.count(tmp)) {
+</span></span><span class="line"><span class="cl">                tmp--;
+</span></span><span class="line"><span class="cl">                del++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            if(tmp &gt; 0) cnt.insert(tmp);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        return del;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

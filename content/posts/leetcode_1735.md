@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1735: Count Ways to Make Array With Product"
-date = "2020-01-27"
+date = "2020-01-28"
 description = "Solution to Leetcode 1735"
 tags = [
     

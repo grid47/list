@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 964: Least Operators to Express Number"
-date = "2022-03-08"
+date = "2022-03-09"
 description = "Solution to Leetcode 964"
 tags = [
     

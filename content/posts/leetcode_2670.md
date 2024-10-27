@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2670: Find the Distinct Difference Array"
-date = "2017-07-06"
+date = "2017-07-07"
 description = "Solution to Leetcode 2670"
 tags = [
     

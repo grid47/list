@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 781: Rabbits in Forest"
-date = "2022-09-07"
+date = "2022-09-08"
 description = "Solution to Leetcode 781"
 tags = [
     

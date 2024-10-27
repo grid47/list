@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2089: Find Target Indices After Sorting Array"
-date = "2019-02-07"
+date = "2019-02-08"
 description = "Solution to Leetcode 2089"
 tags = [
     

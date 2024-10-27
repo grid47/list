@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1923: Longest Common Subpath"
-date = "2019-07-23"
+date = "2019-07-24"
 description = "Solution to Leetcode 1923"
 tags = [
     

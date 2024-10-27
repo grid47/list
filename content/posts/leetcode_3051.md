@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3051: Find Candidates for Data Scientist Position"
-date = "2016-06-20"
+date = "2016-06-21"
 description = "Solution to Leetcode 3051"
 tags = [
     

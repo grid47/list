@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 46: Permutations"
-date = "2024-09-11"
+date = "2024-09-12"
 description = "Solution to Leetcode 46"
 tags = [
     

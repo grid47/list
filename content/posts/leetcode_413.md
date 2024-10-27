@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 413: Arithmetic Slices"
-date = "2023-09-10"
+date = "2023-09-11"
 description = "Solution to Leetcode 413"
 tags = [
     

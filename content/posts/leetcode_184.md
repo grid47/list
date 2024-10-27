@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 184: Department Highest Salary"
-date = "2024-04-26"
+date = "2024-04-27"
 description = "Solution to Leetcode 184"
 tags = [
     

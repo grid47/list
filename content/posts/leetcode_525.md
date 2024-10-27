@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 525: Contiguous Array"
-date = "2023-05-21"
+date = "2023-05-22"
 description = "Solution to Leetcode 525"
 tags = [
     

@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-03-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-03-26T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-03-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-03-27T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-03-26T00:00:00Z">
-                March 26, 2021
+              <time datetime="2021-03-27T00:00:00Z">
+                March 27, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,54 @@
         <p><a href="https://leetcode.com/problems/get-watched-videos-by-your-friends/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> watchedVideosByFriends(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> wv, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> f, int id, int k) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        int n = f.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> vis(n, false);
+</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">        q.push(id);
+</span></span><span class="line"><span class="cl">        vis[id] = true;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        while(k--) {
+</span></span><span class="line"><span class="cl">            int sz = q.size();
+</span></span><span class="line"><span class="cl">            while(sz--) {
+</span></span><span class="line"><span class="cl">                int top = q.front();
+</span></span><span class="line"><span class="cl">                q.pop();
+</span></span><span class="line"><span class="cl">                for(auto it: f[top]) {
+</span></span><span class="line"><span class="cl">                    if(!vis[it]) {
+</span></span><span class="line"><span class="cl">                        vis[it] = true;
+</span></span><span class="line"><span class="cl">                        q.push(it);
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">            int fr = q.front();
+</span></span><span class="line"><span class="cl">            q.pop();
+</span></span><span class="line"><span class="cl">            for(string x: wv[fr]) {
+</span></span><span class="line"><span class="cl">                mp[x]++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>&gt; ans;
+</span></span><span class="line"><span class="cl">        for(auto it: mp) {
+</span></span><span class="line"><span class="cl">            ans.push_back({it.second, it.first});
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        sort(ans.begin(), ans.end());
+</span></span><span class="line"><span class="cl">     
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">        for(auto it: ans)
+</span></span><span class="line"><span class="cl">            res.push_back(it.second);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

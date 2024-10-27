@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2371: Minimize Maximum Value in a Grid"
-date = "2018-05-01"
+date = "2018-05-02"
 description = "Solution to Leetcode 2371"
 tags = [
     

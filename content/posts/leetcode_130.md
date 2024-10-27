@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 130: Surrounded Regions"
-date = "2024-06-19"
+date = "2024-06-20"
 description = "Solution to Leetcode 130"
 tags = [
     

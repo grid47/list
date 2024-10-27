@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3290: Maximum Multiplication Score"
-date = "2015-10-25"
+date = "2015-10-26"
 description = "Solution to Leetcode 3290"
 tags = [
     

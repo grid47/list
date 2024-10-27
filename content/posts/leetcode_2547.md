@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2547: Minimum Cost to Split an Array"
-date = "2017-11-06"
+date = "2017-11-07"
 description = "Solution to Leetcode 2547"
 tags = [
     

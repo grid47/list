@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1883: Minimum Skips to Arrive at Meeting On Time"
-date = "2019-09-01"
+date = "2019-09-02"
 description = "Solution to Leetcode 1883"
 tags = [
     

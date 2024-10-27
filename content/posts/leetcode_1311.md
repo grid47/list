@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1311: Get Watched Videos by Your Friends"
-date = "2021-03-26"
+date = "2021-03-27"
 description = "Solution to Leetcode 1311"
 tags = [
     
@@ -22,6 +22,53 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+        
+    vector<string> watchedVideosByFriends(vector<vector<string>>& wv, vector<vector<int>>& f, int id, int k) {
+        
+        int n = f.size();
+        vector<bool> vis(n, false);
+        queue<int> q;
+        q.push(id);
+        vis[id] = true;
+        
+        while(k--) {
+            int sz = q.size();
+            while(sz--) {
+                int top = q.front();
+                q.pop();
+                for(auto it: f[top]) {
+                    if(!vis[it]) {
+                        vis[it] = true;
+                        q.push(it);
+                    }
+                }
+            }
+        }
+        
+        map<string, int> mp;
+        while(!q.empty()) {
+            int fr = q.front();
+            q.pop();
+            for(string x: wv[fr]) {
+                mp[x]++;
+            }
+        }
+        
+        vector<pair<int, string>> ans;
+        for(auto it: mp) {
+            ans.push_back({it.second, it.first});
+        }
 
+        sort(ans.begin(), ans.end());
+     
+        vector<string> res;
+        for(auto it: ans)
+            res.push_back(it.second);
+        
+        return res;
+    }
+};
 {{< /highlight >}}
 

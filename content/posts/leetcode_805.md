@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 805: Split Array With Same Average"
-date = "2022-08-14"
+date = "2022-08-15"
 description = "Solution to Leetcode 805"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2929: Distribute Candies Among Children II"
-date = "2016-10-20"
+date = "2016-10-21"
 description = "Solution to Leetcode 2929"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 287: Find the Duplicate Number"
-date = "2024-01-14"
+date = "2024-01-15"
 description = "Solution to Leetcode 287"
 tags = [
     

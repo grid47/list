@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2737: Find the Closest Marked Node"
-date = "2017-04-30"
+date = "2017-05-01"
 description = "Solution to Leetcode 2737"
 tags = [
     

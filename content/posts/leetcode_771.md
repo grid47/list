@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 771: Jewels and Stones"
-date = "2022-09-17"
+date = "2022-09-18"
 description = "Solution to Leetcode 771"
 tags = [
     

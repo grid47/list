@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 283: Move Zeroes"
-date = "2024-01-18"
+date = "2024-01-19"
 description = "Solution to Leetcode 283"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2597: The Number of Beautiful Subsets"
-date = "2017-09-17"
+date = "2017-09-18"
 description = "Solution to Leetcode 2597"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3299: Sum of Consecutive Subsequences"
-date = "2015-10-16"
+date = "2015-10-17"
 description = "Solution to Leetcode 3299"
 tags = [
     

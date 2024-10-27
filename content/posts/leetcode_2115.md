@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2115: Find All Possible Recipes from Given Supplies"
-date = "2019-01-12"
+date = "2019-01-13"
 description = "Solution to Leetcode 2115"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 513: Find Bottom Left Tree Value"
-date = "2023-06-02"
+date = "2023-06-03"
 description = "Solution to Leetcode 513"
 tags = [
     

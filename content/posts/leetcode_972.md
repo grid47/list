@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 972: Equal Rational Numbers"
-date = "2022-02-28"
+date = "2022-03-01"
 description = "Solution to Leetcode 972"
 tags = [
     

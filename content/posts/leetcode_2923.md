@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2923: Find Champion I"
-date = "2016-10-26"
+date = "2016-10-27"
 description = "Solution to Leetcode 2923"
 tags = [
     

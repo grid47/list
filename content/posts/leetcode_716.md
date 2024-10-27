@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 716: Max Stack"
-date = "2022-11-11"
+date = "2022-11-12"
 description = "Solution to Leetcode 716"
 tags = [
     

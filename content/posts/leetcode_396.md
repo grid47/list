@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 396: Rotate Function"
-date = "2023-09-27"
+date = "2023-09-28"
 description = "Solution to Leetcode 396"
 tags = [
     

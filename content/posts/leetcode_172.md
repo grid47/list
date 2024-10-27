@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 172: Factorial Trailing Zeroes"
-date = "2024-05-08"
+date = "2024-05-09"
 description = "Solution to Leetcode 172"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2333: Minimum Sum of Squared Difference"
-date = "2018-06-08"
+date = "2018-06-09"
 description = "Solution to Leetcode 2333"
 tags = [
     

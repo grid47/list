@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 830: Positions of Large Groups"
-date = "2022-07-20"
+date = "2022-07-21"
 description = "Solution to Leetcode 830"
 tags = [
     

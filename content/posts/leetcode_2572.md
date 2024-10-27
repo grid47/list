@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2572: Count the Number of Square-Free Subsets"
-date = "2017-10-12"
+date = "2017-10-13"
 description = "Solution to Leetcode 2572"
 tags = [
     

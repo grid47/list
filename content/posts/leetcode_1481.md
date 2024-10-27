@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1481: Least Number of Unique Integers after K Removals"
-date = "2020-10-07"
+date = "2020-10-08"
 description = "Solution to Leetcode 1481"
 tags = [
     
@@ -22,6 +22,21 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int findLeastNumOfUniqueInts(vector<int>& arr, int k) {
+        unordered_map<int, int> mp;
+        for(auto m : arr) mp[m]++;
 
+        sort(begin(arr), end(arr), [&](int x, int y) {
+            return mp[x] != mp[y] ? mp[x] < mp[y] : x < y;
+        });
+
+        unordered_set<int> st;
+        for(int i = k; i < arr.size(); i++) st.insert(arr[i]);
+
+        return st.size();
+    }
+};
 {{< /highlight >}}
 

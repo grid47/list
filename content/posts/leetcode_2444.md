@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2444: Count Subarrays With Fixed Bounds"
-date = "2018-02-17"
+date = "2018-02-18"
 description = "Solution to Leetcode 2444"
 tags = [
     

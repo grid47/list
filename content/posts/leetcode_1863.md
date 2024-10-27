@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1863: Sum of All Subset XOR Totals"
-date = "2019-09-21"
+date = "2019-09-22"
 description = "Solution to Leetcode 1863"
 tags = [
     

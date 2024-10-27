@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2328: Number of Increasing Paths in a Grid"
-date = "2018-06-13"
+date = "2018-06-14"
 description = "Solution to Leetcode 2328"
 tags = [
     

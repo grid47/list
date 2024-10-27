@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2546: Apply Bitwise Operations to Make Strings Equal"
-date = "2017-11-07"
+date = "2017-11-08"
 description = "Solution to Leetcode 2546"
 tags = [
     

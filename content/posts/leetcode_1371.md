@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1371: Find the Longest Substring Containing Vowels in Even Counts"
-date = "2021-01-25"
+date = "2021-01-26"
 description = "Solution to Leetcode 1371"
 tags = [
     
@@ -22,6 +22,34 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int findTheLongestSubstring(string s) {
+        map<char, int> id = {
+            {'a' , 1},
+            {'e' , 2},
+            {'i' , 3},
+            {'o' , 4},
+            {'u' , 5},
+            };
+        int res = 0, msk = 0;
+        map<int, int> mp;
+ 
+        mp[0] = -1;
+        for (int i = 0; i < s.length(); i++) {
+            int x = id[s[i]];
+            
+            if(x != 0)
+            msk ^= (1 << x);
+            if(mp.count(msk)) {
+            res = max(res, i - mp[msk]);
+                }
+            else {
+            mp[msk] = i;}
+        }
+        
+        return res;
+    }
+};
 {{< /highlight >}}
 

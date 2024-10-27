@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1776: Car Fleet II"
-date = "2019-12-17"
+date = "2019-12-18"
 description = "Solution to Leetcode 1776"
 tags = [
     

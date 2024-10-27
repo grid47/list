@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2829: Determine the Minimum Sum of a k-avoiding Array"
-date = "2017-01-28"
+date = "2017-01-29"
 description = "Solution to Leetcode 2829"
 tags = [
     

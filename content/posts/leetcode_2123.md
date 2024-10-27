@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2123: Minimum Operations to Remove Adjacent Ones in Matrix"
-date = "2019-01-04"
+date = "2019-01-05"
 description = "Solution to Leetcode 2123"
 tags = [
     

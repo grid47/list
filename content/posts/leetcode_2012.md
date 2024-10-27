@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2012: Sum of Beauty in the Array"
-date = "2019-04-25"
+date = "2019-04-26"
 description = "Solution to Leetcode 2012"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2530: Maximal Score After Applying K Operations"
-date = "2017-11-23"
+date = "2017-11-24"
 description = "Solution to Leetcode 2530"
 tags = [
     

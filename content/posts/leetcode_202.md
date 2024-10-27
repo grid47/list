@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 202: Happy Number"
-date = "2024-04-08"
+date = "2024-04-09"
 description = "Solution to Leetcode 202"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3129: Find All Possible Stable Binary Arrays I"
-date = "2016-04-03"
+date = "2016-04-04"
 description = "Solution to Leetcode 3129"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3288: Length of the Longest Increasing Path"
-date = "2015-10-27"
+date = "2015-10-28"
 description = "Solution to Leetcode 3288"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2119: A Number After a Double Reversal"
-date = "2019-01-08"
+date = "2019-01-09"
 description = "Solution to Leetcode 2119"
 tags = [
     

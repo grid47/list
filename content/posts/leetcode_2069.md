@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2069: Walking Robot Simulation II"
-date = "2019-02-27"
+date = "2019-02-28"
 description = "Solution to Leetcode 2069"
 tags = [
     

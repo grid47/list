@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2764: Is Array a Preorder of Some ‌Binary Tree"
-date = "2017-04-03"
+date = "2017-04-04"
 description = "Solution to Leetcode 2764"
 tags = [
     

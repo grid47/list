@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2713: Maximum Strictly Increasing Cells in a Matrix"
-date = "2017-05-24"
+date = "2017-05-25"
 description = "Solution to Leetcode 2713"
 tags = [
     

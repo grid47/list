@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2772: Apply Operations to Make All Array Elements Equal to Zero"
-date = "2017-03-26"
+date = "2017-03-27"
 description = "Solution to Leetcode 2772"
 tags = [
     

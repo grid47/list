@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 263: Ugly Number"
-date = "2024-02-07"
+date = "2024-02-08"
 description = "Solution to Leetcode 263"
 tags = [
     

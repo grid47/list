@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1439: Find the Kth Smallest Sum of a Matrix With Sorted Rows"
-date = "2020-11-18"
+date = "2020-11-19"
 description = "Solution to Leetcode 1439"
 tags = [
     

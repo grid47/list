@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1848: Minimum Distance to the Target Element"
-date = "2019-10-06"
+date = "2019-10-07"
 description = "Solution to Leetcode 1848"
 tags = [
     

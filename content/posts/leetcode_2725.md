@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2725: Interval Cancellation"
-date = "2017-05-12"
+date = "2017-05-13"
 description = "Solution to Leetcode 2725"
 tags = [
     

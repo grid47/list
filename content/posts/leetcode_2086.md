@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2086: Minimum Number of Food Buckets to Feed the Hamsters"
-date = "2019-02-10"
+date = "2019-02-11"
 description = "Solution to Leetcode 2086"
 tags = [
     

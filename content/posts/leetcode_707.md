@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 707: Design Linked List"
-date = "2022-11-20"
+date = "2022-11-21"
 description = "Solution to Leetcode 707"
 tags = [
     

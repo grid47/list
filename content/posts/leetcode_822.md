@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 822: Card Flipping Game"
-date = "2022-07-28"
+date = "2022-07-29"
 description = "Solution to Leetcode 822"
 tags = [
     

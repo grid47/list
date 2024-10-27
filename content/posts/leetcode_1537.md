@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1537: Get the Maximum Score"
-date = "2020-08-12"
+date = "2020-08-13"
 description = "Solution to Leetcode 1537"
 tags = [
     

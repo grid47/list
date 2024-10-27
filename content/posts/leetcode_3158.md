@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3158: Find the XOR of Numbers Which Appear Twice"
-date = "2016-03-05"
+date = "2016-03-06"
 description = "Solution to Leetcode 3158"
 tags = [
     

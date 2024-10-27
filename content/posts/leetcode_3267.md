@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3267: Count Almost Equal Pairs II"
-date = "2015-11-17"
+date = "2015-11-18"
 description = "Solution to Leetcode 3267"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 145: Binary Tree Postorder Traversal"
-date = "2024-06-04"
+date = "2024-06-05"
 description = "Solution to Leetcode 145"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 221: Maximal Square"
-date = "2024-03-20"
+date = "2024-03-21"
 description = "Solution to Leetcode 221"
 tags = [
     

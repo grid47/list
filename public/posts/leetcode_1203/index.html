@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-07-12T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-07-12T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-07-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-07-13T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-07-12T00:00:00Z">
-                July 12, 2021
+              <time datetime="2021-07-13T00:00:00Z">
+                July 13, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,55 @@
         <p><a href="https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    bool topoSort(vector<span class="p">&lt;</span><span class="nt">unordered_set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span> al, int i, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> res, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> stat) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        if(stat[i] != 0) return stat[i] == 2;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        stat[i] = 1;
+</span></span><span class="line"><span class="cl">        for(auto n : al[i])
+</span></span><span class="line"><span class="cl">            if(!topoSort(al, n, res, stat))
+</span></span><span class="line"><span class="cl">                return false;
+</span></span><span class="line"><span class="cl">        stat[i] = 2;
+</span></span><span class="line"><span class="cl">        res.push_back(i);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return true;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> sortItems(int n, int m, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> group, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> beforeItems) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res_tmp, res(n), stat(n + 2 * m);
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">unordered_set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; al(n + 2 * m);
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        for(auto i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">(</span><span class="na">group</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="na">-1</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">al</span><span class="err">[</span><span class="na">n</span> <span class="err">+</span> <span class="na">group</span><span class="err">[</span><span class="na">i</span><span class="err">]].</span><span class="na">insert</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">al</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">insert</span><span class="err">(</span><span class="na">n</span> <span class="err">+</span> <span class="na">m</span> <span class="err">+</span> <span class="na">group</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">j</span> <span class="na">:</span> <span class="na">beforeItems</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">if</span> <span class="err">(</span> <span class="na">group</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="na">-1</span> <span class="err">&amp;&amp;</span> <span class="na">group</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">group</span><span class="err">[</span><span class="na">j</span><span class="err">])</span> <span class="na">al</span><span class="err">[</span><span class="na">j</span><span class="err">].</span><span class="na">insert</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="na">else</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">auto</span> <span class="na">ig </span><span class="o">=</span> <span class="s">group[i]</span> <span class="err">==</span> <span class="na">-1</span> <span class="err">?</span> <span class="na">i</span> <span class="na">:</span> <span class="na">n</span>     <span class="err">+</span> <span class="na">group</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">auto</span> <span class="na">jg </span><span class="o">=</span> <span class="s">group[j]</span> <span class="err">==</span> <span class="na">-1</span> <span class="err">?</span> <span class="na">j</span> <span class="na">:</span> <span class="na">n</span> <span class="err">+</span> <span class="na">m</span> <span class="err">+</span> <span class="na">group</span><span class="err">[</span><span class="na">j</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">al</span><span class="err">[</span><span class="na">jg</span><span class="err">].</span><span class="na">insert</span><span class="err">(</span><span class="na">ig</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">                <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">n </span><span class="o">=</span> <span class="s">al.size()</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">n</span> <span class="p">&gt;</span>= 0; n--)
+</span></span><span class="line"><span class="cl">            if(!topoSort(al, n, res_tmp, stat))
+</span></span><span class="line"><span class="cl">                return {};
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        reverse(begin(res_tmp), end(res_tmp));
+</span></span><span class="line"><span class="cl">        copy_if(begin(res_tmp), end(res_tmp), res.begin(), [<span class="err">&amp;</span>](int i) { return i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

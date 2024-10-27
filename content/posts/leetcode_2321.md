@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2321: Maximum Score Of Spliced Array"
-date = "2018-06-20"
+date = "2018-06-21"
 description = "Solution to Leetcode 2321"
 tags = [
     

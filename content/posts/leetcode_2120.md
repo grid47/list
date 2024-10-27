@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2120: Execution of All Suffix Instructions Staying in a Grid"
-date = "2019-01-07"
+date = "2019-01-08"
 description = "Solution to Leetcode 2120"
 tags = [
     

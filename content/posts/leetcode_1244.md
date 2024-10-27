@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1244: Design A Leaderboard"
-date = "2021-06-01"
+date = "2021-06-02"
 description = "Solution to Leetcode 1244"
 tags = [
     

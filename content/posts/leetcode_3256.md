@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3256: Maximum Value Sum by Placing Three Rooks I"
-date = "2015-11-28"
+date = "2015-11-29"
 description = "Solution to Leetcode 3256"
 tags = [
     

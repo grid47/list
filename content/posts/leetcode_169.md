@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 169: Majority Element"
-date = "2024-05-11"
+date = "2024-05-12"
 description = "Solution to Leetcode 169"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2145: Count the Hidden Sequences"
-date = "2018-12-13"
+date = "2018-12-14"
 description = "Solution to Leetcode 2145"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1960: Maximum Product of the Length of Two Palindromic Substrings"
-date = "2019-06-16"
+date = "2019-06-17"
 description = "Solution to Leetcode 1960"
 tags = [
     

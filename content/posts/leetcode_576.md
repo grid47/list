@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 576: Out of Boundary Paths"
-date = "2023-03-31"
+date = "2023-04-01"
 description = "Solution to Leetcode 576"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1927: Sum Game"
-date = "2019-07-19"
+date = "2019-07-20"
 description = "Solution to Leetcode 1927"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2416: Sum of Prefix Scores of Strings"
-date = "2018-03-17"
+date = "2018-03-18"
 description = "Solution to Leetcode 2416"
 tags = [
     

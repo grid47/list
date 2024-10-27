@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 528: Random Pick with Weight"
-date = "2023-05-18"
+date = "2023-05-19"
 description = "Solution to Leetcode 528"
 tags = [
     

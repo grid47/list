@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-09-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-09-28T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-09-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-09-29T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-09-28T00:00:00Z">
-                September 28, 2021
+              <time datetime="2021-09-29T00:00:00Z">
+                September 29, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,38 @@
         <p><a href="https://leetcode.com/problems/smallest-sufficient-team/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> smallestSufficientTeam(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> req, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> people) {
+</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">req.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">            <span class="na">mp</span><span class="err">[</span><span class="na">req</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">n </span><span class="o">=</span> <span class="s">req.size();</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="na">unordered_map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dp;        
+</span></span><span class="line"><span class="cl">        dp.reserve(1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">n</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="na">dp</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="err">=</span> <span class="err">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">people</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">m </span><span class="o">=</span> <span class="s">0;</span>
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">string</span> <span class="na">x:</span> <span class="na">people</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">m</span> <span class="err">|=</span> <span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">it </span><span class="o">=</span> <span class="s">dp.begin();</span> <span class="na">it</span> <span class="err">!=</span> <span class="na">dp</span><span class="err">.</span><span class="na">end</span><span class="err">();</span> <span class="na">it</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">                <span class="na">int</span> <span class="na">comb </span><span class="o">=</span> <span class="s">m</span> <span class="err">|</span> <span class="na">it-</span><span class="p">&gt;</span>first;
+</span></span><span class="line"><span class="cl">                if(!dp.count(comb) || (dp[comb].size() &gt; 1 + dp[it-&gt;first].size())) {
+</span></span><span class="line"><span class="cl">                    dp[comb] = it-&gt;second;
+</span></span><span class="line"><span class="cl">                    dp[comb].push_back(i);
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return dp[(1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">n</span><span class="err">)</span> <span class="na">-</span> <span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

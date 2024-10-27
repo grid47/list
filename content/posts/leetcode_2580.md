@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2580: Count Ways to Group Overlapping Ranges"
-date = "2017-10-04"
+date = "2017-10-05"
 description = "Solution to Leetcode 2580"
 tags = [
     

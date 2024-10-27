@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3018: Maximum Number of Removal Queries That Can Be Processed I"
-date = "2016-07-23"
+date = "2016-07-24"
 description = "Solution to Leetcode 3018"
 tags = [
     

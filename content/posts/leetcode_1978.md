@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1978: Employees Whose Manager Left the Company"
-date = "2019-05-29"
+date = "2019-05-30"
 description = "Solution to Leetcode 1978"
 tags = [
     

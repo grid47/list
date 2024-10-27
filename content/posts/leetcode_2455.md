@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2455: Average Value of Even Numbers That Are Divisible by Three"
-date = "2018-02-06"
+date = "2018-02-07"
 description = "Solution to Leetcode 2455"
 tags = [
     

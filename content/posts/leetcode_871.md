@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 871: Minimum Number of Refueling Stops"
-date = "2022-06-09"
+date = "2022-06-10"
 description = "Solution to Leetcode 871"
 tags = [
     

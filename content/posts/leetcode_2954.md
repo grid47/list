@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2954: Count the Number of Infection Sequences"
-date = "2016-09-25"
+date = "2016-09-26"
 description = "Solution to Leetcode 2954"
 tags = [
     

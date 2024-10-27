@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 543: Diameter of Binary Tree"
-date = "2023-05-03"
+date = "2023-05-04"
 description = "Solution to Leetcode 543"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3327: Check if DFS Strings Are Palindromes"
-date = "2015-09-18"
+date = "2015-09-19"
 description = "Solution to Leetcode 3327"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1360: Number of Days Between Two Dates"
-date = "2021-02-05"
+date = "2021-02-06"
 description = "Solution to Leetcode 1360"
 tags = [
     

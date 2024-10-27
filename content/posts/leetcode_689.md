@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 689: Maximum Sum of 3 Non-Overlapping Subarrays"
-date = "2022-12-08"
+date = "2022-12-09"
 description = "Solution to Leetcode 689"
 tags = [
     

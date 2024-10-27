@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3276: Select Cells in Grid With Maximum Score"
-date = "2015-11-08"
+date = "2015-11-09"
 description = "Solution to Leetcode 3276"
 tags = [
     

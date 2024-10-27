@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2013: Detect Squares"
-date = "2019-04-24"
+date = "2019-04-25"
 description = "Solution to Leetcode 2013"
 tags = [
     

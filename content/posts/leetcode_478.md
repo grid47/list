@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 478: Generate Random Point in a Circle"
-date = "2023-07-07"
+date = "2023-07-08"
 description = "Solution to Leetcode 478"
 tags = [
     

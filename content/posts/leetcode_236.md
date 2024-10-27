@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 236: Lowest Common Ancestor of a Binary Tree"
-date = "2024-03-05"
+date = "2024-03-06"
 description = "Solution to Leetcode 236"
 tags = [
     

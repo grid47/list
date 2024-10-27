@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2778: Sum of Squares of Special Elements "
-date = "2017-03-20"
+date = "2017-03-21"
 description = "Solution to Leetcode 2778"
 tags = [
     

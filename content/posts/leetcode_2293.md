@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2293: Min Max Game"
-date = "2018-07-18"
+date = "2018-07-19"
 description = "Solution to Leetcode 2293"
 tags = [
     

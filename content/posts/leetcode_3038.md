@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3038: Maximum Number of Operations With the Same Score I"
-date = "2016-07-03"
+date = "2016-07-04"
 description = "Solution to Leetcode 3038"
 tags = [
     

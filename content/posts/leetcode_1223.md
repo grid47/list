@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1223: Dice Roll Simulation"
-date = "2021-06-22"
+date = "2021-06-23"
 description = "Solution to Leetcode 1223"
 tags = [
     
@@ -22,6 +22,34 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int mod = (int) 1e9 + 7;
+    vector<int> rm;
+    int n;
+    int mem[5001][7][16];
+    int dp(int idx, int prv, int cnt) {
+        
+        if(idx == n) return 1;
+        if(mem[idx][prv + 1][cnt] != -1) return mem[idx][prv + 1][cnt];
+        long ans = 0;
+        for(int i = 0; i < rm.size(); i++) {
+            if(i== prv && cnt < rm[i]) {
+                ans = (ans + dp(idx + 1, i, cnt + 1)) % mod;
+            } else if(i != prv) {
+                ans = (ans + dp(idx + 1, i, 1)) % mod;                
+            }
+        }
 
+        return mem[idx][prv + 1][cnt] = ans % mod;
+    }
+    
+    int dieSimulator(int n, vector<int>& rollMax) {
+        this-> n = n;
+        rm = rollMax;
+        memset(mem, -1, sizeof(mem));
+        return dp(0, -1, 0);
+    }
+};
 {{< /highlight >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2831: Find the Longest Equal Subarray"
-date = "2017-01-26"
+date = "2017-01-27"
 description = "Solution to Leetcode 2831"
 tags = [
     

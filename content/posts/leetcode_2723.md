@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2723: Add Two Promises"
-date = "2017-05-14"
+date = "2017-05-15"
 description = "Solution to Leetcode 2723"
 tags = [
     

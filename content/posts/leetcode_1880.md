@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1880: Check if Word Equals Summation of Two Words"
-date = "2019-09-04"
+date = "2019-09-05"
 description = "Solution to Leetcode 1880"
 tags = [
     

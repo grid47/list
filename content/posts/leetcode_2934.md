@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2934: Minimum Operations to Maximize Last Elements in Arrays"
-date = "2016-10-15"
+date = "2016-10-16"
 description = "Solution to Leetcode 2934"
 tags = [
     

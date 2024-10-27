@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 916: Word Subsets"
-date = "2022-04-25"
+date = "2022-04-26"
 description = "Solution to Leetcode 916"
 tags = [
     

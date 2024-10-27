@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 924: Minimize Malware Spread"
-date = "2022-04-17"
+date = "2022-04-18"
 description = "Solution to Leetcode 924"
 tags = [
     

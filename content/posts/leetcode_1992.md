@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1992: Find All Groups of Farmland"
-date = "2019-05-15"
+date = "2019-05-16"
 description = "Solution to Leetcode 1992"
 tags = [
     

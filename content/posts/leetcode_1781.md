@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1781: Sum of Beauty of All Substrings"
-date = "2019-12-12"
+date = "2019-12-13"
 description = "Solution to Leetcode 1781"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3248: Snake in Matrix"
-date = "2015-12-06"
+date = "2015-12-07"
 description = "Solution to Leetcode 3248"
 tags = [
     

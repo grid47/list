@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2931: Maximum Spending After Buying Items"
-date = "2016-10-18"
+date = "2016-10-19"
 description = "Solution to Leetcode 2931"
 tags = [
     

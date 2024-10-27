@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 404: Sum of Left Leaves"
-date = "2023-09-19"
+date = "2023-09-20"
 description = "Solution to Leetcode 404"
 tags = [
     

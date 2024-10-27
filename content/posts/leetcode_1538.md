@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1538: Guess the Majority in a Hidden Array"
-date = "2020-08-11"
+date = "2020-08-12"
 description = "Solution to Leetcode 1538"
 tags = [
     

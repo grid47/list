@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 934: Shortest Bridge"
-date = "2022-04-07"
+date = "2022-04-08"
 description = "Solution to Leetcode 934"
 tags = [
     

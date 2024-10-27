@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2472: Maximum Number of Non-overlapping Palindrome Substrings"
-date = "2018-01-20"
+date = "2018-01-21"
 description = "Solution to Leetcode 2472"
 tags = [
     

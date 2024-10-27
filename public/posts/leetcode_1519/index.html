@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-08-30T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-08-30T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-08-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-08-31T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-08-30T00:00:00Z">
-                August 30, 2020
+              <time datetime="2020-08-31T00:00:00Z">
+                August 31, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,39 @@
         <p><a href="https://leetcode.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans;
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> vst;
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> countSubTrees(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> edges, string labels) {
+</span></span><span class="line"><span class="cl">        ans.resize(n, 1);
+</span></span><span class="line"><span class="cl">        vst.resize(n, 0);
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; adj(n);
+</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>e: edges) {
+</span></span><span class="line"><span class="cl">            adj[e[0]].push_back(e[1]);
+</span></span><span class="line"><span class="cl">            adj[e[1]].push_back(e[0]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        vst[0] = 1;
+</span></span><span class="line"><span class="cl">        dfs(n, 0, adj, labels);
+</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dfs(int n, int u, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> adj, string <span class="err">&amp;</span>labels) {
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> cnt(26, 0);
+</span></span><span class="line"><span class="cl">        for(auto v: adj[u]) {
+</span></span><span class="line"><span class="cl">            if(vst[v]) continue;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            vst[v] = 1;
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> sub = dfs(n, v, adj, labels);
+</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">26</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
+</span></span><span class="line"><span class="cl">                <span class="na">cnt</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+=</span> <span class="na">sub</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="na">cnt</span><span class="err">[</span><span class="na">labels</span><span class="err">[</span><span class="na">u</span><span class="err">]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;]++;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">ans</span><span class="err">[</span><span class="na">u</span><span class="err">]</span> <span class="err">=</span> <span class="na">cnt</span><span class="err">[</span><span class="na">labels</span><span class="err">[</span><span class="na">u</span><span class="err">]</span> <span class="na">-</span> <span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;];</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">cnt</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

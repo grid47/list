@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 906: Super Palindromes"
-date = "2022-05-05"
+date = "2022-05-06"
 description = "Solution to Leetcode 906"
 tags = [
     

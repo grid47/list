@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1491: Average Salary Excluding the Minimum and Maximum Salary"
-date = "2020-09-27"
+date = "2020-09-28"
 description = "Solution to Leetcode 1491"
 tags = [
     
@@ -22,6 +22,18 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    double average(vector<int>& nums) {
+        int n = nums.size();
+        double sum = 0, mx = nums[0], mn = nums[0];
+        for(int i = 0; i < n; i++) {
+            sum += nums[i];
+            mx = max((double)nums[i], mx);
+            mn = min((double)nums[i], mn);
+        }
+        return (sum - mx - mn) / (n - 2);
+    }
+};
 {{< /highlight >}}
 

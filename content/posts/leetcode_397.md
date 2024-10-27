@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 397: Integer Replacement"
-date = "2023-09-26"
+date = "2023-09-27"
 description = "Solution to Leetcode 397"
 tags = [
     

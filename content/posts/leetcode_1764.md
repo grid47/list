@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1764: Form Array by Concatenating Subarrays of Another Array"
-date = "2019-12-29"
+date = "2019-12-30"
 description = "Solution to Leetcode 1764"
 tags = [
     

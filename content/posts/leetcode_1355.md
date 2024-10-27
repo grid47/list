@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1355: Activity Participants"
-date = "2021-02-10"
+date = "2021-02-11"
 description = "Solution to Leetcode 1355"
 tags = [
     

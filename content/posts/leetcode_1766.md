@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1766: Tree of Coprimes"
-date = "2019-12-27"
+date = "2019-12-28"
 description = "Solution to Leetcode 1766"
 tags = [
     

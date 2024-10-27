@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1628: Design an Expression Tree With Evaluate Function"
-date = "2020-05-13"
+date = "2020-05-14"
 description = "Solution to Leetcode 1628"
 tags = [
     

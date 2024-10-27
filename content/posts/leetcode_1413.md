@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1413: Minimum Value to Get Positive Step by Step Sum"
-date = "2020-12-14"
+date = "2020-12-15"
 description = "Solution to Leetcode 1413"
 tags = [
     

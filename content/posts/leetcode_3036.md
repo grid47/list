@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3036: Number of Subarrays That Match a Pattern II"
-date = "2016-07-05"
+date = "2016-07-06"
 description = "Solution to Leetcode 3036"
 tags = [
     

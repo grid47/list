@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 952: Largest Component Size by Common Factor"
-date = "2022-03-20"
+date = "2022-03-21"
 description = "Solution to Leetcode 952"
 tags = [
     

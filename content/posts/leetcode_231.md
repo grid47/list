@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 231: Power of Two"
-date = "2024-03-10"
+date = "2024-03-11"
 description = "Solution to Leetcode 231"
 tags = [
     

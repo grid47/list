@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 725: Split Linked List in Parts"
-date = "2022-11-02"
+date = "2022-11-03"
 description = "Solution to Leetcode 725"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1551: Minimum Operations to Make Array Equal"
-date = "2020-07-29"
+date = "2020-07-30"
 description = "Solution to Leetcode 1551"
 tags = [
     
@@ -22,6 +22,11 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int minOperations(int n) {
+        return n * n / 4;
+    }
+};
 {{< /highlight >}}
 

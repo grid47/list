@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2542: Maximum Subsequence Score"
-date = "2017-11-11"
+date = "2017-11-12"
 description = "Solution to Leetcode 2542"
 tags = [
     

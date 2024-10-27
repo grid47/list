@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 977: Squares of a Sorted Array"
-date = "2022-02-23"
+date = "2022-02-24"
 description = "Solution to Leetcode 977"
 tags = [
     

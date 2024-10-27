@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3055: Top Percentile Fraud"
-date = "2016-06-16"
+date = "2016-06-17"
 description = "Solution to Leetcode 3055"
 tags = [
     

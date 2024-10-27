@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2802: Find The K-th Lucky Number"
-date = "2017-02-24"
+date = "2017-02-25"
 description = "Solution to Leetcode 2802"
 tags = [
     

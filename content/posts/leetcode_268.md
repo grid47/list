@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 268: Missing Number"
-date = "2024-02-02"
+date = "2024-02-03"
 description = "Solution to Leetcode 268"
 tags = [
     

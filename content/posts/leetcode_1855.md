@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1855: Maximum Distance Between a Pair of Values"
-date = "2019-09-29"
+date = "2019-09-30"
 description = "Solution to Leetcode 1855"
 tags = [
     

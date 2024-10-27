@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 963: Minimum Area Rectangle II"
-date = "2022-03-09"
+date = "2022-03-10"
 description = "Solution to Leetcode 963"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 310: Minimum Height Trees"
-date = "2023-12-22"
+date = "2023-12-23"
 description = "Solution to Leetcode 310"
 tags = [
     

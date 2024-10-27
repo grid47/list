@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2231: Largest Number After Digit Swaps by Parity"
-date = "2018-09-18"
+date = "2018-09-19"
 description = "Solution to Leetcode 2231"
 tags = [
     

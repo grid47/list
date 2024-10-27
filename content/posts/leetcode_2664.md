@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2664: The Knight’s Tour"
-date = "2017-07-12"
+date = "2017-07-13"
 description = "Solution to Leetcode 2664"
 tags = [
     

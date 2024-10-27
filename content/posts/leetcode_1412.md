@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1412: Find the Quiet Students in All Exams"
-date = "2020-12-15"
+date = "2020-12-16"
 description = "Solution to Leetcode 1412"
 tags = [
     

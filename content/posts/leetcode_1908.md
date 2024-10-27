@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1908: Game of Nim"
-date = "2019-08-07"
+date = "2019-08-08"
 description = "Solution to Leetcode 1908"
 tags = [
     

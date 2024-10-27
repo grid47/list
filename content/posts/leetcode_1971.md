@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1971: Find if Path Exists in Graph"
-date = "2019-06-05"
+date = "2019-06-06"
 description = "Solution to Leetcode 1971"
 tags = [
     

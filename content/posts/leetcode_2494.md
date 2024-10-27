@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2494: Merge Overlapping Events in the Same Hall"
-date = "2017-12-29"
+date = "2017-12-30"
 description = "Solution to Leetcode 2494"
 tags = [
     

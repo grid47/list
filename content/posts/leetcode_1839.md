@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1839: Longest Substring Of All Vowels in Order"
-date = "2019-10-15"
+date = "2019-10-16"
 description = "Solution to Leetcode 1839"
 tags = [
     

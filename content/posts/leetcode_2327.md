@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2327: Number of People Aware of a Secret"
-date = "2018-06-14"
+date = "2018-06-15"
 description = "Solution to Leetcode 2327"
 tags = [
     

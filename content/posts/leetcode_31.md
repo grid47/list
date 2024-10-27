@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 31: Next Permutation"
-date = "2024-09-26"
+date = "2024-09-27"
 description = "Solution to Leetcode 31"
 tags = [
     

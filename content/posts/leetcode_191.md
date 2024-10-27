@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 191: Number of 1 Bits"
-date = "2024-04-19"
+date = "2024-04-20"
 description = "Solution to Leetcode 191"
 tags = [
     

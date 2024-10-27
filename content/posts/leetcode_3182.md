@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3182: Find Top Scoring Students"
-date = "2016-02-10"
+date = "2016-02-11"
 description = "Solution to Leetcode 3182"
 tags = [
     

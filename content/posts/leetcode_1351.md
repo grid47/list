@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1351: Count Negative Numbers in a Sorted Matrix"
-date = "2021-02-14"
+date = "2021-02-15"
 description = "Solution to Leetcode 1351"
 tags = [
     
@@ -22,6 +22,17 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int countNegatives(vector<vector<int>>& grid) {
+        int res = 0, m = grid.size();
+        for(int i = 0; i < m; i++) {
+            auto it = upper_bound(grid[i].rbegin(), grid[i].rend(), -1);
+            if(*grid[i].rbegin() > -1) continue;
+            res += it - grid[i].rbegin();
+        }
+        return res;
+    }
+};
 {{< /highlight >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 881: Boats to Save People"
-date = "2022-05-30"
+date = "2022-05-31"
 description = "Solution to Leetcode 881"
 tags = [
     

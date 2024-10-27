@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 143: Reorder List"
-date = "2024-06-06"
+date = "2024-06-07"
 description = "Solution to Leetcode 143"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2768: Number of Black Blocks"
-date = "2017-03-30"
+date = "2017-03-31"
 description = "Solution to Leetcode 2768"
 tags = [
     

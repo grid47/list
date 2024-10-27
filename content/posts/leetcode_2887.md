@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2887: Fill Missing Data"
-date = "2016-12-01"
+date = "2016-12-02"
 description = "Solution to Leetcode 2887"
 tags = [
     

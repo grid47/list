@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1681: Minimum Incompatibility"
-date = "2020-03-21"
+date = "2020-03-22"
 description = "Solution to Leetcode 1681"
 tags = [
     

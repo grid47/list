@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 171: Excel Sheet Column Number"
-date = "2024-05-09"
+date = "2024-05-10"
 description = "Solution to Leetcode 171"
 tags = [
     

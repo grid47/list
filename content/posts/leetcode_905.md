@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 905: Sort Array By Parity"
-date = "2022-05-06"
+date = "2022-05-07"
 description = "Solution to Leetcode 905"
 tags = [
     

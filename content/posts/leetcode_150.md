@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 150: Evaluate Reverse Polish Notation"
-date = "2024-05-30"
+date = "2024-05-31"
 description = "Solution to Leetcode 150"
 tags = [
     

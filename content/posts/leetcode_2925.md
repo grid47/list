@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2925: Maximum Score After Applying Operations on a Tree"
-date = "2016-10-24"
+date = "2016-10-25"
 description = "Solution to Leetcode 2925"
 tags = [
     

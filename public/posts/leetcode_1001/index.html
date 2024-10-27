@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-01-30T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-01-30T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-01-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-01-31T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-01-30T00:00:00Z">
-                January 30, 2022
+              <time datetime="2022-01-31T00:00:00Z">
+                January 31, 2022
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,47 @@
         <p><a href="https://leetcode.com/problems/grid-illumination/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> gridIllumination(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> lamps, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> queries) {
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> x, y, a_d, d_d;
+</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">unordered_set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; set;
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">lamps.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> axs = lamps[i];
+</span></span><span class="line"><span class="cl">            if(set[axs[0]].insert(axs[1]).second) {
+</span></span><span class="line"><span class="cl">                x[axs[0]]++;
+</span></span><span class="line"><span class="cl">                y[axs[1]]++;
+</span></span><span class="line"><span class="cl">                a_d[axs[0] + axs[1]]++;
+</span></span><span class="line"><span class="cl">                d_d[axs[0] - axs[1]]++;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        int sz = queries.size();
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int k = 0; k <span class="p">&lt;</span> <span class="nt">sz</span><span class="err">;</span> <span class="na">k</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> q = queries[k];
+</span></span><span class="line"><span class="cl">            int i = q[0], j = q[1];
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            if(x[i] || y[j] || a_d[i + j] || d_d[i - j]) {
+</span></span><span class="line"><span class="cl">                res.push_back(1);
+</span></span><span class="line"><span class="cl">                for(int li = i - 1; li <span class="err">&lt;</span>= i + 1; li++)
+</span></span><span class="line"><span class="cl">                for(int lj = j - 1; lj <span class="err">&lt;</span>= j + 1; lj++){
+</span></span><span class="line"><span class="cl">                    if(set[li].erase(lj)) {
+</span></span><span class="line"><span class="cl">                        x[li]--;
+</span></span><span class="line"><span class="cl">                        y[lj]--;
+</span></span><span class="line"><span class="cl">                        a_d[li + lj]--;
+</span></span><span class="line"><span class="cl">                        d_d[li - lj]--;
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            } else res.push_back(0);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return res;
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
 
       </div>
 

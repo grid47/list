@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1759: Count Number of Homogenous Substrings"
-date = "2020-01-03"
+date = "2020-01-04"
 description = "Solution to Leetcode 1759"
 tags = [
     

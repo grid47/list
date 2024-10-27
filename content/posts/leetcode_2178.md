@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2178: Maximum Split of Positive Even Integers"
-date = "2018-11-10"
+date = "2018-11-11"
 description = "Solution to Leetcode 2178"
 tags = [
     

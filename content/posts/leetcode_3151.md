@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3151: Special Array I"
-date = "2016-03-12"
+date = "2016-03-13"
 description = "Solution to Leetcode 3151"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2555: Maximize Win From Two Segments"
-date = "2017-10-29"
+date = "2017-10-30"
 description = "Solution to Leetcode 2555"
 tags = [
     

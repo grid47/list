@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2748: Number of Beautiful Pairs"
-date = "2017-04-19"
+date = "2017-04-20"
 description = "Solution to Leetcode 2748"
 tags = [
     

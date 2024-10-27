@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 234: Palindrome Linked List"
-date = "2024-03-07"
+date = "2024-03-08"
 description = "Solution to Leetcode 234"
 tags = [
     

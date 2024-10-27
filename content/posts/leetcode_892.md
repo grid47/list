@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 892: Surface Area of 3D Shapes"
-date = "2022-05-19"
+date = "2022-05-20"
 description = "Solution to Leetcode 892"
 tags = [
     

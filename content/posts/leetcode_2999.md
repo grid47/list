@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2999: Count the Number of Powerful Integers"
-date = "2016-08-11"
+date = "2016-08-12"
 description = "Solution to Leetcode 2999"
 tags = [
     

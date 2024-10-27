@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3226: Number of Bit Changes to Make Two Integers Equal"
-date = "2015-12-28"
+date = "2015-12-29"
 description = "Solution to Leetcode 3226"
 tags = [
     

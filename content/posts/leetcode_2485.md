@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2485: Find the Pivot Integer"
-date = "2018-01-07"
+date = "2018-01-08"
 description = "Solution to Leetcode 2485"
 tags = [
     

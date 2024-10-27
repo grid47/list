@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1702: Maximum Binary String After Change"
-date = "2020-02-29"
+date = "2020-03-01"
 description = "Solution to Leetcode 1702"
 tags = [
     

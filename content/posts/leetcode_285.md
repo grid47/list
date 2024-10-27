@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 285: Inorder Successor in BST"
-date = "2024-01-16"
+date = "2024-01-17"
 description = "Solution to Leetcode 285"
 tags = [
     

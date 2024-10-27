@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 4: Median of Two Sorted Arrays"
-date = "2024-10-23"
+date = "2024-10-24"
 description = "Solution to Leetcode 4"
 tags = [
     

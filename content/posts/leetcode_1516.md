@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1516: Move Sub-Tree of N-Ary Tree"
-date = "2020-09-02"
+date = "2020-09-03"
 description = "Solution to Leetcode 1516"
 tags = [
     

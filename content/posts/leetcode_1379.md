@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree"
-date = "2021-01-17"
+date = "2021-01-18"
 description = "Solution to Leetcode 1379"
 tags = [
     
@@ -22,6 +22,29 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 
+class Solution {
+public:
+    TreeNode* ans;
+    TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) 
+    {
+        if (cloned == NULL)
+            return cloned;
+        if (cloned->val == target->val) // If target node found in cloned tree save it into a variable.
+            ans = cloned;
+        getTargetCopy(original, cloned->left, target);
+        getTargetCopy(original, cloned->right, target);
+        return ans;
+    }
+};
 {{< /highlight >}}
 

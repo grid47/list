@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2613: Beautiful Pairs"
-date = "2017-09-01"
+date = "2017-09-02"
 description = "Solution to Leetcode 2613"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3227: Vowels Game in a String"
-date = "2015-12-27"
+date = "2015-12-28"
 description = "Solution to Leetcode 3227"
 tags = [
     

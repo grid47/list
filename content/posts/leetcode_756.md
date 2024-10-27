@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 756: Pyramid Transition Matrix"
-date = "2022-10-02"
+date = "2022-10-03"
 description = "Solution to Leetcode 756"
 tags = [
     

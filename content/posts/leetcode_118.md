@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 118: Pascal's Triangle"
-date = "2024-07-01"
+date = "2024-07-02"
 description = "Solution to Leetcode 118"
 tags = [
     

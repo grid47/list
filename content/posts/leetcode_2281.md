@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2281: Sum of Total Strength of Wizards"
-date = "2018-07-30"
+date = "2018-07-31"
 description = "Solution to Leetcode 2281"
 tags = [
     

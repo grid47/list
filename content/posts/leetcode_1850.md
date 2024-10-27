@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1850: Minimum Adjacent Swaps to Reach the Kth Smallest Number"
-date = "2019-10-04"
+date = "2019-10-05"
 description = "Solution to Leetcode 1850"
 tags = [
     

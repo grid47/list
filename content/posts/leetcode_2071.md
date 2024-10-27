@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2071: Maximum Number of Tasks You Can Assign"
-date = "2019-02-25"
+date = "2019-02-26"
 description = "Solution to Leetcode 2071"
 tags = [
     

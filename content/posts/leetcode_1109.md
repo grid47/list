@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1109: Corporate Flight Bookings"
-date = "2021-10-14"
+date = "2021-10-15"
 description = "Solution to Leetcode 1109"
 tags = [
     
@@ -22,6 +22,21 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    vector<int> corpFlightBookings(vector<vector<int>>& bookings, int m) {
 
+        vector<int> ans(m, 0);
+        for(auto& v: bookings) {
+            ans[v[0] - 1] += v[2];
+            if(v[1] < m) ans[v[1]] -= v[2];
+        }
+
+        for(int j = 1; j < m; j++)
+            ans[j] += ans[j-1];
+
+        return ans;
+    }
+};
 {{< /highlight >}}
 

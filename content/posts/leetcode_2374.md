@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2374: Node With Highest Edge Score"
-date = "2018-04-28"
+date = "2018-04-29"
 description = "Solution to Leetcode 2374"
 tags = [
     

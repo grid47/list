@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2294: Partition Array Such That Maximum Difference Is K"
-date = "2018-07-17"
+date = "2018-07-18"
 description = "Solution to Leetcode 2294"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1909: Remove One Element to Make the Array Strictly Increasing"
-date = "2019-08-06"
+date = "2019-08-07"
 description = "Solution to Leetcode 1909"
 tags = [
     

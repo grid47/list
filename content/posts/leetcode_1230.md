@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1230: Toss Strange Coins"
-date = "2021-06-15"
+date = "2021-06-16"
 description = "Solution to Leetcode 1230"
 tags = [
     

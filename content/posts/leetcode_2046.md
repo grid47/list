@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2046: Sort Linked List Already Sorted Using Absolute Values"
-date = "2019-03-22"
+date = "2019-03-23"
 description = "Solution to Leetcode 2046"
 tags = [
     

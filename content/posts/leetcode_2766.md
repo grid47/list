@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2766: Relocate Marbles"
-date = "2017-04-01"
+date = "2017-04-02"
 description = "Solution to Leetcode 2766"
 tags = [
     

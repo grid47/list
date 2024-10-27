@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2589: Minimum Time to Complete All Tasks"
-date = "2017-09-25"
+date = "2017-09-26"
 description = "Solution to Leetcode 2589"
 tags = [
     

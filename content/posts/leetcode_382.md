@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 382: Linked List Random Node"
-date = "2023-10-11"
+date = "2023-10-12"
 description = "Solution to Leetcode 382"
 tags = [
     

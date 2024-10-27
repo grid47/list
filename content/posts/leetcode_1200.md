@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1200: Minimum Absolute Difference"
-date = "2021-07-15"
+date = "2021-07-16"
 description = "Solution to Leetcode 1200"
 tags = [
     

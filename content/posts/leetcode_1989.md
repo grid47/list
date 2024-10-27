@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1989: Maximum Number of People That Can Be Caught in Tag"
-date = "2019-05-18"
+date = "2019-05-19"
 description = "Solution to Leetcode 1989"
 tags = [
     

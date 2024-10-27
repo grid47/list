@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2892: Minimizing Array After Replacing Pairs With Their Product"
-date = "2016-11-26"
+date = "2016-11-27"
 description = "Solution to Leetcode 2892"
 tags = [
     

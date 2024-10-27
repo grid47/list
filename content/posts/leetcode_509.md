@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 509: Fibonacci Number"
-date = "2023-06-06"
+date = "2023-06-07"
 description = "Solution to Leetcode 509"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 20: Valid Parentheses"
-date = "2024-10-07"
+date = "2024-10-08"
 description = "Solution to Leetcode 20"
 tags = [
     

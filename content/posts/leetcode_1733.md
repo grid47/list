@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1733: Minimum Number of People to Teach"
-date = "2020-01-29"
+date = "2020-01-30"
 description = "Solution to Leetcode 1733"
 tags = [
     

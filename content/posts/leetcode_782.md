@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 782: Transform to Chessboard"
-date = "2022-09-06"
+date = "2022-09-07"
 description = "Solution to Leetcode 782"
 tags = [
     

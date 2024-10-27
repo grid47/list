@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2769: Find the Maximum Achievable Number"
-date = "2017-03-29"
+date = "2017-03-30"
 description = "Solution to Leetcode 2769"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 650: 2 Keys Keyboard"
-date = "2023-01-16"
+date = "2023-01-17"
 description = "Solution to Leetcode 650"
 tags = [
     

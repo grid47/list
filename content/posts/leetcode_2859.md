@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2859: Sum of Values at Indices With K Set Bits"
-date = "2016-12-29"
+date = "2016-12-30"
 description = "Solution to Leetcode 2859"
 tags = [
     

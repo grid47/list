@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2617: Minimum Number of Visited Cells in a Grid"
-date = "2017-08-28"
+date = "2017-08-29"
 description = "Solution to Leetcode 2617"
 tags = [
     

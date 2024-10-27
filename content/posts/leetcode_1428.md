@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1428: Leftmost Column with at Least a One"
-date = "2020-11-29"
+date = "2020-11-30"
 description = "Solution to Leetcode 1428"
 tags = [
     

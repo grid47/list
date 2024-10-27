@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 99: Recover Binary Search Tree"
-date = "2024-07-20"
+date = "2024-07-21"
 description = "Solution to Leetcode 99"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 708: Insert into a Sorted Circular Linked List"
-date = "2022-11-19"
+date = "2022-11-20"
 description = "Solution to Leetcode 708"
 tags = [
     

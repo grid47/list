@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 176: Second Highest Salary"
-date = "2024-05-04"
+date = "2024-05-05"
 description = "Solution to Leetcode 176"
 tags = [
     

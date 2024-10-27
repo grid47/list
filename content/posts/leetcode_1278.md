@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1278: Palindrome Partitioning III"
-date = "2021-04-28"
+date = "2021-04-29"
 description = "Solution to Leetcode 1278"
 tags = [
     

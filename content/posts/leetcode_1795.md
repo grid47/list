@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1795: Rearrange Products Table"
-date = "2019-11-28"
+date = "2019-11-29"
 description = "Solution to Leetcode 1795"
 tags = [
     

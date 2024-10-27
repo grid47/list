@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2855: Minimum Right Shifts to Sort the Array"
-date = "2017-01-02"
+date = "2017-01-03"
 description = "Solution to Leetcode 2855"
 tags = [
     

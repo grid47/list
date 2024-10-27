@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 941: Valid Mountain Array"
-date = "2022-03-31"
+date = "2022-04-01"
 description = "Solution to Leetcode 941"
 tags = [
     

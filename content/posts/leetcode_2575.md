@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2575: Find the Divisibility Array of a String"
-date = "2017-10-09"
+date = "2017-10-10"
 description = "Solution to Leetcode 2575"
 tags = [
     

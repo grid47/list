@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3155: Maximum Number of Upgradable Servers"
-date = "2016-03-08"
+date = "2016-03-09"
 description = "Solution to Leetcode 3155"
 tags = [
     

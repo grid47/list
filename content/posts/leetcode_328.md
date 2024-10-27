@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 328: Odd Even Linked List"
-date = "2023-12-04"
+date = "2023-12-05"
 description = "Solution to Leetcode 328"
 tags = [
     

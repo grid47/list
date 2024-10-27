@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2222: Number of Ways to Select Buildings"
-date = "2018-09-27"
+date = "2018-09-28"
 description = "Solution to Leetcode 2222"
 tags = [
     

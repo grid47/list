@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2886: Change Data Type"
-date = "2016-12-02"
+date = "2016-12-03"
 description = "Solution to Leetcode 2886"
 tags = [
     

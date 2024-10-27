@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2635: Apply Transform Over Each Element in Array"
-date = "2017-08-10"
+date = "2017-08-11"
 description = "Solution to Leetcode 2635"
 tags = [
     

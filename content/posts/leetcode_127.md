@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 127: Word Ladder"
-date = "2024-06-22"
+date = "2024-06-23"
 description = "Solution to Leetcode 127"
 tags = [
     

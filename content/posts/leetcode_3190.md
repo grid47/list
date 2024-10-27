@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3190: Find Minimum Operations to Make All Elements Divisible by Three"
-date = "2016-02-02"
+date = "2016-02-03"
 description = "Solution to Leetcode 3190"
 tags = [
     

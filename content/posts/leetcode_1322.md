@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1322: Ads Performance"
-date = "2021-03-15"
+date = "2021-03-16"
 description = "Solution to Leetcode 1322"
 tags = [
     

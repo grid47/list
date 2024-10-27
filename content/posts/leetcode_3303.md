@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3303: Find the Occurrence of First Almost Equal Substring"
-date = "2015-10-12"
+date = "2015-10-13"
 description = "Solution to Leetcode 3303"
 tags = [
     

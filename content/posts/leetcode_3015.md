@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3015: Count the Number of Houses at a Certain Distance I"
-date = "2016-07-26"
+date = "2016-07-27"
 description = "Solution to Leetcode 3015"
 tags = [
     

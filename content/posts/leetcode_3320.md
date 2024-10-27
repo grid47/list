@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3320: Count The Number of Winning Sequences"
-date = "2015-09-25"
+date = "2015-09-26"
 description = "Solution to Leetcode 3320"
 tags = [
     

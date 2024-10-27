@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2832: Maximal Range That Each Element Is Maximum in It"
-date = "2017-01-25"
+date = "2017-01-26"
 description = "Solution to Leetcode 2832"
 tags = [
     

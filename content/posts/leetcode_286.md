@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 286: Walls and Gates"
-date = "2024-01-15"
+date = "2024-01-16"
 description = "Solution to Leetcode 286"
 tags = [
     

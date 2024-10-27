@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 603: Consecutive Available Seats"
-date = "2023-03-04"
+date = "2023-03-05"
 description = "Solution to Leetcode 603"
 tags = [
     

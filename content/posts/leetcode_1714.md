@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1714: Sum Of Special Evenly-Spaced Elements In Array"
-date = "2020-02-17"
+date = "2020-02-18"
 description = "Solution to Leetcode 1714"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2300: Successful Pairs of Spells and Potions"
-date = "2018-07-11"
+date = "2018-07-12"
 description = "Solution to Leetcode 2300"
 tags = [
     

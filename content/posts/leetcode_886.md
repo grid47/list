@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 886: Possible Bipartition"
-date = "2022-05-25"
+date = "2022-05-26"
 description = "Solution to Leetcode 886"
 tags = [
     

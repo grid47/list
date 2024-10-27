@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2621: Sleep"
-date = "2017-08-24"
+date = "2017-08-25"
 description = "Solution to Leetcode 2621"
 tags = [
     

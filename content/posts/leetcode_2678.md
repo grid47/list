@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2678: Number of Senior Citizens"
-date = "2017-06-28"
+date = "2017-06-29"
 description = "Solution to Leetcode 2678"
 tags = [
     

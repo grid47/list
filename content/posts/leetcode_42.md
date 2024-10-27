@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 42: Trapping Rain Water"
-date = "2024-09-15"
+date = "2024-09-16"
 description = "Solution to Leetcode 42"
 tags = [
     

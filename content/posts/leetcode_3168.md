@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3168: Minimum Number of Chairs in a Waiting Room"
-date = "2016-02-24"
+date = "2016-02-25"
 description = "Solution to Leetcode 3168"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1572: Matrix Diagonal Sum"
-date = "2020-07-08"
+date = "2020-07-09"
 description = "Solution to Leetcode 1572"
 tags = [
     
@@ -22,6 +22,15 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int diagonalSum(vector<vector<int>>& mat) {
+        int n = mat.size(), sum = 0;
+        for(int i = 0; i < n; i++)
+            sum += mat[i][i] + mat[n - 1 - i][i];
+        if(n % 2) sum -= mat[n/2][n/2];
+        return sum;
+    }
+};
 {{< /highlight >}}
 

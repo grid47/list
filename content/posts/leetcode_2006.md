@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2006: Count Number of Pairs With Absolute Difference K"
-date = "2019-05-01"
+date = "2019-05-02"
 description = "Solution to Leetcode 2006"
 tags = [
     

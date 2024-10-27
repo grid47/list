@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3021: Alice and Bob Playing Flower Game"
-date = "2016-07-20"
+date = "2016-07-21"
 description = "Solution to Leetcode 3021"
 tags = [
     

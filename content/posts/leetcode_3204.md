@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3204: Bitwise User Permissions Analysis"
-date = "2016-01-19"
+date = "2016-01-20"
 description = "Solution to Leetcode 3204"
 tags = [
     

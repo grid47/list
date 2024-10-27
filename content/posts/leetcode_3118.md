@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3118: Friday Purchase III "
-date = "2016-04-14"
+date = "2016-04-15"
 description = "Solution to Leetcode 3118"
 tags = [
     

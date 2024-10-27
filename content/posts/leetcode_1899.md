@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1899: Merge Triplets to Form Target Triplet"
-date = "2019-08-16"
+date = "2019-08-17"
 description = "Solution to Leetcode 1899"
 tags = [
     

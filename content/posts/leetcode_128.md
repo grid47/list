@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 128: Longest Consecutive Sequence"
-date = "2024-06-21"
+date = "2024-06-22"
 description = "Solution to Leetcode 128"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2541: Minimum Operations to Make Array Equal II"
-date = "2017-11-12"
+date = "2017-11-13"
 description = "Solution to Leetcode 2541"
 tags = [
     

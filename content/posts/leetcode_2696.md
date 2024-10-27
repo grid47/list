@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2696: Minimum String Length After Removing Substrings"
-date = "2017-06-10"
+date = "2017-06-11"
 description = "Solution to Leetcode 2696"
 tags = [
     

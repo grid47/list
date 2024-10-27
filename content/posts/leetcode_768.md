@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 768: Max Chunks To Make Sorted II"
-date = "2022-09-20"
+date = "2022-09-21"
 description = "Solution to Leetcode 768"
 tags = [
     

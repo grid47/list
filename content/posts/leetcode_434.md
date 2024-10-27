@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 434: Number of Segments in a String"
-date = "2023-08-20"
+date = "2023-08-21"
 description = "Solution to Leetcode 434"
 tags = [
     

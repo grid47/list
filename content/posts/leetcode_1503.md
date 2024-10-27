@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1503: Last Moment Before All Ants Fall Out of a Plank"
-date = "2020-09-15"
+date = "2020-09-16"
 description = "Solution to Leetcode 1503"
 tags = [
     
@@ -22,6 +22,19 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int getLastMoment(int n, vector<int>& left, vector<int>& right) {
+        
+        int mx = 0;
+        for(int i = 0; i < right.size(); i++)
+            mx = max(mx, n - right[i]);
+        
+        for(int i = 0; i < left.size(); i++)
+            mx = max(mx, left[i]);        
+        
+        return mx;
+    }
+};
 {{< /highlight >}}
 

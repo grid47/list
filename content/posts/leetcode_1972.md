@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1972: First and Last Call On the Same Day"
-date = "2019-06-04"
+date = "2019-06-05"
 description = "Solution to Leetcode 1972"
 tags = [
     

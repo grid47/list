@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3165: Maximum Sum of Subsequence With Non-adjacent Elements"
-date = "2016-02-27"
+date = "2016-02-28"
 description = "Solution to Leetcode 3165"
 tags = [
     

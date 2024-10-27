@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1279: Traffic Light Controlled Intersection"
-date = "2021-04-27"
+date = "2021-04-28"
 description = "Solution to Leetcode 1279"
 tags = [
     

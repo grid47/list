@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 175: Combine Two Tables"
-date = "2024-05-05"
+date = "2024-05-06"
 description = "Solution to Leetcode 175"
 tags = [
     

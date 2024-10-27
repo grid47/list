@@ -29,8 +29,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-10-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-10-26T00:00:00+00:00">
+    <meta property="article:published_time" content="2020-10-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-10-27T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -168,8 +168,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-10-26T00:00:00Z">
-                October 26, 2020
+              <time datetime="2020-10-27T00:00:00Z">
+                October 27, 2020
               </time>
             </span>
             <span class="reading-time">
@@ -186,7 +186,47 @@
         <p><a href="https://leetcode.com/problems/course-schedule-iv/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> checkIfPrerequisite(int num, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> pre, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> q) {
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">bool</span><span class="p">&gt;</span>&gt; reach(num, vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span>(num, false));
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; grid(num);
+</span></span><span class="line"><span class="cl">        for(auto it: pre) {
+</span></span><span class="line"><span class="cl">            grid[it[0]].push_back(it[1]);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">num</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="na">queue</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> q;
+</span></span><span class="line"><span class="cl">            q.push(i);
+</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> vis(num, 0);            
+</span></span><span class="line"><span class="cl">            vis[i] = true;
+</span></span><span class="line"><span class="cl">            while(!q.empty()) {
+</span></span><span class="line"><span class="cl">                int sz = q.size();
+</span></span><span class="line"><span class="cl">                while(sz--) {
+</span></span><span class="line"><span class="cl">                    int tmp = q.front();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    q.pop();
+</span></span><span class="line"><span class="cl">                    for(int it: grid[tmp]) {
+</span></span><span class="line"><span class="cl">                        reach[i][it] = true;
+</span></span><span class="line"><span class="cl">                        if(vis[it]) continue;
+</span></span><span class="line"><span class="cl">                        vis[it] = true;
+</span></span><span class="line"><span class="cl">                        q.push(it);
+</span></span><span class="line"><span class="cl">                    }
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> ans(q.size());
+</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">q.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="na">is</span> <span class="na">q</span><span class="err">[</span><span class="na">0</span><span class="err">]</span> <span class="na">a</span> <span class="na">pre</span> <span class="na">of</span> <span class="na">q</span><span class="err">[</span><span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">            <span class="na">ans</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">reach</span><span class="err">[</span><span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]][</span><span class="na">q</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]];</span>
+</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
 
       </div>
 

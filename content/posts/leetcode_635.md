@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 635: Design Log Storage System"
-date = "2023-01-31"
+date = "2023-02-01"
 description = "Solution to Leetcode 635"
 tags = [
     

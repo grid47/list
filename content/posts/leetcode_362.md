@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 362: Design Hit Counter"
-date = "2023-10-31"
+date = "2023-11-01"
 description = "Solution to Leetcode 362"
 tags = [
     

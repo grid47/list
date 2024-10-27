@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1454: Active Users"
-date = "2020-11-03"
+date = "2020-11-04"
 description = "Solution to Leetcode 1454"
 tags = [
     

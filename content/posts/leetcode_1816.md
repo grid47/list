@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1816: Truncate Sentence"
-date = "2019-11-07"
+date = "2019-11-08"
 description = "Solution to Leetcode 1816"
 tags = [
     

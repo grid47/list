@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1716: Calculate Money in Leetcode Bank"
-date = "2020-02-15"
+date = "2020-02-16"
 description = "Solution to Leetcode 1716"
 tags = [
     

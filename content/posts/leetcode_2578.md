@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2578: Split With Minimum Sum"
-date = "2017-10-06"
+date = "2017-10-07"
 description = "Solution to Leetcode 2578"
 tags = [
     

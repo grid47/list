@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 243: Shortest Word Distance"
-date = "2024-02-27"
+date = "2024-02-28"
 description = "Solution to Leetcode 243"
 tags = [
     

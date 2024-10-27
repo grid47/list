@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2856: Minimum Array Length After Pair Removals"
-date = "2017-01-01"
+date = "2017-01-02"
 description = "Solution to Leetcode 2856"
 tags = [
     

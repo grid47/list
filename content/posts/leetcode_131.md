@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 131: Palindrome Partitioning"
-date = "2024-06-18"
+date = "2024-06-19"
 description = "Solution to Leetcode 131"
 tags = [
     

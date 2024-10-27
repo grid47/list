@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1287: Element Appearing More Than 25% In Sorted Array"
-date = "2021-04-19"
+date = "2021-04-20"
 description = "Solution to Leetcode 1287"
 tags = [
     
@@ -22,6 +22,20 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+	int findSpecialInteger(vector<int>& arr) {
+		unordered_map<int, int> m;
+		for(int i = 0; i < arr.size(); i++){
+			m[arr[i]]++;
+		}
+		for(auto i : m){
+			if(i.second > arr.size() / 4){
+				return i.first;
+			}
+		}
+		return arr[0];
+	}
+};
 {{< /highlight >}}
 

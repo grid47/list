@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1967: Number of Strings That Appear as Substrings in Word"
-date = "2019-06-09"
+date = "2019-06-10"
 description = "Solution to Leetcode 1967"
 tags = [
     

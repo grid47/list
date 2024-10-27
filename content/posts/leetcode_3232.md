@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3232: Find if Digit Game Can Be Won"
-date = "2015-12-22"
+date = "2015-12-23"
 description = "Solution to Leetcode 3232"
 tags = [
     

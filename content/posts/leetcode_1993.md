@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1993: Operations on Tree"
-date = "2019-05-14"
+date = "2019-05-15"
 description = "Solution to Leetcode 1993"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2510: Check if There is a Path With Equal Number of 0's And 1's"
-date = "2017-12-13"
+date = "2017-12-14"
 description = "Solution to Leetcode 2510"
 tags = [
     

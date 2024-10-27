@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2194: Cells in a Range on an Excel Sheet"
-date = "2018-10-25"
+date = "2018-10-26"
 description = "Solution to Leetcode 2194"
 tags = [
     

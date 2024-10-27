@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2106: Maximum Fruits Harvested After at Most K Steps"
-date = "2019-01-21"
+date = "2019-01-22"
 description = "Solution to Leetcode 2106"
 tags = [
     

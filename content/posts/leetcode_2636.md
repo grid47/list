@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2636: Promise Pool"
-date = "2017-08-09"
+date = "2017-08-10"
 description = "Solution to Leetcode 2636"
 tags = [
     

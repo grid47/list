@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1973: Count Nodes Equal to Sum of Descendants"
-date = "2019-06-03"
+date = "2019-06-04"
 description = "Solution to Leetcode 1973"
 tags = [
     

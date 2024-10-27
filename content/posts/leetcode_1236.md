@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1236: Web Crawler"
-date = "2021-06-09"
+date = "2021-06-10"
 description = "Solution to Leetcode 1236"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1533: Find the Index of the Large Integer"
-date = "2020-08-16"
+date = "2020-08-17"
 description = "Solution to Leetcode 1533"
 tags = [
     

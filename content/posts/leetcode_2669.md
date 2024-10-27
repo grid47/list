@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2669: Count Artist Occurrences On Spotify Ranking List"
-date = "2017-07-07"
+date = "2017-07-08"
 description = "Solution to Leetcode 2669"
 tags = [
     

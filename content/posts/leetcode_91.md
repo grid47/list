@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 91: Decode Ways"
-date = "2024-07-28"
+date = "2024-07-29"
 description = "Solution to Leetcode 91"
 tags = [
     

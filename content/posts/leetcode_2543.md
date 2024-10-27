@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2543: Check if Point Is Reachable"
-date = "2017-11-10"
+date = "2017-11-11"
 description = "Solution to Leetcode 2543"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1063: Number of Valid Subarrays"
-date = "2021-11-29"
+date = "2021-11-30"
 description = "Solution to Leetcode 1063"
 tags = [
     

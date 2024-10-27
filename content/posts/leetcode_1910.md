@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1910: Remove All Occurrences of a Substring"
-date = "2019-08-05"
+date = "2019-08-06"
 description = "Solution to Leetcode 1910"
 tags = [
     

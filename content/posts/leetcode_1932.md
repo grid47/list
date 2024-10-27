@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1932: Merge BSTs to Create Single BST"
-date = "2019-07-14"
+date = "2019-07-15"
 description = "Solution to Leetcode 1932"
 tags = [
     

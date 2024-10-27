@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 971: Flip Binary Tree To Match Preorder Traversal"
-date = "2022-03-01"
+date = "2022-03-02"
 description = "Solution to Leetcode 971"
 tags = [
     

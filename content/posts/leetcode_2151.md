@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2151: Maximum Good People Based on Statements"
-date = "2018-12-07"
+date = "2018-12-08"
 description = "Solution to Leetcode 2151"
 tags = [
     

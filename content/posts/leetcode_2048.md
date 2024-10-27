@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2048: Next Greater Numerically Balanced Number"
-date = "2019-03-20"
+date = "2019-03-21"
 description = "Solution to Leetcode 2048"
 tags = [
     

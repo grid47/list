@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2592: Maximize Greatness of an Array"
-date = "2017-09-22"
+date = "2017-09-23"
 description = "Solution to Leetcode 2592"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1401: Circle and Rectangle Overlapping"
-date = "2020-12-26"
+date = "2020-12-27"
 description = "Solution to Leetcode 1401"
 tags = [
     
@@ -22,6 +22,17 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    bool checkOverlap(int radius, int xCenter, int yCenter, int x1, int y1, int x2, int y2) {
+        x1 -= xCenter;
+        x2 -= xCenter;
+        y1 -= yCenter;
+        y2 -= yCenter;
+        int mx = x1 * x2 > 0? min(x1 * x1, x2 * x2): 0;
+        int my = y1 * y2 > 0? min(y1 * y1, y2 * y2): 0;
+        return mx + my <= radius * radius;
+    }
+};
 {{< /highlight >}}
 

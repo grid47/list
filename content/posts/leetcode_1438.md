@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
-date = "2020-11-19"
+date = "2020-11-20"
 description = "Solution to Leetcode 1438"
 tags = [
     
@@ -22,6 +22,20 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
-
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums, int limit) {
+        multiset<int> ms;
+        int res = 0, j = 0;
+        for(int i = 0; i < nums.size(); i++) {
+            ms.insert(nums[i]);
+            while(!ms.empty() && *ms.rbegin() - *ms.begin() > limit) {
+                ms.erase(ms.find(nums[j++]));
+            }
+            res = max(res, i - j + 1);
+        }
+        return res;
+    }
+};
 {{< /highlight >}}
 

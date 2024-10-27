@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 837: New 21 Game"
-date = "2022-07-13"
+date = "2022-07-14"
 description = "Solution to Leetcode 837"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 484: Find Permutation"
-date = "2023-07-01"
+date = "2023-07-02"
 description = "Solution to Leetcode 484"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2963: Count the Number of Good Partitions"
-date = "2016-09-16"
+date = "2016-09-17"
 description = "Solution to Leetcode 2963"
 tags = [
     

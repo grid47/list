@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3108: Minimum Cost Walk in Weighted Graph"
-date = "2016-04-24"
+date = "2016-04-25"
 description = "Solution to Leetcode 3108"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 292: Nim Game"
-date = "2024-01-09"
+date = "2024-01-10"
 description = "Solution to Leetcode 292"
 tags = [
     

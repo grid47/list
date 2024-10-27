@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 911: Online Election"
-date = "2022-04-30"
+date = "2022-05-01"
 description = "Solution to Leetcode 911"
 tags = [
     

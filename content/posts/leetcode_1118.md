@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1118: Number of Days in a Month"
-date = "2021-10-05"
+date = "2021-10-06"
 description = "Solution to Leetcode 1118"
 tags = [
     

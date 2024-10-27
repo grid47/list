@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3273: Minimum Amount of Damage Dealt to Bob"
-date = "2015-11-11"
+date = "2015-11-12"
 description = "Solution to Leetcode 3273"
 tags = [
     

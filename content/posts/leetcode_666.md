@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 666: Path Sum IV"
-date = "2022-12-31"
+date = "2023-01-01"
 description = "Solution to Leetcode 666"
 tags = [
     

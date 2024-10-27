@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2950: Number of Divisible Substrings"
-date = "2016-09-29"
+date = "2016-09-30"
 description = "Solution to Leetcode 2950"
 tags = [
     

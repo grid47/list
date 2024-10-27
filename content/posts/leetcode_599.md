@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 599: Minimum Index Sum of Two Lists"
-date = "2023-03-08"
+date = "2023-03-09"
 description = "Solution to Leetcode 599"
 tags = [
     

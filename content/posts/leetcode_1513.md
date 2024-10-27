@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1513: Number of Substrings With Only 1s"
-date = "2020-09-05"
+date = "2020-09-06"
 description = "Solution to Leetcode 1513"
 tags = [
     
@@ -22,6 +22,25 @@ series = ["Leetcode"]
 **Code:**
 
 {{< highlight html >}}
+class Solution {
+public:
+    int numSub(string s) {
+        long cnt = 0, mod = (int) 1e9 + 7;
 
+        long tmp = 0, n = s.size();
+        for(int i = 0; i < n; i++) {
+            if(s[i] == '1') {
+                tmp++;
+            }
+            
+            if(s[i] == '0' || i == n - 1) {
+                cnt = (cnt + tmp * (tmp + 1) / 2) % mod;
+                tmp = 0;
+            }
+            
+        }
+        return cnt;
+    }
+};
 {{< /highlight >}}
 

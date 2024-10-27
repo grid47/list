@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1392: Longest Happy Prefix"
-date = "2021-01-04"
+date = "2021-01-05"
 description = "Solution to Leetcode 1392"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2470: Number of Subarrays With LCM Equal to K"
-date = "2018-01-22"
+date = "2018-01-23"
 description = "Solution to Leetcode 2470"
 tags = [
     

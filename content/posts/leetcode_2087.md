@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2087: Minimum Cost Homecoming of a Robot in a Grid"
-date = "2019-02-09"
+date = "2019-02-10"
 description = "Solution to Leetcode 2087"
 tags = [
     

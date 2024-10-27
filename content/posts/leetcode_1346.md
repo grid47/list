@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1346: Check If N and Its Double Exist"
-date = "2021-02-19"
+date = "2021-02-20"
 description = "Solution to Leetcode 1346"
 tags = [
     

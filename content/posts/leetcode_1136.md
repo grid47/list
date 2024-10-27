@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1136: Parallel Courses"
-date = "2021-09-17"
+date = "2021-09-18"
 description = "Solution to Leetcode 1136"
 tags = [
     

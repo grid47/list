@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1703: Minimum Adjacent Swaps for K Consecutive Ones"
-date = "2020-02-28"
+date = "2020-02-29"
 description = "Solution to Leetcode 1703"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1150: Check If a Number Is Majority Element in a Sorted Array"
-date = "2021-09-03"
+date = "2021-09-04"
 description = "Solution to Leetcode 1150"
 tags = [
     

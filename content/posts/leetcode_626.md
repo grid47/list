@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 626: Exchange Seats"
-date = "2023-02-09"
+date = "2023-02-10"
 description = "Solution to Leetcode 626"
 tags = [
     

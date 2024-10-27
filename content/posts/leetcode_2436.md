@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2436: Minimum Split Into Subarrays With GCD Greater Than One"
-date = "2018-02-25"
+date = "2018-02-26"
 description = "Solution to Leetcode 2436"
 tags = [
     

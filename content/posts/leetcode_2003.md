@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2003: Smallest Missing Genetic Value in Each Subtree"
-date = "2019-05-04"
+date = "2019-05-05"
 description = "Solution to Leetcode 2003"
 tags = [
     

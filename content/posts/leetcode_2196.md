@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2196: Create Binary Tree From Descriptions"
-date = "2018-10-23"
+date = "2018-10-24"
 description = "Solution to Leetcode 2196"
 tags = [
     

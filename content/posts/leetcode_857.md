@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 857: Minimum Cost to Hire K Workers"
-date = "2022-06-23"
+date = "2022-06-24"
 description = "Solution to Leetcode 857"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2657: Find the Prefix Common Array of Two Arrays"
-date = "2017-07-19"
+date = "2017-07-20"
 description = "Solution to Leetcode 2657"
 tags = [
     

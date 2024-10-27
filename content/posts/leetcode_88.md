@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 88: Merge Sorted Array"
-date = "2024-07-31"
+date = "2024-08-01"
 description = "Solution to Leetcode 88"
 tags = [
     

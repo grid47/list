@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2504: Concatenate the Name and the Profession"
-date = "2017-12-19"
+date = "2017-12-20"
 description = "Solution to Leetcode 2504"
 tags = [
     

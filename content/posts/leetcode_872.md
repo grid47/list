@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 872: Leaf-Similar Trees"
-date = "2022-06-08"
+date = "2022-06-09"
 description = "Solution to Leetcode 872"
 tags = [
     

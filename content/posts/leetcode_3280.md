@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3280: Convert Date to Binary"
-date = "2015-11-04"
+date = "2015-11-05"
 description = "Solution to Leetcode 3280"
 tags = [
     

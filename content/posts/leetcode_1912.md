@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1912: Design Movie Rental System"
-date = "2019-08-03"
+date = "2019-08-04"
 description = "Solution to Leetcode 1912"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2236: Root Equals Sum of Children"
-date = "2018-09-13"
+date = "2018-09-14"
 description = "Solution to Leetcode 2236"
 tags = [
     

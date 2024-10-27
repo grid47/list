@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 829: Consecutive Numbers Sum"
-date = "2022-07-21"
+date = "2022-07-22"
 description = "Solution to Leetcode 829"
 tags = [
     

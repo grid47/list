@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2140: Solving Questions With Brainpower"
-date = "2018-12-18"
+date = "2018-12-19"
 description = "Solution to Leetcode 2140"
 tags = [
     

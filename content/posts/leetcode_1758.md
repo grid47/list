@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1758: Minimum Changes To Make Alternating Binary String"
-date = "2020-01-04"
+date = "2020-01-05"
 description = "Solution to Leetcode 1758"
 tags = [
     

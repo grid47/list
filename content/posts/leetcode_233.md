@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 233: Number of Digit One"
-date = "2024-03-08"
+date = "2024-03-09"
 description = "Solution to Leetcode 233"
 tags = [
     

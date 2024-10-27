@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2557: Maximum Number of Integers to Choose From a Range II"
-date = "2017-10-27"
+date = "2017-10-28"
 description = "Solution to Leetcode 2557"
 tags = [
     

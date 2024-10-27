@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2733: Neither Minimum nor Maximum"
-date = "2017-05-04"
+date = "2017-05-05"
 description = "Solution to Leetcode 2733"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2094: Finding 3-Digit Even Numbers"
-date = "2019-02-02"
+date = "2019-02-03"
 description = "Solution to Leetcode 2094"
 tags = [
     

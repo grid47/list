@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 751: IP to CIDR"
-date = "2022-10-07"
+date = "2022-10-08"
 description = "Solution to Leetcode 751"
 tags = [
     

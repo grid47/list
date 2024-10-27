@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2889: Reshape Data: Pivot"
-date = "2016-11-29"
+date = "2016-11-30"
 description = "Solution to Leetcode 2889"
 tags = [
     

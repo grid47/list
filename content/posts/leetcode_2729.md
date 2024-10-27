@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2729: Check if The Number is Fascinating"
-date = "2017-05-08"
+date = "2017-05-09"
 description = "Solution to Leetcode 2729"
 tags = [
     

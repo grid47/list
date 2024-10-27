@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2420: Find All Good Indices"
-date = "2018-03-13"
+date = "2018-03-14"
 description = "Solution to Leetcode 2420"
 tags = [
     

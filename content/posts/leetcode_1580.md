@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1580: Put Boxes Into the Warehouse II"
-date = "2020-06-30"
+date = "2020-07-01"
 description = "Solution to Leetcode 1580"
 tags = [
     

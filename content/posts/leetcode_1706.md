@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1706: Where Will the Ball Fall"
-date = "2020-02-25"
+date = "2020-02-26"
 description = "Solution to Leetcode 1706"
 tags = [
     

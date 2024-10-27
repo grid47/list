@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2956: Find Common Elements Between Two Arrays"
-date = "2016-09-23"
+date = "2016-09-24"
 description = "Solution to Leetcode 2956"
 tags = [
     

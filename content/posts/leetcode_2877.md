@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2877: Create a DataFrame from List"
-date = "2016-12-11"
+date = "2016-12-12"
 description = "Solution to Leetcode 2877"
 tags = [
     

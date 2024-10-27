@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2302: Count Subarrays With Score Less Than K"
-date = "2018-07-09"
+date = "2018-07-10"
 description = "Solution to Leetcode 2302"
 tags = [
     

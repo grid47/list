@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 865: Smallest Subtree with all the Deepest Nodes"
-date = "2022-06-15"
+date = "2022-06-16"
 description = "Solution to Leetcode 865"
 tags = [
     

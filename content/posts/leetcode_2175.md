@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2175: The Change in Global Rankings"
-date = "2018-11-13"
+date = "2018-11-14"
 description = "Solution to Leetcode 2175"
 tags = [
     

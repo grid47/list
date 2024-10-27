@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2709: Greatest Common Divisor Traversal"
-date = "2017-05-28"
+date = "2017-05-29"
 description = "Solution to Leetcode 2709"
 tags = [
     

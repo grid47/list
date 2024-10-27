@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3110: Score of a String"
-date = "2016-04-22"
+date = "2016-04-23"
 description = "Solution to Leetcode 3110"
 tags = [
     

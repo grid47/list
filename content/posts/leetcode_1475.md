@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1475: Final Prices With a Special Discount in a Shop"
-date = "2020-10-13"
+date = "2020-10-14"
 description = "Solution to Leetcode 1475"
 tags = [
     

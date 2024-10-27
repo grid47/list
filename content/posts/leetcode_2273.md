@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2273: Find Resultant Array After Removing Anagrams"
-date = "2018-08-07"
+date = "2018-08-08"
 description = "Solution to Leetcode 2273"
 tags = [
     

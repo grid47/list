@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2626: Array Reduce Transformation"
-date = "2017-08-19"
+date = "2017-08-20"
 description = "Solution to Leetcode 2626"
 tags = [
     

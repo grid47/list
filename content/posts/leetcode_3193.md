@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3193: Count the Number of Inversions"
-date = "2016-01-30"
+date = "2016-01-31"
 description = "Solution to Leetcode 3193"
 tags = [
     

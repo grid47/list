@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3279: Maximum Total Area Occupied by Pistons"
-date = "2015-11-05"
+date = "2015-11-06"
 description = "Solution to Leetcode 3279"
 tags = [
     

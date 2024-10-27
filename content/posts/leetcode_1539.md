@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1539: Kth Missing Positive Number"
-date = "2020-08-10"
+date = "2020-08-11"
 description = "Solution to Leetcode 1539"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 258: Add Digits"
-date = "2024-02-12"
+date = "2024-02-13"
 description = "Solution to Leetcode 258"
 tags = [
     

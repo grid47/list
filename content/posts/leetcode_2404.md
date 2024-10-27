@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2404: Most Frequent Even Element"
-date = "2018-03-29"
+date = "2018-03-30"
 description = "Solution to Leetcode 2404"
 tags = [
     
