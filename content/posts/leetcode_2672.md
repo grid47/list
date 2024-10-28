@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2672: Number of Adjacent Elements With the Same Color"
-date = "2017-07-05"
+date = "2017-07-06"
 description = "Solution to Leetcode 2672"
 tags = [
     
@@ -39,4 +39,9 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

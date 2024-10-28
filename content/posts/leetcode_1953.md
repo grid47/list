@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1953: Maximum Number of Weeks for Which You Can Work"
-date = "2019-06-24"
+date = "2019-06-25"
 description = "Solution to Leetcode 1953"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

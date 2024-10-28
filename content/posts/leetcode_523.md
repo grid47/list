@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 523: Continuous Subarray Sum"
-date = "2023-05-24"
+date = "2023-05-25"
 description = "Solution to Leetcode 523"
 tags = [
     
@@ -42,4 +42,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

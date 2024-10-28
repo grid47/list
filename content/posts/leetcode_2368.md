@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2368: Reachable Nodes With Restrictions"
-date = "2018-05-05"
+date = "2018-05-06"
 description = "Solution to Leetcode 2368"
 tags = [
     
@@ -53,4 +53,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 900: RLE Iterator"
-date = "2022-05-12"
+date = "2022-05-13"
 description = "Solution to Leetcode 900"
 tags = [
     
@@ -51,4 +51,9 @@ public:
  * int param_1 = obj->next(n);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

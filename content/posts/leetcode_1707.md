@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1707: Maximum XOR With an Element From Array"
-date = "2020-02-25"
+date = "2020-02-26"
 description = "Solution to Leetcode 1707"
 tags = [
     
@@ -85,4 +85,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

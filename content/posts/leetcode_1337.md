@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1337: The K Weakest Rows in a Matrix"
-date = "2021-03-01"
+date = "2021-03-02"
 description = "Solution to Leetcode 1337"
 tags = [
     
@@ -38,4 +38,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

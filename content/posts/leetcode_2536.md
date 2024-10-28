@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2536: Increment Submatrices by One"
-date = "2017-11-18"
+date = "2017-11-19"
 description = "Solution to Leetcode 2536"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

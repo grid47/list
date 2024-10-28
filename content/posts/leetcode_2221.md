@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2221: Find Triangular Sum of an Array"
-date = "2018-09-29"
+date = "2018-09-30"
 description = "Solution to Leetcode 2221"
 tags = [
     
@@ -39,4 +39,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

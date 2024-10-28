@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2916: Subarrays Distinct Element Sum of Squares II"
-date = "2016-11-03"
+date = "2016-11-04"
 description = "Solution to Leetcode 2916"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

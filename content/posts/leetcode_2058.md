@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2058: Find the Minimum and Maximum Number of Nodes Between Critical Points"
-date = "2019-03-11"
+date = "2019-03-12"
 description = "Solution to Leetcode 2058"
 tags = [
     
@@ -67,4 +67,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

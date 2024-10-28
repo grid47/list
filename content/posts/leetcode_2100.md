@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2100: Find Good Days to Rob the Bank"
-date = "2019-01-28"
+date = "2019-01-29"
 description = "Solution to Leetcode 2100"
 tags = [
     
@@ -56,4 +56,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

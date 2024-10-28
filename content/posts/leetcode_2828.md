@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2828: Check if a String Is an Acronym of Words"
-date = "2017-01-30"
+date = "2017-01-31"
 description = "Solution to Leetcode 2828"
 tags = [
     
@@ -32,4 +32,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

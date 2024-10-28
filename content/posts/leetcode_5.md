@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 5: Longest Palindromic Substring"
-date = "2024-10-23"
+date = "2024-10-24"
 description = "Solution to Leetcode 5"
 tags = [
     
@@ -47,4 +47,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

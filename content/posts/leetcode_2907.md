@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2907: Maximum Profitable Triplets With Increasing Prices I"
-date = "2016-11-12"
+date = "2016-11-13"
 description = "Solution to Leetcode 2907"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

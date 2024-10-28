@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1790: Check if One String Swap Can Make Strings Equal"
-date = "2019-12-04"
+date = "2019-12-05"
 description = "Solution to Leetcode 1790"
 tags = [
     
@@ -37,4 +37,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

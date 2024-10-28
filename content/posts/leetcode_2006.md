@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2006: Count Number of Pairs With Absolute Difference K"
-date = "2019-05-02"
+date = "2019-05-03"
 description = "Solution to Leetcode 2006"
 tags = [
     
@@ -34,4 +34,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

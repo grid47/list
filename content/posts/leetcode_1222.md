@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1222: Queens That Can Attack the King"
-date = "2021-06-24"
+date = "2021-06-25"
 description = "Solution to Leetcode 1222"
 tags = [
     
@@ -48,4 +48,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

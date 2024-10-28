@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1971: Find if Path Exists in Graph"
-date = "2019-06-06"
+date = "2019-06-07"
 description = "Solution to Leetcode 1971"
 tags = [
     
@@ -51,4 +51,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2034: Stock Price Fluctuation "
-date = "2019-04-04"
+date = "2019-04-05"
 description = "Solution to Leetcode 2034"
 tags = [
     
@@ -65,4 +65,9 @@ public:
  * int param_4 = obj->minimum();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

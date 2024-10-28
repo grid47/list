@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1210: Minimum Moves to Reach Target with Rotations"
-date = "2021-07-06"
+date = "2021-07-07"
 description = "Solution to Leetcode 1210"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

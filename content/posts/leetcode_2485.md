@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2485: Find the Pivot Integer"
-date = "2018-01-08"
+date = "2018-01-09"
 description = "Solution to Leetcode 2485"
 tags = [
     
@@ -30,4 +30,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

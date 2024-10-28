@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1827: Minimum Operations to Make the Array Increasing"
-date = "2019-10-28"
+date = "2019-10-29"
 description = "Solution to Leetcode 1827"
 tags = [
     
@@ -36,4 +36,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

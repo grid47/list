@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2244: Minimum Rounds to Complete All Tasks"
-date = "2018-09-06"
+date = "2018-09-07"
 description = "Solution to Leetcode 2244"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

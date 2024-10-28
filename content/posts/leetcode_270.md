@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 270: Closest Binary Search Tree Value"
-date = "2024-02-01"
+date = "2024-02-02"
 description = "Solution to Leetcode 270"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

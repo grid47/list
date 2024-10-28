@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 517: Super Washing Machines"
-date = "2023-05-30"
+date = "2023-05-31"
 description = "Solution to Leetcode 517"
 tags = [
     
@@ -60,4 +60,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

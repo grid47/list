@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1046: Last Stone Weight"
-date = "2021-12-17"
+date = "2021-12-18"
 description = "Solution to Leetcode 1046"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

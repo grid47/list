@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1366: Rank Teams by Votes"
-date = "2021-01-31"
+date = "2021-02-01"
 description = "Solution to Leetcode 1366"
 tags = [
     
@@ -42,4 +42,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

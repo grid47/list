@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 398: Random Pick Index"
-date = "2023-09-26"
+date = "2023-09-27"
 description = "Solution to Leetcode 398"
 tags = [
     
@@ -44,4 +44,9 @@ public:
  * int param_1 = obj->pick(target);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

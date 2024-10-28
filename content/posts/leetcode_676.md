@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 676: Implement Magic Dictionary"
-date = "2022-12-22"
+date = "2022-12-23"
 description = "Solution to Leetcode 676"
 tags = [
     
@@ -62,4 +62,9 @@ public:
  * bool param_2 = obj->search(searchWord);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

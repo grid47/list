@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1690: Stone Game VII"
-date = "2020-03-13"
+date = "2020-03-14"
 description = "Solution to Leetcode 1690"
 tags = [
     
@@ -42,4 +42,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

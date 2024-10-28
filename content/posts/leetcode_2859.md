@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2859: Sum of Values at Indices With K Set Bits"
-date = "2016-12-30"
+date = "2016-12-31"
 description = "Solution to Leetcode 2859"
 tags = [
     
@@ -43,4 +43,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

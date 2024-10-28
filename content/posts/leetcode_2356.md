@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2356: Number of Unique Subjects Taught by Each Teacher"
-date = "2018-05-17"
+date = "2018-05-18"
 description = "Solution to Leetcode 2356"
 tags = [
     
@@ -26,4 +26,9 @@ series = ["Leetcode"]
 SELECT teacher_id, COUNT(DISTINCT subject_id) AS cnt FROM Teacher
 GROUP BY teacher_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1683: Invalid Tweets"
-date = "2020-03-20"
+date = "2020-03-21"
 description = "Solution to Leetcode 1683"
 tags = [
     
@@ -25,4 +25,9 @@ series = ["Leetcode"]
 # Write your MySQL query statement below
 SELECT tweet_id FROM Tweets WHERE LENGTH(content) > 15;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

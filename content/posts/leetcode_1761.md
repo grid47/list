@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1761: Minimum Degree of a Connected Trio in a Graph"
-date = "2020-01-02"
+date = "2020-01-03"
 description = "Solution to Leetcode 1761"
 tags = [
     
@@ -42,4 +42,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

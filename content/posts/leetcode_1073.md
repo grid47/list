@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1073: Adding Two Negabinary Numbers"
-date = "2021-11-20"
+date = "2021-11-21"
 description = "Solution to Leetcode 1073"
 tags = [
     
@@ -40,4 +40,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

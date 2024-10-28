@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2515: Shortest Distance to Target String in a Circular Array"
-date = "2017-12-09"
+date = "2017-12-10"
 description = "Solution to Leetcode 2515"
 tags = [
     
@@ -35,4 +35,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

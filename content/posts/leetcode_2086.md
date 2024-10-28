@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2086: Minimum Number of Food Buckets to Feed the Hamsters"
-date = "2019-02-11"
+date = "2019-02-12"
 description = "Solution to Leetcode 2086"
 tags = [
     
@@ -59,4 +59,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

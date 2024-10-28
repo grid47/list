@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2961: Double Modular Exponentiation"
-date = "2016-09-19"
+date = "2016-09-20"
 description = "Solution to Leetcode 2961"
 tags = [
     
@@ -43,4 +43,9 @@ vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

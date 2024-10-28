@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2640: Find the Score of All Prefixes of an Array"
-date = "2017-08-06"
+date = "2017-08-07"
 description = "Solution to Leetcode 2640"
 tags = [
     
@@ -38,4 +38,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

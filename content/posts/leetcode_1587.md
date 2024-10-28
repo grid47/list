@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1587: Bank Account Summary II"
-date = "2020-06-24"
+date = "2020-06-25"
 description = "Solution to Leetcode 1587"
 tags = [
     
@@ -30,4 +30,9 @@ ON s.account = t.account
 GROUP BY s.account
 HAVING balance > 10000;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 181: Employees Earning More Than Their Managers"
-date = "2024-04-30"
+date = "2024-05-01"
 description = "Solution to Leetcode 181"
 tags = [
     
@@ -27,4 +27,9 @@ FROM employee e1
 INNER JOIN employee e2 ON e1.id = e2.managerID
 WHERE e1.salary < e2.salary
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

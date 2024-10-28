@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 462: Minimum Moves to Equal Array Elements II"
-date = "2023-07-24"
+date = "2023-07-25"
 description = "Solution to Leetcode 462"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

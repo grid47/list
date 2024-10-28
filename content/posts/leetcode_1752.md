@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1752: Check if Array Is Sorted and Rotated"
-date = "2020-01-11"
+date = "2020-01-12"
 description = "Solution to Leetcode 1752"
 tags = [
     
@@ -39,4 +39,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1968: Array With Elements Not Equal to Average of Neighbors"
-date = "2019-06-09"
+date = "2019-06-10"
 description = "Solution to Leetcode 1968"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

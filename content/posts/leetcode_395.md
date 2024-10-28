@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 395: Longest Substring with At Least K Repeating Characters"
-date = "2023-09-29"
+date = "2023-09-30"
 description = "Solution to Leetcode 395"
 tags = [
     
@@ -44,4 +44,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2069: Walking Robot Simulation II"
-date = "2019-02-28"
+date = "2019-03-01"
 description = "Solution to Leetcode 2069"
 tags = [
     
@@ -76,4 +76,9 @@ public:
  * string param_3 = obj->getDir();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 323: Number of Connected Components in an Undirected Graph"
-date = "2023-12-10"
+date = "2023-12-11"
 description = "Solution to Leetcode 323"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

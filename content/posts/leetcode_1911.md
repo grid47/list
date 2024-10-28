@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1911: Maximum Alternating Subsequence Sum"
-date = "2019-08-05"
+date = "2019-08-06"
 description = "Solution to Leetcode 1911"
 tags = [
     
@@ -37,4 +37,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

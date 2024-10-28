@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 769: Max Chunks To Make Sorted"
-date = "2022-09-20"
+date = "2022-09-21"
 description = "Solution to Leetcode 769"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

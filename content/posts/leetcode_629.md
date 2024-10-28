@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 629: K Inverse Pairs Array"
-date = "2023-02-07"
+date = "2023-02-08"
 description = "Solution to Leetcode 629"
 tags = [
     
@@ -38,4 +38,9 @@ int kInversePairs(int n, int k) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

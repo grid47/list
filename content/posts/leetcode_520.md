@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 520: Detect Capital"
-date = "2023-05-27"
+date = "2023-05-28"
 description = "Solution to Leetcode 520"
 tags = [
     
@@ -34,4 +34,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

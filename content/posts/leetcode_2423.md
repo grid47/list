@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2423: Remove Letter To Equalize Frequency"
-date = "2018-03-11"
+date = "2018-03-12"
 description = "Solution to Leetcode 2423"
 tags = [
     
@@ -49,4 +49,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

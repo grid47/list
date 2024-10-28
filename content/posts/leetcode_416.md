@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 416: Partition Equal Subset Sum"
-date = "2023-09-08"
+date = "2023-09-09"
 description = "Solution to Leetcode 416"
 tags = [
     
@@ -58,4 +58,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

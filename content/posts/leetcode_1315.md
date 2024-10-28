@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1315: Sum of Nodes with Even-Valued Grandparent"
-date = "2021-03-23"
+date = "2021-03-24"
 description = "Solution to Leetcode 1315"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

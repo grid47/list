@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1261: Find Elements in a Contaminated Binary Tree"
-date = "2021-05-16"
+date = "2021-05-17"
 description = "Solution to Leetcode 1261"
 tags = [
     
@@ -58,4 +58,9 @@ public:
  * bool param_1 = obj->find(target);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

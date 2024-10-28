@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2224: Minimum Number of Operations to Convert Time"
-date = "2018-09-26"
+date = "2018-09-27"
 description = "Solution to Leetcode 2224"
 tags = [
     
@@ -37,4 +37,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 651: 4 Keys Keyboard"
-date = "2023-01-16"
+date = "2023-01-17"
 description = "Solution to Leetcode 651"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

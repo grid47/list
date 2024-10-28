@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2353: Design a Food Rating System"
-date = "2018-05-20"
+date = "2018-05-21"
 description = "Solution to Leetcode 2353"
 tags = [
     
@@ -57,4 +57,9 @@ public:
  * string param_2 = obj->highestRated(cuisine);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

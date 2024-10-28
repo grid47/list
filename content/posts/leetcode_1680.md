@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1680: Concatenation of Consecutive Binary Numbers"
-date = "2020-03-23"
+date = "2020-03-24"
 description = "Solution to Leetcode 1680"
 tags = [
     
@@ -39,4 +39,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

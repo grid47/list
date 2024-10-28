@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2658: Maximum Number of Fish in a Grid"
-date = "2017-07-19"
+date = "2017-07-20"
 description = "Solution to Leetcode 2658"
 tags = [
     
@@ -53,4 +53,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1443: Minimum Time to Collect All Apples in a Tree"
-date = "2020-11-15"
+date = "2020-11-16"
 description = "Solution to Leetcode 1443"
 tags = [
     
@@ -51,4 +51,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

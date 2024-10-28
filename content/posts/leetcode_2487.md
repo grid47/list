@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2487: Remove Nodes From Linked List"
-date = "2018-01-06"
+date = "2018-01-07"
 description = "Solution to Leetcode 2487"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 341: Flatten Nested List Iterator"
-date = "2023-11-22"
+date = "2023-11-23"
 description = "Solution to Leetcode 341"
 tags = [
     
@@ -55,4 +55,9 @@ private:
     stack<vector<NestedInteger>::iterator> begins, ends;
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

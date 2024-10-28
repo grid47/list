@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 114: Flatten Binary Tree to Linked List"
-date = "2024-07-06"
+date = "2024-07-07"
 description = "Solution to Leetcode 114"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

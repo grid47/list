@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 532: K-diff Pairs in an Array"
-date = "2023-05-15"
+date = "2023-05-16"
 description = "Solution to Leetcode 532"
 tags = [
     
@@ -37,4 +37,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

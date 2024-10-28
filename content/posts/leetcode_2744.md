@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2744: Find Maximum Number of String Pairs"
-date = "2017-04-24"
+date = "2017-04-25"
 description = "Solution to Leetcode 2744"
 tags = [
     
@@ -34,4 +34,9 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1484: Group Sold Products By The Date"
-date = "2020-10-05"
+date = "2020-10-06"
 description = "Solution to Leetcode 1484"
 tags = [
     
@@ -29,4 +29,9 @@ FROM Activities
 GROUP BY sell_date
 ORDER BY sell_date ASC;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

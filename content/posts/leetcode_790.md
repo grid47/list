@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 790: Domino and Tromino Tiling"
-date = "2022-08-30"
+date = "2022-08-31"
 description = "Solution to Leetcode 790"
 tags = [
     
@@ -39,4 +39,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 501: Find Mode in Binary Search Tree"
-date = "2023-06-15"
+date = "2023-06-16"
 description = "Solution to Leetcode 501"
 tags = [
     
@@ -65,4 +65,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

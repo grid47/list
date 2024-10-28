@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1027: Longest Arithmetic Subsequence"
-date = "2022-01-05"
+date = "2022-01-06"
 description = "Solution to Leetcode 1027"
 tags = [
     
@@ -42,4 +42,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

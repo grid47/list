@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1219: Path with Maximum Gold"
-date = "2021-06-27"
+date = "2021-06-28"
 description = "Solution to Leetcode 1219"
 tags = [
     
@@ -48,4 +48,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

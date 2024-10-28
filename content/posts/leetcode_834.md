@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 834: Sum of Distances in Tree"
-date = "2022-07-17"
+date = "2022-07-18"
 description = "Solution to Leetcode 834"
 tags = [
     
@@ -65,4 +65,9 @@ public:
 
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

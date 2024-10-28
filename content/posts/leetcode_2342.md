@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2342: Max Sum of a Pair With Equal Sum of Digits"
-date = "2018-05-31"
+date = "2018-06-01"
 description = "Solution to Leetcode 2342"
 tags = [
     
@@ -49,4 +49,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

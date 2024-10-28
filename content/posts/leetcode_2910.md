@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2910: Minimum Number of Groups to Create a Valid Assignment"
-date = "2016-11-09"
+date = "2016-11-10"
 description = "Solution to Leetcode 2910"
 tags = [
     
@@ -49,4 +49,9 @@ public:
 };
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1129: Shortest Path with Alternating Colors"
-date = "2021-09-25"
+date = "2021-09-26"
 description = "Solution to Leetcode 1129"
 tags = [
     
@@ -66,4 +66,9 @@ class Solution {
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

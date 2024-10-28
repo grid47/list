@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2212: Maximum Points in an Archery Competition"
-date = "2018-10-08"
+date = "2018-10-09"
 description = "Solution to Leetcode 2212"
 tags = [
     
@@ -68,4 +68,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

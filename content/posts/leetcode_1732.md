@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1732: Find the Highest Altitude"
-date = "2020-01-31"
+date = "2020-02-01"
 description = "Solution to Leetcode 1732"
 tags = [
     
@@ -35,4 +35,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

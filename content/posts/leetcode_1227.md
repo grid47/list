@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1227: Airplane Seat Assignment Probability"
-date = "2021-06-19"
+date = "2021-06-20"
 description = "Solution to Leetcode 1227"
 tags = [
     
@@ -30,4 +30,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2610: Convert an Array Into a 2D Array With Conditions"
-date = "2017-09-05"
+date = "2017-09-06"
 description = "Solution to Leetcode 2610"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

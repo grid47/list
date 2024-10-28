@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 211: Design Add and Search Words Data Structure"
-date = "2024-03-31"
+date = "2024-04-01"
 description = "Solution to Leetcode 211"
 tags = [
     
@@ -95,4 +95,9 @@ public:
  * bool param_2 = obj->search(word);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

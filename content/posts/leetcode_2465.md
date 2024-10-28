@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2465: Number of Distinct Averages"
-date = "2018-01-28"
+date = "2018-01-29"
 description = "Solution to Leetcode 2465"
 tags = [
     
@@ -38,4 +38,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

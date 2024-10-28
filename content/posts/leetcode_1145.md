@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1145: Binary Tree Coloring Game"
-date = "2021-09-09"
+date = "2021-09-10"
 description = "Solution to Leetcode 1145"
 tags = [
     
@@ -58,4 +58,9 @@ public:
 
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

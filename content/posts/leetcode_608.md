@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 608: Tree Node"
-date = "2023-02-28"
+date = "2023-03-01"
 description = "Solution to Leetcode 608"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

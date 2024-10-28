@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2942: Find Words Containing Character"
-date = "2016-10-08"
+date = "2016-10-09"
 description = "Solution to Leetcode 2942"
 tags = [
     
@@ -40,4 +40,9 @@ private:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 196: Delete Duplicate Emails"
-date = "2024-04-15"
+date = "2024-04-16"
 description = "Solution to Leetcode 196"
 tags = [
     
@@ -28,4 +28,9 @@ FROM Person p1, Person p2
 WHERE p1.Email = p2.Email AND
 p1.Id > p2.Id
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

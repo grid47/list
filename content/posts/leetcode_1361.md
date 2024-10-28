@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1361: Validate Binary Tree Nodes"
-date = "2021-02-05"
+date = "2021-02-06"
 description = "Solution to Leetcode 1361"
 tags = [
     
@@ -96,4 +96,9 @@ if(!uf.uni(i, rc[i]))
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 180: Consecutive Numbers"
-date = "2024-05-01"
+date = "2024-05-02"
 description = "Solution to Leetcode 180"
 tags = [
     
@@ -32,4 +32,9 @@ def consecutive_numbers(logs: pd.DataFrame) -> pd.DataFrame:
     res = e.rename(columns={'num':'ConsecutiveNums'})
     return res
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

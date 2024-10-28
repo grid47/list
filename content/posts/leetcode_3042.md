@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3042: Count Prefix and Suffix Pairs I"
-date = "2016-06-30"
+date = "2016-07-01"
 description = "Solution to Leetcode 3042"
 tags = [
     
@@ -57,4 +57,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

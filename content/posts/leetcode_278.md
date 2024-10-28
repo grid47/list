@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 278: First Bad Version"
-date = "2024-01-24"
+date = "2024-01-25"
 description = "Solution to Leetcode 278"
 tags = [
     
@@ -39,4 +39,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

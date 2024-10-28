@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1599: Maximum Profit of Operating a Centennial Wheel"
-date = "2020-06-12"
+date = "2020-06-13"
 description = "Solution to Leetcode 1599"
 tags = [
     
@@ -60,4 +60,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

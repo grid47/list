@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 560: Subarray Sum Equals K"
-date = "2023-04-17"
+date = "2023-04-18"
 description = "Solution to Leetcode 560"
 tags = [
     
@@ -43,4 +43,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

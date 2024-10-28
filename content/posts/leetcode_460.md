@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 460: LFU Cache"
-date = "2023-07-26"
+date = "2023-07-27"
 description = "Solution to Leetcode 460"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

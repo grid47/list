@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1981: Minimize the Difference Between Target and Chosen Elements"
-date = "2019-05-27"
+date = "2019-05-28"
 description = "Solution to Leetcode 1981"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2321: Maximum Score Of Spliced Array"
-date = "2018-06-21"
+date = "2018-06-22"
 description = "Solution to Leetcode 2321"
 tags = [
     
@@ -55,4 +55,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

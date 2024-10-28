@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 738: Monotone Increasing Digits"
-date = "2022-10-21"
+date = "2022-10-22"
 description = "Solution to Leetcode 738"
 tags = [
     
@@ -43,4 +43,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2358: Maximum Number of Groups Entering a Competition"
-date = "2018-05-15"
+date = "2018-05-16"
 description = "Solution to Leetcode 2358"
 tags = [
     
@@ -50,4 +50,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2043: Simple Bank System"
-date = "2019-03-26"
+date = "2019-03-27"
 description = "Solution to Leetcode 2043"
 tags = [
     
@@ -64,4 +64,9 @@ public:
  * bool param_3 = obj->withdraw(account,money);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

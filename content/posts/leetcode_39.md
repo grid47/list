@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 39: Combination Sum"
-date = "2024-09-19"
+date = "2024-09-20"
 description = "Solution to Leetcode 39"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

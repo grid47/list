@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 238: Product of Array Except Self"
-date = "2024-03-04"
+date = "2024-03-05"
 description = "Solution to Leetcode 238"
 tags = [
     
@@ -42,4 +42,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2373: Largest Local Values in a Matrix"
-date = "2018-04-30"
+date = "2018-05-01"
 description = "Solution to Leetcode 2373"
 tags = [
     
@@ -36,4 +36,9 @@ vector<vector<int>> largestLocal(vector<vector<int>>& g) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

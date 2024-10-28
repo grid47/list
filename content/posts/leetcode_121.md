@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 121: Best Time to Buy and Sell Stock"
-date = "2024-06-29"
+date = "2024-06-30"
 description = "Solution to Leetcode 121"
 tags = [
     
@@ -34,4 +34,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

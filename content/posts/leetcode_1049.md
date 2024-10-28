@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1049: Last Stone Weight II"
-date = "2021-12-14"
+date = "2021-12-15"
 description = "Solution to Leetcode 1049"
 tags = [
     
@@ -43,4 +43,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

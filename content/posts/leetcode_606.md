@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 606: Construct String from Binary Tree"
-date = "2023-03-02"
+date = "2023-03-03"
 description = "Solution to Leetcode 606"
 tags = [
     
@@ -47,4 +47,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

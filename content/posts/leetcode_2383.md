@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2383: Minimum Hours of Training to Win a Competition"
-date = "2018-04-20"
+date = "2018-04-21"
 description = "Solution to Leetcode 2383"
 tags = [
     
@@ -47,4 +47,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

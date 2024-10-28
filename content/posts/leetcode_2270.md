@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2270: Number of Ways to Split Array"
-date = "2018-08-11"
+date = "2018-08-12"
 description = "Solution to Leetcode 2270"
 tags = [
     
@@ -44,4 +44,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

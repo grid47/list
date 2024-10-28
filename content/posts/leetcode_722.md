@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 722: Remove Comments"
-date = "2022-11-06"
+date = "2022-11-07"
 description = "Solution to Leetcode 722"
 tags = [
     
@@ -61,4 +61,9 @@ public:
 /* */
 // */ --- //
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

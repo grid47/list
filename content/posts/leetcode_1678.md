@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1678: Goal Parser Interpretation"
-date = "2020-03-25"
+date = "2020-03-26"
 description = "Solution to Leetcode 1678"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 947: Most Stones Removed with Same Row or Column"
-date = "2022-03-26"
+date = "2022-03-27"
 description = "Solution to Leetcode 947"
 tags = [
     
@@ -72,4 +72,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

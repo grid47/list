@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2483: Minimum Penalty for a Shop"
-date = "2018-01-10"
+date = "2018-01-11"
 description = "Solution to Leetcode 2483"
 tags = [
     
@@ -53,4 +53,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

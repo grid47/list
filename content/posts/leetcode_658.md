@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 658: Find K Closest Elements"
-date = "2023-01-09"
+date = "2023-01-10"
 description = "Solution to Leetcode 658"
 tags = [
     
@@ -37,4 +37,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

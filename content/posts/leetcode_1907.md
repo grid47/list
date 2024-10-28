@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1907: Count Salary Categories"
-date = "2019-08-09"
+date = "2019-08-10"
 description = "Solution to Leetcode 1907"
 tags = [
     
@@ -28,4 +28,9 @@ SELECT 'Average Salary', SUM(income >= 20000 AND income <= 50000) FROM Accounts
 UNION
 SELECT 'High Salary', SUM(income > 50000) FROM Accounts;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1267: Count Servers that Communicate"
-date = "2021-05-10"
+date = "2021-05-11"
 description = "Solution to Leetcode 1267"
 tags = [
     
@@ -50,4 +50,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

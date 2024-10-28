@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1033: Moving Stones Until Consecutive"
-date = "2021-12-30"
+date = "2021-12-31"
 description = "Solution to Leetcode 1033"
 tags = [
     
@@ -36,4 +36,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

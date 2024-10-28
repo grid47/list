@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1879: Minimum XOR Sum of Two Arrays"
-date = "2019-09-06"
+date = "2019-09-07"
 description = "Solution to Leetcode 1879"
 tags = [
     
@@ -53,4 +53,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

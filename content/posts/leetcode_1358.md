@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1358: Number of Substrings Containing All Three Characters"
-date = "2021-02-08"
+date = "2021-02-09"
 description = "Solution to Leetcode 1358"
 tags = [
     
@@ -44,4 +44,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

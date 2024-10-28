@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 931: Minimum Falling Path Sum"
-date = "2022-04-11"
+date = "2022-04-12"
 description = "Solution to Leetcode 931"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

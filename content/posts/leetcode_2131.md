@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2131: Longest Palindrome by Concatenating Two Letter Words"
-date = "2018-12-28"
+date = "2018-12-29"
 description = "Solution to Leetcode 2131"
 tags = [
     
@@ -55,4 +55,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

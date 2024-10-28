@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1584: Min Cost to Connect All Points"
-date = "2020-06-27"
+date = "2020-06-28"
 description = "Solution to Leetcode 1584"
 tags = [
     
@@ -87,4 +87,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2271: Maximum White Tiles Covered by a Carpet"
-date = "2018-08-10"
+date = "2018-08-11"
 description = "Solution to Leetcode 2271"
 tags = [
     
@@ -48,4 +48,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

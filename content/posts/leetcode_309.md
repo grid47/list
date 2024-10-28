@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 309: Best Time to Buy and Sell Stock with Cooldown"
-date = "2023-12-24"
+date = "2023-12-25"
 description = "Solution to Leetcode 309"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

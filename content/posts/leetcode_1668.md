@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1668: Maximum Repeating Substring"
-date = "2020-04-04"
+date = "2020-04-05"
 description = "Solution to Leetcode 1668"
 tags = [
     
@@ -36,4 +36,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

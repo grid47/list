@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 756: Pyramid Transition Matrix"
-date = "2022-10-03"
+date = "2022-10-04"
 description = "Solution to Leetcode 756"
 tags = [
     
@@ -50,4 +50,9 @@ public:
   }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

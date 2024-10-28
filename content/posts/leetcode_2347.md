@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2347: Best Poker Hand"
-date = "2018-05-26"
+date = "2018-05-27"
 description = "Solution to Leetcode 2347"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

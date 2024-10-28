@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 510: Inorder Successor in BST II"
-date = "2023-06-06"
+date = "2023-06-07"
 description = "Solution to Leetcode 510"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

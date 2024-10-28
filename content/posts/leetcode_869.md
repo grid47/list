@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 869: Reordered Power of 2"
-date = "2022-06-12"
+date = "2022-06-13"
 description = "Solution to Leetcode 869"
 tags = [
     
@@ -38,4 +38,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

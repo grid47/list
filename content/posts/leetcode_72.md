@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 72: Edit Distance"
-date = "2024-08-17"
+date = "2024-08-18"
 description = "Solution to Leetcode 72"
 tags = [
     
@@ -49,4 +49,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1791: Find Center of Star Graph"
-date = "2019-12-03"
+date = "2019-12-04"
 description = "Solution to Leetcode 1791"
 tags = [
     
@@ -29,4 +29,9 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 497: Random Point in Non-overlapping Rectangles"
-date = "2023-06-19"
+date = "2023-06-20"
 description = "Solution to Leetcode 497"
 tags = [
     
@@ -56,4 +56,9 @@ public:
  * vector<int> param_1 = obj->pick();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

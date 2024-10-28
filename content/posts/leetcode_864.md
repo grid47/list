@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 864: Shortest Path to Get All Keys"
-date = "2022-06-17"
+date = "2022-06-18"
 description = "Solution to Leetcode 864"
 tags = [
     
@@ -68,4 +68,9 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

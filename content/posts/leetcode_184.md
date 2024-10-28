@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 184: Department Highest Salary"
-date = "2024-04-27"
+date = "2024-04-28"
 description = "Solution to Leetcode 184"
 tags = [
     
@@ -31,4 +31,9 @@ WHERE E.DepartmentId = D.id
     AND (DepartmentId, Salary) IN
     (SELECT DepartmentId, max(Salary) AS MAX FROM Employee GROUP BY DepartmentId);
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

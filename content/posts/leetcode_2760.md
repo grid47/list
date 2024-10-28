@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2760: Longest Even Odd Subarray With Threshold"
-date = "2017-04-08"
+date = "2017-04-09"
 description = "Solution to Leetcode 2760"
 tags = [
     
@@ -39,4 +39,9 @@ public:
   }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

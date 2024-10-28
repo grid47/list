@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 808: Soup Servings"
-date = "2022-08-12"
+date = "2022-08-13"
 description = "Solution to Leetcode 808"
 tags = [
     
@@ -40,4 +40,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

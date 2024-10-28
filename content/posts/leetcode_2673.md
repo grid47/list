@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2673: Make Costs of Paths Equal in a Binary Tree"
-date = "2017-07-04"
+date = "2017-07-05"
 description = "Solution to Leetcode 2673"
 tags = [
     
@@ -35,4 +35,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

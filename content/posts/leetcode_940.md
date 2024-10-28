@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 940: Distinct Subsequences II"
-date = "2022-04-02"
+date = "2022-04-03"
 description = "Solution to Leetcode 940"
 tags = [
     
@@ -33,4 +33,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

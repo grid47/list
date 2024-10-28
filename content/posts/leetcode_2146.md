@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2146: K Highest Ranked Items Within a Price Range"
-date = "2018-12-13"
+date = "2018-12-14"
 description = "Solution to Leetcode 2146"
 tags = [
     
@@ -93,4 +93,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

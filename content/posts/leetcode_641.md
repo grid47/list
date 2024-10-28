@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 641: Design Circular Deque"
-date = "2023-01-26"
+date = "2023-01-27"
 description = "Solution to Leetcode 641"
 tags = [
     
@@ -104,4 +104,9 @@ public:
  * bool param_8 = obj->isFull();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

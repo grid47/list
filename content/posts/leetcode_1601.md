@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1601: Maximum Number of Achievable Transfer Requests"
-date = "2020-06-10"
+date = "2020-06-11"
 description = "Solution to Leetcode 1601"
 tags = [
     
@@ -51,4 +51,9 @@ public:
 
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

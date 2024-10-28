@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1926: Nearest Exit from Entrance in Maze"
-date = "2019-07-21"
+date = "2019-07-22"
 description = "Solution to Leetcode 1926"
 tags = [
     
@@ -56,4 +56,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

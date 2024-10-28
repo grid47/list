@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1472: Design Browser History"
-date = "2020-10-17"
+date = "2020-10-18"
 description = "Solution to Leetcode 1472"
 tags = [
     
@@ -64,4 +64,9 @@ public:
  * string param_3 = obj->forward(steps);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 623: Add One Row to Tree"
-date = "2023-02-13"
+date = "2023-02-14"
 description = "Solution to Leetcode 623"
 tags = [
     
@@ -60,4 +60,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

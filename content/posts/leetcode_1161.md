@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1161: Maximum Level Sum of a Binary Tree"
-date = "2021-08-24"
+date = "2021-08-25"
 description = "Solution to Leetcode 1161"
 tags = [
     
@@ -61,4 +61,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

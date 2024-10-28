@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1353: Maximum Number of Events That Can Be Attended"
-date = "2021-02-13"
+date = "2021-02-14"
 description = "Solution to Leetcode 1353"
 tags = [
     
@@ -54,4 +54,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

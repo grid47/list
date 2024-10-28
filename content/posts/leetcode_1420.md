@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons"
-date = "2020-12-08"
+date = "2020-12-09"
 description = "Solution to Leetcode 1420"
 tags = [
     
@@ -51,4 +51,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

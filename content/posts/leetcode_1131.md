@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1131: Maximum of Absolute Value Expression"
-date = "2021-09-23"
+date = "2021-09-24"
 description = "Solution to Leetcode 1131"
 tags = [
     
@@ -40,4 +40,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

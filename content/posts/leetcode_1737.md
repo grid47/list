@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1737: Change Minimum Characters to Satisfy One of Three Conditions"
-date = "2020-01-26"
+date = "2020-01-27"
 description = "Solution to Leetcode 1737"
 tags = [
     
@@ -52,4 +52,9 @@ res = min(res, n - cb[i] + ca[i]);
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

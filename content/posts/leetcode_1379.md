@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree"
-date = "2021-01-18"
+date = "2021-01-19"
 description = "Solution to Leetcode 1379"
 tags = [
     
@@ -47,4 +47,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

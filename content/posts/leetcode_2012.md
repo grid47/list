@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2012: Sum of Beauty in the Array"
-date = "2019-04-26"
+date = "2019-04-27"
 description = "Solution to Leetcode 2012"
 tags = [
     
@@ -52,4 +52,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

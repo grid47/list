@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 421: Maximum XOR of Two Numbers in an Array"
-date = "2023-09-03"
+date = "2023-09-04"
 description = "Solution to Leetcode 421"
 tags = [
     
@@ -65,4 +65,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

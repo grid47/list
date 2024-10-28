@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2327: Number of People Aware of a Secret"
-date = "2018-06-15"
+date = "2018-06-16"
 description = "Solution to Leetcode 2327"
 tags = [
     
@@ -40,4 +40,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

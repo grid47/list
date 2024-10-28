@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1945: Sum of Digits of String After Convert"
-date = "2019-07-02"
+date = "2019-07-03"
 description = "Solution to Leetcode 1945"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1854: Maximum Population Year"
-date = "2019-10-01"
+date = "2019-10-02"
 description = "Solution to Leetcode 1854"
 tags = [
     
@@ -48,4 +48,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

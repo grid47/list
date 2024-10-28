@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1344: Angle Between Hands of a Clock"
-date = "2021-02-22"
+date = "2021-02-23"
 description = "Solution to Leetcode 1344"
 tags = [
     
@@ -35,4 +35,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

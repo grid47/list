@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2733: Neither Minimum nor Maximum"
-date = "2017-05-05"
+date = "2017-05-06"
 description = "Solution to Leetcode 2733"
 tags = [
     
@@ -35,4 +35,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 87: Scramble String"
-date = "2024-08-02"
+date = "2024-08-03"
 description = "Solution to Leetcode 87"
 tags = [
     
@@ -59,4 +59,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

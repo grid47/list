@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 946: Validate Stack Sequences"
-date = "2022-03-27"
+date = "2022-03-28"
 description = "Solution to Leetcode 946"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

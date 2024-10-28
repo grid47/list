@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2304: Minimum Path Cost in a Grid"
-date = "2018-07-08"
+date = "2018-07-09"
 description = "Solution to Leetcode 2304"
 tags = [
     
@@ -58,4 +58,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

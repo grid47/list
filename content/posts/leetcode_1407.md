@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1407: Top Travellers"
-date = "2020-12-21"
+date = "2020-12-22"
 description = "Solution to Leetcode 1407"
 tags = [
     
@@ -30,4 +30,9 @@ ON u.id = r.user_id
 GROUP BY u.id
 ORDER BY travelled_distance DESC, name ASC;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1326: Minimum Number of Taps to Open to Water a Garden"
-date = "2021-03-12"
+date = "2021-03-13"
 description = "Solution to Leetcode 1326"
 tags = [
     
@@ -78,4 +78,9 @@ public:
     // {{-1, 1}, {-1, 3}, {1, 3}, {2, 6}, {3, 3}, {4, 6}, {6, 6}, {6, 8}}
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

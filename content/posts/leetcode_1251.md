@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1251: Average Selling Price"
-date = "2021-05-26"
+date = "2021-05-27"
 description = "Solution to Leetcode 1251"
 tags = [
     
@@ -29,4 +29,9 @@ LEFT JOIN UnitsSold u
 ON p.product_id = u.product_id AND p.start_date <= u.purchase_date AND u.purchase_date <= p.end_date
 GROUP BY p.product_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

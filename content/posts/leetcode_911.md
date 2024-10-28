@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 911: Online Election"
-date = "2022-05-01"
+date = "2022-05-02"
 description = "Solution to Leetcode 911"
 tags = [
     
@@ -46,4 +46,9 @@ public:
  * int param_1 = obj->q(t);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

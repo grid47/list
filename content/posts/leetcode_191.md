@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 191: Number of 1 Bits"
-date = "2024-04-20"
+date = "2024-04-21"
 description = "Solution to Leetcode 191"
 tags = [
     
@@ -34,4 +34,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

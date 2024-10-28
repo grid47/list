@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 868: Binary Gap"
-date = "2022-06-13"
+date = "2022-06-14"
 description = "Solution to Leetcode 868"
 tags = [
     
@@ -36,4 +36,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

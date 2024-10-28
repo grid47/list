@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 99: Recover Binary Search Tree"
-date = "2024-07-21"
+date = "2024-07-22"
 description = "Solution to Leetcode 99"
 tags = [
     
@@ -42,4 +42,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

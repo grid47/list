@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 447: Number of Boomerangs"
-date = "2023-08-08"
+date = "2023-08-09"
 description = "Solution to Leetcode 447"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

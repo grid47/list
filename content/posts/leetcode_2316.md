@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2316: Count Unreachable Pairs of Nodes in an Undirected Graph"
-date = "2018-06-26"
+date = "2018-06-27"
 description = "Solution to Leetcode 2316"
 tags = [
     
@@ -60,4 +60,9 @@ public:
     
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

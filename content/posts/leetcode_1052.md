@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1052: Grumpy Bookstore Owner"
-date = "2021-12-11"
+date = "2021-12-12"
 description = "Solution to Leetcode 1052"
 tags = [
     
@@ -53,4 +53,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

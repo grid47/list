@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 935: Knight Dialer"
-date = "2022-04-07"
+date = "2022-04-08"
 description = "Solution to Leetcode 935"
 tags = [
     
@@ -60,4 +60,9 @@ long long path(int i, int j, int n, vector<vector<vector<long long>>> &mem) {
 
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

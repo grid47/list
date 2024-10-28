@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2475: Number of Unequal Triplets in Array"
-date = "2018-01-18"
+date = "2018-01-19"
 description = "Solution to Leetcode 2475"
 tags = [
     
@@ -38,4 +38,9 @@ int unequalTriplets(vector<int>& nums) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

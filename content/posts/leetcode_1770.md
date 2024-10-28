@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1770: Maximum Score from Performing Multiplication Operations"
-date = "2019-12-24"
+date = "2019-12-25"
 description = "Solution to Leetcode 1770"
 tags = [
     
@@ -51,4 +51,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

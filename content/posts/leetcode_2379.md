@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2379: Minimum Recolors to Get K Consecutive Black Blocks"
-date = "2018-04-24"
+date = "2018-04-25"
 description = "Solution to Leetcode 2379"
 tags = [
     
@@ -36,4 +36,9 @@ int minimumRecolors(string blocks, int k) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

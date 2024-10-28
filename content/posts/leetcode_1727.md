@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1727: Largest Submatrix With Rearrangements"
-date = "2020-02-05"
+date = "2020-02-06"
 description = "Solution to Leetcode 1727"
 tags = [
     
@@ -51,4 +51,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2855: Minimum Right Shifts to Sort the Array"
-date = "2017-01-03"
+date = "2017-01-04"
 description = "Solution to Leetcode 2855"
 tags = [
     
@@ -40,4 +40,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

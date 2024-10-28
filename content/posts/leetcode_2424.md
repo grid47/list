@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2424: Longest Uploaded Prefix"
-date = "2018-03-10"
+date = "2018-03-11"
 description = "Solution to Leetcode 2424"
 tags = [
     
@@ -48,4 +48,9 @@ public:
  * int param_2 = obj->longest();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

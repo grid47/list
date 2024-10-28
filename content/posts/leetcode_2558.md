@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2558: Take Gifts From the Richest Pile"
-date = "2017-10-27"
+date = "2017-10-28"
 description = "Solution to Leetcode 2558"
 tags = [
     
@@ -35,4 +35,9 @@ public:
   }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

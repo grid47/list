@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2349: Design a Number Container System"
-date = "2018-05-24"
+date = "2018-05-25"
 description = "Solution to Leetcode 2349"
 tags = [
     
@@ -57,4 +57,9 @@ public:
  * int param_2 = obj->find(number);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

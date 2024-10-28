@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2708: Maximum Strength of a Group"
-date = "2017-05-30"
+date = "2017-05-31"
 description = "Solution to Leetcode 2708"
 tags = [
     
@@ -67,4 +67,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

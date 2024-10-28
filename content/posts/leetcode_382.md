@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 382: Linked List Random Node"
-date = "2023-10-12"
+date = "2023-10-13"
 description = "Solution to Leetcode 382"
 tags = [
     
@@ -57,4 +57,9 @@ public:
  * int param_1 = obj->getRandom();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

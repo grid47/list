@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 630: Course Schedule III"
-date = "2023-02-06"
+date = "2023-02-07"
 description = "Solution to Leetcode 630"
 tags = [
     
@@ -43,4 +43,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

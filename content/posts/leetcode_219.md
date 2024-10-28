@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 219: Contains Duplicate II"
-date = "2024-03-23"
+date = "2024-03-24"
 description = "Solution to Leetcode 219"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

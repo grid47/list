@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 934: Shortest Bridge"
-date = "2022-04-08"
+date = "2022-04-09"
 description = "Solution to Leetcode 934"
 tags = [
     
@@ -72,4 +72,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

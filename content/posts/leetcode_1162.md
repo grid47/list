@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1162: As Far from Land as Possible"
-date = "2021-08-23"
+date = "2021-08-24"
 description = "Solution to Leetcode 1162"
 tags = [
     
@@ -55,4 +55,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

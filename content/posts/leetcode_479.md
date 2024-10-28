@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 479: Largest Palindrome Product"
-date = "2023-07-07"
+date = "2023-07-08"
 description = "Solution to Leetcode 479"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

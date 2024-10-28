@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2562: Find the Array Concatenation Value"
-date = "2017-10-23"
+date = "2017-10-24"
 description = "Solution to Leetcode 2562"
 tags = [
     
@@ -35,4 +35,9 @@ public:
   }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

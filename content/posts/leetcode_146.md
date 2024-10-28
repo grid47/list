@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 146: LRU Cache"
-date = "2024-06-04"
+date = "2024-06-05"
 description = "Solution to Leetcode 146"
 tags = [
     
@@ -63,4 +63,9 @@ public:
  * obj->put(key,value);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 860: Lemonade Change"
-date = "2022-06-21"
+date = "2022-06-22"
 description = "Solution to Leetcode 860"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

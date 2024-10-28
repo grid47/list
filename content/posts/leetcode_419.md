@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 419: Battleships in a Board"
-date = "2023-09-05"
+date = "2023-09-06"
 description = "Solution to Leetcode 419"
 tags = [
     
@@ -37,4 +37,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

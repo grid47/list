@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1620: Coordinate With Maximum Network Quality"
-date = "2020-05-22"
+date = "2020-05-23"
 description = "Solution to Leetcode 1620"
 tags = [
     
@@ -56,4 +56,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 102: Binary Tree Level Order Traversal"
-date = "2024-07-18"
+date = "2024-07-19"
 description = "Solution to Leetcode 102"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

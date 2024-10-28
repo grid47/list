@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 996: Number of Squareful Arrays"
-date = "2022-02-05"
+date = "2022-02-06"
 description = "Solution to Leetcode 996"
 tags = [
     
@@ -51,4 +51,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

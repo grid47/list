@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1084: Sales Analysis III"
-date = "2021-11-09"
+date = "2021-11-10"
 description = "Solution to Leetcode 1084"
 tags = [
     
@@ -31,4 +31,9 @@ GROUP BY p.product_id
 HAVING MIN(sale_date) >= CAST('2019-01-01' AS DATE) AND
        MAX(sale_date) <= CAST('2019-03-31' AS DATE);
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

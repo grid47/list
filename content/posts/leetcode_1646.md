@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1646: Get Maximum in Generated Array"
-date = "2020-04-26"
+date = "2020-04-27"
 description = "Solution to Leetcode 1646"
 tags = [
     
@@ -39,4 +39,9 @@ class Solution {
     }
 }
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

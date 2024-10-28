@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 956: Tallest Billboard"
-date = "2022-03-17"
+date = "2022-03-18"
 description = "Solution to Leetcode 956"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

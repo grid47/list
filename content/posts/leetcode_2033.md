@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2033: Minimum Operations to Make a Uni-Value Grid"
-date = "2019-04-05"
+date = "2019-04-06"
 description = "Solution to Leetcode 2033"
 tags = [
     
@@ -50,4 +50,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 528: Random Pick with Weight"
-date = "2023-05-19"
+date = "2023-05-20"
 description = "Solution to Leetcode 528"
 tags = [
     
@@ -57,4 +57,9 @@ class Solution {
  * int param_1 = obj->pickIndex();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

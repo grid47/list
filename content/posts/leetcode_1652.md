@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1652: Defuse the Bomb"
-date = "2020-04-20"
+date = "2020-04-21"
 description = "Solution to Leetcode 1652"
 tags = [
     
@@ -57,4 +57,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

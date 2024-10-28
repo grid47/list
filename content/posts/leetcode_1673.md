@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1673: Find the Most Competitive Subsequence"
-date = "2020-03-30"
+date = "2020-03-31"
 description = "Solution to Leetcode 1673"
 tags = [
     
@@ -44,4 +44,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

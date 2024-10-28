@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1177: Can Make Palindrome from Substring"
-date = "2021-08-08"
+date = "2021-08-09"
 description = "Solution to Leetcode 1177"
 tags = [
     
@@ -49,4 +49,9 @@ int cnt = __builtin_popcount(pt[v[1]+1] ^ pt[v[0]]);
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

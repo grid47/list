@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1007: Minimum Domino Rotations For Equal Row"
-date = "2022-01-25"
+date = "2022-01-26"
 description = "Solution to Leetcode 1007"
 tags = [
     
@@ -55,4 +55,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

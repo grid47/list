@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 212: Word Search II"
-date = "2024-03-30"
+date = "2024-03-31"
 description = "Solution to Leetcode 212"
 tags = [
     
@@ -89,4 +89,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

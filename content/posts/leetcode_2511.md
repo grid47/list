@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2511: Maximum Enemy Forts That Can Be Captured"
-date = "2017-12-13"
+date = "2017-12-14"
 description = "Solution to Leetcode 2511"
 tags = [
     
@@ -36,4 +36,9 @@ int captureForts(vector<int>& forts) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

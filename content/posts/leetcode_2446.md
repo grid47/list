@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2446: Determine if Two Events Have Conflict"
-date = "2018-02-16"
+date = "2018-02-17"
 description = "Solution to Leetcode 2446"
 tags = [
     
@@ -30,4 +30,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

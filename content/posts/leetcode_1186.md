@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1186: Maximum Subarray Sum with One Deletion"
-date = "2021-07-30"
+date = "2021-07-31"
 description = "Solution to Leetcode 1186"
 tags = [
     
@@ -50,4 +50,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

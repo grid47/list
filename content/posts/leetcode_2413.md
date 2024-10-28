@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2413: Smallest Even Multiple"
-date = "2018-03-21"
+date = "2018-03-22"
 description = "Solution to Leetcode 2413"
 tags = [
     
@@ -29,4 +29,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

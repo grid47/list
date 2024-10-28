@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 883: Projection Area of 3D Shapes"
-date = "2022-05-29"
+date = "2022-05-30"
 description = "Solution to Leetcode 883"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

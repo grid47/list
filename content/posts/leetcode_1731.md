@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1731: The Number of Employees Which Report to Each Employee"
-date = "2020-02-01"
+date = "2020-02-02"
 description = "Solution to Leetcode 1731"
 tags = [
     
@@ -30,4 +30,9 @@ ON e2.reports_to = e1.employee_id
 GROUP BY e1.employee_id
 ORDER BY e1.employee_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

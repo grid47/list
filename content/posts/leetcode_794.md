@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 794: Valid Tic-Tac-Toe State"
-date = "2022-08-26"
+date = "2022-08-27"
 description = "Solution to Leetcode 794"
 tags = [
     
@@ -58,4 +58,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

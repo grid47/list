@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1996: The Number of Weak Characters in the Game"
-date = "2019-05-12"
+date = "2019-05-13"
 description = "Solution to Leetcode 1996"
 tags = [
     
@@ -46,4 +46,9 @@ class Solution {
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

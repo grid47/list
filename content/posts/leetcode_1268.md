@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1268: Search Suggestions System"
-date = "2021-05-09"
+date = "2021-05-10"
 description = "Solution to Leetcode 1268"
 tags = [
     
@@ -47,4 +47,9 @@ for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

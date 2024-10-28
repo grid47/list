@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1639: Number of Ways to Form a Target String Given a Dictionary"
-date = "2020-05-03"
+date = "2020-05-04"
 description = "Solution to Leetcode 1639"
 tags = [
     
@@ -59,4 +59,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

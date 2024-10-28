@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 440: K-th Smallest in Lexicographical Order"
-date = "2023-08-15"
+date = "2023-08-16"
 description = "Solution to Leetcode 440"
 tags = [
     
@@ -53,4 +53,9 @@ class Solution {
   }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

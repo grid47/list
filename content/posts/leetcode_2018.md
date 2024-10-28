@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2018: Check if Word Can Be Placed In Crossword"
-date = "2019-04-20"
+date = "2019-04-21"
 description = "Solution to Leetcode 2018"
 tags = [
     
@@ -69,4 +69,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

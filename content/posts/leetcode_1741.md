@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1741: Find Total Time Spent by Each Employee"
-date = "2020-01-22"
+date = "2020-01-23"
 description = "Solution to Leetcode 1741"
 tags = [
     
@@ -30,4 +30,9 @@ SELECT
 FROM Employees
 GROUP BY day, emp_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

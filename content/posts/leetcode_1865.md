@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1865: Finding Pairs With a Certain Sum"
-date = "2019-09-20"
+date = "2019-09-21"
 description = "Solution to Leetcode 1865"
 tags = [
     
@@ -60,4 +60,9 @@ public:
  * int param_2 = obj->count(tot);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

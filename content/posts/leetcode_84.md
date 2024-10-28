@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 84: Largest Rectangle in Histogram"
-date = "2024-08-05"
+date = "2024-08-06"
 description = "Solution to Leetcode 84"
 tags = [
     
@@ -70,4 +70,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

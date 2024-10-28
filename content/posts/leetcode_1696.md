@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1696: Jump Game VI"
-date = "2020-03-07"
+date = "2020-03-08"
 description = "Solution to Leetcode 1696"
 tags = [
     
@@ -44,4 +44,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

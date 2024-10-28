@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 873: Length of Longest Fibonacci Subsequence"
-date = "2022-06-08"
+date = "2022-06-09"
 description = "Solution to Leetcode 873"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

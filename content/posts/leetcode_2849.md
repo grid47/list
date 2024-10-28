@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2849: Determine if a Cell Is Reachable at a Given Time"
-date = "2017-01-09"
+date = "2017-01-10"
 description = "Solution to Leetcode 2849"
 tags = [
     
@@ -34,4 +34,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 725: Split Linked List in Parts"
-date = "2022-11-03"
+date = "2022-11-04"
 description = "Solution to Leetcode 725"
 tags = [
     
@@ -71,4 +71,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

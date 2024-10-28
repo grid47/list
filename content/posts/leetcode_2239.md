@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2239: Find Closest Number to Zero"
-date = "2018-09-11"
+date = "2018-09-12"
 description = "Solution to Leetcode 2239"
 tags = [
     
@@ -31,4 +31,9 @@ public:
   }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

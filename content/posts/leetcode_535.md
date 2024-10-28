@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 535: Encode and Decode TinyURL"
-date = "2023-05-12"
+date = "2023-05-13"
 description = "Solution to Leetcode 535"
 tags = [
     
@@ -54,4 +54,9 @@ public:
 // Solution solution;
 // solution.decode(solution.encode(url));
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

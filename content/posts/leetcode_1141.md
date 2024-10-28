@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1141: User Activity for the Past 30 Days I"
-date = "2021-09-13"
+date = "2021-09-14"
 description = "Solution to Leetcode 1141"
 tags = [
     
@@ -28,4 +28,9 @@ FROM Activity
 WHERE activity_date > "2019-06-27" AND activity_date <= "2019-07-27"
 GROUP BY activity_date;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

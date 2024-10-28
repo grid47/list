@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1795: Rearrange Products Table"
-date = "2019-11-29"
+date = "2019-11-30"
 description = "Solution to Leetcode 1795"
 tags = [
     
@@ -32,4 +32,9 @@ UNION
 SELECT product_id, 'store3', store3 AS price FROM Products
 WHERE store3 IS NOT NULL;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

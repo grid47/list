@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 357: Count Numbers with Unique Digits"
-date = "2023-11-06"
+date = "2023-11-07"
 description = "Solution to Leetcode 357"
 tags = [
     
@@ -39,4 +39,9 @@ class Solution {
     }
 }
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

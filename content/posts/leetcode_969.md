@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 969: Pancake Sorting"
-date = "2022-03-04"
+date = "2022-03-05"
 description = "Solution to Leetcode 969"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

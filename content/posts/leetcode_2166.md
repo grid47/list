@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2166: Design Bitset"
-date = "2018-11-23"
+date = "2018-11-24"
 description = "Solution to Leetcode 2166"
 tags = [
     
@@ -79,4 +79,9 @@ public:
  * string param_7 = obj->toString();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

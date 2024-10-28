@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 587: Erect the Fence"
-date = "2023-03-21"
+date = "2023-03-22"
 description = "Solution to Leetcode 587"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

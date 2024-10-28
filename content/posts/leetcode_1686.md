@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1686: Stone Game VI"
-date = "2020-03-17"
+date = "2020-03-18"
 description = "Solution to Leetcode 1686"
 tags = [
     
@@ -57,4 +57,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

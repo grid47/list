@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 556: Next Greater Element III"
-date = "2023-04-21"
+date = "2023-04-22"
 description = "Solution to Leetcode 556"
 tags = [
     
@@ -32,4 +32,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 938: Range Sum of BST"
-date = "2022-04-04"
+date = "2022-04-05"
 description = "Solution to Leetcode 938"
 tags = [
     
@@ -47,4 +47,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1542: Find Longest Awesome Substring"
-date = "2020-08-08"
+date = "2020-08-09"
 description = "Solution to Leetcode 1542"
 tags = [
     
@@ -49,4 +49,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

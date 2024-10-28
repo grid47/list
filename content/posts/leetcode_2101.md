@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2101: Detonate the Maximum Bombs"
-date = "2019-01-27"
+date = "2019-01-28"
 description = "Solution to Leetcode 2101"
 tags = [
     
@@ -65,4 +65,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

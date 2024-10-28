@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1845: Seat Reservation Manager"
-date = "2019-10-10"
+date = "2019-10-11"
 description = "Solution to Leetcode 1845"
 tags = [
     
@@ -60,4 +60,9 @@ public:
  * obj->unreserve(seatNumber);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

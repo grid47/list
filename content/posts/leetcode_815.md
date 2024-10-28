@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 815: Bus Routes"
-date = "2022-08-05"
+date = "2022-08-06"
 description = "Solution to Leetcode 815"
 tags = [
     
@@ -68,4 +68,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

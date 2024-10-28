@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 877: Stone Game"
-date = "2022-06-04"
+date = "2022-06-05"
 description = "Solution to Leetcode 877"
 tags = [
     
@@ -45,4 +45,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 620: Not Boring Movies"
-date = "2023-02-16"
+date = "2023-02-17"
 description = "Solution to Leetcode 620"
 tags = [
     
@@ -25,4 +25,9 @@ series = ["Leetcode"]
 # Write your MySQL query statement below
 select * from Cinema c where MOD(c.id, 2) = 1 and c.description != "boring" order by c.rating desc
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 919: Complete Binary Tree Inserter"
-date = "2022-04-23"
+date = "2022-04-24"
 description = "Solution to Leetcode 919"
 tags = [
     
@@ -65,4 +65,9 @@ public:
  * TreeNode* param_2 = obj->get_root();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

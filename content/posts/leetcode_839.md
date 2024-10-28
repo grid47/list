@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 839: Similar String Groups"
-date = "2022-07-12"
+date = "2022-07-13"
 description = "Solution to Leetcode 839"
 tags = [
     
@@ -71,4 +71,9 @@ int numSimilarGroups(vector<string>& A) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1068: Product Sales Analysis I"
-date = "2021-11-25"
+date = "2021-11-26"
 description = "Solution to Leetcode 1068"
 tags = [
     
@@ -28,4 +28,9 @@ FROM Sales b
 LEFT JOIN Product a
 ON a.product_id = b.product_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

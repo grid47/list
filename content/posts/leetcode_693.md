@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 693: Binary Number with Alternating Bits"
-date = "2022-12-05"
+date = "2022-12-06"
 description = "Solution to Leetcode 693"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

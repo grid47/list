@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 896: Monotonic Array"
-date = "2022-05-16"
+date = "2022-05-17"
 description = "Solution to Leetcode 896"
 tags = [
     
@@ -32,4 +32,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 118: Pascal's Triangle"
-date = "2024-07-02"
+date = "2024-07-03"
 description = "Solution to Leetcode 118"
 tags = [
     
@@ -39,4 +39,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

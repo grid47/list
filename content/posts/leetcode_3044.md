@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3044: Most Frequent Prime"
-date = "2016-06-28"
+date = "2016-06-29"
 description = "Solution to Leetcode 3044"
 tags = [
     
@@ -62,4 +62,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

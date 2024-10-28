@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1146: Snapshot Array"
-date = "2021-09-08"
+date = "2021-09-09"
 description = "Solution to Leetcode 1146"
 tags = [
     
@@ -60,4 +60,9 @@ public:
  * int param_3 = obj->get(index,snap_id);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

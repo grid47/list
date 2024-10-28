@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2564: Substring XOR Queries"
-date = "2017-10-21"
+date = "2017-10-22"
 description = "Solution to Leetcode 2564"
 tags = [
     
@@ -75,4 +75,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

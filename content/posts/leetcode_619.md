@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 619: Biggest Single Number"
-date = "2023-02-17"
+date = "2023-02-18"
 description = "Solution to Leetcode 619"
 tags = [
     
@@ -31,4 +31,9 @@ select (
     order by num desc limit 1
 ) as num;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

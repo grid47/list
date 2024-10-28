@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 540: Single Element in a Sorted Array"
-date = "2023-05-07"
+date = "2023-05-08"
 description = "Solution to Leetcode 540"
 tags = [
     
@@ -33,4 +33,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

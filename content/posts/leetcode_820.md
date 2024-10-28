@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 820: Short Encoding of Words"
-date = "2022-07-31"
+date = "2022-08-01"
 description = "Solution to Leetcode 820"
 tags = [
     
@@ -40,4 +40,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

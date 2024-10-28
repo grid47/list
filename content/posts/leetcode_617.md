@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 617: Merge Two Binary Trees"
-date = "2023-02-19"
+date = "2023-02-20"
 description = "Solution to Leetcode 617"
 tags = [
     
@@ -50,4 +50,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 700: Search in a Binary Search Tree"
-date = "2022-11-28"
+date = "2022-11-29"
 description = "Solution to Leetcode 700"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

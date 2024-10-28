@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1978: Employees Whose Manager Left the Company"
-date = "2019-05-30"
+date = "2019-05-31"
 description = "Solution to Leetcode 1978"
 tags = [
     
@@ -28,4 +28,9 @@ FROM Employees
 WHERE manager_id NOT IN (SELECT employee_id FROM Employees)
 AND salary < 30000 ORDER BY employee_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

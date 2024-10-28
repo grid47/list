@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 190: Reverse Bits"
-date = "2024-04-21"
+date = "2024-04-22"
 description = "Solution to Leetcode 190"
 tags = [
     
@@ -34,4 +34,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

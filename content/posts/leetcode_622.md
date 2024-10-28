@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 622: Design Circular Queue"
-date = "2023-02-14"
+date = "2023-02-15"
 description = "Solution to Leetcode 622"
 tags = [
     
@@ -82,4 +82,9 @@ public:
  * bool param_6 = obj->isFull();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

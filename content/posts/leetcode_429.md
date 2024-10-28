@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 429: N-ary Tree Level Order Traversal"
-date = "2023-08-26"
+date = "2023-08-27"
 description = "Solution to Leetcode 429"
 tags = [
     
@@ -64,4 +64,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

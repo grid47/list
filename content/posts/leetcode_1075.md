@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1075: Project Employees I"
-date = "2021-11-18"
+date = "2021-11-19"
 description = "Solution to Leetcode 1075"
 tags = [
     
@@ -29,4 +29,9 @@ LEFT JOIN Employee e
 ON p.employee_id = e.employee_id
 GROUP BY p.project_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

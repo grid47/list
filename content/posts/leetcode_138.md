@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 138: Copy List with Random Pointer"
-date = "2024-06-12"
+date = "2024-06-13"
 description = "Solution to Leetcode 138"
 tags = [
     
@@ -60,4 +60,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

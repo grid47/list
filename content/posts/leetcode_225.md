@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 225: Implement Stack using Queues"
-date = "2024-03-17"
+date = "2024-03-18"
 description = "Solution to Leetcode 225"
 tags = [
     
@@ -61,4 +61,9 @@ public:
  * bool param_4 = obj->empty();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

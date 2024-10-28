@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 660: Remove 9"
-date = "2023-01-07"
+date = "2023-01-08"
 description = "Solution to Leetcode 660"
 tags = [
     
@@ -49,4 +49,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

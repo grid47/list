@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 596: Classes More Than 5 Students"
-date = "2023-03-12"
+date = "2023-03-13"
 description = "Solution to Leetcode 596"
 tags = [
     
@@ -30,4 +30,9 @@ FROM
         GROUP BY class) AS TEMP
 WHERE num >= 5;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

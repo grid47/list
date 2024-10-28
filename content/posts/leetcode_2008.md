@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2008: Maximum Earnings From Taxi"
-date = "2019-04-30"
+date = "2019-05-01"
 description = "Solution to Leetcode 2008"
 tags = [
     
@@ -70,4 +70,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

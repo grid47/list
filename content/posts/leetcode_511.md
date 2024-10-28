@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 511: Game Play Analysis I"
-date = "2023-06-05"
+date = "2023-06-06"
 description = "Solution to Leetcode 511"
 tags = [
     
@@ -27,4 +27,9 @@ SELECT player_id, MIN(event_date) AS first_login
 FROM Activity
 GROUP BY player_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

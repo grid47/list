@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 789: Escape The Ghosts"
-date = "2022-08-31"
+date = "2022-09-01"
 description = "Solution to Leetcode 789"
 tags = [
     
@@ -33,4 +33,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

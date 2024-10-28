@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 954: Array of Doubled Pairs"
-date = "2022-03-19"
+date = "2022-03-20"
 description = "Solution to Leetcode 954"
 tags = [
     
@@ -48,4 +48,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 646: Maximum Length of Pair Chain"
-date = "2023-01-21"
+date = "2023-01-22"
 description = "Solution to Leetcode 646"
 tags = [
     
@@ -51,4 +51,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

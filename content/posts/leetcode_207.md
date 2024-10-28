@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 207: Course Schedule"
-date = "2024-04-04"
+date = "2024-04-05"
 description = "Solution to Leetcode 207"
 tags = [
     
@@ -66,4 +66,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

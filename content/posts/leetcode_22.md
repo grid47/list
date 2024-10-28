@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 22: Generate Parentheses"
-date = "2024-10-06"
+date = "2024-10-07"
 description = "Solution to Leetcode 22"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

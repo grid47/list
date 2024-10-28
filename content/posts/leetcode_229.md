@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 229: Majority Element II"
-date = "2024-03-13"
+date = "2024-03-14"
 description = "Solution to Leetcode 229"
 tags = [
     
@@ -62,4 +62,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

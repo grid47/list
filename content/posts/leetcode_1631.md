@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1631: Path With Minimum Effort"
-date = "2020-05-11"
+date = "2020-05-12"
 description = "Solution to Leetcode 1631"
 tags = [
     
@@ -61,4 +61,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

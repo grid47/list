@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 364: Nested List Weight Sum II"
-date = "2023-10-30"
+date = "2023-10-31"
 description = "Solution to Leetcode 364"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

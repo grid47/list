@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 828: Count Unique Characters of All Substrings of a Given String"
-date = "2022-07-23"
+date = "2022-07-24"
 description = "Solution to Leetcode 828"
 tags = [
     
@@ -47,4 +47,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

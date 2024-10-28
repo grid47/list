@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1979: Find Greatest Common Divisor of Array"
-date = "2019-05-29"
+date = "2019-05-30"
 description = "Solution to Leetcode 1979"
 tags = [
     
@@ -40,4 +40,9 @@ class Solution {
         }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1391: Check if There is a Valid Path in a Grid"
-date = "2021-01-06"
+date = "2021-01-07"
 description = "Solution to Leetcode 1391"
 tags = [
     
@@ -76,4 +76,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

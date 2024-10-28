@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1976: Number of Ways to Arrive at Destination"
-date = "2019-06-01"
+date = "2019-06-02"
 description = "Solution to Leetcode 1976"
 tags = [
     
@@ -69,4 +69,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

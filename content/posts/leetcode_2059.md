@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2059: Minimum Operations to Convert Number"
-date = "2019-03-10"
+date = "2019-03-11"
 description = "Solution to Leetcode 2059"
 tags = [
     
@@ -64,4 +64,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

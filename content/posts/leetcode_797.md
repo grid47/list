@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 797: All Paths From Source to Target"
-date = "2022-08-23"
+date = "2022-08-24"
 description = "Solution to Leetcode 797"
 tags = [
     
@@ -43,4 +43,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1797: Design Authentication Manager"
-date = "2019-11-27"
+date = "2019-11-28"
 description = "Solution to Leetcode 1797"
 tags = [
     
@@ -71,4 +71,9 @@ public:
  * int param_3 = obj->countUnexpiredTokens(currentTime);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

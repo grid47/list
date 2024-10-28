@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1424: Diagonal Traverse II"
-date = "2020-12-04"
+date = "2020-12-05"
 description = "Solution to Leetcode 1424"
 tags = [
     
@@ -48,4 +48,9 @@ public:
     But right attempt is, queueing over a map which shares same diagonals
 */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2364: Count Number of Bad Pairs"
-date = "2018-05-09"
+date = "2018-05-10"
 description = "Solution to Leetcode 2364"
 tags = [
     
@@ -32,4 +32,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

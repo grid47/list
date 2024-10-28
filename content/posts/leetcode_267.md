@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 267: Palindrome Permutation II"
-date = "2024-02-04"
+date = "2024-02-05"
 description = "Solution to Leetcode 267"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

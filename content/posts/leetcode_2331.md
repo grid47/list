@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2331: Evaluate Boolean Binary Tree"
-date = "2018-06-11"
+date = "2018-06-12"
 description = "Solution to Leetcode 2331"
 tags = [
     
@@ -47,4 +47,9 @@ return evaluateTree(root->left) && evaluateTree(root->right);
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

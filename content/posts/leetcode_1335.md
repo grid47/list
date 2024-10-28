@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1335: Minimum Difficulty of a Job Schedule"
-date = "2021-03-03"
+date = "2021-03-04"
 description = "Solution to Leetcode 1335"
 tags = [
     
@@ -54,4 +54,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

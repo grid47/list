@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2259: Remove Digit From Number to Maximize Result"
-date = "2018-08-22"
+date = "2018-08-23"
 description = "Solution to Leetcode 2259"
 tags = [
     
@@ -33,4 +33,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

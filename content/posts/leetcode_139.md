@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 139: Word Break"
-date = "2024-06-11"
+date = "2024-06-12"
 description = "Solution to Leetcode 139"
 tags = [
     
@@ -49,4 +49,9 @@ public:
     
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

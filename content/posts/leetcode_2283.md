@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2283: Check if Number Has Equal Digit Count and Digit Value"
-date = "2018-07-29"
+date = "2018-07-30"
 description = "Solution to Leetcode 2283"
 tags = [
     
@@ -35,4 +35,9 @@ bool digitCount(string num) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

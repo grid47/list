@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2124: Check if All A's Appears Before All B's"
-date = "2019-01-04"
+date = "2019-01-05"
 description = "Solution to Leetcode 2124"
 tags = [
     
@@ -29,4 +29,9 @@ bool checkString(string s) {
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

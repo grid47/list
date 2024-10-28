@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1735: Count Ways to Make Array With Product"
-date = "2020-01-28"
+date = "2020-01-29"
 description = "Solution to Leetcode 1735"
 tags = [
     
@@ -72,4 +72,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

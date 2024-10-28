@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 342: Power of Four"
-date = "2023-11-21"
+date = "2023-11-22"
 description = "Solution to Leetcode 342"
 tags = [
     
@@ -29,4 +29,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

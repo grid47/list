@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 880: Decoded String at Index"
-date = "2022-06-01"
+date = "2022-06-02"
 description = "Solution to Leetcode 880"
 tags = [
     
@@ -47,4 +47,9 @@ class Solution {
     
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

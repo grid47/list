@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1476: Subrectangle Queries"
-date = "2020-10-13"
+date = "2020-10-14"
 description = "Solution to Leetcode 1476"
 tags = [
     
@@ -47,4 +47,9 @@ public:
  * int param_2 = obj->getValue(row,col);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2261: K Divisible Elements Subarrays"
-date = "2018-08-20"
+date = "2018-08-21"
 description = "Solution to Leetcode 2261"
 tags = [
     
@@ -44,4 +44,9 @@ hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

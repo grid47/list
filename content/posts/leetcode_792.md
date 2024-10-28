@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 792: Number of Matching Subsequences"
-date = "2022-08-28"
+date = "2022-08-29"
 description = "Solution to Leetcode 792"
 tags = [
     
@@ -52,4 +52,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

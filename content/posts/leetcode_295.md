@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 295: Find Median from Data Stream"
-date = "2024-01-07"
+date = "2024-01-08"
 description = "Solution to Leetcode 295"
 tags = [
     
@@ -53,4 +53,9 @@ public:
  * double param_2 = obj->findMedian();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

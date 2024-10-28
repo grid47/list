@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1473: Paint House III"
-date = "2020-10-16"
+date = "2020-10-17"
 description = "Solution to Leetcode 1473"
 tags = [
     
@@ -71,4 +71,9 @@ public:
 
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

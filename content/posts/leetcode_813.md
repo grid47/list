@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 813: Largest Sum of Averages"
-date = "2022-08-07"
+date = "2022-08-08"
 description = "Solution to Leetcode 813"
 tags = [
     
@@ -47,4 +47,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1327: List the Products Ordered in a Period"
-date = "2021-03-11"
+date = "2021-03-12"
 description = "Solution to Leetcode 1327"
 tags = [
     
@@ -30,4 +30,9 @@ ON p.product_id = o.product_id AND Left(o.order_date, 7) = '2020-02'
 GROUP BY p.product_name
 HAVING SUM(o.unit) >= 100;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

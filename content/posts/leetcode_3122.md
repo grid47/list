@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 3122: Minimum Number of Operations to Satisfy Conditions"
-date = "2016-04-11"
+date = "2016-04-12"
 description = "Solution to Leetcode 3122"
 tags = [
     
@@ -57,4 +57,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

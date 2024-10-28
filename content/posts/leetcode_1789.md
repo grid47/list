@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1789: Primary Department for Each Employee"
-date = "2019-12-05"
+date = "2019-12-06"
 description = "Solution to Leetcode 1789"
 tags = [
     
@@ -32,4 +32,9 @@ FROM Employee
 GROUP BY employee_id
 HAVING COUNT(*) = 1
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1738: Find Kth Largest XOR Coordinate Value"
-date = "2020-01-25"
+date = "2020-01-26"
 description = "Solution to Leetcode 1738"
 tags = [
     
@@ -58,4 +58,9 @@ public:
 
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

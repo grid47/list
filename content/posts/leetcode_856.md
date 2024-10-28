@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 856: Score of Parentheses"
-date = "2022-06-25"
+date = "2022-06-26"
 description = "Solution to Leetcode 856"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 127: Word Ladder"
-date = "2024-06-23"
+date = "2024-06-24"
 description = "Solution to Leetcode 127"
 tags = [
     
@@ -60,4 +60,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

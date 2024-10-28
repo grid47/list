@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1381: Design a Stack With Increment Operation"
-date = "2021-01-16"
+date = "2021-01-17"
 description = "Solution to Leetcode 1381"
 tags = [
     
@@ -60,4 +60,9 @@ public:
  * obj->increment(k,val);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

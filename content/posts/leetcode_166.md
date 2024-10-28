@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 166: Fraction to Recurring Decimal"
-date = "2024-05-15"
+date = "2024-05-16"
 description = "Solution to Leetcode 166"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

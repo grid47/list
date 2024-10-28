@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level"
-date = "2018-01-22"
+date = "2018-01-23"
 description = "Solution to Leetcode 2471"
 tags = [
     
@@ -61,4 +61,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

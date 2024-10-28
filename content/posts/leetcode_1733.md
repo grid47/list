@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1733: Minimum Number of People to Teach"
-date = "2020-01-30"
+date = "2020-01-31"
 description = "Solution to Leetcode 1733"
 tags = [
     
@@ -65,4 +65,9 @@ public:
 
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

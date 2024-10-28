@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1008: Construct Binary Search Tree from Preorder Traversal"
-date = "2022-01-24"
+date = "2022-01-25"
 description = "Solution to Leetcode 1008"
 tags = [
     
@@ -48,4 +48,9 @@ public:
     
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

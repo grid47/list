@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2943: Maximize Area of Square Hole in Grid"
-date = "2016-10-07"
+date = "2016-10-08"
 description = "Solution to Leetcode 2943"
 tags = [
     
@@ -58,4 +58,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1786: Number of Restricted Paths From First to Last Node"
-date = "2019-12-08"
+date = "2019-12-09"
 description = "Solution to Leetcode 1786"
 tags = [
     
@@ -81,4 +81,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

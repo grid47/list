@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 35: Search Insert Position"
-date = "2024-09-23"
+date = "2024-09-24"
 description = "Solution to Leetcode 35"
 tags = [
     
@@ -36,4 +36,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

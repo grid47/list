@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2125: Number of Laser Beams in a Bank"
-date = "2019-01-03"
+date = "2019-01-04"
 description = "Solution to Leetcode 2125"
 tags = [
     
@@ -43,4 +43,9 @@ class Solution {
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2642: Design Graph With Shortest Path Calculator"
-date = "2017-08-04"
+date = "2017-08-05"
 description = "Solution to Leetcode 2642"
 tags = [
     
@@ -78,4 +78,9 @@ public:
  * int param_2 = obj->shortestPath(node1,node2);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

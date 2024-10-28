@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1600: Throne Inheritance"
-date = "2020-06-11"
+date = "2020-06-12"
 description = "Solution to Leetcode 1600"
 tags = [
     
@@ -55,4 +55,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

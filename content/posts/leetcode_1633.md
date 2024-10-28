@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1633: Percentage of Users Attended a Contest"
-date = "2020-05-09"
+date = "2020-05-10"
 description = "Solution to Leetcode 1633"
 tags = [
     
@@ -28,4 +28,9 @@ FROM Register
 GROUP BY contest_id
 ORDER BY percentage DESC, contest_id;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

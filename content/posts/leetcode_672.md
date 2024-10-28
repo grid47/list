@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 672: Bulb Switcher II"
-date = "2022-12-26"
+date = "2022-12-27"
 description = "Solution to Leetcode 672"
 tags = [
     
@@ -36,4 +36,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

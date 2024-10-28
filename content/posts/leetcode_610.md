@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 610: Triangle Judgement"
-date = "2023-02-26"
+date = "2023-02-27"
 description = "Solution to Leetcode 610"
 tags = [
     
@@ -25,4 +25,9 @@ series = ["Leetcode"]
 # Write your MySQL query statement below
 SELECT x, y, z,IF(x + y > z AND x + z > y AND y + z > x, 'Yes', 'No') AS triangle FROM Triangle;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

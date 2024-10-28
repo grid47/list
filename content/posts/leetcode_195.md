@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 195: Tenth Line"
-date = "2024-04-16"
+date = "2024-04-17"
 description = "Solution to Leetcode 195"
 tags = [
     
@@ -25,4 +25,9 @@ series = ["Leetcode"]
 # Read from the file file.txt and output the tenth line to stdout.
 head -10 file.txt | tail -n+10 | head -1
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

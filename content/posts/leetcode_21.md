@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 21: Merge Two Sorted Lists"
-date = "2024-10-07"
+date = "2024-10-08"
 description = "Solution to Leetcode 21"
 tags = [
     
@@ -47,4 +47,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

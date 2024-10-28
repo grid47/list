@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 449: Serialize and Deserialize BST"
-date = "2023-08-06"
+date = "2023-08-07"
 description = "Solution to Leetcode 449"
 tags = [
     
@@ -78,4 +78,9 @@ public:
 // TreeNode* ans = deser->deserialize(tree);
 // return ans;
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2063: Vowels of All Substrings"
-date = "2019-03-06"
+date = "2019-03-07"
 description = "Solution to Leetcode 2063"
 tags = [
     
@@ -33,4 +33,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

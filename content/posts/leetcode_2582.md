@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2582: Pass the Pillow"
-date = "2017-10-03"
+date = "2017-10-04"
 description = "Solution to Leetcode 2582"
 tags = [
     
@@ -29,4 +29,9 @@ public:
         }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

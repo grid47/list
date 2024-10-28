@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 37: Sudoku Solver"
-date = "2024-09-21"
+date = "2024-09-22"
 description = "Solution to Leetcode 37"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

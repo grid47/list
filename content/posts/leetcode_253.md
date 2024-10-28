@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 253: Meeting Rooms II"
-date = "2024-02-18"
+date = "2024-02-19"
 description = "Solution to Leetcode 253"
 tags = [
     
@@ -24,4 +24,9 @@ series = ["Leetcode"]
 {{< highlight html >}}
 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

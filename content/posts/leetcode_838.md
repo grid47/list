@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 838: Push Dominoes"
-date = "2022-07-13"
+date = "2022-07-14"
 description = "Solution to Leetcode 838"
 tags = [
     
@@ -44,4 +44,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

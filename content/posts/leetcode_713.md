@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 713: Subarray Product Less Than K"
-date = "2022-11-15"
+date = "2022-11-16"
 description = "Solution to Leetcode 713"
 tags = [
     
@@ -41,4 +41,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

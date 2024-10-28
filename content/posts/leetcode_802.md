@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 802: Find Eventual Safe States"
-date = "2022-08-18"
+date = "2022-08-19"
 description = "Solution to Leetcode 802"
 tags = [
     
@@ -55,4 +55,9 @@ public:
 
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

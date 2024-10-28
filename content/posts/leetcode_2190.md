@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2190: Most Frequent Number Following Key In an Array"
-date = "2018-10-30"
+date = "2018-10-31"
 description = "Solution to Leetcode 2190"
 tags = [
     
@@ -33,4 +33,9 @@ public:
   }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

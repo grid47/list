@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 66: Plus One"
-date = "2024-08-23"
+date = "2024-08-24"
 description = "Solution to Leetcode 66"
 tags = [
     
@@ -38,4 +38,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

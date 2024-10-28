@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1376: Time Needed to Inform All Employees"
-date = "2021-01-21"
+date = "2021-01-22"
 description = "Solution to Leetcode 1376"
 tags = [
     
@@ -44,4 +44,9 @@ public:
     
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

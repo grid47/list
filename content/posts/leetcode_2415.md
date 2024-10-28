@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2415: Reverse Odd Levels of Binary Tree"
-date = "2018-03-19"
+date = "2018-03-20"
 description = "Solution to Leetcode 2415"
 tags = [
     
@@ -65,4 +65,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 483: Smallest Good Base"
-date = "2023-07-03"
+date = "2023-07-04"
 description = "Solution to Leetcode 483"
 tags = [
     
@@ -43,4 +43,9 @@ class Solution {
   }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

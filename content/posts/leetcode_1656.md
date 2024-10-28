@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1656: Design an Ordered Stream"
-date = "2020-04-16"
+date = "2020-04-17"
 description = "Solution to Leetcode 1656"
 tags = [
     
@@ -42,4 +42,9 @@ vector<string> insert(int id, string value) {
  * vector<string> param_1 = obj->insert(idKey,value);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

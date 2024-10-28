@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1751: Maximum Number of Events That Can Be Attended II"
-date = "2020-01-12"
+date = "2020-01-13"
 description = "Solution to Leetcode 1751"
 tags = [
     
@@ -74,4 +74,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

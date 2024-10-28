@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 826: Most Profit Assigning Work"
-date = "2022-07-25"
+date = "2022-07-26"
 description = "Solution to Leetcode 826"
 tags = [
     
@@ -46,4 +46,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

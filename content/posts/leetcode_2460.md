@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2460: Apply Operations to an Array"
-date = "2018-02-02"
+date = "2018-02-03"
 description = "Solution to Leetcode 2460"
 tags = [
     
@@ -36,4 +36,9 @@ vector<int> applyOperations(vector<int>& A) {
 }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

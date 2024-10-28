@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1959: Minimum Total Space Wasted With K Resizing Operations"
-date = "2019-06-18"
+date = "2019-06-19"
 description = "Solution to Leetcode 1959"
 tags = [
     
@@ -54,4 +54,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

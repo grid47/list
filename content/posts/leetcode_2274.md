@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2274: Maximum Consecutive Floors Without Special Floors"
-date = "2018-08-07"
+date = "2018-08-08"
 description = "Solution to Leetcode 2274"
 tags = [
     
@@ -44,4 +44,9 @@ public:
 // spec
 // 
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 1670: Design Front Middle Back Queue"
-date = "2020-04-02"
+date = "2020-04-03"
 description = "Solution to Leetcode 1670"
 tags = [
     
@@ -102,4 +102,9 @@ public:
  * int param_6 = obj->popBack();
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

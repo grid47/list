@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 231: Power of Two"
-date = "2024-03-11"
+date = "2024-03-12"
 description = "Solution to Leetcode 231"
 tags = [
     
@@ -30,4 +30,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

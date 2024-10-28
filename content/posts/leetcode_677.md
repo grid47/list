@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 677: Map Sum Pairs"
-date = "2022-12-21"
+date = "2022-12-22"
 description = "Solution to Leetcode 677"
 tags = [
     
@@ -85,4 +85,9 @@ public:
  * int param_2 = obj->sum(prefix);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

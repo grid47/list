@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 729: My Calendar I"
-date = "2022-10-30"
+date = "2022-10-31"
 description = "Solution to Leetcode 729"
 tags = [
     
@@ -45,4 +45,9 @@ public:
  * bool param_1 = obj->book(start,end);
  */
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

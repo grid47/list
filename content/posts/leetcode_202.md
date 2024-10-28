@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 202: Happy Number"
-date = "2024-04-09"
+date = "2024-04-10"
 description = "Solution to Leetcode 202"
 tags = [
     
@@ -44,4 +44,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

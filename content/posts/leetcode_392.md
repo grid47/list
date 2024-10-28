@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 392: Is Subsequence"
-date = "2023-10-02"
+date = "2023-10-03"
 description = "Solution to Leetcode 392"
 tags = [
     
@@ -37,4 +37,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 

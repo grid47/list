@@ -2,7 +2,7 @@
 +++
 authors = ["Yasir"]
 title = "Leetcode 2933: High-Access Employees"
-date = "2016-10-17"
+date = "2016-10-18"
 description = "Solution to Leetcode 2933"
 tags = [
     
@@ -69,4 +69,9 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+{{< notice tip >}}
+[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+{{< /notice >}}
 
