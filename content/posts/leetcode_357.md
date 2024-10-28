@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 357: Count Numbers with Unique Digits"
 date = "2023-11-07"
 description = "Solution to Leetcode 357"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 class Solution {
     public int countNumbersWithUniqueDigits(int n) {
         if(n == 0) return 1;
@@ -42,6 +42,6 @@ class Solution {
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

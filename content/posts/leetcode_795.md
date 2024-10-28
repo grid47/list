@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 795: Number of Subarrays with Bounded Maximum"
 date = "2022-08-26"
 description = "Solution to Leetcode 795"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 class Solution {
 public:
     int numSubarrayBoundedMax(vector<int>& nums, int left, int right) {
@@ -53,6 +53,6 @@ public:
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

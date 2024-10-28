@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 1693: Daily Leads and Partners"
 date = "2020-03-11"
 description = "Solution to Leetcode 1693"
@@ -21,13 +21,13 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 # Write your MySQL query statement below
 SELECT date_id, make_name, COUNT(DISTINCT lead_id) AS unique_leads, COUNT(DISTINCT partner_id) AS unique_partners FROM DailySales GROUP BY date_id, make_name;
 {{< /highlight >}}
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

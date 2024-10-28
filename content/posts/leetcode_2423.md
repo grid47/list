@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 2423: Remove Letter To Equalize Frequency"
 date = "2018-03-12"
 description = "Solution to Leetcode 2423"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 class Solution {
 public:
     bool equalFrequency(string word) {
@@ -52,6 +52,6 @@ public:
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

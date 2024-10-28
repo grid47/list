@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 1729: Find Followers Count"
 date = "2020-02-04"
 description = "Solution to Leetcode 1729"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 # Write your MySQL query statement below
 SELECT user_id, COUNT(DISTINCT follower_id) followers_count
 FROM Followers
@@ -31,6 +31,6 @@ ORDER BY user_id;
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

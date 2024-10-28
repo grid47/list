@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 1177: Can Make Palindrome from Substring"
 date = "2021-08-09"
 description = "Solution to Leetcode 1177"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 class Solution {
 public:
     vector<bool> canMakePaliQueries(string s, vector<vector<int>>& q) {
@@ -52,6 +52,6 @@ int cnt = __builtin_popcount(pt[v[1]+1] ^ pt[v[0]]);
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

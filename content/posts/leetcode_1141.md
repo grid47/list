@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 1141: User Activity for the Past 30 Days I"
 date = "2021-09-14"
 description = "Solution to Leetcode 1141"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 # Write your MySQL query statement below
 SELECT activity_date AS day, COUNT(DISTINCT user_id) AS active_users
 FROM Activity
@@ -31,6 +31,6 @@ GROUP BY activity_date;
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

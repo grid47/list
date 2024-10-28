@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 1581: Customer Who Visited but Did Not Make Any Transactions"
 date = "2020-07-01"
 description = "Solution to Leetcode 1581"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 SELECT v.customer_id, COUNT(v.visit_id) AS count_no_trans 
 from Visits v 
 LEFT JOIN Transactions t 
@@ -32,6 +32,6 @@ GROUP BY v.customer_id;
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

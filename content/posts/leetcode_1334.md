@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance"
 date = "2021-03-05"
 description = "Solution to Leetcode 1334"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 class Solution {
 public:
     int findTheCity(int n, vector<vector<int>>& eds, int thd) {
@@ -61,6 +61,6 @@ d[e[0]][e[1]] = d[e[1]][e[0]] = e[2];
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 

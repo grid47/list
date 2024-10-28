@@ -1,6 +1,6 @@
 
 +++
-authors = ["Yasir"]
+authors = ["Coded by Yasir, Explained by GPT"]
 title = "Leetcode 2245: Maximum Trailing Zeros in a Cornered Path"
 date = "2018-09-06"
 description = "Solution to Leetcode 2245"
@@ -21,7 +21,7 @@ series = ["Leetcode"]
 
 **Code:**
 
-{{< highlight html >}}
+{{< highlight cpp >}}
 array<int, 2> operator+(const array<int, 2> &r1, const array<int, 2> &r2) { return { r1[0] + r2[0], r1[1] + r2[1] }; }
 
 array<int, 2> operator-(const array<int, 2> &r1, const array<int, 2> &r2) { return { r1[0] - r2[0], r1[1] - r2[1] }; }
@@ -66,6 +66,6 @@ public:
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course on Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
 
