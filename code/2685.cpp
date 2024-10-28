@@ -1,0 +1,56 @@
+class UF {
+    public:
+    vector<int> par, edge, rnk;
+    UF(int n) {
+        par.resize(n, 0);
+        iota(par.begin(), par.end(), 0);
+        edge.resize(n, 0);
+        rnk.resize(n, 1);
+    }
+    
+    bool join(int i, int j) {
+        int p = find(i);
+        int q = find(j);
+        if(p != q) {
+            if(rnk[p] > rnk[q]) {
+                rnk[p]+=rnk[q];
+                par[q] = p;
+            } else {
+                rnk[q]+=rnk[p];
+                par[p] = q;         
+            }
+            int e = edge[p]+edge[q] + 1;
+            edge[p] =e; // dge[q] + 1;
+            edge[q] =e; // dge[p] + 1;            
+            return true;
+        }
+        edge[q]++;
+        return false;
+    }
+    int find(int p) {
+        if(p == par[p]) return p;
+        return par[p] = find(par[p]);
+    }
+};
+
+class Solution {
+public:
+    int countCompleteComponents(int n, vector<vector<int>>& edges) {
+        UF uf = UF(n);
+        for(auto e: edges) {
+            uf.join(e[0], e[1]);
+        }
+        set<int> pk;
+        int res = 0;
+            // cout << "edges membercnt edgescal \n";         
+        for(int i = 0; i < n; i++) {
+            int par = uf.find(i);
+            if(pk.count(par)) continue;
+            pk.insert(par);
+            int cnt = uf.edge[par];
+            // cout << cnt << " " << uf.rnk[par] << " " << uf.rnk[par] * (uf.rnk[par] - 1) / 2 << "\n";
+            if(uf.rnk[par] * (uf.rnk[par] - 1) / 2 == cnt) res++;
+        }
+        return res;
+    }
+};

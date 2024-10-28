@@ -1,0 +1,37 @@
+class SeatManager {
+public:
+    int i, n;
+    priority_queue<int, vector<int>, greater<int>> pq;
+    SeatManager(int n) {
+        i = 1;
+        this->n = n;
+    }
+    
+    int reserve() {
+        if(pq.empty() && i > n) {
+            return -1;
+        }
+        if(pq.empty()) {
+            i++;
+            return i - 1;
+        }
+        int tmp = pq.top();
+        pq.pop();
+        return tmp;
+    }
+    
+    void unreserve(int no) {
+        if(no == i - 1) {
+            i--;
+            return;
+        }
+        pq.push(no);
+    }
+};
+
+/**
+ * Your SeatManager object will be instantiated and called as such:
+ * SeatManager* obj = new SeatManager(n);
+ * int param_1 = obj->reserve();
+ * obj->unreserve(seatNumber);
+ */

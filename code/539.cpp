@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int findMinDifference(vector<string>& time) {
+        
+        sort(time.begin(), time.end());
+        
+        int n = time.size(), mindiff = INT_MAX;
+        
+        for(int i = 0; i < n; i++) {
+            
+            int diff = abs(timeDiff(time[(i - 1 +n)%n], time[i]));
+            
+            diff = min(diff, 1440 - diff); // 1440 = 24h in minutes
+            mindiff = min(mindiff, diff);
+        }
+        
+        return mindiff;
+    }
+    
+    int timeDiff(string t1, string t2) {
+        // cout << t1 << t2;
+        int h1 = stoi(t1.substr(0, 2));
+        int m1 = stoi(t1.substr(3, 2));
+        int h2 = stoi(t2.substr(0, 2));
+        int m2 = stoi(t2.substr(3, 2));
+        return (h2 - h1) * 60 + (m2 - m1);
+    }
+};

@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> maxScoreIndices(vector<int>& nums) {
+        int n = nums.size();
+        int ones = 0;
+        for(int i = 0; i < n; i++)
+        if (nums[i] == 1) ones++;
+        
+        int mx = ones;
+        vector<int> mxx;
+        mxx.push_back(0);
+
+        int zeros = 0;
+        
+        int prv, cur = mx;
+        for(int i = 1; i < n + 1; i++) {
+            zeros += ((nums[i - 1] == 0)? 1 : 0);
+            ones  -= ((nums[i - 1] == 1)? 1 : 0);
+
+            prv = mx;
+            cur = zeros + ones;
+            mx  = max(mx, cur);
+
+                 if (mx == cur && cur == prv) mxx.push_back(i);
+            else if (mx >  prv) {
+                mxx.clear();
+                mxx.push_back(i);
+            }
+        }
+        
+        return mxx;
+    }
+};
