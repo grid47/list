@@ -29,6 +29,7 @@ WHERE w1.temperature > w2.temperature AND DATEDIFF(w1.recordDate, w2.recordDate)
 {{< /highlight >}}
 
 
+
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}

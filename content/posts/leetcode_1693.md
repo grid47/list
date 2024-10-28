@@ -27,6 +27,7 @@ SELECT date_id, make_name, COUNT(DISTINCT lead_id) AS unique_leads, COUNT(DISTIN
 {{< /highlight >}}
 
 
+
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}

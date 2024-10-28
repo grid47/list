@@ -27,6 +27,7 @@ SELECT DISTINCT author_id AS id FROM Views WHERE viewer_id=author_id ORDER BY id
 {{< /highlight >}}
 
 
+
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}

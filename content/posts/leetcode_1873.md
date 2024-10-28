@@ -27,6 +27,7 @@ SELECT employee_id, salary * (employee_id % 2) * (name NOT LIKE 'M%') AS bonus F
 {{< /highlight >}}
 
 
+
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
 {{< /notice >}}
