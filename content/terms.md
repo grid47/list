@@ -24,3 +24,6 @@ The Personal information, email that submitted while registering to the site, wi
 
 7. EMBEDDED YOUTUBE VIDEOS
 www.grid47.xyz includes embedded videos from YouTube, which may feature content by third-party creators. These videos are hosted by YouTube, a service provided by Google LLC. When you view or interact with these embedded videos, YouTube may collect certain data, such as your IP address, viewing actions, and other interaction details. YouTube may also use cookies and other tracking technologies for purposes such as analytics and advertising. For further information on YouTube’s data collection and processing practices, please refer to [YouTube’s Privacy Policy](https://policies.google.com/privacy). By using this website, you consent to the data practices outlined by YouTube.
+
+8. GOOGLE ADSENSE
+Our website uses Google AdSense to display advertisements. Google uses cookies to serve ads based on your prior visits to our site and other sites on the internet. Google may collect data regarding your interactions with these ads, including clicks, impressions, and other metrics. For more information on how Google collects and uses your data, please refer to [Google’s Privacy Policy](https://policies.google.com/privacy). We do not have control over the data collected by Google or other advertisers and encourage you to review their policies.
