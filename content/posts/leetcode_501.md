@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 501: Find Mode in Binary Search Tree"
-date = "2023-06-16"
+date = "2023-06-17"
 description = "Solution to Leetcode 501"
 tags = [
     
@@ -66,7 +66,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/501.md" >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

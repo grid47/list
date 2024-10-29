@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1218: Longest Arithmetic Subsequence of Given Difference"
-date = "2021-06-29"
+date = "2021-06-30"
 description = "Solution to Leetcode 1218"
 tags = [
     

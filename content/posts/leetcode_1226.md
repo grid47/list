@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1226: The Dining Philosophers"
-date = "2021-06-21"
+date = "2021-06-22"
 description = "Solution to Leetcode 1226"
 tags = [
     

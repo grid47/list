@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1440: Evaluate Boolean Expression"
-date = "2020-11-19"
+date = "2020-11-20"
 description = "Solution to Leetcode 1440"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2893: Calculate Orders Within Each Interval"
-date = "2016-11-27"
+date = "2016-11-28"
 description = "Solution to Leetcode 2893"
 tags = [
     

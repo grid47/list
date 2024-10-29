@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1864: Minimum Number of Swaps to Make the Binary String Alternating"
-date = "2019-09-22"
+date = "2019-09-23"
 description = "Solution to Leetcode 1864"
 tags = [
     

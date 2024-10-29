@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3112: Minimum Time to Visit Disappearing Nodes"
-date = "2016-04-22"
+date = "2016-04-23"
 description = "Solution to Leetcode 3112"
 tags = [
     

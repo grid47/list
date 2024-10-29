@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3198: Find Cities in Each State"
-date = "2016-01-27"
+date = "2016-01-28"
 description = "Solution to Leetcode 3198"
 tags = [
     

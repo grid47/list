@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3303: Find the Occurrence of First Almost Equal Substring"
-date = "2015-10-14"
+date = "2015-10-15"
 description = "Solution to Leetcode 3303"
 tags = [
     

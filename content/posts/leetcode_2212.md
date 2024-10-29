@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2212: Maximum Points in an Archery Competition"
-date = "2018-10-09"
+date = "2018-10-10"
 description = "Solution to Leetcode 2212"
 tags = [
     

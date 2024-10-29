@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1372: Longest ZigZag Path in a Binary Tree"
-date = "2021-01-26"
+date = "2021-01-27"
 description = "Solution to Leetcode 1372"
 tags = [
     

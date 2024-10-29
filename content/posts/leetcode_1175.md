@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1175: Prime Arrangements"
-date = "2021-08-11"
+date = "2021-08-12"
 description = "Solution to Leetcode 1175"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1470: Shuffle the Array"
-date = "2020-10-20"
+date = "2020-10-21"
 description = "Solution to Leetcode 1470"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1099: Two Sum Less Than K"
-date = "2021-10-26"
+date = "2021-10-27"
 description = "Solution to Leetcode 1099"
 tags = [
     

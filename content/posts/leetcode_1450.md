@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1450: Number of Students Doing Homework at a Given Time"
-date = "2020-11-09"
+date = "2020-11-10"
 description = "Solution to Leetcode 1450"
 tags = [
     

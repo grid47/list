@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 963: Minimum Area Rectangle II"
-date = "2022-03-11"
+date = "2022-03-12"
 description = "Solution to Leetcode 963"
 tags = [
     

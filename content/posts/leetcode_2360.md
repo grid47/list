@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2360: Longest Cycle in a Graph"
-date = "2018-05-14"
+date = "2018-05-15"
 description = "Solution to Leetcode 2360"
 tags = [
     

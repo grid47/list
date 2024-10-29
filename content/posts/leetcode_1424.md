@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1424: Diagonal Traverse II"
-date = "2020-12-05"
+date = "2020-12-06"
 description = "Solution to Leetcode 1424"
 tags = [
     

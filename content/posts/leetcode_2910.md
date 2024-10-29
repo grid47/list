@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2910: Minimum Number of Groups to Create a Valid Assignment"
-date = "2016-11-10"
+date = "2016-11-11"
 description = "Solution to Leetcode 2910"
 tags = [
     

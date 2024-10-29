@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1584: Min Cost to Connect All Points"
-date = "2020-06-28"
+date = "2020-06-29"
 description = "Solution to Leetcode 1584"
 tags = [
     

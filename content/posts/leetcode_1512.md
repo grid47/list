@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1512: Number of Good Pairs"
-date = "2020-09-08"
+date = "2020-09-09"
 description = "Solution to Leetcode 1512"
 tags = [
     

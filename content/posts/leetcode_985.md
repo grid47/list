@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 985: Sum of Even Numbers After Queries"
-date = "2022-02-17"
+date = "2022-02-18"
 description = "Solution to Leetcode 985"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1297: Maximum Number of Occurrences of a Substring"
-date = "2021-04-11"
+date = "2021-04-12"
 description = "Solution to Leetcode 1297"
 tags = [
     

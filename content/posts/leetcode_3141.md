@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3141: Maximum Hamming Distances"
-date = "2016-03-24"
+date = "2016-03-25"
 description = "Solution to Leetcode 3141"
 tags = [
     

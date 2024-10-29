@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3329: Count Substrings With K-Frequency Characters II"
-date = "2015-09-18"
+date = "2015-09-19"
 description = "Solution to Leetcode 3329"
 tags = [
     

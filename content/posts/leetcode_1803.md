@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1803: Count Pairs With XOR in a Range"
-date = "2019-11-22"
+date = "2019-11-23"
 description = "Solution to Leetcode 1803"
 tags = [
     

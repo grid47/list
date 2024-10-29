@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1856: Maximum Subarray Min-Product"
-date = "2019-09-30"
+date = "2019-10-01"
 description = "Solution to Leetcode 1856"
 tags = [
     

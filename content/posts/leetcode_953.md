@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 953: Verifying an Alien Dictionary"
-date = "2022-03-21"
+date = "2022-03-22"
 description = "Solution to Leetcode 953"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2897: Apply Operations on Array to Maximize Sum of Squares"
-date = "2016-11-23"
+date = "2016-11-24"
 description = "Solution to Leetcode 2897"
 tags = [
     

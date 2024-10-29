@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1475: Final Prices With a Special Discount in a Shop"
-date = "2020-10-15"
+date = "2020-10-16"
 description = "Solution to Leetcode 1475"
 tags = [
     

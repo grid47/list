@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1601: Maximum Number of Achievable Transfer Requests"
-date = "2020-06-11"
+date = "2020-06-12"
 description = "Solution to Leetcode 1601"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 60: Permutation Sequence"
-date = "2024-08-30"
+date = "2024-08-31"
 description = "Solution to Leetcode 60"
 tags = [
     

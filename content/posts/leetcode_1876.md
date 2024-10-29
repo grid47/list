@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1876: Substrings of Size Three with Distinct Characters"
-date = "2019-09-10"
+date = "2019-09-11"
 description = "Solution to Leetcode 1876"
 tags = [
     

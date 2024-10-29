@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2207: Maximize Number of Subsequences in a String"
-date = "2018-10-14"
+date = "2018-10-15"
 description = "Solution to Leetcode 2207"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 901: Online Stock Span"
-date = "2022-05-12"
+date = "2022-05-13"
 description = "Solution to Leetcode 901"
 tags = [
     

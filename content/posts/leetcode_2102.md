@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2102: Sequentially Ordinal Rank Tracker"
-date = "2019-01-27"
+date = "2019-01-28"
 description = "Solution to Leetcode 2102"
 tags = [
     

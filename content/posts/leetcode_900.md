@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 900: RLE Iterator"
-date = "2022-05-13"
+date = "2022-05-14"
 description = "Solution to Leetcode 900"
 tags = [
     

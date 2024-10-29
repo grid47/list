@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1344: Angle Between Hands of a Clock"
-date = "2021-02-23"
+date = "2021-02-24"
 description = "Solution to Leetcode 1344"
 tags = [
     

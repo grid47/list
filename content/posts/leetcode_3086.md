@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3086: Minimum Moves to Pick K Ones"
-date = "2016-05-18"
+date = "2016-05-19"
 description = "Solution to Leetcode 3086"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2444: Count Subarrays With Fixed Bounds"
-date = "2018-02-19"
+date = "2018-02-20"
 description = "Solution to Leetcode 2444"
 tags = [
     

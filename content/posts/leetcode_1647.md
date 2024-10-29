@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1647: Minimum Deletions to Make Character Frequencies Unique"
-date = "2020-04-26"
+date = "2020-04-27"
 description = "Solution to Leetcode 1647"
 tags = [
     

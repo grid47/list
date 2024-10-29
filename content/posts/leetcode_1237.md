@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1237: Find Positive Integer Solution for a Given Equation"
-date = "2021-06-10"
+date = "2021-06-11"
 description = "Solution to Leetcode 1237"
 tags = [
     

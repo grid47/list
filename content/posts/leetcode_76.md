@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 76: Minimum Window Substring"
-date = "2024-08-14"
+date = "2024-08-15"
 description = "Solution to Leetcode 76"
 tags = [
     

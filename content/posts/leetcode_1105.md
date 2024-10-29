@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1105: Filling Bookcase Shelves"
-date = "2021-10-20"
+date = "2021-10-21"
 description = "Solution to Leetcode 1105"
 tags = [
     

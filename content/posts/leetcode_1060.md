@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1060: Missing Element in Sorted Array"
-date = "2021-12-04"
+date = "2021-12-05"
 description = "Solution to Leetcode 1060"
 tags = [
     

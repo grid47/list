@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 70: Climbing Stairs"
-date = "2024-08-20"
+date = "2024-08-21"
 description = "Solution to Leetcode 70"
 tags = [
     

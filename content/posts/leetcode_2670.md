@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2670: Find the Distinct Difference Array"
-date = "2017-07-08"
+date = "2017-07-09"
 description = "Solution to Leetcode 2670"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 90: Subsets II"
-date = "2024-07-31"
+date = "2024-08-01"
 description = "Solution to Leetcode 90"
 tags = [
     

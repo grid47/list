@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2591: Distribute Money to Maximum Children"
-date = "2017-09-25"
+date = "2017-09-26"
 description = "Solution to Leetcode 2591"
 tags = [
     

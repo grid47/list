@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3080: Mark Elements on Array by Performing Queries"
-date = "2016-05-24"
+date = "2016-05-25"
 description = "Solution to Leetcode 3080"
 tags = [
     

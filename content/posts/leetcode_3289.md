@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3289: The Two Sneaky Numbers of Digitville"
-date = "2015-10-28"
+date = "2015-10-29"
 description = "Solution to Leetcode 3289"
 tags = [
     

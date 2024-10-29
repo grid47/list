@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1491: Average Salary Excluding the Minimum and Maximum Salary"
-date = "2020-09-29"
+date = "2020-09-30"
 description = "Solution to Leetcode 1491"
 tags = [
     

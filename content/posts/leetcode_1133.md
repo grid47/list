@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1133: Largest Unique Number"
-date = "2021-09-22"
+date = "2021-09-23"
 description = "Solution to Leetcode 1133"
 tags = [
     

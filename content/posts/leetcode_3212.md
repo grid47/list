@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3212: Count Submatrices With Equal Frequency of X and Y"
-date = "2016-01-13"
+date = "2016-01-14"
 description = "Solution to Leetcode 3212"
 tags = [
     

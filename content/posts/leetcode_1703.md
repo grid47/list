@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1703: Minimum Adjacent Swaps for K Consecutive Ones"
-date = "2020-03-01"
+date = "2020-03-02"
 description = "Solution to Leetcode 1703"
 tags = [
     

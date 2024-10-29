@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1017: Convert to Base -2"
-date = "2022-01-16"
+date = "2022-01-17"
 description = "Solution to Leetcode 1017"
 tags = [
     

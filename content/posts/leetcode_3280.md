@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3280: Convert Date to Binary"
-date = "2015-11-06"
+date = "2015-11-07"
 description = "Solution to Leetcode 3280"
 tags = [
     

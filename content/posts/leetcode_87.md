@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 87: Scramble String"
-date = "2024-08-03"
+date = "2024-08-04"
 description = "Solution to Leetcode 87"
 tags = [
     

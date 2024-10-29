@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3281: Maximize Score of Numbers in Ranges"
-date = "2015-11-05"
+date = "2015-11-06"
 description = "Solution to Leetcode 3281"
 tags = [
     

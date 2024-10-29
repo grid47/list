@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2778: Sum of Squares of Special Elements "
-date = "2017-03-22"
+date = "2017-03-23"
 description = "Solution to Leetcode 2778"
 tags = [
     

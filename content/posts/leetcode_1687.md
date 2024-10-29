@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1687: Delivering Boxes from Storage to Ports"
-date = "2020-03-17"
+date = "2020-03-18"
 description = "Solution to Leetcode 1687"
 tags = [
     

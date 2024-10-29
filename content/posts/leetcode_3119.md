@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3119: Maximum Number of Potholes That Can Be Fixed"
-date = "2016-04-15"
+date = "2016-04-16"
 description = "Solution to Leetcode 3119"
 tags = [
     

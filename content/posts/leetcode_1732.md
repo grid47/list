@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1732: Find the Highest Altitude"
-date = "2020-02-01"
+date = "2020-02-02"
 description = "Solution to Leetcode 1732"
 tags = [
     

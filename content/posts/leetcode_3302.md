@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3302: Find the Lexicographically Smallest Valid Sequence"
-date = "2015-10-15"
+date = "2015-10-16"
 description = "Solution to Leetcode 3302"
 tags = [
     

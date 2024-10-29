@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3151: Special Array I"
-date = "2016-03-14"
+date = "2016-03-15"
 description = "Solution to Leetcode 3151"
 tags = [
     

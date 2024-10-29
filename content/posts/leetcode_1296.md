@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1296: Divide Array in Sets of K Consecutive Numbers"
-date = "2021-04-12"
+date = "2021-04-13"
 description = "Solution to Leetcode 1296"
 tags = [
     

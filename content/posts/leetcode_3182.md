@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3182: Find Top Scoring Students"
-date = "2016-02-12"
+date = "2016-02-13"
 description = "Solution to Leetcode 3182"
 tags = [
     

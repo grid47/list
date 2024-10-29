@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1050: Actors and Directors Who Cooperated At Least Three Times"
-date = "2021-12-14"
+date = "2021-12-15"
 description = "Solution to Leetcode 1050"
 tags = [
     

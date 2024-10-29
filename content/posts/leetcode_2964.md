@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2964: Number of Divisible Triplet Sums"
-date = "2016-09-17"
+date = "2016-09-18"
 description = "Solution to Leetcode 2964"
 tags = [
     

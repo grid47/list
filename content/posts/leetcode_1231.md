@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1231: Divide Chocolate"
-date = "2021-06-16"
+date = "2021-06-17"
 description = "Solution to Leetcode 1231"
 tags = [
     

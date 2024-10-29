@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1352: Product of the Last K Numbers"
-date = "2021-02-15"
+date = "2021-02-16"
 description = "Solution to Leetcode 1352"
 tags = [
     

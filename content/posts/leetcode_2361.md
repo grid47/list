@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2361: Minimum Costs Using the Train Line"
-date = "2018-05-13"
+date = "2018-05-14"
 description = "Solution to Leetcode 2361"
 tags = [
     

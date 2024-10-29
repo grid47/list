@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1640: Check Array Formation Through Concatenation"
-date = "2020-05-03"
+date = "2020-05-04"
 description = "Solution to Leetcode 1640"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2064: Minimized Maximum of Products Distributed to Any Store"
-date = "2019-03-06"
+date = "2019-03-07"
 description = "Solution to Leetcode 2064"
 tags = [
     

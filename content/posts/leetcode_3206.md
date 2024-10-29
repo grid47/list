@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3206: Alternating Groups I"
-date = "2016-01-19"
+date = "2016-01-20"
 description = "Solution to Leetcode 3206"
 tags = [
     

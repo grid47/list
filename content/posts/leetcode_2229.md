@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2229: Check if an Array Is Consecutive"
-date = "2018-09-22"
+date = "2018-09-23"
 description = "Solution to Leetcode 2229"
 tags = [
     

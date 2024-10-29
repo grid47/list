@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1917: Leetcodify Friends Recommendations"
-date = "2019-07-31"
+date = "2019-08-01"
 description = "Solution to Leetcode 1917"
 tags = [
     

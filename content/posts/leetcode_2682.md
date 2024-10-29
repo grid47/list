@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2682: Find the Losers of the Circular Game"
-date = "2017-06-26"
+date = "2017-06-27"
 description = "Solution to Leetcode 2682"
 tags = [
     

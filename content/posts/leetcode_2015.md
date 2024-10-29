@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2015: Average Height of Buildings in Each Segment"
-date = "2019-04-24"
+date = "2019-04-25"
 description = "Solution to Leetcode 2015"
 tags = [
     

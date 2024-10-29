@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2314: The First Day of the Maximum Recorded Degree in Each City"
-date = "2018-06-29"
+date = "2018-06-30"
 description = "Solution to Leetcode 2314"
 tags = [
     

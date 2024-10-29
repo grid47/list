@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1975: Maximum Matrix Sum"
-date = "2019-06-03"
+date = "2019-06-04"
 description = "Solution to Leetcode 1975"
 tags = [
     

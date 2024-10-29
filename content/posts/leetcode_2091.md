@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2091: Removing Minimum and Maximum From Array"
-date = "2019-02-07"
+date = "2019-02-08"
 description = "Solution to Leetcode 2091"
 tags = [
     

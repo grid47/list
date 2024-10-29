@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1087: Brace Expansion"
-date = "2021-11-07"
+date = "2021-11-08"
 description = "Solution to Leetcode 1087"
 tags = [
     

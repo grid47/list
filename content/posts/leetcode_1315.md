@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1315: Sum of Nodes with Even-Valued Grandparent"
-date = "2021-03-24"
+date = "2021-03-25"
 description = "Solution to Leetcode 1315"
 tags = [
     

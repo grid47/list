@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3020: Find the Maximum Number of Elements in Subset"
-date = "2016-07-23"
+date = "2016-07-24"
 description = "Solution to Leetcode 3020"
 tags = [
     

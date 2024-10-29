@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1974: Minimum Time to Type Word Using Special Typewriter"
-date = "2019-06-04"
+date = "2019-06-05"
 description = "Solution to Leetcode 1974"
 tags = [
     

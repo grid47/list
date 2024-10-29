@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1946: Largest Number After Mutating Substring"
-date = "2019-07-02"
+date = "2019-07-03"
 description = "Solution to Leetcode 1946"
 tags = [
     

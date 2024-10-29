@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3025: Find the Number of Ways to Place People I"
-date = "2016-07-18"
+date = "2016-07-19"
 description = "Solution to Leetcode 3025"
 tags = [
     

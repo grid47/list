@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 54: Spiral Matrix"
-date = "2024-09-05"
+date = "2024-09-06"
 description = "Solution to Leetcode 54"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1813: Sentence Similarity III"
-date = "2019-11-12"
+date = "2019-11-13"
 description = "Solution to Leetcode 1813"
 tags = [
     

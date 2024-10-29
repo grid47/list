@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1321: Restaurant Growth"
-date = "2021-03-18"
+date = "2021-03-19"
 description = "Solution to Leetcode 1321"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1021: Remove Outermost Parentheses"
-date = "2022-01-12"
+date = "2022-01-13"
 description = "Solution to Leetcode 1021"
 tags = [
     

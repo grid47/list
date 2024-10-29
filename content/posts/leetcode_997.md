@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 997: Find the Town Judge"
-date = "2022-02-05"
+date = "2022-02-06"
 description = "Solution to Leetcode 997"
 tags = [
     

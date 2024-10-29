@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 30: Substring with Concatenation of All Words"
-date = "2024-09-29"
+date = "2024-09-30"
 description = "Solution to Leetcode 30"
 tags = [
     

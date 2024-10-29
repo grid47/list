@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1239: Maximum Length of a Concatenated String with Unique Characters"
-date = "2021-06-08"
+date = "2021-06-09"
 description = "Solution to Leetcode 1239"
 tags = [
     

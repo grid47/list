@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2121: Intervals Between Identical Elements"
-date = "2019-01-08"
+date = "2019-01-09"
 description = "Solution to Leetcode 2121"
 tags = [
     

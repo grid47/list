@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2810: Faulty Keyboard"
-date = "2017-02-18"
+date = "2017-02-19"
 description = "Solution to Leetcode 2810"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1546: Maximum Number of Non-Overlapping Subarrays With Sum Equals Target"
-date = "2020-08-05"
+date = "2020-08-06"
 description = "Solution to Leetcode 1546"
 tags = [
     

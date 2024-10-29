@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1286: Iterator for Combination"
-date = "2021-04-22"
+date = "2021-04-23"
 description = "Solution to Leetcode 1286"
 tags = [
     

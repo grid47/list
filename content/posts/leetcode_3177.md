@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3177: Find the Maximum Length of a Good Subsequence II"
-date = "2016-02-17"
+date = "2016-02-18"
 description = "Solution to Leetcode 3177"
 tags = [
     

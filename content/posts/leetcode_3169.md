@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3169: Count Days Without Meetings"
-date = "2016-02-25"
+date = "2016-02-26"
 description = "Solution to Leetcode 3169"
 tags = [
     

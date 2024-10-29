@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1042: Flower Planting With No Adjacent"
-date = "2021-12-22"
+date = "2021-12-23"
 description = "Solution to Leetcode 1042"
 tags = [
     

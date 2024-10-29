@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 28: Find the Index of the First Occurrence in a String"
-date = "2024-10-01"
+date = "2024-10-02"
 description = "Solution to Leetcode 28"
 tags = [
     

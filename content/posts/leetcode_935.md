@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 935: Knight Dialer"
-date = "2022-04-08"
+date = "2022-04-09"
 description = "Solution to Leetcode 935"
 tags = [
     

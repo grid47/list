@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1382: Balance a Binary Search Tree"
-date = "2021-01-16"
+date = "2021-01-17"
 description = "Solution to Leetcode 1382"
 tags = [
     

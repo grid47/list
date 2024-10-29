@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3201: Find the Maximum Length of Valid Subsequence I"
-date = "2016-01-24"
+date = "2016-01-25"
 description = "Solution to Leetcode 3201"
 tags = [
     

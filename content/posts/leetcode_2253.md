@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2253: Dynamic Unpivoting of a Table"
-date = "2018-08-29"
+date = "2018-08-30"
 description = "Solution to Leetcode 2253"
 tags = [
     

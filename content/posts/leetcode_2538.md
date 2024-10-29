@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2538: Difference Between Maximum and Minimum Price Sum"
-date = "2017-11-17"
+date = "2017-11-18"
 description = "Solution to Leetcode 2538"
 tags = [
     

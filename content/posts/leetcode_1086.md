@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1086: High Five"
-date = "2021-11-08"
+date = "2021-11-09"
 description = "Solution to Leetcode 1086"
 tags = [
     

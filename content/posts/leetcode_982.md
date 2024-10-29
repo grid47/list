@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 982: Triples with Bitwise AND Equal To Zero"
-date = "2022-02-20"
+date = "2022-02-21"
 description = "Solution to Leetcode 982"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1991: Find the Middle Index in Array"
-date = "2019-05-18"
+date = "2019-05-19"
 description = "Solution to Leetcode 1991"
 tags = [
     

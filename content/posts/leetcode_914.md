@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 914: X of a Kind in a Deck of Cards"
-date = "2022-04-29"
+date = "2022-04-30"
 description = "Solution to Leetcode 914"
 tags = [
     

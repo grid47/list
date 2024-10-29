@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2427: Number of Common Factors"
-date = "2018-03-08"
+date = "2018-03-09"
 description = "Solution to Leetcode 2427"
 tags = [
     

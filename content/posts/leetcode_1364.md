@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1364: Number of Trusted Contacts of a Customer"
-date = "2021-02-03"
+date = "2021-02-04"
 description = "Solution to Leetcode 1364"
 tags = [
     

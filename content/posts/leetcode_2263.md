@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2263: Make Array Non-decreasing or Non-increasing"
-date = "2018-08-19"
+date = "2018-08-20"
 description = "Solution to Leetcode 2263"
 tags = [
     

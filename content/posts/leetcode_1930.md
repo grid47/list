@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1930: Unique Length-3 Palindromic Subsequences"
-date = "2019-07-18"
+date = "2019-07-19"
 description = "Solution to Leetcode 1930"
 tags = [
     

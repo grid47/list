@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3185: Count Pairs That Form a Complete Day II"
-date = "2016-02-09"
+date = "2016-02-10"
 description = "Solution to Leetcode 3185"
 tags = [
     

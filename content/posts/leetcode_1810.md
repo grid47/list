@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1810: Minimum Path Cost in a Hidden Grid"
-date = "2019-11-15"
+date = "2019-11-16"
 description = "Solution to Leetcode 1810"
 tags = [
     

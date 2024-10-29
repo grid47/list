@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1444: Number of Ways of Cutting a Pizza"
-date = "2020-11-15"
+date = "2020-11-16"
 description = "Solution to Leetcode 1444"
 tags = [
     

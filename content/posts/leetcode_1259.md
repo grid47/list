@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1259: Handshakes That Don't Cross"
-date = "2021-05-19"
+date = "2021-05-20"
 description = "Solution to Leetcode 1259"
 tags = [
     

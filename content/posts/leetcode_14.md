@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 14: Longest Common Prefix"
-date = "2024-10-15"
+date = "2024-10-16"
 description = "Solution to Leetcode 14"
 tags = [
     

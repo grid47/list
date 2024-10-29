@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1940: Longest Common Subsequence Between Sorted Arrays"
-date = "2019-07-08"
+date = "2019-07-09"
 description = "Solution to Leetcode 1940"
 tags = [
     

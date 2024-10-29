@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 917: Reverse Only Letters"
-date = "2022-04-26"
+date = "2022-04-27"
 description = "Solution to Leetcode 917"
 tags = [
     

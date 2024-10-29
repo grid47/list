@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2412: Minimum Money Required Before Transactions"
-date = "2018-03-23"
+date = "2018-03-24"
 description = "Solution to Leetcode 2412"
 tags = [
     

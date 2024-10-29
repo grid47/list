@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1137: N-th Tribonacci Number"
-date = "2021-09-18"
+date = "2021-09-19"
 description = "Solution to Leetcode 1137"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1757: Recyclable and Low Fat Products"
-date = "2020-01-07"
+date = "2020-01-08"
 description = "Solution to Leetcode 1757"
 tags = [
     

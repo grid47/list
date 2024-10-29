@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1988: Find Cutoff Score for Each School"
-date = "2019-05-21"
+date = "2019-05-22"
 description = "Solution to Leetcode 1988"
 tags = [
     

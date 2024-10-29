@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2529: Maximum Count of Positive Integer and Negative Integer"
-date = "2017-11-26"
+date = "2017-11-27"
 description = "Solution to Leetcode 2529"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3027: Find the Number of Ways to Place People II"
-date = "2016-07-16"
+date = "2016-07-17"
 description = "Solution to Leetcode 3027"
 tags = [
     

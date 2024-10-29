@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1938: Maximum Genetic Difference Query"
-date = "2019-07-10"
+date = "2019-07-11"
 description = "Solution to Leetcode 1938"
 tags = [
     

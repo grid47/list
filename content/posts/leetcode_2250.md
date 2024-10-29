@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2250: Count Number of Rectangles Containing Each Point"
-date = "2018-09-01"
+date = "2018-09-02"
 description = "Solution to Leetcode 2250"
 tags = [
     

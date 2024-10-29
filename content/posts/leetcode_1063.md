@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1063: Number of Valid Subarrays"
-date = "2021-12-01"
+date = "2021-12-02"
 description = "Solution to Leetcode 1063"
 tags = [
     

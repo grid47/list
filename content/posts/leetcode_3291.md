@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3291: Minimum Number of Valid Strings to Form Target I"
-date = "2015-10-26"
+date = "2015-10-27"
 description = "Solution to Leetcode 3291"
 tags = [
     

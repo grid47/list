@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1643: Kth Smallest Instructions"
-date = "2020-04-30"
+date = "2020-05-01"
 description = "Solution to Leetcode 1643"
 tags = [
     

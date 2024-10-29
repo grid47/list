@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1124: Longest Well-Performing Interval"
-date = "2021-10-01"
+date = "2021-10-02"
 description = "Solution to Leetcode 1124"
 tags = [
     

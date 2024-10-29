@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1865: Finding Pairs With a Certain Sum"
-date = "2019-09-21"
+date = "2019-09-22"
 description = "Solution to Leetcode 1865"
 tags = [
     

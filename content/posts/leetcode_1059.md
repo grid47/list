@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1059: All Paths from Source Lead to Destination"
-date = "2021-12-05"
+date = "2021-12-06"
 description = "Solution to Leetcode 1059"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1825: Finding MK Average"
-date = "2019-10-31"
+date = "2019-11-01"
 description = "Solution to Leetcode 1825"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1339: Maximum Product of Splitted Binary Tree"
-date = "2021-02-28"
+date = "2021-03-01"
 description = "Solution to Leetcode 1339"
 tags = [
     

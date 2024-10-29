@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1365: How Many Numbers Are Smaller Than the Current Number"
-date = "2021-02-02"
+date = "2021-02-03"
 description = "Solution to Leetcode 1365"
 tags = [
     

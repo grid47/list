@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3196: Maximize Total Cost of Alternating Subarrays"
-date = "2016-01-29"
+date = "2016-01-30"
 description = "Solution to Leetcode 3196"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2526: Find Consecutive Integers from a Data Stream"
-date = "2017-11-29"
+date = "2017-11-30"
 description = "Solution to Leetcode 2526"
 tags = [
     

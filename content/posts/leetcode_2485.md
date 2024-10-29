@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2485: Find the Pivot Integer"
-date = "2018-01-09"
+date = "2018-01-10"
 description = "Solution to Leetcode 2485"
 tags = [
     

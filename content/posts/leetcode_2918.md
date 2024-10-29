@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2918: Minimum Equal Sum of Two Arrays After Replacing Zeros"
-date = "2016-11-02"
+date = "2016-11-03"
 description = "Solution to Leetcode 2918"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1408: String Matching in an Array"
-date = "2020-12-21"
+date = "2020-12-22"
 description = "Solution to Leetcode 1408"
 tags = [
     

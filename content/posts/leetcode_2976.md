@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2976: Minimum Cost to Convert String I"
-date = "2016-09-05"
+date = "2016-09-06"
 description = "Solution to Leetcode 2976"
 tags = [
     

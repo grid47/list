@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2130: Maximum Twin Sum of a Linked List"
-date = "2018-12-30"
+date = "2018-12-31"
 description = "Solution to Leetcode 2130"
 tags = [
     

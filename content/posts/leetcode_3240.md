@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3240: Minimum Number of Flips to Make Binary Grid Palindromic II"
-date = "2015-12-16"
+date = "2015-12-17"
 description = "Solution to Leetcode 3240"
 tags = [
     

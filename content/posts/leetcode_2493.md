@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2493: Divide Nodes Into the Maximum Number of Groups"
-date = "2018-01-01"
+date = "2018-01-02"
 description = "Solution to Leetcode 2493"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1004: Max Consecutive Ones III"
-date = "2022-01-29"
+date = "2022-01-30"
 description = "Solution to Leetcode 1004"
 tags = [
     

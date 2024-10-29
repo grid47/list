@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 972: Equal Rational Numbers"
-date = "2022-03-02"
+date = "2022-03-03"
 description = "Solution to Leetcode 972"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1774: Closest Dessert Cost"
-date = "2019-12-21"
+date = "2019-12-22"
 description = "Solution to Leetcode 1774"
 tags = [
     

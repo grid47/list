@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1879: Minimum XOR Sum of Two Arrays"
-date = "2019-09-07"
+date = "2019-09-08"
 description = "Solution to Leetcode 1879"
 tags = [
     

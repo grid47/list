@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3258: Count Substrings That Satisfy K-Constraint I"
-date = "2015-11-28"
+date = "2015-11-29"
 description = "Solution to Leetcode 3258"
 tags = [
     

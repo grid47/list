@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3123: Find Edges in Shortest Paths"
-date = "2016-04-11"
+date = "2016-04-12"
 description = "Solution to Leetcode 3123"
 tags = [
     

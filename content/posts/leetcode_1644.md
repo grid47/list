@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1644: Lowest Common Ancestor of a Binary Tree II"
-date = "2020-04-29"
+date = "2020-04-30"
 description = "Solution to Leetcode 1644"
 tags = [
     

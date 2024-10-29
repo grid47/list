@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3040: Maximum Number of Operations With the Same Score II"
-date = "2016-07-03"
+date = "2016-07-04"
 description = "Solution to Leetcode 3040"
 tags = [
     

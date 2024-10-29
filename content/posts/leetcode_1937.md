@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1937: Maximum Number of Points with Cost"
-date = "2019-07-11"
+date = "2019-07-12"
 description = "Solution to Leetcode 1937"
 tags = [
     

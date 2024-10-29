@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 627: Swap Salary"
-date = "2023-02-10"
+date = "2023-02-11"
 description = "Solution to Leetcode 627"
 tags = [
     
@@ -26,7 +26,7 @@ series = ["Leetcode"]
 UPDATE Salary SET sex=IF(sex='m','f','m');
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/627.md" >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

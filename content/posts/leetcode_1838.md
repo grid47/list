@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1838: Frequency of the Most Frequent Element"
-date = "2019-10-18"
+date = "2019-10-19"
 description = "Solution to Leetcode 1838"
 tags = [
     

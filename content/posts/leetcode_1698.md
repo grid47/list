@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1698: Number of Distinct Substrings in a String"
-date = "2020-03-06"
+date = "2020-03-07"
 description = "Solution to Leetcode 1698"
 tags = [
     

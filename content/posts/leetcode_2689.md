@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2689: Extract Kth Character From The Rope Tree"
-date = "2017-06-19"
+date = "2017-06-20"
 description = "Solution to Leetcode 2689"
 tags = [
     

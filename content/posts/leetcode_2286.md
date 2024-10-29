@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2286: Booking Concert Tickets in Groups"
-date = "2018-07-27"
+date = "2018-07-28"
 description = "Solution to Leetcode 2286"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1216: Valid Palindrome III"
-date = "2021-07-01"
+date = "2021-07-02"
 description = "Solution to Leetcode 1216"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1483: Kth Ancestor of a Tree Node"
-date = "2020-10-07"
+date = "2020-10-08"
 description = "Solution to Leetcode 1483"
 tags = [
     

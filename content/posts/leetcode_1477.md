@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1477: Find Two Non-overlapping Sub-arrays Each With Target Sum"
-date = "2020-10-13"
+date = "2020-10-14"
 description = "Solution to Leetcode 1477"
 tags = [
     

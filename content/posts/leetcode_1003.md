@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1003: Check If Word Is Valid After Substitutions"
-date = "2022-01-30"
+date = "2022-01-31"
 description = "Solution to Leetcode 1003"
 tags = [
     

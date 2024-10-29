@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1548: The Most Similar Path in a Graph"
-date = "2020-08-03"
+date = "2020-08-04"
 description = "Solution to Leetcode 1548"
 tags = [
     

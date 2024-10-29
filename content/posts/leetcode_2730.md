@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2730: Find the Longest Semi-Repetitive Substring"
-date = "2017-05-09"
+date = "2017-05-10"
 description = "Solution to Leetcode 2730"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1830: Minimum Number of Operations to Make String Sorted"
-date = "2019-10-26"
+date = "2019-10-27"
 description = "Solution to Leetcode 1830"
 tags = [
     

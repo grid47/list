@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2565: Subsequence With the Minimum Score"
-date = "2017-10-21"
+date = "2017-10-22"
 description = "Solution to Leetcode 2565"
 tags = [
     

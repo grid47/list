@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance"
-date = "2021-03-05"
+date = "2021-03-06"
 description = "Solution to Leetcode 1334"
 tags = [
     

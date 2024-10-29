@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3004: Maximum Subtree of the Same Color"
-date = "2016-08-08"
+date = "2016-08-09"
 description = "Solution to Leetcode 3004"
 tags = [
     

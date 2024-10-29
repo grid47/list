@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1011: Capacity To Ship Packages Within D Days"
-date = "2022-01-22"
+date = "2022-01-23"
 description = "Solution to Leetcode 1011"
 tags = [
     

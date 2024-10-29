@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1102: Path With Maximum Minimum Value"
-date = "2021-10-23"
+date = "2021-10-24"
 description = "Solution to Leetcode 1102"
 tags = [
     

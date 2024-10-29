@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1389: Create Target Array in the Given Order"
-date = "2021-01-09"
+date = "2021-01-10"
 description = "Solution to Leetcode 1389"
 tags = [
     

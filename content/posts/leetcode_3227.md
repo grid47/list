@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3227: Vowels Game in a String"
-date = "2015-12-29"
+date = "2015-12-30"
 description = "Solution to Leetcode 3227"
 tags = [
     

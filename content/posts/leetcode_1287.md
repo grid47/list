@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1287: Element Appearing More Than 25% In Sorted Array"
-date = "2021-04-21"
+date = "2021-04-22"
 description = "Solution to Leetcode 1287"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1831: Maximum Transaction Each Day"
-date = "2019-10-25"
+date = "2019-10-26"
 description = "Solution to Leetcode 1831"
 tags = [
     

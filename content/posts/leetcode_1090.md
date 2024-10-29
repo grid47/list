@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1090: Largest Values From Labels"
-date = "2021-11-04"
+date = "2021-11-05"
 description = "Solution to Leetcode 1090"
 tags = [
     

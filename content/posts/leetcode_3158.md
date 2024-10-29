@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3158: Find the XOR of Numbers Which Appear Twice"
-date = "2016-03-07"
+date = "2016-03-08"
 description = "Solution to Leetcode 3158"
 tags = [
     

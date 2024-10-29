@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 966: Vowel Spellchecker"
-date = "2022-03-08"
+date = "2022-03-09"
 description = "Solution to Leetcode 966"
 tags = [
     

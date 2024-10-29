@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1804: Implement Trie II (Prefix Tree)"
-date = "2019-11-21"
+date = "2019-11-22"
 description = "Solution to Leetcode 1804"
 tags = [
     

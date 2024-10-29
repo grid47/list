@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1293: Shortest Path in a Grid with Obstacles Elimination"
-date = "2021-04-15"
+date = "2021-04-16"
 description = "Solution to Leetcode 1293"
 tags = [
     

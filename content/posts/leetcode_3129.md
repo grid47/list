@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3129: Find All Possible Stable Binary Arrays I"
-date = "2016-04-05"
+date = "2016-04-06"
 description = "Solution to Leetcode 3129"
 tags = [
     

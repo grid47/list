@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 904: Fruit Into Baskets"
-date = "2022-05-09"
+date = "2022-05-10"
 description = "Solution to Leetcode 904"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1325: Delete Leaves With a Given Value"
-date = "2021-03-14"
+date = "2021-03-15"
 description = "Solution to Leetcode 1325"
 tags = [
     

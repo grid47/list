@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3323: Minimize Connected Groups by Inserting Interval"
-date = "2015-09-24"
+date = "2015-09-25"
 description = "Solution to Leetcode 3323"
 tags = [
     

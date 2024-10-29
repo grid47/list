@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3211: Generate Binary Strings Without Adjacent Zeros"
-date = "2016-01-14"
+date = "2016-01-15"
 description = "Solution to Leetcode 3211"
 tags = [
     

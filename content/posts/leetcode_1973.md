@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1973: Count Nodes Equal to Sum of Descendants"
-date = "2019-06-05"
+date = "2019-06-06"
 description = "Solution to Leetcode 1973"
 tags = [
     

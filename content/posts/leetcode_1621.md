@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1621: Number of Sets of K Non-Overlapping Line Segments"
-date = "2020-05-22"
+date = "2020-05-23"
 description = "Solution to Leetcode 1621"
 tags = [
     

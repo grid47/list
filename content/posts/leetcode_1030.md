@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1030: Matrix Cells in Distance Order"
-date = "2022-01-03"
+date = "2022-01-04"
 description = "Solution to Leetcode 1030"
 tags = [
     

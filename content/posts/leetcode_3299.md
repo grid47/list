@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3299: Sum of Consecutive Subsequences"
-date = "2015-10-18"
+date = "2015-10-19"
 description = "Solution to Leetcode 3299"
 tags = [
     

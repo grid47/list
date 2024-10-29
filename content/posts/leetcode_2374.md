@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2374: Node With Highest Edge Score"
-date = "2018-04-30"
+date = "2018-05-01"
 description = "Solution to Leetcode 2374"
 tags = [
     

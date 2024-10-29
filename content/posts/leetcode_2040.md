@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2040: Kth Smallest Product of Two Sorted Arrays"
-date = "2019-03-30"
+date = "2019-03-31"
 description = "Solution to Leetcode 2040"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1754: Largest Merge Of Two Strings"
-date = "2020-01-10"
+date = "2020-01-11"
 description = "Solution to Leetcode 1754"
 tags = [
     

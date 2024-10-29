@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3226: Number of Bit Changes to Make Two Integers Equal"
-date = "2015-12-30"
+date = "2015-12-31"
 description = "Solution to Leetcode 3226"
 tags = [
     

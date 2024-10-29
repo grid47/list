@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1623: All Valid Triplets That Can Represent a Country"
-date = "2020-05-20"
+date = "2020-05-21"
 description = "Solution to Leetcode 1623"
 tags = [
     

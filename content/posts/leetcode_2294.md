@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2294: Partition Array Such That Maximum Difference Is K"
-date = "2018-07-19"
+date = "2018-07-20"
 description = "Solution to Leetcode 2294"
 tags = [
     

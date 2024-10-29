@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2037: Minimum Number of Moves to Seat Everyone"
-date = "2019-04-02"
+date = "2019-04-03"
 description = "Solution to Leetcode 2037"
 tags = [
     

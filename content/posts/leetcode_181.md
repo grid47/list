@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 181: Employees Earning More Than Their Managers"
-date = "2024-05-01"
+date = "2024-05-02"
 description = "Solution to Leetcode 181"
 tags = [
     
@@ -28,7 +28,7 @@ INNER JOIN employee e2 ON e1.id = e2.managerID
 WHERE e1.salary < e2.salary
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/181.md" >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

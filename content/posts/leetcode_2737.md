@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2737: Find the Closest Marked Node"
-date = "2017-05-02"
+date = "2017-05-03"
 description = "Solution to Leetcode 2737"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1168: Optimize Water Distribution in a Village"
-date = "2021-08-18"
+date = "2021-08-19"
 description = "Solution to Leetcode 1168"
 tags = [
     

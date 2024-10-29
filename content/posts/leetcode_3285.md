@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3285: Find Indices of Stable Mountains"
-date = "2015-11-01"
+date = "2015-11-02"
 description = "Solution to Leetcode 3285"
 tags = [
     

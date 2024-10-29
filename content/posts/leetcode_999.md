@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 999: Available Captures for Rook"
-date = "2022-02-03"
+date = "2022-02-04"
 description = "Solution to Leetcode 999"
 tags = [
     

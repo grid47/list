@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1156: Swap For Longest Repeated Character Substring"
-date = "2021-08-30"
+date = "2021-08-31"
 description = "Solution to Leetcode 1156"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2004: The Number of Seniors and Juniors to Join the Company"
-date = "2019-05-05"
+date = "2019-05-06"
 description = "Solution to Leetcode 2004"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3204: Bitwise User Permissions Analysis"
-date = "2016-01-21"
+date = "2016-01-22"
 description = "Solution to Leetcode 3204"
 tags = [
     

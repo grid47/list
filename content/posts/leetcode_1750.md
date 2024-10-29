@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1750: Minimum Length of String After Deleting Similar Ends"
-date = "2020-01-14"
+date = "2020-01-15"
 description = "Solution to Leetcode 1750"
 tags = [
     

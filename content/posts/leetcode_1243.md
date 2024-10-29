@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1243: Array Transformation"
-date = "2021-06-04"
+date = "2021-06-05"
 description = "Solution to Leetcode 1243"
 tags = [
     

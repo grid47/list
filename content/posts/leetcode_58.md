@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 58: Length of Last Word"
-date = "2024-09-01"
+date = "2024-09-02"
 description = "Solution to Leetcode 58"
 tags = [
     

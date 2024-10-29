@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1663: Smallest String With A Given Numeric Value"
-date = "2020-04-10"
+date = "2020-04-11"
 description = "Solution to Leetcode 1663"
 tags = [
     

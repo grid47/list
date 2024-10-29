@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1585: Check If String Is Transformable With Substring Sort Operations"
-date = "2020-06-27"
+date = "2020-06-28"
 description = "Solution to Leetcode 1585"
 tags = [
     

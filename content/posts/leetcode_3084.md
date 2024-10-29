@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3084: Count Substrings Starting and Ending with Given Character"
-date = "2016-05-20"
+date = "2016-05-21"
 description = "Solution to Leetcode 3084"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3035: Maximum Palindromes After Operations"
-date = "2016-07-08"
+date = "2016-07-09"
 description = "Solution to Leetcode 3035"
 tags = [
     

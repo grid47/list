@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1303: Find the Team Size"
-date = "2021-04-05"
+date = "2021-04-06"
 description = "Solution to Leetcode 1303"
 tags = [
     

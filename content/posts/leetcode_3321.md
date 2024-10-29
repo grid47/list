@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3321: Find X-Sum of All K-Long Subarrays II"
-date = "2015-09-26"
+date = "2015-09-27"
 description = "Solution to Leetcode 3321"
 tags = [
     

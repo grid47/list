@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1700: Number of Students Unable to Eat Lunch"
-date = "2020-03-04"
+date = "2020-03-05"
 description = "Solution to Leetcode 1700"
 tags = [
     

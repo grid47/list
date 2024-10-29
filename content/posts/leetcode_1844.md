@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1844: Replace All Digits with Characters"
-date = "2019-10-12"
+date = "2019-10-13"
 description = "Solution to Leetcode 1844"
 tags = [
     

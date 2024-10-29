@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2022: Convert 1D Array Into 2D Array"
-date = "2019-04-17"
+date = "2019-04-18"
 description = "Solution to Leetcode 2022"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1282: Group the People Given the Group Size They Belong To"
-date = "2021-04-26"
+date = "2021-04-27"
 description = "Solution to Leetcode 1282"
 tags = [
     

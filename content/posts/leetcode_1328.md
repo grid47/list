@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1328: Break a Palindrome"
-date = "2021-03-11"
+date = "2021-03-12"
 description = "Solution to Leetcode 1328"
 tags = [
     

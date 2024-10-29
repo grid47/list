@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1955: Count Number of Special Subsequences"
-date = "2019-06-23"
+date = "2019-06-24"
 description = "Solution to Leetcode 1955"
 tags = [
     

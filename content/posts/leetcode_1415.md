@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1415: The k-th Lexicographical String of All Happy Strings of Length n"
-date = "2020-12-14"
+date = "2020-12-15"
 description = "Solution to Leetcode 1415"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 27: Remove Element"
-date = "2024-10-02"
+date = "2024-10-03"
 description = "Solution to Leetcode 27"
 tags = [
     

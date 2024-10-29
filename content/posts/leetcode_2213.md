@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2213: Longest Substring of One Repeating Character"
-date = "2018-10-08"
+date = "2018-10-09"
 description = "Solution to Leetcode 2213"
 tags = [
     

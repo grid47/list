@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1805: Number of Different Integers in a String"
-date = "2019-11-20"
+date = "2019-11-21"
 description = "Solution to Leetcode 1805"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2816: Double a Number Represented as a Linked List"
-date = "2017-02-12"
+date = "2017-02-13"
 description = "Solution to Leetcode 2816"
 tags = [
     

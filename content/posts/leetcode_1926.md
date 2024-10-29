@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1926: Nearest Exit from Entrance in Maze"
-date = "2019-07-22"
+date = "2019-07-23"
 description = "Solution to Leetcode 1926"
 tags = [
     

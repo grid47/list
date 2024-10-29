@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2282: Number of People That Can Be Seen in a Grid"
-date = "2018-07-31"
+date = "2018-08-01"
 description = "Solution to Leetcode 2282"
 tags = [
     

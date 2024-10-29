@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1807: Evaluate the Bracket Pairs of a String"
-date = "2019-11-18"
+date = "2019-11-19"
 description = "Solution to Leetcode 1807"
 tags = [
     

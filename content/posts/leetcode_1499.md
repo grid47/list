@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1499: Max Value of Equation"
-date = "2020-09-21"
+date = "2020-09-22"
 description = "Solution to Leetcode 1499"
 tags = [
     

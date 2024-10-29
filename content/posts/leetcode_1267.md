@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1267: Count Servers that Communicate"
-date = "2021-05-11"
+date = "2021-05-12"
 description = "Solution to Leetcode 1267"
 tags = [
     

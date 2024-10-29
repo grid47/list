@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1000: Minimum Cost to Merge Stones"
-date = "2022-02-02"
+date = "2022-02-03"
 description = "Solution to Leetcode 1000"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1704: Determine if String Halves Are Alike"
-date = "2020-02-29"
+date = "2020-03-01"
 description = "Solution to Leetcode 1704"
 tags = [
     

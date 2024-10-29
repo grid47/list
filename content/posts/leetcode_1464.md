@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1464: Maximum Product of Two Elements in an Array"
-date = "2020-10-26"
+date = "2020-10-27"
 description = "Solution to Leetcode 1464"
 tags = [
     

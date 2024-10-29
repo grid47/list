@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1395: Count Number of Teams"
-date = "2021-01-03"
+date = "2021-01-04"
 description = "Solution to Leetcode 1395"
 tags = [
     

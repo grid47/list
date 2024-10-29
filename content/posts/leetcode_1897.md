@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1897: Redistribute Characters to Make All Strings Equal"
-date = "2019-08-20"
+date = "2019-08-21"
 description = "Solution to Leetcode 1897"
 tags = [
     

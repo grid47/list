@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2931: Maximum Spending After Buying Items"
-date = "2016-10-20"
+date = "2016-10-21"
 description = "Solution to Leetcode 2931"
 tags = [
     

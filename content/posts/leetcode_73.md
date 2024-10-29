@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 73: Set Matrix Zeroes"
-date = "2024-08-17"
+date = "2024-08-18"
 description = "Solution to Leetcode 73"
 tags = [
     

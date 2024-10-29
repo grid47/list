@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1730: Shortest Path to Get Food"
-date = "2020-02-03"
+date = "2020-02-04"
 description = "Solution to Leetcode 1730"
 tags = [
     

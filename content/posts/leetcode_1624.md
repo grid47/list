@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1624: Largest Substring Between Two Equal Characters"
-date = "2020-05-19"
+date = "2020-05-20"
 description = "Solution to Leetcode 1624"
 tags = [
     

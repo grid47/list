@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1870: Minimum Speed to Arrive on Time"
-date = "2019-09-16"
+date = "2019-09-17"
 description = "Solution to Leetcode 1870"
 tags = [
     

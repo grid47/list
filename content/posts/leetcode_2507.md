@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2507: Smallest Value After Replacing With Sum of Prime Factors"
-date = "2017-12-18"
+date = "2017-12-19"
 description = "Solution to Leetcode 2507"
 tags = [
     

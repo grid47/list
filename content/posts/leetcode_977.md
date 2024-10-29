@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 977: Squares of a Sorted Array"
-date = "2022-02-25"
+date = "2022-02-26"
 description = "Solution to Leetcode 977"
 tags = [
     

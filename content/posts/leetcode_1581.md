@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1581: Customer Who Visited but Did Not Make Any Transactions"
-date = "2020-07-01"
+date = "2020-07-02"
 description = "Solution to Leetcode 1581"
 tags = [
     

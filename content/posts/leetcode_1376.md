@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1376: Time Needed to Inform All Employees"
-date = "2021-01-22"
+date = "2021-01-23"
 description = "Solution to Leetcode 1376"
 tags = [
     

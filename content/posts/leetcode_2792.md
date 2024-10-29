@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2792: Count Nodes That Are Great Enough"
-date = "2017-03-08"
+date = "2017-03-09"
 description = "Solution to Leetcode 2792"
 tags = [
     

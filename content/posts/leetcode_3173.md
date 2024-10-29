@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3173: Bitwise OR of Adjacent Elements"
-date = "2016-02-21"
+date = "2016-02-22"
 description = "Solution to Leetcode 3173"
 tags = [
     

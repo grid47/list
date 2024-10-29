@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1816: Truncate Sentence"
-date = "2019-11-09"
+date = "2019-11-10"
 description = "Solution to Leetcode 1816"
 tags = [
     

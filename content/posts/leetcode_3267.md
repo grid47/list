@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3267: Count Almost Equal Pairs II"
-date = "2015-11-19"
+date = "2015-11-20"
 description = "Solution to Leetcode 3267"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1505: Minimum Possible Integer After at Most K Adjacent Swaps On Digits"
-date = "2020-09-15"
+date = "2020-09-16"
 description = "Solution to Leetcode 1505"
 tags = [
     

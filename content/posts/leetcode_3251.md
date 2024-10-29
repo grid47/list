@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3251: Find the Count of Monotonic Pairs II"
-date = "2015-12-05"
+date = "2015-12-06"
 description = "Solution to Leetcode 3251"
 tags = [
     

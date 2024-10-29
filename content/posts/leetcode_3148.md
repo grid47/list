@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3148: Maximum Difference Score in a Grid"
-date = "2016-03-17"
+date = "2016-03-18"
 description = "Solution to Leetcode 3148"
 tags = [
     

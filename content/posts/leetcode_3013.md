@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3013: Divide an Array Into Subarrays With Minimum Cost II"
-date = "2016-07-30"
+date = "2016-07-31"
 description = "Solution to Leetcode 3013"
 tags = [
     

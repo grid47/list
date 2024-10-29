@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1713: Minimum Operations to Make a Subsequence"
-date = "2020-02-20"
+date = "2020-02-21"
 description = "Solution to Leetcode 1713"
 tags = [
     

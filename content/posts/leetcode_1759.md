@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1759: Count Number of Homogenous Substrings"
-date = "2020-01-05"
+date = "2020-01-06"
 description = "Solution to Leetcode 1759"
 tags = [
     

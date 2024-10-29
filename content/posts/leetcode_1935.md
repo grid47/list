@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1935: Maximum Number of Words You Can Type"
-date = "2019-07-13"
+date = "2019-07-14"
 description = "Solution to Leetcode 1935"
 tags = [
     

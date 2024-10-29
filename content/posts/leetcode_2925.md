@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2925: Maximum Score After Applying Operations on a Tree"
-date = "2016-10-26"
+date = "2016-10-27"
 description = "Solution to Leetcode 2925"
 tags = [
     

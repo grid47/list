@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2581: Count Number of Possible Root Nodes"
-date = "2017-10-05"
+date = "2017-10-06"
 description = "Solution to Leetcode 2581"
 tags = [
     

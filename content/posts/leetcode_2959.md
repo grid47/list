@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2959: Number of Possible Sets of Closing Branches"
-date = "2016-09-22"
+date = "2016-09-23"
 description = "Solution to Leetcode 2959"
 tags = [
     

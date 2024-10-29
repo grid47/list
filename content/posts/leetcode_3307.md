@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3307: Find the K-th Character in String Game II"
-date = "2015-10-10"
+date = "2015-10-11"
 description = "Solution to Leetcode 3307"
 tags = [
     

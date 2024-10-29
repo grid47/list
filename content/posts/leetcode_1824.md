@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1824: Minimum Sideway Jumps"
-date = "2019-11-01"
+date = "2019-11-02"
 description = "Solution to Leetcode 1824"
 tags = [
     

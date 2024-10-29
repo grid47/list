@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1256: Encode Number"
-date = "2021-05-22"
+date = "2021-05-23"
 description = "Solution to Leetcode 1256"
 tags = [
     

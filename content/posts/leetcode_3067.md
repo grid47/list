@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3067: Count Pairs of Connectable Servers in a Weighted Tree Network"
-date = "2016-06-06"
+date = "2016-06-07"
 description = "Solution to Leetcode 3067"
 tags = [
     

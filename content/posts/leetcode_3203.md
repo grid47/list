@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3203: Find Minimum Diameter After Merging Two Trees"
-date = "2016-01-22"
+date = "2016-01-23"
 description = "Solution to Leetcode 3203"
 tags = [
     

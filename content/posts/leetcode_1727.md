@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1727: Largest Submatrix With Rearrangements"
-date = "2020-02-06"
+date = "2020-02-07"
 description = "Solution to Leetcode 1727"
 tags = [
     

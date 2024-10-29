@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1085: Sum of Digits in the Minimum Number"
-date = "2021-11-09"
+date = "2021-11-10"
 description = "Solution to Leetcode 1085"
 tags = [
     

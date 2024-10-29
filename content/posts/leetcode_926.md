@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 926: Flip String to Monotone Increasing"
-date = "2022-04-17"
+date = "2022-04-18"
 description = "Solution to Leetcode 926"
 tags = [
     

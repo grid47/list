@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3306: Count of Substrings Containing Every Vowel and K Consonants II"
-date = "2015-10-11"
+date = "2015-10-12"
 description = "Solution to Leetcode 3306"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3094: Guess the Number Using Bitwise Questions II"
-date = "2016-05-10"
+date = "2016-05-11"
 description = "Solution to Leetcode 3094"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1742: Maximum Number of Balls in a Box"
-date = "2020-01-22"
+date = "2020-01-23"
 description = "Solution to Leetcode 1742"
 tags = [
     

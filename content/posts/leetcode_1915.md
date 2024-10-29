@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1915: Number of Wonderful Substrings"
-date = "2019-08-02"
+date = "2019-08-03"
 description = "Solution to Leetcode 1915"
 tags = [
     

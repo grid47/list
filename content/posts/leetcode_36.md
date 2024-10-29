@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 36: Valid Sudoku"
-date = "2024-09-23"
+date = "2024-09-24"
 description = "Solution to Leetcode 36"
 tags = [
     

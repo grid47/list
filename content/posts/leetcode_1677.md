@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1677: Product's Worth Over Invoices"
-date = "2020-03-27"
+date = "2020-03-28"
 description = "Solution to Leetcode 1677"
 tags = [
     

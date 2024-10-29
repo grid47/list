@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1667: Fix Names in a Table"
-date = "2020-04-06"
+date = "2020-04-07"
 description = "Solution to Leetcode 1667"
 tags = [
     

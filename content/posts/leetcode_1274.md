@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1274: Number of Ships in a Rectangle"
-date = "2021-05-04"
+date = "2021-05-05"
 description = "Solution to Leetcode 1274"
 tags = [
     

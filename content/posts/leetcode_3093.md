@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3093: Longest Common Suffix Queries"
-date = "2016-05-11"
+date = "2016-05-12"
 description = "Solution to Leetcode 3093"
 tags = [
     

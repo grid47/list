@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1032: Stream of Characters"
-date = "2022-01-01"
+date = "2022-01-02"
 description = "Solution to Leetcode 1032"
 tags = [
     

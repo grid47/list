@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3108: Minimum Cost Walk in Weighted Graph"
-date = "2016-04-26"
+date = "2016-04-27"
 description = "Solution to Leetcode 3108"
 tags = [
     

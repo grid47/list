@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1324: Print Words Vertically"
-date = "2021-03-15"
+date = "2021-03-16"
 description = "Solution to Leetcode 1324"
 tags = [
     

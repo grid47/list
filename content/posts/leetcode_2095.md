@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2095: Delete the Middle Node of a Linked List"
-date = "2019-02-03"
+date = "2019-02-04"
 description = "Solution to Leetcode 2095"
 tags = [
     

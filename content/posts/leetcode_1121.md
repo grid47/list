@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1121: Divide Array Into Increasing Sequences"
-date = "2021-10-04"
+date = "2021-10-05"
 description = "Solution to Leetcode 1121"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1724: Checking Existence of Edge Length Limited Paths II"
-date = "2020-02-09"
+date = "2020-02-10"
 description = "Solution to Leetcode 1724"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2005: Subtree Removal Game with Fibonacci Tree"
-date = "2019-05-04"
+date = "2019-05-05"
 description = "Solution to Leetcode 2005"
 tags = [
     

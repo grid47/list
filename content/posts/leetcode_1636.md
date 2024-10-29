@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1636: Sort Array by Increasing Frequency"
-date = "2020-05-07"
+date = "2020-05-08"
 description = "Solution to Leetcode 1636"
 tags = [
     

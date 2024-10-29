@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1641: Count Sorted Vowel Strings"
-date = "2020-05-02"
+date = "2020-05-03"
 description = "Solution to Leetcode 1641"
 tags = [
     

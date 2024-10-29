@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1116: Print Zero Even Odd"
-date = "2021-10-09"
+date = "2021-10-10"
 description = "Solution to Leetcode 1116"
 tags = [
     

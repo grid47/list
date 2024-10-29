@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3077: Maximum Strength of K Disjoint Subarrays"
-date = "2016-05-27"
+date = "2016-05-28"
 description = "Solution to Leetcode 3077"
 tags = [
     

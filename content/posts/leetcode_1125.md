@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1125: Smallest Sufficient Team"
-date = "2021-09-30"
+date = "2021-10-01"
 description = "Solution to Leetcode 1125"
 tags = [
     

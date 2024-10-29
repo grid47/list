@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2634: Filter Elements from Array"
-date = "2017-08-13"
+date = "2017-08-14"
 description = "Solution to Leetcode 2634"
 tags = [
     

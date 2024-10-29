@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1722: Minimize Hamming Distance After Swap Operations"
-date = "2020-02-11"
+date = "2020-02-12"
 description = "Solution to Leetcode 1722"
 tags = [
     

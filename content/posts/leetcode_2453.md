@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2453: Destroy Sequential Targets"
-date = "2018-02-10"
+date = "2018-02-11"
 description = "Solution to Leetcode 2453"
 tags = [
     

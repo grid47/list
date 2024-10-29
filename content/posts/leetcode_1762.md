@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1762: Buildings With an Ocean View"
-date = "2020-01-02"
+date = "2020-01-03"
 description = "Solution to Leetcode 1762"
 tags = [
     

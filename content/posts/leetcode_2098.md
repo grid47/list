@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2098: Subsequence of Size K With the Largest Even Sum"
-date = "2019-01-31"
+date = "2019-02-01"
 description = "Solution to Leetcode 2098"
 tags = [
     

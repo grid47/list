@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3270: Find the Key of the Numbers"
-date = "2015-11-16"
+date = "2015-11-17"
 description = "Solution to Leetcode 3270"
 tags = [
     

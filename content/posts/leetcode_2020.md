@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2020: Number of Accounts That Did Not Stream"
-date = "2019-04-19"
+date = "2019-04-20"
 description = "Solution to Leetcode 2020"
 tags = [
     

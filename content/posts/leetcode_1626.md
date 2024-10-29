@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1626: Best Team With No Conflicts"
-date = "2020-05-17"
+date = "2020-05-18"
 description = "Solution to Leetcode 1626"
 tags = [
     

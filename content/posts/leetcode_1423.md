@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1423: Maximum Points You Can Obtain from Cards"
-date = "2020-12-06"
+date = "2020-12-07"
 description = "Solution to Leetcode 1423"
 tags = [
     

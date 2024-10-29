@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1371: Find the Longest Substring Containing Vowels in Even Counts"
-date = "2021-01-27"
+date = "2021-01-28"
 description = "Solution to Leetcode 1371"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1591: Strange Printer II"
-date = "2020-06-21"
+date = "2020-06-22"
 description = "Solution to Leetcode 1591"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero"
-date = "2020-10-24"
+date = "2020-10-25"
 description = "Solution to Leetcode 1466"
 tags = [
     

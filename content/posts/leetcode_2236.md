@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2236: Root Equals Sum of Children"
-date = "2018-09-15"
+date = "2018-09-16"
 description = "Solution to Leetcode 2236"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2777: Date Range Generator"
-date = "2017-03-23"
+date = "2017-03-24"
 description = "Solution to Leetcode 2777"
 tags = [
     

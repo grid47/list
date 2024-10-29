@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 922: Sort Array By Parity II"
-date = "2022-04-21"
+date = "2022-04-22"
 description = "Solution to Leetcode 922"
 tags = [
     

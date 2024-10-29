@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3178: Find the Child Who Has the Ball After K Seconds"
-date = "2016-02-16"
+date = "2016-02-17"
 description = "Solution to Leetcode 3178"
 tags = [
     

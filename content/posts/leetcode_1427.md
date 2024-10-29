@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1427: Perform String Shifts"
-date = "2020-12-02"
+date = "2020-12-03"
 description = "Solution to Leetcode 1427"
 tags = [
     

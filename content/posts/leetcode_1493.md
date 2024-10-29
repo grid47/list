@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1493: Longest Subarray of 1's After Deleting One Element"
-date = "2020-09-27"
+date = "2020-09-28"
 description = "Solution to Leetcode 1493"
 tags = [
     

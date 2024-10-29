@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1684: Count the Number of Consistent Strings"
-date = "2020-03-20"
+date = "2020-03-21"
 description = "Solution to Leetcode 1684"
 tags = [
     

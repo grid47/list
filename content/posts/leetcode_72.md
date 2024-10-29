@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 72: Edit Distance"
-date = "2024-08-18"
+date = "2024-08-19"
 description = "Solution to Leetcode 72"
 tags = [
     

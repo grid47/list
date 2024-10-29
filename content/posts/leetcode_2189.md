@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2189: Number of Ways to Build House of Cards"
-date = "2018-11-01"
+date = "2018-11-02"
 description = "Solution to Leetcode 2189"
 tags = [
     

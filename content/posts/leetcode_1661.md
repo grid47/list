@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1661: Average Time of Process per Machine"
-date = "2020-04-12"
+date = "2020-04-13"
 description = "Solution to Leetcode 1661"
 tags = [
     

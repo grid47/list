@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2943: Maximize Area of Square Hole in Grid"
-date = "2016-10-08"
+date = "2016-10-09"
 description = "Solution to Leetcode 2943"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 930: Binary Subarrays With Sum"
-date = "2022-04-13"
+date = "2022-04-14"
 description = "Solution to Leetcode 930"
 tags = [
     

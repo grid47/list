@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1866: Number of Ways to Rearrange Sticks With K Sticks Visible"
-date = "2019-09-20"
+date = "2019-09-21"
 description = "Solution to Leetcode 1866"
 tags = [
     

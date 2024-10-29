@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3247: Number of Subsequences with Odd Sum"
-date = "2015-12-09"
+date = "2015-12-10"
 description = "Solution to Leetcode 3247"
 tags = [
     

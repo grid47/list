@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2586: Count the Number of Vowel Strings in Range"
-date = "2017-09-30"
+date = "2017-10-01"
 description = "Solution to Leetcode 2586"
 tags = [
     

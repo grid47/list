@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1554: Strings Differ by One Character"
-date = "2020-07-28"
+date = "2020-07-29"
 description = "Solution to Leetcode 1554"
 tags = [
     

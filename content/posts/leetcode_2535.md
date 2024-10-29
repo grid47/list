@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2535: Difference Between Element Sum and Digit Sum of an Array"
-date = "2017-11-20"
+date = "2017-11-21"
 description = "Solution to Leetcode 2535"
 tags = [
     

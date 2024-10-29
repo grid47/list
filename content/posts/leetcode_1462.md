@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1462: Course Schedule IV"
-date = "2020-10-28"
+date = "2020-10-29"
 description = "Solution to Leetcode 1462"
 tags = [
     

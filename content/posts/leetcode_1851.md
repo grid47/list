@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1851: Minimum Interval to Include Each Query"
-date = "2019-10-05"
+date = "2019-10-06"
 description = "Solution to Leetcode 1851"
 tags = [
     

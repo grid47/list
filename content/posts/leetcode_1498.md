@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition"
-date = "2020-09-22"
+date = "2020-09-23"
 description = "Solution to Leetcode 1498"
 tags = [
     

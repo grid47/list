@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1013: Partition Array Into Three Parts With Equal Sum"
-date = "2022-01-20"
+date = "2022-01-21"
 description = "Solution to Leetcode 1013"
 tags = [
     

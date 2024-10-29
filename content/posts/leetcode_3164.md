@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3164: Find the Number of Good Pairs II"
-date = "2016-03-01"
+date = "2016-03-02"
 description = "Solution to Leetcode 3164"
 tags = [
     

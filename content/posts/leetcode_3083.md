@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3083: Existence of a Substring in a String and Its Reverse"
-date = "2016-05-21"
+date = "2016-05-22"
 description = "Solution to Leetcode 3083"
 tags = [
     

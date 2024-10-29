@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 950: Reveal Cards In Increasing Order"
-date = "2022-03-24"
+date = "2022-03-25"
 description = "Solution to Leetcode 950"
 tags = [
     

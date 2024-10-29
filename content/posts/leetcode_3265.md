@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3265: Count Almost Equal Pairs I"
-date = "2015-11-21"
+date = "2015-11-22"
 description = "Solution to Leetcode 3265"
 tags = [
     

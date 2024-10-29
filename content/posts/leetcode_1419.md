@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1419: Minimum Number of Frogs Croaking"
-date = "2020-12-10"
+date = "2020-12-11"
 description = "Solution to Leetcode 1419"
 tags = [
     

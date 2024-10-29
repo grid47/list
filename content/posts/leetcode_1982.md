@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1982: Find Array Given Subset Sums"
-date = "2019-05-27"
+date = "2019-05-28"
 description = "Solution to Leetcode 1982"
 tags = [
     

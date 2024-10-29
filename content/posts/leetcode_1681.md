@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1681: Minimum Incompatibility"
-date = "2020-03-23"
+date = "2020-03-24"
 description = "Solution to Leetcode 1681"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1567: Maximum Length of Subarray With Positive Product"
-date = "2020-07-15"
+date = "2020-07-16"
 description = "Solution to Leetcode 1567"
 tags = [
     

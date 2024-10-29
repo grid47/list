@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1367: Linked List in Binary Tree"
-date = "2021-01-31"
+date = "2021-02-01"
 description = "Solution to Leetcode 1367"
 tags = [
     

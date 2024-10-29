@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1995: Count Special Quadruplets"
-date = "2019-05-14"
+date = "2019-05-15"
 description = "Solution to Leetcode 1995"
 tags = [
     

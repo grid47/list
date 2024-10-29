@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3271: Hash Divided String"
-date = "2015-11-15"
+date = "2015-11-16"
 description = "Solution to Leetcode 3271"
 tags = [
     

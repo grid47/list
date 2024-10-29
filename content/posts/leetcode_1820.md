@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1820: Maximum Number of Accepted Invitations"
-date = "2019-11-05"
+date = "2019-11-06"
 description = "Solution to Leetcode 1820"
 tags = [
     

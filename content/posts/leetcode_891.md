@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 891: Sum of Subsequence Widths"
-date = "2022-05-22"
+date = "2022-05-23"
 description = "Solution to Leetcode 891"
 tags = [
     

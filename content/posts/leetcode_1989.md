@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1989: Maximum Number of People That Can Be Caught in Tag"
-date = "2019-05-20"
+date = "2019-05-21"
 description = "Solution to Leetcode 1989"
 tags = [
     

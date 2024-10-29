@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1199: Minimum Time to Build Blocks"
-date = "2021-07-18"
+date = "2021-07-19"
 description = "Solution to Leetcode 1199"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1745: Palindrome Partitioning IV"
-date = "2020-01-19"
+date = "2020-01-20"
 description = "Solution to Leetcode 1745"
 tags = [
     

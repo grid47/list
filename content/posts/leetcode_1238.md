@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1238: Circular Permutation in Binary Representation"
-date = "2021-06-09"
+date = "2021-06-10"
 description = "Solution to Leetcode 1238"
 tags = [
     

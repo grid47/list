@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2352: Equal Row and Column Pairs"
-date = "2018-05-22"
+date = "2018-05-23"
 description = "Solution to Leetcode 2352"
 tags = [
     

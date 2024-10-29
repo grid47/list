@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2531: Make Number of Distinct Characters Equal"
-date = "2017-11-24"
+date = "2017-11-25"
 description = "Solution to Leetcode 2531"
 tags = [
     

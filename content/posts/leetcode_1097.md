@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1097: Game Play Analysis V"
-date = "2021-10-28"
+date = "2021-10-29"
 description = "Solution to Leetcode 1097"
 tags = [
     

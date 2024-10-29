@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1560: Most Visited Sector in  a Circular Track"
-date = "2020-07-22"
+date = "2020-07-23"
 description = "Solution to Leetcode 1560"
 tags = [
     

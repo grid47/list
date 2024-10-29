@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2521: Distinct Prime Factors of Product of Array"
-date = "2017-12-04"
+date = "2017-12-05"
 description = "Solution to Leetcode 2521"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2782: Number of Unique Categories"
-date = "2017-03-18"
+date = "2017-03-19"
 description = "Solution to Leetcode 2782"
 tags = [
     

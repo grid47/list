@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1948: Delete Duplicate Folders in System"
-date = "2019-06-30"
+date = "2019-07-01"
 description = "Solution to Leetcode 1948"
 tags = [
     

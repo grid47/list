@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1612: Check If Two Expression Trees are Equivalent"
-date = "2020-05-31"
+date = "2020-06-01"
 description = "Solution to Leetcode 1612"
 tags = [
     

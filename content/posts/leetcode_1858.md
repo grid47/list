@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1858: Longest Word With All Prefixes"
-date = "2019-09-28"
+date = "2019-09-29"
 description = "Solution to Leetcode 1858"
 tags = [
     

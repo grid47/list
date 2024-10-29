@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2302: Count Subarrays With Score Less Than K"
-date = "2018-07-11"
+date = "2018-07-12"
 description = "Solution to Leetcode 2302"
 tags = [
     

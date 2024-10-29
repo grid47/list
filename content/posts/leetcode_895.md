@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 895: Maximum Frequency Stack"
-date = "2022-05-18"
+date = "2022-05-19"
 description = "Solution to Leetcode 895"
 tags = [
     

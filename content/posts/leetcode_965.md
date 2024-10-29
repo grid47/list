@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 965: Univalued Binary Tree"
-date = "2022-03-09"
+date = "2022-03-10"
 description = "Solution to Leetcode 965"
 tags = [
     

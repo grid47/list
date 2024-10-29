@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2114: Maximum Number of Words Found in Sentences"
-date = "2019-01-15"
+date = "2019-01-16"
 description = "Solution to Leetcode 2114"
 tags = [
     

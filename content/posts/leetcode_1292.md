@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold"
-date = "2021-04-16"
+date = "2021-04-17"
 description = "Solution to Leetcode 1292"
 tags = [
     

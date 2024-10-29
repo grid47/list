@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3046: Split the Array"
-date = "2016-06-27"
+date = "2016-06-28"
 description = "Solution to Leetcode 3046"
 tags = [
     

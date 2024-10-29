@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3276: Select Cells in Grid With Maximum Score"
-date = "2015-11-10"
+date = "2015-11-11"
 description = "Solution to Leetcode 3276"
 tags = [
     

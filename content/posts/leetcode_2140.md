@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2140: Solving Questions With Brainpower"
-date = "2018-12-20"
+date = "2018-12-21"
 description = "Solution to Leetcode 2140"
 tags = [
     

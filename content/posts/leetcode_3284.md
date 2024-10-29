@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3284: Sum of Consecutive Subarrays"
-date = "2015-11-02"
+date = "2015-11-03"
 description = "Solution to Leetcode 3284"
 tags = [
     

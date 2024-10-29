@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3098: Find the Sum of Subsequence Powers"
-date = "2016-05-06"
+date = "2016-05-07"
 description = "Solution to Leetcode 3098"
 tags = [
     

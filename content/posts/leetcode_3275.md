@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3275: K-th Nearest Obstacle Queries"
-date = "2015-11-11"
+date = "2015-11-12"
 description = "Solution to Leetcode 3275"
 tags = [
     

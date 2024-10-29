@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1843: Suspicious Bank Accounts"
-date = "2019-10-13"
+date = "2019-10-14"
 description = "Solution to Leetcode 1843"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1895: Largest Magic Square"
-date = "2019-08-22"
+date = "2019-08-23"
 description = "Solution to Leetcode 1895"
 tags = [
     

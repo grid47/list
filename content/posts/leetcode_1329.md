@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1329: Sort the Matrix Diagonally"
-date = "2021-03-10"
+date = "2021-03-11"
 description = "Solution to Leetcode 1329"
 tags = [
     

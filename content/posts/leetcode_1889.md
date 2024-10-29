@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1889: Minimum Space Wasted From Packaging"
-date = "2019-08-28"
+date = "2019-08-29"
 description = "Solution to Leetcode 1889"
 tags = [
     

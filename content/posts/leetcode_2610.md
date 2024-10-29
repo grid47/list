@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2610: Convert an Array Into a 2D Array With Conditions"
-date = "2017-09-06"
+date = "2017-09-07"
 description = "Solution to Leetcode 2610"
 tags = [
     

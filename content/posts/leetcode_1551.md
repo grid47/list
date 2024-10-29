@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1551: Minimum Operations to Make Array Equal"
-date = "2020-07-31"
+date = "2020-08-01"
 description = "Solution to Leetcode 1551"
 tags = [
     

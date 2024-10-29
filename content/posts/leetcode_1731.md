@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1731: The Number of Employees Which Report to Each Employee"
-date = "2020-02-02"
+date = "2020-02-03"
 description = "Solution to Leetcode 1731"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2625: Flatten Deeply Nested Array"
-date = "2017-08-22"
+date = "2017-08-23"
 description = "Solution to Leetcode 2625"
 tags = [
     

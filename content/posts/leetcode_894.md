@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 894: All Possible Full Binary Trees"
-date = "2022-05-19"
+date = "2022-05-20"
 description = "Solution to Leetcode 894"
 tags = [
     

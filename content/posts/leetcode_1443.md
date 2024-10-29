@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1443: Minimum Time to Collect All Apples in a Tree"
-date = "2020-11-16"
+date = "2020-11-17"
 description = "Solution to Leetcode 1443"
 tags = [
     

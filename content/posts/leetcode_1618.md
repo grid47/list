@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1618: Maximum Font to Fit a Sentence in a Screen"
-date = "2020-05-25"
+date = "2020-05-26"
 description = "Solution to Leetcode 1618"
 tags = [
     

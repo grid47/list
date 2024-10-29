@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1675: Minimize Deviation in Array"
-date = "2020-03-29"
+date = "2020-03-30"
 description = "Solution to Leetcode 1675"
 tags = [
     

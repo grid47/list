@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1849: Splitting a String Into Descending Consecutive Values"
-date = "2019-10-07"
+date = "2019-10-08"
 description = "Solution to Leetcode 1849"
 tags = [
     

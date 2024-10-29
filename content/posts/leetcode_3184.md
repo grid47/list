@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3184: Count Pairs That Form a Complete Day I"
-date = "2016-02-10"
+date = "2016-02-11"
 description = "Solution to Leetcode 3184"
 tags = [
     

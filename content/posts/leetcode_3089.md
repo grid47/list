@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3089: Find Bursty Behavior"
-date = "2016-05-15"
+date = "2016-05-16"
 description = "Solution to Leetcode 3089"
 tags = [
     

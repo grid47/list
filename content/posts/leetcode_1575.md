@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1575: Count All Possible Routes"
-date = "2020-07-07"
+date = "2020-07-08"
 description = "Solution to Leetcode 1575"
 tags = [
     

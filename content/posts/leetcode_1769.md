@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1769: Minimum Number of Operations to Move All Balls to Each Box"
-date = "2019-12-26"
+date = "2019-12-27"
 description = "Solution to Leetcode 1769"
 tags = [
     

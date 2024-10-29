@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2536: Increment Submatrices by One"
-date = "2017-11-19"
+date = "2017-11-20"
 description = "Solution to Leetcode 2536"
 tags = [
     

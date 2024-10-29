@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2353: Design a Food Rating System"
-date = "2018-05-21"
+date = "2018-05-22"
 description = "Solution to Leetcode 2353"
 tags = [
     

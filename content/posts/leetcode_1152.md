@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1152: Analyze User Website Visit Pattern"
-date = "2021-09-03"
+date = "2021-09-04"
 description = "Solution to Leetcode 1152"
 tags = [
     

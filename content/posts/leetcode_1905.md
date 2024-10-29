@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1905: Count Sub Islands"
-date = "2019-08-12"
+date = "2019-08-13"
 description = "Solution to Leetcode 1905"
 tags = [
     

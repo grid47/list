@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2065: Maximum Path Quality of a Graph"
-date = "2019-03-05"
+date = "2019-03-06"
 description = "Solution to Leetcode 2065"
 tags = [
     

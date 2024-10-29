@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3255: Find the Power of K-Size Subarrays II"
-date = "2015-12-01"
+date = "2015-12-02"
 description = "Solution to Leetcode 3255"
 tags = [
     

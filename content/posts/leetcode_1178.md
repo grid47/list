@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1178: Number of Valid Words for Each Puzzle"
-date = "2021-08-08"
+date = "2021-08-09"
 description = "Solution to Leetcode 1178"
 tags = [
     

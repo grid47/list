@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1368: Minimum Cost to Make at Least One Valid Path in a Grid"
-date = "2021-01-30"
+date = "2021-01-31"
 description = "Solution to Leetcode 1368"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 29: Divide Two Integers"
-date = "2024-09-30"
+date = "2024-10-01"
 description = "Solution to Leetcode 29"
 tags = [
     

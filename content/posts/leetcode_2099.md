@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2099: Find Subsequence of Length K With the Largest Sum"
-date = "2019-01-30"
+date = "2019-01-31"
 description = "Solution to Leetcode 2099"
 tags = [
     

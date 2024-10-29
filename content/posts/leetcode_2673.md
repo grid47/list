@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2673: Make Costs of Paths Equal in a Binary Tree"
-date = "2017-07-05"
+date = "2017-07-06"
 description = "Solution to Leetcode 2673"
 tags = [
     

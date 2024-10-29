@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1899: Merge Triplets to Form Target Triplet"
-date = "2019-08-18"
+date = "2019-08-19"
 description = "Solution to Leetcode 1899"
 tags = [
     

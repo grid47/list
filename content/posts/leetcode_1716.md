@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1716: Calculate Money in Leetcode Bank"
-date = "2020-02-17"
+date = "2020-02-18"
 description = "Solution to Leetcode 1716"
 tags = [
     

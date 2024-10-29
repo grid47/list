@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1553: Minimum Number of Days to Eat N Oranges"
-date = "2020-07-29"
+date = "2020-07-30"
 description = "Solution to Leetcode 1553"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3073: Maximum Increasing Triplet Value"
-date = "2016-05-31"
+date = "2016-06-01"
 description = "Solution to Leetcode 3073"
 tags = [
     

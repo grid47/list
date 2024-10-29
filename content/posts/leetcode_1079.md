@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1079: Letter Tile Possibilities"
-date = "2021-11-15"
+date = "2021-11-16"
 description = "Solution to Leetcode 1079"
 tags = [
     

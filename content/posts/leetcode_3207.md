@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3207: Maximum Points After Enemy Battles"
-date = "2016-01-18"
+date = "2016-01-19"
 description = "Solution to Leetcode 3207"
 tags = [
     

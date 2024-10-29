@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1550: Three Consecutive Odds"
-date = "2020-08-01"
+date = "2020-08-02"
 description = "Solution to Leetcode 1550"
 tags = [
     

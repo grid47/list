@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 878: Nth Magical Number"
-date = "2022-06-04"
+date = "2022-06-05"
 description = "Solution to Leetcode 878"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2198: Number of Single Divisor Triplets"
-date = "2018-10-23"
+date = "2018-10-24"
 description = "Solution to Leetcode 2198"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1433: Check If a String Can Break Another String"
-date = "2020-11-26"
+date = "2020-11-27"
 description = "Solution to Leetcode 1433"
 tags = [
     

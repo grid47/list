@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2677: Chunk Array"
-date = "2017-07-01"
+date = "2017-07-02"
 description = "Solution to Leetcode 2677"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1233: Remove Sub-Folders from the Filesystem"
-date = "2021-06-14"
+date = "2021-06-15"
 description = "Solution to Leetcode 1233"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 51: N-Queens"
-date = "2024-09-08"
+date = "2024-09-09"
 description = "Solution to Leetcode 51"
 tags = [
     

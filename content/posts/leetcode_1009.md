@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1009: Complement of Base 10 Integer"
-date = "2022-01-24"
+date = "2022-01-25"
 description = "Solution to Leetcode 1009"
 tags = [
     

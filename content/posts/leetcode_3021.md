@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3021: Alice and Bob Playing Flower Game"
-date = "2016-07-22"
+date = "2016-07-23"
 description = "Solution to Leetcode 3021"
 tags = [
     

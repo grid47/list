@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 998: Maximum Binary Tree II"
-date = "2022-02-04"
+date = "2022-02-05"
 description = "Solution to Leetcode 998"
 tags = [
     

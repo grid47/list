@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3301: Maximize the Total Height of Unique Towers"
-date = "2015-10-16"
+date = "2015-10-17"
 description = "Solution to Leetcode 3301"
 tags = [
     

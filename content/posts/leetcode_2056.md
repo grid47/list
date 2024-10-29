@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2056: Number of Valid Move Combinations On Chessboard"
-date = "2019-03-14"
+date = "2019-03-15"
 description = "Solution to Leetcode 2056"
 tags = [
     

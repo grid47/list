@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3065: Minimum Operations to Exceed Threshold Value I"
-date = "2016-06-08"
+date = "2016-06-09"
 description = "Solution to Leetcode 3065"
 tags = [
     

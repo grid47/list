@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 906: Super Palindromes"
-date = "2022-05-07"
+date = "2022-05-08"
 description = "Solution to Leetcode 906"
 tags = [
     

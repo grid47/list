@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1080: Insufficient Nodes in Root to Leaf Paths"
-date = "2021-11-14"
+date = "2021-11-15"
 description = "Solution to Leetcode 1080"
 tags = [
     

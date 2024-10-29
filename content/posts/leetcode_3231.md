@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3231: Minimum Number of Increasing Subsequence to Be Removed"
-date = "2015-12-25"
+date = "2015-12-26"
 description = "Solution to Leetcode 3231"
 tags = [
     

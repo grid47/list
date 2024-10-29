@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3092: Most Frequent IDs"
-date = "2016-05-12"
+date = "2016-05-13"
 description = "Solution to Leetcode 3092"
 tags = [
     

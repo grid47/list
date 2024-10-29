@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2554: Maximum Number of Integers to Choose From a Range I"
-date = "2017-11-01"
+date = "2017-11-02"
 description = "Solution to Leetcode 2554"
 tags = [
     

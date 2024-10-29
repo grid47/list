@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 881: Boats to Save People"
-date = "2022-06-01"
+date = "2022-06-02"
 description = "Solution to Leetcode 881"
 tags = [
     

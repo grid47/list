@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2417: Closest Fair Integer"
-date = "2018-03-18"
+date = "2018-03-19"
 description = "Solution to Leetcode 2417"
 tags = [
     

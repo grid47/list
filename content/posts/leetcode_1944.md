@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1944: Number of Visible People in a Queue"
-date = "2019-07-04"
+date = "2019-07-05"
 description = "Solution to Leetcode 1944"
 tags = [
     

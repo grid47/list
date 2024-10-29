@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 961: N-Repeated Element in Size 2N Array"
-date = "2022-03-13"
+date = "2022-03-14"
 description = "Solution to Leetcode 961"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 973: K Closest Points to Origin"
-date = "2022-03-01"
+date = "2022-03-02"
 description = "Solution to Leetcode 973"
 tags = [
     

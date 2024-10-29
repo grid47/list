@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2354: Number of Excellent Pairs"
-date = "2018-05-20"
+date = "2018-05-21"
 description = "Solution to Leetcode 2354"
 tags = [
     

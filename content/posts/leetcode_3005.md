@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3005: Count Elements With Maximum Frequency"
-date = "2016-08-07"
+date = "2016-08-08"
 description = "Solution to Leetcode 3005"
 tags = [
     

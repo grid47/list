@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 957: Prison Cells After N Days"
-date = "2022-03-17"
+date = "2022-03-18"
 description = "Solution to Leetcode 957"
 tags = [
     

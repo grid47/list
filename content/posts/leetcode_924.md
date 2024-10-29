@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 924: Minimize Malware Spread"
-date = "2022-04-19"
+date = "2022-04-20"
 description = "Solution to Leetcode 924"
 tags = [
     

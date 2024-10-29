@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1999: Smallest Greater Multiple Made of Two Digits"
-date = "2019-05-10"
+date = "2019-05-11"
 description = "Solution to Leetcode 1999"
 tags = [
     

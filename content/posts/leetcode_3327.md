@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3327: Check if DFS Strings Are Palindromes"
-date = "2015-09-20"
+date = "2015-09-21"
 description = "Solution to Leetcode 3327"
 tags = [
     

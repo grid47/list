@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1141: User Activity for the Past 30 Days I"
-date = "2021-09-14"
+date = "2021-09-15"
 description = "Solution to Leetcode 1141"
 tags = [
     

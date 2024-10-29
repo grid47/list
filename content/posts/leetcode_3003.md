@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3003: Maximize the Number of Partitions After Operations"
-date = "2016-08-09"
+date = "2016-08-10"
 description = "Solution to Leetcode 3003"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 96: Unique Binary Search Trees"
-date = "2024-07-25"
+date = "2024-07-26"
 description = "Solution to Leetcode 96"
 tags = [
     

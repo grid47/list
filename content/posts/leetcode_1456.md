@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1456: Maximum Number of Vowels in a Substring of Given Length"
-date = "2020-11-03"
+date = "2020-11-04"
 description = "Solution to Leetcode 1456"
 tags = [
     

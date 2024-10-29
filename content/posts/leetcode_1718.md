@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1718: Construct the Lexicographically Largest Valid Sequence"
-date = "2020-02-15"
+date = "2020-02-16"
 description = "Solution to Leetcode 1718"
 tags = [
     

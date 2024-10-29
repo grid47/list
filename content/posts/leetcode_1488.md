@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1488: Avoid Flood in The City"
-date = "2020-10-02"
+date = "2020-10-03"
 description = "Solution to Leetcode 1488"
 tags = [
     

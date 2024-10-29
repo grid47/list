@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1248: Count Number of Nice Subarrays"
-date = "2021-05-30"
+date = "2021-05-31"
 description = "Solution to Leetcode 1248"
 tags = [
     

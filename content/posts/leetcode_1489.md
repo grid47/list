@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree"
-date = "2020-10-01"
+date = "2020-10-02"
 description = "Solution to Leetcode 1489"
 tags = [
     

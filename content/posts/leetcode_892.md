@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 892: Surface Area of 3D Shapes"
-date = "2022-05-21"
+date = "2022-05-22"
 description = "Solution to Leetcode 892"
 tags = [
     

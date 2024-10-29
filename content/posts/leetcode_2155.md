@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2155: All Divisions With the Highest Score of a Binary Array"
-date = "2018-12-05"
+date = "2018-12-06"
 description = "Solution to Leetcode 2155"
 tags = [
     

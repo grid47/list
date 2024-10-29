@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1144: Decrease Elements To Make Array Zigzag"
-date = "2021-09-11"
+date = "2021-09-12"
 description = "Solution to Leetcode 1144"
 tags = [
     

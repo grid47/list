@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1230: Toss Strange Coins"
-date = "2021-06-17"
+date = "2021-06-18"
 description = "Solution to Leetcode 1230"
 tags = [
     

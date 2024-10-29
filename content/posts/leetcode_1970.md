@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1970: Last Day Where You Can Still Cross"
-date = "2019-06-08"
+date = "2019-06-09"
 description = "Solution to Leetcode 1970"
 tags = [
     

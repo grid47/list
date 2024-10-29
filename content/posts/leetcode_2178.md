@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2178: Maximum Split of Positive Even Integers"
-date = "2018-11-12"
+date = "2018-11-13"
 description = "Solution to Leetcode 2178"
 tags = [
     

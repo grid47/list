@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 968: Binary Tree Cameras"
-date = "2022-03-06"
+date = "2022-03-07"
 description = "Solution to Leetcode 968"
 tags = [
     

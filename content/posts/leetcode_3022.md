@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3022: Minimize OR of Remaining Elements Using Operations"
-date = "2016-07-21"
+date = "2016-07-22"
 description = "Solution to Leetcode 3022"
 tags = [
     

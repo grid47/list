@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 910: Smallest Range II"
-date = "2022-05-03"
+date = "2022-05-04"
 description = "Solution to Leetcode 910"
 tags = [
     

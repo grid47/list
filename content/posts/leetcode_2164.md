@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2164: Sort Even and Odd Indices Independently"
-date = "2018-11-26"
+date = "2018-11-27"
 description = "Solution to Leetcode 2164"
 tags = [
     

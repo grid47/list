@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2920: Maximum Points After Collecting Coins From All Nodes"
-date = "2016-10-31"
+date = "2016-11-01"
 description = "Solution to Leetcode 2920"
 tags = [
     

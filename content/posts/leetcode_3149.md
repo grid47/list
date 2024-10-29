@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3149: Find the Minimum Cost Array Permutation"
-date = "2016-03-16"
+date = "2016-03-17"
 description = "Solution to Leetcode 3149"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1492: The kth Factor of n"
-date = "2020-09-28"
+date = "2020-09-29"
 description = "Solution to Leetcode 1492"
 tags = [
     

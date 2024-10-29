@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1582: Special Positions in a Binary Matrix"
-date = "2020-06-30"
+date = "2020-07-01"
 description = "Solution to Leetcode 1582"
 tags = [
     

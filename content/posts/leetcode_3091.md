@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3091: Apply Operations to Make Sum of Array Greater Than or Equal to k"
-date = "2016-05-13"
+date = "2016-05-14"
 description = "Solution to Leetcode 3091"
 tags = [
     

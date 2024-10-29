@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3088: Make String Anti-palindrome"
-date = "2016-05-16"
+date = "2016-05-17"
 description = "Solution to Leetcode 3088"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1404: Number of Steps to Reduce a Number in Binary Representation to One"
-date = "2020-12-25"
+date = "2020-12-26"
 description = "Solution to Leetcode 1404"
 tags = [
     

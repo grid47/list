@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2611: Mice and Cheese"
-date = "2017-09-05"
+date = "2017-09-06"
 description = "Solution to Leetcode 2611"
 tags = [
     

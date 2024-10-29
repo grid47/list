@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3100: Water Bottles II"
-date = "2016-05-04"
+date = "2016-05-05"
 description = "Solution to Leetcode 3100"
 tags = [
     

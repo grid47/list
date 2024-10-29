@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1614: Maximum Nesting Depth of the Parentheses"
-date = "2020-05-29"
+date = "2020-05-30"
 description = "Solution to Leetcode 1614"
 tags = [
     

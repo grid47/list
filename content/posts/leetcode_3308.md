@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3308: Find Top Performing Driver"
-date = "2015-10-09"
+date = "2015-10-10"
 description = "Solution to Leetcode 3308"
 tags = [
     

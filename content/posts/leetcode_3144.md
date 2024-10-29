@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3144: Minimum Substring Partition of Equal Character Frequency"
-date = "2016-03-21"
+date = "2016-03-22"
 description = "Solution to Leetcode 3144"
 tags = [
     

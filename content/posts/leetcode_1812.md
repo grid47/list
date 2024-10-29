@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1812: Determine Color of a Chessboard Square"
-date = "2019-11-13"
+date = "2019-11-14"
 description = "Solution to Leetcode 1812"
 tags = [
     

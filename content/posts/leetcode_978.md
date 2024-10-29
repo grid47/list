@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 978: Longest Turbulent Subarray"
-date = "2022-02-24"
+date = "2022-02-25"
 description = "Solution to Leetcode 978"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1893: Check if All the Integers in a Range Are Covered"
-date = "2019-08-24"
+date = "2019-08-25"
 description = "Solution to Leetcode 1893"
 tags = [
     

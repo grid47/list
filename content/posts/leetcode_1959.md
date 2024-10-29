@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1959: Minimum Total Space Wasted With K Resizing Operations"
-date = "2019-06-19"
+date = "2019-06-20"
 description = "Solution to Leetcode 1959"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3200: Maximum Height of a Triangle"
-date = "2016-01-25"
+date = "2016-01-26"
 description = "Solution to Leetcode 3200"
 tags = [
     

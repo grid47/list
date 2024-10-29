@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1331: Rank Transform of an Array"
-date = "2021-03-08"
+date = "2021-03-09"
 description = "Solution to Leetcode 1331"
 tags = [
     

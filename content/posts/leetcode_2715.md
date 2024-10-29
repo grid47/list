@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2715: Timeout Cancellation"
-date = "2017-05-24"
+date = "2017-05-25"
 description = "Solution to Leetcode 2715"
 tags = [
     

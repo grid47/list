@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1836: Remove Duplicates From an Unsorted Linked List"
-date = "2019-10-20"
+date = "2019-10-21"
 description = "Solution to Leetcode 1836"
 tags = [
     

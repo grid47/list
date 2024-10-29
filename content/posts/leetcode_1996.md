@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1996: The Number of Weak Characters in the Game"
-date = "2019-05-13"
+date = "2019-05-14"
 description = "Solution to Leetcode 1996"
 tags = [
     

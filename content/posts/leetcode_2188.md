@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2188: Minimum Time to Finish the Race"
-date = "2018-11-02"
+date = "2018-11-03"
 description = "Solution to Leetcode 2188"
 tags = [
     

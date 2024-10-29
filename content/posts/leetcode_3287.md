@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3287: Find the Maximum Sequence Value of Array"
-date = "2015-10-30"
+date = "2015-10-31"
 description = "Solution to Leetcode 3287"
 tags = [
     

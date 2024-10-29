@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1326: Minimum Number of Taps to Open to Water a Garden"
-date = "2021-03-13"
+date = "2021-03-14"
 description = "Solution to Leetcode 1326"
 tags = [
     

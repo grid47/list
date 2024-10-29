@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3159: Find Occurrences of an Element in an Array"
-date = "2016-03-06"
+date = "2016-03-07"
 description = "Solution to Leetcode 3159"
 tags = [
     

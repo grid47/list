@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2701: Consecutive Transactions with Increasing Amounts"
-date = "2017-06-07"
+date = "2017-06-08"
 description = "Solution to Leetcode 2701"
 tags = [
     

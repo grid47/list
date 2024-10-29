@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3041: Maximize Consecutive Elements in an Array After Modification"
-date = "2016-07-02"
+date = "2016-07-03"
 description = "Solution to Leetcode 3041"
 tags = [
     

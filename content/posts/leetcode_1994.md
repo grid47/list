@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1994: The Number of Good Subsets"
-date = "2019-05-15"
+date = "2019-05-16"
 description = "Solution to Leetcode 1994"
 tags = [
     

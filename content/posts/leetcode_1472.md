@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1472: Design Browser History"
-date = "2020-10-18"
+date = "2020-10-19"
 description = "Solution to Leetcode 1472"
 tags = [
     

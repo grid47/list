@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2799: Count Complete Subarrays in an Array"
-date = "2017-03-01"
+date = "2017-03-02"
 description = "Solution to Leetcode 2799"
 tags = [
     

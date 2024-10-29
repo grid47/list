@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1501: Countries You Can Safely Invest In"
-date = "2020-09-19"
+date = "2020-09-20"
 description = "Solution to Leetcode 1501"
 tags = [
     

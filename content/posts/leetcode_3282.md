@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3282: Reach End of Array With Max Score"
-date = "2015-11-04"
+date = "2015-11-05"
 description = "Solution to Leetcode 3282"
 tags = [
     

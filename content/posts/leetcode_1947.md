@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1947: Maximum Compatibility Score Sum"
-date = "2019-07-01"
+date = "2019-07-02"
 description = "Solution to Leetcode 1947"
 tags = [
     

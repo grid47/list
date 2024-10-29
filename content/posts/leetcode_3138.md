@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3138: Minimum Length of Anagram Concatenation"
-date = "2016-03-27"
+date = "2016-03-28"
 description = "Solution to Leetcode 3138"
 tags = [
     

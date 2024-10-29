@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 954: Array of Doubled Pairs"
-date = "2022-03-20"
+date = "2022-03-21"
 description = "Solution to Leetcode 954"
 tags = [
     

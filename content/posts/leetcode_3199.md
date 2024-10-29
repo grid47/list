@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3199: Count Triplets with Even XOR Set Bits I"
-date = "2016-01-26"
+date = "2016-01-27"
 description = "Solution to Leetcode 3199"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1694: Reformat Phone Number"
-date = "2020-03-10"
+date = "2020-03-11"
 description = "Solution to Leetcode 1694"
 tags = [
     

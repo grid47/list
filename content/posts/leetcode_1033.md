@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1033: Moving Stones Until Consecutive"
-date = "2021-12-31"
+date = "2022-01-01"
 description = "Solution to Leetcode 1033"
 tags = [
     

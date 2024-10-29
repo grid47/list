@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1192: Critical Connections in a Network"
-date = "2021-07-25"
+date = "2021-07-26"
 description = "Solution to Leetcode 1192"
 tags = [
     

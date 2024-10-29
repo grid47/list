@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2568: Minimum Impossible OR"
-date = "2017-10-18"
+date = "2017-10-19"
 description = "Solution to Leetcode 2568"
 tags = [
     

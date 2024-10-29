@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3068: Find the Maximum Sum of Node Values"
-date = "2016-06-05"
+date = "2016-06-06"
 description = "Solution to Leetcode 3068"
 tags = [
     

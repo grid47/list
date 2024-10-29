@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2482: Difference Between Ones and Zeros in Row and Column"
-date = "2018-01-12"
+date = "2018-01-13"
 description = "Solution to Leetcode 2482"
 tags = [
     

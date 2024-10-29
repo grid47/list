@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1863: Sum of All Subset XOR Totals"
-date = "2019-09-23"
+date = "2019-09-24"
 description = "Solution to Leetcode 1863"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1055: Shortest Way to Form String"
-date = "2021-12-09"
+date = "2021-12-10"
 description = "Solution to Leetcode 1055"
 tags = [
     

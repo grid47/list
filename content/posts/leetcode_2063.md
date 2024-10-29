@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2063: Vowels of All Substrings"
-date = "2019-03-07"
+date = "2019-03-08"
 description = "Solution to Leetcode 2063"
 tags = [
     

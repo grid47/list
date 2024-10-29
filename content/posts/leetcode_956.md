@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 956: Tallest Billboard"
-date = "2022-03-18"
+date = "2022-03-19"
 description = "Solution to Leetcode 956"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2127: Maximum Employees to Be Invited to a Meeting"
-date = "2019-01-02"
+date = "2019-01-03"
 description = "Solution to Leetcode 2127"
 tags = [
     

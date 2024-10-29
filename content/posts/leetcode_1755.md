@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1755: Closest Subsequence Sum"
-date = "2020-01-09"
+date = "2020-01-10"
 description = "Solution to Leetcode 1755"
 tags = [
     

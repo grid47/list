@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3057: Employees Project Allocation"
-date = "2016-06-16"
+date = "2016-06-17"
 description = "Solution to Leetcode 3057"
 tags = [
     

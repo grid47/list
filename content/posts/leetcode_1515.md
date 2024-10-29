@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1515: Best Position for a Service Centre"
-date = "2020-09-05"
+date = "2020-09-06"
 description = "Solution to Leetcode 1515"
 tags = [
     

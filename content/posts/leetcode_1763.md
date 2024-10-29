@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1763: Longest Nice Substring"
-date = "2020-01-01"
+date = "2020-01-02"
 description = "Solution to Leetcode 1763"
 tags = [
     

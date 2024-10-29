@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2698: Find the Punishment Number of an Integer"
-date = "2017-06-10"
+date = "2017-06-11"
 description = "Solution to Leetcode 2698"
 tags = [
     

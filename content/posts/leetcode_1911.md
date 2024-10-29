@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1911: Maximum Alternating Subsequence Sum"
-date = "2019-08-06"
+date = "2019-08-07"
 description = "Solution to Leetcode 1911"
 tags = [
     

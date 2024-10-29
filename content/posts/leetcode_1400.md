@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1400: Construct K Palindrome Strings"
-date = "2020-12-29"
+date = "2020-12-30"
 description = "Solution to Leetcode 1400"
 tags = [
     

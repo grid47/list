@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2087: Minimum Cost Homecoming of a Robot in a Grid"
-date = "2019-02-11"
+date = "2019-02-12"
 description = "Solution to Leetcode 2087"
 tags = [
     

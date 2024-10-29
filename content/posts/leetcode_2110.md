@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2110: Number of Smooth Descent Periods of a Stock"
-date = "2019-01-19"
+date = "2019-01-20"
 description = "Solution to Leetcode 2110"
 tags = [
     

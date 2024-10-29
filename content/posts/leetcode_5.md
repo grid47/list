@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 5: Longest Palindromic Substring"
-date = "2024-10-24"
+date = "2024-10-25"
 description = "Solution to Leetcode 5"
 tags = [
     

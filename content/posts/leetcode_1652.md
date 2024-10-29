@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1652: Defuse the Bomb"
-date = "2020-04-21"
+date = "2020-04-22"
 description = "Solution to Leetcode 1652"
 tags = [
     

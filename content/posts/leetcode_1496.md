@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1496: Path Crossing"
-date = "2020-09-24"
+date = "2020-09-25"
 description = "Solution to Leetcode 1496"
 tags = [
     

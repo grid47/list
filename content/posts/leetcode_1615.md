@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1615: Maximal Network Rank"
-date = "2020-05-28"
+date = "2020-05-29"
 description = "Solution to Leetcode 1615"
 tags = [
     

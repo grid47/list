@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1659: Maximize Grid Happiness"
-date = "2020-04-14"
+date = "2020-04-15"
 description = "Solution to Leetcode 1659"
 tags = [
     

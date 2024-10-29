@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3072: Distribute Elements Into Two Arrays II"
-date = "2016-06-01"
+date = "2016-06-02"
 description = "Solution to Leetcode 3072"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1669: Merge In Between Linked Lists"
-date = "2020-04-04"
+date = "2020-04-05"
 description = "Solution to Leetcode 1669"
 tags = [
     

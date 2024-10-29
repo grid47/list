@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3032: Count Numbers With Unique Digits II"
-date = "2016-07-11"
+date = "2016-07-12"
 description = "Solution to Leetcode 3032"
 tags = [
     

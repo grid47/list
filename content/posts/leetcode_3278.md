@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3278: Find Candidates for Data Scientist Position II"
-date = "2015-11-08"
+date = "2015-11-09"
 description = "Solution to Leetcode 3278"
 tags = [
     

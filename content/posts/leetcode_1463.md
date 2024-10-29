@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1463: Cherry Pickup II"
-date = "2020-10-27"
+date = "2020-10-28"
 description = "Solution to Leetcode 1463"
 tags = [
     

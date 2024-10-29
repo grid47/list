@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3269: Constructing Two Increasing Arrays"
-date = "2015-11-17"
+date = "2015-11-18"
 description = "Solution to Leetcode 3269"
 tags = [
     

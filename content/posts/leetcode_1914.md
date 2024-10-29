@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1914: Cyclically Rotating a Grid"
-date = "2019-08-03"
+date = "2019-08-04"
 description = "Solution to Leetcode 1914"
 tags = [
     

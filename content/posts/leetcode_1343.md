@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1343: Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold"
-date = "2021-02-24"
+date = "2021-02-25"
 description = "Solution to Leetcode 1343"
 tags = [
     

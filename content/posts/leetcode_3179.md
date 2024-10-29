@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3179: Find the N-th Value After K Seconds"
-date = "2016-02-15"
+date = "2016-02-16"
 description = "Solution to Leetcode 3179"
 tags = [
     

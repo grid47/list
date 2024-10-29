@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3209: Number of Subarrays With AND Value of K"
-date = "2016-01-16"
+date = "2016-01-17"
 description = "Solution to Leetcode 3209"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2740: Find the Value of the Partition"
-date = "2017-04-29"
+date = "2017-04-30"
 description = "Solution to Leetcode 2740"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3030: Find the Grid of Region Average"
-date = "2016-07-13"
+date = "2016-07-14"
 description = "Solution to Leetcode 3030"
 tags = [
     

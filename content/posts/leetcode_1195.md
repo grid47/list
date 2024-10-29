@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1195: Fizz Buzz Multithreaded"
-date = "2021-07-22"
+date = "2021-07-23"
 description = "Solution to Leetcode 1195"
 tags = [
     

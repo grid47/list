@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1815: Maximum Number of Groups Getting Fresh Donuts"
-date = "2019-11-10"
+date = "2019-11-11"
 description = "Solution to Leetcode 1815"
 tags = [
     

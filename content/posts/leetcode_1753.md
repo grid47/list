@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1753: Maximum Score From Removing Stones"
-date = "2020-01-11"
+date = "2020-01-12"
 description = "Solution to Leetcode 1753"
 tags = [
     

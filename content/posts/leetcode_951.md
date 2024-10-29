@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 951: Flip Equivalent Binary Trees"
-date = "2022-03-23"
+date = "2022-03-24"
 description = "Solution to Leetcode 951"
 tags = [
     

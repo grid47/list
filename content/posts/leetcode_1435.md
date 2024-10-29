@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1435: Create a Session Bar Chart"
-date = "2020-11-24"
+date = "2020-11-25"
 description = "Solution to Leetcode 1435"
 tags = [
     

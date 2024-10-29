@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 993: Cousins in Binary Tree"
-date = "2022-02-09"
+date = "2022-02-10"
 description = "Solution to Leetcode 993"
 tags = [
     

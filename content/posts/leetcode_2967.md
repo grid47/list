@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2967: Minimum Cost to Make Array Equalindromic"
-date = "2016-09-14"
+date = "2016-09-15"
 description = "Solution to Leetcode 2967"
 tags = [
     

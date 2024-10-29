@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 63: Unique Paths II"
-date = "2024-08-27"
+date = "2024-08-28"
 description = "Solution to Leetcode 63"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1383: Maximum Performance of a Team"
-date = "2021-01-15"
+date = "2021-01-16"
 description = "Solution to Leetcode 1383"
 tags = [
     

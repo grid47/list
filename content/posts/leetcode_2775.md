@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2775: Undefined to Null"
-date = "2017-03-25"
+date = "2017-03-26"
 description = "Solution to Leetcode 2775"
 tags = [
     

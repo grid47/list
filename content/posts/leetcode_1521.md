@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1521: Find a Value of a Mysterious Function Closest to Target"
-date = "2020-08-30"
+date = "2020-08-31"
 description = "Solution to Leetcode 1521"
 tags = [
     

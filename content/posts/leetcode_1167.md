@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1167: Minimum Cost to Connect Sticks"
-date = "2021-08-19"
+date = "2021-08-20"
 description = "Solution to Leetcode 1167"
 tags = [
     

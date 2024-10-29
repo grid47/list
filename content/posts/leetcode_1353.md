@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1353: Maximum Number of Events That Can Be Attended"
-date = "2021-02-14"
+date = "2021-02-15"
 description = "Solution to Leetcode 1353"
 tags = [
     

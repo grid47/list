@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3296: Minimum Number of Seconds to Make Mountain Height Zero"
-date = "2015-10-21"
+date = "2015-10-22"
 description = "Solution to Leetcode 3296"
 tags = [
     

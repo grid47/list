@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1362: Closest Divisors"
-date = "2021-02-05"
+date = "2021-02-06"
 description = "Solution to Leetcode 1362"
 tags = [
     

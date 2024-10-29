@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2423: Remove Letter To Equalize Frequency"
-date = "2018-03-12"
+date = "2018-03-13"
 description = "Solution to Leetcode 2423"
 tags = [
     

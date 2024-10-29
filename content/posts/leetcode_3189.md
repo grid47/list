@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3189: Minimum Moves to Get a Peaceful Board"
-date = "2016-02-05"
+date = "2016-02-06"
 description = "Solution to Leetcode 3189"
 tags = [
     

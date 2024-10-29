@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1787: Make the XOR of All Segments Equal to Zero"
-date = "2019-12-08"
+date = "2019-12-09"
 description = "Solution to Leetcode 1787"
 tags = [
     

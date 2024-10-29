@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3217: Delete Nodes From Linked List Present in Array"
-date = "2016-01-08"
+date = "2016-01-09"
 description = "Solution to Leetcode 3217"
 tags = [
     

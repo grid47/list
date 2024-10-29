@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2866: Beautiful Towers II"
-date = "2016-12-24"
+date = "2016-12-25"
 description = "Solution to Leetcode 2866"
 tags = [
     

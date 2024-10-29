@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2083: Substrings That Begin and End With the Same Letter"
-date = "2019-02-15"
+date = "2019-02-16"
 description = "Solution to Leetcode 2083"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2946: Matrix Similarity After Cyclic Shifts"
-date = "2016-10-05"
+date = "2016-10-06"
 description = "Solution to Leetcode 2946"
 tags = [
     

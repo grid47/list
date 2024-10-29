@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1260: Shift 2D Grid"
-date = "2021-05-18"
+date = "2021-05-19"
 description = "Solution to Leetcode 1260"
 tags = [
     

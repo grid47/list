@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2239: Find Closest Number to Zero"
-date = "2018-09-12"
+date = "2018-09-13"
 description = "Solution to Leetcode 2239"
 tags = [
     

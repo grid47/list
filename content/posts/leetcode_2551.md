@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2551: Put Marbles in Bags"
-date = "2017-11-04"
+date = "2017-11-05"
 description = "Solution to Leetcode 2551"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2233: Maximum Product After K Increments"
-date = "2018-09-18"
+date = "2018-09-19"
 description = "Solution to Leetcode 2233"
 tags = [
     

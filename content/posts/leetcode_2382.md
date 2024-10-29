@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2382: Maximum Segment Sum After Removals"
-date = "2018-04-22"
+date = "2018-04-23"
 description = "Solution to Leetcode 2382"
 tags = [
     

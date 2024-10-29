@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1790: Check if One String Swap Can Make Strings Equal"
-date = "2019-12-05"
+date = "2019-12-06"
 description = "Solution to Leetcode 1790"
 tags = [
     

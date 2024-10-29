@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1852: Distinct Numbers in Each Subarray"
-date = "2019-10-04"
+date = "2019-10-05"
 description = "Solution to Leetcode 1852"
 tags = [
     

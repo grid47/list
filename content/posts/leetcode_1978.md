@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1978: Employees Whose Manager Left the Company"
-date = "2019-05-31"
+date = "2019-06-01"
 description = "Solution to Leetcode 1978"
 tags = [
     

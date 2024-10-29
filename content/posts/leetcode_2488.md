@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2488: Count Subarrays With Median K"
-date = "2018-01-06"
+date = "2018-01-07"
 description = "Solution to Leetcode 2488"
 tags = [
     

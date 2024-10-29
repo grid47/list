@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 976: Largest Perimeter Triangle"
-date = "2022-02-26"
+date = "2022-02-27"
 description = "Solution to Leetcode 976"
 tags = [
     

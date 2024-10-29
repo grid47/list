@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2574: Left and Right Sum Differences"
-date = "2017-10-12"
+date = "2017-10-13"
 description = "Solution to Leetcode 2574"
 tags = [
     

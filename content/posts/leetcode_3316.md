@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3316: Find Maximum Removals From Source String"
-date = "2015-10-01"
+date = "2015-10-02"
 description = "Solution to Leetcode 3316"
 tags = [
     

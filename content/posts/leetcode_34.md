@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 34: Find First and Last Position of Element in Sorted Array"
-date = "2024-09-25"
+date = "2024-09-26"
 description = "Solution to Leetcode 34"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1147: Longest Chunked Palindrome Decomposition"
-date = "2021-09-08"
+date = "2021-09-09"
 description = "Solution to Leetcode 1147"
 tags = [
     

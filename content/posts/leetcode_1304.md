@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1304: Find N Unique Integers Sum up to Zero"
-date = "2021-04-04"
+date = "2021-04-05"
 description = "Solution to Leetcode 1304"
 tags = [
     

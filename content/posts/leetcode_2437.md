@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2437: Number of Valid Clock Times"
-date = "2018-02-26"
+date = "2018-02-27"
 description = "Solution to Leetcode 2437"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 967: Numbers With Same Consecutive Differences"
-date = "2022-03-07"
+date = "2022-03-08"
 description = "Solution to Leetcode 967"
 tags = [
     

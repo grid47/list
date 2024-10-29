@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 45: Jump Game II"
-date = "2024-09-14"
+date = "2024-09-15"
 description = "Solution to Leetcode 45"
 tags = [
     

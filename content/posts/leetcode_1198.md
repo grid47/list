@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1198: Find Smallest Common Element in All Rows"
-date = "2021-07-19"
+date = "2021-07-20"
 description = "Solution to Leetcode 1198"
 tags = [
     

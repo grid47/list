@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1602: Find Nearest Right Node in Binary Tree"
-date = "2020-06-10"
+date = "2020-06-11"
 description = "Solution to Leetcode 1602"
 tags = [
     

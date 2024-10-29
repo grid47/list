@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2518: Number of Great Partitions"
-date = "2017-12-07"
+date = "2017-12-08"
 description = "Solution to Leetcode 2518"
 tags = [
     

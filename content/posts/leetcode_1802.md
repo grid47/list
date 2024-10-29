@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1802: Maximum Value at a Given Index in a Bounded Array"
-date = "2019-11-23"
+date = "2019-11-24"
 description = "Solution to Leetcode 1802"
 tags = [
     

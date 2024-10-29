@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1573: Number of Ways to Split a String"
-date = "2020-07-09"
+date = "2020-07-10"
 description = "Solution to Leetcode 1573"
 tags = [
     

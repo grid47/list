@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1653: Minimum Deletions to Make String Balanced"
-date = "2020-04-20"
+date = "2020-04-21"
 description = "Solution to Leetcode 1653"
 tags = [
     

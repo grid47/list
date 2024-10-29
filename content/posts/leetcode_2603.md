@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2603: Collect Coins in a Tree"
-date = "2017-09-13"
+date = "2017-09-14"
 description = "Solution to Leetcode 2603"
 tags = [
     

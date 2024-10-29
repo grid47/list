@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2495: Number of Subarrays Having Even Product"
-date = "2017-12-30"
+date = "2017-12-31"
 description = "Solution to Leetcode 2495"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1399: Count Largest Group"
-date = "2020-12-30"
+date = "2020-12-31"
 description = "Solution to Leetcode 1399"
 tags = [
     

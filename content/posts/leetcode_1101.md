@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1101: The Earliest Moment When Everyone Become Friends"
-date = "2021-10-24"
+date = "2021-10-25"
 description = "Solution to Leetcode 1101"
 tags = [
     

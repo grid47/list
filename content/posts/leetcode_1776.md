@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1776: Car Fleet II"
-date = "2019-12-19"
+date = "2019-12-20"
 description = "Solution to Leetcode 1776"
 tags = [
     

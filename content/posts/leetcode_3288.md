@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3288: Length of the Longest Increasing Path"
-date = "2015-10-29"
+date = "2015-10-30"
 description = "Solution to Leetcode 3288"
 tags = [
     

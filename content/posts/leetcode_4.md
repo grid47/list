@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 4: Median of Two Sorted Arrays"
-date = "2024-10-25"
+date = "2024-10-26"
 description = "Solution to Leetcode 4"
 tags = [
     

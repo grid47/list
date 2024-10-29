@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1547: Minimum Cost to Cut a Stick"
-date = "2020-08-04"
+date = "2020-08-05"
 description = "Solution to Leetcode 1547"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1734: Decode XORed Permutation"
-date = "2020-01-30"
+date = "2020-01-31"
 description = "Solution to Leetcode 1734"
 tags = [
     

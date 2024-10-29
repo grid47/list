@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1434: Number of Ways to Wear Different Hats to Each Other"
-date = "2020-11-25"
+date = "2020-11-26"
 description = "Solution to Leetcode 1434"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1157: Online Majority Element In Subarray"
-date = "2021-08-29"
+date = "2021-08-30"
 description = "Solution to Leetcode 1157"
 tags = [
     

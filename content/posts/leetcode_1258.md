@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1258: Synonymous Sentences"
-date = "2021-05-20"
+date = "2021-05-21"
 description = "Solution to Leetcode 1258"
 tags = [
     

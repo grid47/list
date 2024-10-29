@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 994: Rotting Oranges"
-date = "2022-02-08"
+date = "2022-02-09"
 description = "Solution to Leetcode 994"
 tags = [
     

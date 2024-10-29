@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3142: Check if Grid Satisfies Conditions"
-date = "2016-03-23"
+date = "2016-03-24"
 description = "Solution to Leetcode 3142"
 tags = [
     

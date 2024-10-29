@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2881: Create a New Column"
-date = "2016-12-09"
+date = "2016-12-10"
 description = "Solution to Leetcode 2881"
 tags = [
     

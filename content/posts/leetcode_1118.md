@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1118: Number of Days in a Month"
-date = "2021-10-07"
+date = "2021-10-08"
 description = "Solution to Leetcode 1118"
 tags = [
     

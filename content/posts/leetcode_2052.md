@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2052: Minimum Cost to Separate Sentence Into Rows"
-date = "2019-03-18"
+date = "2019-03-19"
 description = "Solution to Leetcode 2052"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2259: Remove Digit From Number to Maximize Result"
-date = "2018-08-23"
+date = "2018-08-24"
 description = "Solution to Leetcode 2259"
 tags = [
     

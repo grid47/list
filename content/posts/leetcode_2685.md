@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2685: Count the Number of Complete Components"
-date = "2017-06-23"
+date = "2017-06-24"
 description = "Solution to Leetcode 2685"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1509: Minimum Difference Between Largest and Smallest Value in Three Moves"
-date = "2020-09-11"
+date = "2020-09-12"
 description = "Solution to Leetcode 1509"
 tags = [
     

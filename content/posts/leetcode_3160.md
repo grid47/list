@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3160: Find the Number of Distinct Colors Among the Balls"
-date = "2016-03-05"
+date = "2016-03-06"
 description = "Solution to Leetcode 3160"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2498: Frog Jump II"
-date = "2017-12-27"
+date = "2017-12-28"
 description = "Solution to Leetcode 2498"
 tags = [
     

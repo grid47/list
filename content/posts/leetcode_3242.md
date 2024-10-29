@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3242: Design Neighbor Sum Service"
-date = "2015-12-14"
+date = "2015-12-15"
 description = "Solution to Leetcode 3242"
 tags = [
     

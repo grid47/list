@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2280: Minimum Lines to Represent a Line Chart"
-date = "2018-08-02"
+date = "2018-08-03"
 description = "Solution to Leetcode 2280"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1950: Maximum of Minimum Values in All Subarrays"
-date = "2019-06-28"
+date = "2019-06-29"
 description = "Solution to Leetcode 1950"
 tags = [
     

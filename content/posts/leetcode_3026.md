@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3026: Maximum Good Subarray Sum"
-date = "2016-07-17"
+date = "2016-07-18"
 description = "Solution to Leetcode 3026"
 tags = [
     

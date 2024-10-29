@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2491: Divide Players Into Teams of Equal Skill"
-date = "2018-01-03"
+date = "2018-01-04"
 description = "Solution to Leetcode 2491"
 tags = [
     

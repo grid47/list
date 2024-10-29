@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1332: Remove Palindromic Subsequences"
-date = "2021-03-07"
+date = "2021-03-08"
 description = "Solution to Leetcode 1332"
 tags = [
     

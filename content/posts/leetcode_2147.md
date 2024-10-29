@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2147: Number of Ways to Divide a Long Corridor"
-date = "2018-12-13"
+date = "2018-12-14"
 description = "Solution to Leetcode 2147"
 tags = [
     

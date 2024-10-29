@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1244: Design A Leaderboard"
-date = "2021-06-03"
+date = "2021-06-04"
 description = "Solution to Leetcode 1244"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1229: Meeting Scheduler"
-date = "2021-06-18"
+date = "2021-06-19"
 description = "Solution to Leetcode 1229"
 tags = [
     

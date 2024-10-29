@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 19: Remove Nth Node From End of List"
-date = "2024-10-10"
+date = "2024-10-11"
 description = "Solution to Leetcode 19"
 tags = [
     

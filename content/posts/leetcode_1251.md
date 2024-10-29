@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1251: Average Selling Price"
-date = "2021-05-27"
+date = "2021-05-28"
 description = "Solution to Leetcode 1251"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1190: Reverse Substrings Between Each Pair of Parentheses"
-date = "2021-07-27"
+date = "2021-07-28"
 description = "Solution to Leetcode 1190"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2781: Length of the Longest Valid Substring"
-date = "2017-03-19"
+date = "2017-03-20"
 description = "Solution to Leetcode 2781"
 tags = [
     

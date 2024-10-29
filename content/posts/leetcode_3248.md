@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3248: Snake in Matrix"
-date = "2015-12-08"
+date = "2015-12-09"
 description = "Solution to Leetcode 3248"
 tags = [
     

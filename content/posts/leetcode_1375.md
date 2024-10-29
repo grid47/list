@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1375: Number of Times Binary String Is Prefix-Aligned"
-date = "2021-01-23"
+date = "2021-01-24"
 description = "Solution to Leetcode 1375"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1370: Increasing Decreasing String"
-date = "2021-01-28"
+date = "2021-01-29"
 description = "Solution to Leetcode 1370"
 tags = [
     

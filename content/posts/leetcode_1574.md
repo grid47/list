@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1574: Shortest Subarray to be Removed to Make Array Sorted"
-date = "2020-07-08"
+date = "2020-07-09"
 description = "Solution to Leetcode 1574"
 tags = [
     

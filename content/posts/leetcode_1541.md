@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1541: Minimum Insertions to Balance a Parentheses String"
-date = "2020-08-10"
+date = "2020-08-11"
 description = "Solution to Leetcode 1541"
 tags = [
     

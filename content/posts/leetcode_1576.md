@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1576: Replace All ?'s to Avoid Consecutive Repeating Characters"
-date = "2020-07-06"
+date = "2020-07-07"
 description = "Solution to Leetcode 1576"
 tags = [
     

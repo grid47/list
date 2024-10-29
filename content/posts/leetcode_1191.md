@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1191: K-Concatenation Maximum Sum"
-date = "2021-07-26"
+date = "2021-07-27"
 description = "Solution to Leetcode 1191"
 tags = [
     

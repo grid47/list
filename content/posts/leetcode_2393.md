@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2393: Count Strictly Increasing Subarrays"
-date = "2018-04-11"
+date = "2018-04-12"
 description = "Solution to Leetcode 2393"
 tags = [
     

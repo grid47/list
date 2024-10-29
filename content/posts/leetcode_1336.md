@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1336: Number of Transactions per Visit"
-date = "2021-03-03"
+date = "2021-03-04"
 description = "Solution to Leetcode 1336"
 tags = [
     

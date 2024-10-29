@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2179: Count Good Triplets in an Array"
-date = "2018-11-11"
+date = "2018-11-12"
 description = "Solution to Leetcode 2179"
 tags = [
     

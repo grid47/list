@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1639: Number of Ways to Form a Target String Given a Dictionary"
-date = "2020-05-04"
+date = "2020-05-05"
 description = "Solution to Leetcode 1639"
 tags = [
     

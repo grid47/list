@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2800: Shortest String That Contains Three Strings"
-date = "2017-02-28"
+date = "2017-03-01"
 description = "Solution to Leetcode 2800"
 tags = [
     

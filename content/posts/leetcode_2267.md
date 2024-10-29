@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2267:  Check if There Is a Valid Parentheses String Path"
-date = "2018-08-15"
+date = "2018-08-16"
 description = "Solution to Leetcode 2267"
 tags = [
     

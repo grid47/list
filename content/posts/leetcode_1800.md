@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1800: Maximum Ascending Subarray Sum"
-date = "2019-11-25"
+date = "2019-11-26"
 description = "Solution to Leetcode 1800"
 tags = [
     

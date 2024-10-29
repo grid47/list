@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2278: Percentage of Letter in String"
-date = "2018-08-04"
+date = "2018-08-05"
 description = "Solution to Leetcode 2278"
 tags = [
     

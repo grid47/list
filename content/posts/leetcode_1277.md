@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1277: Count Square Submatrices with All Ones"
-date = "2021-05-01"
+date = "2021-05-02"
 description = "Solution to Leetcode 1277"
 tags = [
     

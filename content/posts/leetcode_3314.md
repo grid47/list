@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3314: Construct the Minimum Bitwise Array I"
-date = "2015-10-03"
+date = "2015-10-04"
 description = "Solution to Leetcode 3314"
 tags = [
     

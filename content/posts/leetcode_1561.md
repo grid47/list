@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1561: Maximum Number of Coins You Can Get"
-date = "2020-07-21"
+date = "2020-07-22"
 description = "Solution to Leetcode 1561"
 tags = [
     

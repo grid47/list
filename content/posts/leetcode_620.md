@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 620: Not Boring Movies"
-date = "2023-02-17"
+date = "2023-02-18"
 description = "Solution to Leetcode 620"
 tags = [
     
@@ -26,7 +26,7 @@ series = ["Leetcode"]
 select * from Cinema c where MOD(c.id, 2) = 1 and c.description != "boring" order by c.rating desc
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/620.md" >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

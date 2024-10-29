@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2017: Grid Game"
-date = "2019-04-22"
+date = "2019-04-23"
 description = "Solution to Leetcode 2017"
 tags = [
     

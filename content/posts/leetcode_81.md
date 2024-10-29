@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 81: Search in Rotated Sorted Array II"
-date = "2024-08-09"
+date = "2024-08-10"
 description = "Solution to Leetcode 81"
 tags = [
     

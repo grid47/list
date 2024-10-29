@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3153: Sum of Digit Differences of All Pairs"
-date = "2016-03-12"
+date = "2016-03-13"
 description = "Solution to Leetcode 3153"
 tags = [
     

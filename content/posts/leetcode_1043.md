@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1043: Partition Array for Maximum Sum"
-date = "2021-12-21"
+date = "2021-12-22"
 description = "Solution to Leetcode 1043"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1335: Minimum Difficulty of a Job Schedule"
-date = "2021-03-04"
+date = "2021-03-05"
 description = "Solution to Leetcode 1335"
 tags = [
     

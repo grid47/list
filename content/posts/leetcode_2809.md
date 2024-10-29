@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2809: Minimum Time to Make Array Sum At Most x"
-date = "2017-02-19"
+date = "2017-02-20"
 description = "Solution to Leetcode 2809"
 tags = [
     

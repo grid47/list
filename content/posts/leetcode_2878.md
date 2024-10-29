@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2878: Get the Size of a DataFrame"
-date = "2016-12-12"
+date = "2016-12-13"
 description = "Solution to Leetcode 2878"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1018: Binary Prefix Divisible By 5"
-date = "2022-01-15"
+date = "2022-01-16"
 description = "Solution to Leetcode 1018"
 tags = [
     

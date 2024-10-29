@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 25: Reverse Nodes in k-Group"
-date = "2024-10-04"
+date = "2024-10-05"
 description = "Solution to Leetcode 25"
 tags = [
     

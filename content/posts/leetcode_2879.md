@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2879: Display the First Three Rows"
-date = "2016-12-11"
+date = "2016-12-12"
 description = "Solution to Leetcode 2879"
 tags = [
     

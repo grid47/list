@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 26: Remove Duplicates from Sorted Array"
-date = "2024-10-03"
+date = "2024-10-04"
 description = "Solution to Leetcode 26"
 tags = [
     

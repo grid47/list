@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2906: Construct Product Matrix"
-date = "2016-11-14"
+date = "2016-11-15"
 description = "Solution to Leetcode 2906"
 tags = [
     

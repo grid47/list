@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1312: Minimum Insertion Steps to Make a String Palindrome"
-date = "2021-03-27"
+date = "2021-03-28"
 description = "Solution to Leetcode 1312"
 tags = [
     

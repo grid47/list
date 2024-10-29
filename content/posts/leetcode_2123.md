@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2123: Minimum Operations to Remove Adjacent Ones in Matrix"
-date = "2019-01-06"
+date = "2019-01-07"
 description = "Solution to Leetcode 2123"
 tags = [
     

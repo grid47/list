@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1064: Fixed Point"
-date = "2021-11-30"
+date = "2021-12-01"
 description = "Solution to Leetcode 1064"
 tags = [
     

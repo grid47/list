@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1301: Number of Paths with Max Score"
-date = "2021-04-07"
+date = "2021-04-08"
 description = "Solution to Leetcode 1301"
 tags = [
     

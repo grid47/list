@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1262: Greatest Sum Divisible by Three"
-date = "2021-05-16"
+date = "2021-05-17"
 description = "Solution to Leetcode 1262"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2305: Fair Distribution of Cookies"
-date = "2018-07-08"
+date = "2018-07-09"
 description = "Solution to Leetcode 2305"
 tags = [
     

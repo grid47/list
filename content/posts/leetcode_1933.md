@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1933: Check if String Is Decomposable Into Value-Equal Substrings"
-date = "2019-07-15"
+date = "2019-07-16"
 description = "Solution to Leetcode 1933"
 tags = [
     

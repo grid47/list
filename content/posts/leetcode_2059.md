@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2059: Minimum Operations to Convert Number"
-date = "2019-03-11"
+date = "2019-03-12"
 description = "Solution to Leetcode 2059"
 tags = [
     

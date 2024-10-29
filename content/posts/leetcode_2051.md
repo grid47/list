@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2051: The Category of Each Member in the Store"
-date = "2019-03-19"
+date = "2019-03-20"
 description = "Solution to Leetcode 2051"
 tags = [
     

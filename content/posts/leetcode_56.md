@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 56: Merge Intervals"
-date = "2024-09-03"
+date = "2024-09-04"
 description = "Solution to Leetcode 56"
 tags = [
     

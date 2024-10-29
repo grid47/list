@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2862: Maximum Element-Sum of a Complete Subset of Indices"
-date = "2016-12-28"
+date = "2016-12-29"
 description = "Solution to Leetcode 2862"
 tags = [
     

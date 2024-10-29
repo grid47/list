@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3283: Maximum Number of Moves to Kill All Pawns"
-date = "2015-11-03"
+date = "2015-11-04"
 description = "Solution to Leetcode 3283"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1962: Remove Stones to Minimize the Total"
-date = "2019-06-16"
+date = "2019-06-17"
 description = "Solution to Leetcode 1962"
 tags = [
     

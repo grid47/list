@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 883: Projection Area of 3D Shapes"
-date = "2022-05-30"
+date = "2022-05-31"
 description = "Solution to Leetcode 883"
 tags = [
     

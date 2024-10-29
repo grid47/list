@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1771: Maximize Palindrome Length From Subsequences"
-date = "2019-12-24"
+date = "2019-12-25"
 description = "Solution to Leetcode 1771"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1410: HTML Entity Parser"
-date = "2020-12-19"
+date = "2020-12-20"
 description = "Solution to Leetcode 1410"
 tags = [
     

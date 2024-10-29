@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 23: Merge k Sorted Lists"
-date = "2024-10-06"
+date = "2024-10-07"
 description = "Solution to Leetcode 23"
 tags = [
     

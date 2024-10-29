@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 898: Bitwise ORs of Subarrays"
-date = "2022-05-15"
+date = "2022-05-16"
 description = "Solution to Leetcode 898"
 tags = [
     

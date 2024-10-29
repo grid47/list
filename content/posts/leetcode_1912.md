@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1912: Design Movie Rental System"
-date = "2019-08-05"
+date = "2019-08-06"
 description = "Solution to Leetcode 1912"
 tags = [
     

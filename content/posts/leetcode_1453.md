@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1453: Maximum Number of Darts Inside of a Circular Dartboard"
-date = "2020-11-06"
+date = "2020-11-07"
 description = "Solution to Leetcode 1453"
 tags = [
     

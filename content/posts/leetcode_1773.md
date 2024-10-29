@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1773: Count Items Matching a Rule"
-date = "2019-12-22"
+date = "2019-12-23"
 description = "Solution to Leetcode 1773"
 tags = [
     

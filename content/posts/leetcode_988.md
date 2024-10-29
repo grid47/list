@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 988: Smallest String Starting From Leaf"
-date = "2022-02-14"
+date = "2022-02-15"
 description = "Solution to Leetcode 988"
 tags = [
     

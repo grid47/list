@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1981: Minimize the Difference Between Target and Chosen Elements"
-date = "2019-05-28"
+date = "2019-05-29"
 description = "Solution to Leetcode 1981"
 tags = [
     

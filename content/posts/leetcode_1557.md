@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1557: Minimum Number of Vertices to Reach All Nodes"
-date = "2020-07-25"
+date = "2020-07-26"
 description = "Solution to Leetcode 1557"
 tags = [
     

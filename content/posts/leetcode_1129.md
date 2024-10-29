@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1129: Shortest Path with Alternating Colors"
-date = "2021-09-26"
+date = "2021-09-27"
 description = "Solution to Leetcode 1129"
 tags = [
     

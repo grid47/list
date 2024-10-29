@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2048: Next Greater Numerically Balanced Number"
-date = "2019-03-22"
+date = "2019-03-23"
 description = "Solution to Leetcode 2048"
 tags = [
     

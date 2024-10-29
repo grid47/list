@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1942: The Number of the Smallest Unoccupied Chair"
-date = "2019-07-06"
+date = "2019-07-07"
 description = "Solution to Leetcode 1942"
 tags = [
     

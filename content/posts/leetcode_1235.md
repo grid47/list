@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1235: Maximum Profit in Job Scheduling"
-date = "2021-06-12"
+date = "2021-06-13"
 description = "Solution to Leetcode 1235"
 tags = [
     

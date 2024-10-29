@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1138: Alphabet Board Path"
-date = "2021-09-17"
+date = "2021-09-18"
 description = "Solution to Leetcode 1138"
 tags = [
     

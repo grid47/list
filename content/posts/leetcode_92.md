@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 92: Reverse Linked List II"
-date = "2024-07-29"
+date = "2024-07-30"
 description = "Solution to Leetcode 92"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3012: Minimize Length of Array Using Operations"
-date = "2016-07-31"
+date = "2016-08-01"
 description = "Solution to Leetcode 3012"
 tags = [
     

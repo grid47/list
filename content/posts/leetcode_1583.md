@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1583: Count Unhappy Friends"
-date = "2020-06-29"
+date = "2020-06-30"
 description = "Solution to Leetcode 1583"
 tags = [
     

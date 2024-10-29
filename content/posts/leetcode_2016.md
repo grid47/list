@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2016: Maximum Difference Between Increasing Elements"
-date = "2019-04-23"
+date = "2019-04-24"
 description = "Solution to Leetcode 2016"
 tags = [
     

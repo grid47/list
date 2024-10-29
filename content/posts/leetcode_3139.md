@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3139: Minimum Cost to Equalize Array"
-date = "2016-03-26"
+date = "2016-03-27"
 description = "Solution to Leetcode 3139"
 tags = [
     

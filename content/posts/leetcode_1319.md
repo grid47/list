@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1319: Number of Operations to Make Network Connected"
-date = "2021-03-20"
+date = "2021-03-21"
 description = "Solution to Leetcode 1319"
 tags = [
     

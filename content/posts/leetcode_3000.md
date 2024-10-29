@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3000: Maximum Area of Longest Diagonal Rectangle"
-date = "2016-08-12"
+date = "2016-08-13"
 description = "Solution to Leetcode 3000"
 tags = [
     

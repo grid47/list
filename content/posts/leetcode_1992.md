@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1992: Find All Groups of Farmland"
-date = "2019-05-17"
+date = "2019-05-18"
 description = "Solution to Leetcode 1992"
 tags = [
     

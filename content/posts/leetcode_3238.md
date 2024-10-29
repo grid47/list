@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3238: Find the Number of Winning Players"
-date = "2015-12-18"
+date = "2015-12-19"
 description = "Solution to Leetcode 3238"
 tags = [
     

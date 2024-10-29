@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1261: Find Elements in a Contaminated Binary Tree"
-date = "2021-05-17"
+date = "2021-05-18"
 description = "Solution to Leetcode 1261"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3163: String Compression III"
-date = "2016-03-02"
+date = "2016-03-03"
 description = "Solution to Leetcode 3163"
 tags = [
     

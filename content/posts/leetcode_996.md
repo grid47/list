@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 996: Number of Squareful Arrays"
-date = "2022-02-06"
+date = "2022-02-07"
 description = "Solution to Leetcode 996"
 tags = [
     

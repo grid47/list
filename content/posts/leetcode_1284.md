@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1284: Minimum Number of Flips to Convert Binary Matrix to Zero Matrix"
-date = "2021-04-24"
+date = "2021-04-25"
 description = "Solution to Leetcode 1284"
 tags = [
     

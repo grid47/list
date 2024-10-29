@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 887: Super Egg Drop"
-date = "2022-05-26"
+date = "2022-05-27"
 description = "Solution to Leetcode 887"
 tags = [
     

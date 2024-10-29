@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 958: Check Completeness of a Binary Tree"
-date = "2022-03-16"
+date = "2022-03-17"
 description = "Solution to Leetcode 958"
 tags = [
     

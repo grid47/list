@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2310: Sum of Numbers With Units Digit K"
-date = "2018-07-03"
+date = "2018-07-04"
 description = "Solution to Leetcode 2310"
 tags = [
     

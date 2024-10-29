@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2832: Maximal Range That Each Element Is Maximum in It"
-date = "2017-01-27"
+date = "2017-01-28"
 description = "Solution to Leetcode 2832"
 tags = [
     

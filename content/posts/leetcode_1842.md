@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1842: Next Palindrome Using Same Digits"
-date = "2019-10-14"
+date = "2019-10-15"
 description = "Solution to Leetcode 1842"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2823: Deep Object Filter"
-date = "2017-02-05"
+date = "2017-02-06"
 description = "Solution to Leetcode 2823"
 tags = [
     

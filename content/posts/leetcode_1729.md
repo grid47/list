@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1729: Find Followers Count"
-date = "2020-02-04"
+date = "2020-02-05"
 description = "Solution to Leetcode 1729"
 tags = [
     

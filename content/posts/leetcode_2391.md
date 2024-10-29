@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2391: Minimum Amount of Time to Collect Garbage"
-date = "2018-04-13"
+date = "2018-04-14"
 description = "Solution to Leetcode 2391"
 tags = [
     

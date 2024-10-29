@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1010: Pairs of Songs With Total Durations Divisible by 60"
-date = "2022-01-23"
+date = "2022-01-24"
 description = "Solution to Leetcode 1010"
 tags = [
     

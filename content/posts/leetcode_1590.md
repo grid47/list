@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1590: Make Sum Divisible by P"
-date = "2020-06-22"
+date = "2020-06-23"
 description = "Solution to Leetcode 1590"
 tags = [
     

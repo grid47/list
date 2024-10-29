@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1317: Convert Integer to the Sum of Two No-Zero Integers"
-date = "2021-03-22"
+date = "2021-03-23"
 description = "Solution to Leetcode 1317"
 tags = [
     

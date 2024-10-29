@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3014: Minimum Number of Pushes to Type Word I"
-date = "2016-07-29"
+date = "2016-07-30"
 description = "Solution to Leetcode 3014"
 tags = [
     

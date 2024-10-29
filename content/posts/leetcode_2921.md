@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2921: Maximum Profitable Triplets With Increasing Prices II"
-date = "2016-10-30"
+date = "2016-10-31"
 description = "Solution to Leetcode 2921"
 tags = [
     

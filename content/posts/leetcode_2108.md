@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2108: Find First Palindromic String in the Array"
-date = "2019-01-21"
+date = "2019-01-22"
 description = "Solution to Leetcode 2108"
 tags = [
     

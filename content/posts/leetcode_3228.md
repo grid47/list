@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3228: Maximum Number of Operations to Move Ones to the End"
-date = "2015-12-28"
+date = "2015-12-29"
 description = "Solution to Leetcode 3228"
 tags = [
     

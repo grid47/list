@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1026: Maximum Difference Between Node and Ancestor"
-date = "2022-01-07"
+date = "2022-01-08"
 description = "Solution to Leetcode 1026"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1733: Minimum Number of People to Teach"
-date = "2020-01-31"
+date = "2020-02-01"
 description = "Solution to Leetcode 1733"
 tags = [
     

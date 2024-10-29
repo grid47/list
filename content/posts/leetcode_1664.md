@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1664: Ways to Make a Fair Array"
-date = "2020-04-09"
+date = "2020-04-10"
 description = "Solution to Leetcode 1664"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2703: Return Length of Arguments Passed"
-date = "2017-06-05"
+date = "2017-06-06"
 description = "Solution to Leetcode 2703"
 tags = [
     

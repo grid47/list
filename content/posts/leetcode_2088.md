@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2088: Count Fertile Pyramids in a Land"
-date = "2019-02-10"
+date = "2019-02-11"
 description = "Solution to Leetcode 2088"
 tags = [
     

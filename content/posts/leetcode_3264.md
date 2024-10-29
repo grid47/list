@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3264: Final Array State After K Multiplication Operations I"
-date = "2015-11-22"
+date = "2015-11-23"
 description = "Solution to Leetcode 3264"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1276: Number of Burgers with No Waste of Ingredients"
-date = "2021-05-02"
+date = "2021-05-03"
 description = "Solution to Leetcode 1276"
 tags = [
     

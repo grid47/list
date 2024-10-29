@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2826: Sorting Three Groups"
-date = "2017-02-02"
+date = "2017-02-03"
 description = "Solution to Leetcode 2826"
 tags = [
     

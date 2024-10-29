@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1426: Counting Elements"
-date = "2020-12-03"
+date = "2020-12-04"
 description = "Solution to Leetcode 1426"
 tags = [
     

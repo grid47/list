@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1095: Find in Mountain Array"
-date = "2021-10-30"
+date = "2021-10-31"
 description = "Solution to Leetcode 1095"
 tags = [
     

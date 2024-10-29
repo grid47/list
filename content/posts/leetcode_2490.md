@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2490: Circular Sentence"
-date = "2018-01-04"
+date = "2018-01-05"
 description = "Solution to Leetcode 2490"
 tags = [
     

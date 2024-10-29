@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1749: Maximum Absolute Sum of Any Subarray"
-date = "2020-01-15"
+date = "2020-01-16"
 description = "Solution to Leetcode 1749"
 tags = [
     

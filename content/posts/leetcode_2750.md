@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2750: Ways to Split Array Into Good Subarrays"
-date = "2017-04-19"
+date = "2017-04-20"
 description = "Solution to Leetcode 2750"
 tags = [
     

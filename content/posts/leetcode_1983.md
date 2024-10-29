@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1983: Widest Pair of Indices With Equal Range Sum"
-date = "2019-05-26"
+date = "2019-05-27"
 description = "Solution to Leetcode 1983"
 tags = [
     

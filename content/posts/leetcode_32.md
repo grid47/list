@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 32: Longest Valid Parentheses"
-date = "2024-09-27"
+date = "2024-09-28"
 description = "Solution to Leetcode 32"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1449: Form Largest Integer With Digits That Add up to Target"
-date = "2020-11-10"
+date = "2020-11-11"
 description = "Solution to Leetcode 1449"
 tags = [
     

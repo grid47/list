@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1155: Number of Dice Rolls With Target Sum"
-date = "2021-08-31"
+date = "2021-09-01"
 description = "Solution to Leetcode 1155"
 tags = [
     

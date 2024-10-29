@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1629: Slowest Key"
-date = "2020-05-14"
+date = "2020-05-15"
 description = "Solution to Leetcode 1629"
 tags = [
     

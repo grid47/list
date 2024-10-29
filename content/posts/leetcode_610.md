@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 610: Triangle Judgement"
-date = "2023-02-27"
+date = "2023-02-28"
 description = "Solution to Leetcode 610"
 tags = [
     
@@ -26,7 +26,7 @@ series = ["Leetcode"]
 SELECT x, y, z,IF(x + y > z AND x + z > y AND y + z > x, 'Yes', 'No') AS triangle FROM Triangle;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/610.md" >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2985: Calculate Compressed Mean"
-date = "2016-08-27"
+date = "2016-08-28"
 description = "Solution to Leetcode 2985"
 tags = [
     

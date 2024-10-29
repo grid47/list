@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1971: Find if Path Exists in Graph"
-date = "2019-06-07"
+date = "2019-06-08"
 description = "Solution to Leetcode 1971"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1542: Find Longest Awesome Substring"
-date = "2020-08-09"
+date = "2020-08-10"
 description = "Solution to Leetcode 1542"
 tags = [
     

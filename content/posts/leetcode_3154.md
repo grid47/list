@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3154: Find Number of Ways to Reach the K-th Stair"
-date = "2016-03-11"
+date = "2016-03-12"
 description = "Solution to Leetcode 3154"
 tags = [
     

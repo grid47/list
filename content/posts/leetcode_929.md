@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 929: Unique Email Addresses"
-date = "2022-04-14"
+date = "2022-04-15"
 description = "Solution to Leetcode 929"
 tags = [
     

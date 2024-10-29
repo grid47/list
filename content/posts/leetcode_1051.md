@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1051: Height Checker"
-date = "2021-12-13"
+date = "2021-12-14"
 description = "Solution to Leetcode 1051"
 tags = [
     

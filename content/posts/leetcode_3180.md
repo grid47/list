@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3180: Maximum Total Reward Using Operations I"
-date = "2016-02-14"
+date = "2016-02-15"
 description = "Solution to Leetcode 3180"
 tags = [
     

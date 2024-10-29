@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3024: Type of Triangle"
-date = "2016-07-19"
+date = "2016-07-20"
 description = "Solution to Leetcode 3024"
 tags = [
     

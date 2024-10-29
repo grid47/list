@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2101: Detonate the Maximum Bombs"
-date = "2019-01-28"
+date = "2019-01-29"
 description = "Solution to Leetcode 2101"
 tags = [
     

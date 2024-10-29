@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1473: Paint House III"
-date = "2020-10-17"
+date = "2020-10-18"
 description = "Solution to Leetcode 1473"
 tags = [
     

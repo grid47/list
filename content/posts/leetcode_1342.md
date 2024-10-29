@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1342: Number of Steps to Reduce a Number to Zero"
-date = "2021-02-25"
+date = "2021-02-26"
 description = "Solution to Leetcode 1342"
 tags = [
     

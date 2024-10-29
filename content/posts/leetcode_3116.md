@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3116: Kth Smallest Amount With Single Denomination Combination"
-date = "2016-04-18"
+date = "2016-04-19"
 description = "Solution to Leetcode 3116"
 tags = [
     

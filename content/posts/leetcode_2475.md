@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2475: Number of Unequal Triplets in Array"
-date = "2018-01-19"
+date = "2018-01-20"
 description = "Solution to Leetcode 2475"
 tags = [
     

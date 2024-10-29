@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3137: Minimum Number of Operations to Make Word K-Periodic"
-date = "2016-03-28"
+date = "2016-03-29"
 description = "Solution to Leetcode 3137"
 tags = [
     

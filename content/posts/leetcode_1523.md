@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1523: Count Odd Numbers in an Interval Range"
-date = "2020-08-28"
+date = "2020-08-29"
 description = "Solution to Leetcode 1523"
 tags = [
     

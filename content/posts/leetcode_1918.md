@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1918: Kth Smallest Subarray Sum"
-date = "2019-07-30"
+date = "2019-07-31"
 description = "Solution to Leetcode 1918"
 tags = [
     

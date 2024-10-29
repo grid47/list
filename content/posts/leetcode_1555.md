@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1555: Bank Account Summary"
-date = "2020-07-27"
+date = "2020-07-28"
 description = "Solution to Leetcode 1555"
 tags = [
     

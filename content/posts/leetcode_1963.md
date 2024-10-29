@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1963: Minimum Number of Swaps to Make the String Balanced"
-date = "2019-06-15"
+date = "2019-06-16"
 description = "Solution to Leetcode 1963"
 tags = [
     

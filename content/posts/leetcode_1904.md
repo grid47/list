@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1904: The Number of Full Rounds You Have Played"
-date = "2019-08-13"
+date = "2019-08-14"
 description = "Solution to Leetcode 1904"
 tags = [
     

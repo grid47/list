@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3268: Find Overlapping Shifts II"
-date = "2015-11-18"
+date = "2015-11-19"
 description = "Solution to Leetcode 3268"
 tags = [
     

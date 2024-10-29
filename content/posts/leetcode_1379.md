@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree"
-date = "2021-01-19"
+date = "2021-01-20"
 description = "Solution to Leetcode 1379"
 tags = [
     

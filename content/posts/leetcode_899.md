@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 899: Orderly Queue"
-date = "2022-05-14"
+date = "2022-05-15"
 description = "Solution to Leetcode 899"
 tags = [
     

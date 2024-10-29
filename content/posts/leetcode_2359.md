@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2359: Find Closest Node to Given Two Nodes"
-date = "2018-05-15"
+date = "2018-05-16"
 description = "Solution to Leetcode 2359"
 tags = [
     

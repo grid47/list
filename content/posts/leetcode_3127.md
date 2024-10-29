@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3127: Make a Square with the Same Color"
-date = "2016-04-07"
+date = "2016-04-08"
 description = "Solution to Leetcode 3127"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 879: Profitable Schemes"
-date = "2022-06-03"
+date = "2022-06-04"
 description = "Solution to Leetcode 879"
 tags = [
     

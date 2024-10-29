@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1791: Find Center of Star Graph"
-date = "2019-12-04"
+date = "2019-12-05"
 description = "Solution to Leetcode 1791"
 tags = [
     

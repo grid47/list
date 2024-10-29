@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1163: Last Substring in Lexicographical Order"
-date = "2021-08-23"
+date = "2021-08-24"
 description = "Solution to Leetcode 1163"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1519: Number of Nodes in the Sub-Tree With the Same Label"
-date = "2020-09-01"
+date = "2020-09-02"
 description = "Solution to Leetcode 1519"
 tags = [
     

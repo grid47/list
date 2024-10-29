@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3124: Find Longest Calls"
-date = "2016-04-10"
+date = "2016-04-11"
 description = "Solution to Leetcode 3124"
 tags = [
     

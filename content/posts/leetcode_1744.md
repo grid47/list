@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1744: Can You Eat Your Favorite Candy on Your Favorite Day?"
-date = "2020-01-20"
+date = "2020-01-21"
 description = "Solution to Leetcode 1744"
 tags = [
     

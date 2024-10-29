@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2528: Maximize the Minimum Powered City"
-date = "2017-11-27"
+date = "2017-11-28"
 description = "Solution to Leetcode 2528"
 tags = [
     

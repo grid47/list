@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2384: Largest Palindromic Number"
-date = "2018-04-20"
+date = "2018-04-21"
 description = "Solution to Leetcode 2384"
 tags = [
     

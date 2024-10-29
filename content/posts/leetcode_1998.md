@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1998: GCD Sort of an Array"
-date = "2019-05-11"
+date = "2019-05-12"
 description = "Solution to Leetcode 1998"
 tags = [
     

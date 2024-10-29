@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2220: Minimum Bit Flips to Convert Number"
-date = "2018-10-01"
+date = "2018-10-02"
 description = "Solution to Leetcode 2220"
 tags = [
     

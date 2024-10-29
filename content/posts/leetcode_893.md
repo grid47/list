@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 893: Groups of Special-Equivalent Strings"
-date = "2022-05-20"
+date = "2022-05-21"
 description = "Solution to Leetcode 893"
 tags = [
     

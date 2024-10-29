@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2205: The Number of Users That Are Eligible for Discount"
-date = "2018-10-16"
+date = "2018-10-17"
 description = "Solution to Leetcode 2205"
 tags = [
     

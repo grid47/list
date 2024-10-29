@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3174: Clear Digits"
-date = "2016-02-20"
+date = "2016-02-21"
 description = "Solution to Leetcode 3174"
 tags = [
     

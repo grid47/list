@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1932: Merge BSTs to Create Single BST"
-date = "2019-07-16"
+date = "2019-07-17"
 description = "Solution to Leetcode 1932"
 tags = [
     

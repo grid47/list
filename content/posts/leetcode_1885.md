@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1885: Count Pairs in Two Arrays"
-date = "2019-09-01"
+date = "2019-09-02"
 description = "Solution to Leetcode 1885"
 tags = [
     

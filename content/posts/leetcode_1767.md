@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1767: Find the Subtasks That Did Not Execute"
-date = "2019-12-28"
+date = "2019-12-29"
 description = "Solution to Leetcode 1767"
 tags = [
     

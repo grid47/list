@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3320: Count The Number of Winning Sequences"
-date = "2015-09-27"
+date = "2015-09-28"
 description = "Solution to Leetcode 3320"
 tags = [
     

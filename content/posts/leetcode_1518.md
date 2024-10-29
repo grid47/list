@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1518: Water Bottles"
-date = "2020-09-02"
+date = "2020-09-03"
 description = "Solution to Leetcode 1518"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1738: Find Kth Largest XOR Coordinate Value"
-date = "2020-01-26"
+date = "2020-01-27"
 description = "Solution to Leetcode 1738"
 tags = [
     

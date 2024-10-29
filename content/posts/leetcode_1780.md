@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1780: Check if Number is a Sum of Powers of Three"
-date = "2019-12-15"
+date = "2019-12-16"
 description = "Solution to Leetcode 1780"
 tags = [
     

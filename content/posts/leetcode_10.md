@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 10: Regular Expression Matching"
-date = "2024-10-19"
+date = "2024-10-20"
 description = "Solution to Leetcode 10"
 tags = [
     

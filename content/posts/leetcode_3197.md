@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3197: Find the Minimum Area to Cover All Ones II"
-date = "2016-01-28"
+date = "2016-01-29"
 description = "Solution to Leetcode 3197"
 tags = [
     

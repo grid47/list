@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1714: Sum Of Special Evenly-Spaced Elements In Array"
-date = "2020-02-19"
+date = "2020-02-20"
 description = "Solution to Leetcode 1714"
 tags = [
     

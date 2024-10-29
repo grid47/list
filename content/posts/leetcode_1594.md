@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1594: Maximum Non Negative Product in a Matrix"
-date = "2020-06-18"
+date = "2020-06-19"
 description = "Solution to Leetcode 1594"
 tags = [
     

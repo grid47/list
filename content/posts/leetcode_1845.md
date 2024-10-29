@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1845: Seat Reservation Manager"
-date = "2019-10-11"
+date = "2019-10-12"
 description = "Solution to Leetcode 1845"
 tags = [
     

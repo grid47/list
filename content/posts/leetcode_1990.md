@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1990: Count the Number of Experiments"
-date = "2019-05-19"
+date = "2019-05-20"
 description = "Solution to Leetcode 1990"
 tags = [
     

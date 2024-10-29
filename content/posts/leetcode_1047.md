@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1047: Remove All Adjacent Duplicates In String"
-date = "2021-12-17"
+date = "2021-12-18"
 description = "Solution to Leetcode 1047"
 tags = [
     

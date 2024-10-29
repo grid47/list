@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1570: Dot Product of Two Sparse Vectors"
-date = "2020-07-12"
+date = "2020-07-13"
 description = "Solution to Leetcode 1570"
 tags = [
     

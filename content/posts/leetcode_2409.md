@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2409: Count Days Spent Together"
-date = "2018-03-26"
+date = "2018-03-27"
 description = "Solution to Leetcode 2409"
 tags = [
     

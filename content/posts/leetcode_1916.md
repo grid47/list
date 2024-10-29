@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1916: Count Ways to Build Rooms in an Ant Colony"
-date = "2019-08-01"
+date = "2019-08-02"
 description = "Solution to Leetcode 1916"
 tags = [
     

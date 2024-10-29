@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1909: Remove One Element to Make the Array Strictly Increasing"
-date = "2019-08-08"
+date = "2019-08-09"
 description = "Solution to Leetcode 1909"
 tags = [
     

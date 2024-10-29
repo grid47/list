@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2580: Count Ways to Group Overlapping Ranges"
-date = "2017-10-06"
+date = "2017-10-07"
 description = "Solution to Leetcode 2580"
 tags = [
     

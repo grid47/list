@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2756: Query Batching"
-date = "2017-04-13"
+date = "2017-04-14"
 description = "Solution to Leetcode 2756"
 tags = [
     

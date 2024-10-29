@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2168: Unique Substrings With Equal Digit Frequency"
-date = "2018-11-22"
+date = "2018-11-23"
 description = "Solution to Leetcode 2168"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3145: Find Products of Elements of Big Array"
-date = "2016-03-20"
+date = "2016-03-21"
 description = "Solution to Leetcode 3145"
 tags = [
     

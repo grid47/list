@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3056: Snaps Analysis"
-date = "2016-06-17"
+date = "2016-06-18"
 description = "Solution to Leetcode 3056"
 tags = [
     

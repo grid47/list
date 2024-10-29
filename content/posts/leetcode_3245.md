@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3245: Alternating Groups III"
-date = "2015-12-11"
+date = "2015-12-12"
 description = "Solution to Leetcode 3245"
 tags = [
     

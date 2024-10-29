@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1170: Compare Strings by Frequency of the Smallest Character"
-date = "2021-08-16"
+date = "2021-08-17"
 description = "Solution to Leetcode 1170"
 tags = [
     

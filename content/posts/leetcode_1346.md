@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1346: Check If N and Its Double Exist"
-date = "2021-02-21"
+date = "2021-02-22"
 description = "Solution to Leetcode 1346"
 tags = [
     

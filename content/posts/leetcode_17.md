@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 17: Letter Combinations of a Phone Number"
-date = "2024-10-12"
+date = "2024-10-13"
 description = "Solution to Leetcode 17"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1425: Constrained Subsequence Sum"
-date = "2020-12-04"
+date = "2020-12-05"
 description = "Solution to Leetcode 1425"
 tags = [
     

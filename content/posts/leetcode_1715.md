@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1715: Count Apples and Oranges"
-date = "2020-02-18"
+date = "2020-02-19"
 description = "Solution to Leetcode 1715"
 tags = [
     

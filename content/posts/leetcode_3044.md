@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3044: Most Frequent Prime"
-date = "2016-06-29"
+date = "2016-06-30"
 description = "Solution to Leetcode 3044"
 tags = [
     

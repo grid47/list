@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1794: Count Pairs of Equal Substrings With Minimum Difference"
-date = "2019-12-01"
+date = "2019-12-02"
 description = "Solution to Leetcode 1794"
 tags = [
     

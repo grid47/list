@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1089: Duplicate Zeros"
-date = "2021-11-05"
+date = "2021-11-06"
 description = "Solution to Leetcode 1089"
 tags = [
     

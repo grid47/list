@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1952: Three Divisors"
-date = "2019-06-26"
+date = "2019-06-27"
 description = "Solution to Leetcode 1952"
 tags = [
     

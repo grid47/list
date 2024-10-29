@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2582: Pass the Pillow"
-date = "2017-10-04"
+date = "2017-10-05"
 description = "Solution to Leetcode 2582"
 tags = [
     

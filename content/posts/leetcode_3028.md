@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3028: Ant on the Boundary"
-date = "2016-07-15"
+date = "2016-07-16"
 description = "Solution to Leetcode 3028"
 tags = [
     

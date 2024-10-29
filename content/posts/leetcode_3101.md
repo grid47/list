@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3101: Count Alternating Subarrays"
-date = "2016-05-03"
+date = "2016-05-04"
 description = "Solution to Leetcode 3101"
 tags = [
     

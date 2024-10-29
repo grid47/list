@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3087: Find Trending Hashtags"
-date = "2016-05-17"
+date = "2016-05-18"
 description = "Solution to Leetcode 3087"
 tags = [
     

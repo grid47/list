@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3252: Premier League Table Ranking II"
-date = "2015-12-04"
+date = "2015-12-05"
 description = "Solution to Leetcode 3252"
 tags = [
     

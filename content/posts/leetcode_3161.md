@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3161: Block Placement Queries"
-date = "2016-03-04"
+date = "2016-03-05"
 description = "Solution to Leetcode 3161"
 tags = [
     

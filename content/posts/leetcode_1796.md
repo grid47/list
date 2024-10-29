@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1796: Second Largest Digit in a String"
-date = "2019-11-29"
+date = "2019-11-30"
 description = "Solution to Leetcode 1796"
 tags = [
     

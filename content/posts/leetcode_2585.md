@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2585: Number of Ways to Earn Points"
-date = "2017-10-01"
+date = "2017-10-02"
 description = "Solution to Leetcode 2585"
 tags = [
     

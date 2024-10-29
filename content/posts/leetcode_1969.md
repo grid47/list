@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1969: Minimum Non-Zero Product of the Array Elements"
-date = "2019-06-09"
+date = "2019-06-10"
 description = "Solution to Leetcode 1969"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3187: Peaks in Array"
-date = "2016-02-07"
+date = "2016-02-08"
 description = "Solution to Leetcode 3187"
 tags = [
     

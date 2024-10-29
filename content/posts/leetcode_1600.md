@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1600: Throne Inheritance"
-date = "2020-06-12"
+date = "2020-06-13"
 description = "Solution to Leetcode 1600"
 tags = [
     

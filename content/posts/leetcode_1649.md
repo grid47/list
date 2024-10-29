@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1649: Create Sorted Array through Instructions"
-date = "2020-04-24"
+date = "2020-04-25"
 description = "Solution to Leetcode 1649"
 tags = [
     

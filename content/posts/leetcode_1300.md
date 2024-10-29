@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1300: Sum of Mutated Array Closest to Target"
-date = "2021-04-08"
+date = "2021-04-09"
 description = "Solution to Leetcode 1300"
 tags = [
     

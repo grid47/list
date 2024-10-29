@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2808: Minimum Seconds to Equalize a Circular Array"
-date = "2017-02-20"
+date = "2017-02-21"
 description = "Solution to Leetcode 2808"
 tags = [
     

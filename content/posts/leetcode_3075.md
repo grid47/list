@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3075: Maximize Happiness of Selected Children"
-date = "2016-05-29"
+date = "2016-05-30"
 description = "Solution to Leetcode 3075"
 tags = [
     

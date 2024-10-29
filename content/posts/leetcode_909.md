@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 909: Snakes and Ladders"
-date = "2022-05-04"
+date = "2022-05-05"
 description = "Solution to Leetcode 909"
 tags = [
     

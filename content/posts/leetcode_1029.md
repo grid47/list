@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1029: Two City Scheduling"
-date = "2022-01-04"
+date = "2022-01-05"
 description = "Solution to Leetcode 1029"
 tags = [
     

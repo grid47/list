@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 896: Monotonic Array"
-date = "2022-05-17"
+date = "2022-05-18"
 description = "Solution to Leetcode 896"
 tags = [
     

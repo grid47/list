@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2331: Evaluate Boolean Binary Tree"
-date = "2018-06-12"
+date = "2018-06-13"
 description = "Solution to Leetcode 2331"
 tags = [
     

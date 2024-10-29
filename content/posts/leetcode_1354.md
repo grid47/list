@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1354: Construct Target Array With Multiple Sums"
-date = "2021-02-13"
+date = "2021-02-14"
 description = "Solution to Leetcode 1354"
 tags = [
     

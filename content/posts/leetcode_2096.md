@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2096: Step-By-Step Directions From a Binary Tree Node to Another"
-date = "2019-02-02"
+date = "2019-02-03"
 description = "Solution to Leetcode 2096"
 tags = [
     

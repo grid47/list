@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 990: Satisfiability of Equality Equations"
-date = "2022-02-12"
+date = "2022-02-13"
 description = "Solution to Leetcode 990"
 tags = [
     

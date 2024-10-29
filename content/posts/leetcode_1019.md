@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1019: Next Greater Node In Linked List"
-date = "2022-01-14"
+date = "2022-01-15"
 description = "Solution to Leetcode 1019"
 tags = [
     

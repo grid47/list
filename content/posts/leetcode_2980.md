@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2980: Check if Bitwise OR Has Trailing Zeros"
-date = "2016-09-01"
+date = "2016-09-02"
 description = "Solution to Leetcode 2980"
 tags = [
     

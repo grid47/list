@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 936: Stamping The Sequence"
-date = "2022-04-07"
+date = "2022-04-08"
 description = "Solution to Leetcode 936"
 tags = [
     

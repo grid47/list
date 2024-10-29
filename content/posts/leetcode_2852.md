@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2852: Sum of Remoteness of All Cells"
-date = "2017-01-07"
+date = "2017-01-08"
 description = "Solution to Leetcode 2852"
 tags = [
     

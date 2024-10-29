@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2545: Sort the Students by Their Kth Score"
-date = "2017-11-10"
+date = "2017-11-11"
 description = "Solution to Leetcode 2545"
 tags = [
     

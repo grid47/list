@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1747: Leetflex Banned Accounts"
-date = "2020-01-17"
+date = "2020-01-18"
 description = "Solution to Leetcode 1747"
 tags = [
     

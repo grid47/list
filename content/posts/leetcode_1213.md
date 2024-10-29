@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1213: Intersection of Three Sorted Arrays"
-date = "2021-07-04"
+date = "2021-07-05"
 description = "Solution to Leetcode 1213"
 tags = [
     

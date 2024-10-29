@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1593: Split a String Into the Max Number of Unique Substrings"
-date = "2020-06-19"
+date = "2020-06-20"
 description = "Solution to Leetcode 1593"
 tags = [
     

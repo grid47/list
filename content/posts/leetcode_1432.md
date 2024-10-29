@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1432: Max Difference You Can Get From Changing an Integer"
-date = "2020-11-27"
+date = "2020-11-28"
 description = "Solution to Leetcode 1432"
 tags = [
     

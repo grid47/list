@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 41: First Missing Positive"
-date = "2024-09-18"
+date = "2024-09-19"
 description = "Solution to Leetcode 41"
 tags = [
     

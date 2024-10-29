@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1249: Minimum Remove to Make Valid Parentheses"
-date = "2021-05-29"
+date = "2021-05-30"
 description = "Solution to Leetcode 1249"
 tags = [
     

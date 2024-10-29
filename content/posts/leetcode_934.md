@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 934: Shortest Bridge"
-date = "2022-04-09"
+date = "2022-04-10"
 description = "Solution to Leetcode 934"
 tags = [
     

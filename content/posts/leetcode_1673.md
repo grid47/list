@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1673: Find the Most Competitive Subsequence"
-date = "2020-03-31"
+date = "2020-04-01"
 description = "Solution to Leetcode 1673"
 tags = [
     

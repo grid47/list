@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1429: First Unique Number"
-date = "2020-11-30"
+date = "2020-12-01"
 description = "Solution to Leetcode 1429"
 tags = [
     

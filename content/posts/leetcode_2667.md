@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2667: Create Hello World Function"
-date = "2017-07-11"
+date = "2017-07-12"
 description = "Solution to Leetcode 2667"
 tags = [
     

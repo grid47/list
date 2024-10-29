@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 964: Least Operators to Express Number"
-date = "2022-03-10"
+date = "2022-03-11"
 description = "Solution to Leetcode 964"
 tags = [
     

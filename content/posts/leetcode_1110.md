@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1110: Delete Nodes And Return Forest"
-date = "2021-10-15"
+date = "2021-10-16"
 description = "Solution to Leetcode 1110"
 tags = [
     

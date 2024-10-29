@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2018: Check if Word Can Be Placed In Crossword"
-date = "2019-04-21"
+date = "2019-04-22"
 description = "Solution to Leetcode 2018"
 tags = [
     

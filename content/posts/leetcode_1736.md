@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1736: Latest Time by Replacing Hidden Digits"
-date = "2020-01-28"
+date = "2020-01-29"
 description = "Solution to Leetcode 1736"
 tags = [
     

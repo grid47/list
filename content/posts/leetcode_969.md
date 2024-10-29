@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 969: Pancake Sorting"
-date = "2022-03-05"
+date = "2022-03-06"
 description = "Solution to Leetcode 969"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1120: Maximum Average Subtree"
-date = "2021-10-05"
+date = "2021-10-06"
 description = "Solution to Leetcode 1120"
 tags = [
     

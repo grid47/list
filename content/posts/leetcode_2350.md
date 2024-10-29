@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2350: Shortest Impossible Sequence of Rolls"
-date = "2018-05-24"
+date = "2018-05-25"
 description = "Solution to Leetcode 2350"
 tags = [
     

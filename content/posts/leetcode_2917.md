@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2917: Find the K-or of an Array"
-date = "2016-11-03"
+date = "2016-11-04"
 description = "Solution to Leetcode 2917"
 tags = [
     

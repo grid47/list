@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1130: Minimum Cost Tree From Leaf Values"
-date = "2021-09-25"
+date = "2021-09-26"
 description = "Solution to Leetcode 1130"
 tags = [
     

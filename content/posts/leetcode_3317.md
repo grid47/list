@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3317: Find the Number of Possible Ways for an Event"
-date = "2015-09-30"
+date = "2015-10-01"
 description = "Solution to Leetcode 3317"
 tags = [
     

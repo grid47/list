@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2486: Append Characters to String to Make Subsequence"
-date = "2018-01-08"
+date = "2018-01-09"
 description = "Solution to Leetcode 2486"
 tags = [
     

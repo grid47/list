@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1072: Flip Columns For Maximum Number of Equal Rows"
-date = "2021-11-22"
+date = "2021-11-23"
 description = "Solution to Leetcode 1072"
 tags = [
     

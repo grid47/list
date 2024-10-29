@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3055: Top Percentile Fraud"
-date = "2016-06-18"
+date = "2016-06-19"
 description = "Solution to Leetcode 3055"
 tags = [
     

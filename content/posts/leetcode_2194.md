@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2194: Cells in a Range on an Excel Sheet"
-date = "2018-10-27"
+date = "2018-10-28"
 description = "Solution to Leetcode 2194"
 tags = [
     

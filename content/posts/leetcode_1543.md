@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1543: Fix Product Name Format"
-date = "2020-08-08"
+date = "2020-08-09"
 description = "Solution to Leetcode 1543"
 tags = [
     

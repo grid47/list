@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1052: Grumpy Bookstore Owner"
-date = "2021-12-12"
+date = "2021-12-13"
 description = "Solution to Leetcode 1052"
 tags = [
     

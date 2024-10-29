@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3049: Earliest Second to Mark Indices II"
-date = "2016-06-24"
+date = "2016-06-25"
 description = "Solution to Leetcode 3049"
 tags = [
     

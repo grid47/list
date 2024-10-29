@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2039: The Time When the Network Becomes Idle"
-date = "2019-03-31"
+date = "2019-04-01"
 description = "Solution to Leetcode 2039"
 tags = [
     

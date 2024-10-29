@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 49: Group Anagrams"
-date = "2024-09-10"
+date = "2024-09-11"
 description = "Solution to Leetcode 49"
 tags = [
     

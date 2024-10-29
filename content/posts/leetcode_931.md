@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 931: Minimum Falling Path Sum"
-date = "2022-04-12"
+date = "2022-04-13"
 description = "Solution to Leetcode 931"
 tags = [
     

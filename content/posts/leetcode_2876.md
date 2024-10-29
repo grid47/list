@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2876: Count Visited Nodes in a Directed Graph"
-date = "2016-12-14"
+date = "2016-12-15"
 description = "Solution to Leetcode 2876"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2356: Number of Unique Subjects Taught by Each Teacher"
-date = "2018-05-18"
+date = "2018-05-19"
 description = "Solution to Leetcode 2356"
 tags = [
     

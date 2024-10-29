@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2749: Minimum Operations to Make the Integer Zero"
-date = "2017-04-20"
+date = "2017-04-21"
 description = "Solution to Leetcode 2749"
 tags = [
     

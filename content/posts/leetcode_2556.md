@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2556: Disconnect Path in a Binary Matrix by at Most One Flip"
-date = "2017-10-30"
+date = "2017-10-31"
 description = "Solution to Leetcode 2556"
 tags = [
     

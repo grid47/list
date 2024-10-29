@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1568: Minimum Number of Days to Disconnect Island"
-date = "2020-07-14"
+date = "2020-07-15"
 description = "Solution to Leetcode 1568"
 tags = [
     

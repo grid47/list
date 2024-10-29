@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1589: Maximum Sum Obtained of Any Permutation"
-date = "2020-06-23"
+date = "2020-06-24"
 description = "Solution to Leetcode 1589"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1506: Find Root of N-Ary Tree"
-date = "2020-09-14"
+date = "2020-09-15"
 description = "Solution to Leetcode 1506"
 tags = [
     

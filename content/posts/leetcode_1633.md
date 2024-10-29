@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1633: Percentage of Users Attended a Contest"
-date = "2020-05-10"
+date = "2020-05-11"
 description = "Solution to Leetcode 1633"
 tags = [
     

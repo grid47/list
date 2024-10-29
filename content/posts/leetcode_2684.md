@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2684: Maximum Number of Moves in a Grid"
-date = "2017-06-24"
+date = "2017-06-25"
 description = "Solution to Leetcode 2684"
 tags = [
     

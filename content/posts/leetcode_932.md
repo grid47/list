@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 932: Beautiful Array"
-date = "2022-04-11"
+date = "2022-04-12"
 description = "Solution to Leetcode 932"
 tags = [
     

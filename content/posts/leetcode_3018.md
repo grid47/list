@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3018: Maximum Number of Removal Queries That Can Be Processed I"
-date = "2016-07-25"
+date = "2016-07-26"
 description = "Solution to Leetcode 3018"
 tags = [
     

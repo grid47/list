@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2403: Minimum Time to Kill All Monsters"
-date = "2018-04-01"
+date = "2018-04-02"
 description = "Solution to Leetcode 2403"
 tags = [
     

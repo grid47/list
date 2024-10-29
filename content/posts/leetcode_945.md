@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 945: Minimum Increment to Make Array Unique"
-date = "2022-03-29"
+date = "2022-03-30"
 description = "Solution to Leetcode 945"
 tags = [
     

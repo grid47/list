@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1308: Running Total for Different Genders"
-date = "2021-03-31"
+date = "2021-04-01"
 description = "Solution to Leetcode 1308"
 tags = [
     

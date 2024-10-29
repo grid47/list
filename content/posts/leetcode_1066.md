@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1066: Campus Bikes II"
-date = "2021-11-28"
+date = "2021-11-29"
 description = "Solution to Leetcode 1066"
 tags = [
     

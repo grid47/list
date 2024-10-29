@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1007: Minimum Domino Rotations For Equal Row"
-date = "2022-01-26"
+date = "2022-01-27"
 description = "Solution to Leetcode 1007"
 tags = [
     

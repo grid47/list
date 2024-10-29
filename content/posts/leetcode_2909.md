@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2909: Minimum Sum of Mountain Triplets II"
-date = "2016-11-11"
+date = "2016-11-12"
 description = "Solution to Leetcode 2909"
 tags = [
     

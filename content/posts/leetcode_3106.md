@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3106: Lexicographically Smallest String After Operations With Constraint"
-date = "2016-04-28"
+date = "2016-04-29"
 description = "Solution to Leetcode 3106"
 tags = [
     

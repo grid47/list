@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1255: Maximum Score Words Formed by Letters"
-date = "2021-05-23"
+date = "2021-05-24"
 description = "Solution to Leetcode 1255"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1898: Maximum Number of Removable Characters"
-date = "2019-08-19"
+date = "2019-08-20"
 description = "Solution to Leetcode 1898"
 tags = [
     

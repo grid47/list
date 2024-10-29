@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1210: Minimum Moves to Reach Target with Rotations"
-date = "2021-07-07"
+date = "2021-07-08"
 description = "Solution to Leetcode 1210"
 tags = [
     

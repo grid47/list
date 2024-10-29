@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1508: Range Sum of Sorted Subarray Sums"
-date = "2020-09-12"
+date = "2020-09-13"
 description = "Solution to Leetcode 1508"
 tags = [
     

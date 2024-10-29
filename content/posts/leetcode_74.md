@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 74: Search a 2D Matrix"
-date = "2024-08-16"
+date = "2024-08-17"
 description = "Solution to Leetcode 74"
 tags = [
     

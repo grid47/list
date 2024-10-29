@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2029: Stone Game IX"
-date = "2019-04-10"
+date = "2019-04-11"
 description = "Solution to Leetcode 2029"
 tags = [
     

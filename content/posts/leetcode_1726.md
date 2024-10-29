@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1726: Tuple with Same Product"
-date = "2020-02-07"
+date = "2020-02-08"
 description = "Solution to Leetcode 1726"
 tags = [
     

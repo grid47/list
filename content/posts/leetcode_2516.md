@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2516: Take K of Each Character From Left and Right"
-date = "2017-12-09"
+date = "2017-12-10"
 description = "Solution to Leetcode 2516"
 tags = [
     

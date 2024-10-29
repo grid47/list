@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2206: Divide Array Into Equal Pairs"
-date = "2018-10-15"
+date = "2018-10-16"
 description = "Solution to Leetcode 2206"
 tags = [
     

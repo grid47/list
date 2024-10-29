@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2506: Count Pairs Of Similar Strings"
-date = "2017-12-19"
+date = "2017-12-20"
 description = "Solution to Leetcode 2506"
 tags = [
     

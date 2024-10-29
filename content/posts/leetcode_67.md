@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 67: Add Binary"
-date = "2024-08-23"
+date = "2024-08-24"
 description = "Solution to Leetcode 67"
 tags = [
     

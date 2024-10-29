@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2107: Number of Unique Flavors After Sharing K Candies"
-date = "2019-01-22"
+date = "2019-01-23"
 description = "Solution to Leetcode 2107"
 tags = [
     

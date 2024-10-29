@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 952: Largest Component Size by Common Factor"
-date = "2022-03-22"
+date = "2022-03-23"
 description = "Solution to Leetcode 952"
 tags = [
     

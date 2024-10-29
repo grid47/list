@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2996: Smallest Missing Integer Greater Than Sequential Prefix Sum"
-date = "2016-08-16"
+date = "2016-08-17"
 description = "Solution to Leetcode 2996"
 tags = [
     

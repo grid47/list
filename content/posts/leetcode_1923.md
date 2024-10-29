@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1923: Longest Common Subpath"
-date = "2019-07-25"
+date = "2019-07-26"
 description = "Solution to Leetcode 1923"
 tags = [
     

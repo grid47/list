@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2209: Minimum White Tiles After Covering With Carpets"
-date = "2018-10-12"
+date = "2018-10-13"
 description = "Solution to Leetcode 2209"
 tags = [
     

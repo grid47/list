@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1564: Put Boxes Into the Warehouse I"
-date = "2020-07-18"
+date = "2020-07-19"
 description = "Solution to Leetcode 1564"
 tags = [
     

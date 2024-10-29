@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1613: Find the Missing IDs"
-date = "2020-05-30"
+date = "2020-05-31"
 description = "Solution to Leetcode 1613"
 tags = [
     

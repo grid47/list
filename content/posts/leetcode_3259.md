@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3259: Maximum Energy Boost From Two Drinks"
-date = "2015-11-27"
+date = "2015-11-28"
 description = "Solution to Leetcode 3259"
 tags = [
     

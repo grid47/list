@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2078: Two Furthest Houses With Different Colors"
-date = "2019-02-20"
+date = "2019-02-21"
 description = "Solution to Leetcode 2078"
 tags = [
     

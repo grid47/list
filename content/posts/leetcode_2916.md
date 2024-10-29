@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2916: Subarrays Distinct Element Sum of Squares II"
-date = "2016-11-04"
+date = "2016-11-05"
 description = "Solution to Leetcode 2916"
 tags = [
     

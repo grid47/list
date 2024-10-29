@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2373: Largest Local Values in a Matrix"
-date = "2018-05-01"
+date = "2018-05-02"
 description = "Solution to Leetcode 2373"
 tags = [
     

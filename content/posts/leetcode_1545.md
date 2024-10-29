@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1545: Find Kth Bit in Nth Binary String"
-date = "2020-08-06"
+date = "2020-08-07"
 description = "Solution to Leetcode 1545"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1619: Mean of Array After Removing Some Elements"
-date = "2020-05-24"
+date = "2020-05-25"
 description = "Solution to Leetcode 1619"
 tags = [
     

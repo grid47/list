@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1882: Process Tasks Using Servers"
-date = "2019-09-04"
+date = "2019-09-05"
 description = "Solution to Leetcode 1882"
 tags = [
     

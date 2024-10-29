@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1688: Count of Matches in Tournament"
-date = "2020-03-16"
+date = "2020-03-17"
 description = "Solution to Leetcode 1688"
 tags = [
     

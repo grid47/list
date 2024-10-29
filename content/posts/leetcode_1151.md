@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1151: Minimum Swaps to Group All 1's Together"
-date = "2021-09-04"
+date = "2021-09-05"
 description = "Solution to Leetcode 1151"
 tags = [
     

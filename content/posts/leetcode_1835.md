@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1835: Find XOR Sum of All Pairs Bitwise AND"
-date = "2019-10-21"
+date = "2019-10-22"
 description = "Solution to Leetcode 1835"
 tags = [
     

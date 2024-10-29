@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 903: Valid Permutations for DI Sequence"
-date = "2022-05-10"
+date = "2022-05-11"
 description = "Solution to Leetcode 903"
 tags = [
     

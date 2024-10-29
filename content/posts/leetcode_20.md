@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 20: Valid Parentheses"
-date = "2024-10-09"
+date = "2024-10-10"
 description = "Solution to Leetcode 20"
 tags = [
     

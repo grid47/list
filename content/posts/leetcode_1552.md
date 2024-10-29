@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1552: Magnetic Force Between Two Balls"
-date = "2020-07-30"
+date = "2020-07-31"
 description = "Solution to Leetcode 1552"
 tags = [
     

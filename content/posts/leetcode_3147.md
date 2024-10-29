@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3147: Taking Maximum Energy From the Mystic Dungeon"
-date = "2016-03-18"
+date = "2016-03-19"
 description = "Solution to Leetcode 3147"
 tags = [
     

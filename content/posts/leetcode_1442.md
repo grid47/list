@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1442: Count Triplets That Can Form Two Arrays of Equal XOR"
-date = "2020-11-17"
+date = "2020-11-18"
 description = "Solution to Leetcode 1442"
 tags = [
     

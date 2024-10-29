@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1689: Partitioning Into Minimum Number Of Deci-Binary Numbers"
-date = "2020-03-15"
+date = "2020-03-16"
 description = "Solution to Leetcode 1689"
 tags = [
     

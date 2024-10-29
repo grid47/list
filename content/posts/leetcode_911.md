@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 911: Online Election"
-date = "2022-05-02"
+date = "2022-05-03"
 description = "Solution to Leetcode 911"
 tags = [
     

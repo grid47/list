@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3099: Harshad Number"
-date = "2016-05-05"
+date = "2016-05-06"
 description = "Solution to Leetcode 3099"
 tags = [
     

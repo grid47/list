@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3266: Final Array State After K Multiplication Operations II"
-date = "2015-11-20"
+date = "2015-11-21"
 description = "Solution to Leetcode 3266"
 tags = [
     

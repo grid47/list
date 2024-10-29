@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 84: Largest Rectangle in Histogram"
-date = "2024-08-06"
+date = "2024-08-07"
 description = "Solution to Leetcode 84"
 tags = [
     

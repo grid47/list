@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2045: Second Minimum Time to Reach Destination"
-date = "2019-03-25"
+date = "2019-03-26"
 description = "Solution to Leetcode 2045"
 tags = [
     

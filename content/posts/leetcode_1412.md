@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1412: Find the Quiet Students in All Exams"
-date = "2020-12-17"
+date = "2020-12-18"
 description = "Solution to Leetcode 1412"
 tags = [
     

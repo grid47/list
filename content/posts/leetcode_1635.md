@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1635: Hopper Company Queries I"
-date = "2020-05-08"
+date = "2020-05-09"
 description = "Solution to Leetcode 1635"
 tags = [
     

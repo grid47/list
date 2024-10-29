@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2997: Minimum Number of Operations to Make Array XOR Equal to K"
-date = "2016-08-15"
+date = "2016-08-16"
 description = "Solution to Leetcode 2997"
 tags = [
     

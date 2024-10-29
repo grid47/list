@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3146: Permutation Difference between Two Strings"
-date = "2016-03-19"
+date = "2016-03-20"
 description = "Solution to Leetcode 3146"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1022: Sum of Root To Leaf Binary Numbers"
-date = "2022-01-11"
+date = "2022-01-12"
 description = "Solution to Leetcode 1022"
 tags = [
     

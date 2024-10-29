@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3277: Maximum XOR Score Subarray Queries"
-date = "2015-11-09"
+date = "2015-11-10"
 description = "Solution to Leetcode 3277"
 tags = [
     

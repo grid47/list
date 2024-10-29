@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1162: As Far from Land as Possible"
-date = "2021-08-24"
+date = "2021-08-25"
 description = "Solution to Leetcode 1162"
 tags = [
     

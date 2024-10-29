@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2728: Count Houses in a Circular Street"
-date = "2017-05-11"
+date = "2017-05-12"
 description = "Solution to Leetcode 2728"
 tags = [
     

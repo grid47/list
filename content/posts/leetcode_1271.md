@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1271: Hexspeak"
-date = "2021-05-07"
+date = "2021-05-08"
 description = "Solution to Leetcode 1271"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1761: Minimum Degree of a Connected Trio in a Graph"
-date = "2020-01-03"
+date = "2020-01-04"
 description = "Solution to Leetcode 1761"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3233: Find the Count of Numbers Which Are Not Special"
-date = "2015-12-23"
+date = "2015-12-24"
 description = "Solution to Leetcode 3233"
 tags = [
     

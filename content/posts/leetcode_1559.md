@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1559: Detect Cycles in 2D Grid"
-date = "2020-07-23"
+date = "2020-07-24"
 description = "Solution to Leetcode 1559"
 tags = [
     

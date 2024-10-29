@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1381: Design a Stack With Increment Operation"
-date = "2021-01-17"
+date = "2021-01-18"
 description = "Solution to Leetcode 1381"
 tags = [
     

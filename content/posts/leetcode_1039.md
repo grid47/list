@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1039: Minimum Score Triangulation of Polygon"
-date = "2021-12-25"
+date = "2021-12-26"
 description = "Solution to Leetcode 1039"
 tags = [
     

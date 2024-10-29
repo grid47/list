@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1485: Clone Binary Tree With Random Pointer"
-date = "2020-10-05"
+date = "2020-10-06"
 description = "Solution to Leetcode 1485"
 tags = [
     

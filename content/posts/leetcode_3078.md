@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3078: Match Alphanumerical Pattern in Matrix I"
-date = "2016-05-26"
+date = "2016-05-27"
 description = "Solution to Leetcode 3078"
 tags = [
     

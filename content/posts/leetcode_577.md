@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 577: Employee Bonus"
-date = "2023-04-01"
+date = "2023-04-02"
 description = "Solution to Leetcode 577"
 tags = [
     
@@ -28,7 +28,7 @@ SELECT e.name, b.bonus FROM Employee e
     WHERE b.bonus IS NULL OR b.bonus < 1000;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/577.md" >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1279: Traffic Light Controlled Intersection"
-date = "2021-04-29"
+date = "2021-04-30"
 description = "Solution to Leetcode 1279"
 tags = [
     

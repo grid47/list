@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1814: Count Nice Pairs in an Array"
-date = "2019-11-11"
+date = "2019-11-12"
 description = "Solution to Leetcode 1814"
 tags = [
     

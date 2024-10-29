@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1224: Maximum Equal Frequency"
-date = "2021-06-23"
+date = "2021-06-24"
 description = "Solution to Leetcode 1224"
 tags = [
     

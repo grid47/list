@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1441: Build an Array With Stack Operations"
-date = "2020-11-18"
+date = "2020-11-19"
 description = "Solution to Leetcode 1441"
 tags = [
     

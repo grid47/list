@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 971: Flip Binary Tree To Match Preorder Traversal"
-date = "2022-03-03"
+date = "2022-03-04"
 description = "Solution to Leetcode 971"
 tags = [
     

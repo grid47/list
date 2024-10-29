@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3249: Count the Number of Good Nodes"
-date = "2015-12-07"
+date = "2015-12-08"
 description = "Solution to Leetcode 3249"
 tags = [
     

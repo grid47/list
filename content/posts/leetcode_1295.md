@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1295: Find Numbers with Even Number of Digits"
-date = "2021-04-13"
+date = "2021-04-14"
 description = "Solution to Leetcode 1295"
 tags = [
     

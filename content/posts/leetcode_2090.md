@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2090: K Radius Subarray Averages"
-date = "2019-02-08"
+date = "2019-02-09"
 description = "Solution to Leetcode 2090"
 tags = [
     

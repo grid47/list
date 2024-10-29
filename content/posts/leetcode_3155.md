@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3155: Maximum Number of Upgradable Servers"
-date = "2016-03-10"
+date = "2016-03-11"
 description = "Solution to Leetcode 3155"
 tags = [
     

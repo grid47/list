@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1290: Convert Binary Number in a Linked List to Integer"
-date = "2021-04-18"
+date = "2021-04-19"
 description = "Solution to Leetcode 1290"
 tags = [
     

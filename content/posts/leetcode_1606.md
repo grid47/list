@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1606: Find Servers That Handled Most Number of Requests"
-date = "2020-06-06"
+date = "2020-06-07"
 description = "Solution to Leetcode 1606"
 tags = [
     

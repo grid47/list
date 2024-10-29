@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1617: Count Subtrees With Max Distance Between Cities"
-date = "2020-05-26"
+date = "2020-05-27"
 description = "Solution to Leetcode 1617"
 tags = [
     

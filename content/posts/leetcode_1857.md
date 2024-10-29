@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1857: Largest Color Value in a Directed Graph"
-date = "2019-09-29"
+date = "2019-09-30"
 description = "Solution to Leetcode 1857"
 tags = [
     

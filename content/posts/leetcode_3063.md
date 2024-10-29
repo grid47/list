@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3063: Linked List Frequency"
-date = "2016-06-10"
+date = "2016-06-11"
 description = "Solution to Leetcode 3063"
 tags = [
     

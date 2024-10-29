@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2174: Remove All Ones With Row and Column Flips II"
-date = "2018-11-16"
+date = "2018-11-17"
 description = "Solution to Leetcode 2174"
 tags = [
     

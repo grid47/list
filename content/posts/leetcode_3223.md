@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3223: Minimum Length of String After Operations"
-date = "2016-01-02"
+date = "2016-01-03"
 description = "Solution to Leetcode 3223"
 tags = [
     

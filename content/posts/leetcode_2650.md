@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2650: Design Cancellable Function"
-date = "2017-07-28"
+date = "2017-07-29"
 description = "Solution to Leetcode 2650"
 tags = [
     

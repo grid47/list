@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1024: Video Stitching"
-date = "2022-01-09"
+date = "2022-01-10"
 description = "Solution to Leetcode 1024"
 tags = [
     

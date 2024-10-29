@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3260: Find the Largest Palindrome Divisible by K"
-date = "2015-11-26"
+date = "2015-11-27"
 description = "Solution to Leetcode 3260"
 tags = [
     

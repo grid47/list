@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2731: Movement of Robots"
-date = "2017-05-08"
+date = "2017-05-09"
 description = "Solution to Leetcode 2731"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1855: Maximum Distance Between a Pair of Values"
-date = "2019-10-01"
+date = "2019-10-02"
 description = "Solution to Leetcode 1855"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2340: Minimum Adjacent Swaps to Make a Valid Array"
-date = "2018-06-03"
+date = "2018-06-04"
 description = "Solution to Leetcode 2340"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1693: Daily Leads and Partners"
-date = "2020-03-11"
+date = "2020-03-12"
 description = "Solution to Leetcode 1693"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1562: Find Latest Group of Size M"
-date = "2020-07-20"
+date = "2020-07-21"
 description = "Solution to Leetcode 1562"
 tags = [
     

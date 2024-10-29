@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3140: Consecutive Available Seats II"
-date = "2016-03-25"
+date = "2016-03-26"
 description = "Solution to Leetcode 3140"
 tags = [
     

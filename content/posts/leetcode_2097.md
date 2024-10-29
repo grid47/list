@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2097: Valid Arrangement of Pairs"
-date = "2019-02-01"
+date = "2019-02-02"
 description = "Solution to Leetcode 2097"
 tags = [
     

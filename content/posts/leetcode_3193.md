@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3193: Count the Number of Inversions"
-date = "2016-02-01"
+date = "2016-02-02"
 description = "Solution to Leetcode 3193"
 tags = [
     

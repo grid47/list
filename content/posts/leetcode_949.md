@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 949: Largest Time for Given Digits"
-date = "2022-03-25"
+date = "2022-03-26"
 description = "Solution to Leetcode 949"
 tags = [
     

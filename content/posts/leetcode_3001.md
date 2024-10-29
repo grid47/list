@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3001: Minimum Moves to Capture The Queen"
-date = "2016-08-11"
+date = "2016-08-12"
 description = "Solution to Leetcode 3001"
 tags = [
     

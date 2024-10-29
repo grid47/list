@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1634: Add Two Polynomials Represented as Linked Lists"
-date = "2020-05-09"
+date = "2020-05-10"
 description = "Solution to Leetcode 1634"
 tags = [
     

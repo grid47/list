@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1874: Minimize Product Sum of Two Arrays"
-date = "2019-09-12"
+date = "2019-09-13"
 description = "Solution to Leetcode 1874"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2853: Highest Salaries Difference"
-date = "2017-01-06"
+date = "2017-01-07"
 description = "Solution to Leetcode 2853"
 tags = [
     

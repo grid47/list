@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2504: Concatenate the Name and the Profession"
-date = "2017-12-21"
+date = "2017-12-22"
 description = "Solution to Leetcode 2504"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2341: Maximum Number of Pairs in Array"
-date = "2018-06-02"
+date = "2018-06-03"
 description = "Solution to Leetcode 2341"
 tags = [
     

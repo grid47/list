@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1578: Minimum Time to Make Rope Colorful"
-date = "2020-07-04"
+date = "2020-07-05"
 description = "Solution to Leetcode 1578"
 tags = [
     

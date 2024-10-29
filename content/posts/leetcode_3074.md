@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3074: Apple Redistribution into Boxes"
-date = "2016-05-30"
+date = "2016-05-31"
 description = "Solution to Leetcode 3074"
 tags = [
     

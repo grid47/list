@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2501: Longest Square Streak in an Array"
-date = "2017-12-24"
+date = "2017-12-25"
 description = "Solution to Leetcode 2501"
 tags = [
     

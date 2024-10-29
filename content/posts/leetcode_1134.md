@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1134: Armstrong Number"
-date = "2021-09-21"
+date = "2021-09-22"
 description = "Solution to Leetcode 1134"
 tags = [
     

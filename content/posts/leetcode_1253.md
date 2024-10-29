@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1253: Reconstruct a 2-Row Binary Matrix"
-date = "2021-05-25"
+date = "2021-05-26"
 description = "Solution to Leetcode 1253"
 tags = [
     

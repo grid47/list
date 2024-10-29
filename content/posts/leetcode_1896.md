@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1896: Minimum Cost to Change the Final Value of Expression"
-date = "2019-08-21"
+date = "2019-08-22"
 description = "Solution to Leetcode 1896"
 tags = [
     

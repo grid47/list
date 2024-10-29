@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3104: Find Longest Self-Contained Substring"
-date = "2016-04-30"
+date = "2016-05-01"
 description = "Solution to Leetcode 3104"
 tags = [
     

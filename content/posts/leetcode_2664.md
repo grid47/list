@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2664: The Knight’s Tour"
-date = "2017-07-14"
+date = "2017-07-15"
 description = "Solution to Leetcode 2664"
 tags = [
     

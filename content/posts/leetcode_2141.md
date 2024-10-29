@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2141: Maximum Running Time of N Computers"
-date = "2018-12-19"
+date = "2018-12-20"
 description = "Solution to Leetcode 2141"
 tags = [
     

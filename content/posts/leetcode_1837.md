@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1837: Sum of Digits in Base K"
-date = "2019-10-19"
+date = "2019-10-20"
 description = "Solution to Leetcode 1837"
 tags = [
     

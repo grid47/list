@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1241: Number of Comments per Post"
-date = "2021-06-06"
+date = "2021-06-07"
 description = "Solution to Leetcode 1241"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 995: Minimum Number of K Consecutive Bit Flips"
-date = "2022-02-07"
+date = "2022-02-08"
 description = "Solution to Leetcode 995"
 tags = [
     

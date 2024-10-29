@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1005: Maximize Sum Of Array After K Negations"
-date = "2022-01-28"
+date = "2022-01-29"
 description = "Solution to Leetcode 1005"
 tags = [
     

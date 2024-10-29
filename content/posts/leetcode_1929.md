@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1929: Concatenation of Array"
-date = "2019-07-19"
+date = "2019-07-20"
 description = "Solution to Leetcode 1929"
 tags = [
     

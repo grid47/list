@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1107: New Users Daily Count"
-date = "2021-10-18"
+date = "2021-10-19"
 description = "Solution to Leetcode 1107"
 tags = [
     

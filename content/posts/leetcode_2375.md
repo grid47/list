@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2375: Construct Smallest Number From DI String"
-date = "2018-04-29"
+date = "2018-04-30"
 description = "Solution to Leetcode 2375"
 tags = [
     

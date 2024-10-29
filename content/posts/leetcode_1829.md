@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1829: Maximum XOR for Each Query"
-date = "2019-10-27"
+date = "2019-10-28"
 description = "Solution to Leetcode 1829"
 tags = [
     

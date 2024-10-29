@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1437: Check If All 1's Are at Least Length K Places Away"
-date = "2020-11-22"
+date = "2020-11-23"
 description = "Solution to Leetcode 1437"
 tags = [
     

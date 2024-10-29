@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2813: Maximum Elegance of a K-Length Subsequence"
-date = "2017-02-15"
+date = "2017-02-16"
 description = "Solution to Leetcode 2813"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1411: Number of Ways to Paint N × 3 Grid"
-date = "2020-12-18"
+date = "2020-12-19"
 description = "Solution to Leetcode 1411"
 tags = [
     

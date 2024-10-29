@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1460: Make Two Arrays Equal by Reversing Subarrays"
-date = "2020-10-30"
+date = "2020-10-31"
 description = "Solution to Leetcode 1460"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2328: Number of Increasing Paths in a Grid"
-date = "2018-06-15"
+date = "2018-06-16"
 description = "Solution to Leetcode 2328"
 tags = [
     

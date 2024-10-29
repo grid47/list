@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 88: Merge Sorted Array"
-date = "2024-08-02"
+date = "2024-08-03"
 description = "Solution to Leetcode 88"
 tags = [
     

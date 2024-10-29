@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1538: Guess the Majority in a Hidden Array"
-date = "2020-08-13"
+date = "2020-08-14"
 description = "Solution to Leetcode 1538"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3175: Find The First Player to win K Games in a Row"
-date = "2016-02-19"
+date = "2016-02-20"
 description = "Solution to Leetcode 3175"
 tags = [
     

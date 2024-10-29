@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3170: Lexicographically Minimum String After Removing Stars"
-date = "2016-02-24"
+date = "2016-02-25"
 description = "Solution to Leetcode 3170"
 tags = [
     

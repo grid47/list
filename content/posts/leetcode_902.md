@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 902: Numbers At Most N Given Digit Set"
-date = "2022-05-11"
+date = "2022-05-12"
 description = "Solution to Leetcode 902"
 tags = [
     

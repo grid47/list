@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3059: Find All Unique Email Domains"
-date = "2016-06-14"
+date = "2016-06-15"
 description = "Solution to Leetcode 3059"
 tags = [
     

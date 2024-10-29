@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3165: Maximum Sum of Subsequence With Non-adjacent Elements"
-date = "2016-02-29"
+date = "2016-03-01"
 description = "Solution to Leetcode 3165"
 tags = [
     

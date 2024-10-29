@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1217: Minimum Cost to Move Chips to The Same Position"
-date = "2021-06-30"
+date = "2021-07-01"
 description = "Solution to Leetcode 1217"
 tags = [
     

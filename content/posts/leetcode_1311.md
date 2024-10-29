@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1311: Get Watched Videos by Your Friends"
-date = "2021-03-28"
+date = "2021-03-29"
 description = "Solution to Leetcode 1311"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 946: Validate Stack Sequences"
-date = "2022-03-28"
+date = "2022-03-29"
 description = "Solution to Leetcode 946"
 tags = [
     

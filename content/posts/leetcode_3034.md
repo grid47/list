@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3034: Number of Subarrays That Match a Pattern I"
-date = "2016-07-09"
+date = "2016-07-10"
 description = "Solution to Leetcode 3034"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1418: Display Table of Food Orders in a Restaurant"
-date = "2020-12-11"
+date = "2020-12-12"
 description = "Solution to Leetcode 1418"
 tags = [
     

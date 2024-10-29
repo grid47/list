@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1702: Maximum Binary String After Change"
-date = "2020-03-02"
+date = "2020-03-03"
 description = "Solution to Leetcode 1702"
 tags = [
     

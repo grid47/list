@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 955: Delete Columns to Make Sorted II"
-date = "2022-03-19"
+date = "2022-03-20"
 description = "Solution to Leetcode 955"
 tags = [
     

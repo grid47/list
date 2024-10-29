@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1719: Number Of Ways To Reconstruct A Tree"
-date = "2020-02-14"
+date = "2020-02-15"
 description = "Solution to Leetcode 1719"
 tags = [
     

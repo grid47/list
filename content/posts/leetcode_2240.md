@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2240: Number of Ways to Buy Pens and Pencils"
-date = "2018-09-11"
+date = "2018-09-12"
 description = "Solution to Leetcode 2240"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 987: Vertical Order Traversal of a Binary Tree"
-date = "2022-02-15"
+date = "2022-02-16"
 description = "Solution to Leetcode 987"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1104: Path In Zigzag Labelled Binary Tree"
-date = "2021-10-21"
+date = "2021-10-22"
 description = "Solution to Leetcode 1104"
 tags = [
     

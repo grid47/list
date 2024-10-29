@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1961: Check If String Is a Prefix of Array"
-date = "2019-06-17"
+date = "2019-06-18"
 description = "Solution to Leetcode 1961"
 tags = [
     

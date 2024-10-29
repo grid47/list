@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3171: Find Subarray With Bitwise OR Closest to K"
-date = "2016-02-23"
+date = "2016-02-24"
 description = "Solution to Leetcode 3171"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1270: All People Report to the Given Manager"
-date = "2021-05-08"
+date = "2021-05-09"
 description = "Solution to Leetcode 1270"
 tags = [
     

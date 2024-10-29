@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1044: Longest Duplicate Substring"
-date = "2021-12-20"
+date = "2021-12-21"
 description = "Solution to Leetcode 1044"
 tags = [
     

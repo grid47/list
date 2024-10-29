@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2612: Minimum Reverse Operations"
-date = "2017-09-04"
+date = "2017-09-05"
 description = "Solution to Leetcode 2612"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2999: Count the Number of Powerful Integers"
-date = "2016-08-13"
+date = "2016-08-14"
 description = "Solution to Leetcode 2999"
 tags = [
     

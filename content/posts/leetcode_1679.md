@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1679: Max Number of K-Sum Pairs"
-date = "2020-03-25"
+date = "2020-03-26"
 description = "Solution to Leetcode 1679"
 tags = [
     

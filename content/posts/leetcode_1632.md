@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1632: Rank Transform of a Matrix"
-date = "2020-05-11"
+date = "2020-05-12"
 description = "Solution to Leetcode 1632"
 tags = [
     

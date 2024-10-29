@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1469: Find All The Lonely Nodes"
-date = "2020-10-21"
+date = "2020-10-22"
 description = "Solution to Leetcode 1469"
 tags = [
     

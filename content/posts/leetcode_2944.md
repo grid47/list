@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2944: Minimum Number of Coins for Fruits"
-date = "2016-10-07"
+date = "2016-10-08"
 description = "Solution to Leetcode 2944"
 tags = [
     

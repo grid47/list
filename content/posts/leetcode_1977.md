@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1977: Number of Ways to Separate Numbers"
-date = "2019-06-01"
+date = "2019-06-02"
 description = "Solution to Leetcode 1977"
 tags = [
     

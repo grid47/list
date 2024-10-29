@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 920: Number of Music Playlists"
-date = "2022-04-23"
+date = "2022-04-24"
 description = "Solution to Leetcode 920"
 tags = [
     

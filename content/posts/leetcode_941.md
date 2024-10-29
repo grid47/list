@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 941: Valid Mountain Array"
-date = "2022-04-02"
+date = "2022-04-03"
 description = "Solution to Leetcode 941"
 tags = [
     

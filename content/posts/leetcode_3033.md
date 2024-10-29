@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3033: Modify the Matrix"
-date = "2016-07-10"
+date = "2016-07-11"
 description = "Solution to Leetcode 3033"
 tags = [
     

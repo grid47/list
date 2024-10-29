@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1828: Queries on Number of Points Inside a Circle"
-date = "2019-10-28"
+date = "2019-10-29"
 description = "Solution to Leetcode 1828"
 tags = [
     

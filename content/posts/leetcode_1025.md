@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1025: Divisor Game"
-date = "2022-01-08"
+date = "2022-01-09"
 description = "Solution to Leetcode 1025"
 tags = [
     

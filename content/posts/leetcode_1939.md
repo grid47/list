@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1939: Users That Actively Request Confirmation Messages"
-date = "2019-07-09"
+date = "2019-07-10"
 description = "Solution to Leetcode 1939"
 tags = [
     

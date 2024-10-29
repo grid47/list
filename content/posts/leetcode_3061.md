@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3061: Calculate Trapping Rain Water"
-date = "2016-06-12"
+date = "2016-06-13"
 description = "Solution to Leetcode 3061"
 tags = [
     

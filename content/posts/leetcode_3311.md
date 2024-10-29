@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3311: Construct 2D Grid Matching Graph Layout"
-date = "2015-10-06"
+date = "2015-10-07"
 description = "Solution to Leetcode 3311"
 tags = [
     

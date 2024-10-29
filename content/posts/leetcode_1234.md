@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1234: Replace the Substring for Balanced String"
-date = "2021-06-13"
+date = "2021-06-14"
 description = "Solution to Leetcode 1234"
 tags = [
     

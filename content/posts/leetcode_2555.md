@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2555: Maximize Win From Two Segments"
-date = "2017-10-31"
+date = "2017-11-01"
 description = "Solution to Leetcode 2555"
 tags = [
     

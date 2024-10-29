@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3120: Count the Number of Special Characters I"
-date = "2016-04-14"
+date = "2016-04-15"
 description = "Solution to Leetcode 3120"
 tags = [
     

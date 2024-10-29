@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2575: Find the Divisibility Array of a String"
-date = "2017-10-11"
+date = "2017-10-12"
 description = "Solution to Leetcode 2575"
 tags = [
     

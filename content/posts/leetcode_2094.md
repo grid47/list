@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2094: Finding 3-Digit Even Numbers"
-date = "2019-02-04"
+date = "2019-02-05"
 description = "Solution to Leetcode 2094"
 tags = [
     

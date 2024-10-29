@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1968: Array With Elements Not Equal to Average of Neighbors"
-date = "2019-06-10"
+date = "2019-06-11"
 description = "Solution to Leetcode 1968"
 tags = [
     

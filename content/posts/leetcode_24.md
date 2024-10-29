@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 24: Swap Nodes in Pairs"
-date = "2024-10-05"
+date = "2024-10-06"
 description = "Solution to Leetcode 24"
 tags = [
     

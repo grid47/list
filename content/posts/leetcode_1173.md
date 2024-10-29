@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1173: Immediate Food Delivery I"
-date = "2021-08-13"
+date = "2021-08-14"
 description = "Solution to Leetcode 1173"
 tags = [
     

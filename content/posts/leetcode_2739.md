@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2739: Total Distance Traveled"
-date = "2017-04-30"
+date = "2017-05-01"
 description = "Solution to Leetcode 2739"
 tags = [
     

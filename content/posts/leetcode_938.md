@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 938: Range Sum of BST"
-date = "2022-04-05"
+date = "2022-04-06"
 description = "Solution to Leetcode 938"
 tags = [
     

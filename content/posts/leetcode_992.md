@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 992: Subarrays with K Different Integers"
-date = "2022-02-10"
+date = "2022-02-11"
 description = "Solution to Leetcode 992"
 tags = [
     

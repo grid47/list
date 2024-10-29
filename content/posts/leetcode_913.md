@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 913: Cat and Mouse"
-date = "2022-04-30"
+date = "2022-05-01"
 description = "Solution to Leetcode 913"
 tags = [
     

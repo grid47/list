@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2217: Find Palindrome With Fixed Length"
-date = "2018-10-04"
+date = "2018-10-05"
 description = "Solution to Leetcode 2217"
 tags = [
     

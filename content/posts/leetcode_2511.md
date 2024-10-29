@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2511: Maximum Enemy Forts That Can Be Captured"
-date = "2017-12-14"
+date = "2017-12-15"
 description = "Solution to Leetcode 2511"
 tags = [
     

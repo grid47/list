@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3150: Invalid Tweets II"
-date = "2016-03-15"
+date = "2016-03-16"
 description = "Solution to Leetcode 3150"
 tags = [
     

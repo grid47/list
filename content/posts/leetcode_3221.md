@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3221: Maximum Array Hopping Score II"
-date = "2016-01-04"
+date = "2016-01-05"
 description = "Solution to Leetcode 3221"
 tags = [
     

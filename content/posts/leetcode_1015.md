@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1015: Smallest Integer Divisible by K"
-date = "2022-01-18"
+date = "2022-01-19"
 description = "Solution to Leetcode 1015"
 tags = [
     

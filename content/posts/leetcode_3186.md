@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3186: Maximum Total Damage With Spell Casting"
-date = "2016-02-08"
+date = "2016-02-09"
 description = "Solution to Leetcode 3186"
 tags = [
     

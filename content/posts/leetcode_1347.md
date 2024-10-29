@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1347: Minimum Number of Steps to Make Two Strings Anagram"
-date = "2021-02-20"
+date = "2021-02-21"
 description = "Solution to Leetcode 1347"
 tags = [
     

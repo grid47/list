@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1846: Maximum Element After Decreasing and Rearranging"
-date = "2019-10-10"
+date = "2019-10-11"
 description = "Solution to Leetcode 1846"
 tags = [
     

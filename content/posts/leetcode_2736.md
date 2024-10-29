@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2736: Maximum Sum Queries"
-date = "2017-05-03"
+date = "2017-05-04"
 description = "Solution to Leetcode 2736"
 tags = [
     

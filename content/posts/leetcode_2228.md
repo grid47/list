@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2228: Users With Two Purchases Within Seven Days"
-date = "2018-09-23"
+date = "2018-09-24"
 description = "Solution to Leetcode 2228"
 tags = [
     

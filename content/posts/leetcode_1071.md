@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1071: Greatest Common Divisor of Strings"
-date = "2021-11-23"
+date = "2021-11-24"
 description = "Solution to Leetcode 1071"
 tags = [
     

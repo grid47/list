@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 942: DI String Match"
-date = "2022-04-01"
+date = "2022-04-02"
 description = "Solution to Leetcode 942"
 tags = [
     

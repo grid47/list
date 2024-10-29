@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1670: Design Front Middle Back Queue"
-date = "2020-04-03"
+date = "2020-04-04"
 description = "Solution to Leetcode 1670"
 tags = [
     

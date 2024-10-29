@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1671: Minimum Number of Removals to Make Mountain Array"
-date = "2020-04-02"
+date = "2020-04-03"
 description = "Solution to Leetcode 1671"
 tags = [
     

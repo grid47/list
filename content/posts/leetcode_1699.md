@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1699: Number of Calls Between Two Persons"
-date = "2020-03-05"
+date = "2020-03-06"
 description = "Solution to Leetcode 1699"
 tags = [
     

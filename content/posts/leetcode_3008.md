@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3008: Find Beautiful Indices in the Given Array II"
-date = "2016-08-04"
+date = "2016-08-05"
 description = "Solution to Leetcode 3008"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3023: Find Pattern in Infinite Stream I"
-date = "2016-07-20"
+date = "2016-07-21"
 description = "Solution to Leetcode 3023"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1869: Longer Contiguous Segments of Ones than Zeros"
-date = "2019-09-17"
+date = "2019-09-18"
 description = "Solution to Leetcode 1869"
 tags = [
     

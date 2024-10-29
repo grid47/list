@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3047: Find the Largest Area of Square Inside Two Rectangles"
-date = "2016-06-26"
+date = "2016-06-27"
 description = "Solution to Leetcode 3047"
 tags = [
     

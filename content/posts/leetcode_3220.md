@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3220: Odd and Even Transactions"
-date = "2016-01-05"
+date = "2016-01-06"
 description = "Solution to Leetcode 3220"
 tags = [
     

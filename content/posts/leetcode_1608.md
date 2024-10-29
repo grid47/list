@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1608: Special Array With X Elements Greater Than or Equal X"
-date = "2020-06-04"
+date = "2020-06-05"
 description = "Solution to Leetcode 1608"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1784: Check if Binary String Has at Most One Segment of Ones"
-date = "2019-12-11"
+date = "2019-12-12"
 description = "Solution to Leetcode 1784"
 tags = [
     

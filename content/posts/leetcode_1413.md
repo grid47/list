@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1413: Minimum Value to Get Positive Step by Step Sum"
-date = "2020-12-16"
+date = "2020-12-17"
 description = "Solution to Leetcode 1413"
 tags = [
     

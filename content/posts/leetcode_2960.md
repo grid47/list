@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2960: Count Tested Devices After Test Operations"
-date = "2016-09-21"
+date = "2016-09-22"
 description = "Solution to Leetcode 2960"
 tags = [
     

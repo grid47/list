@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 947: Most Stones Removed with Same Row or Column"
-date = "2022-03-27"
+date = "2022-03-28"
 description = "Solution to Leetcode 947"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2249: Count Lattice Points Inside a Circle"
-date = "2018-09-02"
+date = "2018-09-03"
 description = "Solution to Leetcode 2249"
 tags = [
     

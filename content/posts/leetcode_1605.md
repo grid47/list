@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1605: Find Valid Matrix Given Row and Column Sums"
-date = "2020-06-07"
+date = "2020-06-08"
 description = "Solution to Leetcode 1605"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2691: Immutability Helper"
-date = "2017-06-17"
+date = "2017-06-18"
 description = "Solution to Leetcode 2691"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3243: Shortest Distance After Road Addition Queries I"
-date = "2015-12-13"
+date = "2015-12-14"
 description = "Solution to Leetcode 3243"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3290: Maximum Multiplication Score"
-date = "2015-10-27"
+date = "2015-10-28"
 description = "Solution to Leetcode 3290"
 tags = [
     

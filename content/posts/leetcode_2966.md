@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2966: Divide Array Into Arrays With Max Difference"
-date = "2016-09-15"
+date = "2016-09-16"
 description = "Solution to Leetcode 2966"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2226: Maximum Candies Allocated to K Children"
-date = "2018-09-25"
+date = "2018-09-26"
 description = "Solution to Leetcode 2226"
 tags = [
     

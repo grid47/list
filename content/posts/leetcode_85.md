@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 85: Maximal Rectangle"
-date = "2024-08-05"
+date = "2024-08-06"
 description = "Solution to Leetcode 85"
 tags = [
     

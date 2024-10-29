@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3060: User Activities within Time Bounds"
-date = "2016-06-13"
+date = "2016-06-14"
 description = "Solution to Leetcode 3060"
 tags = [
     

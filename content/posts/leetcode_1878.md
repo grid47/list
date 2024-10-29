@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1878: Get Biggest Three Rhombus Sums in a Grid"
-date = "2019-09-08"
+date = "2019-09-09"
 description = "Solution to Leetcode 1878"
 tags = [
     

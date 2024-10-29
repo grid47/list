@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1951: All the Pairs With the Maximum Number of Common Followers"
-date = "2019-06-27"
+date = "2019-06-28"
 description = "Solution to Leetcode 1951"
 tags = [
     

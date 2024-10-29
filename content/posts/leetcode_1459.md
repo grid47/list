@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1459: Rectangles Area"
-date = "2020-10-31"
+date = "2020-11-01"
 description = "Solution to Leetcode 1459"
 tags = [
     

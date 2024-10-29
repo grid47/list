@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1906: Minimum Absolute Difference Queries"
-date = "2019-08-11"
+date = "2019-08-12"
 description = "Solution to Leetcode 1906"
 tags = [
     

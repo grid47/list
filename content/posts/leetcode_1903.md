@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1903: Largest Odd Number in String"
-date = "2019-08-14"
+date = "2019-08-15"
 description = "Solution to Leetcode 1903"
 tags = [
     

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1795: Rearrange Products Table"
-date = "2019-11-30"
+date = "2019-12-01"
 description = "Solution to Leetcode 1795"
 tags = [
     

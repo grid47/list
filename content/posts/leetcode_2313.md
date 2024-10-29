@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2313: Minimum Flips in Binary Tree to Get Result"
-date = "2018-06-30"
+date = "2018-07-01"
 description = "Solution to Leetcode 2313"
 tags = [
     

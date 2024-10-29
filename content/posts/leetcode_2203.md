@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2203: Minimum Weighted Subgraph With the Required Paths"
-date = "2018-10-18"
+date = "2018-10-19"
 description = "Solution to Leetcode 2203"
 tags = [
     

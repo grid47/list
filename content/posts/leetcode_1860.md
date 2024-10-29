@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1860: Incremental Memory Leak"
-date = "2019-09-26"
+date = "2019-09-27"
 description = "Solution to Leetcode 1860"
 tags = [
     

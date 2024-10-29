@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2436: Minimum Split Into Subarrays With GCD Greater Than One"
-date = "2018-02-27"
+date = "2018-02-28"
 description = "Solution to Leetcode 2436"
 tags = [
     

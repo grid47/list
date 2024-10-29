@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1862: Sum of Floored Pairs"
-date = "2019-09-24"
+date = "2019-09-25"
 description = "Solution to Leetcode 1862"
 tags = [
     

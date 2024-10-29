@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1112: Highest Grade For Each Student"
-date = "2021-10-13"
+date = "2021-10-14"
 description = "Solution to Leetcode 1112"
 tags = [
     

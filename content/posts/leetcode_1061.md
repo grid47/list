@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1061: Lexicographically Smallest Equivalent String"
-date = "2021-12-03"
+date = "2021-12-04"
 description = "Solution to Leetcode 1061"
 tags = [
     

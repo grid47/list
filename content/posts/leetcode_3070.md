@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3070: Count Submatrices with Top-Left Element and Sum Less Than k"
-date = "2016-06-03"
+date = "2016-06-04"
 description = "Solution to Leetcode 3070"
 tags = [
     

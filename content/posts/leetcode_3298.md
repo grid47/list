@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Yasir, Explained by GPT"]
+authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3298: Count Substrings That Can Be Rearranged to Contain a String II"
-date = "2015-10-19"
+date = "2015-10-20"
 description = "Solution to Leetcode 3298"
 tags = [
     
