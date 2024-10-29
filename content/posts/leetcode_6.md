@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/zigzag-conversion/description/)
 
 ---
-{{ youtube 2NMMVnxV6lo }}
+{{< youtube 2NMMVnxV6lo >}}
 **Code:**
 
 {{< highlight cpp >}}

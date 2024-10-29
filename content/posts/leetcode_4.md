@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/median-of-two-sorted-arrays/description/)
 
 ---
-{{ youtube q6IEA26hvXc }}
+{{< youtube q6IEA26hvXc >}}
 **Code:**
 
 {{< highlight cpp >}}

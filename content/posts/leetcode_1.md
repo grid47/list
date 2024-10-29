@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-sum/description/)
 
 ---
-{{ youtube KLlXCFG5TnA }}
+{{< youtube KLlXCFG5TnA >}}
 **Code:**
 
 {{< highlight cpp >}}

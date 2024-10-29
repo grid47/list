@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/add-two-numbers/description/)
 
 ---
-{{ youtube wgFPrzTjm7s }}
+{{< youtube wgFPrzTjm7s >}}
 **Code:**
 
 {{< highlight cpp >}}
