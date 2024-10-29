@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 801: Minimum Swaps To Make Sequences Increasing · Yasir
+  Leetcode 801: Minimum Swaps To Make Sequences Increasing · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 801">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_801/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 801: Minimum Swaps To Make Sequences Increasing">
   <meta property="og:description" content="Solution to Leetcode 801">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-08-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-08-20T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-08-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-08-21T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-08-20T00:00:00Z">
-                August 20, 2022
+              <time datetime="2022-08-21T00:00:00Z">
+                August 21, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,37 +189,160 @@
         <p><a href="https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    int minSwap(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> n1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> n2) {
-</span></span><span class="line"><span class="cl">        int n = n1.size();
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; res(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(2, 0));
-</span></span><span class="line"><span class="cl">        res[0][0] = 0;
-</span></span><span class="line"><span class="cl">        res[0][1] = 1;
-</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">bool</span> <span class="na">bothInc    </span><span class="o">=</span> <span class="s">n1[i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">n1</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="na">n2</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">n2</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">bool</span> <span class="na">crossInc   </span><span class="o">=</span> <span class="s">n1[i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">n2</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="na">n2</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">n1</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minSwap</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">n1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">n2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">n1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">bool</span> <span class="n">bothInc</span>    <span class="o">=</span> <span class="n">n1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">n2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">bool</span> <span class="n">crossInc</span>   <span class="o">=</span> <span class="n">n1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">n2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n1</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">bothInc</span> <span class="err">&amp;&amp;</span> <span class="na">crossInc</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="err">=</span> <span class="na">min</span><span class="err">(</span><span class="na">res</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">res</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">1</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">min</span><span class="err">(</span><span class="na">res</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">res</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">1</span><span class="err">])</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>                
-</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="na">if</span><span class="err">(</span><span class="na">bothInc</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="err">=</span> <span class="na">res</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">0</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">res</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>                                
-</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="err">=</span> <span class="na">res</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">1</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">res</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>                                                
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">min</span><span class="err">(</span><span class="na">res</span><span class="err">[</span><span class="na">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">res</span><span class="err">[</span><span class="na">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">1</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">bothInc</span> <span class="o">&amp;&amp;</span> <span class="n">crossInc</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>                
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">bothInc</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>                                
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>                                                
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">min</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two arrays <code>n1</code> and <code>n2</code> of the same length, the goal is to find the minimum number of swaps required to make both arrays strictly increasing. A swap consists of exchanging the elements at the same index in both arrays.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize a DP Table</strong>:</p>
+<ul>
+<li>Create a 2D vector <code>res</code> of size <code>n</code> (length of the arrays) where <code>res[i][0]</code> represents the minimum swaps needed to keep the sequences increasing without swapping the element at index <code>i</code>, and <code>res[i][1]</code> represents the minimum swaps needed when swapping the element at index <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>For the first element (index 0):
+<ul>
+<li><code>res[0][0] = 0</code>: No swaps needed if we do not swap the first elements.</li>
+<li><code>res[0][1] = 1</code>: One swap needed if we swap the first elements.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Transition</strong>:</p>
+<ul>
+<li>For each subsequent index <code>i</code> (from 1 to <code>n - 1</code>):
+<ul>
+<li>Determine if both sequences can continue increasing without swaps or if a swap is necessary:
+<ul>
+<li><strong>bothInc</strong>: True if both sequences can continue increasing without swaps.</li>
+<li><strong>crossInc</strong>: True if a swap is needed to maintain the increasing order.</li>
+</ul>
+</li>
+<li>Based on the above checks, update the <code>res</code> array:
+<ul>
+<li>If both increasing and crossing increasing conditions are met, take the minimum of the previous states:
+<ul>
+<li><code>res[i][0] = min(res[i - 1][0], res[i - 1][1])</code></li>
+<li><code>res[i][1] = min(res[i - 1][0], res[i - 1][1]) + 1</code></li>
+</ul>
+</li>
+<li>If only <code>bothInc</code> is true, no swap is needed for <code>res[i][0]</code> and a swap is needed for <code>res[i][1]</code>:
+<ul>
+<li><code>res[i][0] = res[i - 1][0]</code></li>
+<li><code>res[i][1] = res[i - 1][1] + 1</code></li>
+</ul>
+</li>
+<li>If neither condition holds, maintain the previous swap counts accordingly.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>Return the minimum of the last element&rsquo;s swap counts:
+<ul>
+<li><code>return min(res[n - 1][0], res[n - 1][1]);</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains the method to calculate the minimum swaps.
+<ul>
+<li><code>int minSwap(vector&lt;int&gt;&amp; n1, vector&lt;int&gt;&amp; n2)</code>: Implements the logic for calculating the minimum swaps.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>n1</code>: A vector of integers representing the first sequence.</li>
+<li><code>n2</code>: A vector of integers representing the second sequence.</li>
+</ul>
+</li>
+<li><strong>Returns</strong>: An integer representing the minimum number of swaps needed to make both sequences strictly increasing.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of the input arrays. Each index is processed in constant time.</li>
+<li><strong>Space Complexity</strong>: O(n), due to the additional storage used for the <code>res</code> array.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 454: 4Sum II · Yasir
+  Leetcode 454: 4Sum II · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 454">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_454/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 454: 4Sum II">
   <meta property="og:description" content="Solution to Leetcode 454">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-08-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-08-02T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-08-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-08-03T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-08-02T00:00:00Z">
-                August 2, 2023
+              <time datetime="2023-08-03T00:00:00Z">
+                August 3, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,25 +189,96 @@
         <p><a href="https://leetcode.com/problems/4sum-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int fourSumCount(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> A, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> B, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> C, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> D) {
-</span></span><span class="line"><span class="cl">        int res = 0;
-</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
-</span></span><span class="line"><span class="cl">        for(int a : A)
-</span></span><span class="line"><span class="cl">        for(int b : B)
-</span></span><span class="line"><span class="cl">        mp[a+b]++;
-</span></span><span class="line"><span class="cl">        for(int c : C)
-</span></span><span class="line"><span class="cl">        for(int d : D)
-</span></span><span class="line"><span class="cl">        if(mp.count(-c-d)) res+= mp[-c-d];
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fourSumCount</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">A</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">B</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">C</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">D</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">A</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">b</span> <span class="p">:</span> <span class="n">B</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">C</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">d</span> <span class="p">:</span> <span class="n">D</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">))</span> <span class="n">res</span><span class="o">+=</span> <span class="n">mp</span><span class="p">[</span><span class="o">-</span><span class="n">c</span><span class="o">-</span><span class="n">d</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given four integer arrays <code>A</code>, <code>B</code>, <code>C</code>, and <code>D</code>, return the number of tuples <code>(i, j, k, l)</code> such that <code>A[i] + B[j] + C[k] + D[l]</code> equals zero.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>HashMap for Sum Pairs</strong>:</p>
+<ul>
+<li>Create a hashmap to store the frequency of sums of all possible pairs formed by elements from arrays <code>A</code> and <code>B</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Complements</strong>:</p>
+<ul>
+<li>Iterate through all pairs formed by elements from arrays <code>C</code> and <code>D</code> to find complements that equal <code>- (C[k] + D[l])</code>. For each found complement in the hashmap, add its frequency to the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Populating the HashMap</strong>:</p>
+<ul>
+<li>Loop through each element <code>a</code> in array <code>A</code> and each element <code>b</code> in array <code>B</code> to calculate the sum <code>a + b</code>.</li>
+<li>Store the count of each sum in the hashmap <code>mp</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding Complements</strong>:</p>
+<ul>
+<li>For each element <code>c</code> in array <code>C</code> and each element <code>d</code> in array <code>D</code>, calculate <code>- (c + d)</code>.</li>
+<li>Check if this value exists in the hashmap <code>mp</code>. If it does, add the count of that complement to the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N^2), where N is the size of the arrays. The two nested loops for calculating pair sums contribute to this complexity.</li>
+<li><strong>Space Complexity</strong>: O(N), for storing the sums in the hashmap.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

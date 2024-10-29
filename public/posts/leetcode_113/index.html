@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 113: Path Sum II · Yasir
+  Leetcode 113: Path Sum II · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 113">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_113/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 113: Path Sum II">
   <meta property="og:description" content="Solution to Leetcode 113">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-07-08T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-07-08T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-07-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-07-09T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-07-08T00:00:00Z">
-                July 8, 2024
+              <time datetime="2024-07-09T00:00:00Z">
+                July 9, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,35 +189,102 @@
         <p><a href="https://leetcode.com/problems/path-sum-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; pathSum(TreeNode* root, int sum) {
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> &gt; paths;
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> path;
-</span></span><span class="line"><span class="cl">        findPaths(root, sum, path, paths);
-</span></span><span class="line"><span class="cl">        return paths;  
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">pathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">paths</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">path</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">findPaths</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">sum</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">paths</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">paths</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    void findPaths(TreeNode* node, int sum, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> path, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> &gt;<span class="err">&amp;</span> paths) {
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">findPaths</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">path</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;&amp;</span> <span class="n">paths</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        if (!node) return;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">node</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        path.push_back(node -&gt; val);
+</span></span><span class="line"><span class="cl">        <span class="n">path</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">val</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        if (!(node -&gt; left) <span class="err">&amp;&amp;</span> !(node -&gt; right) <span class="err">&amp;&amp;</span> sum == node -&gt; val)
-</span></span><span class="line"><span class="cl">            paths.push_back(path);
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">sum</span> <span class="o">==</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">paths</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        findPaths(node -&gt; left, sum - node -&gt; val, path, paths);
-</span></span><span class="line"><span class="cl">        findPaths(node -&gt; right, sum - node -&gt; val, path, paths);
+</span></span><span class="line"><span class="cl">        <span class="n">findPaths</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">paths</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">findPaths</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">val</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">paths</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        path.pop_back();
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="n">path</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a binary tree and a target sum, return all root-to-leaf paths where the sum of the node values equals the target sum.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Use a depth-first search (DFS) strategy to explore each path from the root to the leaves.</li>
+<li>Maintain a current path and the remaining sum as you traverse the tree.</li>
+<li>When a leaf node is reached, check if the current path&rsquo;s sum equals the target sum.</li>
+<li>If it does, add the current path to the result list.</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong><code>pathSum</code> function</strong>:</p>
+<ul>
+<li><strong>Line 5</strong>: Initialize the result vector <code>paths</code> and the current <code>path</code>.</li>
+<li><strong>Line 6</strong>: Call the helper function <code>findPaths</code> to explore paths from the root.</li>
+<li><strong>Line 7</strong>: Return the collected paths.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>findPaths</code> function</strong>:</p>
+<ul>
+<li><strong>Line 10</strong>: If the current node is <code>NULL</code>, return (base case).</li>
+<li><strong>Line 12</strong>: Add the current node&rsquo;s value to the <code>path</code>.</li>
+<li><strong>Line 14</strong>: Check if the current node is a leaf and if the remaining sum equals the node&rsquo;s value. If true, add the <code>path</code> to <code>paths</code>.</li>
+<li><strong>Lines 16-17</strong>: Recursively call <code>findPaths</code> for the left and right children, reducing the sum by the current node&rsquo;s value.</li>
+<li><strong>Line 19</strong>: Remove the current node from <code>path</code> to backtrack for the next exploration.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes, as each node is visited once.</li>
+<li><strong>Space Complexity</strong>: (O(H)), where (H) is the height of the tree, due to the recursion stack and the path storage.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

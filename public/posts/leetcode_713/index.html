@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 713: Subarray Product Less Than K · Yasir
+  Leetcode 713: Subarray Product Less Than K · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 713">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_713/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 713: Subarray Product Less Than K">
   <meta property="og:description" content="Solution to Leetcode 713">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-11-16T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-11-16T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-11-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-11-17T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-11-16T00:00:00Z">
-                November 16, 2022
+              <time datetime="2022-11-17T00:00:00Z">
+                November 17, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,29 +189,108 @@
         <p><a href="https://leetcode.com/problems/subarray-product-less-than-k/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int numSubarrayProductLessThanK(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) {
-</span></span><span class="line"><span class="cl">        if(k == 0) return 0;
-</span></span><span class="line"><span class="cl">        long long prod = 1;
-</span></span><span class="line"><span class="cl">        int res = 0, j = 0;
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">prod</span> <span class="err">*=</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numSubarrayProductLessThanK</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">prod</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prod</span> <span class="o">*=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">prod</span> <span class="p">&gt;</span>= k <span class="err">&amp;&amp;</span> j <span class="err">&lt;</span>= i) {
-</span></span><span class="line"><span class="cl">                prod /= nums[j++];
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">prod</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">prod</span> <span class="o">/=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            res += (i - j + 1);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of positive integers <code>nums</code> and a positive integer <code>k</code>, find the number of contiguous subarrays where the product of all elements in the subarray is less than <code>k</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Two-Pointer Technique</strong>:</p>
+<ul>
+<li>Use two pointers (<code>i</code> and <code>j</code>) to represent the current subarray.</li>
+<li>Iterate through the array with the outer pointer <code>i</code> while maintaining a running product of the elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Product Calculation</strong>:</p>
+<ul>
+<li>Multiply the current number (<code>nums[i]</code>) into the product.</li>
+<li>If the product becomes greater than or equal to <code>k</code>, increment the inner pointer <code>j</code> to reduce the product until it is less than <code>k</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Valid Subarrays</strong>:</p>
+<ul>
+<li>For each valid position of <code>i</code>, the number of valid subarrays that end at <code>i</code> is <code>(i - j + 1)</code>, since all subarrays starting from <code>j</code> to <code>i</code> are valid.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Variables</strong>:</p>
+<ul>
+<li><code>prod</code>: To keep track of the product of the current subarray.</li>
+<li><code>res</code>: To count the number of valid subarrays.</li>
+<li><code>j</code>: The starting index of the current subarray.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function</strong>:</p>
+<ul>
+<li><code>numSubarrayProductLessThanK(vector&lt;int&gt;&amp; nums, int k)</code>: Computes the total number of contiguous subarrays with a product less than <code>k</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of <code>nums</code>. Each element is processed at most twice (once by <code>i</code> and once by <code>j</code>).</li>
+<li><strong>Space Complexity</strong>: O(1), as only a constant amount of extra space is used for variables.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

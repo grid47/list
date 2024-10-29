@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 841: Keys and Rooms · Yasir
+  Leetcode 841: Keys and Rooms · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 841">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_841/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 841: Keys and Rooms">
   <meta property="og:description" content="Solution to Leetcode 841">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-07-11T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-07-11T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-07-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-07-12T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-07-11T00:00:00Z">
-                July 11, 2022
+              <time datetime="2022-07-12T00:00:00Z">
+                July 12, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,32 +189,93 @@
         <p><a href="https://leetcode.com/problems/keys-and-rooms/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    bool canVisitAllRooms(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> rooms) {
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> vis(rooms.size(), false);
-</span></span><span class="line"><span class="cl">        vis[0] = true;
-</span></span><span class="line"><span class="cl">        dfs(rooms, vis, 0);
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">canVisitAllRooms</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">rooms</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">(</span><span class="n">rooms</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">rooms</span><span class="p">,</span> <span class="n">vis</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(auto x: vis)
-</span></span><span class="line"><span class="cl">            if(!x) return x;
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">x</span><span class="p">:</span> <span class="n">vis</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return true;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void dfs(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> rooms, vector<span class="p">&lt;</span><span class="nt">bool</span><span class="p">&gt;</span> <span class="err">&amp;</span>vis, int cur) {
-</span></span><span class="line"><span class="cl">        vis[cur] = true;
-</span></span><span class="line"><span class="cl">        for(auto x: rooms[cur]) {
-</span></span><span class="line"><span class="cl">            if(!vis[x])
-</span></span><span class="line"><span class="cl">                dfs(rooms, vis, x);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">rooms</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">vis</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vis</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">x</span><span class="p">:</span> <span class="n">rooms</span><span class="p">[</span><span class="n">cur</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dfs</span><span class="p">(</span><span class="n">rooms</span><span class="p">,</span> <span class="n">vis</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given a list of <code>rooms</code>, where <code>rooms[i]</code> contains a list of keys that you can use to access other rooms. Initially, you are in room <code>0</code>, and your goal is to determine if you can visit all rooms.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a <code>vector&lt;bool&gt;</code> called <code>vis</code> to track which rooms have been visited. Mark room <code>0</code> as visited since you start there.</li>
+</ul>
+</li>
+<li>
+<p><strong>Depth-First Search (DFS)</strong>:</p>
+<ul>
+<li>Implement a DFS function that takes the rooms, the visited list, and the current room as parameters.</li>
+<li>Mark the current room as visited and explore each key in that room to access other rooms.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check All Rooms</strong>:</p>
+<ul>
+<li>After performing DFS, iterate through the <code>vis</code> vector to check if all rooms have been visited. If any room is not visited, return <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>If all rooms are visited, return <code>true</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the total number of rooms, as each room and each key is processed at most once.</li>
+<li><strong>Space Complexity</strong>: O(N) for the visited list and the recursion stack.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

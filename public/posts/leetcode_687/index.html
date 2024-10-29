@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 687: Longest Univalue Path · Yasir
+  Leetcode 687: Longest Univalue Path · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 687">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_687/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 687: Longest Univalue Path">
   <meta property="og:description" content="Solution to Leetcode 687">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-12-12T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-12-12T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-12-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-12-13T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-12-12T00:00:00Z">
-                December 12, 2022
+              <time datetime="2022-12-13T00:00:00Z">
+                December 13, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,47 +189,113 @@
         <p><a href="https://leetcode.com/problems/longest-univalue-path/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
-</span></span><span class="line"><span class="cl"> * struct TreeNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     TreeNode *left;
-</span></span><span class="line"><span class="cl"> *     TreeNode *right;
-</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">    int maxi;
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int longestUnivaluePath(TreeNode* root) {
-</span></span><span class="line"><span class="cl">        maxi = 0;
-</span></span><span class="line"><span class="cl">        if((root == NULL) || (root-&gt;left == NULL <span class="err">&amp;&amp;</span> root-&gt;right == NULL)  )
-</span></span><span class="line"><span class="cl">        return 0;
-</span></span><span class="line"><span class="cl">        dfs(root);
-</span></span><span class="line"><span class="cl">        return maxi;
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">longestUnivaluePath</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">maxi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">((</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>  <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">maxi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    int dfs(TreeNode *root) {
-</span></span><span class="line"><span class="cl">        if(root == NULL) return 0;
-</span></span><span class="line"><span class="cl">        int l = 0, r = 0;
-</span></span><span class="line"><span class="cl">        int lft = dfs(root-&gt;left);
-</span></span><span class="line"><span class="cl">        int rgt = dfs(root-&gt;right);
-</span></span><span class="line"><span class="cl">        if((root-&gt;left != NULL) <span class="err">&amp;&amp;</span> (root-&gt;left-&gt;val == root-&gt;val))
-</span></span><span class="line"><span class="cl">        l = lft;
-</span></span><span class="line"><span class="cl">        if((root-&gt;right != NULL) <span class="err">&amp;&amp;</span> (root-&gt;right-&gt;val == root-&gt;val))
-</span></span><span class="line"><span class="cl">        r = rgt;        
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">lft</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">rgt</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">((</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l</span> <span class="o">=</span> <span class="n">lft</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">((</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r</span> <span class="o">=</span> <span class="n">rgt</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        maxi = max(maxi, l + r);
-</span></span><span class="line"><span class="cl">        return 1 + max(l, r);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="n">maxi</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">maxi</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">max</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given the root of a binary tree. Your task is to find the length of the longest path where each node in the path has the same value. This path may or may not pass through the root.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes a depth-first search (DFS) traversal of the binary tree to compute the longest univalue path. The main steps are:</p>
+<ol>
+<li>
+<p><strong>DFS Traversal</strong>: Perform a post-order DFS traversal of the tree, processing the left and right children before the parent node.</p>
+</li>
+<li>
+<p><strong>Path Length Calculation</strong>:</p>
+<ul>
+<li>For each node, determine the longest path on its left and right that has the same value as the node itself.</li>
+<li>If the left child has the same value, add its path length to <code>l</code> (left length); similarly, for the right child.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Maximum Length</strong>: Compare and store the maximum univalue path length found during the traversal.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: After traversing all nodes, return the maximum path length found.</p>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>longestUnivaluePath</code> function initializes the maximum length and checks for edge cases (e.g., if the tree is empty or a single node).</li>
+<li>The <code>dfs</code> function calculates the lengths of the left and right univalue paths for each node, updating the maximum length found so far.</li>
+<li>The function returns the longer of the left or right univalue path lengths plus one (to account for the current node).</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the tree, as each node is visited exactly once.</li>
+<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree due to the recursion stack. In the worst case (unbalanced tree), this could be O(N).</li>
+</ul>
+<p>This efficient approach allows for calculating the longest univalue path in a binary tree with minimal overhead and clear logic.</p>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

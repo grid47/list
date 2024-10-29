@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 239: Sliding Window Maximum · Yasir
+  Leetcode 239: Sliding Window Maximum · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 239">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_239/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 239: Sliding Window Maximum">
   <meta property="og:description" content="Solution to Leetcode 239">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-03-04T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-03-04T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-03-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-05T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-03-04T00:00:00Z">
-                March 4, 2024
+              <time datetime="2024-03-05T00:00:00Z">
+                March 5, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,31 +189,113 @@
         <p><a href="https://leetcode.com/problems/sliding-window-maximum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> maxSlidingWindow(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums, int k) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">maxSlidingWindow</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        deque<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dq;
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ret;
+</span></span><span class="line"><span class="cl">        <span class="n">deque</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ret</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(!</span><span class="na">dq</span><span class="err">.</span><span class="na">empty</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">dq</span><span class="err">.</span><span class="na">front</span><span class="err">()</span> <span class="err">==</span> <span class="na">i</span> <span class="na">-</span> <span class="na">k</span><span class="err">)</span> <span class="na">dq</span><span class="err">.</span><span class="na">pop_front</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">dq</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">==</span> <span class="n">i</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span> <span class="n">dq</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(!</span><span class="na">dq</span><span class="err">.</span><span class="na">empty</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">nums</span><span class="err">[</span><span class="na">dq</span><span class="err">.</span><span class="na">back</span><span class="err">()]</span> <span class="err">&lt;=</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="na">dq</span><span class="err">.</span><span class="na">pop_back</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">dq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">dq</span><span class="p">.</span><span class="n">back</span><span class="p">()]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">dq</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="na">dq</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="p">&gt;</span>= k - 1) ret.push_back(nums[dq.front()]);
+</span></span><span class="line"><span class="cl">            <span class="n">dq</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="n">ret</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">dq</span><span class="p">.</span><span class="n">front</span><span class="p">()]);</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return ret;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return the maximum value in each sliding window of size <code>k</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution utilizes a deque to maintain indices of elements in the current sliding window, ensuring that the front of the deque always holds the index of the maximum element within the window.</p>
+<ol>
+<li>
+<p><strong>Deque Maintenance</strong>:</p>
+<ul>
+<li>Remove elements from the front of the deque if they are outside the current window of size <code>k</code>.</li>
+<li>Remove elements from the back of the deque while the current element is greater than or equal to the element at the deque’s back (to maintain decreasing order).</li>
+</ul>
+</li>
+<li>
+<p><strong>Window Maximum</strong>:</p>
+<ul>
+<li>After processing the first <code>k</code> elements, add the maximum for each window to the result by taking the element at the deque&rsquo;s front.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Input</strong>: Vector <code>nums</code> and integer <code>k</code> (size of sliding window).</li>
+<li><strong>Output</strong>: Vector <code>ret</code> where each element is the maximum of a sliding window of size <code>k</code>.</li>
+</ul>
+<ol>
+<li>Iterate through each element in <code>nums</code> with index <code>i</code>.
+<ul>
+<li>Remove the front element if it’s outside the window (<code>i - k</code>).</li>
+<li>Maintain decreasing order by popping from the back if the current element is greater.</li>
+<li>Add the current index <code>i</code> to the back of the deque.</li>
+</ul>
+</li>
+<li>Once the first <code>k</code> elements are processed (<code>i &gt;= k - 1</code>), add <code>nums[dq.front()]</code> (max in the current window) to <code>ret</code>.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in <code>nums</code>, since each element is added and removed from the deque at most once.</li>
+<li><strong>Space Complexity</strong>: (O(k)) for the deque, which stores indices within the sliding window.</li>
+</ul>
+<h3 id="edge-cases">
+  Edge Cases
+  <a class="heading-link" href="#edge-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Small Array or Window Size</strong>: If <code>nums</code> size is less than <code>k</code>, adjust to return empty or partial window results.</li>
+<li><strong>All Elements Same</strong>: Handles duplicates efficiently since it only retains necessary indices.</li>
+</ol>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 385: Mini Parser · Yasir
+  Leetcode 385: Mini Parser · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 385">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_385/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 385: Mini Parser">
   <meta property="og:description" content="Solution to Leetcode 385">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-10-10T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-10-10T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-10-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-10-11T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-10-10T00:00:00Z">
-                October 10, 2023
+              <time datetime="2023-10-11T00:00:00Z">
+                October 11, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,72 +189,146 @@
         <p><a href="https://leetcode.com/problems/mini-parser/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * // This is the interface that allows for creating nested lists.
-</span></span><span class="line"><span class="cl"> * // You should not implement it, or speculate about its implementation
-</span></span><span class="line"><span class="cl"> * class NestedInteger {
-</span></span><span class="line"><span class="cl"> *   public:
-</span></span><span class="line"><span class="cl"> *     // Constructor initializes an empty nested list.
-</span></span><span class="line"><span class="cl"> *     NestedInteger();
-</span></span><span class="line"><span class="cl"> *
-</span></span><span class="line"><span class="cl"> *     // Constructor initializes a single integer.
-</span></span><span class="line"><span class="cl"> *     NestedInteger(int value);
-</span></span><span class="line"><span class="cl"> *
-</span></span><span class="line"><span class="cl"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.
-</span></span><span class="line"><span class="cl"> *     bool isInteger() const;
-</span></span><span class="line"><span class="cl"> *
-</span></span><span class="line"><span class="cl"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer
-</span></span><span class="line"><span class="cl"> *     // The result is undefined if this NestedInteger holds a nested list
-</span></span><span class="line"><span class="cl"> *     int getInteger() const;
-</span></span><span class="line"><span class="cl"> *
-</span></span><span class="line"><span class="cl"> *     // Set this NestedInteger to hold a single integer.
-</span></span><span class="line"><span class="cl"> *     void setInteger(int value);
-</span></span><span class="line"><span class="cl"> *
-</span></span><span class="line"><span class="cl"> *     // Set this NestedInteger to hold a nested list and adds a nested integer to it.
-</span></span><span class="line"><span class="cl"> *     void add(const NestedInteger <span class="ni">&amp;ni);</span>
-</span></span><span class="line"><span class="cl"> *
-</span></span><span class="line"><span class="cl"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list
-</span></span><span class="line"><span class="cl"> *     // The result is undefined if this NestedInteger holds a single integer
-</span></span><span class="line"><span class="cl"> *     const vector<span class="p">&lt;</span><span class="nt">NestedInteger</span><span class="p">&gt;</span> <span class="err">&amp;</span>getList() const;
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    NestedInteger deserialize(string s) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * // This is the interface that allows for creating nested lists.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * // You should not implement it, or speculate about its implementation
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * class NestedInteger {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *   public:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // Constructor initializes an empty nested list.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     NestedInteger();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // Constructor initializes a single integer.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     NestedInteger(int value);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // Return true if this NestedInteger holds a single integer, rather than a nested list.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     bool isInteger() const;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // Return the single integer that this NestedInteger holds, if it holds a single integer
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // The result is undefined if this NestedInteger holds a nested list
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int getInteger() const;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // Set this NestedInteger to hold a single integer.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     void setInteger(int value);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // Set this NestedInteger to hold a nested list and adds a nested integer to it.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     void add(const NestedInteger &amp;ni);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // Return the nested list that this NestedInteger holds, if it holds a nested list
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     // The result is undefined if this NestedInteger holds a single integer
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     const vector&lt;NestedInteger&gt; &amp;getList() const;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">NestedInteger</span> <span class="n">deserialize</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        function<span class="p">&lt;</span><span class="nt">bool</span><span class="err">(</span><span class="na">char</span><span class="err">)</span><span class="p">&gt;</span> isnumber = [](char c) { return (c == &#39;-&#39;) || isdigit(c); };
+</span></span><span class="line"><span class="cl">        <span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">isnumber</span> <span class="o">=</span> <span class="p">[](</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">NestedInteger</span><span class="p">&gt;</span> stk;
-</span></span><span class="line"><span class="cl">        stk.push(NestedInteger());
+</span></span><span class="line"><span class="cl">        <span class="n">stack</span><span class="o">&lt;</span><span class="n">NestedInteger</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">NestedInteger</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        for(auto it = s.begin(); it != s.end();) {
-</span></span><span class="line"><span class="cl">            const char <span class="err">&amp;</span>c = *it;
-</span></span><span class="line"><span class="cl">            if(isnumber(c)) {
-</span></span><span class="line"><span class="cl">                auto it2 = find_if_not(it, s.end(), isnumber);
-</span></span><span class="line"><span class="cl">                int val = stoi(string(it, it2));
-</span></span><span class="line"><span class="cl">                stk.top().add(NestedInteger(val));
-</span></span><span class="line"><span class="cl">                it = it2;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            else {
-</span></span><span class="line"><span class="cl">                if(c == &#39;[&#39;) {
-</span></span><span class="line"><span class="cl">                    stk.push(NestedInteger());
-</span></span><span class="line"><span class="cl">                } else if (c == &#39;]&#39;) {
-</span></span><span class="line"><span class="cl">                    NestedInteger ni = stk.top();
-</span></span><span class="line"><span class="cl">                    stk.pop();
-</span></span><span class="line"><span class="cl">                    stk.top().add(ni);
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">                it++;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        NestedInteger res = stk.top().getList().front();
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">();)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">const</span> <span class="kt">char</span> <span class="o">&amp;</span><span class="n">c</span> <span class="o">=</span> <span class="o">*</span><span class="n">it</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">isnumber</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">it2</span> <span class="o">=</span> <span class="n">find_if_not</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">isnumber</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="n">stoi</span><span class="p">(</span><span class="n">string</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">it2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">NestedInteger</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="n">it</span> <span class="o">=</span> <span class="n">it2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;[&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">NestedInteger</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;]&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">NestedInteger</span> <span class="n">ni</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">add</span><span class="p">(</span><span class="n">ni</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">it</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">NestedInteger</span> <span class="n">res</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">getList</span><span class="p">().</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Implement a function to deserialize a string representation of a nested list into a nested list structure, using the provided <code>NestedInteger</code> class interface.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To convert a string representation of a nested list into a <code>NestedInteger</code> object, we can use a stack-based approach to handle the nested structure efficiently:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Use a stack to keep track of <code>NestedInteger</code> objects as we parse the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through the String</strong>:</p>
+<ul>
+<li>Traverse each character in the string:
+<ul>
+<li>If the character is a digit or a negative sign, identify the complete number, convert it to an integer, and add it to the top <code>NestedInteger</code> in the stack.</li>
+<li>If the character is an opening bracket <code>'['</code>, push a new <code>NestedInteger</code> onto the stack to represent a new nested list.</li>
+<li>If the character is a closing bracket <code>']'</code>, pop the top <code>NestedInteger</code> from the stack (representing the completed nested list) and add it to the <code>NestedInteger</code> currently on top of the stack.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>At the end of the iteration, the top of the stack will hold the fully constructed <code>NestedInteger</code>, which can be returned as the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>deserialize</code> function reads a string <code>s</code>, processes it character by character, and constructs the nested list.</li>
+<li>The lambda function <code>isnumber</code> checks if a character is part of a number.</li>
+<li>The use of <code>stack&lt;NestedInteger&gt;</code> allows managing nested structures easily.</li>
+<li>The function utilizes <code>stoi</code> to convert string numbers into integers and manages nesting through stack operations.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of the input string, as we process each character once.</li>
+<li><strong>Space Complexity</strong>: O(n) in the worst case, as we may need to store all <code>NestedInteger</code> objects in the stack.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

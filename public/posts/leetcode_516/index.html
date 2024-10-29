@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 516: Longest Palindromic Subsequence · Yasir
+  Leetcode 516: Longest Palindromic Subsequence · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 516">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_516/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 516: Longest Palindromic Subsequence">
   <meta property="og:description" content="Solution to Leetcode 516">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-06-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-06-01T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-06-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-06-02T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-06-01T00:00:00Z">
-                June 1, 2023
+              <time datetime="2023-06-02T00:00:00Z">
+                June 2, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,37 +189,155 @@
         <p><a href="https://leetcode.com/problems/longest-palindromic-subsequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    string str;
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; memo;
-</span></span><span class="line"><span class="cl">    int dp(int i, int j) {
-</span></span><span class="line"><span class="cl">        if(i == j) return 1;
-</span></span><span class="line"><span class="cl">        if(i == j - 1) return str[i] == str[j]? 2: 1;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">memo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">str</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">?</span> <span class="mi">2</span><span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(memo[i][j] != -1) return memo[i][j];
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int ans = 0;
-</span></span><span class="line"><span class="cl">        if(str[i] == str[j]) {
-</span></span><span class="line"><span class="cl">            ans = 2 + dp(i + 1, j - 1);
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            ans = max(dp(i + 1, j), dp(i, j - 1));
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return memo[i][j] = ans;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">str</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int longestPalindromeSubseq(string s) {
-</span></span><span class="line"><span class="cl">        str = s;
-</span></span><span class="line"><span class="cl">        int n = s.size();
-</span></span><span class="line"><span class="cl">        memo.resize(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, -1));
-</span></span><span class="line"><span class="cl">        return dp(0, n - 1);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">longestPalindromeSubseq</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">str</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memo</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string <code>s</code>, return the length of the longest palindromic subsequence in <code>s</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Programming</strong>:</p>
+<ul>
+<li>Use a 2D array <code>memo</code> to store the lengths of the longest palindromic subsequences for different substrings of <code>s</code>.</li>
+<li>The dimensions of the array will be <code>n x n</code>, where <code>n</code> is the length of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:</p>
+<ul>
+<li>Implement a recursive function <code>dp(i, j)</code> that computes the longest palindromic subsequence length for the substring <code>s[i..j]</code>.</li>
+<li>Base cases:
+<ul>
+<li>If <code>i == j</code>, it means the substring is a single character, which is a palindrome of length 1.</li>
+<li>If <code>i == j - 1</code>, check if the two characters are the same:
+<ul>
+<li>If they are, return 2 (both characters form a palindrome).</li>
+<li>If not, return 1 (either character can form a palindrome).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>If the value for <code>memo[i][j]</code> has already been computed, return that value to avoid redundant calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recurrence Relation</strong>:</p>
+<ul>
+<li>If <code>s[i] == s[j]</code>, the characters can contribute to a palindromic subsequence, so add 2 to the result of <code>dp(i + 1, j - 1)</code>.</li>
+<li>If they are not equal, take the maximum of the results from the two possible options: excluding the character at the beginning or the end of the substring.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Computation</strong>:</p>
+<ul>
+<li>Call the <code>dp(0, n - 1)</code> function, which considers the entire string, to get the final result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<ul>
+<li>The <code>longestPalindromeSubseq</code> function initializes the string and the memoization table.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive DP Call</strong>:</p>
+<ul>
+<li>The function <code>dp(i, j)</code> is called with the entire range of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization Check</strong>:</p>
+<ul>
+<li>The function checks if the result for the current substring has been computed and stored in <code>memo</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>Handle the single character and two-character cases directly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursion and Memoization</strong>:</p>
+<ul>
+<li>Calculate the result based on the conditions and store it in <code>memo</code> before returning.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n^2), where n is the length of the string, since each substring is computed once.</li>
+<li><strong>Space Complexity</strong>: O(n^2), due to the memoization table used for storing results of computed subproblems.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

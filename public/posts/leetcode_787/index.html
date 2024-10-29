@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 787: Cheapest Flights Within K Stops · Yasir
+  Leetcode 787: Cheapest Flights Within K Stops · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 787">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_787/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 787: Cheapest Flights Within K Stops">
   <meta property="og:description" content="Solution to Leetcode 787">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-09-03T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-09-03T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-09-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-09-04T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-09-03T00:00:00Z">
-                September 3, 2022
+              <time datetime="2022-09-04T00:00:00Z">
+                September 4, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,29 +189,122 @@
         <p><a href="https://leetcode.com/problems/cheapest-flights-within-k-stops/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    //bellman ford.
-</span></span><span class="line"><span class="cl">    //just run it k+1 iterations.
-</span></span><span class="line"><span class="cl">    int findCheapestPrice(int n, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> a, int src, int sink, int k) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//bellman ford.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//just run it k+1 iterations.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">findCheapestPrice</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">src</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sink</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> c(n, 1e8);
-</span></span><span class="line"><span class="cl">        c[src] = 0;
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">c</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int z=0; z<span class="err">&lt;</span>=k; z++){
-</span></span><span class="line"><span class="cl">            vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> C(c);
-</span></span><span class="line"><span class="cl">            for(auto e: a)
-</span></span><span class="line"><span class="cl">                C[e[1]] = min(C[e[1]], c[e[0]] + e[2]);
-</span></span><span class="line"><span class="cl">            c = C;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return c[sink] == 1e8 ? -1 : c[sink];
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">z</span><span class="o">&lt;=</span><span class="n">k</span><span class="p">;</span> <span class="n">z</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">C</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">e</span><span class="p">:</span> <span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">C</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">c</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">c</span><span class="p">[</span><span class="n">sink</span><span class="p">]</span> <span class="o">==</span> <span class="mf">1e8</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">c</span><span class="p">[</span><span class="n">sink</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a number of cities, a list of flights represented as edges in a graph, and a maximum number of stops, find the cheapest price for a flight from a source city to a destination city.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a distance vector <code>c</code> to store the minimum cost to reach each city. Initialize all cities with a large value (infinity) except for the source city, which is set to zero.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bellman-Ford Algorithm</strong>:</p>
+<ul>
+<li>The algorithm iterates through the flights up to ( k + 1 ) times. This is because a valid path can include up to ( k ) stops, leading to ( k + 1 ) vertices in total.</li>
+<li>In each iteration, create a temporary distance vector <code>C</code> based on the current distances in <code>c</code>. For each flight (edge) from city ( u ) to city ( v ) with cost ( w ):
+<ul>
+<li>Update the cost to reach ( v ) if using flight ( (u, v) ) offers a cheaper price:
+[
+C[v] = \min(C[v], c[u] + w)
+]</li>
+</ul>
+</li>
+<li>After processing all flights, update <code>c</code> with the values from <code>C</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>After ( k + 1 ) iterations, check the distance to the sink. If it remains at the initialized large value, return -1 indicating that the destination cannot be reached within the given number of stops. Otherwise, return the computed cost.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains the method to find the cheapest flight price.
+<ul>
+<li><code>int findCheapestPrice(int n, vector&lt;vector&lt;int&gt;&gt;&amp; a, int src, int sink, int k)</code>: Main function to compute the cheapest price.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>n</code>: Number of cities.</li>
+<li><code>a</code>: Vector of edges, where each edge is represented as a vector <code>[from, to, price]</code>.</li>
+<li><code>src</code>: The source city index.</li>
+<li><code>sink</code>: The destination city index.</li>
+<li><code>k</code>: The maximum number of stops allowed.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(k * E), where ( E ) is the number of edges (flights) in the graph, as we perform ( k + 1 ) iterations over all edges.</li>
+<li><strong>Space Complexity</strong>: O(n), for storing the distances to each city in the vector <code>c</code>.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 707: Design Linked List · Yasir
+  Leetcode 707: Design Linked List · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 707">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_707/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 707: Design Linked List">
   <meta property="og:description" content="Solution to Leetcode 707">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-11-22T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-11-22T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-11-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-11-23T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-11-22T00:00:00Z">
-                November 22, 2022
+              <time datetime="2022-11-23T00:00:00Z">
+                November 23, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,87 +189,209 @@
         <p><a href="https://leetcode.com/problems/design-linked-list/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Node {
-</span></span><span class="line"><span class="cl">    public:
-</span></span><span class="line"><span class="cl">        int val;
-</span></span><span class="line"><span class="cl">        Node* next;
-</span></span><span class="line"><span class="cl">    Node(int x): val(x), next(nullptr) {}
-</span></span><span class="line"><span class="cl">};
-</span></span><span class="line"><span class="cl">class MyLinkedList {
-</span></span><span class="line"><span class="cl">    int sz;
-</span></span><span class="line"><span class="cl">    Node* head;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span><span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">next</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyLinkedList</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">head</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    MyLinkedList(): sz(0), head(nullptr) { }
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MyLinkedList</span><span class="p">()</span><span class="o">:</span> <span class="n">sz</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">head</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int get(int index) {
-</span></span><span class="line"><span class="cl">        if(index <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">index</span> <span class="p">&gt;</span>= sz)
-</span></span><span class="line"><span class="cl">        return -1;
-</span></span><span class="line"><span class="cl">        else {
-</span></span><span class="line"><span class="cl">            Node* curr = head;
-</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">index</span><span class="err">;</span><span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">            <span class="na">curr </span><span class="o">=</span> <span class="s">curr-</span><span class="p">&gt;</span>next;
-</span></span><span class="line"><span class="cl">            return curr-&gt;val;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="n">sz</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Node</span><span class="o">*</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">index</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">curr</span> <span class="o">=</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">curr</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void addAtHead(int val) {
-</span></span><span class="line"><span class="cl">        addAtIndex(0, val);
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">addAtHead</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">addAtIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void addAtTail(int val) {
-</span></span><span class="line"><span class="cl">        addAtIndex(sz, val);        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">addAtTail</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">addAtIndex</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void addAtIndex(int index, int val) {
-</span></span><span class="line"><span class="cl">        if(index &gt; sz || index <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="na">return</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">Node</span><span class="err">*</span> <span class="na">cur </span><span class="o">=</span> <span class="s">head;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">Node</span><span class="err">*</span> <span class="na">new_node </span><span class="o">=</span> <span class="s">new</span> <span class="na">Node</span><span class="err">(</span><span class="na">val</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">index </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">new_node-</span><span class="p">&gt;</span>next = head;
-</span></span><span class="line"><span class="cl">            head = new_node;
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">index</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">cur </span><span class="o">=</span> <span class="s">cur-</span><span class="p">&gt;</span>next;
-</span></span><span class="line"><span class="cl">            new_node-&gt;next = cur-&gt;next;
-</span></span><span class="line"><span class="cl">            cur-&gt;next = new_node;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        sz++;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">addAtIndex</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">sz</span> <span class="o">||</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">new_node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">head</span> <span class="o">=</span> <span class="n">new_node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new_node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sz</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void deleteAtIndex(int index) {
-</span></span><span class="line"><span class="cl">        if(index &gt;= sz || index <span class="p">&lt;</span> <span class="nt">0</span><span class="err">)</span> <span class="na">return</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">deleteAtIndex</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="n">sz</span> <span class="o">||</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">index </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">Node</span><span class="err">*</span> <span class="na">nxt </span><span class="o">=</span> <span class="s">head-</span><span class="p">&gt;</span>next;
-</span></span><span class="line"><span class="cl">            delete head;
-</span></span><span class="line"><span class="cl">            head = nxt;
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            Node* cur = head;
-</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">index</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">cur </span><span class="o">=</span> <span class="s">cur-</span><span class="p">&gt;</span>next;
-</span></span><span class="line"><span class="cl">            Node* nxt = cur-&gt;next-&gt;next;
-</span></span><span class="line"><span class="cl">            delete cur-&gt;next;
-</span></span><span class="line"><span class="cl">            cur-&gt;next = nxt;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        sz--;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Node</span><span class="o">*</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">delete</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">head</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Node</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Node</span><span class="o">*</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">delete</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sz</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Your MyLinkedList object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl"> * MyLinkedList* obj = new MyLinkedList();
-</span></span><span class="line"><span class="cl"> * int param_1 = obj-&gt;get(index);
-</span></span><span class="line"><span class="cl"> * obj-&gt;addAtHead(val);
-</span></span><span class="line"><span class="cl"> * obj-&gt;addAtTail(val);
-</span></span><span class="line"><span class="cl"> * obj-&gt;addAtIndex(index,val);
-</span></span><span class="line"><span class="cl"> * obj-&gt;deleteAtIndex(index);
-</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your MyLinkedList object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * MyLinkedList* obj = new MyLinkedList();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_1 = obj-&gt;get(index);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;addAtHead(val);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;addAtTail(val);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;addAtIndex(index,val);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;deleteAtIndex(index);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Design a linked list that supports the following operations:</p>
+<ol>
+<li><code>get(index)</code>: Get the value of the node at the specified index.</li>
+<li><code>addAtHead(val)</code>: Add a node with the value <code>val</code> at the head of the linked list.</li>
+<li><code>addAtTail(val)</code>: Add a node with the value <code>val</code> at the tail of the linked list.</li>
+<li><code>addAtIndex(index, val)</code>: Add a node with the value <code>val</code> at the specified index.</li>
+<li><code>deleteAtIndex(index)</code>: Delete the node at the specified index.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Node Structure</strong>: Create a <code>Node</code> class to represent each node in the linked list, which contains a value and a pointer to the next node.</li>
+<li><strong>Linked List Structure</strong>: Create a <code>MyLinkedList</code> class that maintains:
+<ul>
+<li><code>sz</code>: The current size of the linked list.</li>
+<li><code>head</code>: A pointer to the first node in the list.</li>
+</ul>
+</li>
+</ul>
+<h3 id="operations">
+  Operations
+  <a class="heading-link" href="#operations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Get</strong>:</p>
+<ul>
+<li>Check if the index is within bounds. If not, return -1.</li>
+<li>Traverse the list until reaching the desired index and return the node&rsquo;s value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add at Head</strong>:</p>
+<ul>
+<li>Call <code>addAtIndex(0, val)</code> to insert the value at the head of the list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add at Tail</strong>:</p>
+<ul>
+<li>Call <code>addAtIndex(sz, val)</code> to append the value at the end of the list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add at Index</strong>:</p>
+<ul>
+<li>Check if the index is valid (0 ≤ index ≤ size). If invalid, do nothing.</li>
+<li>Create a new node with the given value.</li>
+<li>If adding at index 0, set the new node&rsquo;s next pointer to the current head and update the head pointer.</li>
+<li>For other indices, traverse the list to find the node just before the index and adjust the pointers accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete at Index</strong>:</p>
+<ul>
+<li>Check if the index is valid. If not, do nothing.</li>
+<li>If deleting the head (index 0), update the head pointer and delete the old head node.</li>
+<li>For other indices, traverse the list to find the node just before the index, update pointers to bypass the node to be deleted, and then delete it.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Node Class</strong>: A simple structure for linked list nodes.</li>
+<li><strong>MyLinkedList Class</strong>:
+<ul>
+<li>Initializes with size 0 and a null head.</li>
+<li>Implements methods for all required operations.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><code>get</code>: O(n) in the worst case (traversing the list).</li>
+<li><code>addAtHead</code>: O(1).</li>
+<li><code>addAtTail</code>: O(n) in the worst case.</li>
+<li><code>addAtIndex</code>: O(n) in the worst case (if inserting near the end).</li>
+<li><code>deleteAtIndex</code>: O(n) in the worst case (if deleting near the end).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: O(n) for storing the nodes in the linked list.</p>
+</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 936: Stamping The Sequence · Yasir
+  Leetcode 936: Stamping The Sequence · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 936">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_936/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 936: Stamping The Sequence">
   <meta property="og:description" content="Solution to Leetcode 936">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-04-07T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-04-07T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-04-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-04-08T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-04-07T00:00:00Z">
-                April 7, 2022
+              <time datetime="2022-04-08T00:00:00Z">
+                April 8, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,39 +189,113 @@
         <p><a href="https://leetcode.com/problems/stamping-the-sequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> movesToStamp(string stamp, string target) {
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">movesToStamp</span><span class="p">(</span><span class="n">string</span> <span class="n">stamp</span><span class="p">,</span> <span class="n">string</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int turns = -1, net = 0;
-</span></span><span class="line"><span class="cl">        while(turns) {
-</span></span><span class="line"><span class="cl">            turns = 0;
-</span></span><span class="line"><span class="cl">            for(int sz = stamp.size(); sz &gt; 0; sz--) {
-</span></span><span class="line"><span class="cl">                for(int i = 0; i <span class="err">&lt;</span>= stamp.size() - sz; i++) {
-</span></span><span class="line"><span class="cl">                    string key = string(i, &#39;*&#39;) + stamp.substr(i, sz) + string(stamp.size() - sz - i, &#39;*&#39;);
-</span></span><span class="line"><span class="cl">                    auto pos = target.find(key);
-</span></span><span class="line"><span class="cl">                    while(pos != string::npos) {
-</span></span><span class="line"><span class="cl">                        res.push_back(pos);
-</span></span><span class="line"><span class="cl">                        turns += sz;
-</span></span><span class="line"><span class="cl">                        fill(target.begin() + pos, target.begin() + pos + stamp.size(), &#39;*&#39;);
-</span></span><span class="line"><span class="cl">                        pos = target.find(key);
-</span></span><span class="line"><span class="cl">                    }
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            // cout <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">turns</span> <span class="err">&lt;&lt;</span> <span class="err">&#34;</span> <span class="err">&#34;;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">net</span> <span class="err">+=</span> <span class="na">turns</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">turns</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">net</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">turns</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">turns</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">stamp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">sz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">stamp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">sz</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">string</span> <span class="n">key</span> <span class="o">=</span> <span class="n">string</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="sc">&#39;*&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">stamp</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sz</span><span class="p">)</span> <span class="o">+</span> <span class="n">string</span><span class="p">(</span><span class="n">stamp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">sz</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="sc">&#39;*&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">auto</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">while</span><span class="p">(</span><span class="n">pos</span> <span class="o">!=</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">turns</span> <span class="o">+=</span> <span class="n">sz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">fill</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">pos</span><span class="p">,</span> <span class="n">target</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">pos</span> <span class="o">+</span> <span class="n">stamp</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="sc">&#39;*&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">pos</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// cout &lt;&lt; turns &lt;&lt; &#34; &#34;;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">net</span> <span class="o">+=</span> <span class="n">turns</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="na">reverse</span><span class="err">(</span><span class="na">res</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">res</span><span class="err">.</span><span class="na">end</span><span class="err">());</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">net </span><span class="o">=</span><span class="s">=</span> <span class="na">target</span><span class="err">.</span><span class="na">size</span><span class="err">()?</span> <span class="na">res:</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>{};
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="n">reverse</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">net</span> <span class="o">==</span> <span class="n">target</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">?</span> <span class="nl">res</span><span class="p">:</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a <code>stamp</code> and a <code>target</code> string, the goal is to find the minimum sequence of moves to convert <code>target</code> into a string composed entirely of <code>'*'</code> characters by replacing segments of <code>target</code> with the <code>stamp</code>. Each move consists of placing the <code>stamp</code> over the <code>target</code> such that it matches a segment, replacing that segment with <code>'*'</code>. The function should return the sequence of starting indices for each stamping operation, or an empty array if it&rsquo;s not possible.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a result vector <code>res</code> to store the positions of the stamping operations.</li>
+<li>Initialize <code>turns</code> and <code>net</code> to track the number of characters stamped in each iteration and the total characters stamped, respectively.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterative Stamping Process</strong>:</p>
+<ul>
+<li>Use a while loop to continue stamping until no more stamps can be applied (<code>turns</code> remains 0).</li>
+<li>For each possible size of the stamp from its full size down to 1:
+<ul>
+<li>Check all possible starting positions in the <code>stamp</code> to create a pattern (<code>key</code>) that consists of <code>'*'</code> and a substring of the <code>stamp</code>.</li>
+<li>Search for the <code>key</code> in the <code>target</code> string.</li>
+<li>When found, replace that segment in <code>target</code> with <code>'*'</code>, increment the <code>turns</code>, and store the starting position in <code>res</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check</strong>:</p>
+<ul>
+<li>After the loop, check if the total number of characters replaced (<code>net</code>) equals the length of the <code>target</code>.</li>
+<li>If so, return the positions in reverse order; otherwise, return an empty vector.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The main function <code>movesToStamp</code> implements the above logic using nested loops to explore all possible stamps and positions.</li>
+<li>The key transformation is performed using <code>std::string::find</code> and <code>std::fill</code> to replace segments in the target.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n * m^2) where <code>n</code> is the length of the target string and <code>m</code> is the length of the stamp string. The complexity arises from iterating through possible stamp sizes and positions and searching within the target.</li>
+<li><strong>Space Complexity</strong>: O(n) for storing the result vector and additional temporary variables.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 416: Partition Equal Subset Sum · Yasir
+  Leetcode 416: Partition Equal Subset Sum · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 416">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_416/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 416: Partition Equal Subset Sum">
   <meta property="og:description" content="Solution to Leetcode 416">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-09-09T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-09-09T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-09-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-09-10T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-09-09T00:00:00Z">
-                September 9, 2023
+              <time datetime="2023-09-10T00:00:00Z">
+                September 10, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,46 +189,114 @@
         <p><a href="https://leetcode.com/problems/partition-equal-subset-sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums;
-</span></span><span class="line"><span class="cl">    int memo[201][10001];
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">201</span><span class="p">][</span><span class="mi">10001</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool dp(int idx, int sum) {
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(idx == nums.size()) return sum == 0;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="n">sum</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(memo[idx][sum] != -1) return memo[idx][sum];
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">sum</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">sum</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        bool res = dp(idx + 1, sum);
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">res</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(sum &gt;= nums[idx])
-</span></span><span class="line"><span class="cl">            res |= dp(idx + 1, sum - nums[idx]);
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">sum</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">|=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return memo[idx][sum] = res;
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">sum</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool canPartition(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
-</span></span><span class="line"><span class="cl">        this-&gt;nums = nums;
-</span></span><span class="line"><span class="cl">        int sum = 0;
-</span></span><span class="line"><span class="cl">        for(int x: nums)
-</span></span><span class="line"><span class="cl">            sum += x;
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">canPartition</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span><span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(sum <span class="err">&amp;</span> 1) return false;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">sum</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        sum = sum / 2;
+</span></span><span class="line"><span class="cl">        <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        memset(memo, -1, sizeof(memo));
+</span></span><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return dp(0, sum);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a non-empty array <code>nums</code> containing positive integers, determine if it can be partitioned into two subsets such that the sum of the elements in both subsets is equal.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Calculate Total Sum</strong>: First, compute the total sum of the elements in <code>nums</code>. If the total sum is odd, it’s impossible to split it into two equal subsets, so return <code>false</code>.</li>
+<li><strong>Target Sum</strong>: If the total sum is even, set the target sum for each subset to <code>sum / 2</code>.</li>
+<li><strong>Dynamic Programming Setup</strong>: Use a recursive function <code>dp(idx, sum)</code> to check if a subset can be formed from the first <code>idx</code> elements that adds up to <code>sum</code>. Utilize memoization to store previously computed results:
+<ul>
+<li>If the current index equals the size of <code>nums</code>, check if the sum is zero.</li>
+<li>If the result for the current <code>idx</code> and <code>sum</code> is already computed, return it.</li>
+</ul>
+</li>
+<li><strong>Recursive Calls</strong>:
+<ul>
+<li>Check whether the current element can be included in the subset or not:
+<ul>
+<li>Call <code>dp(idx + 1, sum)</code> to explore the case where the current element is excluded.</li>
+<li>If the current element can be included (i.e., <code>sum &gt;= nums[idx]</code>), call <code>dp(idx + 1, sum - nums[idx])</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Store Result</strong>: Save the result in the memoization table and return it.</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Input Initialization</strong>: Store the input <code>nums</code> into a member variable and calculate the total sum.</li>
+<li><strong>Odd Sum Check</strong>: Immediately return <code>false</code> if the total sum is odd.</li>
+<li><strong>Memoization Array</strong>: Initialize the memoization array <code>memo</code> with <code>-1</code> to indicate uncomputed states.</li>
+<li><strong>Recursion</strong>: Start the recursive function from the first index and the target sum.</li>
+<li><strong>Return Result</strong>: The final result of the function indicates whether the partitioning is possible.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n * sum), where <code>n</code> is the number of elements in <code>nums</code> and <code>sum</code> is the target sum. The memoization table has <code>n</code> rows and <code>sum + 1</code> columns.</li>
+<li><strong>Space Complexity</strong>: O(n * sum) for the memoization table, plus O(n) for the recursion stack in the worst case.</li>
+</ul> 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

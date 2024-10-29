@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 639: Decode Ways II · Yasir
+  Leetcode 639: Decode Ways II · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 639">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_639/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 639: Decode Ways II">
   <meta property="og:description" content="Solution to Leetcode 639">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-01-29T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-01-29T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-01-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-01-30T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-01-29T00:00:00Z">
-                January 29, 2023
+              <time datetime="2023-01-30T00:00:00Z">
+                January 30, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,64 +189,143 @@
         <p><a href="https://leetcode.com/problems/decode-ways-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> memo;
-</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7;
-</span></span><span class="line"><span class="cl">    int numDecodings(string s) {
-</span></span><span class="line"><span class="cl">        memo.resize(s.size(), -1);
-</span></span><span class="line"><span class="cl">        return !s.size()? 0: ways(0, s);
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">memo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numDecodings</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memo</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">?</span> <span class="mi">0</span><span class="o">:</span> <span class="n">ways</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    long long ways(int i, string <span class="err">&amp;</span>s) {
-</span></span><span class="line"><span class="cl">        if(i &gt;= s.size()) return 1;
-</span></span><span class="line"><span class="cl">        if(s[i] == &#39;0&#39;) return memo[i] = 0; // no char matching with &#39;0*&#39;
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="nf">ways</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// no char matching with &#39;0*&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(memo[i] != -1) return memo[i];
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        long long res = ways(i + 1, s);
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">*=</span> <span class="mi">9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;6&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>            
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;1&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;2&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;6&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="mi">6</span><span class="o">*</span> <span class="n">ways</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(s[i] == &#39;*&#39;) {
-</span></span><span class="line"><span class="cl">            res *= 9;
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            if(i <span class="p">&lt;</span> <span class="nt">s.size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span>= &#39;0&#39; <span class="err">&amp;&amp;</span> s[i+1] <span class="err">&lt;</span>= &#39;9&#39;) {
-</span></span><span class="line"><span class="cl">                res += ways(i + 2, s);
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            if(i <span class="p">&lt;</span> <span class="nt">s.size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;*&#39;)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span> <span class="err">+=</span> <span class="na">9</span> <span class="err">*</span> <span class="na">ways</span><span class="err">(</span><span class="na">i</span> <span class="err">+</span> <span class="na">2</span><span class="err">,</span> <span class="na">s</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span>= &#39;0&#39; <span class="err">&amp;&amp;</span> s[i+1] <span class="err">&lt;</span>= &#39;6&#39;) {
-</span></span><span class="line"><span class="cl">                res += ways(i + 2, s);
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            if(i <span class="p">&lt;</span> <span class="nt">s.size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;*&#39;)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span> <span class="err">+=</span> <span class="na">6</span> <span class="err">*</span> <span class="na">ways</span><span class="err">(</span><span class="na">i</span> <span class="err">+</span> <span class="na">2</span><span class="err">,</span> <span class="na">s</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>            
-</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="na">if</span><span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;</span><span class="na">1</span><span class="err">&#39;</span> <span class="err">&amp;&amp;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">+</span><span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span>= &#39;0&#39; <span class="err">&amp;&amp;</span> s[i+1] <span class="err">&lt;</span>= &#39;9&#39;)
-</span></span><span class="line"><span class="cl">                res += ways(i + 2, s);
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            if(s[i+1] == &#39;*&#39;)
-</span></span><span class="line"><span class="cl">                res += 9 * ways(i + 2, s);
-</span></span><span class="line"><span class="cl">        } else if(s[i] == &#39;2&#39; <span class="err">&amp;&amp;</span> i <span class="p">&lt;</span> <span class="nt">s.size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">+</span><span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span>= &#39;0&#39; <span class="err">&amp;&amp;</span> s[i+1] <span class="err">&lt;</span>= &#39;6&#39;)
-</span></span><span class="line"><span class="cl">                res += ways(i + 2, s);
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            if(s[i+1] == &#39;*&#39;)
-</span></span><span class="line"><span class="cl">                res += 6* ways(i + 2, s);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        res = res % mod;
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return memo[i] = res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given a string <code>s</code> representing a message encoded as digits. Each digit can represent a letter (&lsquo;1&rsquo; -&gt; &lsquo;A&rsquo;, &lsquo;2&rsquo; -&gt; &lsquo;B&rsquo;, &hellip;, &lsquo;26&rsquo; -&gt; &lsquo;Z&rsquo;). The string may also contain the wildcard character &lsquo;*&rsquo;, which can represent any digit from &lsquo;1&rsquo; to &lsquo;9&rsquo; or &lsquo;10&rsquo; to &lsquo;26&rsquo; when paired with another digit. The goal is to determine the total number of ways to decode the given string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<ul>
+<li>Use an array (<code>memo</code>) to cache the results for specific indices in the string to avoid redundant calculations.</li>
+<li>The function <code>numDecodings</code> initializes the memoization array and calls a helper function <code>ways</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:</p>
+<ul>
+<li>The function <code>ways(int i, string &amp;s)</code> calculates the number of ways to decode the substring starting from index <code>i</code>.</li>
+<li>Base case: If <code>i</code> reaches the end of the string, return 1 (indicating a valid decoding).</li>
+<li>If the character at <code>i</code> is &lsquo;0&rsquo;, return 0 (no valid decoding).</li>
+<li>If the value is already cached, return it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Wildcards and Decodings</strong>:</p>
+<ul>
+<li>For the character at <code>i</code>, if it&rsquo;s a &lsquo;*&rsquo;, consider all valid single digits (1-9) and possible two-digit combinations with the next character.</li>
+<li>If it&rsquo;s &lsquo;1&rsquo; or &lsquo;2&rsquo;, check for valid two-digit combinations with the next character (considering both digits and wildcards).</li>
+<li>Update the result based on the number of ways obtained from recursive calls, ensuring to apply modulo <code>10^9 + 7</code> to prevent overflow.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>The total number of decoding ways is returned after processing the entire string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialization</strong>: The memoization array is initialized to -1, and the decoding process begins.</li>
+<li><strong>Base Cases</strong>: Check for valid characters and end of the string.</li>
+<li><strong>Recursive Exploration</strong>: The recursive function explores possible decodings, caching results for efficiency.</li>
+<li><strong>Modulo Operation</strong>: Ensure results are within the specified limits.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of the input string, since each index is processed at most once.</li>
+<li><strong>Space Complexity</strong>: O(n), for the memoization array that stores intermediate results.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

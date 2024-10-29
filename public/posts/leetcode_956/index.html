@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 956: Tallest Billboard · Yasir
+  Leetcode 956: Tallest Billboard · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 956">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_956/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 956: Tallest Billboard">
   <meta property="og:description" content="Solution to Leetcode 956">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-03-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-03-18T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-03-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-03-19T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-03-18T00:00:00Z">
-                March 18, 2022
+              <time datetime="2022-03-19T00:00:00Z">
+                March 19, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,33 +189,120 @@
         <p><a href="https://leetcode.com/problems/tallest-billboard/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> rods;
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; mem;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rods</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int dp(int idx, int diff) {
-</span></span><span class="line"><span class="cl">        if(idx == rods.size()) return diff == 0? 0: INT_MIN;
-</span></span><span class="line"><span class="cl">        if(mem[idx].count(diff)) return mem[idx][diff];
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">diff</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">rods</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="n">diff</span> <span class="o">==</span> <span class="mi">0</span><span class="o">?</span> <span class="mi">0</span><span class="o">:</span> <span class="n">INT_MIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">count</span><span class="p">(</span><span class="n">diff</span><span class="p">))</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">diff</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        int ans = dp(idx + 1, diff);
-</span></span><span class="line"><span class="cl">        ans = max(ans, rods[idx] + dp(idx + 1, diff + rods[idx]));
-</span></span><span class="line"><span class="cl">        ans = max(ans, (rods[idx]&gt; diff? rods[idx] - diff:0) + dp(idx + 1, abs(diff - rods[idx])));
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">diff</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">rods</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">diff</span> <span class="o">+</span> <span class="n">rods</span><span class="p">[</span><span class="n">idx</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="p">(</span><span class="n">rods</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">&gt;</span> <span class="n">diff</span><span class="o">?</span> <span class="n">rods</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="nl">diff</span><span class="p">:</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">diff</span> <span class="o">-</span> <span class="n">rods</span><span class="p">[</span><span class="n">idx</span><span class="p">])));</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        return mem[idx][diff] = ans;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">diff</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int tallestBillboard(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> rods) {
-</span></span><span class="line"><span class="cl">        this-&gt;rods =rods;
-</span></span><span class="line"><span class="cl">        mem.resize(rods.size());
-</span></span><span class="line"><span class="cl">        return dp(0, 0);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">tallestBillboard</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">rods</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">rods</span> <span class="o">=</span><span class="n">rods</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">rods</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of integers representing the lengths of rods, the goal is to form two billboards of equal height by balancing the rods, maximizing the height of the billboards.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<ul>
+<li>The function uses recursion and memoization to efficiently calculate the maximum height of the billboards.</li>
+<li>It tracks the index of the current rod and the difference in height between the two sides of the billboard.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong> (<code>dp</code>):</p>
+<ul>
+<li><strong>Base Case</strong>:
+<ul>
+<li>If all rods are considered (<code>idx == rods.size()</code>), return 0 if the height difference is zero; otherwise, return <code>INT_MIN</code> (indicating an impossible state).</li>
+</ul>
+</li>
+<li><strong>Memoization Check</strong>:
+<ul>
+<li>If the result for the current <code>idx</code> and <code>diff</code> is already computed, return that result.</li>
+</ul>
+</li>
+<li><strong>Recursion</strong>:
+<ul>
+<li>The recursive function explores three possibilities:
+<ol>
+<li><strong>Skip the current rod</strong>: Call <code>dp(idx + 1, diff)</code>.</li>
+<li><strong>Add the current rod to the first billboard</strong>: Call <code>dp(idx + 1, diff + rods[idx])</code> and add the current rod&rsquo;s length to the result.</li>
+<li><strong>Add the current rod to the second billboard</strong>: Call <code>dp(idx + 1, abs(diff - rods[idx]))</code> and calculate the new height difference.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>The maximum of these three values is stored in the memoization table for the current <code>idx</code> and <code>diff</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Calculation</strong>:</p>
+<ul>
+<li>The initial call to <code>dp</code> starts with the first rod and a difference of zero. The result is the maximum height of the balanced billboards.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The class maintains a vector of rods and a memoization structure to store intermediate results.</li>
+<li>The <code>tallestBillboard</code> function initializes the data structures and calls the recursive <code>dp</code> function.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n * d), where <code>n</code> is the number of rods and <code>d</code> is the maximum possible difference in height. The function processes each rod and each possible height difference.</li>
+<li><strong>Space Complexity</strong>: O(n * d) for the memoization table used to store results of subproblems.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

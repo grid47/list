@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 371: Sum of Two Integers · Yasir
+  Leetcode 371: Sum of Two Integers · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 371">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_371/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 371: Sum of Two Integers">
   <meta property="og:description" content="Solution to Leetcode 371">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-10-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-10-24T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-10-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-10-25T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-10-24T00:00:00Z">
-                October 24, 2023
+              <time datetime="2023-10-25T00:00:00Z">
+                October 25, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,17 +189,86 @@
         <p><a href="https://leetcode.com/problems/sum-of-two-integers/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int getSum(int a, int b) {
-</span></span><span class="line"><span class="cl">        return b == 0? a: getSum(a^b, (a<span class="ni">&amp;b)&lt;&lt;1);</span>
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">getSum</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="o">?</span> <span class="nl">a</span><span class="p">:</span> <span class="n">getSum</span><span class="p">(</span><span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="o">&amp;</span><span class="n">b</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Implement a function that computes the sum of two integers without using the <code>+</code> operator.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Bit Manipulation</strong>:</p>
+<ul>
+<li>The sum of two integers can be obtained using bitwise operations:
+<ul>
+<li><strong>XOR (<code>^</code>)</strong>: This operation gives the sum of two bits without considering the carry. For example, ( 1 \oplus 1 = 0 ) (carry 1) and ( 1 \oplus 0 = 1 ).</li>
+<li><strong>AND (<code>&amp;</code>)</strong>: This operation helps in calculating the carry. The carry for each bit can be obtained by performing ( (a &amp; b) ) and then shifting it left by one position using <code>&lt;&lt;</code>. This left shift effectively moves the carry to the left to add it in the next significant bit.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:</p>
+<ul>
+<li>The function keeps applying the above logic until there is no carry left (i.e., <code>b</code> becomes 0).</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The function <code>getSum(int a, int b)</code> checks if <code>b</code> is zero:
+<ul>
+<li>If yes, it returns <code>a</code> (the final sum).</li>
+<li>If no, it computes the new <code>a</code> using the XOR of <code>a</code> and <code>b</code>, and computes the new <code>b</code> as the carry shifted left by one bit.</li>
+</ul>
+</li>
+<li>This process continues recursively until all carries are resolved.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: ( O(1) ) because the number of operations is constant, regardless of the input size, given the fixed size of integer representation.</li>
+<li><strong>Space Complexity</strong>: ( O(1) ) as no additional data structures are used.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

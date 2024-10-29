@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 123: Best Time to Buy and Sell Stock III · Yasir
+  Leetcode 123: Best Time to Buy and Sell Stock III · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 123">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_123/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 123: Best Time to Buy and Sell Stock III">
   <meta property="og:description" content="Solution to Leetcode 123">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-06-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-06-28T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-06-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-06-29T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-06-28T00:00:00Z">
-                June 28, 2024
+              <time datetime="2024-06-29T00:00:00Z">
+                June 29, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,30 +189,111 @@
         <p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int maxProfit(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> prices) {
-</span></span><span class="line"><span class="cl">        if(prices.empty()) return 0;
-</span></span><span class="line"><span class="cl">        int s1 = -prices[0], s2 = INT_MIN,
-</span></span><span class="line"><span class="cl">            s3 = INT_MIN, s4 = INT_MIN;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxProfit</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">prices</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">prices</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">s1</span> <span class="o">=</span> <span class="o">-</span><span class="n">prices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s3</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">,</span> <span class="n">s4</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int n = prices.size();
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">prices</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">s1 </span><span class="o">=</span> <span class="s">max(s1,</span> <span class="na">-prices</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">s2 </span><span class="o">=</span> <span class="s">max(s2,</span> <span class="na">s1</span> <span class="err">+</span> <span class="na">prices</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">s3 </span><span class="o">=</span> <span class="s">max(s3,</span> <span class="na">s2</span> <span class="na">-</span> <span class="na">prices</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">s4 </span><span class="o">=</span> <span class="s">max(s4,</span> <span class="na">s3</span> <span class="err">+</span> <span class="na">prices</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s1</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="o">-</span><span class="n">prices</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s2</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">s1</span> <span class="o">+</span> <span class="n">prices</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s3</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="n">s2</span> <span class="o">-</span> <span class="n">prices</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s4</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">s4</span><span class="p">,</span> <span class="n">s3</span> <span class="o">+</span> <span class="n">prices</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">max</span><span class="err">(</span><span class="na">s4</span><span class="err">,</span> <span class="na">0</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">max</span><span class="p">(</span><span class="n">s4</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of stock prices <code>prices</code>, where <code>prices[i]</code> is the price of a given stock on the <code>i</code>-th day, find the maximum profit you can achieve by performing at most two transactions (i.e., buy and sell up to two times).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Initialize four variables:
+<ul>
+<li><code>s1</code>: The maximum profit achievable by making the first purchase.</li>
+<li><code>s2</code>: The maximum profit achievable by making the first sale.</li>
+<li><code>s3</code>: The maximum profit achievable by making the second purchase.</li>
+<li><code>s4</code>: The maximum profit achievable by making the second sale.</li>
+</ul>
+</li>
+<li>Iterate through each price in the <code>prices</code> vector:
+<ul>
+<li>Update <code>s1</code> to be the maximum of <code>s1</code> and the negative of the current price (representing the cost of buying the stock).</li>
+<li>Update <code>s2</code> to be the maximum of <code>s2</code> and the profit from selling after the first buy (<code>s1 + prices[i]</code>).</li>
+<li>Update <code>s3</code> to be the maximum of <code>s3</code> and the profit after making the second purchase (<code>s2 - prices[i]</code>).</li>
+<li>Update <code>s4</code> to be the maximum of <code>s4</code> and the profit from selling after the second buy (<code>s3 + prices[i]</code>).</li>
+</ul>
+</li>
+<li>Return the maximum profit achievable from selling after the second transaction or 0 if no profit is possible.</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong><code>maxProfit</code> function</strong>:</p>
+<ul>
+<li><strong>Line 2</strong>: Check if the <code>prices</code> vector is empty. If so, return 0 (no profit possible).</li>
+<li><strong>Line 3</strong>: Initialize <code>s1</code>, <code>s2</code>, <code>s3</code>, and <code>s4</code> to their starting values.</li>
+<li><strong>Line 5</strong>: Get the size of the <code>prices</code> vector.</li>
+<li><strong>Line 7</strong>: Loop through the prices starting from the second day.
+<ul>
+<li><strong>Line 8</strong>: Update <code>s1</code> to be the maximum of the previous <code>s1</code> and the negative of the current price (representing the cost of buying).</li>
+<li><strong>Line 9</strong>: Update <code>s2</code> based on the profit from selling after the first purchase.</li>
+<li><strong>Line 10</strong>: Update <code>s3</code> based on the profit after making the second purchase.</li>
+<li><strong>Line 11</strong>: Update <code>s4</code> based on the profit from selling after the second purchase.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Line 13</strong>: Return the maximum profit from <code>s4</code> or 0.</p>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of days (length of the <code>prices</code> array), since we make a single pass through the array.</li>
+<li><strong>Space Complexity</strong>: (O(1)), as we only use a constant amount of space for the four variables <code>s1</code>, <code>s2</code>, <code>s3</code>, and <code>s4</code>.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

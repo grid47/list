@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 2069: Walking Robot Simulation II · Yasir
+  Leetcode 2069: Walking Robot Simulation II · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 2069">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_2069/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 2069: Walking Robot Simulation II">
   <meta property="og:description" content="Solution to Leetcode 2069">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2019-03-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2019-03-01T00:00:00+00:00">
+    <meta property="article:published_time" content="2019-03-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2019-03-02T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,13 +166,13 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-03-01T00:00:00Z">
-                March 1, 2019
+              <time datetime="2019-03-02T00:00:00Z">
+                March 2, 2019
               </time>
             </span>
             <span class="reading-time">
@@ -189,64 +189,64 @@
         <p><a href="https://leetcode.com/problems/walking-robot-simulation-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Robot {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int w, h, i, j, dir, per;
-</span></span><span class="line"><span class="cl">    Robot(int width, int height) {
-</span></span><span class="line"><span class="cl">        w = width;
-</span></span><span class="line"><span class="cl">        h = height;
-</span></span><span class="line"><span class="cl">        i = 0;
-</span></span><span class="line"><span class="cl">        j = 0;
-</span></span><span class="line"><span class="cl">        dir = 0;
-</span></span><span class="line"><span class="cl">        per = 2 * (w + h - 2);
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Robot</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">per</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Robot</span><span class="p">(</span><span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">w</span> <span class="o">=</span> <span class="n">width</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">h</span> <span class="o">=</span> <span class="n">height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dir</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">per</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">h</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void step(int num) {
-</span></span><span class="line"><span class="cl">        if(num &gt; per) {
-</span></span><span class="line"><span class="cl">            num %= per;
-</span></span><span class="line"><span class="cl">            if(i == 0 <span class="err">&amp;&amp;</span> j == 0 <span class="err">&amp;&amp;</span> dir == 0) dir = 3;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        int mo[4][2] = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-</span></span><span class="line"><span class="cl">        while(num) {
-</span></span><span class="line"><span class="cl">            int x = i + mo[dir][0], y = j + mo[dir][1];
-</span></span><span class="line"><span class="cl">            if(x &gt;= w || y &gt;= h || x <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">dir </span><span class="o">=</span> <span class="s">(dir</span> <span class="err">+</span> <span class="na">1</span><span class="err">)</span> <span class="err">%</span> <span class="na">4</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">i </span><span class="o">=</span> <span class="s">x;</span>
-</span></span><span class="line"><span class="cl">                <span class="na">j </span><span class="o">=</span> <span class="s">y;</span>
-</span></span><span class="line"><span class="cl">                <span class="na">num--</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">step</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="n">per</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">num</span> <span class="o">%=</span> <span class="n">per</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">dir</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">dir</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mo</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">mo</span><span class="p">[</span><span class="n">dir</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">mo</span><span class="p">[</span><span class="n">dir</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">w</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">h</span> <span class="o">||</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dir</span> <span class="o">=</span> <span class="p">(</span><span class="n">dir</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> getPos() {
-</span></span><span class="line"><span class="cl">        return {i, j};
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">getPos</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    string getDir() {
-</span></span><span class="line"><span class="cl">        switch(dir) {
-</span></span><span class="line"><span class="cl">            case 0: return &#34;East&#34;   ; break;
-</span></span><span class="line"><span class="cl">            case 1: return &#34;North&#34;  ; break;    
-</span></span><span class="line"><span class="cl">            case 2: return &#34;West&#34;   ; break;    
-</span></span><span class="line"><span class="cl">            case 3: return &#34;South&#34;  ; break;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return &#34;&#34;;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="nf">getDir</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span><span class="p">(</span><span class="n">dir</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">0</span><span class="o">:</span> <span class="k">return</span> <span class="s">&#34;East&#34;</span>   <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">1</span><span class="o">:</span> <span class="k">return</span> <span class="s">&#34;North&#34;</span>  <span class="p">;</span> <span class="k">break</span><span class="p">;</span>    
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">2</span><span class="o">:</span> <span class="k">return</span> <span class="s">&#34;West&#34;</span>   <span class="p">;</span> <span class="k">break</span><span class="p">;</span>    
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">3</span><span class="o">:</span> <span class="k">return</span> <span class="s">&#34;South&#34;</span>  <span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Your Robot object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl"> * Robot* obj = new Robot(width, height);
-</span></span><span class="line"><span class="cl"> * obj-&gt;step(num);
-</span></span><span class="line"><span class="cl"> * vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> param_2 = obj-&gt;getPos();
-</span></span><span class="line"><span class="cl"> * string param_3 = obj-&gt;getDir();
-</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your Robot object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Robot* obj = new Robot(width, height);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;step(num);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * vector&lt;int&gt; param_2 = obj-&gt;getPos();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * string param_3 = obj-&gt;getDir();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

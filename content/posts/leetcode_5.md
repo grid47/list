@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-palindromic-substring/description/)
 
 ---
-
+{{ youtube XYQecbcd6_c }}
 **Code:**
 
 {{< highlight cpp >}}

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 433: Minimum Genetic Mutation · Yasir
+  Leetcode 433: Minimum Genetic Mutation · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 433">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_433/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 433: Minimum Genetic Mutation">
   <meta property="og:description" content="Solution to Leetcode 433">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-08-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-08-23T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-08-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-08-24T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-08-23T00:00:00Z">
-                August 23, 2023
+              <time datetime="2023-08-24T00:00:00Z">
+                August 24, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,45 +189,136 @@
         <p><a href="https://leetcode.com/problems/minimum-genetic-mutation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int minMutation(string startGene, string endGene, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> bank) {
-</span></span><span class="line"><span class="cl">        unordered_set<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> st{bank.begin(), bank.end()};
-</span></span><span class="line"><span class="cl">        if(!st.count(endGene)) return -1;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minMutation</span><span class="p">(</span><span class="n">string</span> <span class="n">startGene</span><span class="p">,</span> <span class="n">string</span> <span class="n">endGene</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">bank</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">st</span><span class="p">{</span><span class="n">bank</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">bank</span><span class="p">.</span><span class="n">end</span><span class="p">()};</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">endGene</span><span class="p">))</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> q;
-</span></span><span class="line"><span class="cl">        q.push(startGene);
-</span></span><span class="line"><span class="cl">        int step = 0, s;
-</span></span><span class="line"><span class="cl">        string cur, t;
-</span></span><span class="line"><span class="cl">        while(!q.empty()) {
-</span></span><span class="line"><span class="cl">            s = q.size();
-</span></span><span class="line"><span class="cl">            while(s--) {
-</span></span><span class="line"><span class="cl">                cur = q.front();
-</span></span><span class="line"><span class="cl">                q.pop();
-</span></span><span class="line"><span class="cl">                if(cur == endGene) return step;
-</span></span><span class="line"><span class="cl">                st.erase(cur);
-</span></span><span class="line"><span class="cl">                for(int i= 0; i <span class="p">&lt;</span> <span class="nt">8</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">t </span><span class="o">=</span> <span class="s">cur;</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">t</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="err">&#39;</span><span class="na">A</span><span class="err">&#39;;</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">st</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">t</span><span class="err">))</span> <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">t</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">t</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="err">&#39;</span><span class="na">T</span><span class="err">&#39;;</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">st</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">t</span><span class="err">))</span> <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">t</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">t</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="err">&#39;</span><span class="na">G</span><span class="err">&#39;;</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">st</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">t</span><span class="err">))</span> <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">t</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">t</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="err">&#39;</span><span class="na">C</span><span class="err">&#39;;</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">if</span><span class="err">(</span><span class="na">st</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">t</span><span class="err">))</span> <span class="na">q</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">t</span><span class="err">);</span>                    
-</span></span><span class="line"><span class="cl">                <span class="err">}</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">            <span class="na">step</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">-1</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">startGene</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">cur</span><span class="p">,</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">s</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cur</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">==</span> <span class="n">endGene</span><span class="p">)</span> <span class="k">return</span> <span class="n">step</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">st</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">t</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;A&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;T&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;G&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;C&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">st</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>                    
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">step</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a start gene string and an end gene string, along with a bank of valid gene mutations, determine the minimum number of mutations needed to transform the start gene into the end gene. If it is not possible, return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Use of Unordered Set</strong>:</p>
+<ul>
+<li>Store the gene bank in an unordered set for O(1) average time complexity during lookup.</li>
+</ul>
+</li>
+<li>
+<p><strong>Breadth-First Search (BFS)</strong>:</p>
+<ul>
+<li>Implement BFS to explore all possible mutations level by level.</li>
+<li>Start with the <code>startGene</code>, and at each level, attempt to mutate each character in the gene.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mutation Generation</strong>:</p>
+<ul>
+<li>For each character in the current gene, generate all possible mutations by replacing it with &lsquo;A&rsquo;, &lsquo;T&rsquo;, &lsquo;G&rsquo;, or &lsquo;C&rsquo;.</li>
+<li>If a generated mutation exists in the bank, add it to the queue for further exploration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Termination</strong>:</p>
+<ul>
+<li>If the <code>endGene</code> is reached, return the current mutation step count.</li>
+<li>If the queue is exhausted without reaching the <code>endGene</code>, return -1.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Convert the bank into an unordered set and check if the <code>endGene</code> is in the set.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Implementation</strong>:</p>
+<ul>
+<li>Use a queue to keep track of the current gene strings being processed and their corresponding mutation steps.</li>
+<li>For each gene processed, generate all possible mutations and enqueue valid ones that exist in the bank.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step Count</strong>:</p>
+<ul>
+<li>Maintain a step counter to track the number of mutations taken to reach the <code>endGene</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N * 4^L) where N is the number of genes in the bank and L is the length of the gene (8 in this case). Each gene can have 4 possible mutations for each of its 8 positions.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing the gene bank and O(N) for the queue in the worst case.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

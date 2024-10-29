@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 332: Reconstruct Itinerary · Yasir
+  Leetcode 332: Reconstruct Itinerary · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 332">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_332/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 332: Reconstruct Itinerary">
   <meta property="og:description" content="Solution to Leetcode 332">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-12-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-12-02T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-12-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-12-03T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-12-02T00:00:00Z">
-                December 2, 2023
+              <time datetime="2023-12-03T00:00:00Z">
+                December 3, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,39 +189,107 @@
         <p><a href="https://leetcode.com/problems/reconstruct-itinerary/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">priority_queue</span><span class="err">&lt;</span><span class="na">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>, greater<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span>&gt;&gt; gph;
-</span></span><span class="line"><span class="cl">    list<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> res;
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> findItinerary(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> tcks) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;&gt;</span> <span class="n">gph</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">findItinerary</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;&amp;</span> <span class="n">tcks</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        gph.clear();
-</span></span><span class="line"><span class="cl">        for(auto it: tcks) {
-</span></span><span class="line"><span class="cl">            gph[it[0]].push(it[1]);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        dfs(&#34;JFK&#34;);
+</span></span><span class="line"><span class="cl">        <span class="n">gph</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">tcks</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="n">push</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="s">&#34;JFK&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> ans;
-</span></span><span class="line"><span class="cl">        for(auto it: res)
-</span></span><span class="line"><span class="cl">            ans.push_back(it);
-</span></span><span class="line"><span class="cl">        return ans;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">res</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void dfs(string from) {
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">string</span> <span class="n">from</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        while(gph.count(from) <span class="err">&amp;&amp;</span> !gph[from].empty()) {
-</span></span><span class="line"><span class="cl">            string x = gph[from].top();
-</span></span><span class="line"><span class="cl">            gph[from].pop();
-</span></span><span class="line"><span class="cl">            dfs(x);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        res.push_front(from);        
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">gph</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">from</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">gph</span><span class="p">[</span><span class="n">from</span><span class="p">].</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">x</span> <span class="o">=</span> <span class="n">gph</span><span class="p">[</span><span class="n">from</span><span class="p">].</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">from</span><span class="p">].</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">from</span><span class="p">);</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given a list of flight tickets represented as pairs of departure and arrival airports. Each ticket is used exactly once, and you need to reconstruct the itinerary in order to visit all airports exactly once, starting from &ldquo;JFK&rdquo;. The itinerary should be in lexical order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves using Depth-First Search (DFS) combined with a priority queue to ensure that we always visit the next airport in lexical order.</p>
+<ol>
+<li>
+<p><strong>Graph Construction</strong>:</p>
+<ul>
+<li>Use a <code>map</code> to create a graph (<code>gph</code>) where the key is the departure airport and the value is a priority queue containing all possible arrival airports sorted in ascending order.</li>
+</ul>
+</li>
+<li>
+<p><strong>Depth-First Search (DFS)</strong>:</p>
+<ul>
+<li>Start the DFS from &ldquo;JFK&rdquo;.</li>
+<li>While there are airports available to visit from the current airport, pop the next airport from the priority queue and recursively call DFS on that airport.</li>
+<li>After all reachable airports have been visited, prepend the current airport to the result list (<code>res</code>). This ensures that the airports are added in reverse order of their visits.</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing the Result</strong>:</p>
+<ul>
+<li>Convert the result list to a vector of strings for the final output.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Input</strong>: A vector of flight tickets <code>tcks</code>, where each ticket is a pair of strings <code>[departure, arrival]</code>.</li>
+<li><strong>Output</strong>: A vector of strings representing the itinerary starting from &ldquo;JFK&rdquo;.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(E \log E)), where (E) is the number of edges (tickets). This accounts for the time taken to maintain the priority queue for each airport.</li>
+<li><strong>Space Complexity</strong>: (O(V + E)), where (V) is the number of unique airports and (E) is the number of tickets. This includes space for the graph and the result list.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

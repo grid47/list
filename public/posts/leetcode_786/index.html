@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 786: K-th Smallest Prime Fraction · Yasir
+  Leetcode 786: K-th Smallest Prime Fraction · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 786">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_786/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 786: K-th Smallest Prime Fraction">
   <meta property="og:description" content="Solution to Leetcode 786">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-09-04T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-09-04T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-09-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-09-05T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-09-04T00:00:00Z">
-                September 4, 2022
+              <time datetime="2022-09-05T00:00:00Z">
+                September 5, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,29 +189,119 @@
         <p><a href="https://leetcode.com/problems/k-th-smallest-prime-fraction/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> kthSmallestPrimeFraction(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> arr, int k) {
-</span></span><span class="line"><span class="cl">        int n = arr.size();
-</span></span><span class="line"><span class="cl">        priority_queue<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">double</span><span class="err">,</span> <span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">double</span><span class="err">,</span> <span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;&gt;&gt; pq;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">kthSmallestPrimeFraction</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">make_pair</span><span class="err">(</span><span class="na">-1</span><span class="err">.</span><span class="na">0</span><span class="err">*</span><span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">]/</span><span class="na">arr</span><span class="err">[</span><span class="na">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">],</span> <span class="na">make_pair</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">)));</span>
-</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">i</span><span class="err">,</span> <span class="na">j</span><span class="err">;</span>        
-</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">k--</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">auto</span> <span class="na">p </span><span class="o">=</span> <span class="s">pq.top().second;</span> <span class="na">pq</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
-</span></span><span class="line"><span class="cl">            <span class="na">i </span><span class="o">=</span> <span class="s">p.first;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">j </span><span class="o">=</span> <span class="s">p.second;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">pq</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">make_pair</span><span class="err">(</span><span class="na">-1</span><span class="err">.</span><span class="na">0</span><span class="err">*</span><span class="na">arr</span><span class="err">[</span><span class="na">i</span><span class="err">]/</span><span class="na">arr</span><span class="err">[</span><span class="na">j-1</span><span class="err">],</span> <span class="na">make_pair</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">j</span> <span class="na">-</span> <span class="na">1</span><span class="err">)));</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>{arr[i], arr[j]};
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="o">*</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">arr</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">k</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">;</span> <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">j</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="o">*</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a sorted array of prime numbers, find the k-th smallest prime fraction. A prime fraction is defined as the fraction of two prime numbers ( \frac{a}{b} ) where ( a ) and ( b ) are elements from the array, and ( a &lt; b ).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Priority Queue</strong>:</p>
+<ul>
+<li>Utilize a max-heap (priority queue) to efficiently retrieve the k-th smallest fraction.</li>
+<li>The fractions are stored in the form of pairs: the fraction value and its indices in the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Initially, push fractions of the form ( \frac{arr[i]}{arr[n-1]} ) for all valid ( i ) (where ( arr[n-1] ) is the largest element).</li>
+</ul>
+</li>
+<li>
+<p><strong>Extracting k-th Smallest Fraction</strong>:</p>
+<ul>
+<li>Pop the top fraction from the heap ( k ) times.</li>
+<li>For each fraction popped, if ( j &gt; 0 ), push the fraction ( \frac{arr[i]}{arr[j-1]} ) back into the heap.</li>
+<li>This step ensures that we explore the next possible fraction for the current numerator.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After processing k fractions, the last popped fraction will be the k-th smallest.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains the method to find the k-th smallest prime fraction.
+<ul>
+<li><code>vector&lt;int&gt; kthSmallestPrimeFraction(vector&lt;int&gt;&amp; arr, int k)</code>: Main function to find the k-th smallest prime fraction.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>arr</code>: A sorted vector of prime numbers.</li>
+<li><code>k</code>: The index of the desired smallest fraction.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(k log k), due to the heap operations for k extractions and insertions.</li>
+<li><strong>Space Complexity</strong>: O(k), for the storage of the fractions in the heap.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

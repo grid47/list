@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 837: New 21 Game · Yasir
+  Leetcode 837: New 21 Game · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 837">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_837/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 837: New 21 Game">
   <meta property="og:description" content="Solution to Leetcode 837">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-07-15T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-07-15T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-07-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-07-16T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-07-15T00:00:00Z">
-                July 15, 2022
+              <time datetime="2022-07-16T00:00:00Z">
+                July 16, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,53 +189,129 @@
         <p><a href="https://leetcode.com/problems/new-21-game/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    double new21Game(int n, int k, int w) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">new21Game</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        if(k == 0 || n &gt;= k + w)
-</span></span><span class="line"><span class="cl">            return 1;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        /*
+</span></span><span class="line"><span class="cl">        <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        You will get number x (1 to w) in a draw, with probablity 1 / w
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        if you need probablity of getting i points in a draw
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        we can do slecting (i - x) points with probablity dp[i - x] and
+</span></span></span><span class="line"><span class="cl"><span class="cm">        selecting x with probablity x
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        so doing it together dp[i - x] * 1 / w
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        and this to every x in [1, w] to get net prob of dp[i].
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        once the pionts has crossed a limit k, there will be no more selections.
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        then we look for only the over flows from previous trials.
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">        why target probablity counted from k onward instead of dp[n].
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">        */</span>        
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        You will get number x (1 to w) in a draw, with probablity 1 / w
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if you need probablity of getting i points in a draw
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        we can do slecting (i - x) points with probablity dp[i - x] and
-</span></span><span class="line"><span class="cl">        selecting x with probablity x
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        so doing it together dp[i - x] * 1 / w
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        and this to every x in [1, w] to get net prob of dp[i].
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        once the pionts has crossed a limit k, there will be no more selections.
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        then we look for only the over flows from previous trials.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        why target probablity counted from k onward instead of dp[n].
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        */        
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">double</span><span class="p">&gt;</span> dp(n+1);
-</span></span><span class="line"><span class="cl">        dp[0] = 1;
-</span></span><span class="line"><span class="cl">        double Wsum = 1.0, res = 0.0;
-</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="err">&lt;</span>= n; i++) {
-</span></span><span class="line"><span class="cl">            dp[i] = Wsum/ w;
-</span></span><span class="line"><span class="cl">            if(i <span class="p">&lt;</span> <span class="nt">k</span><span class="err">)</span> <span class="na">Wsum</span> <span class="err">+=</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">else</span> <span class="na">res</span> <span class="err">+=</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="na">-</span> <span class="na">w</span> <span class="p">&gt;</span>= 0) Wsum -= dp[i - w];
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">Wsum</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Wsum</span><span class="o">/</span> <span class="n">w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span> <span class="n">Wsum</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="n">res</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">w</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">Wsum</span> <span class="o">-=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">w</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In a card game, you draw cards until your score exceeds a certain value. Given the parameters:</p>
+<ul>
+<li><code>n</code>: the maximum score you can achieve.</li>
+<li><code>k</code>: the threshold score where you stop drawing.</li>
+<li><code>w</code>: the maximum value of a card drawn (1 to <code>w</code>).</li>
+</ul>
+<p>The goal is to find the probability of achieving a score less than or equal to <code>n</code> after you stop drawing cards.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Special Cases</strong>:</p>
+<ul>
+<li>If <code>k == 0</code>, the probability is <code>1</code> because you don&rsquo;t need to draw any cards.</li>
+<li>If <code>n &gt;= k + w</code>, you can always achieve a score of at least <code>k</code>, so the probability is <code>1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming (DP)</strong>:</p>
+<ul>
+<li>Use a DP array <code>dp</code> where <code>dp[i]</code> represents the probability of achieving exactly <code>i</code> points.</li>
+<li>Initialize <code>dp[0] = 1</code> because the probability of starting with 0 points is 1.</li>
+<li>Maintain a sliding window <code>Wsum</code> to sum the probabilities of the last <code>w</code> values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the DP Array</strong>:</p>
+<ul>
+<li>For each score <code>i</code> from <code>1</code> to <code>n</code>:
+<ul>
+<li>Calculate the probability of achieving score <code>i</code> by averaging the probabilities of the previous <code>w</code> scores (i.e., from <code>i - 1</code> to <code>i - w</code>).</li>
+<li>If <code>i &lt; k</code>, add <code>dp[i]</code> to <code>Wsum</code> because you still need to draw cards.</li>
+<li>If <code>i &gt;= k</code>, add <code>dp[i]</code> to the result <code>res</code>.</li>
+<li>Subtract the value <code>dp[i - w]</code> from <code>Wsum</code> if <code>i - w</code> is non-negative.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>The result will be the sum of probabilities for scores <code>k</code> or more.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), as we iterate through scores from <code>1</code> to <code>n</code>.</li>
+<li><strong>Space Complexity</strong>: O(n), due to the storage required for the DP array.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 423: Reconstruct Original Digits from English · Yasir
+  Leetcode 423: Reconstruct Original Digits from English · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 423">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_423/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 423: Reconstruct Original Digits from English">
   <meta property="og:description" content="Solution to Leetcode 423">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-09-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-09-02T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-09-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-09-03T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-09-02T00:00:00Z">
-                September 2, 2023
+              <time datetime="2023-09-03T00:00:00Z">
+                September 3, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,31 +189,107 @@
         <p><a href="https://leetcode.com/problems/reconstruct-original-digits-from-english/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    string originalDigits(string s) {
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> words = {&#34;zero&#34;, &#34;two&#34;, &#34;four&#34;, &#34;six&#34;, &#34;eight&#34;, &#34;one&#34;, &#34;three&#34;, &#34;five&#34;, &#34;seven&#34;, &#34;nine&#34;};
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> nums = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> distinct_char = {&#39;z&#39;, &#39;w&#39;, &#39;u&#39;, &#39;x&#39;, &#39;g&#39;, &#39;o&#39;, &#39;r&#39;, &#39;f&#39;, &#39;v&#39;, &#39;i&#39;};
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> counts(26, 0);
-</span></span><span class="line"><span class="cl">        string result;
-</span></span><span class="line"><span class="cl">        for(auto ch : s){ counts[ch-&#39;a&#39;]++;}
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">10</span><span class="err">;</span> <span class="na">i</span><span class="err">++){</span>
-</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">count </span><span class="o">=</span> <span class="s">counts[distinct_char[i]-&#39;a&#39;];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">size</span><span class="err">();</span> <span class="na">j</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">counts</span><span class="err">[</span><span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span><span class="na">-</span><span class="err">&#39;</span><span class="na">a</span><span class="err">&#39;]</span> <span class="na">-</span><span class="o">=</span> <span class="s">count;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">while</span><span class="err">(</span><span class="na">count--</span><span class="err">)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">result</span> <span class="err">+=</span> <span class="na">to_string</span><span class="err">(</span><span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">result</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">result</span><span class="err">.</span><span class="na">end</span><span class="err">());</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">result</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">originalDigits</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;zero&#34;</span><span class="p">,</span> <span class="s">&#34;two&#34;</span><span class="p">,</span> <span class="s">&#34;four&#34;</span><span class="p">,</span> <span class="s">&#34;six&#34;</span><span class="p">,</span> <span class="s">&#34;eight&#34;</span><span class="p">,</span> <span class="s">&#34;one&#34;</span><span class="p">,</span> <span class="s">&#34;three&#34;</span><span class="p">,</span> <span class="s">&#34;five&#34;</span><span class="p">,</span> <span class="s">&#34;seven&#34;</span><span class="p">,</span> <span class="s">&#34;nine&#34;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">distinct_char</span> <span class="o">=</span> <span class="p">{</span><span class="sc">&#39;z&#39;</span><span class="p">,</span> <span class="sc">&#39;w&#39;</span><span class="p">,</span> <span class="sc">&#39;u&#39;</span><span class="p">,</span> <span class="sc">&#39;x&#39;</span><span class="p">,</span> <span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="sc">&#39;o&#39;</span><span class="p">,</span> <span class="sc">&#39;r&#39;</span><span class="p">,</span> <span class="sc">&#39;f&#39;</span><span class="p">,</span> <span class="sc">&#39;v&#39;</span><span class="p">,</span> <span class="sc">&#39;i&#39;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">counts</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span> <span class="p">:</span> <span class="n">s</span><span class="p">){</span> <span class="n">counts</span><span class="p">[</span><span class="n">ch</span><span class="o">-</span><span class="sc">&#39;a&#39;</span><span class="p">]</span><span class="o">++</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[</span><span class="n">distinct_char</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;a&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">counts</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">-=</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">count</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">result</span> <span class="o">+=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">result</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string <code>s</code> containing jumbled letters, return a string representing the digits from <code>0</code> to <code>9</code> that can be formed using the letters in <code>s</code>. Each digit is represented by its corresponding number.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Distinct Characters Identification</strong>:
+<ul>
+<li>Use distinct characters that uniquely identify each digit:
+<ul>
+<li>&lsquo;z&rsquo; for &ldquo;zero&rdquo; (0)</li>
+<li>&lsquo;w&rsquo; for &ldquo;two&rdquo; (2)</li>
+<li>&lsquo;u&rsquo; for &ldquo;four&rdquo; (4)</li>
+<li>&lsquo;x&rsquo; for &ldquo;six&rdquo; (6)</li>
+<li>&lsquo;g&rsquo; for &ldquo;eight&rdquo; (8)</li>
+<li>&lsquo;o&rsquo; for &ldquo;one&rdquo; (1) (after counting &lsquo;zero&rsquo;, &rsquo;two&rsquo;, and &lsquo;four&rsquo;)</li>
+<li>&lsquo;r&rsquo; for &ldquo;three&rdquo; (3) (after counting &lsquo;four&rsquo;)</li>
+<li>&lsquo;f&rsquo; for &ldquo;five&rdquo; (5) (after counting &lsquo;four&rsquo;)</li>
+<li>&lsquo;v&rsquo; for &ldquo;seven&rdquo; (7) (after counting &lsquo;five&rsquo;)</li>
+<li>&lsquo;i&rsquo; for &ldquo;nine&rdquo; (9) (after counting &lsquo;five&rsquo;, &lsquo;six&rsquo;, and &rsquo;eight&rsquo;)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Character Counting</strong>: Create a frequency count of all characters in the input string <code>s</code>.</li>
+<li><strong>Digit Counting</strong>:
+<ul>
+<li>For each unique character, determine how many times the corresponding digit can be formed based on the character&rsquo;s frequency.</li>
+<li>Decrease the count of each character in the frequency array based on the letters used to form each digit.</li>
+</ul>
+</li>
+<li><strong>Result Compilation</strong>: Append the digits to the result string according to their counts.</li>
+<li><strong>Sorting</strong>: Sort the result string before returning, to ensure the digits are in ascending order.</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialization</strong>: Define vectors for the words representing digits, their corresponding numbers, and distinct characters.</li>
+<li><strong>Character Frequency Count</strong>: Loop through the input string to count occurrences of each letter.</li>
+<li><strong>Counting Digits</strong>: For each digit, determine how many times it can be formed and update the counts accordingly.</li>
+<li><strong>Building Result</strong>: Construct the result string by appending the digit characters as needed and sort it.</li>
+<li><strong>Return Result</strong>: Finally, return the sorted string of digits.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n + m log m), where <code>n</code> is the length of the input string <code>s</code> (for counting characters) and <code>m</code> is the number of digits (which is constant). Sorting a string of digits has a negligible impact since the maximum length is limited to 10.</li>
+<li><strong>Space Complexity</strong>: O(1) for the frequency counts and fixed vectors, as they are limited to 26 letters and 10 digits.</li>
+</ul> 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

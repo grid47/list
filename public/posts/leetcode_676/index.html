@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 676: Implement Magic Dictionary · Yasir
+  Leetcode 676: Implement Magic Dictionary · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 676">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_676/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 676: Implement Magic Dictionary">
   <meta property="og:description" content="Solution to Leetcode 676">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-12-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-12-23T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-12-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-12-24T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-12-23T00:00:00Z">
-                December 23, 2022
+              <time datetime="2022-12-24T00:00:00Z">
+                December 24, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,50 +189,134 @@
         <p><a href="https://leetcode.com/problems/implement-magic-dictionary/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class MagicDictionary {
-</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span>&gt;&gt; mp;
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    MagicDictionary() {
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MagicDictionary</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">char</span><span class="o">&gt;&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MagicDictionary</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void buildDict(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> dict) {
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">buildDict</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">dict</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        for(string s: dict) {
-</span></span><span class="line"><span class="cl">            int n = s.length();            
-</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="n">string</span> <span class="nl">s</span><span class="p">:</span> <span class="n">dict</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>            
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="na">string</span> <span class="na">t </span><span class="o">=</span> <span class="s">s.substr(0,</span> <span class="na">i</span><span class="err">)</span> <span class="err">+</span> <span class="na">s</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i</span><span class="err">+</span><span class="na">1</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                <span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span> p(i, s[i]);                
-</span></span><span class="line"><span class="cl">                mp[t].push_back(p);
+</span></span><span class="line"><span class="cl">                <span class="n">string</span> <span class="n">t</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">char</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>                
+</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">[</span><span class="n">t</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool search(string word) {
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">search</span><span class="p">(</span><span class="n">string</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">word.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">string</span> <span class="na">key </span><span class="o">=</span> <span class="s">word.substr(0,</span> <span class="na">i</span><span class="err">)</span> <span class="err">+</span> <span class="na">word</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i</span><span class="err">+</span><span class="na">1</span><span class="err">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">word</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">key</span> <span class="o">=</span> <span class="n">word</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">word</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">char</span><span class="p">&gt;</span> sk : mp[key])
-</span></span><span class="line"><span class="cl">            if(sk.first == i <span class="err">&amp;&amp;</span> sk.second!=word[i])
-</span></span><span class="line"><span class="cl">                return true;             
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return false;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">char</span><span class="o">&gt;</span> <span class="nl">sk</span> <span class="p">:</span> <span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">sk</span><span class="p">.</span><span class="n">first</span> <span class="o">==</span> <span class="n">i</span> <span class="o">&amp;&amp;</span> <span class="n">sk</span><span class="p">.</span><span class="n">second</span><span class="o">!=</span><span class="n">word</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>             
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Your MagicDictionary object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl"> * MagicDictionary* obj = new MagicDictionary();
-</span></span><span class="line"><span class="cl"> * obj-&gt;buildDict(dictionary);
-</span></span><span class="line"><span class="cl"> * bool param_2 = obj-&gt;search(searchWord);
-</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your MagicDictionary object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * MagicDictionary* obj = new MagicDictionary();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;buildDict(dictionary);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_2 = obj-&gt;search(searchWord);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer array <code>nums</code>, return the number of longest increasing subsequences (LIS) in the array. An increasing subsequence is defined as a sequence where each element is greater than the previous one.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses dynamic programming to find the length of the longest increasing subsequence while also counting how many times this maximum length occurs.</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming Arrays</strong>:</p>
+<ul>
+<li><code>len[i]</code>: Stores the length of the longest increasing subsequence ending at index <code>i</code>.</li>
+<li><code>cnt[i]</code>: Stores the count of the longest increasing subsequences that end at index <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>For each index <code>i</code>, initialize <code>len[i]</code> and <code>cnt[i]</code> to <code>1</code> since the minimum length of an increasing subsequence that ends with any element is <code>1</code> (the element itself).</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the DP Arrays</strong>:</p>
+<ul>
+<li>For each element <code>nums[i]</code>, iterate through all previous elements <code>nums[j]</code> (where <code>j &lt; i</code>):
+<ul>
+<li>If <code>nums[j] &lt; nums[i]</code>, then:
+<ul>
+<li>If extending the subsequence from <code>j</code> to <code>i</code> gives a subsequence of the same length as <code>len[i]</code>, increment the count at <code>cnt[i]</code> by <code>cnt[j]</code>.</li>
+<li>If extending the subsequence from <code>j</code> to <code>i</code> gives a longer subsequence, update <code>len[i]</code> and set <code>cnt[i]</code> to <code>cnt[j]</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Result</strong>:</p>
+<ul>
+<li>After populating the <code>len</code> and <code>cnt</code> arrays, determine the maximum length of the LIS (<code>max_len</code>).</li>
+<li>Count the total number of subsequences that have this maximum length.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Input</strong>: The function takes a vector of integers, <code>nums</code>.</li>
+<li><strong>Dynamic Programming Logic</strong>: Two loops are used to build the <code>len</code> and <code>cnt</code> arrays, checking all previous indices for potential subsequences.</li>
+<li><strong>Output</strong>: The function returns the total count of the longest increasing subsequences.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the length of <code>nums</code>, due to the nested loops for filling <code>len</code> and <code>cnt</code>.</li>
+<li><strong>Space Complexity</strong>: O(n) for the <code>len</code> and <code>cnt</code> arrays, which are used to store intermediate results.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

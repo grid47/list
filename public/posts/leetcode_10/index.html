@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 10: Regular Expression Matching · Yasir
+  Leetcode 10: Regular Expression Matching · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 10">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_10/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 10: Regular Expression Matching">
   <meta property="og:description" content="Solution to Leetcode 10">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-10-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-10-19T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-10-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-20T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-10-19T00:00:00Z">
-                October 19, 2024
+              <time datetime="2024-10-20T00:00:00Z">
+                October 20, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,41 +189,135 @@
         <p><a href="https://leetcode.com/problems/regular-expression-matching/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    string s, p;
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; memo;
-</span></span><span class="line"><span class="cl">    bool dp(int i, int j) {
-</span></span><span class="line"><span class="cl">        if(i == s.size() <span class="err">&amp;&amp;</span> j == p.size()) return true;
-</span></span><span class="line"><span class="cl">        if(j == p.size()) return false;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">memo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="n">p</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">p</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(memo[i][j] != -1) return memo[i][j];
-</span></span><span class="line"><span class="cl">        int ans = 0;
-</span></span><span class="line"><span class="cl">        if(j + 1 <span class="p">&lt;</span> <span class="nt">p.size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">p</span><span class="err">[</span><span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;*&#39;)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">p</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">||</span> <span class="na">p</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;.&#39;))</span>
-</span></span><span class="line"><span class="cl">                <span class="na">ans</span> <span class="err">|=</span> <span class="na">dp</span><span class="err">(</span><span class="na">i</span><span class="err">+</span><span class="na">1</span><span class="err">,</span> <span class="na">j</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">ans</span> <span class="err">|=</span> <span class="na">dp</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">j</span> <span class="err">+</span> <span class="na">2</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">p</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">||</span> <span class="na">p</span><span class="err">[</span><span class="na">j</span><span class="err">]</span> <span class="err">==</span> <span class="err">&#39;.&#39;))</span>
-</span></span><span class="line"><span class="cl">                <span class="na">ans</span> <span class="err">|=</span> <span class="na">dp</span><span class="err">(</span><span class="na">i</span><span class="err">+</span><span class="na">1</span><span class="err">,</span> <span class="na">j</span> <span class="err">+</span> <span class="na">1</span><span class="err">);</span>            
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">||</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;.&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">|=</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">|=</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">||</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;.&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">|=</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>            
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">memo</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">j</span><span class="err">]</span> <span class="err">=</span> <span class="na">ans</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="na">bool</span> <span class="na">isMatch</span><span class="err">(</span><span class="na">string</span> <span class="na">s</span><span class="err">,</span> <span class="na">string</span> <span class="na">p</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">        <span class="na">this-</span><span class="p">&gt;</span> s = s;
-</span></span><span class="line"><span class="cl">        this-&gt; p = p;
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isMatch</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">string</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        memo.resize(s.size() + 1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(p.size() + 1, -1));
-</span></span><span class="line"><span class="cl">        return dp(0, 0);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="n">memo</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Implement a regular expression matching function that supports <code>.</code> and <code>*</code> characters. The <code>.</code> character matches any single character, while the <code>*</code> character matches zero or more occurrences of the preceding element.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Use dynamic programming to memoize results of subproblems, allowing the algorithm to efficiently explore possible matches between the string <code>s</code> and the pattern <code>p</code>.</p>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Store the input strings <code>s</code> and <code>p</code> as member variables.</li>
+<li>Create a <code>memo</code> table initialized to -1, which will store the results of previously computed subproblems.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function <code>dp</code></strong>:</p>
+<ul>
+<li><strong>Base Cases</strong>:
+<ul>
+<li>If both <code>i</code> (index for <code>s</code>) and <code>j</code> (index for <code>p</code>) reach the end of their respective strings, return <code>true</code>.</li>
+<li>If <code>j</code> reaches the end of <code>p</code> but <code>i</code> has not reached the end of <code>s</code>, return <code>false</code>.</li>
+</ul>
+</li>
+<li><strong>Memoization Check</strong>:
+<ul>
+<li>If the result for the current indices <code>i</code> and <code>j</code> has been computed, return the stored result from <code>memo</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Matching Logic</strong>:</p>
+<ul>
+<li>If the next character in <code>p</code> is <code>*</code>:
+<ul>
+<li>Check if the current characters in <code>s</code> and <code>p</code> match, or if <code>p[j]</code> is <code>.</code>. If they match, recursively check for the next character in <code>s</code> while keeping <code>j</code> fixed or skip the <code>*</code> and its preceding character in <code>p</code> by advancing <code>j</code> by 2.</li>
+</ul>
+</li>
+<li>If the next character is not <code>*</code>:
+<ul>
+<li>Check if the current characters in <code>s</code> and <code>p</code> match, or if <code>p[j]</code> is <code>.</code>. If they match, recursively check for the next characters in both strings.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Store Result</strong>:</p>
+<ul>
+<li>Store the result of the current subproblem in <code>memo</code> before returning.</li>
+</ul>
+</li>
+<li>
+<p><strong>Wrapper Function <code>isMatch</code></strong>:</p>
+<ul>
+<li>This function initializes the <code>memo</code> table and starts the recursive matching process from the beginning of both strings.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity:</strong> (O(m \times n)) - where (m) is the length of <code>s</code> and (n) is the length of <code>p</code>, as each subproblem is computed once.</li>
+<li><strong>Space Complexity:</strong> (O(m \times n)) - for the <code>memo</code> table.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

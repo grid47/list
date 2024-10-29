@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 1195: Fizz Buzz Multithreaded · Yasir
+  Leetcode 1195: Fizz Buzz Multithreaded · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 1195">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_1195/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 1195: Fizz Buzz Multithreaded">
   <meta property="og:description" content="Solution to Leetcode 1195">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-07-22T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-07-22T00:00:00+00:00">
+    <meta property="article:published_time" content="2021-07-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-07-23T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,13 +166,13 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-07-22T00:00:00Z">
-                July 22, 2021
+              <time datetime="2021-07-23T00:00:00Z">
+                July 23, 2021
               </time>
             </span>
             <span class="reading-time">
@@ -189,121 +189,121 @@
         <p><a href="https://leetcode.com/problems/fizz-buzz-multithreaded/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class FizzBuzz {
-</span></span><span class="line"><span class="cl">private:
-</span></span><span class="line"><span class="cl">    int n, i;
-</span></span><span class="line"><span class="cl">    mutex f, b, fz, num;
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    FizzBuzz(int n) {
-</span></span><span class="line"><span class="cl">        f.lock();
-</span></span><span class="line"><span class="cl">        b.lock();
-</span></span><span class="line"><span class="cl">        fz.lock();
-</span></span><span class="line"><span class="cl">        i = 1;
-</span></span><span class="line"><span class="cl">        this-&gt;n = n;
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FizzBuzz</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mutex</span> <span class="n">f</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">fz</span><span class="p">,</span> <span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FizzBuzz</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">b</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fz</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    // printFizz() outputs &#34;fizz&#34;.
-</span></span><span class="line"><span class="cl">    void fizz(function<span class="p">&lt;</span><span class="nt">void</span><span class="err">()</span><span class="p">&gt;</span> printFizz) {
-</span></span><span class="line"><span class="cl">        while(i <span class="err">&lt;</span>= n) {
-</span></span><span class="line"><span class="cl">            f.lock();
-</span></span><span class="line"><span class="cl">            if(i <span class="err">&lt;</span>= n)            
-</span></span><span class="line"><span class="cl">            printFizz();
-</span></span><span class="line"><span class="cl">            i++;            
-</span></span><span class="line"><span class="cl">            if(i % 3== 0  <span class="err">&amp;&amp;</span> i % 5== 0 ) {
-</span></span><span class="line"><span class="cl">                fz.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i % 3 == 0) {
-</span></span><span class="line"><span class="cl">                f.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i % 5 == 0) {
-</span></span><span class="line"><span class="cl">                b.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i <span class="err">&lt;</span>= n) {
-</span></span><span class="line"><span class="cl">                num.unlock();
-</span></span><span class="line"><span class="cl">            } else {
-</span></span><span class="line"><span class="cl">                fz.unlock();
-</span></span><span class="line"><span class="cl">                f.unlock();
-</span></span><span class="line"><span class="cl">                b.unlock();
-</span></span><span class="line"><span class="cl">                num.unlock();
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">    <span class="c1">// printFizz() outputs &#34;fizz&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">fizz</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printFizz</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">f</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>            
+</span></span><span class="line"><span class="cl">            <span class="n">printFizz</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span><span class="o">==</span> <span class="mi">0</span>  <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    // printBuzz() outputs &#34;buzz&#34;.
-</span></span><span class="line"><span class="cl">    void buzz(function<span class="p">&lt;</span><span class="nt">void</span><span class="err">()</span><span class="p">&gt;</span> printBuzz) {
-</span></span><span class="line"><span class="cl">        while(i <span class="err">&lt;</span>= n) {
-</span></span><span class="line"><span class="cl">            b.lock();
-</span></span><span class="line"><span class="cl">            if(i <span class="err">&lt;</span>= n)            
-</span></span><span class="line"><span class="cl">            printBuzz();
-</span></span><span class="line"><span class="cl">            i++;
-</span></span><span class="line"><span class="cl">            if(i % 3== 0  <span class="err">&amp;&amp;</span> i % 5== 0 ) {
-</span></span><span class="line"><span class="cl">                fz.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i % 3 == 0) {
-</span></span><span class="line"><span class="cl">                f.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i % 5 == 0) {
-</span></span><span class="line"><span class="cl">                b.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i <span class="err">&lt;</span>= n) {
-</span></span><span class="line"><span class="cl">                num.unlock();
-</span></span><span class="line"><span class="cl">            } else {
-</span></span><span class="line"><span class="cl">                fz.unlock();
-</span></span><span class="line"><span class="cl">                f.unlock();
-</span></span><span class="line"><span class="cl">                b.unlock();
-</span></span><span class="line"><span class="cl">                num.unlock();
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="c1">// printBuzz() outputs &#34;buzz&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">buzz</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printBuzz</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">b</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>            
+</span></span><span class="line"><span class="cl">            <span class="n">printBuzz</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span><span class="o">==</span> <span class="mi">0</span>  <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    // printFizzBuzz() outputs &#34;fizzbuzz&#34;.
-</span></span><span class="line"><span class="cl">	void fizzbuzz(function<span class="p">&lt;</span><span class="nt">void</span><span class="err">()</span><span class="p">&gt;</span> printFizzBuzz) {
-</span></span><span class="line"><span class="cl">        while(i <span class="err">&lt;</span>= n) {
-</span></span><span class="line"><span class="cl">            fz.lock();
-</span></span><span class="line"><span class="cl">            if(i <span class="err">&lt;</span>= n)
-</span></span><span class="line"><span class="cl">            printFizzBuzz();
-</span></span><span class="line"><span class="cl">            i++;
-</span></span><span class="line"><span class="cl">            if(i % 3 == 0 <span class="err">&amp;&amp;</span> i % 5== 0 ) {
-</span></span><span class="line"><span class="cl">                fz.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i % 3 == 0) {
-</span></span><span class="line"><span class="cl">                f.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i % 5 == 0) {
-</span></span><span class="line"><span class="cl">                b.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i <span class="err">&lt;</span>= n) {
-</span></span><span class="line"><span class="cl">                num.unlock();
-</span></span><span class="line"><span class="cl">            } else {
-</span></span><span class="line"><span class="cl">                fz.unlock();
-</span></span><span class="line"><span class="cl">                f.unlock();
-</span></span><span class="line"><span class="cl">                b.unlock();
-</span></span><span class="line"><span class="cl">                num.unlock();
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="c1">// printFizzBuzz() outputs &#34;fizzbuzz&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">void</span> <span class="nf">fizzbuzz</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">printFizzBuzz</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fz</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">printFizzBuzz</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    // printNumber(x) outputs &#34;x&#34;, where x is an integer.
-</span></span><span class="line"><span class="cl">    void number(function<span class="p">&lt;</span><span class="nt">void</span><span class="err">(</span><span class="na">int</span><span class="err">)</span><span class="p">&gt;</span> printNumber) {
-</span></span><span class="line"><span class="cl">        while(i <span class="err">&lt;</span>= n) {
-</span></span><span class="line"><span class="cl">            num.lock();
-</span></span><span class="line"><span class="cl">            if(i <span class="err">&lt;</span>= n)
-</span></span><span class="line"><span class="cl">            printNumber(i);
-</span></span><span class="line"><span class="cl">            i++;
-</span></span><span class="line"><span class="cl">            if(i % 3 == 0 <span class="err">&amp;&amp;</span> i % 5== 0 ) {
-</span></span><span class="line"><span class="cl">                fz.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i % 3 == 0) {
-</span></span><span class="line"><span class="cl">                f.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i % 5 == 0) {
-</span></span><span class="line"><span class="cl">                b.unlock();
-</span></span><span class="line"><span class="cl">            } else if(i <span class="err">&lt;</span>= n) {
-</span></span><span class="line"><span class="cl">                num.unlock();
-</span></span><span class="line"><span class="cl">            } else {
-</span></span><span class="line"><span class="cl">                fz.unlock();
-</span></span><span class="line"><span class="cl">                f.unlock();
-</span></span><span class="line"><span class="cl">                b.unlock();
-</span></span><span class="line"><span class="cl">                num.unlock();
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="c1">// printNumber(x) outputs &#34;x&#34;, where x is an integer.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="nf">number</span><span class="p">(</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">printNumber</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">num</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">printNumber</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span><span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fz</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">f</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">b</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

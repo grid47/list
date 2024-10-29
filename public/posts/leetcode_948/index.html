@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 948: Bag of Tokens · Yasir
+  Leetcode 948: Bag of Tokens · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 948">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_948/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 948: Bag of Tokens">
   <meta property="og:description" content="Solution to Leetcode 948">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-03-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-03-26T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-03-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-03-27T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-03-26T00:00:00Z">
-                March 26, 2022
+              <time datetime="2022-03-27T00:00:00Z">
+                March 27, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,29 +189,101 @@
         <p><a href="https://leetcode.com/problems/bag-of-tokens/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int bagOfTokensScore(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> tokens, int power) {
-</span></span><span class="line"><span class="cl">        sort(tokens.begin(), tokens.end());
-</span></span><span class="line"><span class="cl">        int res = 0, pts = 0, i = 0, j = tokens.size() - 1;
-</span></span><span class="line"><span class="cl">        while(i <span class="err">&lt;</span>= j) {
-</span></span><span class="line"><span class="cl">            if(power &gt;= tokens[i]) {
-</span></span><span class="line"><span class="cl">                power -= tokens[i++];
-</span></span><span class="line"><span class="cl">                res = max(res, ++pts);
-</span></span><span class="line"><span class="cl">            } else if(pts &gt; 0) {
-</span></span><span class="line"><span class="cl">                power += tokens[j--];
-</span></span><span class="line"><span class="cl">                pts--;
-</span></span><span class="line"><span class="cl">            } else break;
-</span></span><span class="line"><span class="cl">        }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">bagOfTokensScore</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">tokens</span><span class="p">,</span> <span class="kt">int</span> <span class="n">power</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">tokens</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tokens</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">power</span> <span class="o">&gt;=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">power</span> <span class="o">-=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="o">++</span><span class="n">pts</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">pts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">power</span> <span class="o">+=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">j</span><span class="o">--</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pts</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given an array of tokens and an initial amount of power. You can spend power to gain points by flipping a token face-up, or you can sacrifice points to regain power by flipping a token face-down. The goal is to maximize the number of points you can earn using the tokens.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Sorting Tokens</strong>:</p>
+<ul>
+<li>Start by sorting the array of tokens. This allows for a greedy approach where you can efficiently decide when to use tokens for points or regain power.</li>
+</ul>
+</li>
+<li>
+<p><strong>Two Pointers Technique</strong>:</p>
+<ul>
+<li>Use two pointers: one (<code>i</code>) starting from the beginning (the smallest token) and another (<code>j</code>) from the end (the largest token).</li>
+<li>While iterating through the tokens, check the following conditions:
+<ul>
+<li>If the current power is greater than or equal to the token pointed to by <code>i</code>, use that token to gain a point (increase points) and deduct its value from power.</li>
+<li>If power is insufficient for the token at <code>i</code> but you have points, sacrifice a point to regain power using the token at <code>j</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating Maximum Score</strong>:</p>
+<ul>
+<li>Throughout the process, update the maximum score whenever a token is successfully used for points.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The function sorts the tokens and initializes the necessary variables: <code>res</code> for maximum score, <code>pts</code> for current points, and two pointers (<code>i</code> and <code>j</code>).</li>
+<li>It iteratively checks whether to gain points or regain power until all possible actions are exhausted.</li>
+<li>Finally, it returns the maximum score achieved.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n log n), where n is the number of tokens, due to the sorting step.</li>
+<li><strong>Space Complexity</strong>: O(1), as no additional space proportional to the input size is used.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 979: Distribute Coins in Binary Tree · Yasir
+  Leetcode 979: Distribute Coins in Binary Tree · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 979">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_979/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 979: Distribute Coins in Binary Tree">
   <meta property="og:description" content="Solution to Leetcode 979">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-02-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-02-23T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-02-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-02-24T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-02-23T00:00:00Z">
-                February 23, 2022
+              <time datetime="2022-02-24T00:00:00Z">
+                February 24, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,39 +189,119 @@
         <p><a href="https://leetcode.com/problems/distribute-coins-in-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
-</span></span><span class="line"><span class="cl"> * struct TreeNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     TreeNode *left;
-</span></span><span class="line"><span class="cl"> *     TreeNode *right;
-</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">    int mv;
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int distributeCoins(TreeNode* root) {
-</span></span><span class="line"><span class="cl">        mv = 0;
-</span></span><span class="line"><span class="cl">        move(root, mv);
-</span></span><span class="line"><span class="cl">        return mv;
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">distributeCoins</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mv</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">move</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">mv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    int move(TreeNode* r, int <span class="err">&amp;</span> mv) {
-</span></span><span class="line"><span class="cl">        if(r == nullptr) return 0;
-</span></span><span class="line"><span class="cl">        int left = move(r-&gt;left, mv);
-</span></span><span class="line"><span class="cl">        int right = move(r-&gt;right, mv);
-</span></span><span class="line"><span class="cl">        mv += abs(left) + abs(right);
-</span></span><span class="line"><span class="cl">        return r-&gt;val + left + right - 1;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">move</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span> <span class="n">mv</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">r</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">mv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">r</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">mv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mv</span> <span class="o">+=</span> <span class="n">abs</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">r</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">left</span> <span class="o">+</span> <span class="n">right</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a binary tree where each node represents the number of coins it has, distribute the coins such that each node has exactly one coin. Minimize the total number of moves, where a move is transferring a coin between two adjacent nodes.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Recursive Postorder Traversal</strong>:</p>
+<ul>
+<li>Use postorder traversal to calculate the balance of coins for each node.</li>
+<li>Define a helper function <code>move</code> that recursively calculates the number of coins needed or in excess for each subtree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Move Calculation</strong>:</p>
+<ul>
+<li>For each node, calculate the moves required to balance its left and right subtrees.</li>
+<li>Accumulate these moves in a class member variable <code>mv</code> to get the total number of moves.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning Balance</strong>:</p>
+<ul>
+<li>For each node, return the net balance of coins: <code>(node’s value + left balance + right balance - 1)</code>.</li>
+<li>This result allows the parent node to know if it needs to move coins into or out of this node to balance the tree.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong><code>distributeCoins</code> Method</strong>:</p>
+<ul>
+<li>Initializes <code>mv</code> to track moves and calls <code>move</code> to start the recursive balancing.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>move</code> Helper Function</strong>:</p>
+<ul>
+<li>For each node, recursively calls <code>move</code> on left and right children to get their balances.</li>
+<li>Updates <code>mv</code> with the total number of moves needed to balance left and right subtrees.</li>
+<li>Returns the balance for the current node.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of nodes in the tree, since each node is visited once.</li>
+<li><strong>Space Complexity</strong>: O(h), where <code>h</code> is the height of the tree, due to the recursive call stack.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

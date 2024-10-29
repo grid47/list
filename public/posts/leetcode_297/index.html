@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 297: Serialize and Deserialize Binary Tree · Yasir
+  Leetcode 297: Serialize and Deserialize Binary Tree · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 297">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_297/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 297: Serialize and Deserialize Binary Tree">
   <meta property="og:description" content="Solution to Leetcode 297">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-01-06T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-01-06T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-01-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-07T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-01-06T00:00:00Z">
-                January 6, 2024
+              <time datetime="2024-01-07T00:00:00Z">
+                January 7, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,61 +189,151 @@
         <p><a href="https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
-</span></span><span class="line"><span class="cl"> * struct TreeNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     TreeNode *left;
-</span></span><span class="line"><span class="cl"> *     TreeNode *right;
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Codec {
-</span></span><span class="line"><span class="cl">public:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Codec</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    string serialize(TreeNode* root) {
-</span></span><span class="line"><span class="cl">        ostringstream out;
-</span></span><span class="line"><span class="cl">        serialize(root, out);
-</span></span><span class="line"><span class="cl">        return out.str();
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">serialize</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ostringstream</span> <span class="n">out</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">serialize</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">out</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    TreeNode* deserialize(string data) {
-</span></span><span class="line"><span class="cl">        istringstream in(data);
-</span></span><span class="line"><span class="cl">        return deserialize(in);
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">deserialize</span><span class="p">(</span><span class="n">string</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">istringstream</span> <span class="n">in</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">deserialize</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">private:
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    void serialize(TreeNode* root, ostringstream<span class="err">&amp;</span> out) {
-</span></span><span class="line"><span class="cl">        if (root) {
-</span></span><span class="line"><span class="cl">            out <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">root-</span><span class="p">&gt;</span>val <span class="err">&lt;&lt;</span> &#39; &#39;;
-</span></span><span class="line"><span class="cl">            serialize(root-&gt;left, out);
-</span></span><span class="line"><span class="cl">            serialize(root-&gt;right, out);
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            out <span class="err">&lt;&lt;</span> &#34;# &#34;;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">serialize</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">ostringstream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">serialize</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">serialize</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;# &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    TreeNode* deserialize(istringstream<span class="err">&amp;</span> in) {
-</span></span><span class="line"><span class="cl">        string val;
-</span></span><span class="line"><span class="cl">        in &gt;&gt; val;
-</span></span><span class="line"><span class="cl">        if (val == &#34;#&#34;)
-</span></span><span class="line"><span class="cl">            return nullptr;
-</span></span><span class="line"><span class="cl">        TreeNode* root = new TreeNode(stoi(val));
-</span></span><span class="line"><span class="cl">        root-&gt;left = deserialize(in);
-</span></span><span class="line"><span class="cl">        root-&gt;right = deserialize(in);
-</span></span><span class="line"><span class="cl">        return root;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">deserialize</span><span class="p">(</span><span class="n">istringstream</span><span class="o">&amp;</span> <span class="n">in</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">in</span> <span class="o">&gt;&gt;</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="s">&#34;#&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">stoi</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">deserialize</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">deserialize</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">// Your Codec object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl">// Codec ser, deser;
-</span></span><span class="line"><span class="cl">// TreeNode* ans = deser.deserialize(ser.serialize(root));</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="c1">// Your Codec object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Codec ser, deser;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// TreeNode* ans = deser.deserialize(ser.serialize(root));
+</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Design a codec that encodes a binary tree to a string and decodes a string back to the binary tree. The encoded string should be a representation of the tree structure that allows for complete reconstruction.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a depth-first traversal approach to serialize and deserialize the binary tree:</p>
+<ol>
+<li>
+<p><strong>Serialization</strong>:</p>
+<ul>
+<li>Use a pre-order traversal (root, left, right) to serialize the tree.</li>
+<li>For each node, append its value to a string. If a node is <code>nullptr</code>, append a special marker (e.g., <code>#</code>) to indicate the absence of a node.</li>
+<li>Separate values with spaces for easy parsing during deserialization.</li>
+</ul>
+</li>
+<li>
+<p><strong>Deserialization</strong>:</p>
+<ul>
+<li>Split the serialized string by spaces to reconstruct the tree.</li>
+<li>Use a recursive function to read values from the string and build the tree back, using the same pre-order logic.</li>
+<li>When a <code>#</code> is encountered, return <code>nullptr</code> for that node.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Input</strong>: A binary tree node <code>root</code> for serialization and a serialized string <code>data</code> for deserialization.</li>
+<li><strong>Output</strong>: The serialized string from the tree and the reconstructed tree from the serialized string.</li>
+</ul>
+<ol>
+<li>
+<p><strong>Serialize Function</strong>:</p>
+<ul>
+<li>Takes a pointer to the root of the tree and an output string stream.</li>
+<li>If the node is not <code>nullptr</code>, its value is added to the output stream, followed by recursive calls for the left and right children.</li>
+<li>If the node is <code>nullptr</code>, a <code>#</code> is added to indicate the absence of a node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Deserialize Function</strong>:</p>
+<ul>
+<li>Takes an input string stream and reads the next value.</li>
+<li>If the value is <code>#</code>, it returns <code>nullptr</code>. Otherwise, it creates a new node and recursively builds the left and right subtrees.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li>(O(n)) for both serialization and deserialization, where (n) is the number of nodes in the tree, as each node is processed once.</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>:
+<ul>
+<li>(O(n)) for the serialized string storage and the recursion stack during deserialization.</li>
+</ul>
+</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

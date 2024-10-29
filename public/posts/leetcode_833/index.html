@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 833: Find And Replace in String · Yasir
+  Leetcode 833: Find And Replace in String · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 833">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_833/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 833: Find And Replace in String">
   <meta property="og:description" content="Solution to Leetcode 833">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-07-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-07-19T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-07-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-07-20T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-07-19T00:00:00Z">
-                July 19, 2022
+              <time datetime="2022-07-20T00:00:00Z">
+                July 20, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,39 +189,105 @@
         <p><a href="https://leetcode.com/problems/find-and-replace-in-string/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    string findReplaceString(string s, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> indices, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> sources, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> targets) {
-</span></span><span class="line"><span class="cl">        /*
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">findReplaceString</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">indices</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">sources</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">targets</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        string s
+</span></span></span><span class="line"><span class="cl"><span class="cm">        indices - arr of int
+</span></span></span><span class="line"><span class="cl"><span class="cm">        src       arr of str
+</span></span></span><span class="line"><span class="cl"><span class="cm">        tgt       arr of str
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        */</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        string s
-</span></span><span class="line"><span class="cl">        indices - arr of int
-</span></span><span class="line"><span class="cl">        src       arr of str
-</span></span><span class="line"><span class="cl">        tgt       arr of str
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">ind</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        */
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">indices</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ind</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">});</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; ind;
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">ind</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span> <span class="n">ind</span><span class="p">.</span><span class="n">rend</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">indices.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">            <span class="na">ind</span><span class="err">.</span><span class="na">push_back</span><span class="err">({</span><span class="na">indices</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">i</span><span class="err">});</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">ind</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">src</span> <span class="o">=</span> <span class="n">sources</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">],</span> <span class="n">tgt</span> <span class="o">=</span> <span class="n">targets</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">src</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">==</span> <span class="n">src</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">)</span> <span class="o">+</span> <span class="n">tgt</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="o">+</span> <span class="n">src</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">sort</span><span class="err">(</span><span class="na">ind</span><span class="err">.</span><span class="na">rbegin</span><span class="err">(),</span> <span class="na">ind</span><span class="err">.</span><span class="na">rend</span><span class="err">());</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">it:</span> <span class="na">ind</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">string</span> <span class="na">src </span><span class="o">=</span> <span class="s">sources[it.second],</span> <span class="na">tgt </span><span class="o">=</span> <span class="s">targets[it.second];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">s</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">it</span><span class="err">.</span><span class="na">first</span><span class="err">,</span> <span class="na">src</span><span class="err">.</span><span class="na">size</span><span class="err">())</span> <span class="err">==</span> <span class="na">src</span><span class="err">)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">s </span><span class="o">=</span> <span class="s">s.substr(0,</span> <span class="na">it</span><span class="err">.</span><span class="na">first</span><span class="err">)</span> <span class="err">+</span> <span class="na">tgt</span> <span class="err">+</span> <span class="na">s</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">it</span><span class="err">.</span><span class="na">first</span><span class="err">+</span> <span class="na">src</span><span class="err">.</span><span class="na">size</span><span class="err">());</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">s</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to replace substrings in a given string <code>s</code> based on specified indices, sources, and targets. Each substring specified by <code>sources</code> at the corresponding <code>indices</code> should be replaced by the corresponding string in <code>targets</code> if the substring matches.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Preparation</strong>:</p>
+<ul>
+<li>Create a vector of pairs, <code>ind</code>, where each pair consists of an index and its corresponding position in the <code>indices</code> vector. This helps to keep track of the original index when sorting.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting</strong>:</p>
+<ul>
+<li>Sort the <code>ind</code> vector in descending order based on the indices. This ensures that when we modify the string <code>s</code>, we start from the end, preventing any shifts in indices that would occur if we modified earlier parts of the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Replacement</strong>:</p>
+<ul>
+<li>Iterate through the sorted indices and check if the substring in <code>s</code> matches the corresponding <code>src</code> from <code>sources</code>. If it does, replace that substring with the corresponding <code>tgt</code> from <code>targets</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The function first constructs the <code>ind</code> vector from the <code>indices</code>.</li>
+<li>After sorting <code>ind</code> in reverse order, the function checks each index to see if the corresponding substring in <code>s</code> matches the <code>src</code>. If it matches, it performs the replacement.</li>
+<li>Finally, the modified string <code>s</code> is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(M + K log K), where M is the length of the string <code>s</code> and K is the number of indices, sources, and targets. The log K arises from the sorting step.</li>
+<li><strong>Space Complexity</strong>: O(K) for the additional storage of the <code>ind</code> vector.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

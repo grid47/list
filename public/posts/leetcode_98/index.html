@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 98: Validate Binary Search Tree · Yasir
+  Leetcode 98: Validate Binary Search Tree · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 98">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_98/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 98: Validate Binary Search Tree">
   <meta property="og:description" content="Solution to Leetcode 98">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-07-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-07-23T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-07-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-07-24T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-07-23T00:00:00Z">
-                July 23, 2024
+              <time datetime="2024-07-24T00:00:00Z">
+                July 24, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,44 +189,117 @@
         <p><a href="https://leetcode.com/problems/validate-binary-search-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
-</span></span><span class="line"><span class="cl"> * struct TreeNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     TreeNode *left;
-</span></span><span class="line"><span class="cl"> *     TreeNode *right;
-</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    bool isValidBST(TreeNode* root) {
-</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">TreeNode</span><span class="err">*</span><span class="p">&gt;</span> stk;
-</span></span><span class="line"><span class="cl">        TreeNode* node = root, *prv = NULL;
-</span></span><span class="line"><span class="cl">        // stk.push(root);
-</span></span><span class="line"><span class="cl">        while(!stk.empty() || node) {
-</span></span><span class="line"><span class="cl">            if(node) {
-</span></span><span class="line"><span class="cl">                stk.push(node);
-</span></span><span class="line"><span class="cl">                node = node-&gt;left;
-</span></span><span class="line"><span class="cl">            } else {
-</span></span><span class="line"><span class="cl">                node = stk.top();
-</span></span><span class="line"><span class="cl">                stk.pop();
-</span></span><span class="line"><span class="cl">                if(prv != NULL <span class="err">&amp;&amp;</span> prv -&gt; val &gt;= node-&gt;val)
-</span></span><span class="line"><span class="cl">                    return false;
-</span></span><span class="line"><span class="cl">                prv = node;
-</span></span><span class="line"><span class="cl">                node = node-&gt;right;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return true;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isValidBST</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">stk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">root</span><span class="p">,</span> <span class="o">*</span><span class="n">prv</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// stk.push(root);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">stk</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">node</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">prv</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">prv</span> <span class="o">-&gt;</span> <span class="n">val</span> <span class="o">&gt;=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">prv</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Determine if a given binary tree is a valid binary search tree (BST). A BST is valid if, for every node, its left subtree values are less than the node value, and its right subtree values are greater than the node value.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses an <strong>iterative in-order traversal</strong>:</p>
+<ol>
+<li><strong>In-order Traversal with a Stack</strong>:
+<ul>
+<li>Perform an in-order traversal, which visits nodes in ascending order if the tree is a valid BST.</li>
+<li>Use a stack to simulate the traversal without recursion.</li>
+</ul>
+</li>
+<li><strong>Check BST Validity</strong>:
+<ul>
+<li>Track the previous node (<code>prv</code>). For each visited node, check if its value is greater than the previous node.</li>
+<li>If any node is not greater than the previous node, the tree is not a BST.</li>
+</ul>
+</li>
+<li><strong>Edge Case</strong>:
+<ul>
+<li>If the tree is empty, it is considered a valid BST.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialize Stack and Pointers</strong>: Use <code>stk</code> for iterative traversal, <code>node</code> as the current node, and <code>prv</code> to store the last visited node.</li>
+<li><strong>Traverse Left Subtree</strong>: Push nodes onto <code>stk</code> until reaching the leftmost node.</li>
+<li><strong>Visit and Compare</strong>:
+<ul>
+<li>Pop from <code>stk</code>, visit the node, and compare it with <code>prv</code>.</li>
+<li>If <code>prv-&gt;val &gt;= node-&gt;val</code>, return <code>false</code> as this violates BST properties.</li>
+</ul>
+</li>
+<li><strong>Update Previous</strong>: Set <code>prv</code> to the current node and move to the right subtree.</li>
+<li><strong>Return</strong>: If all nodes are in order, return <code>true</code>.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes, as each node is visited once.</li>
+<li><strong>Space Complexity</strong>: (O(h)), where (h) is the height of the tree, for the stack in the worst case (unbalanced tree).</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

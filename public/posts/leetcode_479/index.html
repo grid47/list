@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 479: Largest Palindrome Product · Yasir
+  Leetcode 479: Largest Palindrome Product · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 479">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_479/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 479: Largest Palindrome Product">
   <meta property="og:description" content="Solution to Leetcode 479">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-07-08T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-07-08T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-07-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-07-09T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-07-08T00:00:00Z">
-                July 8, 2023
+              <time datetime="2023-07-09T00:00:00Z">
+                July 9, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,34 +189,140 @@
         <p><a href="https://leetcode.com/problems/largest-palindrome-product/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int largestPalindrome(int n) {
-</span></span><span class="line"><span class="cl">        if (n == 1) return 9;
-</span></span><span class="line"><span class="cl">        int upper = pow(10, n) - 1;
-</span></span><span class="line"><span class="cl">        int lower = pow(10, n-1);
-</span></span><span class="line"><span class="cl">        for (int i = upper; i &gt;= lower; i--) {
-</span></span><span class="line"><span class="cl">            long cand = buildPalindrome(i);
-</span></span><span class="line"><span class="cl">            for (long j = upper; j*j &gt;= cand; j--) {
-</span></span><span class="line"><span class="cl">                if (cand % j == 0 <span class="err">&amp;&amp;</span> cand / j <span class="err">&lt;</span>= upper) {
-</span></span><span class="line"><span class="cl">                    return cand % 1337;
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return -1;
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">largestPalindrome</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">lower</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">upper</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">lower</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="n">cand</span> <span class="o">=</span> <span class="n">buildPalindrome</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">long</span> <span class="n">j</span> <span class="o">=</span> <span class="n">upper</span><span class="p">;</span> <span class="n">j</span><span class="o">*</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">cand</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">cand</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cand</span> <span class="o">/</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="n">cand</span> <span class="o">%</span> <span class="mi">1337</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    long buildPalindrome(int n) {
-</span></span><span class="line"><span class="cl">        string s = to_string(n);
-</span></span><span class="line"><span class="cl">        reverse(s.begin(), s.end());
-</span></span><span class="line"><span class="cl">        return stol(to_string(n) + s);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="nf">buildPalindrome</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">stol</span><span class="p">(</span><span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer <code>n</code>, you need to find the largest palindrome made from the product of two <code>n</code>-digit numbers. Return the result modulo <code>1337</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Understanding Palindromes</strong>:</p>
+<ul>
+<li>A palindrome is a number that reads the same backward as forward.</li>
+</ul>
+</li>
+<li>
+<p><strong>Defining the Range</strong>:</p>
+<ul>
+<li>For <code>n</code>-digit numbers, the upper limit is (10^n - 1) and the lower limit is (10^{(n-1)}).</li>
+</ul>
+</li>
+<li>
+<p><strong>Building Palindromes</strong>:</p>
+<ul>
+<li>Start from the largest <code>n</code>-digit number and generate candidate palindromes by reflecting the digits.</li>
+</ul>
+</li>
+<li>
+<p><strong>Checking for Products</strong>:</p>
+<ul>
+<li>For each candidate palindrome, check if it can be expressed as a product of two <code>n</code>-digit numbers.</li>
+<li>This is done by iterating through potential factors from the upper limit down to the lower limit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>If a valid palindrome product is found, return it modulo <code>1337</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<ul>
+<li>The function <code>largestPalindrome()</code> takes an integer <code>n</code> as input.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Upper and Lower Bounds</strong>:</p>
+<ul>
+<li><code>upper</code> is set to (10^n - 1) and <code>lower</code> to (10^{(n-1)}).</li>
+</ul>
+</li>
+<li>
+<p><strong>Generating Palindromes</strong>:</p>
+<ul>
+<li>Loop from <code>upper</code> down to <code>lower</code> to build potential palindromes using the <code>buildPalindrome()</code> helper function.</li>
+</ul>
+</li>
+<li>
+<p><strong>Checking Factorization</strong>:</p>
+<ul>
+<li>For each generated palindrome, check if it can be factorized into two <code>n</code>-digit numbers by iterating through possible factors.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>Return the result modulo <code>1337</code> when a valid palindrome product is found.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n^2) in the worst case, due to the nested loops for generating palindromes and checking their factors.</li>
+<li><strong>Space Complexity</strong>: O(1) since only a constant amount of space is used for variables.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

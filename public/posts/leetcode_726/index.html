@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 726: Number of Atoms · Yasir
+  Leetcode 726: Number of Atoms · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 726">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_726/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 726: Number of Atoms">
   <meta property="og:description" content="Solution to Leetcode 726">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-11-03T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-11-03T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-11-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-11-04T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-11-03T00:00:00Z">
-                November 3, 2022
+              <time datetime="2022-11-04T00:00:00Z">
+                November 4, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,68 +189,162 @@
         <p><a href="https://leetcode.com/problems/number-of-atoms/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int n;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void merge(map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>to, map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> <span class="err">&amp;</span>from, int mul) {
-</span></span><span class="line"><span class="cl">        for(auto [key, val]: from) {
-</span></span><span class="line"><span class="cl">            to[key] += val * mul;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">merge</span><span class="p">(</span><span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">to</span><span class="p">,</span> <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">from</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mul</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="p">[</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">]</span><span class="o">:</span> <span class="n">from</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">to</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span> <span class="o">*</span> <span class="n">mul</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    string atom(string <span class="err">&amp;</span>eqn, int <span class="err">&amp;</span>i) {
-</span></span><span class="line"><span class="cl">        int i1 = i++;
-</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">islower</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="na">i</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">eqn</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i1</span><span class="err">,</span> <span class="na">i</span> <span class="na">-</span> <span class="na">i1</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="nf">atom</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">eqn</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">islower</span><span class="p">(</span><span class="n">eqn</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">eqn</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">i1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">num</span><span class="err">(</span><span class="na">string</span> <span class="err">&amp;</span><span class="na">eqn</span><span class="err">,</span> <span class="na">int</span> <span class="err">&amp;</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">i1 </span><span class="o">=</span> <span class="s">i;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span> <span class="err">&amp;&amp;</span> <span class="na">isdigit</span><span class="err">(</span><span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]))</span> <span class="na">i</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">i1 </span><span class="o">=</span><span class="s">=</span> <span class="na">i</span><span class="err">?</span> <span class="na">1:</span> <span class="na">stoi</span><span class="err">(</span><span class="na">eqn</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i1</span><span class="err">,</span> <span class="na">i</span> <span class="na">-</span> <span class="na">i1</span><span class="err">));</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">num</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">eqn</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">isdigit</span><span class="p">(</span><span class="n">eqn</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">i</span><span class="o">?</span> <span class="mi">1</span><span class="o">:</span> <span class="n">stoi</span><span class="p">(</span><span class="n">eqn</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">i1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="na">map</span><span class="err">&lt;</span><span class="na">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> unit(string <span class="err">&amp;</span>eqn, int <span class="err">&amp;</span>i) {
-</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> cnt;
-</span></span><span class="line"><span class="cl">        if(eqn[i] == &#39;(&#39;) {
-</span></span><span class="line"><span class="cl">            map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> cur = formula(eqn, ++i);
-</span></span><span class="line"><span class="cl">            int frq = num(eqn, ++i);
-</span></span><span class="line"><span class="cl">            merge(cnt, cur, frq);
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            string str = atom(eqn, i);
-</span></span><span class="line"><span class="cl">            int frq = num(eqn, i);
-</span></span><span class="line"><span class="cl">            cnt[str] = frq;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return cnt;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">unit</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">eqn</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">eqn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;(&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span> <span class="o">++</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">frq</span> <span class="o">=</span> <span class="n">num</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span> <span class="o">++</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">merge</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">frq</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="n">atom</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">frq</span> <span class="o">=</span> <span class="n">num</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="p">[</span><span class="n">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">frq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> formula(string <span class="err">&amp;</span>eqn, int <span class="err">&amp;</span>i) {
-</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> cnt;
-</span></span><span class="line"><span class="cl">        while(i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">eqn</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">!=</span> <span class="err">&#39;)&#39;)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">map</span><span class="err">&lt;</span><span class="na">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> res = unit(eqn, i);
-</span></span><span class="line"><span class="cl">            int mul = num(eqn, i);
-</span></span><span class="line"><span class="cl">            merge(cnt, res, mul);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return cnt;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">formula</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">eqn</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">eqn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;)&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="n">unit</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">mul</span> <span class="o">=</span> <span class="n">num</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">merge</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">mul</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    string countOfAtoms(string eqn) {
-</span></span><span class="line"><span class="cl">        n = eqn.size();
-</span></span><span class="line"><span class="cl">        string ans = &#34;&#34;;
-</span></span><span class="line"><span class="cl">        int i = 0;
-</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp = formula(eqn, i);
-</span></span><span class="line"><span class="cl">        for(auto [key, val]: mp) {
-</span></span><span class="line"><span class="cl">            ans += (key + ((val == 1)? &#34;&#34; : to_string(val)));
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return ans;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="nf">countOfAtoms</span><span class="p">(</span><span class="n">string</span> <span class="n">eqn</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">eqn</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">ans</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span> <span class="o">=</span> <span class="n">formula</span><span class="p">(</span><span class="n">eqn</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="p">[</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">]</span><span class="o">:</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">+=</span> <span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="p">((</span><span class="n">val</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">?</span> <span class="s">&#34;&#34;</span> <span class="o">:</span> <span class="n">to_string</span><span class="p">(</span><span class="n">val</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string representing a chemical formula, count the number of atoms of each element in the formula. The formula may include parentheses and subscripts to indicate multiples.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Parsing the Formula</strong>:</p>
+<ul>
+<li>Use a recursive approach to parse the chemical formula string.</li>
+<li>Identify elements, their counts, and handle nested structures within parentheses.</li>
+</ul>
+</li>
+<li>
+<p><strong>Helper Functions</strong>:</p>
+<ul>
+<li><strong><code>atom(string &amp;eqn, int &amp;i)</code></strong>:
+<ul>
+<li>Extracts the name of an atom (element) starting from index <code>i</code>.</li>
+</ul>
+</li>
+<li><strong><code>num(string &amp;eqn, int &amp;i)</code></strong>:
+<ul>
+<li>Extracts the count of atoms (subscript) starting from index <code>i</code>. If no number is found, it returns <code>1</code>.</li>
+</ul>
+</li>
+<li><strong><code>unit(string &amp;eqn, int &amp;i)</code></strong>:
+<ul>
+<li>Handles individual units of the formula. If the unit is a group (parentheses), it recursively parses it.</li>
+</ul>
+</li>
+<li><strong><code>formula(string &amp;eqn, int &amp;i)</code></strong>:
+<ul>
+<li>Parses the entire formula, managing multiple units and their counts.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Merging Counts</strong>:</p>
+<ul>
+<li>Use a helper function <code>merge(map&lt;string, int&gt; &amp;to, map&lt;string, int&gt; &amp;from, int mul)</code> to update the count of atoms based on the parsed results.</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing the Result</strong>:</p>
+<ul>
+<li>After parsing the formula, construct the result string in alphabetical order of the elements, appending their counts.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Function</strong>:
+<ul>
+<li><code>string countOfAtoms(string eqn)</code>: Main function that initializes parsing and constructs the final result string.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the length of the input string, as we parse through the string once.</li>
+<li><strong>Space Complexity</strong>: O(M), where M is the number of unique elements in the formula, as we use a map to store the counts.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

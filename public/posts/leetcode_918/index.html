@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 918: Maximum Sum Circular Subarray · Yasir
+  Leetcode 918: Maximum Sum Circular Subarray · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 918">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_918/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 918: Maximum Sum Circular Subarray">
   <meta property="og:description" content="Solution to Leetcode 918">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-04-25T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-04-25T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-04-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-04-26T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-04-25T00:00:00Z">
-                April 25, 2022
+              <time datetime="2022-04-26T00:00:00Z">
+                April 26, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,27 +189,102 @@
         <p><a href="https://leetcode.com/problems/maximum-sum-circular-subarray/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int maxSubarraySumCircular(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
-</span></span><span class="line"><span class="cl">        int lmax = nums[0], lmin = nums[0];
-</span></span><span class="line"><span class="cl">        int gmax = nums[0], gmin = nums[0];
-</span></span><span class="line"><span class="cl">        int sum = nums[0];
-</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">nums.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">sum</span> <span class="err">+=</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">lmax </span><span class="o">=</span> <span class="s">max(nums[i],</span> <span class="na">lmax</span> <span class="err">+</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">gmax </span><span class="o">=</span> <span class="s">max(lmax,</span> <span class="na">gmax</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">lmin </span><span class="o">=</span> <span class="s">min(nums[i],</span> <span class="na">lmin</span> <span class="err">+</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">gmin </span><span class="o">=</span> <span class="s">min(lmin,</span> <span class="na">gmin</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">gmax</span> <span class="p">&gt;</span> 0? max(gmax, sum - gmin): gmax;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxSubarraySumCircular</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">lmax</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lmin</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">gmax</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gmin</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lmax</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lmax</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gmax</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">lmax</span><span class="p">,</span> <span class="n">gmax</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lmin</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lmin</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gmin</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">lmin</span><span class="p">,</span> <span class="n">gmin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">gmax</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">?</span> <span class="n">max</span><span class="p">(</span><span class="n">gmax</span><span class="p">,</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">gmin</span><span class="p">)</span><span class="o">:</span> <span class="n">gmax</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer array <code>nums</code>, find the maximum possible sum of a non-empty subarray of the array. The subarray may wrap around the end of the array (circular).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initial Variables</strong>:</p>
+<ul>
+<li>Initialize variables <code>lmax</code>, <code>lmin</code>, <code>gmax</code>, and <code>gmin</code> to keep track of the current maximum and minimum subarray sums and the global maximum and minimum sums, respectively.</li>
+<li>Initialize <code>sum</code> to hold the total sum of the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through Array</strong>:</p>
+<ul>
+<li>Loop through each element in <code>nums</code>, updating the following:
+<ul>
+<li><code>lmax</code>: The maximum subarray sum ending at the current position.</li>
+<li><code>gmax</code>: The global maximum subarray sum found so far.</li>
+<li><code>lmin</code>: The minimum subarray sum ending at the current position.</li>
+<li><code>gmin</code>: The global minimum subarray sum found so far.</li>
+<li><code>sum</code>: Accumulate the total sum of the array.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Result</strong>:</p>
+<ul>
+<li>If <code>gmax</code> is greater than 0, return the maximum of <code>gmax</code> and <code>sum - gmin</code> (which accounts for wrapping around).</li>
+<li>If <code>gmax</code> is not greater than 0, simply return <code>gmax</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The code iteratively calculates local maximum and minimum subarray sums while keeping track of the global sums and the total array sum.</li>
+<li>The final result is derived from either the maximum subarray sum found directly or the circular sum derived by subtracting the minimum subarray sum from the total.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in <code>nums</code>, as it requires a single pass through the array.</li>
+<li><strong>Space Complexity</strong>: O(1), as only a constant amount of additional space is used for the variables.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

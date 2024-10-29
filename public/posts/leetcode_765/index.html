@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 765: Couples Holding Hands · Yasir
+  Leetcode 765: Couples Holding Hands · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 765">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_765/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 765: Couples Holding Hands">
   <meta property="og:description" content="Solution to Leetcode 765">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-09-25T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-09-25T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-09-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-09-26T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-09-25T00:00:00Z">
-                September 25, 2022
+              <time datetime="2022-09-26T00:00:00Z">
+                September 26, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,35 +189,107 @@
         <p><a href="https://leetcode.com/problems/couples-holding-hands/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int minSwapsCouples(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> row) {
-</span></span><span class="line"><span class="cl">        int res = 0, n = row.size();
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minSwapsCouples</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">row</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> pos(n, 0);
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ptn(n, 0);
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pos</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ptn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">pos</span><span class="err">[</span><span class="na">row</span><span class="err">[</span><span class="na">i</span><span class="err">]]</span> <span class="err">=</span> <span class="na">i</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">ptn</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="err">(</span><span class="na">i</span> <span class="err">%</span> <span class="na">2 </span><span class="o">=</span><span class="s">=</span> <span class="na">0</span><span class="err">)</span> <span class="err">?</span> <span class="na">i</span> <span class="err">+</span> <span class="na">1</span> <span class="na">:</span> <span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pos</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ptn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">0;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">ptn[pos[ptn[row[i]]]];</span> <span class="na">j</span> <span class="err">!=</span> <span class="na">i</span><span class="err">;</span> <span class="na">j </span><span class="o">=</span> <span class="s">ptn[pos[ptn[row[i]]]])</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">swap</span><span class="err">(</span><span class="na">row</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">row</span><span class="err">[</span><span class="na">j</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">                <span class="na">swap</span><span class="err">(</span><span class="na">pos</span><span class="err">[</span><span class="na">row</span><span class="err">[</span><span class="na">i</span><span class="err">]],</span> <span class="na">pos</span><span class="err">[</span><span class="na">row</span><span class="err">[</span><span class="na">j</span><span class="err">]]);</span>
-</span></span><span class="line"><span class="cl">                <span class="na">res</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ptn</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">ptn</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]]]];</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ptn</span><span class="p">[</span><span class="n">pos</span><span class="p">[</span><span class="n">ptn</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]]]])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">swap</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">swap</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">pos</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">j</span><span class="p">]]);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array representing couples sitting in a row, where each person is represented by a unique integer, the task is to find the minimum number of swaps required to ensure that each couple sits next to each other.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Position Mapping</strong>:</p>
+<ul>
+<li>Create an array <code>pos</code> to store the current index of each person.</li>
+<li>Create an array <code>ptn</code> to define the desired pattern where couples should sit together (even indexed with the next index).</li>
+</ul>
+</li>
+<li>
+<p><strong>Swapping Logic</strong>:</p>
+<ul>
+<li>Iterate through the array. For each person, determine if they are sitting in the correct position.</li>
+<li>If not, swap them with their couple (using the <code>ptn</code> array to find the couple&rsquo;s expected position).</li>
+<li>Update the position array after each swap and increment the swap count.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Class</strong>:</p>
+<ul>
+<li><code>class Solution</code>: Contains the method for calculating the minimum swaps.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method</strong>:</p>
+<ul>
+<li><code>int minSwapsCouples(vector&lt;int&gt;&amp; row)</code>: This method implements the logic to find the minimum number of swaps needed for couples to sit together.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the size of the row array, as each person is processed once.</li>
+<li><strong>Space Complexity</strong>: O(n), for storing the position and pattern arrays.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

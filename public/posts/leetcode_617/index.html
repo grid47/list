@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 617: Merge Two Binary Trees · Yasir
+  Leetcode 617: Merge Two Binary Trees · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 617">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_617/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 617: Merge Two Binary Trees">
   <meta property="og:description" content="Solution to Leetcode 617">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-02-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-02-20T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-02-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-02-21T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-02-20T00:00:00Z">
-                February 20, 2023
+              <time datetime="2023-02-21T00:00:00Z">
+                February 21, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,38 +189,103 @@
         <p><a href="https://leetcode.com/problems/merge-two-binary-trees/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
-</span></span><span class="line"><span class="cl"> * struct TreeNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     TreeNode *left;
-</span></span><span class="line"><span class="cl"> *     TreeNode *right;
-</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    TreeNode* mergeTrees(TreeNode* r1, TreeNode* r2) {
-</span></span><span class="line"><span class="cl">        TreeNode* ans = new TreeNode(0);
-</span></span><span class="line"><span class="cl">        if(r1 == NULL <span class="err">&amp;&amp;</span> r2 == NULL) return NULL;
-</span></span><span class="line"><span class="cl">        if(r1 != NULL <span class="err">&amp;&amp;</span> r2 != NULL)
-</span></span><span class="line"><span class="cl">            ans-&gt;val = r1-&gt;val + r2-&gt;val;
-</span></span><span class="line"><span class="cl">        else if(r1 == NULL)
-</span></span><span class="line"><span class="cl">            ans-&gt;val = r2-&gt;val;
-</span></span><span class="line"><span class="cl">        else
-</span></span><span class="line"><span class="cl">            ans-&gt;val = r1-&gt;val;
-</span></span><span class="line"><span class="cl">        ans-&gt;left = mergeTrees(r1?r1-&gt;left:NULL, r2?r2-&gt;left:NULL);
-</span></span><span class="line"><span class="cl">        ans-&gt;right = mergeTrees(r1?r1-&gt;right:NULL, r2?r2-&gt;right:NULL);
-</span></span><span class="line"><span class="cl">        return ans;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">mergeTrees</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">r1</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">r1</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">r2</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">r1</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">r2</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">r1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">+</span> <span class="n">r2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">r1</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">r2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">r1</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">mergeTrees</span><span class="p">(</span><span class="n">r1</span><span class="o">?</span><span class="n">r1</span><span class="o">-&gt;</span><span class="nl">left</span><span class="p">:</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">r2</span><span class="o">?</span><span class="n">r2</span><span class="o">-&gt;</span><span class="nl">left</span><span class="p">:</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">mergeTrees</span><span class="p">(</span><span class="n">r1</span><span class="o">?</span><span class="n">r1</span><span class="o">-&gt;</span><span class="nl">right</span><span class="p">:</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">r2</span><span class="o">?</span><span class="n">r2</span><span class="o">-&gt;</span><span class="nl">right</span><span class="p">:</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two binary trees, merge them into a new binary tree. The merging process involves summing the values of overlapping nodes. If two nodes overlap, their values are summed. If only one of the trees has a node at a given position, that node is used as the node in the merged tree.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If both nodes are <code>NULL</code>, return <code>NULL</code>.</li>
+<li>If one of the nodes is <code>NULL</code>, return the other node.</li>
+<li>If both nodes are not <code>NULL</code>, create a new node with the sum of the values of both nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursion</strong>:</p>
+<ul>
+<li>Recursively merge the left children of both nodes.</li>
+<li>Recursively merge the right children of both nodes.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>mergeTrees</code> function takes two binary tree nodes (<code>r1</code> and <code>r2</code>).</li>
+<li>It creates a new node (<code>ans</code>) for the merged tree.</li>
+<li>Depending on the presence of <code>r1</code> and <code>r2</code>, it populates <code>ans-&gt;val</code>.</li>
+<li>It recursively merges the left and right subtrees.</li>
+<li>Finally, it returns the merged tree&rsquo;s root node.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the merged tree, as each node from both trees is processed exactly once.</li>
+<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree due to the recursion stack.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

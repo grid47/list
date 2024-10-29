@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 213: House Robber II · Yasir
+  Leetcode 213: House Robber II · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 213">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_213/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 213: House Robber II">
   <meta property="og:description" content="Solution to Leetcode 213">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-03-30T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-03-30T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-03-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-03-31T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-03-30T00:00:00Z">
-                March 30, 2024
+              <time datetime="2024-03-31T00:00:00Z">
+                March 31, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,35 +189,117 @@
         <p><a href="https://leetcode.com/problems/house-robber-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int rob(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">rob</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int n = nums.size();
-</span></span><span class="line"><span class="cl">        if(n == 1) return nums[0];
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dp(n, 0);
-</span></span><span class="line"><span class="cl">        dp[0] = 0;
-</span></span><span class="line"><span class="cl">        dp[1] = nums[0];
-</span></span><span class="line"><span class="cl">        for(int i = 2; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">max</span><span class="err">(</span><span class="na">dp</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">],</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">2</span><span class="err">]</span> <span class="err">+</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">r1 </span><span class="o">=</span> <span class="s">dp[n</span> <span class="na">-</span> <span class="na">1</span><span class="err">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">dp</span><span class="err">.</span><span class="na">resize</span><span class="err">(</span><span class="na">n</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">0</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">        <span class="na">dp</span><span class="err">[</span><span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">0</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">dp</span><span class="err">[</span><span class="na">2</span><span class="err">]</span> <span class="err">=</span> <span class="na">nums</span><span class="err">[</span><span class="na">1</span><span class="err">];</span>        
-</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">3;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">=</span> <span class="na">max</span><span class="err">(</span><span class="na">dp</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">],</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">2</span><span class="err">]</span> <span class="err">+</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]);</span>        
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>        
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">max</span><span class="err">(</span><span class="na">dp</span><span class="err">[</span><span class="na">n</span><span class="err">],</span> <span class="na">r1</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">r1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In a row of houses, each house has a certain amount of money hidden. The robber cannot rob two adjacent houses, as it will alert the police. Given that the houses are arranged in a circle, the robber cannot rob the first and last house simultaneously. The task is to find the maximum amount of money the robber can rob.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Programming</strong>: Use dynamic programming to keep track of the maximum amount of money that can be robbed up to each house.</p>
+</li>
+<li>
+<p><strong>Two Scenarios</strong>:</p>
+<ul>
+<li><strong>Case 1</strong>: Consider the scenario where the first house is robbed but the last house is not.</li>
+<li><strong>Case 2</strong>: Consider the scenario where the last house is robbed but the first house is not.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Array</strong>:</p>
+<ul>
+<li>Initialize a <code>dp</code> array where <code>dp[i]</code> represents the maximum amount of money that can be robbed from the first <code>i</code> houses.</li>
+<li>For each scenario, fill the <code>dp</code> array based on the recurrence relation:
+[
+dp[i] = \max(dp[i - 1], dp[i - 2] + \text{nums}[i - 1])
+]</li>
+<li>This means at house <code>i</code>, the robber can either:
+<ul>
+<li>Skip the house and take the maximum from the previous house.</li>
+<li>Rob the current house and add its value to the maximum from two houses back.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>: Return the maximum value between the two scenarios.</p>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>rob</strong>: The main function that calculates the maximum money that can be robbed:
+<ul>
+<li>If there&rsquo;s only one house, return its value directly.</li>
+<li>For the first scenario, create a <code>dp</code> array for houses from <code>0</code> to <code>n-2</code>.</li>
+<li>For the second scenario, resize the <code>dp</code> array to handle the houses from <code>1</code> to <code>n-1</code>.</li>
+<li>Calculate the maximum robbed amount for both scenarios and return the maximum of the two.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of houses, as the algorithm traverses the list of houses twice.</li>
+<li><strong>Space Complexity</strong>: (O(n)) due to the use of the <code>dp</code> array, which stores the maximum amounts for each house.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

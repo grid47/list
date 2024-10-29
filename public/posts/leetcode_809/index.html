@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 809: Expressive Words · Yasir
+  Leetcode 809: Expressive Words · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 809">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_809/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 809: Expressive Words">
   <meta property="og:description" content="Solution to Leetcode 809">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-08-12T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-08-12T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-08-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-08-13T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-08-12T00:00:00Z">
-                August 12, 2022
+              <time datetime="2022-08-13T00:00:00Z">
+                August 13, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,32 +189,139 @@
         <p><a href="https://leetcode.com/problems/expressive-words/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int expressiveWords(string s, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words) {
-</span></span><span class="line"><span class="cl">        int res = 0;
-</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>w : words)
-</span></span><span class="line"><span class="cl">            if(check(s, w))
-</span></span><span class="line"><span class="cl">                res++;
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">expressiveWords</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">w</span> <span class="p">:</span> <span class="n">words</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    bool check(string s, string w) {
-</span></span><span class="line"><span class="cl">        int n = s.size(), m = w.size(), j = 0;
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">j</span> <span class="err">&lt;</span> <span class="na">m</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">w</span><span class="err">[</span><span class="na">j</span><span class="err">])</span> <span class="na">j</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">else</span> <span class="na">if</span> <span class="err">(</span><span class="na">i</span> <span class="p">&gt;</span> 1 <span class="err">&amp;&amp;</span> s[i - 2] == s[i - 1] <span class="err">&amp;&amp;</span> s[i - 1] == s[i]);
-</span></span><span class="line"><span class="cl">            else if (i &gt; 0 <span class="err">&amp;&amp;</span> i <span class="p">&lt;</span> <span class="nt">n</span> <span class="na">-</span> <span class="na">1</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span> <span class="na">-1</span><span class="err">]</span> <span class="err">==</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">==</span> <span class="na">s</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span><span class="na">1</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">else</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">j </span><span class="o">=</span><span class="s">=</span> <span class="na">m</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">check</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">string</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">m</span> <span class="o">=</span> <span class="n">w</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">j</span> <span class="o">==</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string <code>s</code> and a list of words, the goal is to count how many of the words can be formed from <code>s</code> by stretching some characters. A character can be stretched if it appears consecutively in <code>s</code> at least three times.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Iterate Through Words</strong>:</p>
+<ul>
+<li>For each word in the list, check if it can be formed from <code>s</code> by calling the <code>check</code> function.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Function</strong>:</p>
+<ul>
+<li>Compare each character in <code>s</code> with the characters in the word <code>w</code>.</li>
+<li>Use two pointers, <code>i</code> for <code>s</code> and <code>j</code> for <code>w</code>, to traverse both strings.</li>
+<li>For each character in <code>s</code>:
+<ul>
+<li>If the current characters match, move both pointers forward.</li>
+<li>If characters do not match, check if the current character in <code>s</code> can be stretched:
+<ul>
+<li>If the previous two characters in <code>s</code> are the same as the current character, the character can be stretched.</li>
+<li>If the current character is part of a triplet (e.g., <code>aaa</code>), it can also be stretched.</li>
+<li>If neither condition holds, return <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>After traversing <code>s</code>, check if all characters in <code>w</code> have been matched.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>Return the count of words that can be formed from <code>s</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains methods to compute the count of expressive words.
+<ul>
+<li><code>int expressiveWords(string s, vector&lt;string&gt;&amp; words)</code>: The main function to count the expressive words.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>s</code>: The string to stretch.</li>
+<li><code>words</code>: A list of words to check against <code>s</code>.</li>
+</ul>
+</li>
+<li><strong>Returns</strong>: An integer representing the count of expressive words.</li>
+</ul>
+</li>
+<li><code>bool check(string s, string w)</code>: A helper function to check if a word can be formed by stretching <code>s</code>.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>s</code>: The string to stretch.</li>
+<li><code>w</code>: The word to check.</li>
+</ul>
+</li>
+<li><strong>Returns</strong>: A boolean indicating whether the word can be formed from <code>s</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n * m), where <code>n</code> is the length of <code>s</code> and <code>m</code> is the average length of words in the list, due to the nested iteration over the words.</li>
+<li><strong>Space Complexity</strong>: O(1), since no additional space is used other than variables for iteration.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 383: Ransom Note · Yasir
+  Leetcode 383: Ransom Note · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 383">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_383/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 383: Ransom Note">
   <meta property="og:description" content="Solution to Leetcode 383">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-10-12T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-10-12T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-10-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-10-13T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-10-12T00:00:00Z">
-                October 12, 2023
+              <time datetime="2023-10-13T00:00:00Z">
+                October 13, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,28 +189,101 @@
         <p><a href="https://leetcode.com/problems/ransom-note/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    bool canConstruct(string ransomNote, string magazine) {
-</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
-</span></span><span class="line"><span class="cl">        for(int x: magazine)
-</span></span><span class="line"><span class="cl">            mp[x]++;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">canConstruct</span><span class="p">(</span><span class="n">string</span> <span class="n">ransomNote</span><span class="p">,</span> <span class="n">string</span> <span class="n">magazine</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span><span class="p">:</span> <span class="n">magazine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int j = 0; j <span class="p">&lt;</span> <span class="nt">ransomNote.size</span><span class="err">();</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(!</span><span class="na">mp</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">ransomNote</span><span class="err">[</span><span class="na">j</span><span class="err">]))</span> <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">else</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">[</span><span class="na">ransomNote</span><span class="err">[</span><span class="na">j</span><span class="err">]]</span><span class="na">--</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">[</span><span class="na">ransomNote</span><span class="err">[</span><span class="na">j</span><span class="err">]]</span> <span class="err">==</span> <span class="na">0</span><span class="err">)</span> <span class="na">mp</span><span class="err">.</span><span class="na">erase</span><span class="err">(</span><span class="na">ransomNote</span><span class="err">[</span><span class="na">j</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ransomNote</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">ransomNote</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">[</span><span class="n">ransomNote</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">ransomNote</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">ransomNote</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two strings, <code>ransomNote</code> and <code>magazine</code>, determine if the <code>ransomNote</code> can be constructed using the letters from the <code>magazine</code>. Each letter in the magazine can only be used once in the ransom note.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a frequency count for the characters in the <code>magazine</code> string. The steps are as follows:</p>
+<ol>
+<li>
+<p><strong>Character Counting</strong>:</p>
+<ul>
+<li>Use a hash map (or <code>std::map</code> in C++) to count the occurrences of each character in the <code>magazine</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ransom Note Construction</strong>:</p>
+<ul>
+<li>Iterate through each character in the <code>ransomNote</code>.</li>
+<li>For each character, check if it exists in the frequency map.</li>
+<li>If it does, decrement its count in the map. If the count reaches zero, remove the character from the map.</li>
+<li>If a character in the <code>ransomNote</code> is not found in the map, return <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Completion Check</strong>:</p>
+<ul>
+<li>If all characters in <code>ransomNote</code> can be matched with those in <code>magazine</code>, return <code>true</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>canConstruct</code> function:
+<ul>
+<li>Initializes a map to count characters from <code>magazine</code>.</li>
+<li>Checks each character in <code>ransomNote</code> against the map and updates the counts accordingly.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(m + n), where <code>m</code> is the length of <code>magazine</code> and <code>n</code> is the length of <code>ransomNote</code>. This is because we process both strings once.</li>
+<li><strong>Space Complexity</strong>: O(1), as the space used by the map is constant with respect to the number of unique characters (limited to 26 for lowercase English letters).</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

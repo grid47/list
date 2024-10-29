@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 743: Network Delay Time · Yasir
+  Leetcode 743: Network Delay Time · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 743">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_743/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 743: Network Delay Time">
   <meta property="og:description" content="Solution to Leetcode 743">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-10-17T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-10-17T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-10-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-10-18T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-10-17T00:00:00Z">
-                October 17, 2022
+              <time datetime="2022-10-18T00:00:00Z">
+                October 18, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,40 +189,150 @@
         <p><a href="https://leetcode.com/problems/network-delay-time/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int networkDelayTime(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> times, int n, int k) {
-</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">map</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; mp;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">networkDelayTime</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">times</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">times.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">mp</span><span class="err">[</span><span class="na">times</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">]][</span><span class="na">times</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]]</span> <span class="err">=</span> <span class="na">times</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">2</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">times</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">priority_queue</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>, vector<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;, greater<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; pq;
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> vis(n + 1, 0);
-</span></span><span class="line"><span class="cl">        pq.push(make_pair(0, k));
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        while(!pq.empty()) {
-</span></span><span class="line"><span class="cl">            auto it = pq.top();
-</span></span><span class="line"><span class="cl">            pq.pop();
-</span></span><span class="line"><span class="cl">            if(vis[it.second]) continue;
-</span></span><span class="line"><span class="cl">            vis[it.second] = true;
-</span></span><span class="line"><span class="cl">            n--;
-</span></span><span class="line"><span class="cl">            if(n == 0) return it.first;
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            if(mp.count(it.second))
-</span></span><span class="line"><span class="cl">                for(auto [key, val]: mp[it.second]) {
-</span></span><span class="line"><span class="cl">                    pq.push(make_pair(val + it.first, key));
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return -1;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="p">[</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">]</span><span class="o">:</span> <span class="n">mp</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">key</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given a directed graph represented as an array of edges <code>times</code>, where each edge is a triplet <code>(u, v, w)</code> indicating that there is a directed edge from node <code>u</code> to node <code>v</code> with a weight (or time delay) of <code>w</code>. The goal is to determine the time it takes for a signal sent from a starting node <code>k</code> to reach all <code>n</code> nodes in the network.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>:</p>
+<ul>
+<li>Use a map of maps (adjacency list) to represent the directed graph. The outer map represents the source node, and the inner map contains destination nodes with their corresponding weights.</li>
+</ul>
+</li>
+<li>
+<p><strong>Priority Queue</strong>:</p>
+<ul>
+<li>Use a min-heap (priority queue) to process nodes based on the current known minimum time to reach each node.</li>
+<li>The queue stores pairs of the form <code>(current time, node)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dijkstra&rsquo;s Algorithm</strong>:</p>
+<ul>
+<li>Initialize the priority queue with the starting node <code>k</code> and a time of <code>0</code>.</li>
+<li>Maintain a visited array to track which nodes have been processed.</li>
+<li>While the priority queue is not empty:
+<ul>
+<li>Pop the node with the smallest time.</li>
+<li>If the node has already been visited, skip it.</li>
+<li>Mark the node as visited and decrement the remaining nodes to visit.</li>
+<li>If all nodes are visited, return the current time.</li>
+<li>For each neighboring node, push the updated time into the priority queue.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>If not all nodes are reachable, return <code>-1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(E log V), where E is the number of edges and V is the number of nodes. The logarithmic factor comes from the priority queue operations.</li>
+<li><strong>Space Complexity</strong>: O(V + E) for storing the graph and the priority queue.</li>
+</ul>
+<h3 id="example">
+  Example
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>For <code>times = [[2,1,1],[2,3,1],[3,4,1]]</code>, <code>n = 4</code>, and <code>k = 2</code>:</p>
+<ul>
+<li>Start from node <code>2</code>:
+<ul>
+<li>Signal reaches <code>1</code> in <code>1</code> time unit.</li>
+<li>Signal reaches <code>3</code> in <code>1</code> time unit.</li>
+<li>Signal reaches <code>4</code> in <code>2</code> time units (from <code>3</code>).</li>
+</ul>
+</li>
+<li>Total time for all nodes to receive the signal is <code>2</code>.</li>
+</ul>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Class</strong>:</p>
+<ul>
+<li><code>class Solution</code>: Contains the main method for processing the graph.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method</strong>:</p>
+<ul>
+<li><code>int networkDelayTime(vector&lt;vector&lt;int&gt;&gt;&amp; times, int n, int k)</code>: Implements the Dijkstra&rsquo;s algorithm to calculate the maximum delay for the signal to reach all nodes.</li>
+</ul>
+</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 725: Split Linked List in Parts · Yasir
+  Leetcode 725: Split Linked List in Parts · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 725">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_725/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 725: Split Linked List in Parts">
   <meta property="og:description" content="Solution to Leetcode 725">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-11-04T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-11-04T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-11-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-11-05T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-11-04T00:00:00Z">
-                November 4, 2022
+              <time datetime="2022-11-05T00:00:00Z">
+                November 5, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,59 +189,141 @@
         <p><a href="https://leetcode.com/problems/split-linked-list-in-parts/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for singly-linked list.
-</span></span><span class="line"><span class="cl"> * struct ListNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     ListNode *next;
-</span></span><span class="line"><span class="cl"> *     ListNode() : val(0), next(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     ListNode(int x) : val(x), next(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">ListNode</span><span class="err">*</span><span class="p">&gt;</span> splitListToParts(ListNode* head, int k) {
-</span></span><span class="line"><span class="cl">        int len = 0;
-</span></span><span class="line"><span class="cl">        ListNode* temp = head;
-</span></span><span class="line"><span class="cl">        while(temp) {
-</span></span><span class="line"><span class="cl">            len++;
-</span></span><span class="line"><span class="cl">            temp = temp-&gt;next;
-</span></span><span class="line"><span class="cl">        }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for singly-linked list.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct ListNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode *next;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode() : val(0), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x) : val(x), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">*&gt;</span> <span class="n">splitListToParts</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        int numNodes = len/k;
-</span></span><span class="line"><span class="cl">        int ext = len % k;
-</span></span><span class="line"><span class="cl">        int i = 0;
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">ListNode</span><span class="err">*</span><span class="p">&gt;</span> res;
-</span></span><span class="line"><span class="cl">        temp = head;
-</span></span><span class="line"><span class="cl">        while(temp) {
-</span></span><span class="line"><span class="cl">            res.push_back(temp);
-</span></span><span class="line"><span class="cl">            int curLen = 1;
-</span></span><span class="line"><span class="cl">            while(curLen <span class="p">&lt;</span> <span class="nt">numNodes</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">temp </span><span class="o">=</span>  <span class="s">temp-</span><span class="p">&gt;</span>next;
-</span></span><span class="line"><span class="cl">                curLen++;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            if(ext &gt; 0 <span class="err">&amp;&amp;</span> len &gt; k) {
-</span></span><span class="line"><span class="cl">                temp = temp-&gt;next;
-</span></span><span class="line"><span class="cl">                ext--;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            ListNode* x = temp-&gt;next;
-</span></span><span class="line"><span class="cl">            temp-&gt;next = NULL;
-</span></span><span class="line"><span class="cl">            temp = x;
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">numNodes</span> <span class="o">=</span> <span class="n">len</span><span class="o">/</span><span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">len</span> <span class="o">%</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">*&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">temp</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">curLen</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">curLen</span> <span class="o">&lt;</span> <span class="n">numNodes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">temp</span> <span class="o">=</span>  <span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">curLen</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">ext</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">len</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ext</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ListNode</span><span class="o">*</span> <span class="n">x</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        while(len <span class="p">&lt;</span> <span class="nt">k</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">res</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">NULL</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">len</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given the head of a singly linked list and an integer <code>k</code>, split the linked list into <code>k</code> consecutive parts. The length of each part should be as equal as possible. The parts should be returned as an array of ListNode pointers. If the linked list has fewer nodes than <code>k</code>, some parts should be <code>NULL</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Calculate Length</strong>:</p>
+<ul>
+<li>Traverse the linked list to determine its total length <code>len</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine Size of Each Part</strong>:</p>
+<ul>
+<li>Calculate the number of nodes in each part as <code>numNodes = len / k</code>.</li>
+<li>Calculate the number of extra nodes as <code>ext = len % k</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Split the List</strong>:</p>
+<ul>
+<li>Iterate through the linked list:
+<ul>
+<li>For each part, store the starting node in the result vector.</li>
+<li>Traverse <code>numNodes</code> times to find the end of the current part.</li>
+<li>If there are remaining extra nodes (<code>ext &gt; 0</code>), include one more node in the current part and decrement <code>ext</code>.</li>
+<li>Disconnect the current part from the rest of the list by setting the <code>next</code> pointer to <code>NULL</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle Insufficient Nodes</strong>:</p>
+<ul>
+<li>If the total length of the linked list is less than <code>k</code>, fill the remaining parts with <code>NULL</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Function</strong>:
+<ul>
+<li><code>vector&lt;ListNode*&gt; splitListToParts(ListNode* head, int k)</code>: Splits the linked list into <code>k</code> parts.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the linked list, since we traverse the list to calculate its length and then again to split it.</li>
+<li><strong>Space Complexity</strong>: O(K), where K is the number of parts, as we store the parts in a vector.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

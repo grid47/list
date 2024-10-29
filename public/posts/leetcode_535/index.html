@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 535: Encode and Decode TinyURL · Yasir
+  Leetcode 535: Encode and Decode TinyURL · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 535">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_535/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 535: Encode and Decode TinyURL">
   <meta property="og:description" content="Solution to Leetcode 535">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-05-13T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-05-13T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-05-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-05-14T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-05-13T00:00:00Z">
-                May 13, 2023
+              <time datetime="2023-05-14T00:00:00Z">
+                May 14, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,42 +189,115 @@
         <p><a href="https://leetcode.com/problems/encode-and-decode-tinyurl/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">    const string charset = &#34;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#34;;
-</span></span><span class="line"><span class="cl">    random_device rd;
-</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span> url_code, code_url;
-</span></span><span class="line"><span class="cl">public:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">string</span> <span class="n">charset</span> <span class="o">=</span> <span class="s">&#34;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">random_device</span> <span class="n">rd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">url_code</span><span class="p">,</span> <span class="n">code_url</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    // Encodes a URL to a shortened URL.
-</span></span><span class="line"><span class="cl">    string encode(string longUrl) {
-</span></span><span class="line"><span class="cl">        string code;
-</span></span><span class="line"><span class="cl">        if(!url_code.count(longUrl)) {
-</span></span><span class="line"><span class="cl">            for(int i = 0; i <span class="p">&lt;</span> <span class="nt">6</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">code</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">charset</span><span class="err">[</span><span class="na">rd</span><span class="err">()%</span><span class="na">charset</span><span class="err">.</span><span class="na">size</span><span class="err">()]);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">url_code</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>(longUrl, code));
-</span></span><span class="line"><span class="cl">            code_url.insert(pair<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">string</span><span class="p">&gt;</span>(code, longUrl));                
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            code = url_code[longUrl];
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return &#34;http://tinyurl.com/&#34; + code;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="c1">// Encodes a URL to a shortened URL.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">string</span> <span class="n">encode</span><span class="p">(</span><span class="n">string</span> <span class="n">longUrl</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">code</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">url_code</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">longUrl</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">code</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">charset</span><span class="p">[</span><span class="n">rd</span><span class="p">()</span><span class="o">%</span><span class="n">charset</span><span class="p">.</span><span class="n">size</span><span class="p">()]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">url_code</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">longUrl</span><span class="p">,</span> <span class="n">code</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code_url</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">longUrl</span><span class="p">));</span>                
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">code</span> <span class="o">=</span> <span class="n">url_code</span><span class="p">[</span><span class="n">longUrl</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;http://tinyurl.com/&#34;</span> <span class="o">+</span> <span class="n">code</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    // Decodes a shortened URL to its original URL.
-</span></span><span class="line"><span class="cl">    string decode(string shortUrl) {
-</span></span><span class="line"><span class="cl">        if(shortUrl.size() != 25 || !code_url.count(shortUrl.substr(19,6)))
-</span></span><span class="line"><span class="cl">        return &#34;&#34;;
-</span></span><span class="line"><span class="cl">        return code_url[shortUrl.substr(19,6)];
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">    <span class="c1">// Decodes a shortened URL to its original URL.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">string</span> <span class="nf">decode</span><span class="p">(</span><span class="n">string</span> <span class="n">shortUrl</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">shortUrl</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">25</span> <span class="o">||</span> <span class="o">!</span><span class="n">code_url</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">shortUrl</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span><span class="mi">6</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">code_url</span><span class="p">[</span><span class="n">shortUrl</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span><span class="mi">6</span><span class="p">)];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">// Your Solution object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl">// Solution solution;
-</span></span><span class="line"><span class="cl">// solution.decode(solution.encode(url));</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="c1">// Your Solution object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Solution solution;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// solution.decode(solution.encode(url));
+</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Design a URL shortening service that allows for encoding a long URL into a short URL and decoding the short URL back into the original long URL.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Data Structures</strong>:</p>
+<ul>
+<li>Use two hash maps (<code>url_code</code> and <code>code_url</code>) to store the mapping between long URLs and their corresponding short codes, and vice versa.</li>
+<li>Use a constant string <code>charset</code> that contains all valid characters for the short URL.</li>
+</ul>
+</li>
+<li>
+<p><strong>Encoding Process</strong>:</p>
+<ul>
+<li>Generate a random 6-character code from <code>charset</code> using <code>random_device</code>.</li>
+<li>Check if the long URL is already present in <code>url_code</code>. If not, insert it with its generated code.</li>
+<li>If the URL already exists, simply retrieve the corresponding code.</li>
+<li>Return the full short URL by concatenating the base URL with the generated code.</li>
+</ul>
+</li>
+<li>
+<p><strong>Decoding Process</strong>:</p>
+<ul>
+<li>Extract the 6-character code from the given short URL.</li>
+<li>Check if this code exists in <code>code_url</code>. If it does, return the corresponding long URL.</li>
+<li>If the code does not exist or if the URL format is invalid, return an empty string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The constructor initializes the mappings and defines the character set.</li>
+<li>The <code>encode</code> function generates a unique code and returns the short URL.</li>
+<li>The <code>decode</code> function retrieves the original URL from the short code.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(1) for both encoding and decoding operations on average, as hashmap operations are generally O(1).</li>
+<li><strong>Space Complexity</strong>: O(n), where n is the number of unique long URLs stored, as we need to keep a mapping for each URL.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

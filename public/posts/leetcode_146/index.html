@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 146: LRU Cache · Yasir
+  Leetcode 146: LRU Cache · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 146">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_146/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 146: LRU Cache">
   <meta property="og:description" content="Solution to Leetcode 146">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-06-05T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-06-05T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-06-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-06-06T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-06-05T00:00:00Z">
-                June 5, 2024
+              <time datetime="2024-06-06T00:00:00Z">
+                June 6, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,51 +189,160 @@
         <p><a href="https://leetcode.com/problems/lru-cache/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class LRUCache {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">list</span><span class="err">&lt;</span><span class="na">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt;::iterator&gt; mp;
-</span></span><span class="line"><span class="cl">    list<span class="p">&lt;</span><span class="nt">pair</span><span class="err">&lt;</span><span class="na">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span>&gt; q;
-</span></span><span class="line"><span class="cl">    int cap;
-</span></span><span class="line"><span class="cl">    LRUCache(int capacity) {
-</span></span><span class="line"><span class="cl">        cap = capacity;
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LRUCache</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">list</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;::</span><span class="n">iterator</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">cap</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LRUCache</span><span class="p">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cap</span> <span class="o">=</span> <span class="n">capacity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int get(int key) {
-</span></span><span class="line"><span class="cl">        if(!mp.count(key)) return -1;
-</span></span><span class="line"><span class="cl">        auto it = *mp[key];
-</span></span><span class="line"><span class="cl">        q.erase(mp[key]);
-</span></span><span class="line"><span class="cl">        q.push_front(make_pair(key, it.second));
-</span></span><span class="line"><span class="cl">        mp[key] = q.begin();
-</span></span><span class="line"><span class="cl">        return it.second;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="o">*</span><span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void put(int key, int value) {
-</span></span><span class="line"><span class="cl">        if(mp.count(key)) {
-</span></span><span class="line"><span class="cl">            q.erase(mp[key]);
-</span></span><span class="line"><span class="cl">            q.push_front(make_pair(key, value));
-</span></span><span class="line"><span class="cl">            mp[key] = q.begin();
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            q.push_front(make_pair(key, value));
-</span></span><span class="line"><span class="cl">            mp[key] = q.begin();
-</span></span><span class="line"><span class="cl">            if(q.size() &gt; cap) {
-</span></span><span class="line"><span class="cl">                mp.erase(q.back().first);
-</span></span><span class="line"><span class="cl">                q.pop_back();
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">put</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">cap</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">first</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Your LRUCache object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl"> * LRUCache* obj = new LRUCache(capacity);
-</span></span><span class="line"><span class="cl"> * int param_1 = obj-&gt;get(key);
-</span></span><span class="line"><span class="cl"> * obj-&gt;put(key,value);
-</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your LRUCache object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * LRUCache* obj = new LRUCache(capacity);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_1 = obj-&gt;get(key);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;put(key,value);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Design a data structure that implements an LRU cache. The cache should support the following operations:</p>
+<ul>
+<li><code>get(key)</code>: Retrieve the value of the key if the key exists in the cache. Otherwise, return -1.</li>
+<li><code>put(key, value)</code>: Update the value of the key if it exists. If the key does not exist, add the key-value pair to the cache. If the cache reaches its capacity, it should invalidate the least recently used item before inserting a new item.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Data Structures</strong>:</p>
+<ul>
+<li>Use a <strong>map</strong> to store the key and an iterator pointing to its position in the list.</li>
+<li>Use a <strong>doubly linked list</strong> (implemented as a list of pairs) to maintain the order of usage. The front of the list represents the most recently used item, and the back represents the least recently used item.</li>
+</ul>
+</li>
+<li>
+<p><strong>Operations</strong>:</p>
+<ul>
+<li><strong>Get</strong>:
+<ul>
+<li>If the key is not found, return -1.</li>
+<li>If the key is found, move the corresponding item to the front of the list (marking it as most recently used) and return its value.</li>
+</ul>
+</li>
+<li><strong>Put</strong>:
+<ul>
+<li>If the key already exists, update its value and move it to the front of the list.</li>
+<li>If the key does not exist, add it to the front of the list.</li>
+<li>If adding the new key-value pair exceeds the cache capacity, remove the least recently used item (back of the list).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Line 1-2</strong>: Define the <code>LRUCache</code> class containing necessary data structures:</p>
+<ul>
+<li><code>mp</code>: A map that associates keys with iterators pointing to their positions in the list.</li>
+<li><code>q</code>: A doubly linked list (using a list of pairs) to store key-value pairs.</li>
+<li><code>cap</code>: An integer representing the cache&rsquo;s capacity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Line 3-10</strong>: Constructor to initialize the cache with a specified capacity.</p>
+</li>
+<li>
+<p><strong>Line 12-21</strong>: Implement the <code>get</code> function:</p>
+<ul>
+<li>Check if the key exists in the map.</li>
+<li>If not, return -1.</li>
+<li>If it exists, retrieve the iterator, erase the current entry from the list, push it to the front, update the map, and return the value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Line 23-38</strong>: Implement the <code>put</code> function:</p>
+<ul>
+<li>If the key already exists, erase it from the list, push the new value to the front, and update the map.</li>
+<li>If the key does not exist, push it to the front and update the map.</li>
+<li>If the cache exceeds capacity, erase the least recently used item from both the list and the map.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><code>get</code>: (O(1)) since both map lookups and list operations are constant time.</li>
+<li><code>put</code>: (O(1)) for the same reasons.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(C)), where (C) is the capacity of the cache, as we store up to (C) key-value pairs.</p>
+</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

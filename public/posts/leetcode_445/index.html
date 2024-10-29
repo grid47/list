@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 445: Add Two Numbers II · Yasir
+  Leetcode 445: Add Two Numbers II · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 445">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_445/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 445: Add Two Numbers II">
   <meta property="og:description" content="Solution to Leetcode 445">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-08-11T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-08-11T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-08-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-08-12T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-08-11T00:00:00Z">
-                August 11, 2023
+              <time datetime="2023-08-12T00:00:00Z">
+                August 12, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,69 +189,177 @@
         <p><a href="https://leetcode.com/problems/add-two-numbers-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for singly-linked list.
-</span></span><span class="line"><span class="cl"> * struct ListNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     ListNode *next;
-</span></span><span class="line"><span class="cl"> *     ListNode() : val(0), next(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     ListNode(int x) : val(x), next(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> s1, s2;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for singly-linked list.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct ListNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode *next;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode() : val(0), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x) : val(x), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ListNode</span><span class="o">*</span> <span class="n">addTwoNumbers</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">l1</span><span class="p">,</span> <span class="n">ListNode</span><span class="o">*</span> <span class="n">l2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        while(l1) {
-</span></span><span class="line"><span class="cl">            s1.push(l1-&gt;val);
-</span></span><span class="line"><span class="cl">            l1 = l1-&gt;next;
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">l1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        while(l2) {
-</span></span><span class="line"><span class="cl">            s2.push(l2-&gt;val);
-</span></span><span class="line"><span class="cl">            l2 = l2-&gt;next;
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s2</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">l2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int cry = 0;
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cry</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        ListNode* node = NULL, *prv = NULL;
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">*</span><span class="n">prv</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        while(!s1.empty() || !s2.empty()) {
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">s1</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">s2</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            if(!s1.empty()) {
-</span></span><span class="line"><span class="cl">                cry += s1.top();
-</span></span><span class="line"><span class="cl">                s1.pop();
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s1</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cry</span> <span class="o">+=</span> <span class="n">s1</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">s1</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            if(!s2.empty()) {
-</span></span><span class="line"><span class="cl">                cry += s2.top();
-</span></span><span class="line"><span class="cl">                s2.pop();
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s2</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cry</span> <span class="o">+=</span> <span class="n">s2</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">s2</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            node = new ListNode(cry % 10);
-</span></span><span class="line"><span class="cl">            node-&gt;next = prv;
+</span></span><span class="line"><span class="cl">            <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">cry</span> <span class="o">%</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">prv</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            prv = node;
-</span></span><span class="line"><span class="cl">            cry /= 10;
+</span></span><span class="line"><span class="cl">            <span class="n">prv</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cry</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(cry != 0) {
-</span></span><span class="line"><span class="cl">            node = new ListNode(cry %10);
-</span></span><span class="line"><span class="cl">            node-&gt;next = prv;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cry</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">cry</span> <span class="o">%</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">prv</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return node;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return it as a linked list.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Using Stacks</strong>:</p>
+<ul>
+<li>Utilize two stacks to store the digits of both linked lists. This helps in reversing the order since the linked list represents numbers in reverse.</li>
+</ul>
+</li>
+<li>
+<p><strong>Traverse the Lists</strong>:</p>
+<ul>
+<li>Traverse both linked lists (<code>l1</code> and <code>l2</code>), pushing each digit onto its respective stack until reaching the end of both lists.</li>
+</ul>
+</li>
+<li>
+<p><strong>Addition Logic</strong>:</p>
+<ul>
+<li>Initialize a carry variable (<code>cry</code>) to handle sums that exceed 10.</li>
+<li>While either stack is not empty, pop elements from both stacks (if available) and add them along with the carry.</li>
+<li>Create a new node for the result list with the value of the sum modulo 10 (to get the last digit) and set it to point to the previous node (to maintain the reversed order).</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Remaining Carry</strong>:</p>
+<ul>
+<li>After processing both stacks, if there’s a remaining carry, create a new node with the carry value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>Return the head of the newly formed linked list, which represents the sum.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create two stacks, <code>s1</code> and <code>s2</code>, to store the digits from <code>l1</code> and <code>l2</code>, respectively.</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the Stacks</strong>:</p>
+<ul>
+<li>Use a while loop to fill <code>s1</code> with digits from <code>l1</code> and <code>s2</code> with digits from <code>l2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adding the Numbers</strong>:</p>
+<ul>
+<li>Create a pointer <code>prv</code> to build the resulting linked list in reverse order.</li>
+<li>Use another while loop to pop digits from both stacks and compute the total sum for each position, updating <code>cry</code> accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Carry Check</strong>:</p>
+<ul>
+<li>If there’s any carry left after processing both stacks, create a new node for the carry.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>The head of the resulting linked list is returned, which represents the sum of the two numbers.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(max(m, n)), where <code>m</code> and <code>n</code> are the lengths of the two linked lists, as we traverse both lists once.</li>
+<li><strong>Space Complexity</strong>: O(m + n), since we store all digits in stacks.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

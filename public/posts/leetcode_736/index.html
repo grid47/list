@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 736: Parse Lisp Expression · Yasir
+  Leetcode 736: Parse Lisp Expression · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 736">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_736/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 736: Parse Lisp Expression">
   <meta property="og:description" content="Solution to Leetcode 736">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-10-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-10-24T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-10-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-10-25T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-10-24T00:00:00Z">
-                October 24, 2022
+              <time datetime="2022-10-25T00:00:00Z">
+                October 25, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,69 +189,154 @@
         <p><a href="https://leetcode.com/problems/parse-lisp-expression/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int evaluate(string expression) {
-</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span> myMap;
-</span></span><span class="line"><span class="cl">        return help(expression,myMap);
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">string</span> <span class="n">expression</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">myMap</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">help</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span><span class="n">myMap</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int help(string expression,unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span> myMap) {
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">help</span><span class="p">(</span><span class="n">string</span> <span class="n">expression</span><span class="p">,</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">myMap</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        if ((expression[0] == &#39;-&#39;) || (expression[0] &gt;= &#39;0&#39; <span class="err">&amp;&amp;</span> expression[0] <span class="err">&lt;</span>= &#39;9&#39;))
-</span></span><span class="line"><span class="cl">            return stoi(expression);
-</span></span><span class="line"><span class="cl">        else if (expression[0] != &#39;(&#39;)
-</span></span><span class="line"><span class="cl">            return myMap[expression];
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">((</span><span class="n">expression</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">expression</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">expression</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="sc">&#39;9&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">stoi</span><span class="p">(</span><span class="n">expression</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">expression</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;(&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">myMap</span><span class="p">[</span><span class="n">expression</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        string s = expression.substr(1,expression.size()-2);
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">expression</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">expression</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        int start = 0;
-</span></span><span class="line"><span class="cl">        string word = parse(s,start);
-</span></span><span class="line"><span class="cl">        if (word == &#34;let&#34;) {
-</span></span><span class="line"><span class="cl">            while (true) {
-</span></span><span class="line"><span class="cl">                string variable = parse(s,start);
-</span></span><span class="line"><span class="cl">                //if there is no more expression, simply evaluate the variable
-</span></span><span class="line"><span class="cl">                if (start &gt; s.size())
-</span></span><span class="line"><span class="cl">                    return help(variable,myMap);
-</span></span><span class="line"><span class="cl">                string temp = parse(s,start);
-</span></span><span class="line"><span class="cl">                myMap[variable] = help(temp,myMap);                    
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">word</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">word</span> <span class="o">==</span> <span class="s">&#34;let&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">string</span> <span class="n">variable</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//if there is no more expression, simply evaluate the variable
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">start</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="n">help</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span><span class="n">myMap</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">string</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">myMap</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span> <span class="o">=</span> <span class="n">help</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="n">myMap</span><span class="p">);</span>                    
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        else if (word == &#34;add&#34;) 
-</span></span><span class="line"><span class="cl">            return help(parse(s,start),myMap) + help(parse(s,start),myMap);
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">word</span> <span class="o">==</span> <span class="s">&#34;add&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">help</span><span class="p">(</span><span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="p">),</span><span class="n">myMap</span><span class="p">)</span> <span class="o">+</span> <span class="n">help</span><span class="p">(</span><span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="p">),</span><span class="n">myMap</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        else if (word == &#34;mult&#34;) 
-</span></span><span class="line"><span class="cl">            return help(parse(s,start),myMap) * help(parse(s,start),myMap);
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">word</span> <span class="o">==</span> <span class="s">&#34;mult&#34;</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">help</span><span class="p">(</span><span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="p">),</span><span class="n">myMap</span><span class="p">)</span> <span class="o">*</span> <span class="n">help</span><span class="p">(</span><span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">start</span><span class="p">),</span><span class="n">myMap</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        return 0;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    //function to seperate each expression
-</span></span><span class="line"><span class="cl">    string parse(string <span class="err">&amp;</span>s,int <span class="err">&amp;</span>start) {
-</span></span><span class="line"><span class="cl">        int end = start+1, temp = start, count = 1;
-</span></span><span class="line"><span class="cl">        if (s[start] == &#39;(&#39;) {
-</span></span><span class="line"><span class="cl">            while (count != 0) {
-</span></span><span class="line"><span class="cl">                if (s[end] == &#39;(&#39;)
-</span></span><span class="line"><span class="cl">                    count++;
-</span></span><span class="line"><span class="cl">                else if (s[end] == &#39;)&#39;)
-</span></span><span class="line"><span class="cl">                    count--;
-</span></span><span class="line"><span class="cl">                end++;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        else {
-</span></span><span class="line"><span class="cl">            while (end <span class="p">&lt;</span> <span class="nt">s.size</span><span class="err">()</span> <span class="err">&amp;&amp;</span> <span class="na">s</span><span class="err">[</span><span class="na">end</span><span class="err">]</span> <span class="err">!=</span> <span class="err">&#39;</span> <span class="err">&#39;)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">end</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">start </span><span class="o">=</span> <span class="s">end+1;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">s</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">temp</span><span class="err">,</span><span class="na">end-temp</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="c1">//function to seperate each expression
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">string</span> <span class="nf">parse</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">start</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="n">start</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">start</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;(&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;(&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;)&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">count</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">end</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">end</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">start</span> <span class="o">=</span> <span class="n">end</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="n">end</span><span class="o">-</span><span class="n">temp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Implement a function that evaluates a nested mathematical expression containing variables, addition, multiplication, and assignment. The expressions follow the format:</p>
+<ul>
+<li><code>&quot;let var1 value1 ... varN valueN expr&quot;</code></li>
+<li><code>&quot;add expr1 expr2&quot;</code></li>
+<li><code>&quot;mult expr1 expr2&quot;</code></li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Recursive Evaluation</strong>:</p>
+<ul>
+<li>Use a helper function <code>help</code> to recursively evaluate the expression.</li>
+<li>Maintain a map to store the values of variables.</li>
+</ul>
+</li>
+<li>
+<p><strong>Parsing Expressions</strong>:</p>
+<ul>
+<li>For expressions starting with <code>let</code>, store variable values and evaluate the rest.</li>
+<li>For <code>add</code> and <code>mult</code>, recursively evaluate the two expressions and perform the respective operation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If the expression is a number or a variable (not in parentheses), return its value directly.</li>
+<li>If the expression is enclosed in parentheses, extract the inner expression and process it.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Class</strong>:</p>
+<ul>
+<li><code>class Solution</code>: Contains the main method for evaluation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Methods</strong>:</p>
+<ul>
+<li><code>int evaluate(string expression)</code>: Initiates the evaluation by calling <code>help</code>.</li>
+<li><code>int help(string expression, unordered_map&lt;string,int&gt; myMap)</code>: Evaluates the expression recursively.</li>
+<li><code>string parse(string &amp;s, int &amp;start)</code>: Helper function to extract individual tokens from the expression string.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of characters in the expression, due to parsing and evaluating each character.</li>
+<li><strong>Space Complexity</strong>: O(V), where V is the number of unique variables stored in the map.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

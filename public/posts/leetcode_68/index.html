@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 68: Text Justification · Yasir
+  Leetcode 68: Text Justification · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 68">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_68/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 68: Text Justification">
   <meta property="og:description" content="Solution to Leetcode 68">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-08-22T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-08-22T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-08-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-08-23T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-08-22T00:00:00Z">
-                August 22, 2024
+              <time datetime="2024-08-23T00:00:00Z">
+                August 23, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,51 +189,133 @@
         <p><a href="https://leetcode.com/problems/text-justification/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> fullJustify(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words, int maxWidth) {
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> res;
-</span></span><span class="line"><span class="cl">        const int n = words.size();
-</span></span><span class="line"><span class="cl">        int begin = 0, len = 0;
-</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span> <span class="err">(</span><span class="na">len</span> <span class="err">+</span> <span class="na">words</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">size</span><span class="err">()</span> <span class="err">+</span> <span class="err">(</span><span class="na">i</span> <span class="na">-</span> <span class="na">begin</span><span class="err">)</span> <span class="p">&gt;</span> maxWidth) {
-</span></span><span class="line"><span class="cl">                res.emplace_back(connect(words, maxWidth, begin, i, len, false));
-</span></span><span class="line"><span class="cl">                begin = i;
-</span></span><span class="line"><span class="cl">                len = 0;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            len += words[i].size();
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        res.emplace_back(connect(words, maxWidth, begin, n, len, true));
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">private:
-</span></span><span class="line"><span class="cl">    string connect(const vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> words, int maxWidth, int begin, int end, int len, bool is_last) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">fullJustify</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxWidth</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">len</span> <span class="o">+</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">begin</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">maxWidth</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">maxWidth</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="nb">false</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="n">begin</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">len</span> <span class="o">+=</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">connect</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">maxWidth</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="nb">true</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">connect</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxWidth</span><span class="p">,</span> <span class="kt">int</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">is_last</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        string s;
-</span></span><span class="line"><span class="cl">        int n = end - begin;
-</span></span><span class="line"><span class="cl">        for (int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">s</span> <span class="err">+=</span> <span class="na">words</span><span class="err">[</span><span class="na">begin</span> <span class="err">+</span> <span class="na">i</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">addSpaces</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">n</span> <span class="na">-</span> <span class="na">1</span><span class="err">,</span> <span class="na">maxWidth</span> <span class="na">-</span> <span class="na">len</span><span class="err">,</span> <span class="na">is_last</span><span class="err">,</span> <span class="err">&amp;</span><span class="na">s</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">begin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">+=</span> <span class="n">words</span><span class="p">[</span><span class="n">begin</span> <span class="o">+</span> <span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">addSpaces</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxWidth</span> <span class="o">-</span> <span class="n">len</span><span class="p">,</span> <span class="n">is_last</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="na">if</span> <span class="err">(</span><span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="err">&lt;</span> <span class="na">maxWidth</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">s</span><span class="err">.</span><span class="na">append</span><span class="err">(</span><span class="na">maxWidth</span> <span class="na">-</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">(),</span> <span class="err">&#39;</span> <span class="err">&#39;);</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxWidth</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">maxWidth</span> <span class="o">-</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="sc">&#39; &#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">s</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl">    <span class="na">void</span> <span class="na">addSpaces</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="err">,</span> <span class="na">int</span> <span class="na">spaceCnt</span><span class="err">,</span> <span class="na">int</span> <span class="na">maxWidth</span><span class="err">,</span> <span class="na">bool</span> <span class="na">is_last</span><span class="err">,</span> <span class="na">string</span> <span class="err">*</span><span class="na">s</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">        <span class="na">if</span> <span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">spaceCnt</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">spaces </span><span class="o">=</span> <span class="s">is_last</span> <span class="err">?</span> <span class="na">1</span> <span class="na">:</span> <span class="na">maxWidth</span> <span class="err">/</span> <span class="na">spaceCnt</span> <span class="err">+</span> <span class="err">(</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">maxWidth</span> <span class="err">%</span> <span class="na">spaceCnt</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">s-</span><span class="p">&gt;</span>append(spaces, &#39; &#39;);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">addSpaces</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">spaceCnt</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxWidth</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">is_last</span><span class="p">,</span> <span class="n">string</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">spaceCnt</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">spaces</span> <span class="o">=</span> <span class="n">is_last</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">maxWidth</span> <span class="o">/</span> <span class="n">spaceCnt</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">maxWidth</span> <span class="o">%</span> <span class="n">spaceCnt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="o">-&gt;</span><span class="n">append</span><span class="p">(</span><span class="n">spaces</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a list of words and a maximum width for a line, format the text so that each line has exactly <code>maxWidth</code> characters. Each line should be fully justified, meaning that extra spaces should be distributed evenly among the words.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialize Variables</strong>: Create a result vector to store the formatted lines, and initialize variables for tracking the starting index of the current line (<code>begin</code>) and the cumulative length of words in the current line (<code>len</code>).</li>
+<li><strong>Iterate Over Words</strong>: Loop through each word in the input:
+<ul>
+<li>If adding the current word exceeds the <code>maxWidth</code>, call the helper function to create a justified line from <code>begin</code> to the current word, then reset <code>begin</code> and <code>len</code>.</li>
+<li>Add the current word&rsquo;s length to <code>len</code>.</li>
+</ul>
+</li>
+<li><strong>Handle Last Line</strong>: After the loop, handle the last line differently to ensure it is left-justified (spaces added only at the end).</li>
+<li><strong>Justification Logic</strong>: Use a helper function to create a justified string from a range of words:
+<ul>
+<li>Calculate the total number of spaces needed and distribute them evenly between the words. If there are leftover spaces, distribute them from the leftmost gap.</li>
+<li>If it’s the last line, left-justify by appending spaces to the end.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Main Function</strong>:</p>
+<ul>
+<li>Iterate over the words, checking if the cumulative length exceeds <code>maxWidth</code>.</li>
+<li>If it does, call <code>connect</code> to format the current line and reset the tracking variables.</li>
+<li>Finally, format the last line and add it to the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connect Function</strong>:</p>
+<ul>
+<li>Builds a justified string by iterating through the words between <code>begin</code> and <code>end</code>.</li>
+<li>Calls <code>addSpaces</code> to handle spacing between words based on whether it’s the last line or not.</li>
+<li>Adds any remaining spaces at the end of the line if necessary.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add Spaces Function</strong>:</p>
+<ul>
+<li>Calculates how many spaces to add based on whether the line is the last one and how many gaps exist.</li>
+<li>Appends the calculated spaces to the current line string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity:</strong> ( O(n) ), where ( n ) is the total number of characters in the <code>words</code>, as each character is processed once.</li>
+<li><strong>Space Complexity:</strong> ( O(n) ), as the result string will store the formatted output, which can be at most ( n ) characters.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

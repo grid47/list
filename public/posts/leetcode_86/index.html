@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 86: Partition List · Yasir
+  Leetcode 86: Partition List · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 86">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_86/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 86: Partition List">
   <meta property="og:description" content="Solution to Leetcode 86">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-08-04T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-08-04T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-08-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-08-05T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-08-04T00:00:00Z">
-                August 4, 2024
+              <time datetime="2024-08-05T00:00:00Z">
+                August 5, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,45 +189,144 @@
         <p><a href="https://leetcode.com/problems/partition-list/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for singly-linked list.
-</span></span><span class="line"><span class="cl"> * struct ListNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     ListNode *next;
-</span></span><span class="line"><span class="cl"> *     ListNode() : val(0), next(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     ListNode(int x) : val(x), next(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    ListNode* partition(ListNode* head, int x) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for singly-linked list.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct ListNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode *next;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode() : val(0), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x) : val(x), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ListNode</span><span class="o">*</span> <span class="n">partition</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        ListNode* p1 = new ListNode(0);
-</span></span><span class="line"><span class="cl">        ListNode* p2 = new ListNode(0);        
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>        
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        ListNode* ans = p1, *r = p2;
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">p1</span><span class="p">,</span> <span class="o">*</span><span class="n">r</span> <span class="o">=</span> <span class="n">p2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        while(head) {
-</span></span><span class="line"><span class="cl">            if(head-&gt;val <span class="p">&lt;</span> <span class="nt">x</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">p1-</span><span class="p">&gt;</span>next = new ListNode(head-&gt;val);
-</span></span><span class="line"><span class="cl">                p1 = p1-&gt;next;
-</span></span><span class="line"><span class="cl">            } else {
-</span></span><span class="line"><span class="cl">                p2-&gt;next = new ListNode(head-&gt;val);
-</span></span><span class="line"><span class="cl">                p2 = p2-&gt;next;                
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            head = head-&gt;next;
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">p1</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">p2</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>                
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        p1-&gt;next = r-&gt;next;
-</span></span><span class="line"><span class="cl">        return ans-&gt;next;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="n">p1</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">r</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a linked list and a value <code>x</code>, partition the linked list such that all nodes with values less than <code>x</code> come before nodes with values greater than or equal to <code>x</code>. The order of nodes in each partition should be preserved.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Create Two Dummy Nodes</strong>:</p>
+<ul>
+<li>Use two dummy nodes to create two separate linked lists:
+<ul>
+<li>One for nodes with values less than <code>x</code> (let&rsquo;s call it <code>p1</code>).</li>
+<li>Another for nodes with values greater than or equal to <code>x</code> (let&rsquo;s call it <code>p2</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Traverse the Original List</strong>:</p>
+<ul>
+<li>Iterate through the original linked list.</li>
+<li>For each node, check its value:
+<ul>
+<li>If it&rsquo;s less than <code>x</code>, add it to the <code>p1</code> list.</li>
+<li>If it&rsquo;s greater than or equal to <code>x</code>, add it to the <code>p2</code> list.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Combine the Two Lists</strong>:</p>
+<ul>
+<li>After traversing the original list, connect the <code>p1</code> list to the <code>p2</code> list by setting the <code>next</code> pointer of the last node of <code>p1</code> to the head of the <code>p2</code> list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the New List</strong>:</p>
+<ul>
+<li>The head of the newly partitioned list is the node next to the dummy head of <code>p1</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Two dummy nodes <code>p1</code> and <code>p2</code> are initialized to help build the two separate lists.</li>
+<li>A pointer <code>ans</code> points to the start of the first list.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building Lists</strong>:</p>
+<ul>
+<li>While traversing the input linked list, nodes are added to <code>p1</code> or <code>p2</code> based on their values relative to <code>x</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connecting Lists</strong>:</p>
+<ul>
+<li>Finally, connect the last node of the <code>p1</code> list to the head of the <code>p2</code> list and return the combined list starting from <code>ans-&gt;next</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity:</strong> ( O(n) ), where ( n ) is the number of nodes in the linked list since each node is processed exactly once.</li>
+<li><strong>Space Complexity:</strong> ( O(n) ) for storing new nodes in the two lists. However, the original nodes are not modified; only new nodes are created, leading to additional space usage.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

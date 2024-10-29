@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 847: Shortest Path Visiting All Nodes · Yasir
+  Leetcode 847: Shortest Path Visiting All Nodes · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 847">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_847/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 847: Shortest Path Visiting All Nodes">
   <meta property="og:description" content="Solution to Leetcode 847">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-07-05T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-07-05T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-07-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-07-06T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-07-05T00:00:00Z">
-                July 5, 2022
+              <time datetime="2022-07-06T00:00:00Z">
+                July 6, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,63 +189,131 @@
         <p><a href="https://leetcode.com/problems/shortest-path-visiting-all-nodes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Node {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int mask, cur, cost;
-</span></span><span class="line"><span class="cl">    Node(int msk, int cu, int cos) {
-</span></span><span class="line"><span class="cl">        mask = msk;
-</span></span><span class="line"><span class="cl">        cur = cu;
-</span></span><span class="line"><span class="cl">        cost = cos;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    int eq(Node *n) {
-</span></span><span class="line"><span class="cl">        return n-&gt;mask == this-&gt;mask <span class="err">&amp;&amp;</span>
-</span></span><span class="line"><span class="cl">             n-&gt;cur == this-&gt;cur <span class="err">&amp;&amp;</span>
-</span></span><span class="line"><span class="cl">             n-&gt;cost == this-&gt;cost;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    int hash() {
-</span></span><span class="line"><span class="cl">        return 1331 * this-&gt;mask+ 
-</span></span><span class="line"><span class="cl">               7193 * this-&gt;cur + 
-</span></span><span class="line"><span class="cl">                727 * this-&gt;cost;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mask</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">cost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">msk</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cu</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cos</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mask</span> <span class="o">=</span> <span class="n">msk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur</span> <span class="o">=</span> <span class="n">cu</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cost</span> <span class="o">=</span> <span class="n">cos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">eq</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">n</span><span class="o">-&gt;</span><span class="n">mask</span> <span class="o">==</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">mask</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">             <span class="n">n</span><span class="o">-&gt;</span><span class="n">cur</span> <span class="o">==</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">cur</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">             <span class="n">n</span><span class="o">-&gt;</span><span class="n">cost</span> <span class="o">==</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">cost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">hash</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1331</span> <span class="o">*</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">mask</span><span class="o">+</span> 
+</span></span><span class="line"><span class="cl">               <span class="mi">7193</span> <span class="o">*</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">cur</span> <span class="o">+</span> 
+</span></span><span class="line"><span class="cl">                <span class="mi">727</span> <span class="o">*</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">cost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int shortestPathLength(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> gph) {
-</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> s;
-</span></span><span class="line"><span class="cl">        queue<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span> q;
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">gph.size</span><span class="err">();</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">Node</span><span class="err">*</span> <span class="na">tmp </span><span class="o">=</span> <span class="s">new</span> <span class="na">Node</span><span class="err">(</span><span class="na">1</span> <span class="err">&lt;&lt;</span> <span class="na">i</span><span class="err">,</span> <span class="na">i</span><span class="err">,</span> <span class="na">0</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">s</span><span class="err">.</span><span class="na">insert</span><span class="err">(</span><span class="na">tmp-</span><span class="p">&gt;</span>hash());
-</span></span><span class="line"><span class="cl">            q.push(tmp);
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">shortestPathLength</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">gph</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">*&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">gph</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Node</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">hash</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        while(!q.empty()) {
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            Node* tmp = q.front();
-</span></span><span class="line"><span class="cl">            q.pop();
-</span></span><span class="line"><span class="cl">            if(tmp-&gt;mask == (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">gph.size</span><span class="err">())</span> <span class="na">-</span> <span class="na">1</span><span class="err">)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">return</span> <span class="na">tmp-</span><span class="p">&gt;</span>cost;
+</span></span><span class="line"><span class="cl">            <span class="n">Node</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">mask</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">gph</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">cost</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            for(auto x : gph[tmp-&gt;cur]) {
-</span></span><span class="line"><span class="cl">                int msk = tmp-&gt;mask;
-</span></span><span class="line"><span class="cl">                msk |= (1 <span class="err">&lt;</span><span class="p">&lt;</span> <span class="nt">x</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                <span class="na">Node</span><span class="err">*</span> <span class="na">t </span><span class="o">=</span> <span class="s">new</span> <span class="na">Node</span><span class="err">(</span><span class="na">msk</span><span class="err">,</span> <span class="na">x</span><span class="err">,</span> <span class="na">0</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(!</span><span class="na">s</span><span class="err">.</span><span class="na">count</span><span class="err">(</span><span class="na">t-</span><span class="p">&gt;</span>hash())) {
-</span></span><span class="line"><span class="cl">                    q.push(new Node(msk, x, tmp-&gt;cost + 1));
-</span></span><span class="line"><span class="cl">                    s.insert(t-&gt;hash());
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">x</span> <span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">cur</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">msk</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">Node</span><span class="o">*</span> <span class="n">t</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">msk</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">hash</span><span class="p">()))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">msk</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">tmp</span><span class="o">-&gt;</span><span class="n">cost</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">hash</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return -1;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given a directed graph represented as an adjacency list, where each node represents a state (like a city or a junction). The goal is to find the shortest path that visits all nodes in the graph, starting from any node.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Node Representation</strong>: Create a <code>Node</code> class to represent the state of the search, including:</p>
+<ul>
+<li><code>mask</code>: A bitmask representing the set of visited nodes.</li>
+<li><code>cur</code>: The current node.</li>
+<li><code>cost</code>: The cost (or distance) to reach this node from the starting node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize Queue and Set</strong>:</p>
+<ul>
+<li>Use a queue to perform a breadth-first search (BFS) on the nodes.</li>
+<li>Initialize a set to keep track of visited states (to avoid cycles and redundant checks).</li>
+</ul>
+</li>
+<li>
+<p><strong>Start BFS</strong>:</p>
+<ul>
+<li>For each node in the graph, initialize a <code>Node</code> with the corresponding mask (indicating that only this node is visited), the current node, and a cost of zero. Push this node onto the queue and add its hash to the set of visited states.</li>
+</ul>
+</li>
+<li>
+<p><strong>Process Nodes</strong>:</p>
+<ul>
+<li>Dequeue a node and check if it has visited all nodes (i.e., if its mask is equal to <code>(1 &lt;&lt; gph.size()) - 1</code>).</li>
+<li>If it has, return the cost of reaching this node, as it represents the shortest path that visits all nodes.</li>
+<li>For each neighbor of the current node, calculate the new mask by setting the bit corresponding to the neighbor. If this new state (represented by a new <code>Node</code>) has not been visited yet, push it onto the queue and mark it as visited.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>: If the queue is exhausted without visiting all nodes, return <code>-1</code>.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N * 2^N), where N is the number of nodes in the graph. This accounts for the number of states (visited nodes) and the time taken to process each state.</li>
+<li><strong>Space Complexity</strong>: O(N * 2^N) for storing the set of visited states and the queue of nodes.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

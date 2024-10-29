@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 939: Minimum Area Rectangle · Yasir
+  Leetcode 939: Minimum Area Rectangle · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 939">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_939/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 939: Minimum Area Rectangle">
   <meta property="og:description" content="Solution to Leetcode 939">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-04-04T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-04-04T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-04-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-04-05T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-04-04T00:00:00Z">
-                April 4, 2022
+              <time datetime="2022-04-05T00:00:00Z">
+                April 5, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,41 +189,117 @@
         <p><a href="https://leetcode.com/problems/minimum-area-rectangle/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int minAreaRect(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> pts) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minAreaRect</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">pts</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mp;
-</span></span><span class="line"><span class="cl">        for(auto <span class="err">&amp;</span>it: pts)
-</span></span><span class="line"><span class="cl">        mp[it[0]].insert(it[1]);
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">it</span><span class="p">:</span> <span class="n">pts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="n">insert</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int n = pts.size();
-</span></span><span class="line"><span class="cl">        int area = INT_MAX;
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">pts</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">area</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">x1 </span><span class="o">=</span> <span class="s">pts[i][0],</span> <span class="na">y1 </span><span class="o">=</span> <span class="s">pts[i][1];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">x2 </span><span class="o">=</span> <span class="s">pts[j][0],</span> <span class="na">y2 </span><span class="o">=</span> <span class="s">pts[j][1];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">x1</span> <span class="err">!=</span> <span class="na">x2</span> <span class="err">&amp;&amp;</span> <span class="na">y1</span> <span class="err">!=</span> <span class="na">y2</span><span class="err">)</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">x1</span> <span class="o">!=</span> <span class="n">x2</span> <span class="o">&amp;&amp;</span> <span class="n">y1</span> <span class="o">!=</span> <span class="n">y2</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                
-</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">mp</span><span class="err">[</span><span class="na">x1</span><span class="err">].</span><span class="na">find</span><span class="err">(</span><span class="na">y2</span><span class="err">)</span> <span class="err">!=</span> <span class="na">mp</span><span class="err">[</span><span class="na">x1</span><span class="err">].</span><span class="na">end</span><span class="err">()</span> <span class="err">&amp;&amp;</span>
-</span></span><span class="line"><span class="cl">                  <span class="na">mp</span><span class="err">[</span><span class="na">x2</span><span class="err">].</span><span class="na">find</span><span class="err">(</span><span class="na">y1</span><span class="err">)</span> <span class="err">!=</span> <span class="na">mp</span><span class="err">[</span><span class="na">x2</span><span class="err">].</span><span class="na">end</span><span class="err">())</span>
-</span></span><span class="line"><span class="cl">                <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">area </span><span class="o">=</span> <span class="s">min(area,</span> <span class="na">abs</span><span class="err">(</span><span class="na">x1</span> <span class="na">-</span> <span class="na">x2</span><span class="err">)</span> <span class="err">*</span> <span class="na">abs</span><span class="err">(</span><span class="na">y1</span> <span class="na">-</span> <span class="na">y2</span><span class="err">));</span>
-</span></span><span class="line"><span class="cl">                <span class="err">}</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">x1</span><span class="p">].</span><span class="n">find</span><span class="p">(</span><span class="n">y2</span><span class="p">)</span> <span class="o">!=</span> <span class="n">mp</span><span class="p">[</span><span class="n">x1</span><span class="p">].</span><span class="n">end</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">mp</span><span class="p">[</span><span class="n">x2</span><span class="p">].</span><span class="n">find</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">mp</span><span class="p">[</span><span class="n">x2</span><span class="p">].</span><span class="n">end</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">area</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span> <span class="o">*</span> <span class="n">abs</span><span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">area </span><span class="o">=</span><span class="s">=</span> <span class="na">INT_MAX</span><span class="err">?</span> <span class="na">0:</span> <span class="na">area</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">area</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="o">?</span> <span class="mi">0</span><span class="o">:</span> <span class="n">area</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a set of points in a 2D plane, the task is to find the minimum area of a rectangle that can be formed using four of these points as vertices. If there is no such rectangle, return 0.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Data Structure</strong>:</p>
+<ul>
+<li>Use an unordered map to store the points. The map&rsquo;s keys are x-coordinates, and the values are sets of y-coordinates. This allows for quick lookups of points.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through Pairs</strong>:</p>
+<ul>
+<li>Loop through all pairs of points <code>(pts[i], pts[j])</code>. For each pair:
+<ul>
+<li>Extract the coordinates: <code>x1, y1</code> for the first point and <code>x2, y2</code> for the second point.</li>
+<li>Check if the points can form a rectangle:
+<ul>
+<li>Ensure the x-coordinates are different (<code>x1 != x2</code>) and the y-coordinates are different (<code>y1 != y2</code>).</li>
+<li>Check if the other two corners of the rectangle <code>(x1, y2)</code> and <code>(x2, y1)</code> exist in the map.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Area</strong>:</p>
+<ul>
+<li>If the corners exist, calculate the area of the rectangle formed by the points and update the minimum area found.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The function initializes a map and populates it with the given points.</li>
+<li>It then checks all combinations of points to determine potential rectangles and calculates their areas.</li>
+<li>Finally, it returns the minimum area found, or 0 if no rectangle can be formed.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N^2), where N is the number of points. The nested loops check all pairs of points.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing the points in the unordered map.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

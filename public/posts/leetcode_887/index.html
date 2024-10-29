@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 887: Super Egg Drop · Yasir
+  Leetcode 887: Super Egg Drop · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 887">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_887/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 887: Super Egg Drop">
   <meta property="og:description" content="Solution to Leetcode 887">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-05-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-05-26T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-05-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-05-27T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-05-26T00:00:00Z">
-                May 26, 2022
+              <time datetime="2022-05-27T00:00:00Z">
+                May 27, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,24 +189,102 @@
         <p><a href="https://leetcode.com/problems/super-egg-drop/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int superEggDrop(int K, int N) {
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; dp(N + 1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(K + 1, 0));
-</span></span><span class="line"><span class="cl">        int m = 0;
-</span></span><span class="line"><span class="cl">        while (dp[m][K] <span class="p">&lt;</span> <span class="nt">N</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">m</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">for</span> <span class="err">(</span><span class="na">int</span> <span class="na">k </span><span class="o">=</span> <span class="s">1;</span> <span class="na">k</span> <span class="err">&lt;=</span> <span class="na">K</span><span class="err">;</span> <span class="err">++</span><span class="na">k</span><span class="err">)</span>
-</span></span><span class="line"><span class="cl">                <span class="na">dp</span><span class="err">[</span><span class="na">m</span><span class="err">][</span><span class="na">k</span><span class="err">]</span> <span class="err">=</span> <span class="na">dp</span><span class="err">[</span><span class="na">m</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">k</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">dp</span><span class="err">[</span><span class="na">m</span> <span class="na">-</span> <span class="na">1</span><span class="err">][</span><span class="na">k</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">m</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">superEggDrop</span><span class="p">(</span><span class="kt">int</span> <span class="n">K</span><span class="p">,</span> <span class="kt">int</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">K</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">K</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">K</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given <code>K</code> eggs and a building with <code>N</code> floors. Your task is to find the minimum number of attempts needed in the worst case to determine the highest floor from which an egg can be dropped without breaking.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be solved using dynamic programming (DP). The main idea is to build a DP table where the entry <code>dp[m][k]</code> represents the maximum number of floors that can be checked with <code>k</code> eggs and <code>m</code> moves.</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a DP table <code>dp</code> with dimensions ((N + 1) \times (K + 1)), initialized to 0.</li>
+<li><code>m</code> is initialized to track the number of moves.</li>
+</ul>
+</li>
+<li>
+<p><strong>DP Table Filling</strong>:</p>
+<ul>
+<li>Incrementally increase <code>m</code> (the number of moves) until <code>dp[m][K]</code> (maximum floors with <code>K</code> eggs and <code>m</code> moves) is at least <code>N</code>.</li>
+<li>For each <code>k</code> from 1 to <code>K</code>, calculate:
+[
+dp[m][k] = dp[m-1][k-1] + dp[m-1][k] + 1
+]
+where:
+<ul>
+<li><code>dp[m-1][k-1]</code> accounts for the scenario where the egg breaks.</li>
+<li><code>dp[m-1][k]</code> accounts for the scenario where the egg does not break.</li>
+<li>The <code>+1</code> accounts for the current floor being tested.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>The minimum number of moves <code>m</code> needed to guarantee determining the highest safe floor is found when <code>dp[m][K]</code> is greater than or equal to <code>N</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The outer while loop continues until the maximum floors reachable with <code>K</code> eggs meets or exceeds <code>N</code>.</li>
+<li>The inner for loop updates the DP table based on the recurrence relation until the correct number of attempts is found.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(K \cdot m)), where <code>m</code> is the number of moves needed, which can be at most (N).</li>
+<li><strong>Space Complexity</strong>: (O(N \cdot K)) for the DP table.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

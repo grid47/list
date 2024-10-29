@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 609: Find Duplicate File in System · Yasir
+  Leetcode 609: Find Duplicate File in System · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 609">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_609/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 609: Find Duplicate File in System">
   <meta property="og:description" content="Solution to Leetcode 609">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-02-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-02-28T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-03-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-03-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-02-28T00:00:00Z">
-                February 28, 2023
+              <time datetime="2023-03-01T00:00:00Z">
+                March 1, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,37 +189,120 @@
         <p><a href="https://leetcode.com/problems/find-duplicate-file-in-system/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; findDuplicate(vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> paths) {
-</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">string</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; mp;
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span>&gt; result;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">findDuplicate</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">paths</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">result</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        for(auto path: paths) {
-</span></span><span class="line"><span class="cl">            stringstream ss(path);
-</span></span><span class="line"><span class="cl">            string root;
-</span></span><span class="line"><span class="cl">            string s;
-</span></span><span class="line"><span class="cl">            getline(ss, root, &#39; &#39;);
-</span></span><span class="line"><span class="cl">            while(getline(ss, s, &#39; &#39;)) {
-</span></span><span class="line"><span class="cl">                string fileName = root + &#39;/&#39; + s.substr(0, s.find(&#39;(&#39;));
-</span></span><span class="line"><span class="cl">                string fileContent = s.substr(s.find(&#39;(&#39;) + 1, s.find(&#39;)&#39;) - s.find(&#39;(&#39;)-1);
-</span></span><span class="line"><span class="cl">                mp[fileContent].push_back(fileName);
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">path</span><span class="p">:</span> <span class="n">paths</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stringstream</span> <span class="nf">ss</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">getline</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">getline</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">string</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">root</span> <span class="o">+</span> <span class="sc">&#39;/&#39;</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="sc">&#39;(&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="n">string</span> <span class="n">fileContent</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="sc">&#39;(&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="sc">&#39;)&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="sc">&#39;(&#39;</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">[</span><span class="n">fileContent</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        for (auto file : mp) {
-</span></span><span class="line"><span class="cl">            if(file.second.size() &gt; 1)
-</span></span><span class="line"><span class="cl">            result.push_back(file.second);
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">file</span> <span class="p">:</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        return result;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a list of paths, each containing a directory and files with their content, identify and group files that have the same content. Each file is represented as &ldquo;filename(content)&rdquo;, where <code>filename</code> is the name of the file and <code>content</code> is the content within parentheses.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Parsing the Input</strong>:</p>
+<ul>
+<li>For each string in the <code>paths</code> list, split it into the directory and the files.</li>
+<li>The first element of the string represents the root directory.</li>
+<li>The remaining elements represent files and their content.</li>
+</ul>
+</li>
+<li>
+<p><strong>Storing Content</strong>:</p>
+<ul>
+<li>Use a hash map (<code>unordered_map</code>) to store file contents as keys and the corresponding full file paths as values.</li>
+<li>The key will be the content of the file (the part inside parentheses), and the value will be a list of file paths that share that content.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Result</strong>:</p>
+<ul>
+<li>After processing all paths, iterate through the hash map and collect all file paths where the content appears more than once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Output</strong>:</p>
+<ul>
+<li>Return a list of lists, where each inner list contains paths of files with identical content.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>findDuplicate</code> function takes a vector of strings (<code>paths</code>).</li>
+<li>It initializes an unordered map (<code>mp</code>) to map file contents to their corresponding file paths.</li>
+<li>For each path:
+<ul>
+<li>Split the path using a string stream.</li>
+<li>Read the root directory and each subsequent file.</li>
+<li>Construct the full path and extract the content.</li>
+<li>Store the full path in the map using content as the key.</li>
+</ul>
+</li>
+<li>Finally, check the map for entries with more than one path and add those to the result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the total number of characters in all strings, as each character is processed once.</li>
+<li><strong>Space Complexity</strong>: O(M), where M is the number of unique file contents, as each unique content can potentially store multiple paths.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

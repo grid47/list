@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 816: Ambiguous Coordinates · Yasir
+  Leetcode 816: Ambiguous Coordinates · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 816">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_816/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 816: Ambiguous Coordinates">
   <meta property="og:description" content="Solution to Leetcode 816">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-08-05T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-08-05T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-08-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-08-06T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-08-05T00:00:00Z">
-                August 5, 2022
+              <time datetime="2022-08-06T00:00:00Z">
+                August 6, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,32 +189,111 @@
         <p><a href="https://leetcode.com/problems/ambiguous-coordinates/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> ambiguousCoordinates(string S) {
-</span></span><span class="line"><span class="cl">        int n = S.size();
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> res;
-</span></span><span class="line"><span class="cl">        for (int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span> <span class="na">-</span> <span class="na">2</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">vector</span><span class="err">&lt;</span><span class="na">string</span><span class="p">&gt;</span> A = f(S.substr(1, i)), B = f(S.substr(i + 1, n - 2 - i));
-</span></span><span class="line"><span class="cl">            for (auto <span class="err">&amp;</span> a : A) for (auto <span class="err">&amp;</span> b : B) res.push_back(&#34;(&#34; + a + &#34;, &#34; + b + &#34;)&#34;);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> f(string S) {
-</span></span><span class="line"><span class="cl">        int n = S.size();
-</span></span><span class="line"><span class="cl">        if (n == 0 || (n &gt; 1 <span class="err">&amp;&amp;</span> S[0] == &#39;0&#39; <span class="err">&amp;&amp;</span> S[n - 1] == &#39;0&#39;)) return {};
-</span></span><span class="line"><span class="cl">        if (n &gt; 1 <span class="err">&amp;&amp;</span> S[0] == &#39;0&#39;) return {&#34;0.&#34; + S.substr(1)};
-</span></span><span class="line"><span class="cl">        if (n == 1 || S[n - 1] == &#39;0&#39;) return {S};
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> res = {S};
-</span></span><span class="line"><span class="cl">        for (int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span> <span class="na">res</span><span class="err">.</span><span class="na">push_back</span><span class="err">(</span><span class="na">S</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">0</span><span class="err">,</span> <span class="na">i</span><span class="err">)</span> <span class="err">+</span> <span class="err">&#39;.&#39;</span> <span class="err">+</span> <span class="na">S</span><span class="err">.</span><span class="na">substr</span><span class="err">(</span><span class="na">i</span><span class="err">));</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ambiguousCoordinates</span><span class="p">(</span><span class="n">string</span> <span class="n">S</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">S</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)),</span> <span class="n">B</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">A</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">b</span> <span class="p">:</span> <span class="n">B</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="s">&#34;(&#34;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s">&#34;, &#34;</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="s">&#34;)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">string</span> <span class="n">S</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">S</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">S</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">))</span> <span class="k">return</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span><span class="s">&#34;0.&#34;</span> <span class="o">+</span> <span class="n">S</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">)};</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">S</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="p">{</span><span class="n">S</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="n">S</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="sc">&#39;.&#39;</span> <span class="o">+</span> <span class="n">S</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given a string representing a valid number in the format &ldquo;(x.y)&rdquo; where <code>x</code> and <code>y</code> can be non-empty strings of digits. Your task is to find all possible valid coordinates by splitting the number into two parts: one before and one after the decimal point, while ensuring each part satisfies the rules of a valid decimal representation.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Splitting the String</strong>:</p>
+<ul>
+<li>The string <code>S</code> is of the form <code>&quot;(xy)&quot;</code>, where <code>x</code> and <code>y</code> represent digits. The goal is to split <code>xy</code> into two non-empty parts <code>A</code> and <code>B</code> such that <code>A</code> represents the x-coordinate and <code>B</code> represents the y-coordinate.</li>
+</ul>
+</li>
+<li>
+<p><strong>Generating Valid Coordinates</strong>:</p>
+<ul>
+<li>Create a helper function <code>f</code> that takes a string and generates all valid decimal representations of that string.</li>
+<li>The rules for a valid decimal number are:
+<ul>
+<li>A number cannot have leading zeros unless it is exactly &ldquo;0&rdquo;.</li>
+<li>A number can have a decimal point, but it cannot have trailing zeros (e.g., &ldquo;1.0&rdquo; is invalid).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through Possible Splits</strong>:</p>
+<ul>
+<li>For each possible split of <code>S</code>, call the helper function <code>f</code> on both parts (the left and right of the split) to get valid representations.</li>
+<li>Combine these representations into coordinate pairs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>Collect all valid coordinate pairs and return them.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>ambiguousCoordinates</code> function iterates through possible split points in <code>S</code> and generates valid pairs using the helper function.</li>
+<li>The helper function <code>f</code> checks the conditions for valid numbers and returns all possible valid representations for a given string.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n^2) in the worst case, where <code>n</code> is the length of the string. This accounts for generating all valid splits and checking them.</li>
+<li><strong>Space Complexity</strong>: O(n) for storing the results and intermediate representations.</li>
+</ul>
+<p>This solution effectively handles the constraints for valid number representations and generates all possible valid coordinates.</p>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

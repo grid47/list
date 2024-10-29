@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 641: Design Circular Deque · Yasir
+  Leetcode 641: Design Circular Deque · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 641">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_641/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 641: Design Circular Deque">
   <meta property="og:description" content="Solution to Leetcode 641">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-01-27T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-01-27T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-01-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-01-28T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-01-27T00:00:00Z">
-                January 27, 2023
+              <time datetime="2023-01-28T00:00:00Z">
+                January 28, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,92 +189,188 @@
         <p><a href="https://leetcode.com/problems/design-circular-deque/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class MyCircularDeque {
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> buf;
-</span></span><span class="line"><span class="cl">    int frd, bck;
-</span></span><span class="line"><span class="cl">    int sz, cnt;
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    MyCircularDeque(int k) : sz(k), buf(k, 0), bck(0), frd(k - 1), cnt(0) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyCircularDeque</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">buf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">frd</span><span class="p">,</span> <span class="n">bck</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sz</span><span class="p">,</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MyCircularDeque</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="o">:</span> <span class="n">sz</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">buf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">bck</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">frd</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cnt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool insertFront(int value) {
-</span></span><span class="line"><span class="cl">        if(isFull()) return false;
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">insertFront</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">isFull</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        buf[frd] = value;
-</span></span><span class="line"><span class="cl">        frd = (frd -1 + sz) % sz;
+</span></span><span class="line"><span class="cl">        <span class="n">buf</span><span class="p">[</span><span class="n">frd</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">frd</span> <span class="o">=</span> <span class="p">(</span><span class="n">frd</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sz</span><span class="p">)</span> <span class="o">%</span> <span class="n">sz</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        ++cnt;
-</span></span><span class="line"><span class="cl">        return true;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool insertLast(int value) {
-</span></span><span class="line"><span class="cl">        if(isFull()) return false;
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">insertLast</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">isFull</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        buf[bck] = value;        
-</span></span><span class="line"><span class="cl">        bck = (bck + 1) % sz;
+</span></span><span class="line"><span class="cl">        <span class="n">buf</span><span class="p">[</span><span class="n">bck</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">        <span class="n">bck</span> <span class="o">=</span> <span class="p">(</span><span class="n">bck</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">sz</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        ++cnt;
-</span></span><span class="line"><span class="cl">        return true;        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool deleteFront() {
-</span></span><span class="line"><span class="cl">        if(isEmpty()) return false;
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">deleteFront</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        frd = (frd + 1) % sz;
+</span></span><span class="line"><span class="cl">        <span class="n">frd</span> <span class="o">=</span> <span class="p">(</span><span class="n">frd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">sz</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        --cnt;
-</span></span><span class="line"><span class="cl">        return true;        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="o">--</span><span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool deleteLast() {
-</span></span><span class="line"><span class="cl">        if(isEmpty()) return false;
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">deleteLast</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        bck = (bck - 1 + sz) % sz;
+</span></span><span class="line"><span class="cl">        <span class="n">bck</span> <span class="o">=</span> <span class="p">(</span><span class="n">bck</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sz</span><span class="p">)</span> <span class="o">%</span> <span class="n">sz</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        --cnt;
-</span></span><span class="line"><span class="cl">        return true;        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="o">--</span><span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int getFront() {
-</span></span><span class="line"><span class="cl">        if(isEmpty()) return -1;
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getFront</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return buf[(frd + 1) % sz];
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">buf</span><span class="p">[(</span><span class="n">frd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">sz</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int getRear() {
-</span></span><span class="line"><span class="cl">        if(isEmpty()) return -1;
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getRear</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">isEmpty</span><span class="p">())</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return buf[(bck - 1 + sz) % sz];
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">buf</span><span class="p">[(</span><span class="n">bck</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sz</span><span class="p">)</span> <span class="o">%</span> <span class="n">sz</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool isEmpty() {
-</span></span><span class="line"><span class="cl">        return cnt == 0;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isEmpty</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool isFull() {
-</span></span><span class="line"><span class="cl">        return  cnt == sz;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isFull</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>  <span class="n">cnt</span> <span class="o">==</span> <span class="n">sz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Your MyCircularDeque object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl"> * MyCircularDeque* obj = new MyCircularDeque(k);
-</span></span><span class="line"><span class="cl"> * bool param_1 = obj-&gt;insertFront(value);
-</span></span><span class="line"><span class="cl"> * bool param_2 = obj-&gt;insertLast(value);
-</span></span><span class="line"><span class="cl"> * bool param_3 = obj-&gt;deleteFront();
-</span></span><span class="line"><span class="cl"> * bool param_4 = obj-&gt;deleteLast();
-</span></span><span class="line"><span class="cl"> * int param_5 = obj-&gt;getFront();
-</span></span><span class="line"><span class="cl"> * int param_6 = obj-&gt;getRear();
-</span></span><span class="line"><span class="cl"> * bool param_7 = obj-&gt;isEmpty();
-</span></span><span class="line"><span class="cl"> * bool param_8 = obj-&gt;isFull();
-</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your MyCircularDeque object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * MyCircularDeque* obj = new MyCircularDeque(k);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_1 = obj-&gt;insertFront(value);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_2 = obj-&gt;insertLast(value);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_3 = obj-&gt;deleteFront();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_4 = obj-&gt;deleteLast();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_5 = obj-&gt;getFront();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_6 = obj-&gt;getRear();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_7 = obj-&gt;isEmpty();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_8 = obj-&gt;isFull();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Design and implement a circular deque (double-ended queue) with the following operations:</p>
+<ul>
+<li><code>insertFront(value)</code>: Adds an item at the front of the deque.</li>
+<li><code>insertLast(value)</code>: Adds an item at the back of the deque.</li>
+<li><code>deleteFront()</code>: Deletes an item from the front of the deque.</li>
+<li><code>deleteLast()</code>: Deletes an item from the back of the deque.</li>
+<li><code>getFront()</code>: Gets the front item from the deque.</li>
+<li><code>getRear()</code>: Gets the last item from the deque.</li>
+<li><code>isEmpty()</code>: Checks whether the deque is empty.</li>
+<li><code>isFull()</code>: Checks whether the deque is full.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Use a vector to store the deque elements.</li>
+<li>Maintain pointers for the front and back of the deque, and track the size and current count of elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Insert Operations</strong>:</p>
+<ul>
+<li>For <code>insertFront</code>, place the value at the front pointer, then update the front pointer in a circular manner.</li>
+<li>For <code>insertLast</code>, place the value at the back pointer, then update the back pointer in a circular manner.</li>
+<li>Both operations check for fullness before inserting.</li>
+</ul>
+</li>
+<li>
+<p><strong>Delete Operations</strong>:</p>
+<ul>
+<li>For <code>deleteFront</code>, simply move the front pointer forward.</li>
+<li>For <code>deleteLast</code>, move the back pointer backward.</li>
+<li>Both operations check for emptiness before deleting.</li>
+</ul>
+</li>
+<li>
+<p><strong>Get Operations</strong>:</p>
+<ul>
+<li><code>getFront</code> and <code>getRear</code> return the values at the respective pointers, ensuring to handle cases when the deque is empty.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Operations</strong>:</p>
+<ul>
+<li><code>isEmpty</code> returns true if the count of elements is zero.</li>
+<li><code>isFull</code> returns true if the count is equal to the size.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Constructor</strong>: Initializes the deque with a fixed size, setting all elements to zero and the pointers accordingly.</li>
+<li><strong>Insert Functions</strong>: Each function updates the respective pointer and increments the count, returning false if the deque is full.</li>
+<li><strong>Delete Functions</strong>: Each function decrements the count and adjusts the respective pointer, returning false if the deque is empty.</li>
+<li><strong>Get Functions</strong>: Retrieve values based on the current state of the pointers while handling edge cases for empty states.</li>
+<li><strong>Size Checks</strong>: The empty and full checks rely on a simple count comparison.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: All operations run in O(1) time.</li>
+<li><strong>Space Complexity</strong>: O(k), where k is the capacity of the deque.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

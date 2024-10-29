@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 589: N-ary Tree Preorder Traversal · Yasir
+  Leetcode 589: N-ary Tree Preorder Traversal · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 589">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_589/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 589: N-ary Tree Preorder Traversal">
   <meta property="og:description" content="Solution to Leetcode 589">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-03-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-03-20T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-03-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-03-21T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-03-20T00:00:00Z">
-                March 20, 2023
+              <time datetime="2023-03-21T00:00:00Z">
+                March 21, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,46 +189,118 @@
         <p><a href="https://leetcode.com/problems/n-ary-tree-preorder-traversal/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/*
-</span></span><span class="line"><span class="cl">// Definition for a Node.
-</span></span><span class="line"><span class="cl">class Node {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int val;
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span> children;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">// Definition for a Node.
+</span></span></span><span class="line"><span class="cl"><span class="cm">class Node {
+</span></span></span><span class="line"><span class="cl"><span class="cm">public:
+</span></span></span><span class="line"><span class="cl"><span class="cm">    int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    vector&lt;Node*&gt; children;
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node() {}
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node(int _val) {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        val = _val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node(int _val, vector&lt;Node*&gt; _children) {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        val = _val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        children = _children;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">};
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    Node() {}
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    Node(int _val) {
-</span></span><span class="line"><span class="cl">        val = _val;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    Node(int _val, vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span> _children) {
-</span></span><span class="line"><span class="cl">        val = _val;
-</span></span><span class="line"><span class="cl">        children = _children;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
-</span></span><span class="line"><span class="cl">*/
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans;
-</span></span><span class="line"><span class="cl">    void pre(Node* root) {
-</span></span><span class="line"><span class="cl">        if(root == NULL) return;
-</span></span><span class="line"><span class="cl">        ans.push_back(root-&gt;val);
-</span></span><span class="line"><span class="cl">        for(auto x: root-&gt;children)
-</span></span><span class="line"><span class="cl">            pre(x);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> preorder(Node* root) {
-</span></span><span class="line"><span class="cl">        pre(root);
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">pre</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">x</span><span class="p">:</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pre</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">preorder</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pre</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return ans;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an N-ary tree, return the preorder traversal of its nodes&rsquo; values.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Preorder Traversal</strong>:</p>
+<ul>
+<li>Preorder traversal visits the root node first, followed by recursively visiting each of the children from left to right.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:</p>
+<ul>
+<li>Define a recursive helper function <code>pre</code> that takes a node as input:
+<ul>
+<li>If the node is <code>NULL</code>, return immediately.</li>
+<li>Otherwise, append the node&rsquo;s value to the result list.</li>
+<li>Iterate through the children of the node and call the <code>pre</code> function recursively on each child.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<ul>
+<li>The main function <code>preorder</code> initializes the result list and calls the helper function on the root node.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>Node</code> class is defined with an integer value and a vector of child nodes.</li>
+<li>The <code>pre</code> function performs the preorder traversal and fills the <code>ans</code> vector with node values.</li>
+<li>The <code>preorder</code> function serves as the entry point for the traversal.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the tree, as we visit each node exactly once.</li>
+<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree, for the recursion stack. The space used for the result list is O(N).</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 798: Smallest Rotation with Highest Score · Yasir
+  Leetcode 798: Smallest Rotation with Highest Score · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 798">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_798/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 798: Smallest Rotation with Highest Score">
   <meta property="og:description" content="Solution to Leetcode 798">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-08-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-08-23T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-08-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-08-24T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-08-23T00:00:00Z">
-                August 23, 2022
+              <time datetime="2022-08-24T00:00:00Z">
+                August 24, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,26 +189,119 @@
         <p><a href="https://leetcode.com/problems/smallest-rotation-with-highest-score/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    int bestRotation(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
-</span></span><span class="line"><span class="cl">        int n = nums.size();
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> change(n, 0);
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">change</span><span class="err">[(</span><span class="na">i</span> <span class="na">-</span> <span class="na">nums</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span> <span class="err">+</span> <span class="na">n</span><span class="err">)</span> <span class="err">%</span> <span class="na">n</span><span class="err">]</span><span class="na">--</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">i </span><span class="o">=</span> <span class="s">1;</span> <span class="na">i</span> <span class="err">&lt;</span> <span class="na">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">change</span><span class="err">[</span><span class="na">i</span><span class="err">]</span> <span class="err">+=</span> <span class="na">change</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">distance</span><span class="err">(</span><span class="na">change</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">max_element</span><span class="err">(</span><span class="na">change</span><span class="err">.</span><span class="na">begin</span><span class="err">(),</span> <span class="na">change</span><span class="err">.</span><span class="na">end</span><span class="err">()));</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">bestRotation</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">change</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">change</span><span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">change</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">change</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">distance</span><span class="p">(</span><span class="n">change</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">max_element</span><span class="p">(</span><span class="n">change</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">change</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer array <code>nums</code>, you want to rotate the array to maximize the score. The score of a rotation is defined as the sum of indices <code>i</code> for which <code>nums[i]</code> is greater than <code>i</code>. Return the index of the rotation that maximizes the score.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize Change Array</strong>:</p>
+<ul>
+<li>Create an array <code>change</code> of size <code>n</code> initialized to zero. This array will be used to track the changes in scores for different rotations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Changes</strong>:</p>
+<ul>
+<li>For each element <code>nums[i]</code>:
+<ul>
+<li>Calculate the rotation index where the current score will be affected. This is given by <code>(i - nums[i] + 1 + n) % n</code>.</li>
+<li>Decrease the value at this index in the <code>change</code> array by 1, indicating that the score will drop for this rotation.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Prefix Sum Calculation</strong>:</p>
+<ul>
+<li>Update the <code>change</code> array to compute the cumulative score changes using a prefix sum approach.</li>
+<li>For each index from 1 to <code>n-1</code>, add the previous value and increment the score by 1 for each rotation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Find the Best Rotation</strong>:</p>
+<ul>
+<li>Use <code>max_element</code> to find the index of the maximum score in the <code>change</code> array. This index corresponds to the best rotation.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains the method to determine the best rotation.
+<ul>
+<li><code>int bestRotation(vector&lt;int&gt;&amp; nums)</code>: Implements the logic for calculating the best rotation.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>nums</code>: A vector of integers representing the original array.</li>
+</ul>
+</li>
+<li><strong>Returns</strong>: An integer representing the index of the best rotation that maximizes the score.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the size of the input array. The algorithm passes through the array a constant number of times.</li>
+<li><strong>Space Complexity</strong>: O(n), for the additional <code>change</code> array used to store score changes.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

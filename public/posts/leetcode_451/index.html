@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 451: Sort Characters By Frequency · Yasir
+  Leetcode 451: Sort Characters By Frequency · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 451">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_451/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 451: Sort Characters By Frequency">
   <meta property="og:description" content="Solution to Leetcode 451">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-08-05T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-08-05T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-08-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-08-06T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-08-05T00:00:00Z">
-                August 5, 2023
+              <time datetime="2023-08-06T00:00:00Z">
+                August 6, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,34 +189,117 @@
         <p><a href="https://leetcode.com/problems/sort-characters-by-frequency/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    string frequencySort(string s) {
-</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">char</span><span class="err">,</span><span class="na">int</span><span class="p">&gt;</span> freq;
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> bucket(s.size()+1, &#34;&#34;);
-</span></span><span class="line"><span class="cl">        string res;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">frequencySort</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">freq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">bucket</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        //count frequency of each character
-</span></span><span class="line"><span class="cl">        for(char c:s) freq[c]++;
-</span></span><span class="line"><span class="cl">        //put character into frequency bucket
-</span></span><span class="line"><span class="cl">        for(auto<span class="err">&amp;</span> it:freq) {
-</span></span><span class="line"><span class="cl">            int n = it.second;
-</span></span><span class="line"><span class="cl">            char c = it.first;
-</span></span><span class="line"><span class="cl">            bucket[n].append(n, c);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        //form descending sorted string
-</span></span><span class="line"><span class="cl">        for(int i=s.size(); i&gt;0; i--) {
-</span></span><span class="line"><span class="cl">            if(bucket[i].size())
-</span></span><span class="line"><span class="cl">                res.append(bucket[i]);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="c1">//count frequency of each character
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="nl">c</span><span class="p">:</span><span class="n">s</span><span class="p">)</span> <span class="n">freq</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//put character into frequency bucket
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">it</span><span class="p">:</span><span class="n">freq</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bucket</span><span class="p">[</span><span class="n">n</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//form descending sorted string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">bucket</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">bucket</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string <code>s</code>, sort it in descending order based on the frequency of characters. Characters with the same frequency should maintain their relative order from the input string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Frequency Counting</strong>:</p>
+<ul>
+<li>Use an unordered map to count the frequency of each character in the string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Bucket Sort</strong>:</p>
+<ul>
+<li>Create a vector of strings (<code>bucket</code>) where the index represents the frequency of characters. Each index <code>i</code> will store a string of characters that appear <code>i</code> times.</li>
+<li>Populate this bucket with characters based on their frequencies.</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing the Result</strong>:</p>
+<ul>
+<li>Iterate through the <code>bucket</code> in reverse order (from highest frequency to lowest) to construct the final sorted string.</li>
+<li>Append the characters from each non-empty bucket to the result string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Frequency Counting</strong>:</p>
+<ul>
+<li>Iterate through each character in the string and count its occurrences using an unordered map (<code>freq</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Populating the Bucket</strong>:</p>
+<ul>
+<li>For each character in the frequency map, append the character to the corresponding index in the <code>bucket</code> based on its frequency.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Result String</strong>:</p>
+<ul>
+<li>Loop through the <code>bucket</code> from the end to the beginning, appending the non-empty strings to the result (<code>res</code>).</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the string, as we traverse the string to count frequencies and then again to construct the result.</li>
+<li><strong>Space Complexity</strong>: O(n), for storing the frequency map and the bucket of strings.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 149: Max Points on a Line · Yasir
+  Leetcode 149: Max Points on a Line · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 149">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_149/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 149: Max Points on a Line">
   <meta property="og:description" content="Solution to Leetcode 149">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-06-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-06-02T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-06-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-06-03T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-06-02T00:00:00Z">
-                June 2, 2024
+              <time datetime="2024-06-03T00:00:00Z">
+                June 3, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,35 +189,128 @@
         <p><a href="https://leetcode.com/problems/max-points-on-a-line/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int maxPoints(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> pts) {
-</span></span><span class="line"><span class="cl">        if(pts.size() <span class="err">&lt;</span>= 2) return pts.size();
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxPoints</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">pts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">pts</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="n">pts</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int mx = 0;
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(auto p1: pts) {
-</span></span><span class="line"><span class="cl">            map<span class="p">&lt;</span><span class="nt">double</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> ma;
-</span></span><span class="line"><span class="cl">            for(auto p2: pts) {
-</span></span><span class="line"><span class="cl">                if(p1 == p2) continue;
-</span></span><span class="line"><span class="cl">                double slope = 0;
-</span></span><span class="line"><span class="cl">                if(p1[0] == p2[0]) slope = DBL_MAX;
-</span></span><span class="line"><span class="cl">                else {
-</span></span><span class="line"><span class="cl">                    slope = (double) (p2[1] - p1[1]) / (p2[0] - p1[0]);
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">                ma[slope]++;
-</span></span><span class="line"><span class="cl">                if(ma[slope] &gt; mx)
-</span></span><span class="line"><span class="cl">                    mx = ma[slope];
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return mx + 1;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">p1</span><span class="p">:</span> <span class="n">pts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">map</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">ma</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">p2</span><span class="p">:</span> <span class="n">pts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">p1</span> <span class="o">==</span> <span class="n">p2</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">double</span> <span class="n">slope</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="n">slope</span> <span class="o">=</span> <span class="n">DBL_MAX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="p">(</span><span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ma</span><span class="p">[</span><span class="n">slope</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">ma</span><span class="p">[</span><span class="n">slope</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">mx</span> <span class="o">=</span> <span class="n">ma</span><span class="p">[</span><span class="n">slope</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of points where each point is represented by its coordinates ((x, y)), determine the maximum number of points that can lie on the same straight line.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Handling Edge Cases</strong>:</p>
+<ul>
+<li>If the number of points is less than or equal to 2, return the number of points since any two points can form a line.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using Slope Calculation</strong>:</p>
+<ul>
+<li>For each point, calculate the slope of the line formed with every other point.</li>
+<li>Use a map to keep track of the frequency of each slope.</li>
+</ul>
+</li>
+<li>
+<p><strong>Slope Calculation</strong>:</p>
+<ul>
+<li>If the x-coordinates of two points are the same, the slope is considered vertical (set as <code>DBL_MAX</code>).</li>
+<li>Otherwise, calculate the slope using the formula:
+[
+\text{slope} = \frac{y_2 - y_1}{x_2 - x_1}
+]</li>
+<li>Count how many times each slope appears for the current point.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding Maximum Points</strong>:</p>
+<ul>
+<li>Update the maximum count of points on a line whenever a slope&rsquo;s frequency exceeds the current maximum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>The result is the maximum count of points on a line plus one (to include the starting point).</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Line 1-3</strong>: Define the <code>maxPoints</code> function and check for edge cases.</li>
+<li><strong>Line 5</strong>: Initialize a variable <code>mx</code> to keep track of the maximum points on the same line.</li>
+<li><strong>Line 7-8</strong>: Iterate through each point (p1) as the reference point.</li>
+<li><strong>Line 9</strong>: Create a map <code>ma</code> to count occurrences of slopes for the current point.</li>
+<li><strong>Line 10-16</strong>: Nested loop to calculate the slope between (p1) and every other point (p2):
+<ul>
+<li>Skip if (p1) and (p2) are the same.</li>
+<li>Calculate the slope and update its count in the map.</li>
+<li>Update <code>mx</code> if the current slope count exceeds the previous maximum.</li>
+</ul>
+</li>
+<li><strong>Line 17</strong>: Return <code>mx + 1</code> to include the reference point.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N^2)), where (N) is the number of points, due to the nested iteration to calculate slopes.</li>
+<li><strong>Space Complexity</strong>: (O(N)) for the map storing slopes for each reference point.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

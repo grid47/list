@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 392: Is Subsequence · Yasir
+  Leetcode 392: Is Subsequence · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 392">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_392/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 392: Is Subsequence">
   <meta property="og:description" content="Solution to Leetcode 392">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-10-03T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-10-03T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-10-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-10-04T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-10-03T00:00:00Z">
-                October 3, 2023
+              <time datetime="2023-10-04T00:00:00Z">
+                October 4, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,25 +189,85 @@
         <p><a href="https://leetcode.com/problems/is-subsequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    bool isSubsequence(string s, string t) {
-</span></span><span class="line"><span class="cl">        if(s == &#34;&#34;) return true;
-</span></span><span class="line"><span class="cl">        int sdx = 0, tdx = 0;
-</span></span><span class="line"><span class="cl">        // sdx is sub seq of tdx
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        for(; tdx <span class="p">&lt;</span> <span class="nt">t.size</span><span class="err">();</span> <span class="na">tdx</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">t</span><span class="err">[</span><span class="na">tdx</span><span class="err">]</span> <span class="err">==</span> <span class="na">s</span><span class="err">[</span><span class="na">sdx</span><span class="err">])</span> <span class="na">sdx</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">sdx </span><span class="o">=</span><span class="s">=</span> <span class="na">s</span><span class="err">.</span><span class="na">size</span><span class="err">())</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">false</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isSubsequence</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">string</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// sdx is sub seq of tdx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(;</span> <span class="n">tdx</span> <span class="o">&lt;</span> <span class="n">t</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">tdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">tdx</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">sdx</span><span class="p">])</span> <span class="n">sdx</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">sdx</span> <span class="o">==</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two strings <code>s</code> and <code>t</code>, determine if <code>s</code> is a subsequence of <code>t</code>. A string <code>s</code> is a subsequence of <code>t</code> if you can remove some characters from <code>t</code> (without changing the order of the remaining characters) to get <code>s</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Pointer Initialization</strong>: Use two pointers, <code>sdx</code> for string <code>s</code> and <code>tdx</code> for string <code>t</code>, both initialized to 0. These pointers will help track the current character being evaluated in each string.</p>
+</li>
+<li>
+<p><strong>Iterate Through String <code>t</code></strong>: Loop through the characters of <code>t</code> using the <code>tdx</code> pointer:</p>
+<ul>
+<li>If the current character in <code>t</code> matches the current character in <code>s</code> (i.e., <code>t[tdx] == s[sdx]</code>), increment the <code>sdx</code> pointer to check the next character in <code>s</code>.</li>
+<li>If <code>sdx</code> reaches the length of <code>s</code>, this means all characters of <code>s</code> have been found in <code>t</code>, and we can return true.</li>
+</ul>
+</li>
+<li>
+<p><strong>Completion Check</strong>: If the loop completes and not all characters of <code>s</code> have been matched, return false.</p>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The loop efficiently checks each character of <code>t</code> against <code>s</code>, leveraging pointer arithmetic to confirm the sequence order.</li>
+<li>The check for <code>s</code> being empty is handled at the start, ensuring an immediate return of true when applicable.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of string <code>t</code>, as we may need to traverse all characters in <code>t</code>.</li>
+<li><strong>Space Complexity</strong>: O(1), as no additional data structures are used, just a few pointers.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

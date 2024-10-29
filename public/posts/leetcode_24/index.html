@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 24: Swap Nodes in Pairs · Yasir
+  Leetcode 24: Swap Nodes in Pairs · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 24">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_24/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 24: Swap Nodes in Pairs">
   <meta property="og:description" content="Solution to Leetcode 24">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-10-05T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-10-05T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-10-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-06T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-10-05T00:00:00Z">
-                October 5, 2024
+              <time datetime="2024-10-06T00:00:00Z">
+                October 6, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,40 +189,135 @@
         <p><a href="https://leetcode.com/problems/swap-nodes-in-pairs/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for singly-linked list.
-</span></span><span class="line"><span class="cl"> * struct ListNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     ListNode *next;
-</span></span><span class="line"><span class="cl"> *     ListNode() : val(0), next(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     ListNode(int x) : val(x), next(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    ListNode* swapPairs(ListNode* head) {
-</span></span><span class="line"><span class="cl">        if(head == NULL || head-&gt;next == NULL) return head;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for singly-linked list.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct ListNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode *next;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode() : val(0), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x) : val(x), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ListNode</span><span class="o">*</span> <span class="n">swapPairs</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">||</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        ListNode* cur = head, *nxt = head-&gt;next, *ret = nxt, *prv = NULL;
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">head</span><span class="p">,</span> <span class="o">*</span><span class="n">nxt</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span> <span class="o">*</span><span class="n">ret</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">,</span> <span class="o">*</span><span class="n">prv</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        while(cur != NULL <span class="err">&amp;&amp;</span> nxt != NULL) {
-</span></span><span class="line"><span class="cl">            if(prv != NULL) prv-&gt;next = nxt;
-</span></span><span class="line"><span class="cl">            prv = cur;            
-</span></span><span class="line"><span class="cl">            cur-&gt;next = nxt-&gt;next;
-</span></span><span class="line"><span class="cl">            nxt-&gt;next = cur;
-</span></span><span class="line"><span class="cl">            cur = cur-&gt;next;
-</span></span><span class="line"><span class="cl">            if(cur != NULL) nxt = cur-&gt;next;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return ret;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">nxt</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">prv</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">prv</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">nxt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prv</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>            
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">nxt</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nxt</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a linked list, swap every two adjacent nodes and return its head. If the number of nodes is odd, the last node should remain unchanged.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>If the list is empty or contains only one node, return the head as no swaps can be performed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Define pointers:
+<ul>
+<li><code>cur</code> to track the current node.</li>
+<li><code>nxt</code> to track the next node (which will be swapped with <code>cur</code>).</li>
+<li><code>ret</code> to store the new head of the modified list (which will be the second node).</li>
+<li><code>prv</code> to keep track of the previous node to correctly link the swapped pairs.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Swapping Process</strong>:</p>
+<ul>
+<li>Iterate through the list while both <code>cur</code> and <code>nxt</code> are not null:
+<ul>
+<li>Update the <code>next</code> of the previous node (<code>prv</code>) to point to the next node (<code>nxt</code>).</li>
+<li>Set <code>prv</code> to the current node (<code>cur</code>).</li>
+<li>Adjust the <code>next</code> pointers to swap <code>cur</code> and <code>nxt</code>.</li>
+<li>Move <code>cur</code> to the next node in the original sequence (which is now the node after the swapped pair).</li>
+<li>Update <code>nxt</code> to the node after <code>cur</code> for the next swap.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the New Head</strong>: After all swaps, return <code>ret</code>, which points to the new head of the swapped list.</p>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Base Condition Check</strong>: The function immediately returns the head if it’s null or has only one node.</li>
+<li><strong>Pointer Initialization</strong>:
+<ul>
+<li><code>cur</code> starts at the head, and <code>nxt</code> points to the second node.</li>
+<li><code>ret</code> stores the new head (the second node).</li>
+</ul>
+</li>
+<li><strong>Swapping Logic</strong>:
+<ul>
+<li>In the loop, the pointers are rearranged to perform the swap.</li>
+<li>Ensure to check for <code>cur</code> and <code>nxt</code> being non-null before attempting to access their values.</li>
+</ul>
+</li>
+<li><strong>Return the Result</strong>: Finally, the function returns the new head of the list after all necessary swaps.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity:</strong> (O(N)), where (N) is the number of nodes in the linked list.</li>
+<li><strong>Space Complexity:</strong> (O(1)) since the swapping is done in place and only a constant amount of additional space is used for pointers.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

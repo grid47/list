@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 435: Non-overlapping Intervals · Yasir
+  Leetcode 435: Non-overlapping Intervals · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 435">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_435/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 435: Non-overlapping Intervals">
   <meta property="og:description" content="Solution to Leetcode 435">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-08-21T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-08-21T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-08-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-08-22T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-08-21T00:00:00Z">
-                August 21, 2023
+              <time datetime="2023-08-22T00:00:00Z">
+                August 22, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,32 +189,120 @@
         <p><a href="https://leetcode.com/problems/non-overlapping-intervals/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int eraseOverlapIntervals(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> ivl) {
-</span></span><span class="line"><span class="cl">        sort(ivl.begin(), ivl.end());
-</span></span><span class="line"><span class="cl">        int ans = 0;
-</span></span><span class="line"><span class="cl">        int n = ivl.size();
-</span></span><span class="line"><span class="cl">        int prv = 0;
-</span></span><span class="line"><span class="cl">        for(int cur = 1; cur <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">cur</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="err">[</span><span class="na">1</span><span class="err">,</span> <span class="na">5</span><span class="err">].</span> <span class="err">[</span><span class="na">3</span><span class="err">,</span> <span class="na">6</span><span class="err">]</span>
-</span></span><span class="line"><span class="cl">            <span class="err">//</span> <span class="err">[</span><span class="na">2</span><span class="err">,</span> <span class="na">8</span><span class="err">].</span> <span class="err">[</span><span class="na">3</span><span class="err">,</span> <span class="na">5</span><span class="err">]</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">ivl</span><span class="err">[</span><span class="na">cur</span><span class="err">][</span><span class="na">0</span><span class="err">]</span> <span class="err">&lt;</span> <span class="na">ivl</span><span class="err">[</span><span class="na">prv</span><span class="err">][</span><span class="na">1</span><span class="err">])</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">ans</span><span class="err">++;</span>
-</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">ivl</span><span class="err">[</span><span class="na">cur</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">&lt;=</span> <span class="na">ivl</span><span class="err">[</span><span class="na">prv</span><span class="err">][</span><span class="na">1</span><span class="err">])</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">prv </span><span class="o">=</span> <span class="s">cur;</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span> <span class="na">else</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">prv </span><span class="o">=</span> <span class="s">cur;</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">ans</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">eraseOverlapIntervals</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">ivl</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">ivl</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">ivl</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">ivl</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">prv</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">cur</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">cur</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// [1, 5]. [3, 6]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// [2, 8]. [3, 5]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">ivl</span><span class="p">[</span><span class="n">cur</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ivl</span><span class="p">[</span><span class="n">prv</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">ivl</span><span class="p">[</span><span class="n">cur</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">ivl</span><span class="p">[</span><span class="n">prv</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">prv</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">prv</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a collection of intervals, determine the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Sorting</strong>:</p>
+<ul>
+<li>Start by sorting the intervals based on their start times. This helps in easily identifying overlapping intervals.</li>
+</ul>
+</li>
+<li>
+<p><strong>Two Pointers Technique</strong>:</p>
+<ul>
+<li>Use two pointers: <code>prv</code> to track the last non-overlapping interval and <code>cur</code> to explore the current interval.</li>
+<li>Initialize <code>prv</code> to the first interval and iterate through the rest.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check for Overlaps</strong>:</p>
+<ul>
+<li>For each interval, check if it overlaps with the last non-overlapping interval:
+<ul>
+<li>If it overlaps (i.e., the start of the current interval is less than the end of the last non-overlapping interval), increment the count of removed intervals (<code>ans</code>).</li>
+<li>If the current interval ends before or at the same time as the last one, update <code>prv</code> to the current interval, which means the current interval is retained.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>The final count of removed intervals is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Sort the intervals based on the first element (start time).</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate and Check</strong>:</p>
+<ul>
+<li>Start from the second interval, comparing it with the last non-overlapping interval tracked by <code>prv</code>.</li>
+<li>Update the count of removed intervals and the <code>prv</code> pointer based on the overlap conditions.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N log N) due to sorting, where N is the number of intervals.</li>
+<li><strong>Space Complexity</strong>: O(1) for the in-place sorting and pointer tracking.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

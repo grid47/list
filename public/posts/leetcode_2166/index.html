@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 2166: Design Bitset · Yasir
+  Leetcode 2166: Design Bitset · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 2166">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_2166/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 2166: Design Bitset">
   <meta property="og:description" content="Solution to Leetcode 2166">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2018-11-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2018-11-24T00:00:00+00:00">
+    <meta property="article:published_time" content="2018-11-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2018-11-25T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,13 +166,13 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2018-11-24T00:00:00Z">
-                November 24, 2018
+              <time datetime="2018-11-25T00:00:00Z">
+                November 25, 2018
               </time>
             </span>
             <span class="reading-time">
@@ -189,67 +189,67 @@
         <p><a href="https://leetcode.com/problems/design-bitset/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Bitset {
-</span></span><span class="line"><span class="cl">    string s, flipp;
-</span></span><span class="line"><span class="cl">    int ones = 0, size = 0;
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    Bitset(int size) {
-</span></span><span class="line"><span class="cl">        s = string(size, &#39;0&#39;);
-</span></span><span class="line"><span class="cl">        flipp = string(size, &#39;1&#39;);
-</span></span><span class="line"><span class="cl">        ones = 0;
-</span></span><span class="line"><span class="cl">        this-&gt;size = size;
-</span></span><span class="line"><span class="cl">    }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Bitset</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">flipp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ones</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Bitset</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">=</span> <span class="n">string</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flipp</span> <span class="o">=</span> <span class="n">string</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="sc">&#39;1&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ones</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void fix(int idx) {
-</span></span><span class="line"><span class="cl">        if(s[idx] == &#39;0&#39;) ones++;
-</span></span><span class="line"><span class="cl">        s[idx] = &#39;1&#39;;
-</span></span><span class="line"><span class="cl">        flipp[idx] = &#39;0&#39;;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">fix</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="n">ones</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flipp</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void unfix(int idx) {
-</span></span><span class="line"><span class="cl">        if(s[idx] == &#39;1&#39;) ones--;
-</span></span><span class="line"><span class="cl">        s[idx] = &#39;0&#39;;
-</span></span><span class="line"><span class="cl">        flipp[idx] = &#39;1&#39;;        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">unfix</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="n">ones</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flipp</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void flip() {
-</span></span><span class="line"><span class="cl">        ones = size - ones;
-</span></span><span class="line"><span class="cl">        s.swap(flipp);
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">flip</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ones</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="n">ones</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">flipp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool all() {
-</span></span><span class="line"><span class="cl">        return ones == size;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">all</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ones</span> <span class="o">==</span> <span class="n">size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool one() {
-</span></span><span class="line"><span class="cl">        return ones &gt; 0;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">one</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ones</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int count() {
-</span></span><span class="line"><span class="cl">        return ones;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">count</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ones</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    string toString() {
-</span></span><span class="line"><span class="cl">        return s;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Your Bitset object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl"> * Bitset* obj = new Bitset(size);
-</span></span><span class="line"><span class="cl"> * obj-&gt;fix(idx);
-</span></span><span class="line"><span class="cl"> * obj-&gt;unfix(idx);
-</span></span><span class="line"><span class="cl"> * obj-&gt;flip();
-</span></span><span class="line"><span class="cl"> * bool param_4 = obj-&gt;all();
-</span></span><span class="line"><span class="cl"> * bool param_5 = obj-&gt;one();
-</span></span><span class="line"><span class="cl"> * int param_6 = obj-&gt;count();
-</span></span><span class="line"><span class="cl"> * string param_7 = obj-&gt;toString();
-</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your Bitset object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Bitset* obj = new Bitset(size);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;fix(idx);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;unfix(idx);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;flip();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_4 = obj-&gt;all();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_5 = obj-&gt;one();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_6 = obj-&gt;count();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * string param_7 = obj-&gt;toString();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

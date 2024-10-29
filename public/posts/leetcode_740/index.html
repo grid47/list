@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 740: Delete and Earn · Yasir
+  Leetcode 740: Delete and Earn · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 740">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_740/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 740: Delete and Earn">
   <meta property="og:description" content="Solution to Leetcode 740">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-10-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-10-20T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-10-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-10-21T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-10-20T00:00:00Z">
-                October 20, 2022
+              <time datetime="2022-10-21T00:00:00Z">
+                October 21, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,29 +189,135 @@
         <p><a href="https://leetcode.com/problems/delete-and-earn/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int deleteAndEarn(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums) {
-</span></span><span class="line"><span class="cl">        int n = 10001;
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> val(n + 1, 0);
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> dp (n + 1, 0);
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">deleteAndEarn</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">10001</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">val</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int num : nums)
-</span></span><span class="line"><span class="cl">          val[num] += num;
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="n">val</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">+=</span> <span class="n">num</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        dp[0] = 0;
-</span></span><span class="line"><span class="cl">        dp[1] = val[0];
-</span></span><span class="line"><span class="cl">        for(int i = 1; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="na">dp</span><span class="err">[</span><span class="na">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">]</span> <span class="err">=</span> <span class="na">max</span><span class="err">(</span><span class="na">dp</span><span class="err">[</span><span class="na">i</span><span class="err">],</span> <span class="na">dp</span><span class="err">[</span><span class="na">i</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">val</span><span class="err">[</span><span class="na">i</span><span class="err">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">dp</span><span class="err">[</span><span class="na">n</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given an array <code>nums</code> of integers. You can perform the following operation: Choose any number <code>x</code> in <code>nums</code>, earn <code>x</code> points, and delete <code>x</code>, as well as all instances of <code>x-1</code> and <code>x+1</code> from the array. Your goal is to maximize the points you earn by performing this operation multiple times.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Create Value Array</strong>:</p>
+<ul>
+<li>Create an array <code>val</code> where <code>val[i]</code> represents the total points earned by choosing the number <code>i</code> (i.e., the sum of all occurrences of <code>i</code> in <code>nums</code>).</li>
+<li>Loop through the <code>nums</code> array to populate the <code>val</code> array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Setup</strong>:</p>
+<ul>
+<li>Initialize a <code>dp</code> array where <code>dp[i]</code> represents the maximum points that can be earned considering the numbers from <code>0</code> to <code>i</code>.</li>
+<li>Set <code>dp[0]</code> to <code>0</code> (no points if there are no numbers).</li>
+<li>Set <code>dp[1]</code> to <code>val[0]</code> (points earned by deleting <code>0</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Fill DP Array</strong>:</p>
+<ul>
+<li>Use a loop to fill the <code>dp</code> array from <code>1</code> to <code>n</code> (the maximum number in <code>nums</code>):
+<ul>
+<li>For each <code>i</code>, compute <code>dp[i + 1]</code> as the maximum of not taking <code>i</code> (<code>dp[i]</code>) or taking <code>i</code> (<code>dp[i - 1] + val[i]</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>The answer is found in <code>dp[n]</code>, which gives the maximum points that can be earned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N + M), where N is the size of the <code>nums</code> array and M is the maximum number in <code>nums</code> (in this case, a constant 10000).</li>
+<li><strong>Space Complexity</strong>: O(M) for the <code>val</code> and <code>dp</code> arrays, which store the cumulative values and the maximum points.</li>
+</ul>
+<h3 id="example">
+  Example
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>For <code>nums = [3, 4, 2]</code>:</p>
+<ul>
+<li>Calculate <code>val</code> array: <code>val[2] = 2</code>, <code>val[3] = 3</code>, <code>val[4] = 4</code>.</li>
+<li>The dynamic programming states would be:
+<ul>
+<li><code>dp[3] = max(dp[2], dp[1] + val[3])</code></li>
+<li><code>dp[4] = max(dp[3], dp[2] + val[4])</code></li>
+</ul>
+</li>
+<li>The result will be <code>6</code>, as you can delete <code>3</code> and <code>4</code> for a total of <code>3 + 4 = 7</code>.</li>
+</ul>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Class</strong>:</p>
+<ul>
+<li><code>class Solution</code>: Contains the main method for processing the <code>nums</code> array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method</strong>:</p>
+<ul>
+<li><code>int deleteAndEarn(vector&lt;int&gt;&amp; nums)</code>: Implements the logic to compute the maximum points that can be earned.</li>
+</ul>
+</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

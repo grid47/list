@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 388: Longest Absolute File Path · Yasir
+  Leetcode 388: Longest Absolute File Path · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 388">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_388/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 388: Longest Absolute File Path">
   <meta property="og:description" content="Solution to Leetcode 388">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-10-07T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-10-07T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-10-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-10-08T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-10-07T00:00:00Z">
-                October 7, 2023
+              <time datetime="2023-10-08T00:00:00Z">
+                October 8, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,42 +189,123 @@
         <p><a href="https://leetcode.com/problems/longest-absolute-file-path/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int lengthLongestPath(string ipt) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">lengthLongestPath</span><span class="p">(</span><span class="n">string</span> <span class="n">ipt</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> levels(300, 0);
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">levels</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int level = 0;
-</span></span><span class="line"><span class="cl">        bool isFile = false;
-</span></span><span class="line"><span class="cl">        int ans = 0;
-</span></span><span class="line"><span class="cl">        int len = 0;
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">isFile</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        for(char c: ipt) {
-</span></span><span class="line"><span class="cl">            switch(c) {
-</span></span><span class="line"><span class="cl">                case &#39;\n&#39;:
-</span></span><span class="line"><span class="cl">                    level = 0, isFile = false, len = 0; break;
-</span></span><span class="line"><span class="cl">                case &#39;\t&#39;:
-</span></span><span class="line"><span class="cl">                    level++; break;
-</span></span><span class="line"><span class="cl">                case &#39;.&#39;:
-</span></span><span class="line"><span class="cl">                    isFile = true;
-</span></span><span class="line"><span class="cl">                default:
-</span></span><span class="line"><span class="cl">                    len++;
-</span></span><span class="line"><span class="cl">                    levels[level] = len;
-</span></span><span class="line"><span class="cl">                    if(isFile) {
-</span></span><span class="line"><span class="cl">                        ans = max(ans, accumulate(levels.begin(), levels.begin() + level + 1, 0) + level); 
-</span></span><span class="line"><span class="cl">                    }
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return ans;
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="nl">c</span><span class="p">:</span> <span class="n">ipt</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">switch</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">case</span> <span class="sc">&#39;\n&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">isFile</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">case</span> <span class="sc">&#39;\t&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">level</span><span class="o">++</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">case</span> <span class="sc">&#39;.&#39;</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">isFile</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">default</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">levels</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">=</span> <span class="n">len</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">isFile</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">levels</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">levels</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">level</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string representing a file system path where directories and files are separated by newline characters (<code>\n</code>) and directory levels are indicated by tab characters (<code>\t</code>), find the length of the longest path to a file. A path is considered to lead to a file if it contains a dot (<code>.</code>) in its name.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li>Use a vector <code>levels</code> to keep track of the lengths of the current path at each directory level.</li>
+<li>Variables for <code>level</code> (current directory level), <code>isFile</code> (flag to check if the current entry is a file), <code>ans</code> (maximum length of the file path), and <code>len</code> (length of the current file/directory name).</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Characters</strong>:</p>
+<ul>
+<li>Traverse through the string character by character.</li>
+<li>Use a <code>switch</code> statement to handle different characters:
+<ul>
+<li><strong>Newline (<code>\n</code>)</strong>: Reset <code>level</code>, <code>isFile</code>, and <code>len</code> to prepare for a new path entry.</li>
+<li><strong>Tab (<code>\t</code>)</strong>: Increment the <code>level</code> to indicate moving deeper into the directory structure.</li>
+<li><strong>File Indicator (<code>.</code>)</strong>: Set <code>isFile</code> to true if the current name contains a dot.</li>
+<li><strong>Default</strong>: Count the length of the current file/directory name and store it in <code>levels[level]</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Length</strong>:</p>
+<ul>
+<li>If the current entry is a file, calculate the total length of the path up to that file by summing the lengths from the <code>levels</code> vector, including the current level for file length.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Maximum Length</strong>:</p>
+<ul>
+<li>The function returns the maximum length found for any file path.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The function processes the string in a single pass, making adjustments based on the character type.</li>
+<li>It uses a <code>switch</code> statement for clear handling of character types, making the code organized and easy to follow.</li>
+<li>At the end, the maximum path length is determined based on the accumulated lengths of directories leading to any file.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of the input string, since we process each character once.</li>
+<li><strong>Space Complexity</strong>: O(d), where d is the depth of the directory structure (up to 300 levels in this case).</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

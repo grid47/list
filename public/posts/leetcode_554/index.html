@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 554: Brick Wall · Yasir
+  Leetcode 554: Brick Wall · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 554">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_554/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 554: Brick Wall">
   <meta property="og:description" content="Solution to Leetcode 554">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-04-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-04-24T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-04-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-04-25T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-04-24T00:00:00Z">
-                April 24, 2023
+              <time datetime="2023-04-25T00:00:00Z">
+                April 25, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,28 +189,102 @@
         <p><a href="https://leetcode.com/problems/brick-wall/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int leastBricks(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> wall) {
-</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> edge_freq;
-</span></span><span class="line"><span class="cl">        int max_freq = 0;
-</span></span><span class="line"><span class="cl">        for(int row = 0; row <span class="p">&lt;</span> <span class="nt">wall.size</span><span class="err">();</span> <span class="na">row</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">edge_pos </span><span class="o">=</span> <span class="s">0;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">brick_no </span><span class="o">=</span> <span class="s">0;</span> <span class="na">brick_no</span> <span class="err">&lt;</span> <span class="na">wall</span><span class="err">[</span><span class="na">row</span><span class="err">].</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">;</span> <span class="na">brick_no</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">int</span> <span class="na">curr_brick_length </span><span class="o">=</span> <span class="s">wall[row][brick_no];</span>
-</span></span><span class="line"><span class="cl">                <span class="na">edge_pos </span><span class="o">=</span> <span class="s">edge_pos</span> <span class="err">+</span> <span class="na">curr_brick_length</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">                <span class="na">edge_freq</span><span class="err">[</span><span class="na">edge_pos</span><span class="err">]++;</span>
-</span></span><span class="line"><span class="cl">                <span class="na">max_freq </span><span class="o">=</span> <span class="s">max(edge_freq[edge_pos],</span> <span class="na">max_freq</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">wall</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">max_freq</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">leastBricks</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">wall</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">edge_freq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">max_freq</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">wall</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">edge_pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">brick_no</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">brick_no</span> <span class="o">&lt;</span> <span class="n">wall</span><span class="p">[</span><span class="n">row</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">brick_no</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">curr_brick_length</span> <span class="o">=</span> <span class="n">wall</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">brick_no</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">edge_pos</span> <span class="o">=</span> <span class="n">edge_pos</span> <span class="o">+</span> <span class="n">curr_brick_length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">edge_freq</span><span class="p">[</span><span class="n">edge_pos</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">max_freq</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">edge_freq</span><span class="p">[</span><span class="n">edge_pos</span><span class="p">],</span> <span class="n">max_freq</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">wall</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">max_freq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a wall represented as a 2D array, where each element is the width of the bricks in each row, the task is to find the least number of bricks that need to be crossed by a vertical line drawn from the top of the wall to the bottom.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Understanding the Problem</strong>:</p>
+<ul>
+<li>A vertical line can cross multiple bricks in each row. The goal is to minimize the number of bricks that the line crosses.</li>
+<li>Each row of the wall can have different brick widths, and the position where the vertical line intersects can vary.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using a Hash Map to Track Edges</strong>:</p>
+<ul>
+<li>Iterate through each row of the wall and calculate the positions of the edges of the bricks.</li>
+<li>For every edge position, keep a count of how many rows have that edge position using a hash map (<code>edge_freq</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Maximum Frequency</strong>:</p>
+<ul>
+<li>Determine the maximum frequency of any edge position across all rows. This value represents the maximum number of rows that can be aligned without crossing a brick.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Calculation</strong>:</p>
+<ul>
+<li>The result is the total number of rows minus the maximum frequency, which gives the minimum number of bricks crossed by the vertical line.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>leastBricks</code> function iterates over each row of the wall.</li>
+<li>For each brick in the row (except the last one), it calculates the cumulative edge position and updates the frequency in the hash map.</li>
+<li>Finally, it calculates the number of rows that need to be crossed and returns the result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the total number of bricks in all rows combined, since each brick width is processed once.</li>
+<li><strong>Space Complexity</strong>: O(M), where M is the number of unique edge positions tracked in the hash map.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

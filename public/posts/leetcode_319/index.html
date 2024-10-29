@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 319: Bulb Switcher · Yasir
+  Leetcode 319: Bulb Switcher · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 319">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_319/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 319: Bulb Switcher">
   <meta property="og:description" content="Solution to Leetcode 319">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-12-15T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-12-15T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-12-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-12-16T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-12-15T00:00:00Z">
-                December 15, 2023
+              <time datetime="2023-12-16T00:00:00Z">
+                December 16, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,17 +189,83 @@
         <p><a href="https://leetcode.com/problems/bulb-switcher/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int bulbSwitch(int n) {
-</span></span><span class="line"><span class="cl">        return sqrt(n);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">bulbSwitch</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You have <code>n</code> bulbs, initially turned off. A person toggles the state of the bulbs (turning them on if they are off and vice versa) in the following manner:</p>
+<ul>
+<li>On the first round, they toggle every bulb.</li>
+<li>On the second round, they toggle every second bulb.</li>
+<li>On the third round, they toggle every third bulb, and so on until the <code>n</code>-th round.</li>
+</ul>
+<p>The goal is to determine how many bulbs are on after <code>n</code> rounds.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key observation is that a bulb ends up being toggled (switched) for each of its divisors. For example:</p>
+<ul>
+<li>Bulb 12 is toggled on rounds 1, 2, 3, 4, 6, and 12.</li>
+</ul>
+<p>A bulb will remain on if it is toggled an odd number of times. This occurs only for bulbs that are perfect squares because perfect squares have an odd number of divisors (one of the divisors is repeated).</p>
+<p>For instance:</p>
+<ul>
+<li>(1 = 1^2) has 1 divisor.</li>
+<li>(4 = 2^2) has 3 divisors (1, 2, 4).</li>
+<li>(9 = 3^2) has 3 divisors (1, 3, 9).</li>
+</ul>
+<p>Thus, the number of bulbs that remain on corresponds to the number of perfect squares less than or equal to <code>n</code>. This is equal to the largest integer (k) such that (k^2 \leq n), which is the integer part of the square root of <code>n</code>.</p>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Input</strong>: An integer <code>n</code> representing the number of bulbs.</li>
+<li><strong>Output</strong>: An integer representing the number of bulbs that are on after all rounds.</li>
+</ul>
+<ol>
+<li>Return the integer part of the square root of <code>n</code>.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(1)) because calculating the square root is a constant-time operation.</li>
+<li><strong>Space Complexity</strong>: (O(1)) since no additional data structures are used.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

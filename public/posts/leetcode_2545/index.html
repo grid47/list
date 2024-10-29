@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 2545: Sort the Students by Their Kth Score · Yasir
+  Leetcode 2545: Sort the Students by Their Kth Score · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 2545">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_2545/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 2545: Sort the Students by Their Kth Score">
   <meta property="og:description" content="Solution to Leetcode 2545">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2017-11-10T00:00:00+00:00">
-    <meta property="article:modified_time" content="2017-11-10T00:00:00+00:00">
+    <meta property="article:published_time" content="2017-11-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2017-11-11T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,13 +166,13 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2017-11-10T00:00:00Z">
-                November 10, 2017
+              <time datetime="2017-11-11T00:00:00Z">
+                November 11, 2017
               </time>
             </span>
             <span class="reading-time">
@@ -189,55 +189,55 @@
         <p><a href="https://leetcode.com/problems/sort-the-students-by-their-kth-score/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int k;
-</span></span><span class="line"><span class="cl">    int partition(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> score, int low, int high) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">partition</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">score</span><span class="p">,</span> <span class="kt">int</span> <span class="n">low</span><span class="p">,</span> <span class="kt">int</span> <span class="n">high</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      // select the rightmost element as pivot
-</span></span><span class="line"><span class="cl">      vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> pivot = score[high];
+</span></span><span class="line"><span class="cl">      <span class="c1">// select the rightmost element as pivot
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pivot</span> <span class="o">=</span> <span class="n">score</span><span class="p">[</span><span class="n">high</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      // pointer for greater element
-</span></span><span class="line"><span class="cl">      int i = (low - 1);
+</span></span><span class="line"><span class="cl">      <span class="c1">// pointer for greater element
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      // traverse each element of the array
-</span></span><span class="line"><span class="cl">      // compare them with the pivot
-</span></span><span class="line"><span class="cl">      for (int j = low; j <span class="p">&lt;</span> <span class="nt">high</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">        <span class="na">if</span> <span class="err">(</span><span class="na">score</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">k</span><span class="err">]</span> <span class="p">&gt;</span> pivot[k]) {
+</span></span><span class="line"><span class="cl">      <span class="c1">// traverse each element of the array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// compare them with the pivot
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">low</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pivot</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">          // if element smaller than pivot is found
-</span></span><span class="line"><span class="cl">          // swap it with the greater element pointed by i
-</span></span><span class="line"><span class="cl">          i++;
+</span></span><span class="line"><span class="cl">          <span class="c1">// if element smaller than pivot is found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="c1">// swap it with the greater element pointed by i
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="n">i</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">          // swap element at i with element at j
-</span></span><span class="line"><span class="cl">          swap(score[i], score[j]);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">      }
+</span></span><span class="line"><span class="cl">          <span class="c1">// swap element at i with element at j
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="n">swap</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">score</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      // swap pivot with the greater element at i
-</span></span><span class="line"><span class="cl">      swap(score[i + 1], score[high]);
+</span></span><span class="line"><span class="cl">      <span class="c1">// swap pivot with the greater element at i
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">swap</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">score</span><span class="p">[</span><span class="n">high</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      // return the partition point
-</span></span><span class="line"><span class="cl">      return (i + 1);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    void quickSort(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> score, int low, int high) {
-</span></span><span class="line"><span class="cl">        if (low <span class="p">&lt;</span> <span class="nt">high</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">pi </span><span class="o">=</span> <span class="s">partition(score,</span> <span class="na">low</span><span class="err">,</span> <span class="na">high</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">quickSort</span><span class="err">(</span><span class="na">score</span><span class="err">,</span> <span class="na">low</span><span class="err">,</span> <span class="na">pi</span> <span class="na">-</span> <span class="na">1</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">quickSort</span><span class="err">(</span><span class="na">score</span><span class="err">,</span> <span class="na">pi</span> <span class="err">+</span> <span class="na">1</span><span class="err">,</span> <span class="na">high</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl">    <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; sortTheStudents(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> score, int k) {
-</span></span><span class="line"><span class="cl">        this-&gt;k = k;
-</span></span><span class="line"><span class="cl">        quickSort(score, 0, score.size() - 1);
-</span></span><span class="line"><span class="cl">        return score;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">      <span class="c1">// return the partition point
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">return</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">quickSort</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">score</span><span class="p">,</span> <span class="kt">int</span> <span class="n">low</span><span class="p">,</span> <span class="kt">int</span> <span class="n">high</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">low</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">quickSort</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">pi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">quickSort</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">pi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">sortTheStudents</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">score</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">quickSort</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">score</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">score</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

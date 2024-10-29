@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 911: Online Election · Yasir
+  Leetcode 911: Online Election · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 911">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_911/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 911: Online Election">
   <meta property="og:description" content="Solution to Leetcode 911">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-05-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-05-02T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-05-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-05-03T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-05-02T00:00:00Z">
-                May 2, 2022
+              <time datetime="2022-05-03T00:00:00Z">
+                May 3, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,34 +189,142 @@
         <p><a href="https://leetcode.com/problems/online-election/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class TopVotedCandidate {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> mp;
-</span></span><span class="line"><span class="cl">    TopVotedCandidate(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> persons, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> times) {
-</span></span><span class="line"><span class="cl">        int n = persons.size(), lead = -1;
-</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">int</span><span class="p">&gt;</span> cnt;
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">lead </span><span class="o">=</span> <span class="s">++cnt[persons[i]]</span> <span class="p">&gt;</span>= cnt[lead]? persons[i] : lead;
-</span></span><span class="line"><span class="cl">            mp[times[i]] = lead;
-</span></span><span class="line"><span class="cl">        }
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TopVotedCandidate</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TopVotedCandidate</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">persons</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">times</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">persons</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">lead</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lead</span> <span class="o">=</span> <span class="o">++</span><span class="n">cnt</span><span class="p">[</span><span class="n">persons</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&gt;=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">lead</span><span class="p">]</span><span class="o">?</span> <span class="n">persons</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">:</span> <span class="n">lead</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">times</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">lead</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int q(int t) {
-</span></span><span class="line"><span class="cl">        return (--mp.upper_bound(t))-&gt;second;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">q</span><span class="p">(</span><span class="kt">int</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="o">--</span><span class="n">mp</span><span class="p">.</span><span class="n">upper_bound</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Your TopVotedCandidate object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl"> * TopVotedCandidate* obj = new TopVotedCandidate(persons, times);
-</span></span><span class="line"><span class="cl"> * int param_1 = obj-&gt;q(t);
-</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your TopVotedCandidate object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * TopVotedCandidate* obj = new TopVotedCandidate(persons, times);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_1 = obj-&gt;q(t);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>TopVotedCandidate</code> class records votes for candidates over time and allows you to query who the leading candidate was at any given time.</p>
+<h3 id="class-definition">
+  Class Definition
+  <a class="heading-link" href="#class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>: <code>TopVotedCandidate</code>
+<ul>
+<li>
+<p><strong>Constructor</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">TopVotedCandidate</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">persons</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">times</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>persons</code>: A vector of integers representing the IDs of candidates receiving votes.</li>
+<li><code>times</code>: A vector of integers representing the timestamps corresponding to each vote.</li>
+</ul>
+</li>
+<li><strong>Purpose</strong>: Initializes the <code>TopVotedCandidate</code> object and tracks the leading candidate at each vote timestamp.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">q</span><span class="p">(</span><span class="kt">int</span> <span class="n">t</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>t</code>: An integer representing a timestamp.</li>
+</ul>
+</li>
+<li><strong>Returns</strong>: The ID of the candidate who was the leading candidate at time <code>t</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Vote Counting</strong>:</p>
+<ul>
+<li>Maintain a <code>map&lt;int, int&gt;</code> to store the leading candidate at each time stamp.</li>
+<li>Use an <code>unordered_map&lt;int, int&gt;</code> to count the votes for each candidate.</li>
+<li>As you iterate through the <code>persons</code> and <code>times</code> vectors:
+<ul>
+<li>Increment the vote count for the current candidate.</li>
+<li>Update the leading candidate if the current candidate has the highest vote count or ties with the current leader.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Querying</strong>:</p>
+<ul>
+<li>For a given timestamp <code>t</code>, use <code>mp.upper_bound(t)</code> to find the latest time less than or equal to <code>t</code>.</li>
+<li>Return the candidate ID associated with that time.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li>Constructor: O(n log n), where n is the number of votes (due to the map insertions).</li>
+<li>Query: O(log n) for finding the upper bound in the map.</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>: O(n) for storing the candidate counts and the mapping of times to leading candidates.</li>
+</ul>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">TopVotedCandidate</span><span class="o">*</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TopVotedCandidate</span><span class="p">(</span><span class="n">persons</span><span class="p">,</span> <span class="n">times</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">param_1</span> <span class="o">=</span> <span class="n">obj</span><span class="o">-&gt;</span><span class="n">q</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+</span></span></code></pre></div> 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

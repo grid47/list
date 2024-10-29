@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 529: Minesweeper · Yasir
+  Leetcode 529: Minesweeper · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 529">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_529/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 529: Minesweeper">
   <meta property="og:description" content="Solution to Leetcode 529">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-05-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-05-19T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-05-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-05-20T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-05-19T00:00:00Z">
-                May 19, 2023
+              <time datetime="2023-05-20T00:00:00Z">
+                May 20, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,46 +189,140 @@
         <p><a href="https://leetcode.com/problems/minesweeper/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt; updateBoard(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">char</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> board, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> click) {
-</span></span><span class="line"><span class="cl">        int m = board.size(), n = board[0].size();
-</span></span><span class="line"><span class="cl">        int row = click[0], col = click[1];
-</span></span><span class="line"><span class="cl">        if(board[row][col] == &#39;M&#39;) {
-</span></span><span class="line"><span class="cl">            board[row][col] = &#39;X&#39;;
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">            int cnt = 0;
-</span></span><span class="line"><span class="cl">            for(int i = -1; i <span class="err">&lt;</span>= 1; i++)
-</span></span><span class="line"><span class="cl">            for(int j = -1; j <span class="err">&lt;</span>= 1; j++) {
-</span></span><span class="line"><span class="cl">                if(i == 0 <span class="err">&amp;&amp;</span> j == 0) continue;
-</span></span><span class="line"><span class="cl">                int x = row + i, y = col + j;
-</span></span><span class="line"><span class="cl">                if(x <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">x</span> <span class="p">&gt;</span>= m || y &gt;= n)    continue;
-</span></span><span class="line"><span class="cl">                if(board[x][y] == &#39;M&#39; || board[x][y] == &#39;X&#39;) cnt++;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            if (cnt &gt; 0) board[row][col] = &#39;0&#39; + cnt;
-</span></span><span class="line"><span class="cl">            else {
-</span></span><span class="line"><span class="cl">                board[row][col] = &#39;B&#39;;
-</span></span><span class="line"><span class="cl">                for(int i = -1; i <span class="err">&lt;</span>= 1; i++)
-</span></span><span class="line"><span class="cl">                for(int j = -1; j <span class="err">&lt;</span>= 1; j++) {
-</span></span><span class="line"><span class="cl">                    if(i == 0 <span class="err">&amp;&amp;</span> j == 0) continue;
-</span></span><span class="line"><span class="cl">                    int x = row + i, y = col + j;
-</span></span><span class="line"><span class="cl">                    if(x <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">x</span> <span class="p">&gt;</span>= m || y &gt;= n)    continue;
-</span></span><span class="line"><span class="cl">                    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> arr;
-</span></span><span class="line"><span class="cl">                    arr.push_back(x);
-</span></span><span class="line"><span class="cl">                    arr.push_back(y);
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">updateBoard</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">board</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">click</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">board</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">board</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">click</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">col</span> <span class="o">=</span> <span class="n">click</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;M&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;X&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">col</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">m</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span>    <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;M&#39;</span> <span class="o">||</span> <span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;X&#39;</span><span class="p">)</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;B&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">col</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">m</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span>    <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                    if(board[x][y] == &#39;E&#39;) updateBoard(board, arr);
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return board;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">board</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;E&#39;</span><span class="p">)</span> <span class="n">updateBoard</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">arr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">board</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In the game of Minesweeper, you are given a board represented as a 2D grid with the following characters:</p>
+<ul>
+<li><code>'E'</code>: Empty square</li>
+<li><code>'M'</code>: Mine</li>
+<li><code>'X'</code>: Revealed mine</li>
+<li><code>'B'</code>: Blank square (no adjacent mines)</li>
+<li><code>'1'</code> to <code>'8'</code>: Square with a number representing the count of adjacent mines</li>
+</ul>
+<p>When a player clicks on an empty square, you need to reveal it and its adjacent squares based on the number of mines around it. If the square contains a mine, it should be marked with <code>'X'</code>. If there are no adjacent mines, all adjacent squares should also be revealed recursively.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Extract the number of rows <code>m</code> and columns <code>n</code> from the board.</li>
+<li>Get the clicked position <code>(row, col)</code> from the <code>click</code> vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle Mine Click</strong>:</p>
+<ul>
+<li>If the clicked square contains a mine (<code>'M'</code>), change it to <code>'X'</code> and return the board.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Adjacent Mines</strong>:</p>
+<ul>
+<li>For an empty square, count the number of adjacent squares that contain mines.</li>
+<li>Check all 8 possible directions around the clicked square:
+<ul>
+<li>If a direction goes out of bounds, skip it.</li>
+<li>If an adjacent square is a mine or already revealed, increment the mine counter.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Reveal the Square</strong>:</p>
+<ul>
+<li>If there are adjacent mines (<code>cnt &gt; 0</code>), update the square with the number of adjacent mines (as a character).</li>
+<li>If there are no adjacent mines, mark the square as <code>'B'</code>, and recursively reveal all adjacent squares that are still <code>'E'</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Updated Board</strong>:</p>
+<ul>
+<li>After processing the click, return the modified board.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The function first checks if the clicked square is a mine or empty.</li>
+<li>If empty, it counts adjacent mines and reveals the square accordingly.</li>
+<li>If the square has no adjacent mines, it recursively calls itself for all adjacent empty squares.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> is the number of rows and <code>n</code> is the number of columns. In the worst case, all squares may need to be processed.</li>
+<li><strong>Space Complexity</strong>: O(m * n) in the worst case due to the recursion stack if many squares are empty.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

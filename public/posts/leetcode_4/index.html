@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 4: Median of Two Sorted Arrays · Yasir
+  Leetcode 4: Median of Two Sorted Arrays · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 4">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_4/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 4: Median of Two Sorted Arrays">
   <meta property="og:description" content="Solution to Leetcode 4">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-10-25T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-10-25T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-10-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-26T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -110,7 +110,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -165,18 +165,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-10-25T00:00:00Z">
-                October 25, 2024
+              <time datetime="2024-10-26T00:00:00Z">
+                October 26, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -188,53 +188,118 @@
         <p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    double findMedianSortedArrays(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums1, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> nums2) {
-</span></span><span class="line"><span class="cl">        int m = nums1.size();
-</span></span><span class="line"><span class="cl">        int n = nums2.size();
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">findMedianSortedArrays</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> A = (m <span class="p">&lt;</span> <span class="nt">n</span><span class="err">)?</span> <span class="na">nums1</span> <span class="na">:</span> <span class="na">nums2</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> B = (m <span class="p">&lt;</span> <span class="nt">n</span><span class="err">)?</span> <span class="na">nums2</span> <span class="na">:</span> <span class="na">nums1</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">m </span><span class="o">=</span> <span class="s">(nums1.size()</span> <span class="err">&lt;</span> <span class="na">nums2</span><span class="err">.</span><span class="na">size</span><span class="err">())?</span> <span class="na">nums1</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">:</span> <span class="na">nums2</span><span class="err">.</span><span class="na">size</span><span class="err">();</span>
-</span></span><span class="line"><span class="cl">        <span class="na">n </span><span class="o">=</span> <span class="s">(nums1.size()</span> <span class="err">&lt;</span> <span class="na">nums2</span><span class="err">.</span><span class="na">size</span><span class="err">())?</span> <span class="na">nums2</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">:</span> <span class="na">nums1</span><span class="err">.</span><span class="na">size</span><span class="err">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span><span class="o">?</span> <span class="nl">nums1</span> <span class="p">:</span> <span class="n">nums2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span><span class="o">?</span> <span class="nl">nums2</span> <span class="p">:</span> <span class="n">nums1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="o">?</span> <span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">:</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="o">?</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">:</span> <span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">imin </span><span class="o">=</span> <span class="s">0,</span> <span class="na">imax </span><span class="o">=</span> <span class="s">m,</span> <span class="na">i</span><span class="err">,</span> <span class="na">j</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">imin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">imax</span> <span class="o">=</span> <span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="na">while</span><span class="err">(</span><span class="na">imin</span> <span class="err">&lt;=</span> <span class="na">imax</span><span class="err">)</span>
-</span></span><span class="line"><span class="cl">        <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">i </span><span class="o">=</span> <span class="s">((imin</span> <span class="err">+</span> <span class="na">imax</span><span class="err">)</span> <span class="err">/</span> <span class="na">2</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="na">j </span><span class="o">=</span> <span class="s">((m</span> <span class="err">+</span> <span class="na">n</span> <span class="err">+</span> <span class="na">1</span><span class="err">)/</span> <span class="na">2</span><span class="err">)</span> <span class="na">-</span> <span class="na">i</span><span class="err">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">imin</span> <span class="o">&lt;=</span> <span class="n">imax</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="p">((</span><span class="n">imin</span> <span class="o">+</span> <span class="n">imax</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">j</span> <span class="o">=</span> <span class="p">((</span><span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                 <span class="na">if</span><span class="err">((</span><span class="na">i</span> <span class="err">&lt;</span> <span class="na">m</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="err">(</span><span class="na">B</span><span class="err">[</span><span class="na">j</span> <span class="na">-</span> <span class="na">1</span><span class="err">]</span> <span class="p">&gt;</span> A[i]))
-</span></span><span class="line"><span class="cl">                    imin = i + 1;
-</span></span><span class="line"><span class="cl">            else if((i &gt; 0) <span class="err">&amp;&amp;</span> (A[i - 1] &gt; B[j]))
-</span></span><span class="line"><span class="cl">                    imax = i - 1;
-</span></span><span class="line"><span class="cl">            else
-</span></span><span class="line"><span class="cl">            {
-</span></span><span class="line"><span class="cl">                int lmax;
-</span></span><span class="line"><span class="cl">                     if(i == 0) lmax = B[j - 1];
-</span></span><span class="line"><span class="cl">                else if(j == 0) lmax = A[i - 1];
-</span></span><span class="line"><span class="cl">                else            lmax = max(A[i - 1], B[j - 1]);
+</span></span><span class="line"><span class="cl">                 <span class="k">if</span><span class="p">((</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">imin</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span><span class="p">((</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">imax</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">lmax</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                     <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">lmax</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">lmax</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span>            <span class="n">lmax</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                if(((m + n) % 2) == 1) return lmax;
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(((</span><span class="n">m</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">lmax</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                int rmin;
-</span></span><span class="line"><span class="cl">                     if(i == m) rmin = B[j];
-</span></span><span class="line"><span class="cl">                else if(j == n) rmin = A[i];
-</span></span><span class="line"><span class="cl">                else            rmin = min(A[i], B[j]);
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">rmin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                     <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">m</span><span class="p">)</span> <span class="n">rmin</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="n">rmin</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span>            <span class="n">rmin</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">B</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                return (double)(lmax + rmin) / 2;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return 0;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">lmax</span> <span class="o">+</span> <span class="n">rmin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given two sorted arrays <code>nums1</code> and <code>nums2</code>, find the median of the two sorted arrays. The overall run time complexity should be (O(\log(\min(m, n)))), where (m) and (n) are the lengths of the two arrays.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Use a binary search technique to partition both arrays into two halves such that the maximum of the left halves is less than or equal to the minimum of the right halves. This allows us to find the median directly.</p>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Determine the sizes of <code>nums1</code> and <code>nums2</code>. Assign the smaller array to <code>A</code> and the larger one to <code>B</code> to minimize the binary search range.</li>
+<li>Initialize pointers <code>imin</code>, <code>imax</code>, and variables <code>i</code> and <code>j</code> to represent the partition indices.</li>
+<li>Perform binary search:
+<ul>
+<li>Calculate the partition index <code>i</code> for array <code>A</code> and <code>j</code> for array <code>B</code>.</li>
+<li>Adjust <code>imin</code> and <code>imax</code> based on the comparison of elements around the partitions:
+<ul>
+<li>If <code>B[j - 1] &gt; A[i]</code>, move <code>imin</code> up to <code>i + 1</code>.</li>
+<li>If <code>A[i - 1] &gt; B[j]</code>, move <code>imax</code> down to <code>i - 1</code>.</li>
+</ul>
+</li>
+<li>If the correct partition is found:
+<ul>
+<li>Calculate <code>lmax</code>, the maximum of the left partitions.</li>
+<li>If the combined length of the arrays is odd, return <code>lmax</code> as the median.</li>
+<li>If even, calculate <code>rmin</code>, the minimum of the right partitions, and return the average of <code>lmax</code> and <code>rmin</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Return 0 if no median is found (should not reach here if inputs are valid).</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity:</strong> (O(\log(\min(m, n)))) - due to the binary search on the smaller array.</li>
+<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used beyond a few variables.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

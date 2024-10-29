@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 815: Bus Routes · Yasir
+  Leetcode 815: Bus Routes · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 815">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_815/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 815: Bus Routes">
   <meta property="og:description" content="Solution to Leetcode 815">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-08-06T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-08-06T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-08-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-08-07T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-08-06T00:00:00Z">
-                August 6, 2022
+              <time datetime="2022-08-07T00:00:00Z">
+                August 7, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,56 +189,135 @@
         <p><a href="https://leetcode.com/problems/bus-routes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int numBusesToDestination(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> routes, int source, int target) {
-</span></span><span class="line"><span class="cl">        unordered_map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">unordered_set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mp;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numBusesToDestination</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">routes</span><span class="p">,</span> <span class="kt">int</span> <span class="n">source</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">unordered_set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int n = routes.size();
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; bus(n);
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">routes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">bus</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">x:</span> <span class="na">routes</span><span class="err">[</span><span class="na">i</span><span class="err">])</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(!</span><span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">].</span><span class="na">count</span><span class="err">(</span><span class="na">i</span><span class="err">))</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="na">for</span><span class="err">(</span><span class="na">auto</span> <span class="na">it:</span> <span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">])</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="na">bus</span><span class="err">[</span><span class="na">i</span><span class="err">].</span><span class="na">push_back</span><span class="err">(</span><span class="na">it</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                        <span class="na">bus</span><span class="err">[</span><span class="na">it</span><span class="err">].</span><span class="na">push_back</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="err">}</span>
-</span></span><span class="line"><span class="cl">                <span class="err">}</span>
-</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">[</span><span class="na">x</span><span class="err">].</span><span class="na">insert</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">if</span><span class="err">(</span><span class="na">source </span><span class="o">=</span><span class="s">=</span> <span class="na">target</span><span class="err">)</span> <span class="na">return</span> <span class="na">0</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">cnt </span><span class="o">=</span> <span class="s">0;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">queue</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span> q;
-</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> vis;
-</span></span><span class="line"><span class="cl">        for(int it: mp[source]) {
-</span></span><span class="line"><span class="cl">            q.push(it);
-</span></span><span class="line"><span class="cl">            vis.insert(it);
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span><span class="p">:</span> <span class="n">routes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">bus</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">bus</span><span class="p">[</span><span class="n">it</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">source</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">it</span><span class="p">:</span> <span class="n">mp</span><span class="p">[</span><span class="n">source</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vis</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        while(!q.empty()) {
-</span></span><span class="line"><span class="cl">            cnt++;
-</span></span><span class="line"><span class="cl">            int sz = q.size();
-</span></span><span class="line"><span class="cl">            while(sz--) {
-</span></span><span class="line"><span class="cl">                int x = q.front();
-</span></span><span class="line"><span class="cl">                q.pop();
-</span></span><span class="line"><span class="cl">                if(mp[target].count(x)) return cnt;
-</span></span><span class="line"><span class="cl">                for(auto it: bus[x]) {
-</span></span><span class="line"><span class="cl">                    if(vis.count(it)) continue;
-</span></span><span class="line"><span class="cl">                    vis.insert(it);
-</span></span><span class="line"><span class="cl">                    q.push(it);
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return -1;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">target</span><span class="p">].</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">bus</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">it</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">vis</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given a list of bus routes and two bus stops: a source and a target. Each bus route is represented as an array of bus stops it serves. Your task is to find the minimum number of buses required to travel from the source to the target. If it is not possible to reach the target, return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be approached using a graph traversal technique (Breadth-First Search, BFS) because we can consider each bus route as a node and each bus stop as an edge connecting those nodes.</p>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>:</p>
+<ul>
+<li>Use an unordered map (<code>mp</code>) to keep track of which bus routes serve each bus stop.</li>
+<li>Use an adjacency list (<code>bus</code>) to represent the connections between bus routes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Graph</strong>:</p>
+<ul>
+<li>Iterate through each route and populate the map so that each bus stop points to the routes that can be taken from that stop.</li>
+<li>Populate the adjacency list to show which routes are connected to each other.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Initialization</strong>:</p>
+<ul>
+<li>If the source and target are the same, return 0 (no buses needed).</li>
+<li>Initialize a queue for BFS and a set to keep track of visited bus routes.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Traversal</strong>:</p>
+<ul>
+<li>For each level of BFS (each bus transfer), push all the bus routes accessible from the currently visited routes into the queue.</li>
+<li>Check if any of these routes lead to the target bus stop. If so, return the current count of buses taken.</li>
+<li>If the queue is exhausted without reaching the target, return -1.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>numBusesToDestination</code> function constructs the necessary data structures and performs BFS.</li>
+<li>The graph is built to show connections between bus routes.</li>
+<li>The BFS process explores each level of routes, counting the number of transfers (buses).</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(B + S), where B is the number of bus routes and S is the number of bus stops. Each bus route and stop is processed once.</li>
+<li><strong>Space Complexity</strong>: O(B + S) for storing the graph representation and the queue.</li>
+</ul>
+<p>This approach effectively finds the minimum number of buses needed to travel from the source to the target while handling edge cases where the target may not be reachable.</p>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

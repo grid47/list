@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 576: Out of Boundary Paths · Yasir
+  Leetcode 576: Out of Boundary Paths · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 576">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_576/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 576: Out of Boundary Paths">
   <meta property="og:description" content="Solution to Leetcode 576">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-04-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-04-02T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-04-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-04-03T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-04-02T00:00:00Z">
-                April 2, 2023
+              <time datetime="2023-04-03T00:00:00Z">
+                April 3, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,37 +189,111 @@
         <p><a href="https://leetcode.com/problems/out-of-boundary-paths/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">    int mod = (int) 1e9 + 7;
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int findPaths(int m, int n, int mv, int i, int j) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">findPaths</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mv</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; mm(mv + 1, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;(m, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, -1)));
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">mm</span><span class="p">(</span><span class="n">mv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)));</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        return dfs(m, n, mv, 0, i, j, mm);
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mv</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">mm</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    int dfs(int m, int n, int mx, int mv, int x, int y, vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt; <span class="err">&amp;</span> mm) {
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mv</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">mm</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        if (x <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">y</span> <span class="err">&lt;</span> <span class="na">0</span> <span class="err">||</span> <span class="na">x</span> <span class="p">&gt;</span>= m || y &gt;= n) return 1;
-</span></span><span class="line"><span class="cl">        if (mv == mx)                           return 0;
-</span></span><span class="line"><span class="cl">        if (mm[mv][x][y] &gt; -1)                  return mm[mv][x][y];
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">m</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">mv</span> <span class="o">==</span> <span class="n">mx</span><span class="p">)</span>                           <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">mm</span><span class="p">[</span><span class="n">mv</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>                  <span class="k">return</span> <span class="n">mm</span><span class="p">[</span><span class="n">mv</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        int res = 0;
-</span></span><span class="line"><span class="cl">        res = ( res + dfs(m, n, mx, mv + 1, x + 1, y, mm) ) % mod;
-</span></span><span class="line"><span class="cl">        res = ( res + dfs(m, n, mx, mv + 1, x - 1, y, mm) ) % mod;
-</span></span><span class="line"><span class="cl">        res = ( res + dfs(m, n, mx, mv + 1, x, y + 1, mm) ) % mod;
-</span></span><span class="line"><span class="cl">        res = ( res + dfs(m, n, mx, mv + 1, x, y - 1, mm) ) % mod;
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="p">(</span> <span class="n">res</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">mv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mm</span><span class="p">)</span> <span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="p">(</span> <span class="n">res</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">mv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mm</span><span class="p">)</span> <span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="p">(</span> <span class="n">res</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">mv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mm</span><span class="p">)</span> <span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="p">(</span> <span class="n">res</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">mv</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mm</span><span class="p">)</span> <span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        return mm[mv][x][y] = (res % mod);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mm</span><span class="p">[</span><span class="n">mv</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">%</span> <span class="n">mod</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You are given a grid of size <code>m x n</code>, and a starting point <code>(i, j)</code>. You can move in four directions: up, down, left, or right, and you can do this at most <code>mv</code> times. The objective is to find the number of paths that lead out of the grid.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<ul>
+<li>Use a 3D vector <code>mm</code> to store the number of paths from a specific point <code>(x, y)</code> with <code>mv</code> moves left.</li>
+<li>The dimensions of <code>mm</code> will be <code>(mv + 1) x m x n</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Depth-First Search (DFS)</strong>:</p>
+<ul>
+<li>Create a recursive function <code>dfs</code> that takes parameters for the grid size <code>(m, n)</code>, the maximum moves <code>mx</code>, the current move count <code>mv</code>, and the current position <code>(x, y)</code>.</li>
+<li>Base cases:
+<ul>
+<li>If the current position <code>(x, y)</code> is out of bounds (i.e., <code>x &lt; 0</code> or <code>y &lt; 0</code> or <code>x &gt;= m</code> or <code>y &gt;= n</code>), it means a path has successfully moved out of the grid, so return 1.</li>
+<li>If the maximum moves have been reached (<code>mv == mx</code>), return 0 since no more moves can be made.</li>
+<li>If the result for <code>(mv, x, y)</code> is already computed (i.e., <code>mm[mv][x][y] &gt; -1</code>), return that stored value.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Exploration of All Directions</strong>:</p>
+<ul>
+<li>From the current position, recursively call <code>dfs</code> for all four possible movements: down, up, right, and left.</li>
+<li>Sum up the results from these calls, ensuring to take modulo <code>10^9 + 7</code> to prevent overflow.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>findPaths</code> function initializes the memoization table and calls <code>dfs</code>.</li>
+<li>The <code>dfs</code> function checks the base cases and recursively explores all four directions, updating the memoization table with the computed results.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(m * n * mv), since we might potentially compute the value for every cell <code>(x, y)</code> for every move <code>mv</code>.</li>
+<li><strong>Space Complexity</strong>: O(m * n * mv), for the memoization table <code>mm</code>.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

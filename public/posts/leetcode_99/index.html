@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 99: Recover Binary Search Tree · Yasir
+  Leetcode 99: Recover Binary Search Tree · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 99">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_99/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 99: Recover Binary Search Tree">
   <meta property="og:description" content="Solution to Leetcode 99">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-07-22T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-07-22T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-07-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-07-23T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-07-22T00:00:00Z">
-                July 22, 2024
+              <time datetime="2024-07-23T00:00:00Z">
+                July 23, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,30 +189,114 @@
         <p><a href="https://leetcode.com/problems/recover-binary-search-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">    TreeNode *prv = NULL, * fst = NULL , *scd = NULL;
-</span></span><span class="line"><span class="cl">    void inorder(TreeNode* node)
-</span></span><span class="line"><span class="cl">    {
-</span></span><span class="line"><span class="cl">        if(!node) return;
-</span></span><span class="line"><span class="cl">        inorder(node-&gt;left);
-</span></span><span class="line"><span class="cl">        if (prv <span class="err">&amp;&amp;</span> node-&gt;val <span class="p">&lt;</span> <span class="nt">prv-</span><span class="p">&gt;</span>val) {
-</span></span><span class="line"><span class="cl">            if (!fst)  fst = prv;
-</span></span><span class="line"><span class="cl">            scd = node; 
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        prv = node;
-</span></span><span class="line"><span class="cl">        inorder(node-&gt;right);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    void recoverTree(TreeNode* node) {
-</span></span><span class="line"><span class="cl">        inorder(node);
-</span></span><span class="line"><span class="cl">        swap(fst-&gt;val, scd-&gt;val);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TreeNode</span> <span class="o">*</span><span class="n">prv</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">*</span> <span class="n">fst</span> <span class="o">=</span> <span class="nb">NULL</span> <span class="p">,</span> <span class="o">*</span><span class="n">scd</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">inorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">node</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inorder</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">prv</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">prv</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fst</span><span class="p">)</span>  <span class="n">fst</span> <span class="o">=</span> <span class="n">prv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">scd</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prv</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inorder</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">recoverTree</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inorder</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">swap</span><span class="p">(</span><span class="n">fst</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">scd</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Two nodes in a binary search tree (BST) have been swapped by mistake, violating the BST property. This function identifies and corrects the swapped nodes to restore the BST.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses <strong>in-order traversal</strong> to detect the swapped nodes:</p>
+<ol>
+<li><strong>In-order Traversal</strong>:
+<ul>
+<li>Perform an in-order traversal, which would normally visit nodes in increasing order for a valid BST.</li>
+<li>During traversal, detect nodes that are out of order by comparing each node with the previous node (<code>prv</code>).</li>
+</ul>
+</li>
+<li><strong>Detect Swapped Nodes</strong>:
+<ul>
+<li>If a node is smaller than the previous node, record the misplaced nodes:
+<ul>
+<li><strong>First misplaced node (<code>fst</code>)</strong>: The first time we detect a violation, <code>prv</code> is recorded as <code>fst</code>.</li>
+<li><strong>Second misplaced node (<code>scd</code>)</strong>: Each subsequent violation records the current node as <code>scd</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Swap the Values</strong>:
+<ul>
+<li>After identifying the two misplaced nodes (<code>fst</code> and <code>scd</code>), swap their values to restore the BST property.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialize Pointers</strong>: Set <code>prv</code> (previous node), <code>fst</code> (first misplaced node), and <code>scd</code> (second misplaced node) to <code>NULL</code>.</li>
+<li><strong>Recursive In-order Traversal</strong> (<code>inorder</code> function):
+<ul>
+<li>Traverse to the leftmost node, checking for order violations.</li>
+<li>If <code>node-&gt;val</code> is less than <code>prv-&gt;val</code>, record nodes:
+<ul>
+<li>On the first violation, set <code>fst</code> to <code>prv</code>.</li>
+<li>On subsequent violations, set <code>scd</code> to <code>node</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Restore BST</strong>:
+<ul>
+<li>After traversal, swap the values of <code>fst</code> and <code>scd</code> to correct the BST.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes, since each node is visited once during the traversal.</li>
+<li><strong>Space Complexity</strong>: (O(h)), where (h) is the height of the tree, due to the recursion stack in the traversal.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 968: Binary Tree Cameras · Yasir
+  Leetcode 968: Binary Tree Cameras · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 968">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_968/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 968: Binary Tree Cameras">
   <meta property="og:description" content="Solution to Leetcode 968">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-03-06T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-03-06T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-03-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-03-07T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-03-06T00:00:00Z">
-                March 6, 2022
+              <time datetime="2022-03-07T00:00:00Z">
+                March 7, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,38 +189,131 @@
         <p><a href="https://leetcode.com/problems/binary-tree-cameras/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
-</span></span><span class="line"><span class="cl"> * struct TreeNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     TreeNode *left;
-</span></span><span class="line"><span class="cl"> *     TreeNode *right;
-</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int res = 0;
-</span></span><span class="line"><span class="cl">    int minCameraCover(TreeNode* root) {
-</span></span><span class="line"><span class="cl">        return (dfs(root) <span class="p">&lt;</span> <span class="nt">1</span> <span class="err">?</span> <span class="na">1</span> <span class="na">:</span> <span class="na">0</span><span class="err">)</span> <span class="err">+</span> <span class="na">res</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl">    <span class="na">int</span> <span class="na">dfs</span><span class="err">(</span><span class="na">TreeNode</span><span class="err">*</span> <span class="na">root</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">        <span class="na">if</span> <span class="err">(!</span><span class="na">root</span><span class="err">)</span> <span class="na">return</span> <span class="na">2</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="na">int</span> <span class="na">left </span><span class="o">=</span> <span class="s">dfs(root-</span><span class="p">&gt;</span>left), right = dfs(root-&gt;right);
-</span></span><span class="line"><span class="cl">        if (left == 0 || right == 0) {
-</span></span><span class="line"><span class="cl">            res++;
-</span></span><span class="line"><span class="cl">            return 1;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return left == 1 || right == 1 ? 2 : 0;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minCameraCover</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">),</span> <span class="n">right</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">right</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">left</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">right</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h2 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Given a binary tree, place the minimum number of cameras to monitor all nodes. Each camera at a node monitors its parent, itself, and its immediate children.</p>
+<h2 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li>
+<p><strong>Define States</strong>:</p>
+<ul>
+<li>Each node can be in one of three states:
+<ul>
+<li><strong>0</strong>: The node needs a camera.</li>
+<li><strong>1</strong>: The node has a camera.</li>
+<li><strong>2</strong>: The node is covered but does not have a camera.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Traversal</strong>:</p>
+<ul>
+<li>Use a depth-first search to decide the state of each node starting from the leaves up to the root.</li>
+<li><strong>Base Case</strong>: If the node is <code>nullptr</code>, return <code>2</code> (covered without a camera).</li>
+</ul>
+</li>
+<li>
+<p><strong>Node State Logic</strong>:</p>
+<ul>
+<li>If either child node needs a camera (state 0), place a camera at the current node, increment the result counter <code>res</code>, and return <code>1</code> (has a camera).</li>
+<li>If either child has a camera (state 1), the current node is covered without needing a camera, so return <code>2</code>.</li>
+<li>If both children are covered (state 2), the current node needs a camera, so return <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check</strong>:</p>
+<ul>
+<li>After the DFS completes, check the root node. If it still needs a camera, increment <code>res</code>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>
+<p><strong><code>int minCameraCover(TreeNode* root)</code></strong>:</p>
+<ul>
+<li>Calls <code>dfs(root)</code> to determine if the root itself needs a camera.</li>
+<li>Returns the total number of cameras required (<code>res</code>), adding one if the root is unmonitored.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>int dfs(TreeNode* root)</code></strong>:</p>
+<ul>
+<li>Recursively determines the state of each child.</li>
+<li>Applies the node state rules to decide whether the current node requires or has a camera.</li>
+</ul>
+</li>
+</ul>
+<h2 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of nodes, since each node is visited once.</li>
+<li><strong>Space Complexity</strong>: O(h), where <code>h</code> is the height of the tree due to recursive stack space.</li>
+</ul>
+<p>This approach leverages DFS to minimize the number of cameras by deciding each node&rsquo;s state based on its children&rsquo;s states.</p>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

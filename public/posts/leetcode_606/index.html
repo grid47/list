@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 606: Construct String from Binary Tree · Yasir
+  Leetcode 606: Construct String from Binary Tree · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 606">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_606/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 606: Construct String from Binary Tree">
   <meta property="og:description" content="Solution to Leetcode 606">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-03-03T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-03-03T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-03-04T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-03-03T00:00:00Z">
-                March 3, 2023
+              <time datetime="2023-03-04T00:00:00Z">
+                March 4, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,35 +189,111 @@
         <p><a href="https://leetcode.com/problems/construct-string-from-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
-</span></span><span class="line"><span class="cl"> * struct TreeNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     TreeNode *left;
-</span></span><span class="line"><span class="cl"> *     TreeNode *right;
-</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    string tree2str(TreeNode* root) {
-</span></span><span class="line"><span class="cl">        if(root == NULL) return &#34;&#34;;
-</span></span><span class="line"><span class="cl">        string left  = tree2str(root-&gt;left);
-</span></span><span class="line"><span class="cl">        if(left!= &#34;&#34;) left = &#39;(&#39; + left + &#39;)&#39;;
-</span></span><span class="line"><span class="cl">        string right = tree2str(root-&gt;right);
-</span></span><span class="line"><span class="cl">        if(right != &#34;&#34;) right = &#39;(&#39; + right + &#39;)&#39;;
-</span></span><span class="line"><span class="cl">        if(left == &#34;&#34; <span class="err">&amp;&amp;</span> right != &#34;&#34;) left = &#34;()&#34;;
-</span></span><span class="line"><span class="cl">        // if(left != &#34;&#34; <span class="err">&amp;&amp;</span> right == &#34;&#34;) right = &#34;()&#34;;        
-</span></span><span class="line"><span class="cl">        return to_string(root-&gt;val)+left+right;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">tree2str</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">left</span>  <span class="o">=</span> <span class="n">tree2str</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">left</span><span class="o">!=</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="n">left</span> <span class="o">=</span> <span class="sc">&#39;(&#39;</span> <span class="o">+</span> <span class="n">left</span> <span class="o">+</span> <span class="sc">&#39;)&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">right</span> <span class="o">=</span> <span class="n">tree2str</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">right</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="n">right</span> <span class="o">=</span> <span class="sc">&#39;(&#39;</span> <span class="o">+</span> <span class="n">right</span> <span class="o">+</span> <span class="sc">&#39;)&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="n">left</span> <span class="o">=</span> <span class="s">&#34;()&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// if(left != &#34;&#34; &amp;&amp; right == &#34;&#34;) right = &#34;()&#34;;        
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span><span class="o">+</span><span class="n">left</span><span class="o">+</span><span class="n">right</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Convert a binary tree into a string representation. The string format should follow these rules:</p>
+<ol>
+<li>The root value should be printed first.</li>
+<li>If the left child exists, its string representation should follow, enclosed in parentheses.</li>
+<li>If the right child exists, its string representation should also follow, enclosed in parentheses.</li>
+<li>If the left child does not exist, but the right child does, the left child should still be represented as an empty pair of parentheses <code>()</code>.</li>
+<li>If both children are absent, nothing should be printed for them.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Recursive Traversal</strong>:</p>
+<ul>
+<li>Use a recursive function <code>tree2str</code> to traverse the tree and build the string representation.</li>
+<li>Start from the root node, convert its value to a string, and append the string representations of its children.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Left and Right Children</strong>:</p>
+<ul>
+<li>If the left child exists, recursively call <code>tree2str</code> for the left child and enclose the result in parentheses.</li>
+<li>If the right child exists, similarly, get the string for the right child and enclose it in parentheses.</li>
+<li>If the left child does not exist but the right child does, include <code>()</code> for the left child.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>If the current node is <code>NULL</code>, return an empty string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The function first checks if the root is <code>NULL</code>. If it is, it returns an empty string.</li>
+<li>It builds the strings for the left and right subtrees recursively.</li>
+<li>It handles the cases where children may be absent, ensuring the correct format is maintained.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the tree, as each node is visited exactly once.</li>
+<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree, due to the recursive call stack.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

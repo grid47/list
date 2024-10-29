@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 32: Longest Valid Parentheses · Yasir
+  Leetcode 32: Longest Valid Parentheses · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 32">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_32/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 32: Longest Valid Parentheses">
   <meta property="og:description" content="Solution to Leetcode 32">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-09-27T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-09-27T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-09-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-09-28T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-09-27T00:00:00Z">
-                September 27, 2024
+              <time datetime="2024-09-28T00:00:00Z">
+                September 28, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,31 +189,112 @@
         <p><a href="https://leetcode.com/problems/longest-valid-parentheses/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int longestValidParentheses(string s) {
-</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> stk;
-</span></span><span class="line"><span class="cl">        stk.push(-1);
-</span></span><span class="line"><span class="cl">        int maxL = 0;
-</span></span><span class="line"><span class="cl">        for(int i=0;i<span class="p">&lt;</span><span class="nt">s.size</span><span class="err">();</span><span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">t </span><span class="o">=</span> <span class="s">stk.top();</span>
-</span></span><span class="line"><span class="cl">            <span class="na">if</span><span class="err">(</span><span class="na">t</span><span class="err">!=</span><span class="na">-1</span><span class="err">&amp;&amp;</span><span class="na">s</span><span class="err">[</span><span class="na">i</span><span class="err">]==&#39;)&#39;&amp;&amp;</span><span class="na">s</span><span class="err">[</span><span class="na">t</span><span class="err">]==&#39;(&#39;)</span>
-</span></span><span class="line"><span class="cl">            <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">stk</span><span class="err">.</span><span class="na">pop</span><span class="err">();</span>
-</span></span><span class="line"><span class="cl">                <span class="na">maxL</span><span class="o">=</span><span class="s">max(maxL,i-stk.top());</span>
-</span></span><span class="line"><span class="cl">            <span class="err">}</span>
-</span></span><span class="line"><span class="cl">            <span class="na">else</span>
-</span></span><span class="line"><span class="cl">                <span class="na">stk</span><span class="err">.</span><span class="na">push</span><span class="err">(</span><span class="na">i</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">maxL</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
-</span></span><span class="line"><span class="cl"><span class="err">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">longestValidParentheses</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">maxL</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="o">!=-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;)&#39;</span><span class="o">&amp;&amp;</span><span class="n">s</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;(&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">maxL</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">maxL</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">maxL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string containing just the characters <code>'('</code> and <code>')'</code>, find the length of the longest valid (well-formed) parentheses substring.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Using a Stack</strong>:</p>
+<ul>
+<li>Utilize a stack to keep track of indices of the characters in the string. This helps in determining the position of the last unmatched parenthesis.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize the Stack</strong>:</p>
+<ul>
+<li>Push <code>-1</code> onto the stack to handle the edge case of valid substrings starting from index <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through the String</strong>:</p>
+<ul>
+<li>For each character in the string:
+<ul>
+<li>If the character is <code>')'</code> and the top of the stack is not <code>-1</code>, check if the character at that index is <code>'('</code>.
+<ul>
+<li>If it is, a valid pair is found; pop the index from the stack and calculate the length of the valid substring by subtracting the new top of the stack from the current index <code>i</code>.</li>
+<li>Update <code>maxL</code> if the new length is greater.</li>
+</ul>
+</li>
+<li>If no valid pair is found or the character is <code>'('</code>, push the current index onto the stack.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialization</strong>: A stack is initialized with <code>-1</code> to track the last unmatched parenthesis index.</li>
+<li><strong>Traversal</strong>: As the string is traversed:
+<ul>
+<li>When a valid pair is found, the top of the stack is popped, and the length of the valid substring is calculated.</li>
+<li>If the character is <code>'('</code>, its index is simply pushed onto the stack.</li>
+</ul>
+</li>
+<li><strong>Result</strong>: The maximum length of valid parentheses is stored in <code>maxL</code> and returned.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity:</strong> (O(n)), where (n) is the length of the string since each character is processed once.</li>
+<li><strong>Space Complexity:</strong> (O(n)) in the worst case for the stack when all characters are <code>'('</code>.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

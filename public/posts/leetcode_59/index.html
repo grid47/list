@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 59: Spiral Matrix II · Yasir
+  Leetcode 59: Spiral Matrix II · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 59">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_59/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 59: Spiral Matrix II">
   <meta property="og:description" content="Solution to Leetcode 59">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-08-31T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-08-31T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-09-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-09-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-08-31T00:00:00Z">
-                August 31, 2024
+              <time datetime="2024-09-01T00:00:00Z">
+                September 1, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,38 +189,129 @@
         <p><a href="https://leetcode.com/problems/spiral-matrix-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; generateMatrix(int n) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">generateMatrix</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mtx(n, vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span>(n, 0));
-</span></span><span class="line"><span class="cl">        int cBgn = 0, cEnd = n - 1, rBgn = 0, rEnd = n - 1;
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mtx</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cBgn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cEnd</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rBgn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rEnd</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int num = 1;
-</span></span><span class="line"><span class="cl">        while(cBgn <span class="err">&lt;</span>= cEnd <span class="err">&amp;&amp;</span> rBgn <span class="err">&lt;</span>= rEnd) {
-</span></span><span class="line"><span class="cl">            for(int i = cBgn; i <span class="err">&lt;</span>= cEnd; i++)
-</span></span><span class="line"><span class="cl">                mtx[rBgn][i] = num++;
-</span></span><span class="line"><span class="cl">            rBgn++;
-</span></span><span class="line"><span class="cl">            for(int i = rBgn; i <span class="err">&lt;</span>= rEnd; i++)
-</span></span><span class="line"><span class="cl">                mtx[i][cEnd] = num++;
-</span></span><span class="line"><span class="cl">            cEnd--;
-</span></span><span class="line"><span class="cl">            if(rBgn <span class="err">&lt;</span>= rEnd)
-</span></span><span class="line"><span class="cl">            for(int i = cEnd; i &gt;= cBgn; i--)
-</span></span><span class="line"><span class="cl">                mtx[rEnd][i] = num++;
-</span></span><span class="line"><span class="cl">            rEnd--;
-</span></span><span class="line"><span class="cl">            if(cBgn <span class="err">&lt;</span>= cEnd)
-</span></span><span class="line"><span class="cl">            for(int i = rEnd; i &gt;= rBgn; i--)
-</span></span><span class="line"><span class="cl">                mtx[i][cBgn] = num++;
-</span></span><span class="line"><span class="cl">            cBgn++;            
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return mtx;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">cBgn</span> <span class="o">&lt;=</span> <span class="n">cEnd</span> <span class="o">&amp;&amp;</span> <span class="n">rBgn</span> <span class="o">&lt;=</span> <span class="n">rEnd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">cBgn</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">cEnd</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mtx</span><span class="p">[</span><span class="n">rBgn</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rBgn</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">rBgn</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">rEnd</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mtx</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">cEnd</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cEnd</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">rBgn</span> <span class="o">&lt;=</span> <span class="n">rEnd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">cEnd</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">cBgn</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mtx</span><span class="p">[</span><span class="n">rEnd</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">rEnd</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">cBgn</span> <span class="o">&lt;=</span> <span class="n">cEnd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">rEnd</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">rBgn</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mtx</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">cBgn</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cBgn</span><span class="o">++</span><span class="p">;</span>            
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mtx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a positive integer <code>n</code>, generate an <code>n x n</code> matrix filled with elements from <code>1</code> to <code>n^2</code> in a spiral order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Matrix Initialization</strong>:</p>
+<ul>
+<li>Create an <code>n x n</code> matrix filled with zeros.</li>
+</ul>
+</li>
+<li>
+<p><strong>Define Boundaries</strong>:</p>
+<ul>
+<li>Use four variables to define the boundaries of the matrix:
+<ul>
+<li><code>cBgn</code> (column beginning)</li>
+<li><code>cEnd</code> (column end)</li>
+<li><code>rBgn</code> (row beginning)</li>
+<li><code>rEnd</code> (row end)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the Matrix</strong>:</p>
+<ul>
+<li>Start with a number <code>num</code> initialized to <code>1</code>.</li>
+<li>Use a loop to fill the matrix in a spiral manner until all boundaries are exhausted:
+<ul>
+<li>Fill from left to right along the top row.</li>
+<li>Fill from top to bottom along the right column.</li>
+<li>Fill from right to left along the bottom row (if still within bounds).</li>
+<li>Fill from bottom to top along the left column (if still within bounds).</li>
+</ul>
+</li>
+<li>After filling each side, update the corresponding boundary to narrow the area for the next iteration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Matrix</strong>:</p>
+<ul>
+<li>Once the matrix is completely filled, return it.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Initialization</strong>: The matrix is created and the boundaries are set.</li>
+<li><strong>Spiral Filling</strong>: The while loop continues until all boundaries meet:
+<ul>
+<li>Each side of the square is filled, incrementing <code>num</code> appropriately.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: ( O(n^2) ) since every cell in the matrix is filled once.</li>
+<li><strong>Space Complexity</strong>: ( O(n^2) ) for the matrix itself.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

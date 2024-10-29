@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 133: Clone Graph · Yasir
+  Leetcode 133: Clone Graph · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 133">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_133/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 133: Clone Graph">
   <meta property="og:description" content="Solution to Leetcode 133">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-06-18T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-06-18T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-06-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-06-19T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-06-18T00:00:00Z">
-                June 18, 2024
+              <time datetime="2024-06-19T00:00:00Z">
+                June 19, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,53 +189,121 @@
         <p><a href="https://leetcode.com/problems/clone-graph/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/*
-</span></span><span class="line"><span class="cl">// Definition for a Node.
-</span></span><span class="line"><span class="cl">class Node {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int val;
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span> neighbors;
-</span></span><span class="line"><span class="cl">    Node() {
-</span></span><span class="line"><span class="cl">        val = 0;
-</span></span><span class="line"><span class="cl">        neighbors = vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span>();
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    Node(int _val) {
-</span></span><span class="line"><span class="cl">        val = _val;
-</span></span><span class="line"><span class="cl">        neighbors = vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span>();
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    Node(int _val, vector<span class="p">&lt;</span><span class="nt">Node</span><span class="err">*</span><span class="p">&gt;</span> _neighbors) {
-</span></span><span class="line"><span class="cl">        val = _val;
-</span></span><span class="line"><span class="cl">        neighbors = _neighbors;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
-</span></span><span class="line"><span class="cl">*/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">// Definition for a Node.
+</span></span></span><span class="line"><span class="cl"><span class="cm">class Node {
+</span></span></span><span class="line"><span class="cl"><span class="cm">public:
+</span></span></span><span class="line"><span class="cl"><span class="cm">    int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    vector&lt;Node*&gt; neighbors;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node() {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        val = 0;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        neighbors = vector&lt;Node*&gt;();
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node(int _val) {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        val = _val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        neighbors = vector&lt;Node*&gt;();
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node(int _val, vector&lt;Node*&gt; _neighbors) {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        val = _val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        neighbors = _neighbors;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">};
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">Node</span><span class="err">*</span><span class="p">&gt;</span> mp;
-</span></span><span class="line"><span class="cl">    Node* cloneGraph(Node* node) {
-</span></span><span class="line"><span class="cl">        if(node == NULL) return node;
-</span></span><span class="line"><span class="cl">        Node * ans;
-</span></span><span class="line"><span class="cl">        ans = copy(node);
-</span></span><span class="line"><span class="cl">        return ans;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">Node</span><span class="o">*&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="nf">cloneGraph</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span> <span class="o">*</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    Node* copy(Node* node) {
-</span></span><span class="line"><span class="cl">        if(mp.count(node-&gt;val)) return mp[node-&gt;val];
-</span></span><span class="line"><span class="cl">        Node* ans = new Node(node-&gt;val);
-</span></span><span class="line"><span class="cl">        mp[node-&gt;val] = ans;
-</span></span><span class="line"><span class="cl">        for(auto it: node-&gt;neighbors) {
-</span></span><span class="line"><span class="cl">            Node* n = copy(it);
-</span></span><span class="line"><span class="cl">            ans-&gt;neighbors.push_back(n);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return ans;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="nf">copy</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">))</span> <span class="k">return</span> <span class="n">mp</span><span class="p">[</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">ans</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">neighbors</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Node</span><span class="o">*</span> <span class="n">n</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="o">-&gt;</span><span class="n">neighbors</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a reference to a node in a connected undirected graph, clone the entire graph. Each node in the graph contains a value and a list of its neighbors.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Depth-First Search (DFS)</strong>:
+<ul>
+<li>Use a recursive DFS approach to traverse the graph and clone each node and its neighbors.</li>
+<li>Maintain a mapping of original nodes to their corresponding cloned nodes to avoid duplication and ensure the graph structure is preserved.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong><code>cloneGraph</code> function</strong>:</p>
+<ul>
+<li><strong>Line 7</strong>: Checks if the input node is <code>NULL</code>. If it is, returns <code>NULL</code>.</li>
+<li><strong>Line 9</strong>: Calls the helper function <code>copy</code> to clone the graph starting from the given node.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>copy</code> function</strong>:</p>
+<ul>
+<li><strong>Line 12</strong>: Checks if the node has already been cloned by checking the map. If it has, returns the cloned node.</li>
+<li><strong>Line 13</strong>: Creates a new node for the clone.</li>
+<li><strong>Line 14</strong>: Stores the mapping of the original node to its clone.</li>
+<li><strong>Line 15-17</strong>: Iterates through the neighbors of the original node, recursively cloning each neighbor and adding it to the cloned node&rsquo;s neighbors.</li>
+<li><strong>Line 18</strong>: Returns the cloned node.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(V + E)), where (V) is the number of nodes and (E) is the number of edges, as each node and edge is processed once.</li>
+<li><strong>Space Complexity</strong>: (O(V)) for the map storing the cloned nodes, plus (O(V)) for the recursion stack in the worst case (for deep graphs).</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

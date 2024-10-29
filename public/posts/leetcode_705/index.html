@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 705: Design HashSet · Yasir
+  Leetcode 705: Design HashSet · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 705">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_705/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 705: Design HashSet">
   <meta property="og:description" content="Solution to Leetcode 705">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-11-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-11-24T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-11-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-11-25T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-11-24T00:00:00Z">
-                November 24, 2022
+              <time datetime="2022-11-25T00:00:00Z">
+                November 25, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,87 +189,196 @@
         <p><a href="https://leetcode.com/problems/design-hashset/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">// class ListNode {
-</span></span><span class="line"><span class="cl">//     public:
-</span></span><span class="line"><span class="cl">//     int val;
-</span></span><span class="line"><span class="cl">//     ListNode* next;
-</span></span><span class="line"><span class="cl">//     ListNode(int val, ListNode* nxt) {
-</span></span><span class="line"><span class="cl">//         this-&gt;val = val
-</span></span><span class="line"><span class="cl">//         this-&gt;next = nxt;
-</span></span><span class="line"><span class="cl">//     }
-</span></span><span class="line"><span class="cl">// };
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// class ListNode {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     public:
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     int val;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     ListNode* next;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     ListNode(int val, ListNode* nxt) {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//         this-&gt;val = val
+</span></span></span><span class="line"><span class="cl"><span class="c1">//         this-&gt;next = nxt;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     }
+</span></span></span><span class="line"><span class="cl"><span class="c1">// };
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyHashSet</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">ListNode</span><span class="o">*&gt;</span> <span class="n">lst</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MyHashSet</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lst</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">key</span><span class="o">%</span><span class="n">sz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">],</span> <span class="o">*</span><span class="n">prv</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prv</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prv</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">remove</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">key</span><span class="o">%</span><span class="n">sz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">it</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>            
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span> <span class="o">*</span><span class="n">prv</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">prv</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prv</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">contains</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">key</span><span class="o">%</span><span class="n">sz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">class MyHashSet {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int sz = 10000;
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">ListNode</span><span class="err">*</span><span class="p">&gt;</span> lst;
-</span></span><span class="line"><span class="cl">    MyHashSet() {
-</span></span><span class="line"><span class="cl">        lst.resize(sz, NULL);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void add(int key) {
-</span></span><span class="line"><span class="cl">        int num = key%sz;
-</span></span><span class="line"><span class="cl">        if(lst[num] == NULL) {
-</span></span><span class="line"><span class="cl">            lst[num] = new ListNode(key, NULL);
-</span></span><span class="line"><span class="cl">            return;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        ListNode* cur = lst[num], *prv = NULL;
-</span></span><span class="line"><span class="cl">        while(cur) {
-</span></span><span class="line"><span class="cl">            if(cur-&gt;val == key) return;
-</span></span><span class="line"><span class="cl">            prv = cur;
-</span></span><span class="line"><span class="cl">            cur = cur-&gt;next;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        prv-&gt;next = new ListNode(key, NULL);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    void remove(int key) {
-</span></span><span class="line"><span class="cl">        int num = key%sz;
-</span></span><span class="line"><span class="cl">        if(lst[num] == NULL) {
-</span></span><span class="line"><span class="cl">            return;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        if(lst[num]-&gt;val == key) {
-</span></span><span class="line"><span class="cl">            auto it = lst[num];
-</span></span><span class="line"><span class="cl">            lst[num] = lst[num]-&gt;next;
-</span></span><span class="line"><span class="cl">            it-&gt;next = NULL;            
-</span></span><span class="line"><span class="cl">            return;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        ListNode* cur = lst[num]-&gt;next, *prv = lst[num];
-</span></span><span class="line"><span class="cl">        while(cur) {
-</span></span><span class="line"><span class="cl">            if(cur-&gt;val == key) {
-</span></span><span class="line"><span class="cl">                prv-&gt;next = cur-&gt;next;
-</span></span><span class="line"><span class="cl">                cur-&gt;next = NULL;
-</span></span><span class="line"><span class="cl">                return;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            prv = cur;
-</span></span><span class="line"><span class="cl">            cur = cur-&gt;next;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    bool contains(int key) {
-</span></span><span class="line"><span class="cl">        int num = key%sz;
-</span></span><span class="line"><span class="cl">        ListNode* cur = lst[num];
-</span></span><span class="line"><span class="cl">        while(cur) {
-</span></span><span class="line"><span class="cl">            if(cur-&gt;val == key) {
-</span></span><span class="line"><span class="cl">                return true;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            cur = cur-&gt;next;
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return false;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Your MyHashSet object will be instantiated and called as such:
-</span></span><span class="line"><span class="cl"> * MyHashSet* obj = new MyHashSet();
-</span></span><span class="line"><span class="cl"> * obj-&gt;add(key);
-</span></span><span class="line"><span class="cl"> * obj-&gt;remove(key);
-</span></span><span class="line"><span class="cl"> * bool param_3 = obj-&gt;contains(key);
-</span></span><span class="line"><span class="cl"> */</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your MyHashSet object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * MyHashSet* obj = new MyHashSet();
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;add(key);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;remove(key);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_3 = obj-&gt;contains(key);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Design a HashSet that supports the following operations:</p>
+<ol>
+<li><code>add(key)</code>: Inserts the value <code>key</code> into the HashSet.</li>
+<li><code>remove(key)</code>: Removes the value <code>key</code> from the HashSet.</li>
+<li><code>contains(key)</code>: Returns <code>true</code> if the value <code>key</code> exists in the HashSet, otherwise returns <code>false</code>.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Data Structure</strong>: Use an array of linked lists to handle collisions via chaining.</p>
+<ul>
+<li>The array size is predefined (e.g., 10,000).</li>
+<li>Each index of the array points to the head of a linked list containing values that hash to the same index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Hash Function</strong>: Use the modulo operation with the size of the array to determine the index for each key.</p>
+</li>
+</ul>
+<h3 id="operations">
+  Operations
+  <a class="heading-link" href="#operations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Add</strong>:</p>
+<ul>
+<li>Compute the index using <code>key % sz</code>.</li>
+<li>If there is no list at that index, create a new list node.</li>
+<li>Traverse the list to check for duplicates; if not found, add the new node at the end.</li>
+</ul>
+</li>
+<li>
+<p><strong>Remove</strong>:</p>
+<ul>
+<li>Compute the index using <code>key % sz</code>.</li>
+<li>If the list at that index is <code>NULL</code>, do nothing.</li>
+<li>If the head node is the target, move the head pointer to the next node.</li>
+<li>Traverse the list to find the target node and adjust the pointers to remove it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Contains</strong>:</p>
+<ul>
+<li>Compute the index using <code>key % sz</code>.</li>
+<li>Traverse the linked list at that index, returning <code>true</code> if the key is found.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>ListNode Class</strong>: Defines a basic linked list node with a value and a pointer to the next node.</li>
+<li><strong>MyHashSet Class</strong>:
+<ul>
+<li>Initializes a vector of <code>ListNode*</code> to serve as buckets for storing linked lists.</li>
+<li>Implements the three main operations (<code>add</code>, <code>remove</code>, and <code>contains</code>) efficiently.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><code>add</code>: O(1) on average; O(n) in the worst case (when all keys hash to the same index).</li>
+<li><code>remove</code>: O(1) on average; O(n) in the worst case.</li>
+<li><code>contains</code>: O(1) on average; O(n) in the worst case.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: O(n) for storing elements in the hash set.</p>
+</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

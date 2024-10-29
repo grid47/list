@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 427: Construct Quad Tree · Yasir
+  Leetcode 427: Construct Quad Tree · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 427">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_427/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 427: Construct Quad Tree">
   <meta property="og:description" content="Solution to Leetcode 427">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-08-29T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-08-29T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-08-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-08-30T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-08-29T00:00:00Z">
-                August 29, 2023
+              <time datetime="2023-08-30T00:00:00Z">
+                August 30, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,80 +189,160 @@
         <p><a href="https://leetcode.com/problems/construct-quad-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/*
-</span></span><span class="line"><span class="cl">// Definition for a QuadTree node.
-</span></span><span class="line"><span class="cl">class Node {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    bool val;
-</span></span><span class="line"><span class="cl">    bool isLeaf;
-</span></span><span class="line"><span class="cl">    Node* topLeft;
-</span></span><span class="line"><span class="cl">    Node* topRight;
-</span></span><span class="line"><span class="cl">    Node* bottomLeft;
-</span></span><span class="line"><span class="cl">    Node* bottomRight;
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    Node() {
-</span></span><span class="line"><span class="cl">        val = false;
-</span></span><span class="line"><span class="cl">        isLeaf = false;
-</span></span><span class="line"><span class="cl">        topLeft = NULL;
-</span></span><span class="line"><span class="cl">        topRight = NULL;
-</span></span><span class="line"><span class="cl">        bottomLeft = NULL;
-</span></span><span class="line"><span class="cl">        bottomRight = NULL;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    Node(bool _val, bool _isLeaf) {
-</span></span><span class="line"><span class="cl">        val = _val;
-</span></span><span class="line"><span class="cl">        isLeaf = _isLeaf;
-</span></span><span class="line"><span class="cl">        topLeft = NULL;
-</span></span><span class="line"><span class="cl">        topRight = NULL;
-</span></span><span class="line"><span class="cl">        bottomLeft = NULL;
-</span></span><span class="line"><span class="cl">        bottomRight = NULL;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    Node(bool _val, bool _isLeaf, Node* _topLeft, Node* _topRight, Node* _bottomLeft, Node* _bottomRight) {
-</span></span><span class="line"><span class="cl">        val = _val;
-</span></span><span class="line"><span class="cl">        isLeaf = _isLeaf;
-</span></span><span class="line"><span class="cl">        topLeft = _topLeft;
-</span></span><span class="line"><span class="cl">        topRight = _topRight;
-</span></span><span class="line"><span class="cl">        bottomLeft = _bottomLeft;
-</span></span><span class="line"><span class="cl">        bottomRight = _bottomRight;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};
-</span></span><span class="line"><span class="cl">*/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">// Definition for a QuadTree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm">class Node {
+</span></span></span><span class="line"><span class="cl"><span class="cm">public:
+</span></span></span><span class="line"><span class="cl"><span class="cm">    bool val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    bool isLeaf;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node* topLeft;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node* topRight;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node* bottomLeft;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node* bottomRight;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node() {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        val = false;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        isLeaf = false;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        topLeft = NULL;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        topRight = NULL;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        bottomLeft = NULL;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        bottomRight = NULL;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">    
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node(bool _val, bool _isLeaf) {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        val = _val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        isLeaf = _isLeaf;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        topLeft = NULL;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        topRight = NULL;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        bottomLeft = NULL;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        bottomRight = NULL;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">    
+</span></span></span><span class="line"><span class="cl"><span class="cm">    Node(bool _val, bool _isLeaf, Node* _topLeft, Node* _topRight, Node* _bottomLeft, Node* _bottomRight) {
+</span></span></span><span class="line"><span class="cl"><span class="cm">        val = _val;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        isLeaf = _isLeaf;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        topLeft = _topLeft;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        topRight = _topRight;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        bottomLeft = _bottomLeft;
+</span></span></span><span class="line"><span class="cl"><span class="cm">        bottomRight = _bottomRight;
+</span></span></span><span class="line"><span class="cl"><span class="cm">    }
+</span></span></span><span class="line"><span class="cl"><span class="cm">};
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    Node* construct(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> grid) {
-</span></span><span class="line"><span class="cl">        return helper(grid, 0, 0, grid.size());
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="n">construct</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">helper</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    Node* helper(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; <span class="err">&amp;</span>grid, int x, int y, int sz) {
-</span></span><span class="line"><span class="cl">        if(sz == 1) return new Node(grid[x][y] != 0, true, NULL, NULL, NULL, NULL);
-</span></span><span class="line"><span class="cl">        Node* res = new Node();
-</span></span><span class="line"><span class="cl">        Node* topRight    = helper(grid, x , y+sz/2, sz / 2);
-</span></span><span class="line"><span class="cl">        Node* topLeft     = helper(grid, x , y, sz / 2);
-</span></span><span class="line"><span class="cl">        Node* bottomRight = helper(grid, x +sz/2, y+sz/2, sz / 2);
-</span></span><span class="line"><span class="cl">        Node* bottomLeft  = helper(grid, x +sz/2, y, sz / 2);
+</span></span><span class="line"><span class="cl">    <span class="n">Node</span><span class="o">*</span> <span class="nf">helper</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">grid</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sz</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">sz</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">topRight</span>    <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">sz</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">sz</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">topLeft</span>     <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sz</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">bottomRight</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span><span class="n">sz</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">sz</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">sz</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Node</span><span class="o">*</span> <span class="n">bottomLeft</span>  <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span><span class="n">sz</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sz</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        if(topRight-&gt;isLeaf <span class="err">&amp;&amp;</span> topLeft-&gt;isLeaf <span class="err">&amp;&amp;</span> bottomRight-&gt;isLeaf <span class="err">&amp;&amp;</span> bottomLeft-&gt;isLeaf <span class="err">&amp;&amp;</span> 
-</span></span><span class="line"><span class="cl">        topLeft-&gt;val == topRight-&gt;val <span class="err">&amp;&amp;</span> topRight-&gt;val == bottomRight-&gt;val <span class="err">&amp;&amp;</span> bottomRight-&gt;val == bottomLeft-&gt;val) {
-</span></span><span class="line"><span class="cl">            res-&gt;val = topLeft-&gt;val;
-</span></span><span class="line"><span class="cl">            res-&gt; isLeaf = true;
-</span></span><span class="line"><span class="cl">        } else {
-</span></span><span class="line"><span class="cl">             res-&gt;topRight    = topRight;   
-</span></span><span class="line"><span class="cl">             res-&gt;topLeft     = topLeft;   
-</span></span><span class="line"><span class="cl">             res-&gt;bottomRight = bottomRight;   
-</span></span><span class="line"><span class="cl">             res-&gt;bottomLeft  = bottomLeft;       
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">topRight</span><span class="o">-&gt;</span><span class="n">isLeaf</span> <span class="o">&amp;&amp;</span> <span class="n">topLeft</span><span class="o">-&gt;</span><span class="n">isLeaf</span> <span class="o">&amp;&amp;</span> <span class="n">bottomRight</span><span class="o">-&gt;</span><span class="n">isLeaf</span> <span class="o">&amp;&amp;</span> <span class="n">bottomLeft</span><span class="o">-&gt;</span><span class="n">isLeaf</span> <span class="o">&amp;&amp;</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">topLeft</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">topRight</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">topRight</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">bottomRight</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">bottomRight</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">bottomLeft</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">=</span> <span class="n">topLeft</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="o">-&gt;</span> <span class="n">isLeaf</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="n">res</span><span class="o">-&gt;</span><span class="n">topRight</span>    <span class="o">=</span> <span class="n">topRight</span><span class="p">;</span>   
+</span></span><span class="line"><span class="cl">             <span class="n">res</span><span class="o">-&gt;</span><span class="n">topLeft</span>     <span class="o">=</span> <span class="n">topLeft</span><span class="p">;</span>   
+</span></span><span class="line"><span class="cl">             <span class="n">res</span><span class="o">-&gt;</span><span class="n">bottomRight</span> <span class="o">=</span> <span class="n">bottomRight</span><span class="p">;</span>   
+</span></span><span class="line"><span class="cl">             <span class="n">res</span><span class="o">-&gt;</span><span class="n">bottomLeft</span>  <span class="o">=</span> <span class="n">bottomLeft</span><span class="p">;</span>       
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a <code>n x n</code> grid where each element is either <code>0</code> or <code>1</code>, construct a QuadTree to represent the grid. A QuadTree is a tree data structure in which each internal node has exactly four children corresponding to the four quadrants of a 2D space.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>QuadTree Node Definition</strong>: Each node has:</p>
+<ul>
+<li>A boolean value <code>val</code> representing whether the region it covers is filled with <code>1</code> (true) or <code>0</code> (false).</li>
+<li>A boolean <code>isLeaf</code> indicating if the node is a leaf node (i.e., it represents a single color).</li>
+<li>Pointers to its four children: <code>topLeft</code>, <code>topRight</code>, <code>bottomLeft</code>, and <code>bottomRight</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Construction</strong>:</p>
+<ul>
+<li>Use a helper function to construct the QuadTree recursively.</li>
+<li>Base Case: If the size of the current region (<code>sz</code>) is <code>1</code>, create a leaf node using the value of the single cell.</li>
+<li>Recursive Case:
+<ul>
+<li>Divide the current grid into four quadrants and call the helper function for each quadrant.</li>
+<li>If all four child nodes are leaf nodes and have the same value, merge them into a single leaf node. Otherwise, keep the four children.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Merging Logic</strong>: After constructing the child nodes:</p>
+<ul>
+<li>Check if all children are leaf nodes and have the same value. If so, set the current node as a leaf with that value; otherwise, link the children to the current node.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Construct Function</strong>: Initializes the QuadTree construction by calling the helper function with the full grid.</li>
+<li><strong>Helper Function</strong>:
+<ul>
+<li>Checks for base case (single cell) and creates a leaf node if true.</li>
+<li>Recursively creates the four child nodes by dividing the grid.</li>
+<li>Merges nodes if all child nodes are leaf nodes with the same value; otherwise, links the child nodes.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n^2) where <code>n</code> is the dimension of the grid, since each cell is processed once.</li>
+<li><strong>Space Complexity</strong>: O(log(n)) for the recursive call stack in the worst case, assuming the tree is balanced. The space for the tree itself depends on the number of distinct regions in the grid.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

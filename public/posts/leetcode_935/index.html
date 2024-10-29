@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 935: Knight Dialer · Yasir
+  Leetcode 935: Knight Dialer · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 935">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_935/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 935: Knight Dialer">
   <meta property="og:description" content="Solution to Leetcode 935">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-04-08T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-04-08T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-04-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-04-09T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-04-08T00:00:00Z">
-                April 8, 2022
+              <time datetime="2022-04-09T00:00:00Z">
+                April 9, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,48 +189,122 @@
         <p><a href="https://leetcode.com/problems/knight-dialer/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">    int mod = 1e9 + 7;
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int knightDialer(int n) {
-</span></span><span class="line"><span class="cl">        long long res = 0;
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="p">&gt;</span>&gt; arr(4, vector<span class="p">&lt;</span><span class="nt">long</span> <span class="na">long</span><span class="p">&gt;</span>(3, -1));
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="p">&gt;</span>&gt;&gt; mem(n + 1, arr);
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">knightDialer</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;&gt;</span> <span class="n">mem</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">arr</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">4</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">j </span><span class="o">=</span> <span class="s">0;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">3</span><span class="err">;</span> <span class="na">j</span><span class="err">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">res </span><span class="o">=</span> <span class="s">(res</span> <span class="err">+</span> <span class="na">path</span><span class="err">(</span><span class="na">i</span><span class="err">,</span> <span class="na">j</span><span class="err">,</span> <span class="na">n</span><span class="err">,</span> <span class="na">mem</span><span class="err">))%</span> <span class="na">mod</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">        <span class="na">return</span> <span class="na">res</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">    <span class="err">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">+</span> <span class="n">path</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">mem</span><span class="p">))</span><span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="na">long</span> <span class="na">long</span> <span class="na">path</span><span class="err">(</span><span class="na">int</span> <span class="na">i</span><span class="err">,</span> <span class="na">int</span> <span class="na">j</span><span class="err">,</span> <span class="na">int</span> <span class="na">n</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">long</span> <span class="na">long</span><span class="p">&gt;</span>&gt;&gt; <span class="err">&amp;</span>mem) {
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="nf">path</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;&gt;</span> <span class="o">&amp;</span><span class="n">mem</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(i <span class="p">&lt;</span> <span class="nt">0</span> <span class="err">||</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">0</span><span class="err">||</span> <span class="na">i</span> <span class="p">&gt;</span>= 4 || j &gt;= 3 || (i==3 <span class="err">&amp;&amp;</span> j !=1))
-</span></span><span class="line"><span class="cl">            return 0;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">||</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="o">||</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="o">||</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">!=</span><span class="mi">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        if(mem[n][i][j] != -1) return mem[n][i][j] % mod;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        if (n == 1) return 1;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        mem[n][i][j] = path(i -1 , j -2, n - 1, mem) % mod +
-</span></span><span class="line"><span class="cl">                  path(i -1 , j +2, n - 1, mem) % mod +
-</span></span><span class="line"><span class="cl">                  path(i -2 , j -1, n - 1, mem) % mod +
-</span></span><span class="line"><span class="cl">                  path(i -2 , j +1, n - 1, mem) % mod +
-</span></span><span class="line"><span class="cl">                  path(i +1 , j -2, n - 1, mem) % mod +
-</span></span><span class="line"><span class="cl">                  path(i +1 , j +2, n - 1, mem) % mod +
-</span></span><span class="line"><span class="cl">                  path(i +2 , j -1, n - 1, mem) % mod +
-</span></span><span class="line"><span class="cl">                  path(i +2 , j +1, n - 1, mem) % mod;
-</span></span><span class="line"><span class="cl">        return mem[n][i][j];
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">        <span class="n">mem</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="n">j</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">path</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span><span class="mi">1</span> <span class="p">,</span> <span class="n">j</span> <span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">path</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span><span class="mi">2</span> <span class="p">,</span> <span class="n">j</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">path</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span><span class="mi">2</span> <span class="p">,</span> <span class="n">j</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">path</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span><span class="mi">1</span> <span class="p">,</span> <span class="n">j</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">path</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span><span class="mi">1</span> <span class="p">,</span> <span class="n">j</span> <span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">path</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span><span class="mi">2</span> <span class="p">,</span> <span class="n">j</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">path</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span><span class="mi">2</span> <span class="p">,</span> <span class="n">j</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mem</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a phone keypad represented as a 4x3 grid (where the last row has only one digit), the goal is to find the number of distinct phone numbers that can be dialed by a knight in <code>n</code> moves, starting from any digit on the keypad. The knight can jump to digits that are valid moves according to its movement pattern.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<ul>
+<li>Use a 3D array to store the results of subproblems, where <code>mem[n][i][j]</code> represents the number of distinct phone numbers that can be formed starting from the digit at position <code>(i, j)</code> with <code>n</code> moves left.</li>
+<li>If the knight reaches an invalid position (like moving out of the keypad or onto the &ldquo;0&rdquo; in the last row), return 0.</li>
+<li>If only one move remains (<code>n == 1</code>), return 1 because the current position itself counts as a valid number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Path Calculation</strong>:</p>
+<ul>
+<li>For each digit <code>(i, j)</code>, calculate the total distinct numbers formed by making a knight&rsquo;s move to valid positions and summing the results recursively for <code>n - 1</code> moves.</li>
+<li>Utilize memoization to avoid redundant calculations for previously computed positions.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong><code>knightDialer</code> Function</strong>:</p>
+<ul>
+<li>Initializes the result and sets up a memoization table.</li>
+<li>Iterates over all possible starting positions on the keypad and aggregates results from the <code>path</code> function.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>path</code> Function</strong>:</p>
+<ul>
+<li>Implements the recursive logic to explore all valid knight moves from the current position <code>(i, j)</code> for <code>n</code> moves.</li>
+<li>Uses bounds checking to ensure valid movements within the keypad.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n * 4 * 3) where <code>n</code> is the number of moves, since for each move the function checks 8 possible positions on the keypad.</li>
+<li><strong>Space Complexity</strong>: O(n * 4 * 3) for the memoization table that stores results for each position and number of moves.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

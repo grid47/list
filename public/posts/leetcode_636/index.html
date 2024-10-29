@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 636: Exclusive Time of Functions · Yasir
+  Leetcode 636: Exclusive Time of Functions · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 636">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_636/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 636: Exclusive Time of Functions">
   <meta property="og:description" content="Solution to Leetcode 636">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-02-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-02-01T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-02-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-02-02T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-02-01T00:00:00Z">
-                February 1, 2023
+              <time datetime="2023-02-02T00:00:00Z">
+                February 2, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,45 +189,133 @@
         <p><a href="https://leetcode.com/problems/exclusive-time-of-functions/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">struct Log {
-</span></span><span class="line"><span class="cl">    int id;
-</span></span><span class="line"><span class="cl">    string status;
-</span></span><span class="line"><span class="cl">    int time;
-</span></span><span class="line"><span class="cl">};
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> exclusiveTime(int n, vector<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span><span class="err">&amp;</span> logs) {
-</span></span><span class="line"><span class="cl">        vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> ans(n, 0);
-</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">Log</span><span class="p">&gt;</span> stk;
-</span></span><span class="line"><span class="cl">        for(string log : logs) {
-</span></span><span class="line"><span class="cl">            stringstream ss(log);
-</span></span><span class="line"><span class="cl">            string num, adj, time;
-</span></span><span class="line"><span class="cl">            getline(ss, num,  &#39;:&#39;);
-</span></span><span class="line"><span class="cl">            getline(ss, adj,  &#39;:&#39;);
-</span></span><span class="line"><span class="cl">            getline(ss, time, &#39;:&#39;);
-</span></span><span class="line"><span class="cl">            Log item = { stoi(num), adj, stoi(time) };
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Log</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">status</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">exclusiveTime</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">logs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stack</span><span class="o">&lt;</span><span class="n">Log</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="n">string</span> <span class="nl">log</span> <span class="p">:</span> <span class="n">logs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stringstream</span> <span class="nf">ss</span><span class="p">(</span><span class="n">log</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">num</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="n">time</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">getline</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span>  <span class="sc">&#39;:&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">getline</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span>  <span class="sc">&#39;:&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">getline</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="sc">&#39;:&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Log</span> <span class="n">item</span> <span class="o">=</span> <span class="p">{</span> <span class="n">stoi</span><span class="p">(</span><span class="n">num</span><span class="p">),</span> <span class="n">adj</span><span class="p">,</span> <span class="n">stoi</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            if(item.status == &#34;start&#34;) {
-</span></span><span class="line"><span class="cl">                stk.push(item);
-</span></span><span class="line"><span class="cl">            } else {
-</span></span><span class="line"><span class="cl">                assert(stk.top().id == item.id);
-</span></span><span class="line"><span class="cl">                int t = item.time - stk.top().time +1;
-</span></span><span class="line"><span class="cl">                ans[item.id] += t;
-</span></span><span class="line"><span class="cl">                stk.pop();
-</span></span><span class="line"><span class="cl">                if(!stk.empty()){
-</span></span><span class="line"><span class="cl">                    assert(stk.top().status == &#34;start&#34;);
-</span></span><span class="line"><span class="cl">                    ans[stk.top().id] -= t;
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return ans;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">status</span> <span class="o">==</span> <span class="s">&#34;start&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">assert</span><span class="p">(</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">id</span> <span class="o">==</span> <span class="n">item</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">item</span><span class="p">.</span><span class="n">time</span> <span class="o">-</span> <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">time</span> <span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span><span class="p">[</span><span class="n">item</span><span class="p">.</span><span class="n">id</span><span class="p">]</span> <span class="o">+=</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">stk</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">assert</span><span class="p">(</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">status</span> <span class="o">==</span> <span class="s">&#34;start&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ans</span><span class="p">[</span><span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">id</span><span class="p">]</span> <span class="o">-=</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given <code>n</code> functions with unique IDs and a list of logs indicating when each function starts and stops, compute the exclusive time for each function. The exclusive time of a function is the total time spent in that function, excluding the time spent in any child functions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Data Structure</strong>:</p>
+<ul>
+<li>Use a <code>Log</code> struct to hold the function ID, status (start or end), and the timestamp.</li>
+<li>Use a vector <code>ans</code> to store the exclusive time for each function.</li>
+<li>Use a stack to keep track of the active function logs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Parsing Logs</strong>:</p>
+<ul>
+<li>For each log entry, split the string using the delimiter <code>:</code> to extract the function ID, status, and time.</li>
+<li>Create a <code>Log</code> object for each log entry.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Logs</strong>:</p>
+<ul>
+<li>If the log indicates a &ldquo;start&rdquo; event:
+<ul>
+<li>Push the log onto the stack.</li>
+</ul>
+</li>
+<li>If the log indicates an &ldquo;end&rdquo; event:
+<ul>
+<li>Calculate the time spent in the function using the difference between the end time and the start time (considering inclusive counts).</li>
+<li>Add this time to the exclusive time of the current function.</li>
+<li>Pop the function from the stack.</li>
+<li>If there is still a function in the stack (indicating a parent function), subtract the calculated time from the parent function&rsquo;s exclusive time.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After processing all logs, return the <code>ans</code> vector containing the exclusive times for each function.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>Initialize a vector <code>ans</code> of size <code>n</code> to zero.</li>
+<li>Iterate through each log entry, parsing and processing it based on the function status.</li>
+<li>Use assertions to ensure that the function IDs match appropriately when popping from the stack.</li>
+<li>Return the <code>ans</code> vector as the final result.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(L), where L is the number of log entries, since each log is processed once.</li>
+<li><strong>Space Complexity</strong>: O(n), for storing the results and the stack in the worst case (when all functions are active).</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

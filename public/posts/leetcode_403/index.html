@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 403: Frog Jump · Yasir
+  Leetcode 403: Frog Jump · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 403">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_403/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 403: Frog Jump">
   <meta property="og:description" content="Solution to Leetcode 403">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-09-22T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-09-22T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-09-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-09-23T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-09-22T00:00:00Z">
-                September 22, 2023
+              <time datetime="2023-09-23T00:00:00Z">
+                September 23, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,30 +189,92 @@
         <p><a href="https://leetcode.com/problems/frog-jump/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    bool canCross(vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span><span class="err">&amp;</span> stones) {
-</span></span><span class="line"><span class="cl">        int n = stones.size();
-</span></span><span class="line"><span class="cl">        map<span class="p">&lt;</span><span class="nt">int</span><span class="err">,</span> <span class="na">set</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt; mp;
-</span></span><span class="line"><span class="cl">        mp[0].insert(1);
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="p">&lt;</span> <span class="nt">n</span><span class="err">;</span> <span class="na">i</span><span class="err">++)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">            <span class="na">int</span> <span class="na">st </span><span class="o">=</span> <span class="s">stones[i];</span>
-</span></span><span class="line"><span class="cl">            <span class="na">for</span><span class="err">(</span><span class="na">int</span> <span class="na">step</span> <span class="na">:</span> <span class="na">mp</span><span class="err">[</span><span class="na">st</span><span class="err">])</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">                <span class="na">int</span> <span class="na">tgt </span><span class="o">=</span> <span class="s">st</span> <span class="err">+</span> <span class="na">step</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">tgt </span><span class="o">=</span><span class="s">=</span> <span class="na">stones</span><span class="err">[</span><span class="na">stones</span><span class="err">.</span><span class="na">size</span><span class="err">()</span> <span class="na">-</span> <span class="na">1</span><span class="err">])</span> <span class="na">return</span> <span class="na">true</span><span class="err">;</span>
-</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">[</span><span class="na">tgt</span><span class="err">].</span><span class="na">insert</span><span class="err">(</span><span class="na">step</span> <span class="err">+</span> <span class="na">1</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                <span class="na">mp</span><span class="err">[</span><span class="na">tgt</span><span class="err">].</span><span class="na">insert</span><span class="err">(</span><span class="na">step</span><span class="err">);</span>
-</span></span><span class="line"><span class="cl">                <span class="na">if</span><span class="err">(</span><span class="na">step</span> <span class="na">-</span> <span class="na">1</span> <span class="p">&gt;</span> 0) mp[tgt].insert(step - 1);
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return false;        
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">canCross</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">stones</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">stones</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">st</span> <span class="o">=</span> <span class="n">stones</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">step</span> <span class="p">:</span> <span class="n">mp</span><span class="p">[</span><span class="n">st</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">tgt</span> <span class="o">=</span> <span class="n">st</span> <span class="o">+</span> <span class="n">step</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">tgt</span> <span class="o">==</span> <span class="n">stones</span><span class="p">[</span><span class="n">stones</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">[</span><span class="n">tgt</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">[</span><span class="n">tgt</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">step</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">step</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">mp</span><span class="p">[</span><span class="n">tgt</span><span class="p">].</span><span class="n">insert</span><span class="p">(</span><span class="n">step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array <code>stones</code> where <code>stones[i]</code> represents the position of the i-th stone on a straight line, determine if a frog can cross to the last stone. The frog starts at the first stone (position <code>0</code>) and can jump to a stone <code>k</code> positions ahead, where <code>k</code> can be one less, the same, or one more than the previous jump. The frog can only jump to stones that exist in the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialization</strong>: Create a map <code>mp</code> to store each stone&rsquo;s position as keys and the set of possible jump distances to that position as values. Start by inserting a jump of <code>1</code> to the first stone.</li>
+<li><strong>Iterate through stones</strong>: For each stone in the list:
+<ul>
+<li>For each possible jump from that stone, calculate the target position (<code>tgt</code>).</li>
+<li>If the target position is the last stone, return <code>true</code>.</li>
+<li>Insert possible jump distances (<code>step + 1</code>, <code>step</code>, <code>step - 1</code>) to the map for the target position, ensuring that the frog can make these jumps.</li>
+</ul>
+</li>
+<li><strong>Completion Check</strong>: After processing all stones, if the last stone is not reachable, return <code>false</code>.</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Map Initialization</strong>: The map <code>mp</code> is initialized with the starting position <code>0</code> having a jump of <code>1</code>.</li>
+<li><strong>Outer Loop</strong>: Iterate through each stone&rsquo;s position:
+<ul>
+<li>For each stone, access the set of possible jumps and calculate the target position for each jump.</li>
+<li>If the target position matches the last stone, the frog can cross, so return <code>true</code>.</li>
+<li>Insert new possible jumps for the target position into the map, considering one less, the same, and one more than the previous jump.</li>
+</ul>
+</li>
+<li><strong>Final Check</strong>: If no valid path to the last stone is found after all iterations, return <code>false</code>.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n^2), where n is the number of stones. Each stone might be processed with each possible jump.</li>
+<li><strong>Space Complexity</strong>: O(n), for storing the map and the set of jump distances.</li>
+</ul> 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

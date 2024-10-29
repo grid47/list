@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 2712: Minimum Cost to Make All Characters Equal · Yasir
+  Leetcode 2712: Minimum Cost to Make All Characters Equal · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 2712">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_2712/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 2712: Minimum Cost to Make All Characters Equal">
   <meta property="og:description" content="Solution to Leetcode 2712">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2017-05-27T00:00:00+00:00">
-    <meta property="article:modified_time" content="2017-05-27T00:00:00+00:00">
+    <meta property="article:published_time" content="2017-05-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2017-05-28T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,13 +166,13 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2017-05-27T00:00:00Z">
-                May 27, 2017
+              <time datetime="2017-05-28T00:00:00Z">
+                May 28, 2017
               </time>
             </span>
             <span class="reading-time">
@@ -189,77 +189,77 @@
         <p><a href="https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    long long minimumCost(string s) {
-</span></span><span class="line"><span class="cl">        /*
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">minimumCost</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        0100111
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        0000000 3 + 2 + 1        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        1011111 4 + 2 + 1   if odd len choose middle
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        0101000
+</span></span></span><span class="line"><span class="cl"><span class="cm">        1011111 3 + 3 + 2 + 1         
+</span></span></span><span class="line"><span class="cl"><span class="cm">        0100000 4 + 3 + 2 + 1 if odd len choose middle
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        010111
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        011011
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        011011  0/ 2 + 3 + 1
+</span></span></span><span class="line"><span class="cl"><span class="cm">                1/ 3 + 2 + 1
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        010011
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        010000  2 + 2 + 1
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        101111  3
+</span></span></span><span class="line"><span class="cl"><span class="cm">        011111  3 + 2
+</span></span></span><span class="line"><span class="cl"><span class="cm">        111111  3 + 2 + 1 = 6
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        010000  3 = 3
+</span></span></span><span class="line"><span class="cl"><span class="cm">        100000  3 + 2 = 5
+</span></span></span><span class="line"><span class="cl"><span class="cm">        000000  3 + 2 + 1 = 6
+</span></span></span><span class="line"><span class="cl"><span class="cm">        
+</span></span></span><span class="line"><span class="cl"><span class="cm">        */</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        0100111
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        0000000 3 + 2 + 1        
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        1011111 4 + 2 + 1   if odd len choose middle
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        0101000
-</span></span><span class="line"><span class="cl">        1011111 3 + 3 + 2 + 1         
-</span></span><span class="line"><span class="cl">        0100000 4 + 3 + 2 + 1 if odd len choose middle
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        010111
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        011011
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        011011  0/ 2 + 3 + 1
-</span></span><span class="line"><span class="cl">                1/ 3 + 2 + 1
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        010011
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        010000  2 + 2 + 1
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        101111  3
-</span></span><span class="line"><span class="cl">        011111  3 + 2
-</span></span><span class="line"><span class="cl">        111111  3 + 2 + 1 = 6
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        010000  3 = 3
-</span></span><span class="line"><span class="cl">        100000  3 + 2 = 5
-</span></span><span class="line"><span class="cl">        000000  3 + 2 + 1 = 6
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        */
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int n = s.size();
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(n == 1) return 0;
-</span></span><span class="line"><span class="cl">        long long res = 0;
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        char k = s[n / 2];
+</span></span><span class="line"><span class="cl">        <span class="kt">char</span> <span class="n">k</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        int i, j;
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        if(n % 2)
-</span></span><span class="line"><span class="cl">            i = n/2 + 1, j = n/2 - 1;
-</span></span><span class="line"><span class="cl">        else i = n/2, j = n / 2 - 1;
-</span></span><span class="line"><span class="cl">            bool ltog = true, rtog = true;
-</span></span><span class="line"><span class="cl">            while(i <span class="p">&lt;</span> <span class="nt">n</span> <span class="err">&amp;&amp;</span> <span class="na">j</span> <span class="p">&gt;</span>= 0) {
-</span></span><span class="line"><span class="cl">                if(s[i] == k <span class="err">&amp;&amp;</span> rtog || s[i] != k <span class="err">&amp;&amp;</span> !rtog) {
-</span></span><span class="line"><span class="cl">                } else {
-</span></span><span class="line"><span class="cl">                    rtog = !rtog;
-</span></span><span class="line"><span class="cl">                    res += n - i;
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">                i++;
-</span></span><span class="line"><span class="cl">                if((s[j] == k <span class="err">&amp;&amp;</span> ltog) || (s[j] != k <span class="err">&amp;&amp;</span> !ltog)) {
-</span></span><span class="line"><span class="cl">                } else {
-</span></span><span class="line"><span class="cl">                    ltog = !ltog;
-</span></span><span class="line"><span class="cl">                    res += j + 1;
-</span></span><span class="line"><span class="cl">                }
-</span></span><span class="line"><span class="cl">                j--;                
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">bool</span> <span class="n">ltog</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="n">rtog</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="n">rtog</span> <span class="o">||</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">rtog</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">rtog</span> <span class="o">=</span> <span class="o">!</span><span class="n">rtog</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">res</span> <span class="o">+=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="n">ltog</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">ltog</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ltog</span> <span class="o">=</span> <span class="o">!</span><span class="n">ltog</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">res</span> <span class="o">+=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span><span class="o">--</span><span class="p">;</span>                
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

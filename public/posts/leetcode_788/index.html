@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 788: Rotated Digits · Yasir
+  Leetcode 788: Rotated Digits · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 788">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_788/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 788: Rotated Digits">
   <meta property="og:description" content="Solution to Leetcode 788">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-09-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-09-02T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-09-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-09-03T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-09-02T00:00:00Z">
-                September 2, 2022
+              <time datetime="2022-09-03T00:00:00Z">
+                September 3, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,28 +189,130 @@
         <p><a href="https://leetcode.com/problems/rotated-digits/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int rotatedDigits(int n) {
-</span></span><span class="line"><span class="cl">        int f[] = {1,1,2,0,0,2,2,0,1,2};
-</span></span><span class="line"><span class="cl">        int res = 0;
-</span></span><span class="line"><span class="cl">        for(int i = 0; i <span class="err">&lt;</span>= n; i++) {
-</span></span><span class="line"><span class="cl">            int p = i;
-</span></span><span class="line"><span class="cl">            int s = 1;
-</span></span><span class="line"><span class="cl">            while(p) {
-</span></span><span class="line"><span class="cl">                s *= f[p%10];
-</span></span><span class="line"><span class="cl">                p /= 10;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">            if (s &gt;= 2) res +=1;
-</span></span><span class="line"><span class="cl">        }        
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">rotatedDigits</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">f</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">s</span> <span class="o">*=</span> <span class="n">f</span><span class="p">[</span><span class="n">p</span><span class="o">%</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">p</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="n">res</span> <span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer <code>n</code>, count how many numbers between <code>1</code> and <code>n</code> are &ldquo;good&rdquo; numbers. A number is considered &ldquo;good&rdquo; if:</p>
+<ul>
+<li>Each digit in the number remains valid when rotated (i.e., 0, 1, 8 remain unchanged; 2, 5, 6, 9 become 5, 2, 9, 6, respectively; and 3, 4, 7 become invalid).</li>
+<li>At least one digit changes when the number is rotated.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Digit Mapping</strong>:</p>
+<ul>
+<li>Create an array <code>f</code> that maps each digit to its rotation result:
+<ul>
+<li><code>0, 1, 8</code> remain unchanged (value <code>1</code>).</li>
+<li><code>2, 5, 6, 9</code> change to a valid digit (value <code>2</code>).</li>
+<li><code>3, 4, 7</code> are invalid (value <code>0</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Good Numbers</strong>:</p>
+<ul>
+<li>Initialize a counter <code>res</code> to keep track of good numbers.</li>
+<li>Loop through each number <code>i</code> from <code>1</code> to <code>n</code>.
+<ul>
+<li>For each number, initialize <code>p</code> to the current number and <code>s</code> to <code>1</code>.</li>
+<li>For each digit in the number:
+<ul>
+<li>Multiply <code>s</code> by the corresponding value in <code>f</code> using the last digit of <code>p</code>.</li>
+<li>Remove the last digit from <code>p</code> by performing integer division by <code>10</code>.</li>
+</ul>
+</li>
+<li>After processing all digits, if <code>s</code> is <code>2</code> or greater, increment <code>res</code> by <code>1</code> (indicating it is a good number).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>Return the total count of good numbers found.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains the method to count good rotated numbers.
+<ul>
+<li><code>int rotatedDigits(int n)</code>: Main function to compute the count of good numbers.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>n</code>: The upper limit of the range to count good numbers.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(d * n), where ( d ) is the number of digits in each number. This results from iterating through all numbers up to <code>n</code> and checking each digit of the number.</li>
+<li><strong>Space Complexity</strong>: O(1), as we use a fixed-size array <code>f</code> and a few integer variables.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

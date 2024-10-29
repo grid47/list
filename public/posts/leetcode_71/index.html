@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 71: Simplify Path · Yasir
+  Leetcode 71: Simplify Path · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 71">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_71/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 71: Simplify Path">
   <meta property="og:description" content="Solution to Leetcode 71">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-08-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-08-19T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-08-20T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-08-20T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2024-08-19T00:00:00Z">
-                August 19, 2024
+              <time datetime="2024-08-20T00:00:00Z">
+                August 20, 2024
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -189,34 +189,95 @@
         <p><a href="https://leetcode.com/problems/simplify-path/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    string simplifyPath(string path) {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">simplifyPath</span><span class="p">(</span><span class="n">string</span> <span class="n">path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        set<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> dot = {&#34;..&#34;, &#34;.&#34;, &#34;&#34;};
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">dot</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;..&#34;</span><span class="p">,</span> <span class="s">&#34;.&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        string res = &#34;&#34;, tmp;
-</span></span><span class="line"><span class="cl">        stringstream ss(path);
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">res</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stringstream</span> <span class="nf">ss</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        stack<span class="p">&lt;</span><span class="nt">string</span><span class="p">&gt;</span> stk;
+</span></span><span class="line"><span class="cl">        <span class="n">stack</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        while(getline(ss, tmp, &#39;/&#39;)) {
-</span></span><span class="line"><span class="cl">            if(tmp == &#34;..&#34; <span class="err">&amp;&amp;</span> !stk.empty()) stk.pop();
-</span></span><span class="line"><span class="cl">            else if (!dot.count(tmp)) stk.push(tmp);
-</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">getline</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="sc">&#39;/&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="s">&#34;..&#34;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">stk</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dot</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span> <span class="n">stk</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        while(!stk.empty()) {
-</span></span><span class="line"><span class="cl">            res = &#34;/&#34; + stk.top() + res;
-</span></span><span class="line"><span class="cl">            stk.pop();
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        return res == &#34;&#34;? &#34;/&#34;: res;
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">stk</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="s">&#34;/&#34;</span> <span class="o">+</span> <span class="n">stk</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">+</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stk</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">==</span> <span class="s">&#34;&#34;</span><span class="o">?</span> <span class="s">&#34;/&#34;</span><span class="o">:</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a string representing an absolute path for a file, simplify it. The path may contain <code>.</code> (current directory), <code>..</code> (parent directory), and multiple slashes. Return the simplified canonical path.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Tokenization</strong>: Split the input string <code>path</code> by the &lsquo;/&rsquo; delimiter to extract individual components (directories).</li>
+<li><strong>Stack Usage</strong>: Utilize a stack to manage the directories:
+<ul>
+<li><strong>Push Valid Directories</strong>: Push directory names onto the stack if they are not empty, <code>.</code> (current directory), or <code>..</code> (parent directory). If encountering <code>..</code>, pop the last directory from the stack if it exists.</li>
+</ul>
+</li>
+<li><strong>Reconstruction</strong>: After processing all components, reconstruct the simplified path by concatenating elements from the stack.</li>
+<li><strong>Final Adjustment</strong>: Return the simplified path, ensuring it returns &ldquo;/&rdquo; if the result is empty.</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Initialization</strong>: A set <code>dot</code> is created to define characters that should be ignored. A string stream <code>ss</code> is initialized with the <code>path</code>.</li>
+<li><strong>Processing</strong>: A loop reads components from <code>ss</code>:
+<ul>
+<li>If the component is <code>..</code>, pop from the stack if not empty.</li>
+<li>If it&rsquo;s valid (not in <code>dot</code>), push it onto the stack.</li>
+</ul>
+</li>
+<li><strong>Building Result</strong>: After processing, the stack is used to build the resulting path by prepending each component.</li>
+<li><strong>Output</strong>: If the result is empty, return &ldquo;/&rdquo;, otherwise return the constructed path.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity:</strong> ( O(N) ), where ( N ) is the length of the input path, as each character is processed once.</li>
+<li><strong>Space Complexity:</strong> ( O(N) ), in the worst case, for the stack to store the directory components.</li>
+</ul> 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

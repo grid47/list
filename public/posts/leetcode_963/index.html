@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 963: Minimum Area Rectangle II · Yasir
+  Leetcode 963: Minimum Area Rectangle II · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 963">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_963/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 963: Minimum Area Rectangle II">
   <meta property="og:description" content="Solution to Leetcode 963">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2022-03-11T00:00:00+00:00">
-    <meta property="article:modified_time" content="2022-03-11T00:00:00+00:00">
+    <meta property="article:published_time" content="2022-03-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-03-12T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-03-11T00:00:00Z">
-                March 11, 2022
+              <time datetime="2022-03-12T00:00:00Z">
+                March 12, 2022
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,35 +189,137 @@
         <p><a href="https://leetcode.com/problems/minimum-area-rectangle-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    size_t d2(int x1, int y1, int x2, int y2) {
-</span></span><span class="line"><span class="cl">      return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">    double minAreaFreeRect(vector<span class="p">&lt;</span><span class="nt">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;<span class="err">&amp;</span> ps, size_t res = 0) {
-</span></span><span class="line"><span class="cl">      unordered_map<span class="p">&lt;</span><span class="nt">size_t</span><span class="err">,</span> <span class="na">unordered_map</span><span class="err">&lt;</span><span class="na">size_t</span><span class="err">,</span> <span class="na">vector</span><span class="err">&lt;</span><span class="na">vector</span><span class="err">&lt;</span><span class="na">int</span><span class="p">&gt;</span>&gt;&gt;&gt; m;
-</span></span><span class="line"><span class="cl">      for (auto i = 0; i <span class="p">&lt;</span> <span class="nt">ps.size</span><span class="err">();</span> <span class="err">++</span><span class="na">i</span><span class="err">)</span>
-</span></span><span class="line"><span class="cl">        <span class="na">for</span> <span class="err">(</span><span class="na">auto</span> <span class="na">j </span><span class="o">=</span> <span class="s">i</span> <span class="err">+</span> <span class="na">1</span><span class="err">;</span> <span class="na">j</span> <span class="err">&lt;</span> <span class="na">ps</span><span class="err">.</span><span class="na">size</span><span class="err">();</span> <span class="err">++</span><span class="na">j</span><span class="err">)</span> <span class="err">{</span>
-</span></span><span class="line"><span class="cl">          <span class="na">auto</span> <span class="na">center </span><span class="o">=</span> <span class="s">((size_t)(ps[i][0]</span> <span class="err">+</span> <span class="na">ps</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">0</span><span class="err">])</span> <span class="err">&lt;&lt;</span> <span class="na">16</span><span class="err">)</span> <span class="err">+</span> <span class="na">ps</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">+</span> <span class="na">ps</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">1</span><span class="err">];</span>
-</span></span><span class="line"><span class="cl">          <span class="na">auto</span> <span class="na">len </span><span class="o">=</span> <span class="s">d2(ps[i][0],</span> <span class="na">ps</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">],</span> <span class="na">ps</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">ps</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">1</span><span class="err">]);</span>
-</span></span><span class="line"><span class="cl">          <span class="na">m</span><span class="err">[</span><span class="na">center</span><span class="err">][</span><span class="na">len</span><span class="err">].</span><span class="na">push_back</span><span class="err">({</span> <span class="na">ps</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">ps</span><span class="err">[</span><span class="na">i</span><span class="err">][</span><span class="na">1</span><span class="err">],</span> <span class="na">ps</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">0</span><span class="err">],</span> <span class="na">ps</span><span class="err">[</span><span class="na">j</span><span class="err">][</span><span class="na">1</span><span class="err">]</span> <span class="err">});</span>
-</span></span><span class="line"><span class="cl">        <span class="err">}</span>
-</span></span><span class="line"><span class="cl">      <span class="na">for</span> <span class="err">(</span><span class="na">auto</span> <span class="na">it_c </span><span class="o">=</span> <span class="s">begin(m);</span> <span class="na">it_c</span> <span class="err">!=</span> <span class="na">end</span><span class="err">(</span><span class="na">m</span><span class="err">);</span> <span class="err">++</span><span class="na">it_c</span><span class="err">)</span>
-</span></span><span class="line"><span class="cl">        <span class="na">for</span> <span class="err">(</span><span class="na">auto</span> <span class="na">it_l </span><span class="o">=</span> <span class="s">begin(it_c-</span><span class="p">&gt;</span>second); it_l != end(it_c-&gt;second); ++it_l)
-</span></span><span class="line"><span class="cl">          for (auto i = 0; i <span class="p">&lt;</span> <span class="nt">it_l-</span><span class="p">&gt;</span>second.size(); ++i)
-</span></span><span class="line"><span class="cl">            for (auto j = i + 1; j <span class="p">&lt;</span> <span class="nt">it_l-</span><span class="p">&gt;</span>second.size(); ++j) {
-</span></span><span class="line"><span class="cl">              auto <span class="err">&amp;</span>p1 = it_l-&gt;second[i], <span class="err">&amp;</span>p2 = it_l-&gt;second[j];
-</span></span><span class="line"><span class="cl">              auto area = d2(p1[0], p1[1], p2[0], p2[1]) * d2(p1[0], p1[1], p2[2], p2[3]);
-</span></span><span class="line"><span class="cl">              if (res == 0 || res &gt; area) res = area;
-</span></span><span class="line"><span class="cl">            }
-</span></span><span class="line"><span class="cl">      return sqrt(res);
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">d2</span><span class="p">(</span><span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">y2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="nf">minAreaFreeRect</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">ps</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">size_t</span><span class="p">,</span> <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">size_t</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ps</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ps</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">auto</span> <span class="n">center</span> <span class="o">=</span> <span class="p">((</span><span class="n">size_t</span><span class="p">)(</span><span class="n">ps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">ps</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">ps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">ps</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="k">auto</span> <span class="n">len</span> <span class="o">=</span> <span class="n">d2</span><span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">m</span><span class="p">[</span><span class="n">center</span><span class="p">][</span><span class="n">len</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span> <span class="n">ps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ps</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it_c</span> <span class="o">=</span> <span class="n">begin</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="n">it_c</span> <span class="o">!=</span> <span class="n">end</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="o">++</span><span class="n">it_c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it_l</span> <span class="o">=</span> <span class="n">begin</span><span class="p">(</span><span class="n">it_c</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">);</span> <span class="n">it_l</span> <span class="o">!=</span> <span class="n">end</span><span class="p">(</span><span class="n">it_c</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">);</span> <span class="o">++</span><span class="n">it_l</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">it_l</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">it_l</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="k">auto</span> <span class="o">&amp;</span><span class="n">p1</span> <span class="o">=</span> <span class="n">it_l</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">p2</span> <span class="o">=</span> <span class="n">it_l</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">              <span class="k">auto</span> <span class="n">area</span> <span class="o">=</span> <span class="n">d2</span><span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">d2</span><span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p2</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">p2</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">              <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">res</span> <span class="o">&gt;</span> <span class="n">area</span><span class="p">)</span> <span class="n">res</span> <span class="o">=</span> <span class="n">area</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">res</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a set of points in a 2D plane, find the area of the smallest rectangle that can be formed such that all four corners of the rectangle are taken from the provided points. The rectangle must be axis-aligned and must contain no points inside it.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Distance Calculation</strong>:</p>
+<ul>
+<li>Define a function <code>d2</code> that calculates the squared Euclidean distance between two points. This avoids floating-point inaccuracies and unnecessary square root calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mapping Points</strong>:</p>
+<ul>
+<li>Use a nested loop to iterate over all pairs of points. For each pair, calculate:
+<ul>
+<li>The center of the potential rectangle formed by these two points.</li>
+<li>The squared length of the line segment between the two points.</li>
+</ul>
+</li>
+<li>Store these pairs in a hash map (<code>m</code>) where the key is a combination of the center coordinates and the squared length.</li>
+</ul>
+</li>
+<li>
+<p><strong>Identifying Rectangles</strong>:</p>
+<ul>
+<li>Iterate through the hash map to find pairs of segments that share the same center and length.</li>
+<li>For each combination of segments, compute the area of the rectangle formed by the endpoints of these segments.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Minimum Area</strong>:</p>
+<ul>
+<li>Track the minimum area found during the iterations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>Return the square root of the minimum area to get the actual area.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong><code>d2</code> Function</strong>:</p>
+<ul>
+<li>Computes the squared distance between two points to be used in area calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>minAreaFreeRect</code> Method</strong>:</p>
+<ul>
+<li>Initializes a hash map to store potential rectangles.</li>
+<li>Loops through all pairs of points to populate the hash map with centers and lengths.</li>
+<li>Checks each possible rectangle formed by the endpoints to compute and compare areas.</li>
+</ul>
+</li>
+<li>
+<p><strong>Area Calculation</strong>:</p>
+<ul>
+<li>For valid rectangles, computes the area using the squared distance and updates the minimum area variable.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(N^2), where N is the number of points. The algorithm involves nested loops to compare each pair of points.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing points and their associated centers and lengths in the hash map.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 

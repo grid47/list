@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  Leetcode 501: Find Mode in Binary Search Tree · Yasir
+  Leetcode 501: Find Mode in Binary Search Tree · grid47
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,14 +23,14 @@
   <meta name="twitter:description" content="Solution to Leetcode 501">
 
 <meta property="og:url" content="http://localhost:1313/posts/leetcode_501/">
-  <meta property="og:site_name" content="Yasir">
+  <meta property="og:site_name" content="grid47">
   <meta property="og:title" content="Leetcode 501: Find Mode in Binary Search Tree">
   <meta property="og:description" content="Solution to Leetcode 501">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-06-16T00:00:00+00:00">
-    <meta property="article:modified_time" content="2023-06-16T00:00:00+00:00">
+    <meta property="article:published_time" content="2023-06-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2023-06-17T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
@@ -111,7 +111,7 @@
   <section class="container">
     
     <a class="navigation-title" href="http://localhost:1313/">
-      Yasir
+      grid47
     </a>
     
     
@@ -166,18 +166,18 @@
           
           <div class="authors">
   <i class="fa-solid fa-user" aria-hidden="true"></i>
-    <a href="/authors/yasir/">Yasir</a></div>
+    <a href="/authors/coded-by-me-explained-by-gpt/">Coded by Me, Explained by GPT</a></div>
 
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-06-16T00:00:00Z">
-                June 16, 2023
+              <time datetime="2023-06-17T00:00:00Z">
+                June 17, 2023
               </time>
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -189,53 +189,146 @@
         <p><a href="https://leetcode.com/problems/find-mode-in-binary-search-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">/**
-</span></span><span class="line"><span class="cl"> * Definition for a binary tree node.
-</span></span><span class="line"><span class="cl"> * struct TreeNode {
-</span></span><span class="line"><span class="cl"> *     int val;
-</span></span><span class="line"><span class="cl"> *     TreeNode *left;
-</span></span><span class="line"><span class="cl"> *     TreeNode *right;
-</span></span><span class="line"><span class="cl"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span><span class="line"><span class="cl"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span><span class="line"><span class="cl"> * };
-</span></span><span class="line"><span class="cl"> */
-</span></span><span class="line"><span class="cl">class Solution {
-</span></span><span class="line"><span class="cl">public:
-</span></span><span class="line"><span class="cl">    int maxFreq = 0, currFreq = 0, precursor = INT_MIN;
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> res;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxFreq</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">currFreq</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">precursor</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    vector<span class="p">&lt;</span><span class="nt">int</span><span class="p">&gt;</span> findMode(TreeNode *root)
-</span></span><span class="line"><span class="cl">    {
-</span></span><span class="line"><span class="cl">        inorderTraversal(root);
-</span></span><span class="line"><span class="cl">        return res;
-</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findMode</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inorderTraversal</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    void inorderTraversal(TreeNode *root)
-</span></span><span class="line"><span class="cl">    {
-</span></span><span class="line"><span class="cl">        if (root == NULL) return; // Stop condition
-</span></span><span class="line"><span class="cl">        inorderTraversal(root-&gt;left); // Traverse left subtree
-</span></span><span class="line"><span class="cl">        if (precursor == root-&gt;val) currFreq++;
-</span></span><span class="line"><span class="cl">        else currFreq = 1;
-</span></span><span class="line"><span class="cl">        if (currFreq &gt; maxFreq)
-</span></span><span class="line"><span class="cl">        {// Current node value has higher frequency than any previous visited
-</span></span><span class="line"><span class="cl">            res.clear();
-</span></span><span class="line"><span class="cl">            maxFreq = currFreq;
-</span></span><span class="line"><span class="cl">            res.push_back(root-&gt;val);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        else if (currFreq == maxFreq)
-</span></span><span class="line"><span class="cl">        {// Current node value has a frequency equal to the highest of previous visited
-</span></span><span class="line"><span class="cl">            res.push_back(root-&gt;val);
-</span></span><span class="line"><span class="cl">        }
-</span></span><span class="line"><span class="cl">        precursor = root-&gt;val; // Update the precursor
-</span></span><span class="line"><span class="cl">        inorderTraversal(root-&gt;right); // Traverse right subtree
-</span></span><span class="line"><span class="cl">    }
-</span></span><span class="line"><span class="cl">};</span></span></code></pre></div>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">inorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span> <span class="c1">// Stop condition
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">inorderTraversal</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span> <span class="c1">// Traverse left subtree
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">precursor</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="n">currFreq</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="n">currFreq</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">currFreq</span> <span class="o">&gt;</span> <span class="n">maxFreq</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="c1">// Current node value has higher frequency than any previous visited
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">maxFreq</span> <span class="o">=</span> <span class="n">currFreq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">currFreq</span> <span class="o">==</span> <span class="n">maxFreq</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="c1">// Current node value has a frequency equal to the highest of previous visited
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">precursor</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span> <span class="c1">// Update the precursor
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">inorderTraversal</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span> <span class="c1">// Traverse right subtree
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given a binary search tree (BST), find all the modes (the most frequently occurred values) in the BST. If the tree is empty, return an empty array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Inorder Traversal</strong>:</p>
+<ul>
+<li>Perform an inorder traversal of the tree, which retrieves the values in sorted order due to the properties of a BST.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Frequencies</strong>:</p>
+<ul>
+<li>Use variables to track the frequency of the current value (<code>currFreq</code>), the maximum frequency observed (<code>maxFreq</code>), and the last value processed (<code>precursor</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating Modes</strong>:</p>
+<ul>
+<li>During traversal, update the frequency count based on whether the current value is the same as the precursor. If a new maximum frequency is found, reset the result vector and update <code>maxFreq</code>. If the current frequency equals <code>maxFreq</code>, append the value to the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Results</strong>:</p>
+<ul>
+<li>After completing the traversal, return the result vector containing all modes.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<ul>
+<li>The <code>Solution</code> class contains the method <code>findMode</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<ul>
+<li><code>maxFreq</code> and <code>currFreq</code> are initialized to track frequencies, while <code>precursor</code> stores the last value processed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Method</strong>:</p>
+<ul>
+<li><code>findMode</code> initiates the traversal by calling <code>inorderTraversal</code> and returns the results.</li>
+</ul>
+</li>
+<li>
+<p><strong>Traversal Method</strong>:</p>
+<ul>
+<li>The <code>inorderTraversal</code> function recursively visits each node, updating frequencies and managing the result vector based on the frequency conditions.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the tree, since each node is visited once during the traversal.</li>
+<li><strong>Space Complexity</strong>: O(n), where n is the size of the result vector in the worst case (if all values are modes), and O(h) for the recursion stack, where h is the height of the tree.</li>
+</ul>
+ 
+</div>
+  
+
 <div class="notice tip">
   <div class="notice-title">
     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
   </div>
-  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course on Udemy! 🚀 &ldquo;</a></div>
+  <div class="notice-content"><a href="https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 &ldquo;</a></div>
 </div>
 
 
