@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/)
 
 ---
-
+{{< youtube TrQ47XPM6Qg >}}
 **Code:**
 
 {{< highlight cpp >}}

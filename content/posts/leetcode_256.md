@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/paint-house/description/)
 
 ---
-
+{{< youtube pceXlW8Aa7U >}}
 **Code:**
 
 {{< highlight cpp >}}

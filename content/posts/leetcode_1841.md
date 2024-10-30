@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/league-statistics/description/)
 
 ---
-
+{{< youtube y6_Hn_yS1Ow >}}
 **Code:**
 
 {{< highlight cpp >}}

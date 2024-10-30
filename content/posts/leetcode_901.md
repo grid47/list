@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/online-stock-span/description/)
 
 ---
-
+{{< youtube slYh0ZNEqSw >}}
 **Code:**
 
 {{< highlight cpp >}}

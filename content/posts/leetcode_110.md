@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/balanced-binary-tree/description/)
 
 ---
-
+{{< youtube BrnZDIoScEA >}}
 **Code:**
 
 {{< highlight cpp >}}

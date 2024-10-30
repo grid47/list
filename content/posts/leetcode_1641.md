@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-sorted-vowel-strings/description/)
 
 ---
-
+{{< youtube gdH4yfgfwiU >}}
 **Code:**
 
 {{< highlight cpp >}}

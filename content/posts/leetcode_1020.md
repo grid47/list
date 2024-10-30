@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-enclaves/description/)
 
 ---
-
+{{< youtube BcrKHwawGb8 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/pascals-triangle/description/)
 
 ---
-
+{{< youtube nPVEaB3AjUM >}}
 **Code:**
 
 {{< highlight cpp >}}

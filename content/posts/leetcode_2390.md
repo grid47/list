@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/removing-stars-from-a-string/description/)
 
 ---
-
+{{< youtube Qln1aXh2kvQ >}}
 **Code:**
 
 {{< highlight cpp >}}

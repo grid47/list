@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/missing-element-in-sorted-array/description/)
 
 ---
-
+{{< youtube fxvHlezVcOE >}}
 **Code:**
 
 {{< highlight cpp >}}

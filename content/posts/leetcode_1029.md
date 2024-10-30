@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-city-scheduling/description/)
 
 ---
-
+{{< youtube d-B_gk_gJtQ >}}
 **Code:**
 
 {{< highlight cpp >}}

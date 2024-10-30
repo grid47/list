@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-size-subarray-in-infinite-array/description/)
 
 ---
-
+{{< youtube nsgqVWeUI24 >}}
 **Code:**
 
 {{< highlight cpp >}}

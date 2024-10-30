@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/peak-index-in-a-mountain-array/description/)
 
 ---
-
+{{< youtube yeYhFWpIus4 >}}
 **Code:**
 
 {{< highlight cpp >}}

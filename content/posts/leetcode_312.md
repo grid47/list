@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/burst-balloons/description/)
 
 ---
-
+{{< youtube VFskby7lUbw >}}
 **Code:**
 
 {{< highlight cpp >}}

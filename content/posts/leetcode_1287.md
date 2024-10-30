@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/element-appearing-more-than-25-in-sorted-array/description/)
 
 ---
-
+{{< youtube G74W8v2yVjY >}}
 **Code:**
 
 {{< highlight cpp >}}

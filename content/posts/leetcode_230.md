@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/)
 
 ---
-
+{{< youtube PwjF3RO9djY >}}
 **Code:**
 
 {{< highlight cpp >}}

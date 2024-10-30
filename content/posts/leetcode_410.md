@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/split-array-largest-sum/description/)
 
 ---
-
+{{< youtube YUF3_eBdzsk >}}
 **Code:**
 
 {{< highlight cpp >}}

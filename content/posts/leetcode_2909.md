@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-sum-of-mountain-triplets-ii/description/)
 
 ---
-
+{{< youtube PU5YZP1-uVA >}}
 **Code:**
 
 {{< highlight cpp >}}

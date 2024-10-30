@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-for-tickets/description/)
 
 ---
-
+{{< youtube akXV67u1pTg >}}
 **Code:**
 
 {{< highlight cpp >}}

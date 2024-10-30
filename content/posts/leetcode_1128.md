@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-equivalent-domino-pairs/description/)
 
 ---
-
+{{< youtube 7EpEEHAAxyw >}}
 **Code:**
 
 {{< highlight cpp >}}

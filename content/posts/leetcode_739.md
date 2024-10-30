@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/daily-temperatures/description/)
 
 ---
-
+{{< youtube _ZEvmycwXHs >}}
 **Code:**
 
 {{< highlight cpp >}}

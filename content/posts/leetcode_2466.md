@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-ways-to-build-good-strings/description/)
 
 ---
-
+{{< youtube t0QkjXhE02g >}}
 **Code:**
 
 {{< highlight cpp >}}

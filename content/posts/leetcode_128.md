@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-consecutive-sequence/description/)
 
 ---
-
+{{< youtube P6RZZMu_maU >}}
 **Code:**
 
 {{< highlight cpp >}}

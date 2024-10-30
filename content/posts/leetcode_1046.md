@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/last-stone-weight/description/)
 
 ---
-
+{{< youtube bmcFr1AdiJg >}}
 **Code:**
 
 {{< highlight cpp >}}

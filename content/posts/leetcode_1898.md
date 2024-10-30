@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-removable-characters/description/)
 
 ---
-
+{{< youtube NMP3nRPyX5g >}}
 **Code:**
 
 {{< highlight cpp >}}

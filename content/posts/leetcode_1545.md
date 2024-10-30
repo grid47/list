@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/description/)
 
 ---
-
+{{< youtube 34QYE5HAFy4 >}}
 **Code:**
 
 {{< highlight cpp >}}

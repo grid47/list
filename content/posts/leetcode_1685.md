@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/description/)
 
 ---
-
+{{< youtube WYe644djV30 >}}
 **Code:**
 
 {{< highlight cpp >}}

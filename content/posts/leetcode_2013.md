@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/detect-squares/description/)
 
 ---
-
+{{< youtube bahebearrDc >}}
 **Code:**
 
 {{< highlight cpp >}}

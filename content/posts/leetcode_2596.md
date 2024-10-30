@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-knight-tour-configuration/description/)
 
 ---
-
+{{< youtube OBht8NT_09c >}}
 **Code:**
 
 {{< highlight cpp >}}

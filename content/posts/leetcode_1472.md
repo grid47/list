@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-browser-history/description/)
 
 ---
-
+{{< youtube pvj8WQMPlGY >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/dot-product-of-two-sparse-vectors/description/)
 
 ---
-
+{{< youtube 7OWu2_tTBN4 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-string-length/description/)
 
 ---
-
+{{< youtube aMJ3T0K8LjI >}}
 **Code:**
 
 {{< highlight cpp >}}

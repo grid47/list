@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/)
 
 ---
-
+{{< youtube vyXBp3S6-y4 >}}
 **Code:**
 
 {{< highlight cpp >}}

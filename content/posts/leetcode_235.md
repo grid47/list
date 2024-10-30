@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)
 
 ---
-
+{{< youtube ML6vGnziUaI >}}
 **Code:**
 
 {{< highlight cpp >}}

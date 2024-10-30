@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/description/)
 
 ---
-
+{{< youtube bFer5PdsgpY >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-tree-right-side-view/description/)
 
 ---
-
+{{< youtube d4zLyf32e3I >}}
 **Code:**
 
 {{< highlight cpp >}}

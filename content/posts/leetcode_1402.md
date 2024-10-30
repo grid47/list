@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reducing-dishes/description/)
 
 ---
-
+{{< youtube A5Nt6s-ZwV4 >}}
 **Code:**
 
 {{< highlight cpp >}}

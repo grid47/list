@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/house-robber-iii/description/)
 
 ---
-
+{{< youtube HllsaLY2Fy8 >}}
 **Code:**
 
 {{< highlight cpp >}}

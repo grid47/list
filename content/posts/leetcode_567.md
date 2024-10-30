@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/permutation-in-string/description/)
 
 ---
-
+{{< youtube quSfR-uwkZU >}}
 **Code:**
 
 {{< highlight cpp >}}

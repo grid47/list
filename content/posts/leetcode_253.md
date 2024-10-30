@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/meeting-rooms-ii/description/)
 
 ---
-
+{{< youtube 5tVsLRM5o3A >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximal-square/description/)
 
 ---
-
+{{< youtube _7dR9W7CPCw >}}
 **Code:**
 
 {{< highlight cpp >}}

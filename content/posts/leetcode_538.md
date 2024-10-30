@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convert-bst-to-greater-tree/description/)
 
 ---
-
+{{< youtube AFDxiYO9XzY >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/min-stack/description/)
 
 ---
-
+{{< youtube RfMroCV17-4 >}}
 **Code:**
 
 {{< highlight cpp >}}

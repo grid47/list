@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-zero-filled-subarrays/description/)
 
 ---
-
+{{< youtube 1Y_QfTQmfKg >}}
 **Code:**
 
 {{< highlight cpp >}}

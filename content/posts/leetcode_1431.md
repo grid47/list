@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/)
 
 ---
-
+{{< youtube xBpYKQzjjnM >}}
 **Code:**
 
 {{< highlight cpp >}}

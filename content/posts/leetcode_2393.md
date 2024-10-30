@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-strictly-increasing-subarrays/description/)
 
 ---
-
+{{< youtube 7Adxz4MqbP4 >}}
 **Code:**
 
 {{< highlight cpp >}}

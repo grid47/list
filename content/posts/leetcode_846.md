@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/hand-of-straights/description/)
 
 ---
-
+{{< youtube amnrMCVd2YI >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/)
 
 ---
-
+{{< youtube NttA_NC_ZhI >}}
 **Code:**
 
 {{< highlight cpp >}}

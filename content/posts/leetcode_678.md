@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/valid-parenthesis-string/description/)
 
 ---
-
+{{< youtube QhPdNS143Qg >}}
 **Code:**
 
 {{< highlight cpp >}}

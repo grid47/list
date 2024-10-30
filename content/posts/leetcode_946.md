@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/validate-stack-sequences/description/)
 
 ---
-
+{{< youtube YF5ZWSWvMT0 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rising-temperature/description/)
 
 ---
-
+{{< youtube FROOb0_r1xQ >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-bottom-left-tree-value/description/)
 
 ---
-
+{{< youtube u_by_cTsNJA >}}
 **Code:**
 
 {{< highlight cpp >}}

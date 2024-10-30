@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/triangle/description/)
 
 ---
-
+{{< youtube OM1MTokvxs4 >}}
 **Code:**
 
 {{< highlight cpp >}}

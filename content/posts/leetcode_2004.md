@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company/description/)
 
 ---
-
+{{< youtube mLVULApGD0s >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/description/)
 
 ---
-
+{{< youtube 7epgOP3ezWM >}}
 **Code:**
 
 {{< highlight cpp >}}

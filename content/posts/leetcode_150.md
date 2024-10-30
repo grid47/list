@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
 
 ---
-
+{{< youtube ffgmKxRqiMc >}}
 **Code:**
 
 {{< highlight cpp >}}

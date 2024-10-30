@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-good-nodes-in-binary-tree/description/)
 
 ---
-
+{{< youtube 2AdOBLcj2wk >}}
 **Code:**
 
 {{< highlight cpp >}}

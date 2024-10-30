@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-two-binary-trees/description/)
 
 ---
-
+{{< youtube NtHOsOl8zvQ >}}
 **Code:**
 
 {{< highlight cpp >}}

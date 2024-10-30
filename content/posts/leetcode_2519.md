@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-the-number-of-k-big-indices/description/)
 
 ---
-
+{{< youtube -zMGgsGq_Kg >}}
 **Code:**
 
 {{< highlight cpp >}}

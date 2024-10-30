@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-alternating-subsequence-sum/description/)
 
 ---
-
+{{< youtube 4v42XOuU1XA >}}
 **Code:**
 
 {{< highlight cpp >}}

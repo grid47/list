@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/armstrong-number/description/)
 
 ---
-
+{{< youtube HTL7fd4HPf4 >}}
 **Code:**
 
 {{< highlight cpp >}}

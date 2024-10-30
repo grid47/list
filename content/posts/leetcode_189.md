@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rotate-array/description/)
 
 ---
-
+{{< youtube lTHTR_jsqAQ >}}
 **Code:**
 
 {{< highlight cpp >}}

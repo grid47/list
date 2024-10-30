@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/squares-of-a-sorted-array/description/)
 
 ---
-
+{{< youtube z0InhrjK3es >}}
 **Code:**
 
 {{< highlight cpp >}}

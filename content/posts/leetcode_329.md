@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/)
 
 ---
-
+{{< youtube wCc_nd-GiEc >}}
 **Code:**
 
 {{< highlight cpp >}}

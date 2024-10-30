@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-cycle-in-a-graph/description/)
 
 ---
-
+{{< youtube liPjCFmSpS4 >}}
 **Code:**
 
 {{< highlight cpp >}}

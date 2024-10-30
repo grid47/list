@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/uncrossed-lines/description/)
 
 ---
-
+{{< youtube TFBZKlASq3g >}}
 **Code:**
 
 {{< highlight cpp >}}

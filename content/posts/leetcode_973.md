@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-closest-points-to-origin/description/)
 
 ---
-
+{{< youtube IGRUukbD6p8 >}}
 **Code:**
 
 {{< highlight cpp >}}

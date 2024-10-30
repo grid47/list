@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-sum-less-than-k/description/)
 
 ---
-
+{{< youtube 2Uq7p7HE0TI >}}
 **Code:**
 
 {{< highlight cpp >}}

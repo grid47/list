@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/non-decreasing-array/description/)
 
 ---
-
+{{< youtube RegQckCegDk >}}
 **Code:**
 
 {{< highlight cpp >}}

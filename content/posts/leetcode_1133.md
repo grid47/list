@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-unique-number/description/)
 
 ---
-
+{{< youtube Fecpt1YZlCs >}}
 **Code:**
 
 {{< highlight cpp >}}

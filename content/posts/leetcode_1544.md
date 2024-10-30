@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-the-string-great/description/)
 
 ---
-
+{{< youtube Q-ycCXbUOck >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reconstruct-itinerary/description/)
 
 ---
-
+{{< youtube ZyB_gQ8vqGA >}}
 **Code:**
 
 {{< highlight cpp >}}

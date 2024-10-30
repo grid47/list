@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/description/)
 
 ---
-
+{{< youtube kUFaMqz5ArI >}}
 **Code:**
 
 {{< highlight cpp >}}

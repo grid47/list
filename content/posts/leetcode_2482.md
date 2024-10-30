@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column/description/)
 
 ---
-
+{{< youtube JwuTsHDJVdI >}}
 **Code:**
 
 {{< highlight cpp >}}

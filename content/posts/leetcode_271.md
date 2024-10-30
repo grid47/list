@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/encode-and-decode-strings/description/)
 
 ---
-
+{{< youtube B1k_sxOSgv8 >}}
 **Code:**
 
 {{< highlight cpp >}}

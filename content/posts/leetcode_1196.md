@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/how-many-apples-can-you-put-into-the-basket/description/)
 
 ---
-
+{{< youtube UelshlMQNJM >}}
 **Code:**
 
 {{< highlight cpp >}}

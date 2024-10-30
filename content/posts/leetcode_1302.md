@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/deepest-leaves-sum/description/)
 
 ---
-
+{{< youtube ebJiQrgumP4 >}}
 **Code:**
 
 {{< highlight cpp >}}

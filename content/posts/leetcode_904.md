@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/fruit-into-baskets/description/)
 
 ---
-
+{{< youtube GVecnelW8mA >}}
 **Code:**
 
 {{< highlight cpp >}}

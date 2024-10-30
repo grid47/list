@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/)
 
 ---
-
+{{< youtube u4JAi2JJhI8 >}}
 **Code:**
 
 {{< highlight cpp >}}

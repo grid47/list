@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-values-from-labels/description/)
 
 ---
-
+{{< youtube E0OkE3G95vU >}}
 **Code:**
 
 {{< highlight cpp >}}

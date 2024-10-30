@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subarray-sum-equals-k/description/)
 
 ---
-
+{{< youtube fFVZt-6sgyo >}}
 **Code:**
 
 {{< highlight cpp >}}

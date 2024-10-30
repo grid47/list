@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/department-top-three-salaries/description/)
 
 ---
-
+{{< youtube fbtJV7Kwib0 >}}
 **Code:**
 
 {{< highlight cpp >}}

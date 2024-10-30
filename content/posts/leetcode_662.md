@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-width-of-binary-tree/description/)
 
 ---
-
+{{< youtube zHz0Ut1r-_8 >}}
 **Code:**
 
 {{< highlight cpp >}}

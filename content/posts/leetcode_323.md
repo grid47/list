@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/)
 
 ---
-
+{{< youtube 8f1XPm4WOUc >}}
 **Code:**
 
 {{< highlight cpp >}}

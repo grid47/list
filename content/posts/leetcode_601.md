@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/human-traffic-of-stadium/description/)
 
 ---
-
+{{< youtube dxLYUGNKAjU >}}
 **Code:**
 
 {{< highlight cpp >}}

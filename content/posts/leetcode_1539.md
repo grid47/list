@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-missing-positive-number/description/)
 
 ---
-
+{{< youtube p0P1JNHAB-c >}}
 **Code:**
 
 {{< highlight cpp >}}

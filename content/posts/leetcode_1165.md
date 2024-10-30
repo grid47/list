@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/single-row-keyboard/description/)
 
 ---
-
+{{< youtube nxn8sPTGDwA >}}
 **Code:**
 
 {{< highlight cpp >}}

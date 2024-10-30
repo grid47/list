@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/ugly-number/description/)
 
 ---
-
+{{< youtube M0Zay1Qr9ws >}}
 **Code:**
 
 {{< highlight cpp >}}

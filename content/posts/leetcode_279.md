@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/perfect-squares/description/)
 
 ---
-
+{{< youtube HLZLwjzIVGo >}}
 **Code:**
 
 {{< highlight cpp >}}

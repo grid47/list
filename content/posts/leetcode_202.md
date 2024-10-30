@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/happy-number/description/)
 
 ---
-
+{{< youtube 4IroNy8fmNA >}}
 **Code:**
 
 {{< highlight cpp >}}

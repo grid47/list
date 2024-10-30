@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/brick-wall/description/)
 
 ---
-
+{{< youtube Kkmv2h48ekw >}}
 **Code:**
 
 {{< highlight cpp >}}

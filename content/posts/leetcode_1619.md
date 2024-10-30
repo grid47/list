@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/mean-of-array-after-removing-some-elements/description/)
 
 ---
-
+{{< youtube vyrEra_OfDo >}}
 **Code:**
 
 {{< highlight cpp >}}

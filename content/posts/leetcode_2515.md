@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/description/)
 
 ---
-
+{{< youtube yTpRd3yvyz0 >}}
 **Code:**
 
 {{< highlight cpp >}}

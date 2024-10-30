@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-depth-of-binary-tree/description/)
 
 ---
-
+{{< youtube Ukbbnzxmd8o >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/)
 
 ---
-
+{{< youtube Tuc-rjJbsXU >}}
 **Code:**
 
 {{< highlight cpp >}}

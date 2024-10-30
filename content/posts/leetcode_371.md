@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-two-integers/description/)
 
 ---
-
+{{< youtube gVUrDV4tZfY >}}
 **Code:**
 
 {{< highlight cpp >}}

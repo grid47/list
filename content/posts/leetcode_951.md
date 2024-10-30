@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flip-equivalent-binary-trees/description/)
 
 ---
-
+{{< youtube izRDc1il9Pk >}}
 **Code:**
 
 {{< highlight cpp >}}

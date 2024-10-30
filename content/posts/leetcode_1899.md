@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-triplets-to-form-target-triplet/description/)
 
 ---
-
+{{< youtube kShkQLQZ9K4 >}}
 **Code:**
 
 {{< highlight cpp >}}

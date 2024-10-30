@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-anagrams-in-a-string/description/)
 
 ---
-
+{{< youtube G8xtZy0fDKg >}}
 **Code:**
 
 {{< highlight cpp >}}

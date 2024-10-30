@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/integer-break/description/)
 
 ---
-
+{{< youtube 61kuCyvWWhI >}}
 **Code:**
 
 {{< highlight cpp >}}

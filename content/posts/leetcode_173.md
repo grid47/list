@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-search-tree-iterator/description/)
 
 ---
-
+{{< youtube RXy5RzGF5wo >}}
 **Code:**
 
 {{< highlight cpp >}}

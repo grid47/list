@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-string-chain/description/)
 
 ---
-
+{{< youtube mB13CkhSe3A >}}
 **Code:**
 
 {{< highlight cpp >}}

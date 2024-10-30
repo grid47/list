@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/ransom-note/description/)
 
 ---
-
+{{< youtube i3bvxJyUB40 >}}
 **Code:**
 
 {{< highlight cpp >}}

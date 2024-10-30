@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rabbits-in-forest/description/)
 
 ---
-
+{{< youtube leiSa1i-QrI >}}
 **Code:**
 
 {{< highlight cpp >}}

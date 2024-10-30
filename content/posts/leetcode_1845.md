@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/seat-reservation-manager/description/)
 
 ---
-
+{{< youtube ahobllKXEEY >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/intersection-of-two-linked-lists/description/)
 
 ---
-
+{{< youtube D0X0BONOQhI >}}
 **Code:**
 
 {{< highlight cpp >}}

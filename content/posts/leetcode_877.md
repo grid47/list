@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/stone-game/description/)
 
 ---
-
+{{< youtube jGmq8d4cIx0 >}}
 **Code:**
 
 {{< highlight cpp >}}

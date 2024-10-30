@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/push-dominoes/description/)
 
 ---
-
+{{< youtube 0_XmKkgHSdI >}}
 **Code:**
 
 {{< highlight cpp >}}

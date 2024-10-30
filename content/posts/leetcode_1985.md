@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-kth-largest-integer-in-the-array/description/)
 
 ---
-
+{{< youtube lRCaNiqO3xI >}}
 **Code:**
 
 {{< highlight cpp >}}

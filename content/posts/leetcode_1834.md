@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/single-threaded-cpu/description/)
 
 ---
-
+{{< youtube RR1n-d4oYqE >}}
 **Code:**
 
 {{< highlight cpp >}}

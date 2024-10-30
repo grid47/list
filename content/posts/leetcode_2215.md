@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-difference-of-two-arrays/description/)
 
 ---
-
+{{< youtube oypp_RzI69w >}}
 **Code:**
 
 {{< highlight cpp >}}

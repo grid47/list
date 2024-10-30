@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-people-to-teach/description/)
 
 ---
-
+{{< youtube eHk8TQIhvCk >}}
 **Code:**
 
 {{< highlight cpp >}}

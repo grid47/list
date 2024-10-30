@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/baseball-game/description/)
 
 ---
-
+{{< youtube 365VRBxje4E >}}
 **Code:**
 
 {{< highlight cpp >}}

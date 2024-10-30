@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/distinct-subsequences/description/)
 
 ---
-
+{{< youtube -RDzMJ33nx8 >}}
 **Code:**
 
 {{< highlight cpp >}}

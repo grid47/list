@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/description/)
 
 ---
-
+{{< youtube TkT-6WsmqY0 >}}
 **Code:**
 
 {{< highlight cpp >}}

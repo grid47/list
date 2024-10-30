@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/defanging-an-ip-address/description/)
 
 ---
-
+{{< youtube FP0Na-pL0qk >}}
 **Code:**
 
 {{< highlight cpp >}}

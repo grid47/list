@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lru-cache/description/)
 
 ---
-
+{{< youtube 7ABFKPK2hD4 >}}
 **Code:**
 
 {{< highlight cpp >}}

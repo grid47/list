@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/movie-rating/description/)
 
 ---
-
+{{< youtube rgmstqJ9Oao >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-k-closest-elements/description/)
 
 ---
-
+{{< youtube o-YDQzHoaKM >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/description/)
 
 ---
-
+{{< youtube 3YDBT9ZrfaU >}}
 **Code:**
 
 {{< highlight cpp >}}

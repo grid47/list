@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/stickers-to-spell-word/description/)
 
 ---
-
+{{< youtube hsomLb6mUdI >}}
 **Code:**
 
 {{< highlight cpp >}}

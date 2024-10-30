@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-score-from-removing-substrings/description/)
 
 ---
-
+{{< youtube 9wZ-TWBreTg >}}
 **Code:**
 
 {{< highlight cpp >}}

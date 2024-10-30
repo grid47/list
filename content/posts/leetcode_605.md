@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/can-place-flowers/description/)
 
 ---
-
+{{< youtube Vp4eEOmYlvc >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/matrix-diagonal-sum/description/)
 
 ---
-
+{{< youtube 5TLlr3y3Iww >}}
 **Code:**
 
 {{< highlight cpp >}}

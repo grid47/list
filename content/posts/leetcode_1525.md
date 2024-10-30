@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-good-ways-to-split-a-string/description/)
 
 ---
-
+{{< youtube lRVpVUC5mQ4 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-smallest-common-element-in-all-rows/description/)
 
 ---
-
+{{< youtube RMiofZrTmWo >}}
 **Code:**
 
 {{< highlight cpp >}}

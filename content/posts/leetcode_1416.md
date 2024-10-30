@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/restore-the-array/description/)
 
 ---
-
+{{< youtube Kw6_4htJ9Sw >}}
 **Code:**
 
 {{< highlight cpp >}}

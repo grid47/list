@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/copy-list-with-random-pointer/description/)
 
 ---
-
+{{< youtube 5Y2EiZST97Y >}}
 **Code:**
 
 {{< highlight cpp >}}

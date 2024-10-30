@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/thousand-separator/description/)
 
 ---
-
+{{< youtube re2BnNbg598 >}}
 **Code:**
 
 {{< highlight cpp >}}

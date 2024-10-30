@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/network-delay-time/description/)
 
 ---
-
+{{< youtube Bp7STMWMMQw >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/description/)
 
 ---
-
+{{< youtube 3ntsbHSI8Gs >}}
 **Code:**
 
 {{< highlight cpp >}}

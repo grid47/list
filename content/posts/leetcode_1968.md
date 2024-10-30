@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/array-with-elements-not-equal-to-average-of-neighbors/description/)
 
 ---
-
+{{< youtube Wmb3YdVYfqM >}}
 **Code:**
 
 {{< highlight cpp >}}

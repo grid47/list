@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/candy/description/)
 
 ---
-
+{{< youtube _l9N_LcplLs >}}
 **Code:**
 
 {{< highlight cpp >}}

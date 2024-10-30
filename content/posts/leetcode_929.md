@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/unique-email-addresses/description/)
 
 ---
-
+{{< youtube TC_xLIWl7qY >}}
 **Code:**
 
 {{< highlight cpp >}}

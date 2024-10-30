@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/description/)
 
 ---
-
+{{< youtube PEKAlnmbBCc >}}
 **Code:**
 
 {{< highlight cpp >}}

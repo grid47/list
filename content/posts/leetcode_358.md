@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rearrange-string-k-distance-apart/description/)
 
 ---
-
+{{< youtube wzeVkOAEbv0 >}}
 **Code:**
 
 {{< highlight cpp >}}

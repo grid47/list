@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/)
 
 ---
-
+{{< youtube mBk4I0X46oI >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/array-transformation/description/)
 
 ---
-
+{{< youtube MQ2i4T1l-Gs >}}
 **Code:**
 
 {{< highlight cpp >}}

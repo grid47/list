@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/)
 
 ---
-
+{{< youtube 0K0uCMYq5ng >}}
 **Code:**
 
 {{< highlight cpp >}}

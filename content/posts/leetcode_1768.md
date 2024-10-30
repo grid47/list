@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-strings-alternately/description/)
 
 ---
-
+{{< youtube oFuFTMu2Tgg >}}
 **Code:**
 
 {{< highlight cpp >}}

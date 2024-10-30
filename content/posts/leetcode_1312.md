@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/)
 
 ---
-
+{{< youtube ggQlIW5keAA >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/description/)
 
 ---
-
+{{< youtube ZHjKhUjcsaU >}}
 **Code:**
 
 {{< highlight cpp >}}

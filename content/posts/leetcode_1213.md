@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/intersection-of-three-sorted-arrays/description/)
 
 ---
-
+{{< youtube zceoOrHSHNQ >}}
 **Code:**
 
 {{< highlight cpp >}}

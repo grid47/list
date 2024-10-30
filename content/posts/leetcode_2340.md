@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-adjacent-swaps-to-make-a-valid-array/description/)
 
 ---
-
+{{< youtube UlvnPb0fRlE >}}
 **Code:**
 
 {{< highlight cpp >}}

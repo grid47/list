@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/min-cost-to-connect-all-points/description/)
 
 ---
-
+{{< youtube 8VPIrqwQ8sQ >}}
 **Code:**
 
 {{< highlight cpp >}}

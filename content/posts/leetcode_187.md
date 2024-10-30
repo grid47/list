@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/repeated-dna-sequences/description/)
 
 ---
-
+{{< youtube FzTYfsmtOso >}}
 **Code:**
 
 {{< highlight cpp >}}

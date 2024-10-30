@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/target-sum/description/)
 
 ---
-
+{{< youtube Rdie0uPp7e8 >}}
 **Code:**
 
 {{< highlight cpp >}}

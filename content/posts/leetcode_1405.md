@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-happy-string/description/)
 
 ---
-
+{{< youtube 8u-H6O_XQKE >}}
 **Code:**
 
 {{< highlight cpp >}}

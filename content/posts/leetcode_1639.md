@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/description/)
 
 ---
-
+{{< youtube l10Gtcr_Gqo >}}
 **Code:**
 
 {{< highlight cpp >}}

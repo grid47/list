@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sign-of-the-product-of-an-array/description/)
 
 ---
-
+{{< youtube 5qwGgOEHL3U >}}
 **Code:**
 
 {{< highlight cpp >}}

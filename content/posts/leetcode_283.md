@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/move-zeroes/description/)
 
 ---
-
+{{< youtube 39VJV4KVyi8 >}}
 **Code:**
 
 {{< highlight cpp >}}

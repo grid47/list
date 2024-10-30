@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/)
 
 ---
-
+{{< youtube rKnD7rLT0lI >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/range-sum-query-2d-immutable/description/)
 
 ---
-
+{{< youtube KE8MQuwE2yA >}}
 **Code:**
 
 {{< highlight cpp >}}

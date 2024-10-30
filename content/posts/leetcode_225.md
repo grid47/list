@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/implement-stack-using-queues/description/)
 
 ---
-
+{{< youtube rW4vm0-DLYc >}}
 **Code:**
 
 {{< highlight cpp >}}

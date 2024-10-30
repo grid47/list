@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-labels/description/)
 
 ---
-
+{{< youtube B7m8UmZE-vw >}}
 **Code:**
 
 {{< highlight cpp >}}

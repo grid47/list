@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-unique-binary-string/description/)
 
 ---
-
+{{< youtube aHqn4Dynd1k >}}
 **Code:**
 
 {{< highlight cpp >}}

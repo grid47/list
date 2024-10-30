@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/prison-cells-after-n-days/description/)
 
 ---
-
+{{< youtube mQQp6I985bw >}}
 **Code:**
 
 {{< highlight cpp >}}

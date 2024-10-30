@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/robot-bounded-in-circle/description/)
 
 ---
-
+{{< youtube nKv2LnC_g6E >}}
 **Code:**
 
 {{< highlight cpp >}}

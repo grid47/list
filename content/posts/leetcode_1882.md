@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/process-tasks-using-servers/description/)
 
 ---
-
+{{< youtube XKA22PecuMQ >}}
 **Code:**
 
 {{< highlight cpp >}}

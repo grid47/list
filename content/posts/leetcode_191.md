@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-1-bits/description/)
 
 ---
-
+{{< youtube 1JfdvPk-iHg >}}
 **Code:**
 
 {{< highlight cpp >}}

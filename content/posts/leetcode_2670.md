@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-distinct-difference-array/description/)
 
 ---
-
+{{< youtube ikDNBcVaq6Y >}}
 **Code:**
 
 {{< highlight cpp >}}

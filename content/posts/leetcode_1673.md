@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-most-competitive-subsequence/description/)
 
 ---
-
+{{< youtube GBJFxSD3B_s >}}
 **Code:**
 
 {{< highlight cpp >}}

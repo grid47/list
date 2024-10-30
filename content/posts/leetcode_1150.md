@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-a-number-is-majority-element-in-a-sorted-array/description/)
 
 ---
-
+{{< youtube -t2cdVs9cKk >}}
 **Code:**
 
 {{< highlight cpp >}}

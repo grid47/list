@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/successful-pairs-of-spells-and-potions/description/)
 
 ---
-
+{{< youtube vO6FxLZpKg4 >}}
 **Code:**
 
 {{< highlight cpp >}}

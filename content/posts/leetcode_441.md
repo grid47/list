@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/arranging-coins/description/)
 
 ---
-
+{{< youtube 5rHz_6s2Buw >}}
 **Code:**
 
 {{< highlight cpp >}}

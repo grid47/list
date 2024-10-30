@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-cumulative-salary-of-an-employee/description/)
 
 ---
-
+{{< youtube sUHAF9WrBXU >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/description/)
 
 ---
-
+{{< youtube iPqrN6Bb-NI >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/redundant-connection/description/)
 
 ---
-
+{{< youtube FXWRE67PLL0 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-duplicate-number/description/)
 
 ---
-
+{{< youtube P5Knc5OmL2o >}}
 **Code:**
 
 {{< highlight cpp >}}

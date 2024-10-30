@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/trips-and-users/description/)
 
 ---
-
+{{< youtube YpLHd4wTQPY >}}
 **Code:**
 
 {{< highlight cpp >}}

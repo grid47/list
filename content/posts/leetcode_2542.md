@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-subsequence-score/description/)
 
 ---
-
+{{< youtube vJ7ZWmfO1Rw >}}
 **Code:**
 
 {{< highlight cpp >}}

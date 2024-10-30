@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/array-of-doubled-pairs/description/)
 
 ---
-
+{{< youtube Q0WKzdpR74o >}}
 **Code:**
 
 {{< highlight cpp >}}

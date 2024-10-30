@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/description/)
 
 ---
-
+{{< youtube JU5XdBZZtlk >}}
 **Code:**
 
 {{< highlight cpp >}}

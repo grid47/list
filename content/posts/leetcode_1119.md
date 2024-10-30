@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-vowels-from-a-string/description/)
 
 ---
-
+{{< youtube 6KCBrIWEauw >}}
 **Code:**
 
 {{< highlight cpp >}}

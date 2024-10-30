@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/restaurant-growth/description/)
 
 ---
-
+{{< youtube 7Afmt-y4lxQ >}}
 **Code:**
 
 {{< highlight cpp >}}

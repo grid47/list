@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-score-after-n-operations/description/)
 
 ---
-
+{{< youtube W4ruG1rTKw0 >}}
 **Code:**
 
 {{< highlight cpp >}}
