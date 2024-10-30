@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-k-subsequences-of-a-string-with-maximum-beauty/description/)
 
 ---
-{{< youtube nan >}}
+
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-subsequence-with-limited-sum/description/)
 
 ---
-{{< youtube nan >}}
+
 **Code:**
 
 {{< highlight cpp >}}

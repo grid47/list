@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-length-of-pair-chain/description/)
 
 ---
-{{< youtube nan >}}
+
 **Code:**
 
 {{< highlight cpp >}}

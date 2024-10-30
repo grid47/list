@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-skips-to-arrive-at-meeting-on-time/description/)
 
 ---
-{{< youtube nan >}}
+
 **Code:**
 
 {{< highlight cpp >}}

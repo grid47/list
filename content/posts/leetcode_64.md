@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-path-sum/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube pGMsrvt0fpk >}}
 **Code:**
 
 {{< highlight cpp >}}

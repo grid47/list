@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/permutation-sequence/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube C89FQ1wAD0E >}}
 **Code:**
 
 {{< highlight cpp >}}

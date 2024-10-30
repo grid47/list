@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube ScvTcU2Aifs >}}
 **Code:**
 
 {{< highlight cpp >}}

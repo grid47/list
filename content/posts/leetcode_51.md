@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/n-queens/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube Ph95IHmRp5M >}}
 **Code:**
 
 {{< highlight cpp >}}

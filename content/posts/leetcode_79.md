@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/word-search/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube pfiQ_PS1g8E >}}
 **Code:**
 
 {{< highlight cpp >}}

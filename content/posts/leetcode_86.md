@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-list/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube KT1iUciJr4g >}}
 **Code:**
 
 {{< highlight cpp >}}

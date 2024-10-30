@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/scramble-string/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube 0ugQof_dTOU >}}
 **Code:**
 
 {{< highlight cpp >}}

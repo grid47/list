@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximal-rectangle/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube dAVF2NpC3j4 >}}
 **Code:**
 
 {{< highlight cpp >}}

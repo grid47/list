@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/jump-game/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube Yan0cv2cLy8 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/climbing-stairs/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube I-R1XsECJu8 >}}
 **Code:**
 
 {{< highlight cpp >}}

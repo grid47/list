@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/unique-paths-ii/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube d3UOz7zdE4I >}}
 **Code:**
 
 {{< highlight cpp >}}

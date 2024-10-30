@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/trapping-rain-water/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube KFdHpOlz8hs >}}
 **Code:**
 
 {{< highlight cpp >}}

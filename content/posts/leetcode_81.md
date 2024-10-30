@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube oUnF7o88_Xc >}}
 **Code:**
 
 {{< highlight cpp >}}

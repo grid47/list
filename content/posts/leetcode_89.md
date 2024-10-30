@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/gray-code/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube k5UYQtKXJGo >}}
 **Code:**
 
 {{< highlight cpp >}}

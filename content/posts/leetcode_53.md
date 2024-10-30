@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-subarray/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube 5WZl3MMT0Eg >}}
 **Code:**
 
 {{< highlight cpp >}}

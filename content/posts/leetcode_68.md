@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/text-justification/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube smaxL16J504 >}}
 **Code:**
 
 {{< highlight cpp >}}

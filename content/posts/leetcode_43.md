@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/multiply-strings/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube 6k2PdSDX-1w >}}
 **Code:**
 
 {{< highlight cpp >}}

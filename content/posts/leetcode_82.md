@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube EJCONKcI0iE >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/length-of-last-word/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube KT9rltZTybQ >}}
 **Code:**
 
 {{< highlight cpp >}}

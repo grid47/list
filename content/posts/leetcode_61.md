@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rotate-list/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube UcGtPs2LE_c >}}
 **Code:**
 
 {{< highlight cpp >}}

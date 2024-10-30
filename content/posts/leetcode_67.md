@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/add-binary/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube M9foA9gcL98 >}}
 **Code:**
 
 {{< highlight cpp >}}

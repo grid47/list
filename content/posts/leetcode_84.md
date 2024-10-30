@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-rectangle-in-histogram/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube zx5Sw9130L0 >}}
 **Code:**
 
 {{< highlight cpp >}}

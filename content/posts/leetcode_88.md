@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-sorted-array/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube 0-KuWOcHZuk >}}
 **Code:**
 
 {{< highlight cpp >}}

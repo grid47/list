@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/simplify-path/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube 4e1gVeQ0AEs >}}
 **Code:**
 
 {{< highlight cpp >}}

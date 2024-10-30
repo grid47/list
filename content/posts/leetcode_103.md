@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube igbboQbiwqw >}}
 **Code:**
 
 {{< highlight cpp >}}

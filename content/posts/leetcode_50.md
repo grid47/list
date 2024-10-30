@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/powx-n/description/)
 
 ---
-{{< youtube nan >}}
+{{< youtube g9YQyYi4IQQ >}}
 **Code:**
 
 {{< highlight cpp >}}
