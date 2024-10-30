@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 190: Reverse Bits"
-date = "2024-04-23"
+date = "2024-04-24"
 description = "Solution to Leetcode 190"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reverse-bits/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

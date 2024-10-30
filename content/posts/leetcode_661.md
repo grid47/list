@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 661: Image Smoother"
-date = "2023-01-08"
+date = "2023-01-09"
 description = "Solution to Leetcode 661"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/image-smoother/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

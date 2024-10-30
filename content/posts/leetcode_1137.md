@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1137: N-th Tribonacci Number"
-date = "2021-09-19"
+date = "2021-09-20"
 description = "Solution to Leetcode 1137"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/n-th-tribonacci-number/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

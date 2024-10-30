@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3206: Alternating Groups I"
-date = "2016-01-20"
+date = "2016-01-21"
 description = "Solution to Leetcode 3206"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/alternating-groups-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

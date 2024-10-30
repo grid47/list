@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 689: Maximum Sum of 3 Non-Overlapping Subarrays"
-date = "2022-12-11"
+date = "2022-12-12"
 description = "Solution to Leetcode 689"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

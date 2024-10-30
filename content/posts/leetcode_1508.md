@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1508: Range Sum of Sorted Subarray Sums"
-date = "2020-09-13"
+date = "2020-09-14"
 description = "Solution to Leetcode 1508"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

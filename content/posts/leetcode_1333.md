@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1333: Filter Restaurants by Vegan-Friendly, Price and Distance"
-date = "2021-03-07"
+date = "2021-03-08"
 description = "Solution to Leetcode 1333"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/filter-restaurants-by-vegan-friendly-price-and-distance/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

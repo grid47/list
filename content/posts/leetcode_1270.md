@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1270: All People Report to the Given Manager"
-date = "2021-05-09"
+date = "2021-05-10"
 description = "Solution to Leetcode 1270"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-people-report-to-the-given-manager/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

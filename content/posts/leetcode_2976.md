@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2976: Minimum Cost to Convert String I"
-date = "2016-09-06"
+date = "2016-09-07"
 description = "Solution to Leetcode 2976"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-to-convert-string-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

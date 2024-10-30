@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3155: Maximum Number of Upgradable Servers"
-date = "2016-03-11"
+date = "2016-03-12"
 description = "Solution to Leetcode 3155"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-upgradable-servers/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

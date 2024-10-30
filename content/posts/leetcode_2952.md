@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2952: Minimum Number of Coins to be Added"
-date = "2016-09-30"
+date = "2016-10-01"
 description = "Solution to Leetcode 2952"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-coins-to-be-added/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

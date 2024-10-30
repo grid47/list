@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3173: Bitwise OR of Adjacent Elements"
-date = "2016-02-22"
+date = "2016-02-23"
 description = "Solution to Leetcode 3173"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/bitwise-or-of-adjacent-elements/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

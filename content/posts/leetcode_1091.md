@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1091: Shortest Path in Binary Matrix"
-date = "2021-11-04"
+date = "2021-11-05"
 description = "Solution to Leetcode 1091"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-path-in-binary-matrix/description/)
 
 ---
-
+{{< youtube U3VJjmvRVLY >}}
 **Code:**
 
 {{< highlight cpp >}}

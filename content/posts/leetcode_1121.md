@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1121: Divide Array Into Increasing Sequences"
-date = "2021-10-05"
+date = "2021-10-06"
 description = "Solution to Leetcode 1121"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-array-into-increasing-sequences/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1524: Number of Sub-arrays With Odd Sum"
-date = "2020-08-28"
+date = "2020-08-29"
 description = "Solution to Leetcode 1524"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

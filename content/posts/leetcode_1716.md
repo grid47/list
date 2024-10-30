@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1716: Calculate Money in Leetcode Bank"
-date = "2020-02-18"
+date = "2020-02-19"
 description = "Solution to Leetcode 1716"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/calculate-money-in-leetcode-bank/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

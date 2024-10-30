@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2368: Reachable Nodes With Restrictions"
-date = "2018-05-07"
+date = "2018-05-08"
 description = "Solution to Leetcode 2368"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reachable-nodes-with-restrictions/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

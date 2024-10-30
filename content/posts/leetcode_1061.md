@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1061: Lexicographically Smallest Equivalent String"
-date = "2021-12-04"
+date = "2021-12-05"
 description = "Solution to Leetcode 1061"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographically-smallest-equivalent-string/description/)
 
 ---
-
+{{< youtube YQ-q0oydRl4 >}}
 **Code:**
 
 {{< highlight cpp >}}

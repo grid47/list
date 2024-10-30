@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1558: Minimum Numbers of Function Calls to Make Target Array"
-date = "2020-07-25"
+date = "2020-07-26"
 description = "Solution to Leetcode 1558"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-numbers-of-function-calls-to-make-target-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

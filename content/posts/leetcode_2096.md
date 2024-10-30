@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2096: Step-By-Step Directions From a Binary Tree Node to Another"
-date = "2019-02-03"
+date = "2019-02-04"
 description = "Solution to Leetcode 2096"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

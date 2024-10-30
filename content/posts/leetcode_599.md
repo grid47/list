@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 599: Minimum Index Sum of Two Lists"
-date = "2023-03-11"
+date = "2023-03-12"
 description = "Solution to Leetcode 599"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-index-sum-of-two-lists/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

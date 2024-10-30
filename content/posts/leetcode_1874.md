@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1874: Minimize Product Sum of Two Arrays"
-date = "2019-09-13"
+date = "2019-09-14"
 description = "Solution to Leetcode 1874"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-product-sum-of-two-arrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2201: Count Artifacts That Can Be Extracted"
-date = "2018-10-21"
+date = "2018-10-22"
 description = "Solution to Leetcode 2201"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-artifacts-that-can-be-extracted/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

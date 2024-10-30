@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2260: Minimum Consecutive Cards to Pick Up"
-date = "2018-08-23"
+date = "2018-08-24"
 description = "Solution to Leetcode 2260"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-consecutive-cards-to-pick-up/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

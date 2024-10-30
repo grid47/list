@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 430: Flatten a Multilevel Doubly Linked List"
-date = "2023-08-27"
+date = "2023-08-28"
 description = "Solution to Leetcode 430"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

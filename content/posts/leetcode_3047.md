@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3047: Find the Largest Area of Square Inside Two Rectangles"
-date = "2016-06-27"
+date = "2016-06-28"
 description = "Solution to Leetcode 3047"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-largest-area-of-square-inside-two-rectangles/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

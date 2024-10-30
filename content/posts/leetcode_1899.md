@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1899: Merge Triplets to Form Target Triplet"
-date = "2019-08-19"
+date = "2019-08-20"
 description = "Solution to Leetcode 1899"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-triplets-to-form-target-triplet/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 317: Shortest Distance from All Buildings"
-date = "2023-12-18"
+date = "2023-12-19"
 description = "Solution to Leetcode 317"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-distance-from-all-buildings/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

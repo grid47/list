@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1398: Customers Who Bought Products A and B but Not C"
-date = "2021-01-01"
+date = "2021-01-02"
 description = "Solution to Leetcode 1398"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/customers-who-bought-products-a-and-b-but-not-c/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

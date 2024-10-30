@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 201: Bitwise AND of Numbers Range"
-date = "2024-04-12"
+date = "2024-04-13"
 description = "Solution to Leetcode 201"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/bitwise-and-of-numbers-range/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

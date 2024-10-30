@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1432: Max Difference You Can Get From Changing an Integer"
-date = "2020-11-28"
+date = "2020-11-29"
 description = "Solution to Leetcode 1432"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/max-difference-you-can-get-from-changing-an-integer/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

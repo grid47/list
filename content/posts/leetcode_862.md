@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 862: Shortest Subarray with Sum at Least K"
-date = "2022-06-21"
+date = "2022-06-22"
 description = "Solution to Leetcode 862"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

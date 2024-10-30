@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1129: Shortest Path with Alternating Colors"
-date = "2021-09-27"
+date = "2021-09-28"
 description = "Solution to Leetcode 1129"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-path-with-alternating-colors/description/)
 
 ---
-
+{{< youtube VaW0deOb2aQ >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1391: Check if There is a Valid Path in a Grid"
-date = "2021-01-08"
+date = "2021-01-09"
 description = "Solution to Leetcode 1391"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

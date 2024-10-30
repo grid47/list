@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1576: Replace All ?'s to Avoid Consecutive Repeating Characters"
-date = "2020-07-07"
+date = "2020-07-08"
 description = "Solution to Leetcode 1576"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

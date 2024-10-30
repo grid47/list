@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1277: Count Square Submatrices with All Ones"
-date = "2021-05-02"
+date = "2021-05-03"
 description = "Solution to Leetcode 1277"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-square-submatrices-with-all-ones/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

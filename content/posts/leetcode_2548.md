@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2548: Maximum Price to Fill a Bag"
-date = "2017-11-08"
+date = "2017-11-09"
 description = "Solution to Leetcode 2548"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-price-to-fill-a-bag/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

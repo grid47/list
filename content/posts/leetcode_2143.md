@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2143: Choose Numbers From Two Arrays in Range"
-date = "2018-12-18"
+date = "2018-12-19"
 description = "Solution to Leetcode 2143"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/choose-numbers-from-two-arrays-in-range/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

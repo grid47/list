@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 795: Number of Subarrays with Bounded Maximum"
-date = "2022-08-27"
+date = "2022-08-28"
 description = "Solution to Leetcode 795"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

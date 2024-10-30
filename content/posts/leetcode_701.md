@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 701: Insert into a Binary Search Tree"
-date = "2022-11-29"
+date = "2022-11-30"
 description = "Solution to Leetcode 701"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/insert-into-a-binary-search-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

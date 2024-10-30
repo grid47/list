@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1663: Smallest String With A Given Numeric Value"
-date = "2020-04-11"
+date = "2020-04-12"
 description = "Solution to Leetcode 1663"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

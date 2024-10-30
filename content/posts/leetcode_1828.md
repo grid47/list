@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1828: Queries on Number of Points Inside a Circle"
-date = "2019-10-29"
+date = "2019-10-30"
 description = "Solution to Leetcode 1828"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/queries-on-number-of-points-inside-a-circle/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

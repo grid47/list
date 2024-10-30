@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1582: Special Positions in a Binary Matrix"
-date = "2020-07-01"
+date = "2020-07-02"
 description = "Solution to Leetcode 1582"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/special-positions-in-a-binary-matrix/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1135: Connecting Cities With Minimum Cost"
-date = "2021-09-21"
+date = "2021-09-22"
 description = "Solution to Leetcode 1135"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/connecting-cities-with-minimum-cost/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

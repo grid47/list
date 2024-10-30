@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1918: Kth Smallest Subarray Sum"
-date = "2019-07-31"
+date = "2019-08-01"
 description = "Solution to Leetcode 1918"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-smallest-subarray-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

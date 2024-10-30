@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1615: Maximal Network Rank"
-date = "2020-05-29"
+date = "2020-05-30"
 description = "Solution to Leetcode 1615"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximal-network-rank/description/)
 
 ---
-
+{{< youtube WCfyVhtldoU >}}
 **Code:**
 
 {{< highlight cpp >}}

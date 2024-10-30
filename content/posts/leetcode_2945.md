@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2945: Find Maximum Non-decreasing Array Length"
-date = "2016-10-07"
+date = "2016-10-08"
 description = "Solution to Leetcode 2945"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-maximum-non-decreasing-array-length/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

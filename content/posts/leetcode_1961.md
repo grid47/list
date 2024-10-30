@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1961: Check If String Is a Prefix of Array"
-date = "2019-06-18"
+date = "2019-06-19"
 description = "Solution to Leetcode 1961"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-string-is-a-prefix-of-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

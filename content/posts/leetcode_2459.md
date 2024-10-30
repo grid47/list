@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2459: Sort Array by Moving Items to Empty Space"
-date = "2018-02-05"
+date = "2018-02-06"
 description = "Solution to Leetcode 2459"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-array-by-moving-items-to-empty-space/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

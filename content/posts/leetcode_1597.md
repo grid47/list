@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1597: Build Binary Expression Tree From Infix Expression"
-date = "2020-06-16"
+date = "2020-06-17"
 description = "Solution to Leetcode 1597"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/build-binary-expression-tree-from-infix-expression/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

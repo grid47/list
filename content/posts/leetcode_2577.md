@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2577: Minimum Time to Visit a Cell In a Grid"
-date = "2017-10-10"
+date = "2017-10-11"
 description = "Solution to Leetcode 2577"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

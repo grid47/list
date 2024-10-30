@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 902: Numbers At Most N Given Digit Set"
-date = "2022-05-12"
+date = "2022-05-13"
 description = "Solution to Leetcode 902"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/numbers-at-most-n-given-digit-set/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

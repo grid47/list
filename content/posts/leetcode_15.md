@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 15: 3Sum"
-date = "2024-10-15"
+date = "2024-10-16"
 description = "Solution to Leetcode 15"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/3sum/description/)
 
 ---
-
+{{< youtube 8IjCNFIo8YI >}}
 **Code:**
 
 {{< highlight cpp >}}

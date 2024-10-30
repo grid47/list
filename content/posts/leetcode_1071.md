@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1071: Greatest Common Divisor of Strings"
-date = "2021-11-24"
+date = "2021-11-25"
 description = "Solution to Leetcode 1071"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/greatest-common-divisor-of-strings/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

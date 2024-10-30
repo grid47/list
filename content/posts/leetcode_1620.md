@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1620: Coordinate With Maximum Network Quality"
-date = "2020-05-24"
+date = "2020-05-25"
 description = "Solution to Leetcode 1620"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/coordinate-with-maximum-network-quality/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

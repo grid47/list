@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 961: N-Repeated Element in Size 2N Array"
-date = "2022-03-14"
+date = "2022-03-15"
 description = "Solution to Leetcode 961"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/n-repeated-element-in-size-2n-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

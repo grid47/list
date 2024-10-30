@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2138: Divide a String Into Groups of Size k"
-date = "2018-12-23"
+date = "2018-12-24"
 description = "Solution to Leetcode 2138"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-a-string-into-groups-of-size-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

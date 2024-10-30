@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3006: Find Beautiful Indices in the Given Array I"
-date = "2016-08-07"
+date = "2016-08-08"
 description = "Solution to Leetcode 3006"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

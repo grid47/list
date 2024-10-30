@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2684: Maximum Number of Moves in a Grid"
-date = "2017-06-25"
+date = "2017-06-26"
 description = "Solution to Leetcode 2684"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2839: Check if Strings Can be Made Equal With Operations I"
-date = "2017-01-21"
+date = "2017-01-22"
 description = "Solution to Leetcode 2839"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 21: Merge Two Sorted Lists"
-date = "2024-10-09"
+date = "2024-10-10"
 description = "Solution to Leetcode 21"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-two-sorted-lists/description/)
 
 ---
-
+{{< youtube XIdigk956u0 >}}
 **Code:**
 
 {{< highlight cpp >}}

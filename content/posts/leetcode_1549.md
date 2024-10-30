@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1549: The Most Recent Orders for Each Product"
-date = "2020-08-03"
+date = "2020-08-04"
 description = "Solution to Leetcode 1549"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-most-recent-orders-for-each-product/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

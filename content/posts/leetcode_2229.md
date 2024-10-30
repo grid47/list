@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2229: Check if an Array Is Consecutive"
-date = "2018-09-23"
+date = "2018-09-24"
 description = "Solution to Leetcode 2229"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-an-array-is-consecutive/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

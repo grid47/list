@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2162: Minimum Cost to Set Cooking Time"
-date = "2018-11-29"
+date = "2018-11-30"
 description = "Solution to Leetcode 2162"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-to-set-cooking-time/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1306: Jump Game III"
-date = "2021-04-03"
+date = "2021-04-04"
 description = "Solution to Leetcode 1306"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/jump-game-iii/description/)
 
 ---
-
+{{< youtube 9oUhzPLmLZQ >}}
 **Code:**
 
 {{< highlight cpp >}}

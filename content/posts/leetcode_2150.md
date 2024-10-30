@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2150: Find All Lonely Numbers in the Array"
-date = "2018-12-11"
+date = "2018-12-12"
 description = "Solution to Leetcode 2150"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-lonely-numbers-in-the-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

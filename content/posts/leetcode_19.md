@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 19: Remove Nth Node From End of List"
-date = "2024-10-11"
+date = "2024-10-12"
 description = "Solution to Leetcode 19"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/)
 
 ---
-
+{{< youtube XVuQxVej6y8 >}}
 **Code:**
 
 {{< highlight cpp >}}

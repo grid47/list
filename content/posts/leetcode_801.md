@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 801: Minimum Swaps To Make Sequences Increasing"
-date = "2022-08-21"
+date = "2022-08-22"
 description = "Solution to Leetcode 801"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

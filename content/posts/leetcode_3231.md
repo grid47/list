@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3231: Minimum Number of Increasing Subsequence to Be Removed"
-date = "2015-12-26"
+date = "2015-12-27"
 description = "Solution to Leetcode 3231"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-increasing-subsequence-to-be-removed/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

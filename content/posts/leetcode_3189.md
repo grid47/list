@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3189: Minimum Moves to Get a Peaceful Board"
-date = "2016-02-06"
+date = "2016-02-07"
 description = "Solution to Leetcode 3189"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-moves-to-get-a-peaceful-board/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 597: Friend Requests I: Overall Acceptance Rate"
-date = "2023-03-13"
+date = "2023-03-14"
 description = "Solution to Leetcode 597"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

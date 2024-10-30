@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1794: Count Pairs of Equal Substrings With Minimum Difference"
-date = "2019-12-02"
+date = "2019-12-03"
 description = "Solution to Leetcode 1794"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-pairs-of-equal-substrings-with-minimum-difference/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

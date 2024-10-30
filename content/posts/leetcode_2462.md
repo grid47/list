@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2462: Total Cost to Hire K Workers"
-date = "2018-02-02"
+date = "2018-02-03"
 description = "Solution to Leetcode 2462"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/total-cost-to-hire-k-workers/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

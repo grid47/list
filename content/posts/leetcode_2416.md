@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2416: Sum of Prefix Scores of Strings"
-date = "2018-03-20"
+date = "2018-03-21"
 description = "Solution to Leetcode 2416"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-prefix-scores-of-strings/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

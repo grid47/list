@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1503: Last Moment Before All Ants Fall Out of a Plank"
-date = "2020-09-18"
+date = "2020-09-19"
 description = "Solution to Leetcode 1503"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2835: Minimum Operations to Form Subsequence With Target Sum"
-date = "2017-01-25"
+date = "2017-01-26"
 description = "Solution to Leetcode 2835"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-form-subsequence-with-target-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

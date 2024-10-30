@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero"
-date = "2020-10-25"
+date = "2020-10-26"
 description = "Solution to Leetcode 1466"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
 
 ---
-
+{{< youtube qL4UaMAdPts >}}
 **Code:**
 
 {{< highlight cpp >}}

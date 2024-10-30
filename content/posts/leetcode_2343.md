@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2343: Query Kth Smallest Trimmed Number"
-date = "2018-06-01"
+date = "2018-06-02"
 description = "Solution to Leetcode 2343"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/query-kth-smallest-trimmed-number/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

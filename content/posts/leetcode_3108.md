@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3108: Minimum Cost Walk in Weighted Graph"
-date = "2016-04-27"
+date = "2016-04-28"
 description = "Solution to Leetcode 3108"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

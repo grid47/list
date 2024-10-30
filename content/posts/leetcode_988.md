@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 988: Smallest String Starting From Leaf"
-date = "2022-02-15"
+date = "2022-02-16"
 description = "Solution to Leetcode 988"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-string-starting-from-leaf/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

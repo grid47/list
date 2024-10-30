@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1957: Delete Characters to Make Fancy String"
-date = "2019-06-22"
+date = "2019-06-23"
 description = "Solution to Leetcode 1957"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delete-characters-to-make-fancy-string/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

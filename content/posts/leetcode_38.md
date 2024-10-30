@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 38: Count and Say"
-date = "2024-09-22"
+date = "2024-09-23"
 description = "Solution to Leetcode 38"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-and-say/description/)
 
 ---
-
+{{< youtube 4PFCdoSOsiA >}}
 **Code:**
 
 {{< highlight cpp >}}

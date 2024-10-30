@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3085: Minimum Deletions to Make String K-Special"
-date = "2016-05-20"
+date = "2016-05-21"
 description = "Solution to Leetcode 3085"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-deletions-to-make-string-k-special/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

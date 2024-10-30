@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2824: Count Pairs Whose Sum is Less than Target"
-date = "2017-02-05"
+date = "2017-02-06"
 description = "Solution to Leetcode 2824"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

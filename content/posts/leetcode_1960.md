@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1960: Maximum Product of the Length of Two Palindromic Substrings"
-date = "2019-06-19"
+date = "2019-06-20"
 description = "Solution to Leetcode 1960"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-substrings/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

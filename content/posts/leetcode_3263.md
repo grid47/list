@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3263: Convert Doubly Linked List to Array I"
-date = "2015-11-24"
+date = "2015-11-25"
 description = "Solution to Leetcode 3263"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convert-doubly-linked-list-to-array-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

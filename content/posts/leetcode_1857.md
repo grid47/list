@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1857: Largest Color Value in a Directed Graph"
-date = "2019-09-30"
+date = "2019-10-01"
 description = "Solution to Leetcode 1857"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-color-value-in-a-directed-graph/description/)
 
 ---
-
+{{< youtube SGAHkdqtj5s >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 719: Find K-th Smallest Pair Distance"
-date = "2022-11-11"
+date = "2022-11-12"
 description = "Solution to Leetcode 719"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

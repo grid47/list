@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3199: Count Triplets with Even XOR Set Bits I"
-date = "2016-01-27"
+date = "2016-01-28"
 description = "Solution to Leetcode 3199"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-triplets-with-even-xor-set-bits-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

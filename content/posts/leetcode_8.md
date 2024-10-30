@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 8: String to Integer (atoi)"
-date = "2024-10-22"
+date = "2024-10-23"
 description = "Solution to Leetcode 8"
 tags = [
     

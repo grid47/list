@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 671: Second Minimum Node In a Binary Tree"
-date = "2022-12-29"
+date = "2022-12-30"
 description = "Solution to Leetcode 671"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

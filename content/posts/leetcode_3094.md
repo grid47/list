@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3094: Guess the Number Using Bitwise Questions II"
-date = "2016-05-11"
+date = "2016-05-12"
 description = "Solution to Leetcode 3094"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/guess-the-number-using-bitwise-questions-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

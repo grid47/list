@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3177: Find the Maximum Length of a Good Subsequence II"
-date = "2016-02-18"
+date = "2016-02-19"
 description = "Solution to Leetcode 3177"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-maximum-length-of-a-good-subsequence-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

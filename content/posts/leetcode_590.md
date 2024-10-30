@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 590: N-ary Tree Postorder Traversal"
-date = "2023-03-20"
+date = "2023-03-21"
 description = "Solution to Leetcode 590"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/n-ary-tree-postorder-traversal/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

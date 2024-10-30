@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1287: Element Appearing More Than 25% In Sorted Array"
-date = "2021-04-22"
+date = "2021-04-23"
 description = "Solution to Leetcode 1287"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/element-appearing-more-than-25-in-sorted-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

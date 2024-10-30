@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 921: Minimum Add to Make Parentheses Valid"
-date = "2022-04-23"
+date = "2022-04-24"
 description = "Solution to Leetcode 921"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

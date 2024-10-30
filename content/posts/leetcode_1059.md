@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1059: All Paths from Source Lead to Destination"
-date = "2021-12-06"
+date = "2021-12-07"
 description = "Solution to Leetcode 1059"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-paths-from-source-lead-to-destination/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

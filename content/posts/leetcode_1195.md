@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1195: Fizz Buzz Multithreaded"
-date = "2021-07-23"
+date = "2021-07-24"
 description = "Solution to Leetcode 1195"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/fizz-buzz-multithreaded/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

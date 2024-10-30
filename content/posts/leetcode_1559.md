@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1559: Detect Cycles in 2D Grid"
-date = "2020-07-24"
+date = "2020-07-25"
 description = "Solution to Leetcode 1559"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/detect-cycles-in-2d-grid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

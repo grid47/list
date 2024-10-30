@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2920: Maximum Points After Collecting Coins From All Nodes"
-date = "2016-11-01"
+date = "2016-11-02"
 description = "Solution to Leetcode 2920"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-points-after-collecting-coins-from-all-nodes/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

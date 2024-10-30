@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1815: Maximum Number of Groups Getting Fresh Donuts"
-date = "2019-11-11"
+date = "2019-11-12"
 description = "Solution to Leetcode 1815"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-groups-getting-fresh-donuts/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

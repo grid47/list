@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1608: Special Array With X Elements Greater Than or Equal X"
-date = "2020-06-05"
+date = "2020-06-06"
 description = "Solution to Leetcode 1608"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2959: Number of Possible Sets of Closing Branches"
-date = "2016-09-23"
+date = "2016-09-24"
 description = "Solution to Leetcode 2959"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-possible-sets-of-closing-branches/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

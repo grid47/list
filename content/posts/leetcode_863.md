@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 863: All Nodes Distance K in Binary Tree"
-date = "2022-06-20"
+date = "2022-06-21"
 description = "Solution to Leetcode 863"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

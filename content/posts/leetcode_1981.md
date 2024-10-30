@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1981: Minimize the Difference Between Target and Chosen Elements"
-date = "2019-05-29"
+date = "2019-05-30"
 description = "Solution to Leetcode 1981"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

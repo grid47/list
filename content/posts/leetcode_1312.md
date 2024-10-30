@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1312: Minimum Insertion Steps to Make a String Palindrome"
-date = "2021-03-28"
+date = "2021-03-29"
 description = "Solution to Leetcode 1312"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

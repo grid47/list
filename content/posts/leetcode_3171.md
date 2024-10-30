@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3171: Find Subarray With Bitwise OR Closest to K"
-date = "2016-02-24"
+date = "2016-02-25"
 description = "Solution to Leetcode 3171"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-subarray-with-bitwise-or-closest-to-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

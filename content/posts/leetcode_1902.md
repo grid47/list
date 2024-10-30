@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1902: Depth of BST Given Insertion Order"
-date = "2019-08-16"
+date = "2019-08-17"
 description = "Solution to Leetcode 1902"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/depth-of-bst-given-insertion-order/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

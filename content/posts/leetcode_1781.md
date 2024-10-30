@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1781: Sum of Beauty of All Substrings"
-date = "2019-12-15"
+date = "2019-12-16"
 description = "Solution to Leetcode 1781"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-beauty-of-all-substrings/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

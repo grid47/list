@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1704: Determine if String Halves Are Alike"
-date = "2020-03-01"
+date = "2020-03-02"
 description = "Solution to Leetcode 1704"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-if-string-halves-are-alike/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

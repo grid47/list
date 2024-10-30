@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1849: Splitting a String Into Descending Consecutive Values"
-date = "2019-10-08"
+date = "2019-10-09"
 description = "Solution to Leetcode 1849"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/splitting-a-string-into-descending-consecutive-values/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

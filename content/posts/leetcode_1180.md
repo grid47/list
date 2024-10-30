@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1180: Count Substrings with Only One Distinct Letter"
-date = "2021-08-07"
+date = "2021-08-08"
 description = "Solution to Leetcode 1180"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-substrings-with-only-one-distinct-letter/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

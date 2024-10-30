@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3138: Minimum Length of Anagram Concatenation"
-date = "2016-03-28"
+date = "2016-03-29"
 description = "Solution to Leetcode 3138"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-length-of-anagram-concatenation/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

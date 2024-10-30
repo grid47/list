@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3160: Find the Number of Distinct Colors Among the Balls"
-date = "2016-03-06"
+date = "2016-03-07"
 description = "Solution to Leetcode 3160"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-number-of-distinct-colors-among-the-balls/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

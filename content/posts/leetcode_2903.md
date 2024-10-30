@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2903: Find Indices With Index and Value Difference I"
-date = "2016-11-18"
+date = "2016-11-19"
 description = "Solution to Leetcode 2903"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-indices-with-index-and-value-difference-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

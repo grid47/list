@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1712: Ways to Split Array Into Three Subarrays"
-date = "2020-02-22"
+date = "2020-02-23"
 description = "Solution to Leetcode 1712"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/ways-to-split-array-into-three-subarrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 17: Letter Combinations of a Phone Number"
-date = "2024-10-13"
+date = "2024-10-14"
 description = "Solution to Leetcode 17"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/)
 
 ---
-
+{{< youtube F7EoBxhPmBk >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1364: Number of Trusted Contacts of a Customer"
-date = "2021-02-04"
+date = "2021-02-05"
 description = "Solution to Leetcode 1364"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-trusted-contacts-of-a-customer/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

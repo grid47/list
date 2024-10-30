@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2232: Minimize Result by Adding Parentheses to Expression"
-date = "2018-09-20"
+date = "2018-09-21"
 description = "Solution to Leetcode 2232"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

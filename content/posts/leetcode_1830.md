@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1830: Minimum Number of Operations to Make String Sorted"
-date = "2019-10-27"
+date = "2019-10-28"
 description = "Solution to Leetcode 1830"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-operations-to-make-string-sorted/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

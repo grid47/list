@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2892: Minimizing Array After Replacing Pairs With Their Product"
-date = "2016-11-29"
+date = "2016-11-30"
 description = "Solution to Leetcode 2892"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimizing-array-after-replacing-pairs-with-their-product/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

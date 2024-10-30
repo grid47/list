@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1605: Find Valid Matrix Given Row and Column Sums"
-date = "2020-06-08"
+date = "2020-06-09"
 description = "Solution to Leetcode 1605"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

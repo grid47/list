@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1275: Find Winner on a Tic Tac Toe Game"
-date = "2021-05-04"
+date = "2021-05-05"
 description = "Solution to Leetcode 1275"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3194: Minimum Average of Smallest and Largest Elements"
-date = "2016-02-01"
+date = "2016-02-02"
 description = "Solution to Leetcode 3194"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-average-of-smallest-and-largest-elements/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

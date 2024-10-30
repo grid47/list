@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3256: Maximum Value Sum by Placing Three Rooks I"
-date = "2015-12-01"
+date = "2015-12-02"
 description = "Solution to Leetcode 3256"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-value-sum-by-placing-three-rooks-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

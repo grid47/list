@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1228: Missing Number In Arithmetic Progression"
-date = "2021-06-20"
+date = "2021-06-21"
 description = "Solution to Leetcode 1228"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/missing-number-in-arithmetic-progression/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

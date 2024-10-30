@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2526: Find Consecutive Integers from a Data Stream"
-date = "2017-11-30"
+date = "2017-12-01"
 description = "Solution to Leetcode 2526"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-consecutive-integers-from-a-data-stream/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

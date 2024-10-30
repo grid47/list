@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1933: Check if String Is Decomposable Into Value-Equal Substrings"
-date = "2019-07-16"
+date = "2019-07-17"
 description = "Solution to Leetcode 1933"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-string-is-decomposable-into-value-equal-substrings/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

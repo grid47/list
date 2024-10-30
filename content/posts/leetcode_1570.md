@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1570: Dot Product of Two Sparse Vectors"
-date = "2020-07-13"
+date = "2020-07-14"
 description = "Solution to Leetcode 1570"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/dot-product-of-two-sparse-vectors/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2616: Minimize the Maximum Difference of Pairs"
-date = "2017-09-01"
+date = "2017-09-02"
 description = "Solution to Leetcode 2616"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

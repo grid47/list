@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3041: Maximize Consecutive Elements in an Array After Modification"
-date = "2016-07-03"
+date = "2016-07-04"
 description = "Solution to Leetcode 3041"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-consecutive-elements-in-an-array-after-modification/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

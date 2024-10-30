@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1634: Add Two Polynomials Represented as Linked Lists"
-date = "2020-05-10"
+date = "2020-05-11"
 description = "Solution to Leetcode 1634"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/add-two-polynomials-represented-as-linked-lists/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

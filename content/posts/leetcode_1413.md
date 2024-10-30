@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1413: Minimum Value to Get Positive Step by Step Sum"
-date = "2020-12-17"
+date = "2020-12-18"
 description = "Solution to Leetcode 1413"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1736: Latest Time by Replacing Hidden Digits"
-date = "2020-01-29"
+date = "2020-01-30"
 description = "Solution to Leetcode 1736"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/latest-time-by-replacing-hidden-digits/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

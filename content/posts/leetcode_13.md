@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 13: Roman to Integer"
-date = "2024-10-17"
+date = "2024-10-18"
 description = "Solution to Leetcode 13"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/roman-to-integer/description/)
 
 ---
-
+{{< youtube 3jdxYj3DD98 >}}
 **Code:**
 
 {{< highlight cpp >}}

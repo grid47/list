@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 951: Flip Equivalent Binary Trees"
-date = "2022-03-24"
+date = "2022-03-25"
 description = "Solution to Leetcode 951"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flip-equivalent-binary-trees/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

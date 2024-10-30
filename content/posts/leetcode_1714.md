@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1714: Sum Of Special Evenly-Spaced Elements In Array"
-date = "2020-02-20"
+date = "2020-02-21"
 description = "Solution to Leetcode 1714"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-special-evenly-spaced-elements-in-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

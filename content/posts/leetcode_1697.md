@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1697: Checking Existence of Edge Length Limited Paths"
-date = "2020-03-08"
+date = "2020-03-09"
 description = "Solution to Leetcode 1697"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/checking-existence-of-edge-length-limited-paths/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

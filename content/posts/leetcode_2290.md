@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2290: Minimum Obstacle Removal to Reach Corner"
-date = "2018-07-24"
+date = "2018-07-25"
 description = "Solution to Leetcode 2290"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

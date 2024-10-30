@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1298: Maximum Candies You Can Get from Boxes"
-date = "2021-04-11"
+date = "2021-04-12"
 description = "Solution to Leetcode 1298"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 600: Non-negative Integers without Consecutive Ones"
-date = "2023-03-10"
+date = "2023-03-11"
 description = "Solution to Leetcode 600"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

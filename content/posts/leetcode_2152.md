@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2152: Minimum Number of Lines to Cover Points"
-date = "2018-12-09"
+date = "2018-12-10"
 description = "Solution to Leetcode 2152"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-lines-to-cover-points/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 873: Length of Longest Fibonacci Subsequence"
-date = "2022-06-10"
+date = "2022-06-11"
 description = "Solution to Leetcode 873"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

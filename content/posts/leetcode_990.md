@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 990: Satisfiability of Equality Equations"
-date = "2022-02-13"
+date = "2022-02-14"
 description = "Solution to Leetcode 990"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/satisfiability-of-equality-equations/description/)
 
 ---
-
+{{< youtube d3MkgeCo8l4 >}}
 **Code:**
 
 {{< highlight cpp >}}

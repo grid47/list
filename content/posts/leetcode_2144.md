@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2144: Minimum Cost of Buying Candies With Discount"
-date = "2018-12-17"
+date = "2018-12-18"
 description = "Solution to Leetcode 2144"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-of-buying-candies-with-discount/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

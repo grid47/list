@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1616: Split Two Strings to Make Palindrome"
-date = "2020-05-28"
+date = "2020-05-29"
 description = "Solution to Leetcode 1616"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/split-two-strings-to-make-palindrome/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1868: Product of Two Run-Length Encoded Arrays"
-date = "2019-09-19"
+date = "2019-09-20"
 description = "Solution to Leetcode 1868"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/product-of-two-run-length-encoded-arrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

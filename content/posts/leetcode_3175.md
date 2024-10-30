@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3175: Find The First Player to win K Games in a Row"
-date = "2016-02-20"
+date = "2016-02-21"
 description = "Solution to Leetcode 3175"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-first-player-to-win-k-games-in-a-row/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

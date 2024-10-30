@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3090: Maximum Length Substring With Two Occurrences"
-date = "2016-05-15"
+date = "2016-05-16"
 description = "Solution to Leetcode 3090"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-length-substring-with-two-occurrences/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

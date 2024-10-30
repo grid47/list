@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1897: Redistribute Characters to Make All Strings Equal"
-date = "2019-08-21"
+date = "2019-08-22"
 description = "Solution to Leetcode 1897"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/redistribute-characters-to-make-all-strings-equal/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

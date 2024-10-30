@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1569: Number of Ways to Reorder Array to Get Same BST"
-date = "2020-07-14"
+date = "2020-07-15"
 description = "Solution to Leetcode 1569"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-reorder-array-to-get-same-bst/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

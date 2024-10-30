@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 10: Regular Expression Matching"
-date = "2024-10-20"
+date = "2024-10-21"
 description = "Solution to Leetcode 10"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/regular-expression-matching/description/)
 
 ---
-
+{{< youtube ZNI_yXaGlxY >}}
 **Code:**
 
 {{< highlight cpp >}}

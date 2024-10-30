@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 109: Convert Sorted List to Binary Search Tree"
-date = "2024-07-13"
+date = "2024-07-14"
 description = "Solution to Leetcode 109"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3135: Equalize Strings by Adding or Removing Characters at Ends"
-date = "2016-03-31"
+date = "2016-04-01"
 description = "Solution to Leetcode 3135"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/equalize-strings-by-adding-or-removing-characters-at-ends/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

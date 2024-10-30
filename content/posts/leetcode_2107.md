@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2107: Number of Unique Flavors After Sharing K Candies"
-date = "2019-01-23"
+date = "2019-01-24"
 description = "Solution to Leetcode 2107"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-unique-flavors-after-sharing-k-candies/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2966: Divide Array Into Arrays With Max Difference"
-date = "2016-09-16"
+date = "2016-09-17"
 description = "Solution to Leetcode 2966"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

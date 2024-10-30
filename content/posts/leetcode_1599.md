@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1599: Maximum Profit of Operating a Centennial Wheel"
-date = "2020-06-14"
+date = "2020-06-15"
 description = "Solution to Leetcode 1599"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

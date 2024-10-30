@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1585: Check If String Is Transformable With Substring Sort Operations"
-date = "2020-06-28"
+date = "2020-06-29"
 description = "Solution to Leetcode 1585"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-string-is-transformable-with-substring-sort-operations/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

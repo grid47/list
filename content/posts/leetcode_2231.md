@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2231: Largest Number After Digit Swaps by Parity"
-date = "2018-09-21"
+date = "2018-09-22"
 description = "Solution to Leetcode 2231"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-number-after-digit-swaps-by-parity/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2808: Minimum Seconds to Equalize a Circular Array"
-date = "2017-02-21"
+date = "2017-02-22"
 description = "Solution to Leetcode 2808"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-seconds-to-equalize-a-circular-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

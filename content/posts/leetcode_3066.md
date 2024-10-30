@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3066: Minimum Operations to Exceed Threshold Value II"
-date = "2016-06-08"
+date = "2016-06-09"
 description = "Solution to Leetcode 3066"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

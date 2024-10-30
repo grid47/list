@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1648: Sell Diminishing-Valued Colored Balls"
-date = "2020-04-26"
+date = "2020-04-27"
 description = "Solution to Leetcode 1648"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sell-diminishing-valued-colored-balls/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

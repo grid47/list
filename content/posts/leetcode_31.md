@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 31: Next Permutation"
-date = "2024-09-29"
+date = "2024-09-30"
 description = "Solution to Leetcode 31"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/next-permutation/description/)
 
 ---
-
+{{< youtube 6qXO72FkqwM >}}
 **Code:**
 
 {{< highlight cpp >}}

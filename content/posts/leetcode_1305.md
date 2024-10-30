@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1305: All Elements in Two Binary Search Trees"
-date = "2021-04-04"
+date = "2021-04-05"
 description = "Solution to Leetcode 1305"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-elements-in-two-binary-search-trees/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

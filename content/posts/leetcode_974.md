@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 974: Subarray Sums Divisible by K"
-date = "2022-03-01"
+date = "2022-03-02"
 description = "Solution to Leetcode 974"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subarray-sums-divisible-by-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

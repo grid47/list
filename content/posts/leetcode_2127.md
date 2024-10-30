@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2127: Maximum Employees to Be Invited to a Meeting"
-date = "2019-01-03"
+date = "2019-01-04"
 description = "Solution to Leetcode 2127"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-employees-to-be-invited-to-a-meeting/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

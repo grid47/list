@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3203: Find Minimum Diameter After Merging Two Trees"
-date = "2016-01-23"
+date = "2016-01-24"
 description = "Solution to Leetcode 3203"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-minimum-diameter-after-merging-two-trees/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

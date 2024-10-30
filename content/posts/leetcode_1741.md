@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1741: Find Total Time Spent by Each Employee"
-date = "2020-01-24"
+date = "2020-01-25"
 description = "Solution to Leetcode 1741"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-total-time-spent-by-each-employee/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

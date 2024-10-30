@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3264: Final Array State After K Multiplication Operations I"
-date = "2015-11-23"
+date = "2015-11-24"
 description = "Solution to Leetcode 3264"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/final-array-state-after-k-multiplication-operations-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1347: Minimum Number of Steps to Make Two Strings Anagram"
-date = "2021-02-21"
+date = "2021-02-22"
 description = "Solution to Leetcode 1347"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

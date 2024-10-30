@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 947: Most Stones Removed with Same Row or Column"
-date = "2022-03-28"
+date = "2022-03-29"
 description = "Solution to Leetcode 947"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2216: Minimum Deletions to Make Array Beautiful"
-date = "2018-10-06"
+date = "2018-10-07"
 description = "Solution to Leetcode 2216"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

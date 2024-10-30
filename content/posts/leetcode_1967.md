@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1967: Number of Strings That Appear as Substrings in Word"
-date = "2019-06-12"
+date = "2019-06-13"
 description = "Solution to Leetcode 1967"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-strings-that-appear-as-substrings-in-word/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 103: Binary Tree Zigzag Level Order Traversal"
-date = "2024-07-19"
+date = "2024-07-20"
 description = "Solution to Leetcode 103"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

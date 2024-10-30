@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2763: Sum of Imbalance Numbers of All Subarrays"
-date = "2017-04-07"
+date = "2017-04-08"
 description = "Solution to Leetcode 2763"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-imbalance-numbers-of-all-subarrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1665: Minimum Initial Energy to Finish Tasks"
-date = "2020-04-09"
+date = "2020-04-10"
 description = "Solution to Leetcode 1665"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-initial-energy-to-finish-tasks/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

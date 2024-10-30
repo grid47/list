@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1976: Number of Ways to Arrive at Destination"
-date = "2019-06-03"
+date = "2019-06-04"
 description = "Solution to Leetcode 1976"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

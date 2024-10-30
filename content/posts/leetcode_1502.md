@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1502: Can Make Arithmetic Progression From Sequence"
-date = "2020-09-19"
+date = "2020-09-20"
 description = "Solution to Leetcode 1502"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/can-make-arithmetic-progression-from-sequence/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

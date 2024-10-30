@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 798: Smallest Rotation with Highest Score"
-date = "2022-08-24"
+date = "2022-08-25"
 description = "Solution to Leetcode 798"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-rotation-with-highest-score/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

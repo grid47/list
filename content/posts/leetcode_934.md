@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 934: Shortest Bridge"
-date = "2022-04-10"
+date = "2022-04-11"
 description = "Solution to Leetcode 934"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-bridge/description/)
 
 ---
-
+{{< youtube 1RZijG2c1CA >}}
 **Code:**
 
 {{< highlight cpp >}}

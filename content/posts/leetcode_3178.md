@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3178: Find the Child Who Has the Ball After K Seconds"
-date = "2016-02-17"
+date = "2016-02-18"
 description = "Solution to Leetcode 3178"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-child-who-has-the-ball-after-k-seconds/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3184: Count Pairs That Form a Complete Day I"
-date = "2016-02-11"
+date = "2016-02-12"
 description = "Solution to Leetcode 3184"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-pairs-that-form-a-complete-day-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

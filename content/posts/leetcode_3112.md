@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3112: Minimum Time to Visit Disappearing Nodes"
-date = "2016-04-23"
+date = "2016-04-24"
 description = "Solution to Leetcode 3112"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-to-visit-disappearing-nodes/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

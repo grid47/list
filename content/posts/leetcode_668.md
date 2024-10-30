@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 668: Kth Smallest Number in Multiplication Table"
-date = "2023-01-01"
+date = "2023-01-02"
 description = "Solution to Leetcode 668"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

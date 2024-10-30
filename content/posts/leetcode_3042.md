@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3042: Count Prefix and Suffix Pairs I"
-date = "2016-07-02"
+date = "2016-07-03"
 description = "Solution to Leetcode 3042"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-prefix-and-suffix-pairs-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

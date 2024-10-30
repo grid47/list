@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1700: Number of Students Unable to Eat Lunch"
-date = "2020-03-05"
+date = "2020-03-06"
 description = "Solution to Leetcode 1700"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-students-unable-to-eat-lunch/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

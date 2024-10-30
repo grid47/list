@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1887: Reduction Operations to Make the Array Elements Equal"
-date = "2019-08-31"
+date = "2019-09-01"
 description = "Solution to Leetcode 1887"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reduction-operations-to-make-the-array-elements-equal/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

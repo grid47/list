@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2356: Number of Unique Subjects Taught by Each Teacher"
-date = "2018-05-19"
+date = "2018-05-20"
 description = "Solution to Leetcode 2356"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

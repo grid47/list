@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1401: Circle and Rectangle Overlapping"
-date = "2020-12-29"
+date = "2020-12-30"
 description = "Solution to Leetcode 1401"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/circle-and-rectangle-overlapping/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

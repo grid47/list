@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1618: Maximum Font to Fit a Sentence in a Screen"
-date = "2020-05-26"
+date = "2020-05-27"
 description = "Solution to Leetcode 1618"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-font-to-fit-a-sentence-in-a-screen/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

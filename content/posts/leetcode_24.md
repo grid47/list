@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 24: Swap Nodes in Pairs"
-date = "2024-10-06"
+date = "2024-10-07"
 description = "Solution to Leetcode 24"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/swap-nodes-in-pairs/description/)
 
 ---
-
+{{< youtube o811TZLAWOo >}}
 **Code:**
 
 {{< highlight cpp >}}

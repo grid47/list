@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1785: Minimum Elements to Add to Form a Given Sum"
-date = "2019-12-11"
+date = "2019-12-12"
 description = "Solution to Leetcode 1785"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-elements-to-add-to-form-a-given-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

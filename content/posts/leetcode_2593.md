@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2593: Find Score of an Array After Marking All Elements"
-date = "2017-09-24"
+date = "2017-09-25"
 description = "Solution to Leetcode 2593"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 839: Similar String Groups"
-date = "2022-07-14"
+date = "2022-07-15"
 description = "Solution to Leetcode 839"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/similar-string-groups/description/)
 
 ---
-
+{{< youtube SbLsabsSFt0 >}}
 **Code:**
 
 {{< highlight cpp >}}

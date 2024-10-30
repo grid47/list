@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1378: Replace Employee ID With The Unique Identifier"
-date = "2021-01-21"
+date = "2021-01-22"
 description = "Solution to Leetcode 1378"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-employee-id-with-the-unique-identifier/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

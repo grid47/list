@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 659: Split Array into Consecutive Subsequences"
-date = "2023-01-10"
+date = "2023-01-11"
 description = "Solution to Leetcode 659"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/split-array-into-consecutive-subsequences/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

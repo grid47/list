@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 35: Search Insert Position"
-date = "2024-09-25"
+date = "2024-09-26"
 description = "Solution to Leetcode 35"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/search-insert-position/description/)
 
 ---
-
+{{< youtube K-RYzDZkzCI >}}
 **Code:**
 
 {{< highlight cpp >}}

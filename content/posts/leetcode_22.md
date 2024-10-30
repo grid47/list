@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 22: Generate Parentheses"
-date = "2024-10-08"
+date = "2024-10-09"
 description = "Solution to Leetcode 22"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/generate-parentheses/description/)
 
 ---
-
+{{< youtube 7aSAbqCWhwE >}}
 **Code:**
 
 {{< highlight cpp >}}

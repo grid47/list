@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2779: Maximum Beauty of an Array After Applying Operation"
-date = "2017-03-22"
+date = "2017-03-23"
 description = "Solution to Leetcode 2779"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

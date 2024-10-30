@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1893: Check if All the Integers in a Range Are Covered"
-date = "2019-08-25"
+date = "2019-08-26"
 description = "Solution to Leetcode 1893"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-all-the-integers-in-a-range-are-covered/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

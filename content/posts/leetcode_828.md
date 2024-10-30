@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 828: Count Unique Characters of All Substrings of a Given String"
-date = "2022-07-25"
+date = "2022-07-26"
 description = "Solution to Leetcode 828"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

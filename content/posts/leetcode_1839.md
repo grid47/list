@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1839: Longest Substring Of All Vowels in Order"
-date = "2019-10-18"
+date = "2019-10-19"
 description = "Solution to Leetcode 1839"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3159: Find Occurrences of an Element in an Array"
-date = "2016-03-07"
+date = "2016-03-08"
 description = "Solution to Leetcode 3159"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-occurrences-of-an-element-in-an-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

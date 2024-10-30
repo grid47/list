@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3082: Find the Sum of the Power of All Subsequences"
-date = "2016-05-23"
+date = "2016-05-24"
 description = "Solution to Leetcode 3082"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-sum-of-the-power-of-all-subsequences/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

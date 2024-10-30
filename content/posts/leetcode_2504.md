@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2504: Concatenate the Name and the Profession"
-date = "2017-12-22"
+date = "2017-12-23"
 description = "Solution to Leetcode 2504"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/concatenate-the-name-and-the-profession/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

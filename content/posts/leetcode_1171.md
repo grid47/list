@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1171: Remove Zero Sum Consecutive Nodes from Linked List"
-date = "2021-08-16"
+date = "2021-08-17"
 description = "Solution to Leetcode 1171"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

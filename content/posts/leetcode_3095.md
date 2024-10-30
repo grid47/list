@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3095: Shortest Subarray With OR at Least K I"
-date = "2016-05-10"
+date = "2016-05-11"
 description = "Solution to Leetcode 3095"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

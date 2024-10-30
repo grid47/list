@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2776: Convert Callback Based Function to Promise Based Function"
-date = "2017-03-25"
+date = "2017-03-26"
 description = "Solution to Leetcode 2776"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convert-callback-based-function-to-promise-based-function/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

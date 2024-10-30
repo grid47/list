@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 914: X of a Kind in a Deck of Cards"
-date = "2022-04-30"
+date = "2022-05-01"
 description = "Solution to Leetcode 914"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3273: Minimum Amount of Damage Dealt to Bob"
-date = "2015-11-14"
+date = "2015-11-15"
 description = "Solution to Leetcode 3273"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-amount-of-damage-dealt-to-bob/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

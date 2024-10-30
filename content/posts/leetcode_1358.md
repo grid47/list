@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1358: Number of Substrings Containing All Three Characters"
-date = "2021-02-10"
+date = "2021-02-11"
 description = "Solution to Leetcode 1358"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

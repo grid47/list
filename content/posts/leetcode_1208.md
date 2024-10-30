@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1208: Get Equal Substrings Within Budget"
-date = "2021-07-10"
+date = "2021-07-11"
 description = "Solution to Leetcode 1208"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/get-equal-substrings-within-budget/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

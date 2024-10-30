@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 433: Minimum Genetic Mutation"
-date = "2023-08-24"
+date = "2023-08-25"
 description = "Solution to Leetcode 433"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-genetic-mutation/description/)
 
 ---
-
+{{< youtube XLvyInrFjm4 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2713: Maximum Strictly Increasing Cells in a Matrix"
-date = "2017-05-27"
+date = "2017-05-28"
 description = "Solution to Leetcode 2713"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-strictly-increasing-cells-in-a-matrix/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

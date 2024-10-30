@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1548: The Most Similar Path in a Graph"
-date = "2020-08-04"
+date = "2020-08-05"
 description = "Solution to Leetcode 1548"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-most-similar-path-in-a-graph/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

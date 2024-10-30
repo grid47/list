@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 421: Maximum XOR of Two Numbers in an Array"
-date = "2023-09-05"
+date = "2023-09-06"
 description = "Solution to Leetcode 421"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

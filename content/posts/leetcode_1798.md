@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1798: Maximum Number of Consecutive Values You Can Make"
-date = "2019-11-28"
+date = "2019-11-29"
 description = "Solution to Leetcode 1798"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-consecutive-values-you-can-make/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

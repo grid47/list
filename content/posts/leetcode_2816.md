@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2816: Double a Number Represented as a Linked List"
-date = "2017-02-13"
+date = "2017-02-14"
 description = "Solution to Leetcode 2816"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/double-a-number-represented-as-a-linked-list/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1318: Minimum Flips to Make a OR b Equal to c"
-date = "2021-03-22"
+date = "2021-03-23"
 description = "Solution to Leetcode 1318"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

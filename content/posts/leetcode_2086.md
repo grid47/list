@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2086: Minimum Number of Food Buckets to Feed the Hamsters"
-date = "2019-02-13"
+date = "2019-02-14"
 description = "Solution to Leetcode 2086"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-food-buckets-to-feed-the-hamsters/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

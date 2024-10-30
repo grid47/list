@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 470: Implement Rand10() Using Rand7()"
-date = "2023-07-18"
+date = "2023-07-19"
 description = "Solution to Leetcode 470"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/implement-rand10-using-rand7/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

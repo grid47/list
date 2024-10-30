@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1662: Check If Two String Arrays are Equivalent"
-date = "2020-04-12"
+date = "2020-04-13"
 description = "Solution to Leetcode 1662"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

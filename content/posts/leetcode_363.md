@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 363: Max Sum of Rectangle No Larger Than K"
-date = "2023-11-02"
+date = "2023-11-03"
 description = "Solution to Leetcode 363"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

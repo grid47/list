@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2689: Extract Kth Character From The Rope Tree"
-date = "2017-06-20"
+date = "2017-06-21"
 description = "Solution to Leetcode 2689"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/extract-kth-character-from-the-rope-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 378: Kth Smallest Element in a Sorted Matrix"
-date = "2023-10-18"
+date = "2023-10-19"
 description = "Solution to Leetcode 378"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

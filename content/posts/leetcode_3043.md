@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3043: Find the Length of the Longest Common Prefix"
-date = "2016-07-01"
+date = "2016-07-02"
 description = "Solution to Leetcode 3043"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-length-of-the-longest-common-prefix/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

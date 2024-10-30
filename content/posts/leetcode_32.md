@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 32: Longest Valid Parentheses"
-date = "2024-09-28"
+date = "2024-09-29"
 description = "Solution to Leetcode 32"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-valid-parentheses/description/)
 
 ---
-
+{{< youtube CPEDLKfaQJE >}}
 **Code:**
 
 {{< highlight cpp >}}

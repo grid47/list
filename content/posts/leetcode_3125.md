@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3125: Maximum Number That Makes Result of Bitwise AND Zero"
-date = "2016-04-10"
+date = "2016-04-11"
 description = "Solution to Leetcode 3125"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-that-makes-result-of-bitwise-and-zero/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

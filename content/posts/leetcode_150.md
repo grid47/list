@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 150: Evaluate Reverse Polish Notation"
-date = "2024-06-02"
+date = "2024-06-03"
 description = "Solution to Leetcode 150"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/evaluate-reverse-polish-notation/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

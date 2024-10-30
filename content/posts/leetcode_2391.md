@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2391: Minimum Amount of Time to Collect Garbage"
-date = "2018-04-14"
+date = "2018-04-15"
 description = "Solution to Leetcode 2391"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-amount-of-time-to-collect-garbage/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

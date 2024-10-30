@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3296: Minimum Number of Seconds to Make Mountain Height Zero"
-date = "2015-10-22"
+date = "2015-10-23"
 description = "Solution to Leetcode 3296"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-seconds-to-make-mountain-height-zero/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

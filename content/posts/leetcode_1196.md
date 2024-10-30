@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1196: How Many Apples Can You Put into the Basket"
-date = "2021-07-22"
+date = "2021-07-23"
 description = "Solution to Leetcode 1196"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/how-many-apples-can-you-put-into-the-basket/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3317: Find the Number of Possible Ways for an Event"
-date = "2015-10-01"
+date = "2015-10-02"
 description = "Solution to Leetcode 3317"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-number-of-possible-ways-for-an-event/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

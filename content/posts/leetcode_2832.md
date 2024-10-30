@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2832: Maximal Range That Each Element Is Maximum in It"
-date = "2017-01-28"
+date = "2017-01-29"
 description = "Solution to Leetcode 2832"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximal-range-that-each-element-is-maximum-in-it/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

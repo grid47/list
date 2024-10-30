@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2749: Minimum Operations to Make the Integer Zero"
-date = "2017-04-21"
+date = "2017-04-22"
 description = "Solution to Leetcode 2749"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

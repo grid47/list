@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1442: Count Triplets That Can Form Two Arrays of Equal XOR"
-date = "2020-11-18"
+date = "2020-11-19"
 description = "Solution to Leetcode 1442"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

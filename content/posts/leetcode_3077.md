@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3077: Maximum Strength of K Disjoint Subarrays"
-date = "2016-05-28"
+date = "2016-05-29"
 description = "Solution to Leetcode 3077"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-strength-of-k-disjoint-subarrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

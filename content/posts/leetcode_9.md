@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 9: Palindrome Number"
-date = "2024-10-21"
+date = "2024-10-22"
 description = "Solution to Leetcode 9"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/palindrome-number/description/)
 
 ---
-
+{{< youtube yubRKwixN-U >}}
 **Code:**
 
 {{< highlight cpp >}}

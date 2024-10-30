@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 127: Word Ladder"
-date = "2024-06-25"
+date = "2024-06-26"
 description = "Solution to Leetcode 127"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/word-ladder/description/)
 
 ---
-
+{{< youtube didn5XCQ14s >}}
 **Code:**
 
 {{< highlight cpp >}}

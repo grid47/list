@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2934: Minimum Operations to Maximize Last Elements in Arrays"
-date = "2016-10-18"
+date = "2016-10-19"
 description = "Solution to Leetcode 2934"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-maximize-last-elements-in-arrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

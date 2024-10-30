@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 982: Triples with Bitwise AND Equal To Zero"
-date = "2022-02-21"
+date = "2022-02-22"
 description = "Solution to Leetcode 982"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/triples-with-bitwise-and-equal-to-zero/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

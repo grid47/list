@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2044: Count Number of Maximum Bitwise-OR Subsets"
-date = "2019-03-27"
+date = "2019-03-28"
 description = "Solution to Leetcode 2044"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

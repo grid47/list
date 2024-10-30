@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2941: Maximum GCD-Sum of a Subarray"
-date = "2016-10-11"
+date = "2016-10-12"
 description = "Solution to Leetcode 2941"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-gcd-sum-of-a-subarray/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

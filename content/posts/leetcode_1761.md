@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1761: Minimum Degree of a Connected Trio in a Graph"
-date = "2020-01-04"
+date = "2020-01-05"
 description = "Solution to Leetcode 1761"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

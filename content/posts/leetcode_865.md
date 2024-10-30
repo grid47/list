@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 865: Smallest Subtree with all the Deepest Nodes"
-date = "2022-06-18"
+date = "2022-06-19"
 description = "Solution to Leetcode 865"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

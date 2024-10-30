@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3253: Construct String with Minimum Cost (Easy)"
-date = "2015-12-04"
+date = "2015-12-05"
 description = "Solution to Leetcode 3253"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-string-with-minimum-cost-easy/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

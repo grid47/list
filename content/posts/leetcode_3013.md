@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3013: Divide an Array Into Subarrays With Minimum Cost II"
-date = "2016-07-31"
+date = "2016-08-01"
 description = "Solution to Leetcode 3013"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

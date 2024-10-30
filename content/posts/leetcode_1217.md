@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1217: Minimum Cost to Move Chips to The Same Position"
-date = "2021-07-01"
+date = "2021-07-02"
 description = "Solution to Leetcode 1217"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-to-move-chips-to-the-same-position/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

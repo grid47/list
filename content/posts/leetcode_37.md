@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 37: Sudoku Solver"
-date = "2024-09-23"
+date = "2024-09-24"
 description = "Solution to Leetcode 37"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sudoku-solver/description/)
 
 ---
-
+{{< youtube 4psV4SedHg0 >}}
 **Code:**
 
 {{< highlight cpp >}}

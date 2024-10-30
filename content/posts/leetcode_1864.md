@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1864: Minimum Number of Swaps to Make the Binary String Alternating"
-date = "2019-09-23"
+date = "2019-09-24"
 description = "Solution to Leetcode 1864"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-binary-string-alternating/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

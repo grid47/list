@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3072: Distribute Elements Into Two Arrays II"
-date = "2016-06-02"
+date = "2016-06-03"
 description = "Solution to Leetcode 3072"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/distribute-elements-into-two-arrays-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

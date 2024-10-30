@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3300: Minimum Element After Replacement With Digit Sum"
-date = "2015-10-18"
+date = "2015-10-19"
 description = "Solution to Leetcode 3300"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-element-after-replacement-with-digit-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

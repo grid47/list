@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 797: All Paths From Source to Target"
-date = "2022-08-25"
+date = "2022-08-26"
 description = "Solution to Leetcode 797"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-paths-from-source-to-target/description/)
 
 ---
-
+{{< youtube MQU2IIWwaOg >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 235: Lowest Common Ancestor of a Binary Search Tree"
-date = "2024-03-09"
+date = "2024-03-10"
 description = "Solution to Leetcode 235"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

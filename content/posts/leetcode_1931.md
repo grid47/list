@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1931: Painting a Grid With Three Different Colors"
-date = "2019-07-18"
+date = "2019-07-19"
 description = "Solution to Leetcode 1931"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/painting-a-grid-with-three-different-colors/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1276: Number of Burgers with No Waste of Ingredients"
-date = "2021-05-03"
+date = "2021-05-04"
 description = "Solution to Leetcode 1276"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-burgers-with-no-waste-of-ingredients/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

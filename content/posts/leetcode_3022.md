@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3022: Minimize OR of Remaining Elements Using Operations"
-date = "2016-07-22"
+date = "2016-07-23"
 description = "Solution to Leetcode 3022"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimize-or-of-remaining-elements-using-operations/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

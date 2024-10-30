@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2332: The Latest Time to Catch a Bus"
-date = "2018-06-12"
+date = "2018-06-13"
 description = "Solution to Leetcode 2332"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-latest-time-to-catch-a-bus/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

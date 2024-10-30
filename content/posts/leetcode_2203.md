@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2203: Minimum Weighted Subgraph With the Required Paths"
-date = "2018-10-19"
+date = "2018-10-20"
 description = "Solution to Leetcode 2203"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-weighted-subgraph-with-the-required-paths/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

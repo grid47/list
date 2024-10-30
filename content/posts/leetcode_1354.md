@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1354: Construct Target Array With Multiple Sums"
-date = "2021-02-14"
+date = "2021-02-15"
 description = "Solution to Leetcode 1354"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-target-array-with-multiple-sums/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

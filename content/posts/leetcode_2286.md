@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2286: Booking Concert Tickets in Groups"
-date = "2018-07-28"
+date = "2018-07-29"
 description = "Solution to Leetcode 2286"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/booking-concert-tickets-in-groups/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

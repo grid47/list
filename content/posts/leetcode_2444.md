@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2444: Count Subarrays With Fixed Bounds"
-date = "2018-02-20"
+date = "2018-02-21"
 description = "Solution to Leetcode 2444"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-subarrays-with-fixed-bounds/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

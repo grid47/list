@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2493: Divide Nodes Into the Maximum Number of Groups"
-date = "2018-01-02"
+date = "2018-01-03"
 description = "Solution to Leetcode 2493"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-nodes-into-the-maximum-number-of-groups/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

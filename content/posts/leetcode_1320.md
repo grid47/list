@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1320: Minimum Distance to Type a Word Using Two Fingers"
-date = "2021-03-20"
+date = "2021-03-21"
 description = "Solution to Leetcode 1320"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-distance-to-type-a-word-using-two-fingers/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1281: Subtract the Product and Sum of Digits of an Integer"
-date = "2021-04-28"
+date = "2021-04-29"
 description = "Solution to Leetcode 1281"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subtract-the-product-and-sum-of-digits-of-an-integer/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

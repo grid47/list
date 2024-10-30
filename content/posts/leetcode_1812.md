@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1812: Determine Color of a Chessboard Square"
-date = "2019-11-14"
+date = "2019-11-15"
 description = "Solution to Leetcode 1812"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-color-of-a-chessboard-square/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

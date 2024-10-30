@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1428: Leftmost Column with at Least a One"
-date = "2020-12-02"
+date = "2020-12-03"
 description = "Solution to Leetcode 1428"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/leftmost-column-with-at-least-a-one/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 308: Range Sum Query 2D - Mutable"
-date = "2023-12-27"
+date = "2023-12-28"
 description = "Solution to Leetcode 308"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/range-sum-query-2d-mutable/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

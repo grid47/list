@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2516: Take K of Each Character From Left and Right"
-date = "2017-12-10"
+date = "2017-12-11"
 description = "Solution to Leetcode 2516"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

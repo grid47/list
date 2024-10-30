@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2147: Number of Ways to Divide a Long Corridor"
-date = "2018-12-14"
+date = "2018-12-15"
 description = "Solution to Leetcode 2147"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-divide-a-long-corridor/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

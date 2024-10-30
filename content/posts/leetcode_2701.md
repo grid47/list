@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2701: Consecutive Transactions with Increasing Amounts"
-date = "2017-06-08"
+date = "2017-06-09"
 description = "Solution to Leetcode 2701"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/consecutive-transactions-with-increasing-amounts/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

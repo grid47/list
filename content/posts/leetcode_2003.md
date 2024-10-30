@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2003: Smallest Missing Genetic Value in Each Subtree"
-date = "2019-05-07"
+date = "2019-05-08"
 description = "Solution to Leetcode 2003"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-missing-genetic-value-in-each-subtree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

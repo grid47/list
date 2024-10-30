@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1846: Maximum Element After Decreasing and Rearranging"
-date = "2019-10-11"
+date = "2019-10-12"
 description = "Solution to Leetcode 1846"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2919: Minimum Increment Operations to Make Array Beautiful"
-date = "2016-11-02"
+date = "2016-11-03"
 description = "Solution to Leetcode 2919"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-increment-operations-to-make-array-beautiful/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2894: Divisible and Non-divisible Sums Difference"
-date = "2016-11-27"
+date = "2016-11-28"
 description = "Solution to Leetcode 2894"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divisible-and-non-divisible-sums-difference/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

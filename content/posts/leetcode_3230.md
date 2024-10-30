@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3230: Customer Purchasing Behavior Analysis"
-date = "2015-12-27"
+date = "2015-12-28"
 description = "Solution to Leetcode 3230"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/customer-purchasing-behavior-analysis/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

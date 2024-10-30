@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1790: Check if One String Swap Can Make Strings Equal"
-date = "2019-12-06"
+date = "2019-12-07"
 description = "Solution to Leetcode 1790"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-one-string-swap-can-make-strings-equal/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

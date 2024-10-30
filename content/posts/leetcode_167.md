@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 167: Two Sum II - Input Array Is Sorted"
-date = "2024-05-16"
+date = "2024-05-17"
 description = "Solution to Leetcode 167"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

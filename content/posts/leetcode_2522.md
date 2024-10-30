@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2522: Partition String Into Substrings With Values at Most K"
-date = "2017-12-04"
+date = "2017-12-05"
 description = "Solution to Leetcode 2522"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-string-into-substrings-with-values-at-most-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 269: Alien Dictionary"
-date = "2024-02-04"
+date = "2024-02-05"
 description = "Solution to Leetcode 269"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/alien-dictionary/description/)
 
 ---
-
+{{< youtube U6-Fb-bR1d0 >}}
 **Code:**
 
 {{< highlight cpp >}}

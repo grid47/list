@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2814: Minimum Time Takes to Reach Destination Without Drowning"
-date = "2017-02-15"
+date = "2017-02-16"
 description = "Solution to Leetcode 2814"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-takes-to-reach-destination-without-drowning/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

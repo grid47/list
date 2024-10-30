@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 586: Customer Placing the Largest Number of Orders"
-date = "2023-03-24"
+date = "2023-03-25"
 description = "Solution to Leetcode 586"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

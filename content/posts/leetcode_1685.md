@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1685: Sum of Absolute Differences in a Sorted Array"
-date = "2020-03-20"
+date = "2020-03-21"
 description = "Solution to Leetcode 1685"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3129: Find All Possible Stable Binary Arrays I"
-date = "2016-04-06"
+date = "2016-04-07"
 description = "Solution to Leetcode 3129"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

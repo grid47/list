@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3289: The Two Sneaky Numbers of Digitville"
-date = "2015-10-29"
+date = "2015-10-30"
 description = "Solution to Leetcode 3289"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-two-sneaky-numbers-of-digitville/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

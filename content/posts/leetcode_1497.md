@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1497: Check If Array Pairs Are Divisible by k"
-date = "2020-09-24"
+date = "2020-09-25"
 description = "Solution to Leetcode 1497"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-array-pairs-are-divisible-by-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

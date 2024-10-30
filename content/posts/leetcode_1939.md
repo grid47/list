@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1939: Users That Actively Request Confirmation Messages"
-date = "2019-07-10"
+date = "2019-07-11"
 description = "Solution to Leetcode 1939"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/users-that-actively-request-confirmation-messages/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

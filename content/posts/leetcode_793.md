@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 793: Preimage Size of Factorial Zeroes Function"
-date = "2022-08-29"
+date = "2022-08-30"
 description = "Solution to Leetcode 793"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/preimage-size-of-factorial-zeroes-function/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3228: Maximum Number of Operations to Move Ones to the End"
-date = "2015-12-29"
+date = "2015-12-30"
 description = "Solution to Leetcode 3228"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-operations-to-move-ones-to-the-end/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

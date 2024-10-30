@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2018: Check if Word Can Be Placed In Crossword"
-date = "2019-04-22"
+date = "2019-04-23"
 description = "Solution to Leetcode 2018"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

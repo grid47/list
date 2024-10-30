@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2: Add Two Numbers"
-date = "2024-10-28"
+date = "2024-10-29"
 description = "Solution to Leetcode 2"
 tags = [
     

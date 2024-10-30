@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3137: Minimum Number of Operations to Make Word K-Periodic"
-date = "2016-03-29"
+date = "2016-03-30"
 description = "Solution to Leetcode 3137"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-operations-to-make-word-k-periodic/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

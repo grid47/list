@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2001: Number of Pairs of Interchangeable Rectangles"
-date = "2019-05-09"
+date = "2019-05-10"
 description = "Solution to Leetcode 2001"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-pairs-of-interchangeable-rectangles/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

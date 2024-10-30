@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1940: Longest Common Subsequence Between Sorted Arrays"
-date = "2019-07-09"
+date = "2019-07-10"
 description = "Solution to Leetcode 1940"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-common-subsequence-between-sorted-arrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

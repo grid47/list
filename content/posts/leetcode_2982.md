@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2982: Find Longest Special Substring That Occurs Thrice II"
-date = "2016-08-31"
+date = "2016-09-01"
 description = "Solution to Leetcode 2982"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

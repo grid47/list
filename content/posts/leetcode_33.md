@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 33: Search in Rotated Sorted Array"
-date = "2024-09-27"
+date = "2024-09-28"
 description = "Solution to Leetcode 33"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/search-in-rotated-sorted-array/description/)
 
 ---
-
+{{< youtube U8XENwh8Oy8 >}}
 **Code:**
 
 {{< highlight cpp >}}

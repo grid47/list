@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3288: Length of the Longest Increasing Path"
-date = "2015-10-30"
+date = "2015-10-31"
 description = "Solution to Leetcode 3288"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/length-of-the-longest-increasing-path/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

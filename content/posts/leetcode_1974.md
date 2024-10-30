@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1974: Minimum Time to Type Word Using Special Typewriter"
-date = "2019-06-05"
+date = "2019-06-06"
 description = "Solution to Leetcode 1974"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-to-type-word-using-special-typewriter/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1296: Divide Array in Sets of K Consecutive Numbers"
-date = "2021-04-13"
+date = "2021-04-14"
 description = "Solution to Leetcode 1296"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

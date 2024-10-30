@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1295: Find Numbers with Even Number of Digits"
-date = "2021-04-14"
+date = "2021-04-15"
 description = "Solution to Leetcode 1295"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 26: Remove Duplicates from Sorted Array"
-date = "2024-10-04"
+date = "2024-10-05"
 description = "Solution to Leetcode 26"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
 
 ---
-
+{{< youtube DEJAZBq0FDA >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2176: Count Equal and Divisible Pairs in an Array"
-date = "2018-11-15"
+date = "2018-11-16"
 description = "Solution to Leetcode 2176"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

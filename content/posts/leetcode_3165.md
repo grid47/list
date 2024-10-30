@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3165: Maximum Sum of Subsequence With Non-adjacent Elements"
-date = "2016-03-01"
+date = "2016-03-02"
 description = "Solution to Leetcode 3165"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-sum-of-subsequence-with-non-adjacent-elements/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

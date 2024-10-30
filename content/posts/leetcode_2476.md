@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2476: Closest Nodes Queries in a Binary Search Tree"
-date = "2018-01-19"
+date = "2018-01-20"
 description = "Solution to Leetcode 2476"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/closest-nodes-queries-in-a-binary-search-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

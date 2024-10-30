@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 23: Merge k Sorted Lists"
-date = "2024-10-07"
+date = "2024-10-08"
 description = "Solution to Leetcode 23"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-k-sorted-lists/description/)
 
 ---
-
+{{< youtube q5a5OiGbT6Q >}}
 **Code:**
 
 {{< highlight cpp >}}

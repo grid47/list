@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 4: Median of Two Sorted Arrays"
-date = "2024-10-26"
+date = "2024-10-27"
 description = "Solution to Leetcode 4"
 tags = [
     

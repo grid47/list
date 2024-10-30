@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1894: Find the Student that Will Replace the Chalk"
-date = "2019-08-24"
+date = "2019-08-25"
 description = "Solution to Leetcode 1894"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-student-that-will-replace-the-chalk/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

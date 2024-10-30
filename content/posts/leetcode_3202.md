@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3202: Find the Maximum Length of Valid Subsequence II"
-date = "2016-01-24"
+date = "2016-01-25"
 description = "Solution to Leetcode 3202"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-maximum-length-of-valid-subsequence-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

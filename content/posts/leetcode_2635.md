@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2635: Apply Transform Over Each Element in Array"
-date = "2017-08-13"
+date = "2017-08-14"
 description = "Solution to Leetcode 2635"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/apply-transform-over-each-element-in-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

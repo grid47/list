@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 153: Find Minimum in Rotated Sorted Array"
-date = "2024-05-30"
+date = "2024-05-31"
 description = "Solution to Leetcode 153"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

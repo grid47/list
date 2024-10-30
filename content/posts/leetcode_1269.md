@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1269: Number of Ways to Stay in the Same Place After Some Steps"
-date = "2021-05-10"
+date = "2021-05-11"
 description = "Solution to Leetcode 1269"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

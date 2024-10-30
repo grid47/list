@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2836: Maximize Value of Function in a Ball Passing Game"
-date = "2017-01-24"
+date = "2017-01-25"
 description = "Solution to Leetcode 2836"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-value-of-function-in-a-ball-passing-game/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

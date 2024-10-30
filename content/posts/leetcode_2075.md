@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2075: Decode the Slanted Ciphertext"
-date = "2019-02-24"
+date = "2019-02-25"
 description = "Solution to Leetcode 2075"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/decode-the-slanted-ciphertext/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2834: Find the Minimum Possible Sum of a Beautiful Array"
-date = "2017-01-26"
+date = "2017-01-27"
 description = "Solution to Leetcode 2834"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-minimum-possible-sum-of-a-beautiful-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2730: Find the Longest Semi-Repetitive Substring"
-date = "2017-05-10"
+date = "2017-05-11"
 description = "Solution to Leetcode 2730"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-longest-semi-repetitive-substring/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

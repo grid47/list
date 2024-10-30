@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1450: Number of Students Doing Homework at a Given Time"
-date = "2020-11-10"
+date = "2020-11-11"
 description = "Solution to Leetcode 1450"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-students-doing-homework-at-a-given-time/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

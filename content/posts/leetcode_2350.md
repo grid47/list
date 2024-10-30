@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2350: Shortest Impossible Sequence of Rolls"
-date = "2018-05-25"
+date = "2018-05-26"
 description = "Solution to Leetcode 2350"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-impossible-sequence-of-rolls/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

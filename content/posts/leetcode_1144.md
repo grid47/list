@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1144: Decrease Elements To Make Array Zigzag"
-date = "2021-09-12"
+date = "2021-09-13"
 description = "Solution to Leetcode 1144"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/decrease-elements-to-make-array-zigzag/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

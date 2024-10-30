@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3311: Construct 2D Grid Matching Graph Layout"
-date = "2015-10-07"
+date = "2015-10-08"
 description = "Solution to Leetcode 3311"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-2d-grid-matching-graph-layout/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

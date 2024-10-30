@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2091: Removing Minimum and Maximum From Array"
-date = "2019-02-08"
+date = "2019-02-09"
 description = "Solution to Leetcode 2091"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/removing-minimum-and-maximum-from-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

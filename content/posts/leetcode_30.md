@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 30: Substring with Concatenation of All Words"
-date = "2024-09-30"
+date = "2024-10-01"
 description = "Solution to Leetcode 30"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/substring-with-concatenation-of-all-words/description/)
 
 ---
-
+{{< youtube taYRJf-M25I >}}
 **Code:**
 
 {{< highlight cpp >}}

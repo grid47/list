@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 786: K-th Smallest Prime Fraction"
-date = "2022-09-05"
+date = "2022-09-06"
 description = "Solution to Leetcode 786"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-th-smallest-prime-fraction/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

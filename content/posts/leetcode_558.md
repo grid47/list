@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 558: Logical OR of Two Binary Grids Represented as Quad-Trees"
-date = "2023-04-21"
+date = "2023-04-22"
 description = "Solution to Leetcode 558"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/logical-or-of-two-binary-grids-represented-as-quad-trees/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

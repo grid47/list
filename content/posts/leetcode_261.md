@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 261: Graph Valid Tree"
-date = "2024-02-12"
+date = "2024-02-13"
 description = "Solution to Leetcode 261"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/graph-valid-tree/description/)
 
 ---
-
+{{< youtube FMdyxwowP2A >}}
 **Code:**
 
 {{< highlight cpp >}}

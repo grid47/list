@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1501: Countries You Can Safely Invest In"
-date = "2020-09-20"
+date = "2020-09-21"
 description = "Solution to Leetcode 1501"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/countries-you-can-safely-invest-in/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

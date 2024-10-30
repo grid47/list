@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2515: Shortest Distance to Target String in a Circular Array"
-date = "2017-12-11"
+date = "2017-12-12"
 description = "Solution to Leetcode 2515"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-distance-to-target-string-in-a-circular-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

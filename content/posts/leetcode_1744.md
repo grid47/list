@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1744: Can You Eat Your Favorite Candy on Your Favorite Day?"
-date = "2020-01-21"
+date = "2020-01-22"
 description = "Solution to Leetcode 1744"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/can-you-eat-your-favorite-candy-on-your-favorite-day/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

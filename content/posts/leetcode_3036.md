@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3036: Number of Subarrays That Match a Pattern II"
-date = "2016-07-08"
+date = "2016-07-09"
 description = "Solution to Leetcode 3036"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-subarrays-that-match-a-pattern-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

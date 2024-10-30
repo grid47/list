@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1628: Design an Expression Tree With Evaluate Function"
-date = "2020-05-16"
+date = "2020-05-17"
 description = "Solution to Leetcode 1628"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-an-expression-tree-with-evaluate-function/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

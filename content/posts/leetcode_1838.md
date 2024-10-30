@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1838: Frequency of the Most Frequent Element"
-date = "2019-10-19"
+date = "2019-10-20"
 description = "Solution to Leetcode 1838"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/frequency-of-the-most-frequent-element/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

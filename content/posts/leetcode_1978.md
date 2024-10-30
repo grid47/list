@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1978: Employees Whose Manager Left the Company"
-date = "2019-06-01"
+date = "2019-06-02"
 description = "Solution to Leetcode 1978"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

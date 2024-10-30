@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1262: Greatest Sum Divisible by Three"
-date = "2021-05-17"
+date = "2021-05-18"
 description = "Solution to Leetcode 1262"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/greatest-sum-divisible-by-three/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

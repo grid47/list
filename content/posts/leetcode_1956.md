@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1956: Minimum Time For K Virus Variants to Spread"
-date = "2019-06-23"
+date = "2019-06-24"
 description = "Solution to Leetcode 1956"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-time-for-k-virus-variants-to-spread/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2056: Number of Valid Move Combinations On Chessboard"
-date = "2019-03-15"
+date = "2019-03-16"
 description = "Solution to Leetcode 2056"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-valid-move-combinations-on-chessboard/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

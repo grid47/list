@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 16: 3Sum Closest"
-date = "2024-10-14"
+date = "2024-10-15"
 description = "Solution to Leetcode 16"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/3sum-closest/description/)
 
 ---
-
+{{< youtube PXWT4wzkA6M >}}
 **Code:**
 
 {{< highlight cpp >}}

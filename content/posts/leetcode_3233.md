@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3233: Find the Count of Numbers Which Are Not Special"
-date = "2015-12-24"
+date = "2015-12-25"
 description = "Solution to Leetcode 3233"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-count-of-numbers-which-are-not-special/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1521: Find a Value of a Mysterious Function Closest to Target"
-date = "2020-08-31"
+date = "2020-09-01"
 description = "Solution to Leetcode 1521"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

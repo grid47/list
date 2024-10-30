@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 579: Find Cumulative Salary of an Employee"
-date = "2023-03-31"
+date = "2023-04-01"
 description = "Solution to Leetcode 579"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-cumulative-salary-of-an-employee/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

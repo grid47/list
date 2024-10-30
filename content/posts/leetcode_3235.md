@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3235: Check if the Rectangle Corner Is Reachable"
-date = "2015-12-22"
+date = "2015-12-23"
 description = "Solution to Leetcode 3235"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-the-rectangle-corner-is-reachable/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

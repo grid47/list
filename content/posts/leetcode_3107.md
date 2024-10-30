@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3107: Minimum Operations to Make Median of Array Equal to K"
-date = "2016-04-28"
+date = "2016-04-29"
 description = "Solution to Leetcode 3107"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-make-median-of-array-equal-to-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

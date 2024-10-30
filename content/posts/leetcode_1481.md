@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1481: Least Number of Unique Integers after K Removals"
-date = "2020-10-10"
+date = "2020-10-11"
 description = "Solution to Leetcode 1481"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

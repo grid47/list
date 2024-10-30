@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2863: Maximum Length of Semi-Decreasing Subarrays"
-date = "2016-12-28"
+date = "2016-12-29"
 description = "Solution to Leetcode 2863"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-length-of-semi-decreasing-subarrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2910: Minimum Number of Groups to Create a Valid Assignment"
-date = "2016-11-11"
+date = "2016-11-12"
 description = "Solution to Leetcode 2910"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-groups-to-create-a-valid-assignment/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

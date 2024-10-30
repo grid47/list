@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3039: Apply Operations to Make String Empty"
-date = "2016-07-05"
+date = "2016-07-06"
 description = "Solution to Leetcode 3039"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/apply-operations-to-make-string-empty/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

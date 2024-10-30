@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1237: Find Positive Integer Solution for a Given Equation"
-date = "2021-06-11"
+date = "2021-06-12"
 description = "Solution to Leetcode 1237"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-positive-integer-solution-for-a-given-equation/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

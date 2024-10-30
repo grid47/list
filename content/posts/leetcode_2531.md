@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2531: Make Number of Distinct Characters Equal"
-date = "2017-11-25"
+date = "2017-11-26"
 description = "Solution to Leetcode 2531"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-number-of-distinct-characters-equal/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

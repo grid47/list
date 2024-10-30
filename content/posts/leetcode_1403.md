@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1403: Minimum Subsequence in Non-Increasing Order"
-date = "2020-12-27"
+date = "2020-12-28"
 description = "Solution to Leetcode 1403"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-subsequence-in-non-increasing-order/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

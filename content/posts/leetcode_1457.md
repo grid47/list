@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1457: Pseudo-Palindromic Paths in a Binary Tree"
-date = "2020-11-03"
+date = "2020-11-04"
 description = "Solution to Leetcode 1457"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

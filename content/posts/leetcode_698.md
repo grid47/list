@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 698: Partition to K Equal Sum Subsets"
-date = "2022-12-02"
+date = "2022-12-03"
 description = "Solution to Leetcode 698"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

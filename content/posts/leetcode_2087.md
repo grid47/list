@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2087: Minimum Cost Homecoming of a Robot in a Grid"
-date = "2019-02-12"
+date = "2019-02-13"
 description = "Solution to Leetcode 2087"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-homecoming-of-a-robot-in-a-grid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

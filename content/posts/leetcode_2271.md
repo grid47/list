@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2271: Maximum White Tiles Covered by a Carpet"
-date = "2018-08-12"
+date = "2018-08-13"
 description = "Solution to Leetcode 2271"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-white-tiles-covered-by-a-carpet/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

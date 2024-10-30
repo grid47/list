@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2181: Merge Nodes in Between Zeros"
-date = "2018-11-10"
+date = "2018-11-11"
 description = "Solution to Leetcode 2181"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-nodes-in-between-zeros/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

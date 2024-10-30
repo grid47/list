@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 524: Longest Word in Dictionary through Deleting"
-date = "2023-05-25"
+date = "2023-05-26"
 description = "Solution to Leetcode 524"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2980: Check if Bitwise OR Has Trailing Zeros"
-date = "2016-09-02"
+date = "2016-09-03"
 description = "Solution to Leetcode 2980"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-bitwise-or-has-trailing-zeros/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

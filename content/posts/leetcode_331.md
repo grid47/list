@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 331: Verify Preorder Serialization of a Binary Tree"
-date = "2023-12-04"
+date = "2023-12-05"
 description = "Solution to Leetcode 331"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

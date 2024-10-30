@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3122: Minimum Number of Operations to Satisfy Conditions"
-date = "2016-04-13"
+date = "2016-04-14"
 description = "Solution to Leetcode 3122"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-operations-to-satisfy-conditions/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

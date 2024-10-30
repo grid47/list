@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3216: Lexicographically Smallest String After a Swap"
-date = "2016-01-10"
+date = "2016-01-11"
 description = "Solution to Leetcode 3216"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographically-smallest-string-after-a-swap/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

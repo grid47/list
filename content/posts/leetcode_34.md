@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 34: Find First and Last Position of Element in Sorted Array"
-date = "2024-09-26"
+date = "2024-09-27"
 description = "Solution to Leetcode 34"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/)
 
 ---
-
+{{< youtube 4sQL7R5ySUU >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3154: Find Number of Ways to Reach the K-th Stair"
-date = "2016-03-12"
+date = "2016-03-13"
 description = "Solution to Leetcode 3154"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-number-of-ways-to-reach-the-k-th-stair/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

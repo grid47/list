@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3018: Maximum Number of Removal Queries That Can Be Processed I"
-date = "2016-07-26"
+date = "2016-07-27"
 description = "Solution to Leetcode 3018"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-removal-queries-that-can-be-processed-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

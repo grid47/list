@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1304: Find N Unique Integers Sum up to Zero"
-date = "2021-04-05"
+date = "2021-04-06"
 description = "Solution to Leetcode 1304"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

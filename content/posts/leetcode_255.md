@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 255: Verify Preorder Sequence in Binary Search Tree"
-date = "2024-02-18"
+date = "2024-02-19"
 description = "Solution to Leetcode 255"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

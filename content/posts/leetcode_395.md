@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 395: Longest Substring with At Least K Repeating Characters"
-date = "2023-10-01"
+date = "2023-10-02"
 description = "Solution to Leetcode 395"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

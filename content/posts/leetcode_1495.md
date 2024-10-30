@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1495: Friendly Movies Streamed Last Month"
-date = "2020-09-26"
+date = "2020-09-27"
 description = "Solution to Leetcode 1495"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/friendly-movies-streamed-last-month/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

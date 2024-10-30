@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2545: Sort the Students by Their Kth Score"
-date = "2017-11-11"
+date = "2017-11-12"
 description = "Solution to Leetcode 2545"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-the-students-by-their-kth-score/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

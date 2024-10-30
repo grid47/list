@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3051: Find Candidates for Data Scientist Position"
-date = "2016-06-23"
+date = "2016-06-24"
 description = "Solution to Leetcode 3051"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-candidates-for-data-scientist-position/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

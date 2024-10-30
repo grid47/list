@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1752: Check if Array Is Sorted and Rotated"
-date = "2020-01-13"
+date = "2020-01-14"
 description = "Solution to Leetcode 1752"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

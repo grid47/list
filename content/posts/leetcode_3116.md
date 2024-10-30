@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3116: Kth Smallest Amount With Single Denomination Combination"
-date = "2016-04-19"
+date = "2016-04-20"
 description = "Solution to Leetcode 3116"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/kth-smallest-amount-with-single-denomination-combination/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

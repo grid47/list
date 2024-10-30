@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2116: Check if a Parentheses String Can Be Valid"
-date = "2019-01-14"
+date = "2019-01-15"
 description = "Solution to Leetcode 2116"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

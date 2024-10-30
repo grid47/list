@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1886: Determine Whether Matrix Can Be Obtained By Rotation"
-date = "2019-09-01"
+date = "2019-09-02"
 description = "Solution to Leetcode 1886"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

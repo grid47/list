@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3191: Minimum Operations to Make Binary Array Elements Equal to One I"
-date = "2016-02-04"
+date = "2016-02-05"
 description = "Solution to Leetcode 3191"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-make-binary-array-elements-equal-to-one-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

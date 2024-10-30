@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1519: Number of Nodes in the Sub-Tree With the Same Label"
-date = "2020-09-02"
+date = "2020-09-03"
 description = "Solution to Leetcode 1519"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

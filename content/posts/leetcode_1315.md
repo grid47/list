@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1315: Sum of Nodes with Even-Valued Grandparent"
-date = "2021-03-25"
+date = "2021-03-26"
 description = "Solution to Leetcode 1315"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

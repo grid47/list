@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1968: Array With Elements Not Equal to Average of Neighbors"
-date = "2019-06-11"
+date = "2019-06-12"
 description = "Solution to Leetcode 1968"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/array-with-elements-not-equal-to-average-of-neighbors/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

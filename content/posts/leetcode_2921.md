@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2921: Maximum Profitable Triplets With Increasing Prices II"
-date = "2016-10-31"
+date = "2016-11-01"
 description = "Solution to Leetcode 2921"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-profitable-triplets-with-increasing-prices-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

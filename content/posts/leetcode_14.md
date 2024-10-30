@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 14: Longest Common Prefix"
-date = "2024-10-16"
+date = "2024-10-17"
 description = "Solution to Leetcode 14"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-common-prefix/description/)
 
 ---
-
+{{< youtube 0sWShKIJoo4 >}}
 **Code:**
 
 {{< highlight cpp >}}

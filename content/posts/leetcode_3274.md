@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3274: Check if Two Chessboard Squares Have the Same Color"
-date = "2015-11-13"
+date = "2015-11-14"
 description = "Solution to Leetcode 3274"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-two-chessboard-squares-have-the-same-color/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

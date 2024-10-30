@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3067: Count Pairs of Connectable Servers in a Weighted Tree Network"
-date = "2016-06-07"
+date = "2016-06-08"
 description = "Solution to Leetcode 3067"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-pairs-of-connectable-servers-in-a-weighted-tree-network/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

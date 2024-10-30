@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3283: Maximum Number of Moves to Kill All Pawns"
-date = "2015-11-04"
+date = "2015-11-05"
 description = "Solution to Leetcode 3283"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-moves-to-kill-all-pawns/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

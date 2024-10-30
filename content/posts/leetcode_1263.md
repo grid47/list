@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1263: Minimum Moves to Move a Box to Their Target Location"
-date = "2021-05-16"
+date = "2021-05-17"
 description = "Solution to Leetcode 1263"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-moves-to-move-a-box-to-their-target-location/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

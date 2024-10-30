@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2244: Minimum Rounds to Complete All Tasks"
-date = "2018-09-08"
+date = "2018-09-09"
 description = "Solution to Leetcode 2244"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-rounds-to-complete-all-tasks/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

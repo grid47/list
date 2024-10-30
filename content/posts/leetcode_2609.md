@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2609: Find the Longest Balanced Substring of a Binary String"
-date = "2017-09-08"
+date = "2017-09-09"
 description = "Solution to Leetcode 2609"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-longest-balanced-substring-of-a-binary-string/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

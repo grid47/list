@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1552: Magnetic Force Between Two Balls"
-date = "2020-07-31"
+date = "2020-08-01"
 description = "Solution to Leetcode 1552"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/magnetic-force-between-two-balls/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

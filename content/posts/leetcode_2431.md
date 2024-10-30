@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2431: Maximize Total Tastiness of Purchased Fruits"
-date = "2018-03-05"
+date = "2018-03-06"
 description = "Solution to Leetcode 2431"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximize-total-tastiness-of-purchased-fruits/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

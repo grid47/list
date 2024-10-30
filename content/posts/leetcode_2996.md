@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2996: Smallest Missing Integer Greater Than Sequential Prefix Sum"
-date = "2016-08-17"
+date = "2016-08-18"
 description = "Solution to Leetcode 2996"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-missing-integer-greater-than-sequential-prefix-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

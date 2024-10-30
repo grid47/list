@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2807: Insert Greatest Common Divisors in Linked List"
-date = "2017-02-22"
+date = "2017-02-23"
 description = "Solution to Leetcode 2807"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/insert-greatest-common-divisors-in-linked-list/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

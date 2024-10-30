@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2721: Execute Asynchronous Functions in Parallel"
-date = "2017-05-19"
+date = "2017-05-20"
 description = "Solution to Leetcode 2721"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/execute-asynchronous-functions-in-parallel/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

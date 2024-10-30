@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2948: Make Lexicographically Smallest Array by Swapping Elements"
-date = "2016-10-04"
+date = "2016-10-05"
 description = "Solution to Leetcode 2948"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

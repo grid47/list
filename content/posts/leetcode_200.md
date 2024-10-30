@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 200: Number of Islands"
-date = "2024-04-13"
+date = "2024-04-14"
 description = "Solution to Leetcode 200"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-islands/description/)
 
 ---
-
+{{< youtube IeuyI_kZ5zI >}}
 **Code:**
 
 {{< highlight cpp >}}

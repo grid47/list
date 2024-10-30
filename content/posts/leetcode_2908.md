@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2908: Minimum Sum of Mountain Triplets I"
-date = "2016-11-13"
+date = "2016-11-14"
 description = "Solution to Leetcode 2908"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-sum-of-mountain-triplets-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

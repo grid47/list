@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2335: Minimum Amount of Time to Fill Cups"
-date = "2018-06-09"
+date = "2018-06-10"
 description = "Solution to Leetcode 2335"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-amount-of-time-to-fill-cups/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

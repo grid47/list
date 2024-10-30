@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3106: Lexicographically Smallest String After Operations With Constraint"
-date = "2016-04-29"
+date = "2016-04-30"
 description = "Solution to Leetcode 3106"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographically-smallest-string-after-operations-with-constraint/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1007: Minimum Domino Rotations For Equal Row"
-date = "2022-01-27"
+date = "2022-01-28"
 description = "Solution to Leetcode 1007"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

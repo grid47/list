@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2850: Minimum Moves to Spread Stones Over Grid"
-date = "2017-01-10"
+date = "2017-01-11"
 description = "Solution to Leetcode 2850"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

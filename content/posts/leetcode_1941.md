@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1941: Check if All Characters Have Equal Number of Occurrences"
-date = "2019-07-08"
+date = "2019-07-09"
 description = "Solution to Leetcode 1941"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-all-characters-have-equal-number-of-occurrences/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

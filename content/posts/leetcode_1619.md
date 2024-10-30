@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1619: Mean of Array After Removing Some Elements"
-date = "2020-05-25"
+date = "2020-05-26"
 description = "Solution to Leetcode 1619"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/mean-of-array-after-removing-some-elements/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

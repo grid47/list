@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 352: Data Stream as Disjoint Intervals"
-date = "2023-11-13"
+date = "2023-11-14"
 description = "Solution to Leetcode 352"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/data-stream-as-disjoint-intervals/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2711: Difference of Number of Distinct Values on Diagonals"
-date = "2017-05-29"
+date = "2017-05-30"
 description = "Solution to Leetcode 2711"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/difference-of-number-of-distinct-values-on-diagonals/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

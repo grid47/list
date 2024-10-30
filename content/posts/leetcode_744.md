@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 744: Find Smallest Letter Greater Than Target"
-date = "2022-10-17"
+date = "2022-10-18"
 description = "Solution to Leetcode 744"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

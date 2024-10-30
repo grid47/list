@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2110: Number of Smooth Descent Periods of a Stock"
-date = "2019-01-20"
+date = "2019-01-21"
 description = "Solution to Leetcode 2110"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-smooth-descent-periods-of-a-stock/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

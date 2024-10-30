@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1156: Swap For Longest Repeated Character Substring"
-date = "2021-08-31"
+date = "2021-09-01"
 description = "Solution to Leetcode 1156"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/swap-for-longest-repeated-character-substring/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

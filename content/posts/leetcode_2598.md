@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2598: Smallest Missing Non-negative Integer After Operations"
-date = "2017-09-19"
+date = "2017-09-20"
 description = "Solution to Leetcode 2598"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

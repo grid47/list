@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2434: Using a Robot to Print the Lexicographically Smallest String"
-date = "2018-03-02"
+date = "2018-03-03"
 description = "Solution to Leetcode 2434"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/using-a-robot-to-print-the-lexicographically-smallest-string/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

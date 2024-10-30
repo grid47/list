@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 36: Valid Sudoku"
-date = "2024-09-24"
+date = "2024-09-25"
 description = "Solution to Leetcode 36"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/valid-sudoku/description/)
 
 ---
-
+{{< youtube TjFXEUCMqI8 >}}
 **Code:**
 
 {{< highlight cpp >}}

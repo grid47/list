@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3302: Find the Lexicographically Smallest Valid Sequence"
-date = "2015-10-16"
+date = "2015-10-17"
 description = "Solution to Leetcode 3302"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-lexicographically-smallest-valid-sequence/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

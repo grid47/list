@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2975: Maximum Square Area by Removing Fences From a Field"
-date = "2016-09-07"
+date = "2016-09-08"
 description = "Solution to Leetcode 2975"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-square-area-by-removing-fences-from-a-field/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 159: Longest Substring with At Most Two Distinct Characters"
-date = "2024-05-24"
+date = "2024-05-25"
 description = "Solution to Leetcode 159"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

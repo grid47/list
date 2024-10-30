@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2419: Longest Subarray With Maximum Bitwise AND"
-date = "2018-03-17"
+date = "2018-03-18"
 description = "Solution to Leetcode 2419"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

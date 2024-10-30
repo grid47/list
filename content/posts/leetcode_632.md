@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 632: Smallest Range Covering Elements from K Lists"
-date = "2023-02-06"
+date = "2023-02-07"
 description = "Solution to Leetcode 632"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

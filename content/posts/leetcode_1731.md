@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1731: The Number of Employees Which Report to Each Employee"
-date = "2020-02-03"
+date = "2020-02-04"
 description = "Solution to Leetcode 1731"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

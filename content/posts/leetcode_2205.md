@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2205: The Number of Users That Are Eligible for Discount"
-date = "2018-10-17"
+date = "2018-10-18"
 description = "Solution to Leetcode 2205"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-users-that-are-eligible-for-discount/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

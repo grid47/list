@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 570: Managers with at Least 5 Direct Reports"
-date = "2023-04-09"
+date = "2023-04-10"
 description = "Solution to Leetcode 570"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

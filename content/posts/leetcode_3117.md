@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3117: Minimum Sum of Values by Dividing Array"
-date = "2016-04-18"
+date = "2016-04-19"
 description = "Solution to Leetcode 3117"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-sum-of-values-by-dividing-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

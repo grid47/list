@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1072: Flip Columns For Maximum Number of Equal Rows"
-date = "2021-11-23"
+date = "2021-11-24"
 description = "Solution to Leetcode 1072"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

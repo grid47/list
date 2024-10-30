@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1013: Partition Array Into Three Parts With Equal Sum"
-date = "2022-01-21"
+date = "2022-01-22"
 description = "Solution to Leetcode 1013"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

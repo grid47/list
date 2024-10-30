@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2098: Subsequence of Size K With the Largest Even Sum"
-date = "2019-02-01"
+date = "2019-02-02"
 description = "Solution to Leetcode 2098"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/subsequence-of-size-k-with-the-largest-even-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

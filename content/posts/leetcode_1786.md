@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1786: Number of Restricted Paths From First to Last Node"
-date = "2019-12-10"
+date = "2019-12-11"
 description = "Solution to Leetcode 1786"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

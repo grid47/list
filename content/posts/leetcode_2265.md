@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2265: Count Nodes Equal to Average of Subtree"
-date = "2018-08-18"
+date = "2018-08-19"
 description = "Solution to Leetcode 2265"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

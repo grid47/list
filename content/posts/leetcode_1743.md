@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1743: Restore the Array From Adjacent Pairs"
-date = "2020-01-22"
+date = "2020-01-23"
 description = "Solution to Leetcode 1743"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/restore-the-array-from-adjacent-pairs/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

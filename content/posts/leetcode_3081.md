@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3081: Replace Question Marks in String to Minimize Its Value"
-date = "2016-05-24"
+date = "2016-05-25"
 description = "Solution to Leetcode 3081"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-question-marks-in-string-to-minimize-its-value/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

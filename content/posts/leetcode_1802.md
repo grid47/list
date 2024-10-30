@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1802: Maximum Value at a Given Index in a Bounded Array"
-date = "2019-11-24"
+date = "2019-11-25"
 description = "Solution to Leetcode 1802"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-value-at-a-given-index-in-a-bounded-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

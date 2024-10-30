@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1434: Number of Ways to Wear Different Hats to Each Other"
-date = "2020-11-26"
+date = "2020-11-27"
 description = "Solution to Leetcode 1434"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-wear-different-hats-to-each-other/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

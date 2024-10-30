@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3212: Count Submatrices With Equal Frequency of X and Y"
-date = "2016-01-14"
+date = "2016-01-15"
 description = "Solution to Leetcode 3212"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-submatrices-with-equal-frequency-of-x-and-y/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

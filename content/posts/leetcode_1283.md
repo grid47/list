@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1283: Find the Smallest Divisor Given a Threshold"
-date = "2021-04-26"
+date = "2021-04-27"
 description = "Solution to Leetcode 1283"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

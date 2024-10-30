@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1779: Find Nearest Point That Has the Same X or Y Coordinate"
-date = "2019-12-17"
+date = "2019-12-18"
 description = "Solution to Leetcode 1779"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

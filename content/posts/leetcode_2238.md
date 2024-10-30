@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2238: Number of Times a Driver Was a Passenger"
-date = "2018-09-14"
+date = "2018-09-15"
 description = "Solution to Leetcode 2238"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-times-a-driver-was-a-passenger/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

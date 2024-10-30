@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition"
-date = "2020-09-23"
+date = "2020-09-24"
 description = "Solution to Leetcode 1498"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

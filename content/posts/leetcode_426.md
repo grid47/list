@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 426: Convert Binary Search Tree to Sorted Doubly Linked List"
-date = "2023-08-31"
+date = "2023-09-01"
 description = "Solution to Leetcode 426"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

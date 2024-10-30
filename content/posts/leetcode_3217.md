@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3217: Delete Nodes From Linked List Present in Array"
-date = "2016-01-09"
+date = "2016-01-10"
 description = "Solution to Leetcode 3217"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

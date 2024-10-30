@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2245: Maximum Trailing Zeros in a Cornered Path"
-date = "2018-09-07"
+date = "2018-09-08"
 description = "Solution to Leetcode 2245"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-trailing-zeros-in-a-cornered-path/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

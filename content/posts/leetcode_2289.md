@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2289: Steps to Make Array Non-decreasing"
-date = "2018-07-25"
+date = "2018-07-26"
 description = "Solution to Leetcode 2289"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/steps-to-make-array-non-decreasing/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

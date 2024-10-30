@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1050: Actors and Directors Who Cooperated At Least Three Times"
-date = "2021-12-15"
+date = "2021-12-16"
 description = "Solution to Leetcode 1050"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

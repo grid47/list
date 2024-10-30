@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1878: Get Biggest Three Rhombus Sums in a Grid"
-date = "2019-09-09"
+date = "2019-09-10"
 description = "Solution to Leetcode 1878"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/get-biggest-three-rhombus-sums-in-a-grid/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

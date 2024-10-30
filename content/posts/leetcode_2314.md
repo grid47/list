@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2314: The First Day of the Maximum Recorded Degree in Each City"
-date = "2018-06-30"
+date = "2018-07-01"
 description = "Solution to Leetcode 2314"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-first-day-of-the-maximum-recorded-degree-in-each-city/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

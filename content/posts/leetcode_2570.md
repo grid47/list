@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2570: Merge Two 2D Arrays by Summing Values"
-date = "2017-10-17"
+date = "2017-10-18"
 description = "Solution to Leetcode 2570"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

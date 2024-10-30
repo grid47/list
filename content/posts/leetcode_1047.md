@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1047: Remove All Adjacent Duplicates In String"
-date = "2021-12-18"
+date = "2021-12-19"
 description = "Solution to Leetcode 1047"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

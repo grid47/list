@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1876: Substrings of Size Three with Distinct Characters"
-date = "2019-09-11"
+date = "2019-09-12"
 description = "Solution to Leetcode 1876"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

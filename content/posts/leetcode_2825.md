@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2825: Make String a Subsequence Using Cyclic Increments"
-date = "2017-02-04"
+date = "2017-02-05"
 description = "Solution to Leetcode 2825"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

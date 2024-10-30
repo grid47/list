@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3156: Employee Task Duration and Concurrent Tasks"
-date = "2016-03-10"
+date = "2016-03-11"
 description = "Solution to Leetcode 3156"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/employee-task-duration-and-concurrent-tasks/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

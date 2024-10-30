@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3170: Lexicographically Minimum String After Removing Stars"
-date = "2016-02-25"
+date = "2016-02-26"
 description = "Solution to Leetcode 3170"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographically-minimum-string-after-removing-stars/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

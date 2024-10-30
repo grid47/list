@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1147: Longest Chunked Palindrome Decomposition"
-date = "2021-09-09"
+date = "2021-09-10"
 description = "Solution to Leetcode 1147"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-chunked-palindrome-decomposition/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

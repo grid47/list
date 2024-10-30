@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1299: Replace Elements with Greatest Element on Right Side"
-date = "2021-04-10"
+date = "2021-04-11"
 description = "Solution to Leetcode 1299"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

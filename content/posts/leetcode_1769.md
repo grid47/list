@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1769: Minimum Number of Operations to Move All Balls to Each Box"
-date = "2019-12-27"
+date = "2019-12-28"
 description = "Solution to Leetcode 1769"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

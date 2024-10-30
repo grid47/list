@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2571: Minimum Operations to Reduce an Integer to 0"
-date = "2017-10-16"
+date = "2017-10-17"
 description = "Solution to Leetcode 2571"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-reduce-an-integer-to-0/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

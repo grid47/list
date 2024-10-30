@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 785: Is Graph Bipartite?"
-date = "2022-09-06"
+date = "2022-09-07"
 description = "Solution to Leetcode 785"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/is-graph-bipartite/description/)
 
 ---
-
+{{< youtube j69Of_2nfRA >}}
 **Code:**
 
 {{< highlight cpp >}}

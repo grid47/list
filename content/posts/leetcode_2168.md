@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2168: Unique Substrings With Equal Digit Frequency"
-date = "2018-11-23"
+date = "2018-11-24"
 description = "Solution to Leetcode 2168"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/unique-substrings-with-equal-digit-frequency/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

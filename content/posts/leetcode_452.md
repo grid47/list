@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 452: Minimum Number of Arrows to Burst Balloons"
-date = "2023-08-05"
+date = "2023-08-06"
 description = "Solution to Leetcode 452"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

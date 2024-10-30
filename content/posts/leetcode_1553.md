@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1553: Minimum Number of Days to Eat N Oranges"
-date = "2020-07-30"
+date = "2020-07-31"
 description = "Solution to Leetcode 1553"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-days-to-eat-n-oranges/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

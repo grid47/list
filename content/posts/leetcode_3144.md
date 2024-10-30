@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3144: Minimum Substring Partition of Equal Character Frequency"
-date = "2016-03-22"
+date = "2016-03-23"
 description = "Solution to Leetcode 3144"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-substring-partition-of-equal-character-frequency/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

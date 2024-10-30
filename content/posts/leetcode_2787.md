@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2787: Ways to Express an Integer as Sum of Powers"
-date = "2017-03-14"
+date = "2017-03-15"
 description = "Solution to Leetcode 2787"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/ways-to-express-an-integer-as-sum-of-powers/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 787: Cheapest Flights Within K Stops"
-date = "2022-09-04"
+date = "2022-09-05"
 description = "Solution to Leetcode 787"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/cheapest-flights-within-k-stops/description/)
 
 ---
-
+{{< youtube WDxnQSAvNbI >}}
 **Code:**
 
 {{< highlight cpp >}}

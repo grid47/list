@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1612: Check If Two Expression Trees are Equivalent"
-date = "2020-06-01"
+date = "2020-06-02"
 description = "Solution to Leetcode 1612"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-two-expression-trees-are-equivalent/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

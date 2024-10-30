@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2464: Minimum Subarrays in a Valid Split"
-date = "2018-01-31"
+date = "2018-02-01"
 description = "Solution to Leetcode 2464"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-subarrays-in-a-valid-split/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

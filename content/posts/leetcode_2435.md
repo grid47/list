@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2435: Paths in Matrix Whose Sum Is Divisible by K"
-date = "2018-03-01"
+date = "2018-03-02"
 description = "Solution to Leetcode 2435"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/paths-in-matrix-whose-sum-is-divisible-by-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

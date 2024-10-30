@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3259: Maximum Energy Boost From Two Drinks"
-date = "2015-11-28"
+date = "2015-11-29"
 description = "Solution to Leetcode 3259"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-energy-boost-from-two-drinks/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

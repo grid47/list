@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2237: Count Positions on Street With Required Brightness"
-date = "2018-09-15"
+date = "2018-09-16"
 description = "Solution to Leetcode 2237"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-positions-on-street-with-required-brightness/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

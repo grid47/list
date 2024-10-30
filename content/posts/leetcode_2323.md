@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2323: Find Minimum Time to Finish All Jobs II"
-date = "2018-06-21"
+date = "2018-06-22"
 description = "Solution to Leetcode 2323"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

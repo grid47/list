@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2897: Apply Operations on Array to Maximize Sum of Squares"
-date = "2016-11-24"
+date = "2016-11-25"
 description = "Solution to Leetcode 2897"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/apply-operations-on-array-to-maximize-sum-of-squares/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

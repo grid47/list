@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3260: Find the Largest Palindrome Divisible by K"
-date = "2015-11-27"
+date = "2015-11-28"
 description = "Solution to Leetcode 3260"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-largest-palindrome-divisible-by-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

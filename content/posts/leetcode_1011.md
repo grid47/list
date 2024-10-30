@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1011: Capacity To Ship Packages Within D Days"
-date = "2022-01-23"
+date = "2022-01-24"
 description = "Solution to Leetcode 1011"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

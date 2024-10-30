@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2862: Maximum Element-Sum of a Complete Subset of Indices"
-date = "2016-12-29"
+date = "2016-12-30"
 description = "Solution to Leetcode 2862"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-element-sum-of-a-complete-subset-of-indices/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

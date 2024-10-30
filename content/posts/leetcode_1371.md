@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1371: Find the Longest Substring Containing Vowels in Even Counts"
-date = "2021-01-28"
+date = "2021-01-29"
 description = "Solution to Leetcode 1371"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

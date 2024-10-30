@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2006: Count Number of Pairs With Absolute Difference K"
-date = "2019-05-04"
+date = "2019-05-05"
 description = "Solution to Leetcode 2006"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-number-of-pairs-with-absolute-difference-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

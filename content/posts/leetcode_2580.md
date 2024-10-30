@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2580: Count Ways to Group Overlapping Ranges"
-date = "2017-10-07"
+date = "2017-10-08"
 description = "Solution to Leetcode 2580"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

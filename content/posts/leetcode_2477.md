@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2477: Minimum Fuel Cost to Report to the Capital"
-date = "2018-01-18"
+date = "2018-01-19"
 description = "Solution to Leetcode 2477"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-fuel-cost-to-report-to-the-capital/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

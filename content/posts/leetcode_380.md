@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 380: Insert Delete GetRandom O(1)"
-date = "2023-10-16"
+date = "2023-10-17"
 description = "Solution to Leetcode 380"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/insert-delete-getrandom-o1/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

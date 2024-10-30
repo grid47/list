@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2042: Check if Numbers Are Ascending in a Sentence"
-date = "2019-03-29"
+date = "2019-03-30"
 description = "Solution to Leetcode 2042"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-numbers-are-ascending-in-a-sentence/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

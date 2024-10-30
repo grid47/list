@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2010: The Number of Seniors and Juniors to Join the Company II"
-date = "2019-04-30"
+date = "2019-05-01"
 description = "Solution to Leetcode 2010"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-seniors-and-juniors-to-join-the-company-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

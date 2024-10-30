@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2115: Find All Possible Recipes from Given Supplies"
-date = "2019-01-15"
+date = "2019-01-16"
 description = "Solution to Leetcode 2115"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

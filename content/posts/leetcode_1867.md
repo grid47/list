@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1867: Orders With Maximum Quantity Above Average"
-date = "2019-09-20"
+date = "2019-09-21"
 description = "Solution to Leetcode 1867"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/orders-with-maximum-quantity-above-average/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

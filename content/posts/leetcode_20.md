@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 20: Valid Parentheses"
-date = "2024-10-10"
+date = "2024-10-11"
 description = "Solution to Leetcode 20"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/valid-parentheses/description/)
 
 ---
-
+{{< youtube WTzjTskDFMg >}}
 **Code:**
 
 {{< highlight cpp >}}

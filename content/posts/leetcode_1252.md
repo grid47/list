@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1252: Cells with Odd Values in a Matrix"
-date = "2021-05-27"
+date = "2021-05-28"
 description = "Solution to Leetcode 1252"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/cells-with-odd-values-in-a-matrix/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2550: Count Collisions of Monkeys on a Polygon"
-date = "2017-11-06"
+date = "2017-11-07"
 description = "Solution to Leetcode 2550"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-collisions-of-monkeys-on-a-polygon/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

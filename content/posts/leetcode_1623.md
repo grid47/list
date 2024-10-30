@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1623: All Valid Triplets That Can Represent a Country"
-date = "2020-05-21"
+date = "2020-05-22"
 description = "Solution to Leetcode 1623"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-valid-triplets-that-can-represent-a-country/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

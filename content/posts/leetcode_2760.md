@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2760: Longest Even Odd Subarray With Threshold"
-date = "2017-04-10"
+date = "2017-04-11"
 description = "Solution to Leetcode 2760"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-even-odd-subarray-with-threshold/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

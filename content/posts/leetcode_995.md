@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 995: Minimum Number of K Consecutive Bit Flips"
-date = "2022-02-08"
+date = "2022-02-09"
 description = "Solution to Leetcode 995"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

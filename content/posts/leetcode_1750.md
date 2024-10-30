@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1750: Minimum Length of String After Deleting Similar Ends"
-date = "2020-01-15"
+date = "2020-01-16"
 description = "Solution to Leetcode 1750"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

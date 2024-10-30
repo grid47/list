@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3303: Find the Occurrence of First Almost Equal Substring"
-date = "2015-10-15"
+date = "2015-10-16"
 description = "Solution to Leetcode 3303"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-occurrence-of-first-almost-equal-substring/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3195: Find the Minimum Area to Cover All Ones I"
-date = "2016-01-31"
+date = "2016-02-01"
 description = "Solution to Leetcode 3195"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-minimum-area-to-cover-all-ones-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 967: Numbers With Same Consecutive Differences"
-date = "2022-03-08"
+date = "2022-03-09"
 description = "Solution to Leetcode 967"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/numbers-with-same-consecutive-differences/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

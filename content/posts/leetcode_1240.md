@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1240: Tiling a Rectangle with the Fewest Squares"
-date = "2021-06-08"
+date = "2021-06-09"
 description = "Solution to Leetcode 1240"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

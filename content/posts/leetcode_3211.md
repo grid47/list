@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3211: Generate Binary Strings Without Adjacent Zeros"
-date = "2016-01-15"
+date = "2016-01-16"
 description = "Solution to Leetcode 3211"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/generate-binary-strings-without-adjacent-zeros/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

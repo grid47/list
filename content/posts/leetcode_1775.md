@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1775: Equal Sum Arrays With Minimum Number of Operations"
-date = "2019-12-21"
+date = "2019-12-22"
 description = "Solution to Leetcode 1775"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/equal-sum-arrays-with-minimum-number-of-operations/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

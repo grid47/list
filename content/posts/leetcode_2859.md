@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2859: Sum of Values at Indices With K Set Bits"
-date = "2017-01-01"
+date = "2017-01-02"
 description = "Solution to Leetcode 2859"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-values-at-indices-with-k-set-bits/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

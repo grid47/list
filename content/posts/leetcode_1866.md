@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1866: Number of Ways to Rearrange Sticks With K Sticks Visible"
-date = "2019-09-21"
+date = "2019-09-22"
 description = "Solution to Leetcode 1866"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-rearrange-sticks-with-k-sticks-visible/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

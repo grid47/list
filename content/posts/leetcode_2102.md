@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2102: Sequentially Ordinal Rank Tracker"
-date = "2019-01-28"
+date = "2019-01-29"
 description = "Solution to Leetcode 2102"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sequentially-ordinal-rank-tracker/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

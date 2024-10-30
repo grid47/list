@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2303: Calculate Amount Paid in Taxes"
-date = "2018-07-11"
+date = "2018-07-12"
 description = "Solution to Leetcode 2303"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/calculate-amount-paid-in-taxes/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

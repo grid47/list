@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3326: Minimum Division Operations to Make Array Non Decreasing"
-date = "2015-09-22"
+date = "2015-09-23"
 description = "Solution to Leetcode 3326"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-division-operations-to-make-array-non-decreasing/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

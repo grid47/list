@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2092: Find All People With Secret"
-date = "2019-02-07"
+date = "2019-02-08"
 description = "Solution to Leetcode 2092"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-all-people-with-secret/description/)
 
 ---
-
+{{< youtube v8-OkMKBqyA >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1969: Minimum Non-Zero Product of the Array Elements"
-date = "2019-06-10"
+date = "2019-06-11"
 description = "Solution to Leetcode 1969"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-non-zero-product-of-the-array-elements/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

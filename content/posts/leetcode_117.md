@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 117: Populating Next Right Pointers in Each Node II"
-date = "2024-07-05"
+date = "2024-07-06"
 description = "Solution to Leetcode 117"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

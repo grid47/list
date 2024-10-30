@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1680: Concatenation of Consecutive Binary Numbers"
-date = "2020-03-25"
+date = "2020-03-26"
 description = "Solution to Leetcode 1680"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/concatenation-of-consecutive-binary-numbers/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

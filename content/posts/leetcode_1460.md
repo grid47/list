@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1460: Make Two Arrays Equal by Reversing Subarrays"
-date = "2020-10-31"
+date = "2020-11-01"
 description = "Solution to Leetcode 1460"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-two-arrays-equal-by-reversing-subarrays/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

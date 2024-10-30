@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 121: Best Time to Buy and Sell Stock"
-date = "2024-07-01"
+date = "2024-07-02"
 description = "Solution to Leetcode 121"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

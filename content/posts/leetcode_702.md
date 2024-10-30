@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 702: Search in a Sorted Array of Unknown Size"
-date = "2022-11-28"
+date = "2022-11-29"
 description = "Solution to Leetcode 702"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/search-in-a-sorted-array-of-unknown-size/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2038: Remove Colored Pieces if Both Neighbors are the Same Color"
-date = "2019-04-02"
+date = "2019-04-03"
 description = "Solution to Leetcode 2038"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-colored-pieces-if-both-neighbors-are-the-same-color/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

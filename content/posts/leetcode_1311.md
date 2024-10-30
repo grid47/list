@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1311: Get Watched Videos by Your Friends"
-date = "2021-03-29"
+date = "2021-03-30"
 description = "Solution to Leetcode 1311"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/get-watched-videos-by-your-friends/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

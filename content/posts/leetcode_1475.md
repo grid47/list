@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1475: Final Prices With a Special Discount in a Shop"
-date = "2020-10-16"
+date = "2020-10-17"
 description = "Solution to Leetcode 1475"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2432: The Employee That Worked on the Longest Task"
-date = "2018-03-04"
+date = "2018-03-05"
 description = "Solution to Leetcode 2432"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-employee-that-worked-on-the-longest-task/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

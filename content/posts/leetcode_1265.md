@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1265: Print Immutable Linked List in Reverse"
-date = "2021-05-14"
+date = "2021-05-15"
 description = "Solution to Leetcode 1265"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/print-immutable-linked-list-in-reverse/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

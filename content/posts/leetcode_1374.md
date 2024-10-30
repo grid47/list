@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1374: Generate a String With Characters That Have Odd Counts"
-date = "2021-01-25"
+date = "2021-01-26"
 description = "Solution to Leetcode 1374"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/generate-a-string-with-characters-that-have-odd-counts/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

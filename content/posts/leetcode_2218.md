@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2218: Maximum Value of K Coins From Piles"
-date = "2018-10-04"
+date = "2018-10-05"
 description = "Solution to Leetcode 2218"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-value-of-k-coins-from-piles/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

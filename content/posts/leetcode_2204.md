@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2204: Distance to a Cycle in Undirected Graph"
-date = "2018-10-18"
+date = "2018-10-19"
 description = "Solution to Leetcode 2204"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/distance-to-a-cycle-in-undirected-graph/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

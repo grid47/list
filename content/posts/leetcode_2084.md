@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2084: Drop Type 1 Orders for Customers With Type 0 Orders"
-date = "2019-02-15"
+date = "2019-02-16"
 description = "Solution to Leetcode 2084"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/drop-type-1-orders-for-customers-with-type-0-orders/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

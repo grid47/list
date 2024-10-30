@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2045: Second Minimum Time to Reach Destination"
-date = "2019-03-26"
+date = "2019-03-27"
 description = "Solution to Leetcode 2045"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/second-minimum-time-to-reach-destination/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

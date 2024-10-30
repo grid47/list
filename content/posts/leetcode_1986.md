@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1986: Minimum Number of Work Sessions to Finish the Tasks"
-date = "2019-05-24"
+date = "2019-05-25"
 description = "Solution to Leetcode 1986"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

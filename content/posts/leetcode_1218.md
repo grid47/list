@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1218: Longest Arithmetic Subsequence of Given Difference"
-date = "2021-06-30"
+date = "2021-07-01"
 description = "Solution to Leetcode 1218"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-arithmetic-subsequence-of-given-difference/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

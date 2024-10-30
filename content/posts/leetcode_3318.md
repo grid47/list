@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3318: Find X-Sum of All K-Long Subarrays I"
-date = "2015-09-30"
+date = "2015-10-01"
 description = "Solution to Leetcode 3318"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-x-sum-of-all-k-long-subarrays-i/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2136: Earliest Possible Day of Full Bloom"
-date = "2018-12-25"
+date = "2018-12-26"
 description = "Solution to Leetcode 2136"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/earliest-possible-day-of-full-bloom/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

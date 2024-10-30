@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1016: Binary String With Substrings Representing 1 To N"
-date = "2022-01-18"
+date = "2022-01-19"
 description = "Solution to Leetcode 1016"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-string-with-substrings-representing-1-to-n/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

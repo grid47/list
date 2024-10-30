@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1307: Verbal Arithmetic Puzzle"
-date = "2021-04-02"
+date = "2021-04-03"
 description = "Solution to Leetcode 1307"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/verbal-arithmetic-puzzle/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

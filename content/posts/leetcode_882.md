@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 882: Reachable Nodes In Subdivided Graph"
-date = "2022-06-01"
+date = "2022-06-02"
 description = "Solution to Leetcode 882"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

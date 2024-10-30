@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3000: Maximum Area of Longest Diagonal Rectangle"
-date = "2016-08-13"
+date = "2016-08-14"
 description = "Solution to Leetcode 3000"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-area-of-longest-diagonal-rectangle/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

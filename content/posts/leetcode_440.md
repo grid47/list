@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 440: K-th Smallest in Lexicographical Order"
-date = "2023-08-17"
+date = "2023-08-18"
 description = "Solution to Leetcode 440"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-th-smallest-in-lexicographical-order/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

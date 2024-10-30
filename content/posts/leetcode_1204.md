@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1204: Last Person to Fit in the Bus"
-date = "2021-07-14"
+date = "2021-07-15"
 description = "Solution to Leetcode 1204"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/last-person-to-fit-in-the-bus/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

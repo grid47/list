@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1461: Check If a String Contains All Binary Codes of Size K"
-date = "2020-10-30"
+date = "2020-10-31"
 description = "Solution to Leetcode 1461"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

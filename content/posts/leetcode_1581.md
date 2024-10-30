@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1581: Customer Who Visited but Did Not Make Any Transactions"
-date = "2020-07-02"
+date = "2020-07-03"
 description = "Solution to Leetcode 1581"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

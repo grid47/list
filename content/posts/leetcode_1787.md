@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1787: Make the XOR of All Segments Equal to Zero"
-date = "2019-12-09"
+date = "2019-12-10"
 description = "Solution to Leetcode 1787"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/make-the-xor-of-all-segments-equal-to-zero/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

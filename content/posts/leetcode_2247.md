@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2247: Maximum Cost of Trip With K Highways"
-date = "2018-09-05"
+date = "2018-09-06"
 description = "Solution to Leetcode 2247"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-cost-of-trip-with-k-highways/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2450: Number of Distinct Binary Strings After Applying Operations"
-date = "2018-02-14"
+date = "2018-02-15"
 description = "Solution to Leetcode 2450"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-distinct-binary-strings-after-applying-operations/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

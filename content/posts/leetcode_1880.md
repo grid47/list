@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1880: Check if Word Equals Summation of Two Words"
-date = "2019-09-07"
+date = "2019-09-08"
 description = "Solution to Leetcode 1880"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-word-equals-summation-of-two-words/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

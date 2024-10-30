@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1921: Eliminate Maximum Number of Monsters"
-date = "2019-07-28"
+date = "2019-07-29"
 description = "Solution to Leetcode 1921"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/eliminate-maximum-number-of-monsters/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

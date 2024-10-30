@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 841: Keys and Rooms"
-date = "2022-07-12"
+date = "2022-07-13"
 description = "Solution to Leetcode 841"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/keys-and-rooms/description/)
 
 ---
-
+{{< youtube i89fYz8JX7U >}}
 **Code:**
 
 {{< highlight cpp >}}

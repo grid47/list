@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2077: Paths in Maze That Lead to Same Room"
-date = "2019-02-22"
+date = "2019-02-23"
 description = "Solution to Leetcode 2077"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/paths-in-maze-that-lead-to-same-room/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

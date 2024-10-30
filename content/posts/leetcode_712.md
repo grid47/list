@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 712: Minimum ASCII Delete Sum for Two Strings"
-date = "2022-11-18"
+date = "2022-11-19"
 description = "Solution to Leetcode 712"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

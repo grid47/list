@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2902: Count of Sub-Multisets With Bounded Sum"
-date = "2016-11-19"
+date = "2016-11-20"
 description = "Solution to Leetcode 2902"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-of-sub-multisets-with-bounded-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

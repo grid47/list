@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 302: Smallest Rectangle Enclosing Black Pixels"
-date = "2024-01-02"
+date = "2024-01-03"
 description = "Solution to Leetcode 302"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1687: Delivering Boxes from Storage to Ports"
-date = "2020-03-18"
+date = "2020-03-19"
 description = "Solution to Leetcode 1687"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delivering-boxes-from-storage-to-ports/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

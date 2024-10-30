@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 864: Shortest Path to Get All Keys"
-date = "2022-06-19"
+date = "2022-06-20"
 description = "Solution to Leetcode 864"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-path-to-get-all-keys/description/)
 
 ---
-
+{{< youtube fgR31bhbeVs >}}
 **Code:**
 
 {{< highlight cpp >}}

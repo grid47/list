@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2538: Difference Between Maximum and Minimum Price Sum"
-date = "2017-11-18"
+date = "2017-11-19"
 description = "Solution to Leetcode 2538"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/difference-between-maximum-and-minimum-price-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1038: Binary Search Tree to Greater Sum Tree"
-date = "2021-12-27"
+date = "2021-12-28"
 description = "Solution to Leetcode 1038"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

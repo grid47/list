@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2517: Maximum Tastiness of Candy Basket"
-date = "2017-12-09"
+date = "2017-12-10"
 description = "Solution to Leetcode 2517"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-tastiness-of-candy-basket/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

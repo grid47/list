@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 41: First Missing Positive"
-date = "2024-09-19"
+date = "2024-09-20"
 description = "Solution to Leetcode 41"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/first-missing-positive/description/)
 
 ---
-
+{{< youtube 8g78yfzMlao >}}
 **Code:**
 
 {{< highlight cpp >}}

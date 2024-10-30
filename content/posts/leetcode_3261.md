@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3261: Count Substrings That Satisfy K-Constraint II"
-date = "2015-11-26"
+date = "2015-11-27"
 description = "Solution to Leetcode 3261"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-substrings-that-satisfy-k-constraint-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

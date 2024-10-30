@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1614: Maximum Nesting Depth of the Parentheses"
-date = "2020-05-30"
+date = "2020-05-31"
 description = "Solution to Leetcode 1614"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

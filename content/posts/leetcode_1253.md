@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1253: Reconstruct a 2-Row Binary Matrix"
-date = "2021-05-26"
+date = "2021-05-27"
 description = "Solution to Leetcode 1253"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

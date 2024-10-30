@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1170: Compare Strings by Frequency of the Smallest Character"
-date = "2021-08-17"
+date = "2021-08-18"
 description = "Solution to Leetcode 1170"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

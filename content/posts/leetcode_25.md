@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 25: Reverse Nodes in k-Group"
-date = "2024-10-05"
+date = "2024-10-06"
 description = "Solution to Leetcode 25"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reverse-nodes-in-k-group/description/)
 
 ---
-
+{{< youtube 1UOPsfP85V4 >}}
 **Code:**
 
 {{< highlight cpp >}}

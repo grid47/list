@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2146: K Highest Ranked Items Within a Price Range"
-date = "2018-12-15"
+date = "2018-12-16"
 description = "Solution to Leetcode 2146"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/k-highest-ranked-items-within-a-price-range/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

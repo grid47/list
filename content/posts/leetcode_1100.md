@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1100: Find K-Length Substrings With No Repeated Characters"
-date = "2021-10-26"
+date = "2021-10-27"
 description = "Solution to Leetcode 1100"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-k-length-substrings-with-no-repeated-characters/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

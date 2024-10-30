@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 106: Construct Binary Tree from Inorder and Postorder Traversal"
-date = "2024-07-16"
+date = "2024-07-17"
 description = "Solution to Leetcode 106"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1738: Find Kth Largest XOR Coordinate Value"
-date = "2020-01-27"
+date = "2020-01-28"
 description = "Solution to Leetcode 1738"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-kth-largest-xor-coordinate-value/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

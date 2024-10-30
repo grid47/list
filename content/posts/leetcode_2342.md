@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2342: Max Sum of a Pair With Equal Sum of Digits"
-date = "2018-06-02"
+date = "2018-06-03"
 description = "Solution to Leetcode 2342"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/max-sum-of-a-pair-with-equal-sum-of-digits/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

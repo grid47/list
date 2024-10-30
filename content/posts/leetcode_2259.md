@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2259: Remove Digit From Number to Maximize Result"
-date = "2018-08-24"
+date = "2018-08-25"
 description = "Solution to Leetcode 2259"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-digit-from-number-to-maximize-result/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

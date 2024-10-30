@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2411: Smallest Subarrays With Maximum Bitwise OR"
-date = "2018-03-25"
+date = "2018-03-26"
 description = "Solution to Leetcode 2411"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

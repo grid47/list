@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2154: Keep Multiplying Found Values by Two"
-date = "2018-12-07"
+date = "2018-12-08"
 description = "Solution to Leetcode 2154"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/keep-multiplying-found-values-by-two/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

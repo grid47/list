@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1942: The Number of the Smallest Unoccupied Chair"
-date = "2019-07-07"
+date = "2019-07-08"
 description = "Solution to Leetcode 1942"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

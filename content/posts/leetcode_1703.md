@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1703: Minimum Adjacent Swaps for K Consecutive Ones"
-date = "2020-03-02"
+date = "2020-03-03"
 description = "Solution to Leetcode 1703"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-adjacent-swaps-for-k-consecutive-ones/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

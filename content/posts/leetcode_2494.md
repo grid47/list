@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2494: Merge Overlapping Events in the Same Hall"
-date = "2018-01-01"
+date = "2018-01-02"
 description = "Solution to Leetcode 2494"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-overlapping-events-in-the-same-hall/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

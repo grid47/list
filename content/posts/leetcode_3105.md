@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3105: Longest Strictly Increasing or Strictly Decreasing Subarray"
-date = "2016-04-30"
+date = "2016-05-01"
 description = "Solution to Leetcode 3105"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-strictly-increasing-or-strictly-decreasing-subarray/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

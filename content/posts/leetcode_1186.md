@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1186: Maximum Subarray Sum with One Deletion"
-date = "2021-08-01"
+date = "2021-08-02"
 description = "Solution to Leetcode 1186"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-subarray-sum-with-one-deletion/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

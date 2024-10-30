@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1028: Recover a Tree From Preorder Traversal"
-date = "2022-01-06"
+date = "2022-01-07"
 description = "Solution to Leetcode 1028"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

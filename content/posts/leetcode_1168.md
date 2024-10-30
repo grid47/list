@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1168: Optimize Water Distribution in a Village"
-date = "2021-08-19"
+date = "2021-08-20"
 description = "Solution to Leetcode 1168"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/optimize-water-distribution-in-a-village/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

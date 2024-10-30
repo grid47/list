@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2385: Amount of Time for Binary Tree to Be Infected"
-date = "2018-04-20"
+date = "2018-04-21"
 description = "Solution to Leetcode 2385"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

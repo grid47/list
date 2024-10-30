@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3147: Taking Maximum Energy From the Mystic Dungeon"
-date = "2016-03-19"
+date = "2016-03-20"
 description = "Solution to Leetcode 3147"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/taking-maximum-energy-from-the-mystic-dungeon/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

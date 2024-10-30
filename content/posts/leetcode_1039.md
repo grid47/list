@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1039: Minimum Score Triangulation of Polygon"
-date = "2021-12-26"
+date = "2021-12-27"
 description = "Solution to Leetcode 1039"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-score-triangulation-of-polygon/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

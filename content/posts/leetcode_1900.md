@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1900: The Earliest and Latest Rounds Where Players Compete"
-date = "2019-08-18"
+date = "2019-08-19"
 description = "Solution to Leetcode 1900"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-earliest-and-latest-rounds-where-players-compete/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

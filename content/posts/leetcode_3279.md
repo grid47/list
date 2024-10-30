@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 3279: Maximum Total Area Occupied by Pistons"
-date = "2015-11-08"
+date = "2015-11-09"
 description = "Solution to Leetcode 3279"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-total-area-occupied-by-pistons/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

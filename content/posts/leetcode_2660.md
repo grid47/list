@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2660: Determine the Winner of a Bowling Game"
-date = "2017-07-19"
+date = "2017-07-20"
 description = "Solution to Leetcode 2660"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-the-winner-of-a-bowling-game/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

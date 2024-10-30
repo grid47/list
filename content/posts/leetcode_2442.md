@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2442: Count Number of Distinct Integers After Reverse Operations"
-date = "2018-02-22"
+date = "2018-02-23"
 description = "Solution to Leetcode 2442"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

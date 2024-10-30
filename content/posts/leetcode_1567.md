@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1567: Maximum Length of Subarray With Positive Product"
-date = "2020-07-16"
+date = "2020-07-17"
 description = "Solution to Leetcode 1567"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

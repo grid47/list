@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1375: Number of Times Binary String Is Prefix-Aligned"
-date = "2021-01-24"
+date = "2021-01-25"
 description = "Solution to Leetcode 1375"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-times-binary-string-is-prefix-aligned/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

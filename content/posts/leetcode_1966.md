@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1966: Binary Searchable Numbers in an Unsorted Array"
-date = "2019-06-13"
+date = "2019-06-14"
 description = "Solution to Leetcode 1966"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-searchable-numbers-in-an-unsorted-array/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

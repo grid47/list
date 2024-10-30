@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2064: Minimized Maximum of Products Distributed to Any Store"
-date = "2019-03-07"
+date = "2019-03-08"
 description = "Solution to Leetcode 2064"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimized-maximum-of-products-distributed-to-any-store/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

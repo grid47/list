@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1356: Sort Integers by The Number of 1 Bits"
-date = "2021-02-12"
+date = "2021-02-13"
 description = "Solution to Leetcode 1356"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

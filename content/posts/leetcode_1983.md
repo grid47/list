@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1983: Widest Pair of Indices With Equal Range Sum"
-date = "2019-05-27"
+date = "2019-05-28"
 description = "Solution to Leetcode 1983"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/widest-pair-of-indices-with-equal-range-sum/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

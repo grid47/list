@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1279: Traffic Light Controlled Intersection"
-date = "2021-04-30"
+date = "2021-05-01"
 description = "Solution to Leetcode 1279"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/traffic-light-controlled-intersection/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

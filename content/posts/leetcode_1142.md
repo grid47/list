@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1142: User Activity for the Past 30 Days II"
-date = "2021-09-14"
+date = "2021-09-15"
 description = "Solution to Leetcode 1142"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/user-activity-for-the-past-30-days-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

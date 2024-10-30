@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2819: Minimum Relative Loss After Buying Chocolates"
-date = "2017-02-10"
+date = "2017-02-11"
 description = "Solution to Leetcode 2819"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-relative-loss-after-buying-chocolates/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1327: List the Products Ordered in a Period"
-date = "2021-03-13"
+date = "2021-03-14"
 description = "Solution to Leetcode 1327"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/list-the-products-ordered-in-a-period/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

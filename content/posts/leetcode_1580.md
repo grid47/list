@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1580: Put Boxes Into the Warehouse II"
-date = "2020-07-03"
+date = "2020-07-04"
 description = "Solution to Leetcode 1580"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/put-boxes-into-the-warehouse-ii/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 309: Best Time to Buy and Sell Stock with Cooldown"
-date = "2023-12-26"
+date = "2023-12-27"
 description = "Solution to Leetcode 309"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

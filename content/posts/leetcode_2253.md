@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2253: Dynamic Unpivoting of a Table"
-date = "2018-08-30"
+date = "2018-08-31"
 description = "Solution to Leetcode 2253"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/dynamic-unpivoting-of-a-table/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

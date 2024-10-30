@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 2472: Maximum Number of Non-overlapping Palindrome Substrings"
-date = "2018-01-23"
+date = "2018-01-24"
 description = "Solution to Leetcode 2472"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}

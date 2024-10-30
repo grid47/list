@@ -2,7 +2,7 @@
 +++
 authors = ["Coded by Me, Explained by GPT"]
 title = "Leetcode 1423: Maximum Points You Can Obtain from Cards"
-date = "2020-12-07"
+date = "2020-12-08"
 description = "Solution to Leetcode 1423"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/description/)
 
 ---
-
+{{< youtube nan >}}
 **Code:**
 
 {{< highlight cpp >}}
