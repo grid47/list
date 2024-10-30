@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/previous-permutation-with-one-swap/description/)
 
 ---
-
+{{< youtube x_y3nIsbENM >}}
 **Code:**
 
 {{< highlight cpp >}}

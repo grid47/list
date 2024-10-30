@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/delete-duplicate-emails/description/)
 
 ---
-
+{{< youtube TqjS05MEi1E >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-bounded-blocking-queue/description/)
 
 ---
-
+{{< youtube 0B8CXDCtpCU >}}
 **Code:**
 
 {{< highlight cpp >}}

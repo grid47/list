@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/description/)
 
 ---
-
+{{< youtube h48x-eQaqk4 >}}
 **Code:**
 
 {{< highlight cpp >}}

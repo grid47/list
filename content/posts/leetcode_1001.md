@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/grid-illumination/description/)
 
 ---
-
+{{< youtube Mjbq8aGPBr8 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-complete-tree-nodes/description/)
 
 ---
-
+{{< youtube Bm9gkcn1Qbo >}}
 **Code:**
 
 {{< highlight cpp >}}

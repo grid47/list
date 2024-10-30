@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-line-of-consecutive-one-in-matrix/description/)
 
 ---
-
+{{< youtube 6FPsqiCS2g8 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/description/)
 
 ---
-
+{{< youtube SG7VnKzhfjo >}}
 **Code:**
 
 {{< highlight cpp >}}

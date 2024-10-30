@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/description/)
 
 ---
-
+{{< youtube nhbiXqGsICw >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/pancake-sorting/description/)
 
 ---
-
+{{< youtube O8YUmSwQ2WU >}}
 **Code:**
 
 {{< highlight cpp >}}

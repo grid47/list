@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/description/)
 
 ---
-
+{{< youtube qCeJu4Pjuec >}}
 **Code:**
 
 {{< highlight cpp >}}

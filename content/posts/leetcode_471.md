@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/encode-string-with-shortest-length/description/)
 
 ---
-
+{{< youtube B8uSIMh_fFI >}}
 **Code:**
 
 {{< highlight cpp >}}

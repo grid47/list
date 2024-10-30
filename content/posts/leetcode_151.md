@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reverse-words-in-a-string/description/)
 
 ---
-
+{{< youtube U58YRqyAulg >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/next-greater-element-ii/description/)
 
 ---
-
+{{< youtube 1rwOw6l3Bh0 >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/peeking-iterator/description/)
 
 ---
-
+{{< youtube g92eLjGcroI >}}
 **Code:**
 
 {{< highlight cpp >}}

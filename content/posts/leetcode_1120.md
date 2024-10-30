@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-average-subtree/description/)
 
 ---
-
+{{< youtube opfPHMQJ4i8 >}}
 **Code:**
 
 {{< highlight cpp >}}

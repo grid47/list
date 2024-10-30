@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/strobogrammatic-number-ii/description/)
 
 ---
-
+{{< youtube lnMjTXYLBLQ >}}
 **Code:**
 
 {{< highlight cpp >}}

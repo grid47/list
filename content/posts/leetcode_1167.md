@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-cost-to-connect-sticks/description/)
 
 ---
-
+{{< youtube e2CW9UF_gMw >}}
 **Code:**
 
 {{< highlight cpp >}}

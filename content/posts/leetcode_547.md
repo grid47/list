@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-provinces/description/)
 
 ---
-
+{{< youtube p5Ocm71wB0E >}}
 **Code:**
 
 {{< highlight cpp >}}

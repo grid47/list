@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/elimination-game/description/)
 
 ---
-
+{{< youtube 0U5Lenn_vMo >}}
 **Code:**
 
 {{< highlight cpp >}}

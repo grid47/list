@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/exclusive-time-of-functions/description/)
 
 ---
-
+{{< youtube Rjcwy-Q2uDo >}}
 **Code:**
 
 {{< highlight cpp >}}

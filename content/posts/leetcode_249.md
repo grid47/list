@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/group-shifted-strings/description/)
 
 ---
-
+{{< youtube vUd-7qS6BPQ >}}
 **Code:**
 
 {{< highlight cpp >}}

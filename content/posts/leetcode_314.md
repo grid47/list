@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/)
 
 ---
-
+{{< youtube N-eSD_NZWXA >}}
 **Code:**
 
 {{< highlight cpp >}}

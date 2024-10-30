@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-knight-moves/description/)
 
 ---
-
+{{< youtube 4pUElCFt4OA >}}
 **Code:**
 
 {{< highlight cpp >}}

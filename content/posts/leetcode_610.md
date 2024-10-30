@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/triangle-judgement/description/)
 
 ---
-
+{{< youtube QWyzkiwBhFc >}}
 **Code:**
 
 {{< highlight cpp >}}

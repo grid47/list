@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-tic-tac-toe/description/)
 
 ---
-
+{{< youtube e7Rx7ZEY1EE >}}
 **Code:**
 
 {{< highlight cpp >}}

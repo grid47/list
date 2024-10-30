@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-duplicate-substring/description/)
 
 ---
-
+{{< youtube pCVCoCn-8fw >}}
 **Code:**
 
 {{< highlight cpp >}}

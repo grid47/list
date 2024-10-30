@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/all-people-report-to-the-given-manager/description/)
 
 ---
-
+{{< youtube SvfOqpcZ-KU >}}
 **Code:**
 
 {{< highlight cpp >}}

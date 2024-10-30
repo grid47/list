@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-skyline-problem/description/)
 
 ---
-
+{{< youtube C2Eryy46l0M >}}
 **Code:**
 
 {{< highlight cpp >}}

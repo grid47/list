@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/index-pairs-of-a-string/description/)
 
 ---
-
+{{< youtube dFp1hdN2owg >}}
 **Code:**
 
 {{< highlight cpp >}}

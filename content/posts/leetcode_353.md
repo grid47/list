@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-snake-game/description/)
 
 ---
-
+{{< youtube idsPB3vGzLY >}}
 **Code:**
 
 {{< highlight cpp >}}

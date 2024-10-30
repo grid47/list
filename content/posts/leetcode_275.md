@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/h-index-ii/description/)
 
 ---
-
+{{< youtube l58nSAsqN-k >}}
 **Code:**
 
 {{< highlight cpp >}}

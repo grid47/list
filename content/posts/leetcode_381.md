@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/description/)
 
 ---
-
+{{< youtube DeeRweQ7bnw >}}
 **Code:**
 
 {{< highlight cpp >}}

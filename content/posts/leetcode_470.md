@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/implement-rand10-using-rand7/description/)
 
 ---
-
+{{< youtube Ea0m2r84RhU >}}
 **Code:**
 
 {{< highlight cpp >}}

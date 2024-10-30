@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/counting-elements/description/)
 
 ---
-
+{{< youtube qMpXTZjo_l4 >}}
 **Code:**
 
 {{< highlight cpp >}}

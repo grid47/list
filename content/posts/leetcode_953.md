@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/verifying-an-alien-dictionary/description/)
 
 ---
-
+{{< youtube 8gCFuDKkmfk >}}
 **Code:**
 
 {{< highlight cpp >}}

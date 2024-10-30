@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sell-diminishing-valued-colored-balls/description/)
 
 ---
-
+{{< youtube oj7Rxz1r70g >}}
 **Code:**
 
 {{< highlight cpp >}}

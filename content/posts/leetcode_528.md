@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/random-pick-with-weight/description/)
 
 ---
-
+{{< youtube oYjDXfo-mt0 >}}
 **Code:**
 
 {{< highlight cpp >}}

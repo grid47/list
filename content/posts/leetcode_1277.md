@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-square-submatrices-with-all-ones/description/)
 
 ---
-
+{{< youtube PBZCmMugu5Q >}}
 **Code:**
 
 {{< highlight cpp >}}

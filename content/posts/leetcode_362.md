@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-hit-counter/description/)
 
 ---
-
+{{< youtube 3AkMGIdlGPo >}}
 **Code:**
 
 {{< highlight cpp >}}

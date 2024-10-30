@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-music-playlists/description/)
 
 ---
-
+{{< youtube 7kqUjOW1Dlw >}}
 **Code:**
 
 {{< highlight cpp >}}

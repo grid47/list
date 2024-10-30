@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/single-element-in-a-sorted-array/description/)
 
 ---
-
+{{< youtube T4nRgIxka18 >}}
 **Code:**
 
 {{< highlight cpp >}}

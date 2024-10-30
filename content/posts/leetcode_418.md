@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sentence-screen-fitting/description/)
 
 ---
-
+{{< youtube 1ChX4Cpz0bU >}}
 **Code:**
 
 {{< highlight cpp >}}

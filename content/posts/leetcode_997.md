@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-town-judge/description/)
 
 ---
-
+{{< youtube xR2Qg9ENtKQ >}}
 **Code:**
 
 {{< highlight cpp >}}

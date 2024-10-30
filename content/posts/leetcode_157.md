@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/read-n-characters-given-read4/description/)
 
 ---
-
+{{< youtube x7pg4cTHu4g >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/first-unique-number/description/)
 
 ---
-
+{{< youtube 9xxXHPDpZnE >}}
 **Code:**
 
 {{< highlight cpp >}}

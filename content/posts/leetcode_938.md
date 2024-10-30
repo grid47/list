@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/range-sum-of-bst/description/)
 
 ---
-
+{{< youtube ISUXXRnKmx0 >}}
 **Code:**
 
 {{< highlight cpp >}}

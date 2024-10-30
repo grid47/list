@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/buildings-with-an-ocean-view/description/)
 
 ---
-
+{{< youtube dI_FGn8-V-U >}}
 **Code:**
 
 {{< highlight cpp >}}

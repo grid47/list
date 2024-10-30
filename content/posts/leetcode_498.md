@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/diagonal-traverse/description/)
 
 ---
-
+{{< youtube xio2uEQQPZQ >}}
 **Code:**
 
 {{< highlight cpp >}}

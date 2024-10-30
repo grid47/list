@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/description/)
 
 ---
-
+{{< youtube 8PbdJB0d9yQ >}}
 **Code:**
 
 {{< highlight cpp >}}

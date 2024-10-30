@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographical-numbers/description/)
 
 ---
-
+{{< youtube n4YGTbFfU-w >}}
 **Code:**
 
 {{< highlight cpp >}}

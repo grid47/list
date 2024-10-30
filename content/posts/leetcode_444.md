@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sequence-reconstruction/description/)
 
 ---
-
+{{< youtube Bqhf7zPMdaU >}}
 **Code:**
 
 {{< highlight cpp >}}

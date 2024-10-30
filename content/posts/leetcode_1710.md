@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-units-on-a-truck/description/)
 
 ---
-
+{{< youtube SXgCMkAQUqM >}}
 **Code:**
 
 {{< highlight cpp >}}

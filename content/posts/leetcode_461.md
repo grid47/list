@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/hamming-distance/description/)
 
 ---
-
+{{< youtube tvXyP0TmaSo >}}
 **Code:**
 
 {{< highlight cpp >}}

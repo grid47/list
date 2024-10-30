@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sparse-matrix-multiplication/description/)
 
 ---
-
+{{< youtube 3cdeehULUBo >}}
 **Code:**
 
 {{< highlight cpp >}}

@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-atoms/description/)
 
 ---
-
+{{< youtube 1rp7kIKlajI >}}
 **Code:**
 
 {{< highlight cpp >}}

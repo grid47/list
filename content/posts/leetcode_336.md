@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/palindrome-pairs/description/)
 
 ---
-
+{{< youtube D5PMCyPcw-o >}}
 **Code:**
 
 {{< highlight cpp >}}

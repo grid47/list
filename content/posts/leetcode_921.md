@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/)
 
 ---
-
+{{< youtube EPr9X0Y3vmo >}}
 **Code:**
 
 {{< highlight cpp >}}

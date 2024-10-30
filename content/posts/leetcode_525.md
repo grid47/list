@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/contiguous-array/description/)
 
 ---
-
+{{< youtube 3dRoRxipjhY >}}
 **Code:**
 
 {{< highlight cpp >}}

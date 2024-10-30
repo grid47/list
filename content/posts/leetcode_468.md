@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/validate-ip-address/description/)
 
 ---
-
+{{< youtube Vdz6JaEtE3g >}}
 **Code:**
 
 {{< highlight cpp >}}

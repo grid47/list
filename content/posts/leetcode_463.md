@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/island-perimeter/description/)
 
 ---
-
+{{< youtube Ht0qgveESkE >}}
 **Code:**
 
 {{< highlight cpp >}}

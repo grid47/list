@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shuffle-an-array/description/)
 
 ---
-
+{{< youtube LSNxktnyoh8 >}}
 **Code:**
 
 {{< highlight cpp >}}

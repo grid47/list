@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/possible-bipartition/description/)
 
 ---
-
+{{< youtube WIJa0GAC9Cg >}}
 **Code:**
 
 {{< highlight cpp >}}

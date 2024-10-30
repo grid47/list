@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-islands-ii/description/)
 
 ---
-
+{{< youtube u0JggMnEanA >}}
 **Code:**
 
 {{< highlight cpp >}}

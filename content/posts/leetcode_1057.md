@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/campus-bikes/description/)
 
 ---
-
+{{< youtube HxYbpT3Qfy4 >}}
 **Code:**
 
 {{< highlight cpp >}}

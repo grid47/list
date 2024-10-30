@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/description/)
 
 ---
-
+{{< youtube r_uJ9Vlqaqs >}}
 **Code:**
 
 {{< highlight cpp >}}

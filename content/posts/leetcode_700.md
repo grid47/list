@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/search-in-a-binary-search-tree/description/)
 
 ---
-
+{{< youtube yogDVzdYNJ0 >}}
 **Code:**
 
 {{< highlight cpp >}}

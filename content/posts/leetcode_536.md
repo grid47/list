@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-binary-tree-from-string/description/)
 
 ---
-
+{{< youtube ye4b7nH0Hx8 >}}
 **Code:**
 
 {{< highlight cpp >}}

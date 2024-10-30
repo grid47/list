@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rectangle-area-ii/description/)
 
 ---
-
+{{< youtube xm5-u_l8tTY >}}
 **Code:**
 
 {{< highlight cpp >}}

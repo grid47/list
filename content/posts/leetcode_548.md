@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/split-array-with-equal-sum/description/)
 
 ---
-
+{{< youtube GeT_IfUbC0s >}}
 **Code:**
 
 {{< highlight cpp >}}

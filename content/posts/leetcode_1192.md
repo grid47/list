@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/critical-connections-in-a-network/description/)
 
 ---
-
+{{< youtube Q_zTaB9dj0Y >}}
 **Code:**
 
 {{< highlight cpp >}}
