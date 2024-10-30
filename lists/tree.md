@@ -45,3 +45,5 @@
 | LeetCode 1530 | [Number of Good Leaf Nodes Pairs](https://grid47.xyz/posts/leetcode_1530) |
 | LeetCode 1361 | [Validate Binary Tree Nodes](https://grid47.xyz/posts/leetcode_1361) |
 | LeetCode 863 | [All Nodes Distance K in Binary Tree](https://grid47.xyz/posts/leetcode_863) |
+
+Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1212004/Binary-Trees-study-guide)

@@ -1,5 +1,5 @@
 +++
-title = "Dynamic Programming"
+title = "DP"
 slug = "dp"
 date = "2024-10-30"
 +++

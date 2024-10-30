@@ -64,3 +64,5 @@
 | LeetCode 121 | [Best Time to Buy and Sell Stock](https://grid47.xyz/posts/leetcode_121) |
 | LeetCode 123 | [Best Time to Buy and Sell Stock III](https://grid47.xyz/posts/leetcode_123) |
 | LeetCode 188 | [Best Time to Buy and Sell Stock IV](https://grid47.xyz/posts/leetcode_188) |
+
+Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)

@@ -22,3 +22,5 @@
 | LeetCode 759 | [Employee Free Time](https://grid47.xyz/posts/leetcode_759) |
 | LeetCode 378 | [Kth Smallest Element in a Sorted Matrix](https://grid47.xyz/posts/leetcode_378) |
 | LeetCode 253 | [Meeting Rooms II](https://grid47.xyz/posts/leetcode_253) |
+
+Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/1127238/master-heap-by-solving-23-questions-in-4-patterns-category)
