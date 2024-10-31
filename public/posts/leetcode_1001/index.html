@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
           
@@ -234,8 +234,61 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<!-- raw HTML omitted -->
-<hr>
+<h2 id="hahahugoshortcode3369s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <p>class Solution {
+public:
+vector<!-- raw HTML omitted --> gridIllumination(int n, vector&lt;vector<!-- raw HTML omitted -->&gt;&amp; lamps, vector&lt;vector<!-- raw HTML omitted -->&gt;&amp; queries) {</p>
+<pre><code>    map&lt;int, int&gt; x, y, a_d, d_d;
+    map&lt;int, unordered_set&lt;int&gt;&gt; set;
+    for(int i = 0; i &lt; lamps.size(); i++) {
+        vector&lt;int&gt; axs = lamps[i];
+        if(set[axs[0]].insert(axs[1]).second) {
+            x[axs[0]]++;
+            y[axs[1]]++;
+            a_d[axs[0] + axs[1]]++;
+            d_d[axs[0] - axs[1]]++;
+        }
+    }
+
+    int sz = queries.size();
+    vector&lt;int&gt; res;
+
+    for(int k = 0; k &lt; sz; k++) {
+        vector&lt;int&gt; q = queries[k];
+        int i = q[0], j = q[1];
+        
+        if(x[i] || y[j] || a_d[i + j] || d_d[i - j]) {
+            res.push_back(1);
+            for(int li = i - 1; li &lt;= i + 1; li++)
+            for(int lj = j - 1; lj &lt;= j + 1; lj++){
+                if(set[li].erase(lj)) {
+                    x[li]--;
+                    y[lj]--;
+                    a_d[li + lj]--;
+                    d_d[li - lj]--;
+                }
+            }
+        } else res.push_back(0);
+    }
+
+    return res;
+    
+}
+</code></pre>
+<p>};</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode3369s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
