@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -33,6 +31,8 @@ FROM Employees
 GROUP BY day, emp_id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

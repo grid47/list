@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-{{< youtube _nU4hBwsyTE >}}
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -36,6 +34,8 @@ def consecutive_numbers(logs: pd.DataFrame) -> pd.DataFrame:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/180.md" >}}
+---
+{{< youtube _nU4hBwsyTE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

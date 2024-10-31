@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -39,6 +37,8 @@ vector<int> applyOperations(vector<int>& A) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

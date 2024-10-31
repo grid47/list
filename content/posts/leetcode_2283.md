@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -38,6 +36,8 @@ bool digitCount(string num) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

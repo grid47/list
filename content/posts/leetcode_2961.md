@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -46,6 +44,8 @@ vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

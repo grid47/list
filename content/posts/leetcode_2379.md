@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -39,6 +37,8 @@ int minimumRecolors(string blocks, int k) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -38,6 +36,8 @@ int findMaxK(vector<int>& nums) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

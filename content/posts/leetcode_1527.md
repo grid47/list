@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -28,6 +26,8 @@ series = ["Leetcode"]
 SELECT * FROM Patients WHERE REGEXP_LIKE(conditions,'\\bDIAB1');
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

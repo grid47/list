@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -36,6 +34,8 @@ int differenceOfSum(vector<int>& n) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

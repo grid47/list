@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -31,6 +29,8 @@ GROUP BY contest_id
 ORDER BY percentage DESC, contest_id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

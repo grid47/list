@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -52,6 +50,8 @@ int cnt = __builtin_popcount(pt[v[1]+1] ^ pt[v[0]]);
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

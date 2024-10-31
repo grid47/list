@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-{{< youtube JU5XdBZZtlk >}}
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -37,6 +35,8 @@ int minimumDifference(vector<int>& nums, int k) {
 {{< /highlight >}}
 
 
+---
+{{< youtube JU5XdBZZtlk >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

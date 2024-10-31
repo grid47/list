@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -32,6 +30,8 @@ WHERE t.amount IS NULL  and t.transaction_id IS NULL
 GROUP BY v.customer_id; 
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

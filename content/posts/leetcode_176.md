@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-{{< youtube 3xc0_XIob1M >}}
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -29,6 +27,8 @@ SELECT MAX(Salary) AS "SecondHighestSalary" FROM Employee WHERE Salary < (SELECT
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/176.md" >}}
+---
+{{< youtube 3xc0_XIob1M >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

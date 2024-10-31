@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -43,6 +41,8 @@ return true;}
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

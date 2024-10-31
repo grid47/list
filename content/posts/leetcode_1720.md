@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -36,6 +34,8 @@ vector<int> decode(vector<int>& encoded, int first) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

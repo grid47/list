@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -28,6 +26,8 @@ series = ["Leetcode"]
 SELECT tweet_id FROM Tweets WHERE LENGTH(content) > 15;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

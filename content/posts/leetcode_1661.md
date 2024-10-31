@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -32,6 +30,8 @@ ON a1.machine_id = a2.machine_id AND a1.activity_type = 'end' AND a2.activity_ty
 GROUP BY machine_id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

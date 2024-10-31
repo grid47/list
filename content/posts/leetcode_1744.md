@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -50,6 +48,8 @@ if (mn <= day && day <= mx) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

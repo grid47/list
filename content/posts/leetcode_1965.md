@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -35,6 +33,8 @@ WHERE T.salary IS NULL OR T.name IS NULL
 ORDER BY employee_id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

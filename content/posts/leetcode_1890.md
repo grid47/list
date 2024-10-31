@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -32,6 +30,8 @@ WHERE YEAR(time_stamp) = 2020 #filtering for login dates with year 2020 in times
 GROUP BY user_id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

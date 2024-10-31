@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -32,6 +30,8 @@ bool checkString(string s) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

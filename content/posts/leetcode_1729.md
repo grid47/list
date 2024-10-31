@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -31,6 +29,8 @@ GROUP BY user_id
 ORDER BY user_id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

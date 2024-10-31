@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -28,6 +26,8 @@ series = ["Leetcode"]
 SELECT product_id FROM Products WHERE low_fats="Y" AND recyclable="Y";
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

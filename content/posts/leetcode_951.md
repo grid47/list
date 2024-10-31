@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-{{< youtube izRDc1il9Pk >}}
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -50,6 +48,8 @@ flipEquiv(root1->left, root2->right) && flipEquiv(root1->right, root2->left));
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/951.md" >}}
+---
+{{< youtube izRDc1il9Pk >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

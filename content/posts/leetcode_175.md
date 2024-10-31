@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-{{< youtube iVz5triYt-8 >}}
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -29,6 +27,8 @@ SELECT Person.firstName,Person.lastName,Address.city,Address.state FROM Person L
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/175.md" >}}
+---
+{{< youtube iVz5triYt-8 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

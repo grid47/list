@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -31,6 +29,8 @@ LEFT JOIN Product a
 ON a.product_id = b.product_id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -33,6 +31,8 @@ GROUP BY p.product_name
 HAVING SUM(o.unit) >= 100;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -32,6 +30,8 @@ ON p.product_id = u.product_id AND p.start_date <= u.purchase_date AND u.purchas
 GROUP BY p.product_id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

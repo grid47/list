@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -45,6 +43,8 @@ vector<string> insert(int id, string value) {
  */
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

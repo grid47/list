@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -31,6 +29,8 @@ UNION
 SELECT 'High Salary', SUM(income > 50000) FROM Accounts;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

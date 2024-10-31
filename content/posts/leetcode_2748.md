@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -41,6 +39,8 @@ int countBeautifulPairs(vector<int>& nums) {
 };
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

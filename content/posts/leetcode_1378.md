@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -31,6 +29,8 @@ LEFT JOIN EmployeeUNI u
 ON u.id = e.id;
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}

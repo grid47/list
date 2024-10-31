@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-{{< youtube QWyzkiwBhFc >}}
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -29,6 +27,8 @@ SELECT x, y, z,IF(x + y > z AND x + z > y AND y + z > x, 'Yes', 'No') AS triangl
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/610.md" >}}
+---
+{{< youtube QWyzkiwBhFc >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

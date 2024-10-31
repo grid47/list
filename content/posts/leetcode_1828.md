@@ -19,8 +19,6 @@ series = ["Leetcode"]
 
 ---
 
-{{< youtube fU4oOBSsVMg >}}
-
 **Code:**
 
 {{< highlight cpp >}}
@@ -43,6 +41,8 @@ public:
 {{< /highlight >}}
 
 
+---
+{{< youtube fU4oOBSsVMg >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

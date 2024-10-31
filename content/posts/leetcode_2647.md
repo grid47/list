@@ -19,14 +19,14 @@ series = ["Leetcode"]
 
 ---
 
-
-
 **Code:**
 
 {{< highlight cpp >}}
 
 {{< /highlight >}}
 
+
+---
 
 
 {{< notice tip >}}
