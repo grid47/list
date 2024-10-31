@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3195: Find the Minimum Area to Cover All Ones I"
-date = "2016-02-01"
+date = "2016-02-02"
 description = "Solution to Leetcode 3195"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

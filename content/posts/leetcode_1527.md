@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1527: Patients With a Condition"
-date = "2020-08-26"
+date = "2020-08-27"
 description = "Solution to Leetcode 1527"
 tags = [
     
@@ -25,6 +25,10 @@ series = ["Leetcode"]
 # Write your MySQL query statement below
 SELECT * FROM Patients WHERE REGEXP_LIKE(conditions,'\\bDIAB1');
 {{< /highlight >}}
+
+
+
+---
 
 
 

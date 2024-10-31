@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1658: Minimum Operations to Reduce X to Zero"
-date = "2020-04-17"
+date = "2020-04-18"
 description = "Solution to Leetcode 1658"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/description/)
 
 ---
-{{< youtube iPqrN6Bb-NI >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -48,6 +48,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube iPqrN6Bb-NI >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

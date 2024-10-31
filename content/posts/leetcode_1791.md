@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1791: Find Center of Star Graph"
-date = "2019-12-06"
+date = "2019-12-07"
 description = "Solution to Leetcode 1791"
 tags = [
     
@@ -29,6 +29,10 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

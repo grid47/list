@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1903: Largest Odd Number in String"
-date = "2019-08-16"
+date = "2019-08-17"
 description = "Solution to Leetcode 1903"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-odd-number-in-string/description/)
 
 ---
-{{< youtube IIt_ARZzclY >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -36,6 +36,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube IIt_ARZzclY >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1146: Snapshot Array"
-date = "2021-09-11"
+date = "2021-09-12"
 description = "Solution to Leetcode 1146"
 tags = [
     
@@ -60,6 +60,10 @@ public:
  * int param_3 = obj->get(index,snap_id);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2634: Filter Elements from Array"
-date = "2017-08-15"
+date = "2017-08-16"
 description = "Solution to Leetcode 2634"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

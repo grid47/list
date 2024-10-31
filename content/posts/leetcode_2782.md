@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2782: Number of Unique Categories"
-date = "2017-03-20"
+date = "2017-03-21"
 description = "Solution to Leetcode 2782"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

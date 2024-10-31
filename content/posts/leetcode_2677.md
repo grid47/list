@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2677: Chunk Array"
-date = "2017-07-03"
+date = "2017-07-04"
 description = "Solution to Leetcode 2677"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

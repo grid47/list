@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1936: Add Minimum Number of Rungs"
-date = "2019-07-14"
+date = "2019-07-15"
 description = "Solution to Leetcode 1936"
 tags = [
     
@@ -65,6 +65,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

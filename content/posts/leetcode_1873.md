@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1873: Calculate Special Bonus"
-date = "2019-09-15"
+date = "2019-09-16"
 description = "Solution to Leetcode 1873"
 tags = [
     
@@ -25,6 +25,10 @@ series = ["Leetcode"]
 # Write your MySQL query statement below
 SELECT employee_id, salary * (employee_id % 2) * (name NOT LIKE 'M%') AS bonus FROM Employees ORDER BY employee_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

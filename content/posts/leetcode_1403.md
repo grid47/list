@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1403: Minimum Subsequence in Non-Increasing Order"
-date = "2020-12-28"
+date = "2020-12-29"
 description = "Solution to Leetcode 1403"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

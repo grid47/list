@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 210: Course Schedule II"
-date = "2024-04-04"
+date = "2024-04-05"
 description = "Solution to Leetcode 210"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/course-schedule-ii/description/)
 
 ---
-{{< youtube 2cpihwDznaw >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -54,6 +54,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/210.md" >}}
+
+---
+
+{{< youtube 2cpihwDznaw >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

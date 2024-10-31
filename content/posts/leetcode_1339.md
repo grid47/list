@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1339: Maximum Product of Splitted Binary Tree"
-date = "2021-03-02"
+date = "2021-03-03"
 description = "Solution to Leetcode 1339"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

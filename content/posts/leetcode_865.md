@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 865: Smallest Subtree with all the Deepest Nodes"
-date = "2022-06-19"
+date = "2022-06-20"
 description = "Solution to Leetcode 865"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/description/)
 
 ---
-{{< youtube QF7ZBH8mXHE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -54,6 +54,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/865.md" >}}
+
+---
+
+{{< youtube QF7ZBH8mXHE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

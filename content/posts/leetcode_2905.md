@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2905: Find Indices With Index and Value Difference II"
-date = "2016-11-17"
+date = "2016-11-18"
 description = "Solution to Leetcode 2905"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

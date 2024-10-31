@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2414: Length of the Longest Alphabetical Continuous Substring"
-date = "2018-03-23"
+date = "2018-03-24"
 description = "Solution to Leetcode 2414"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

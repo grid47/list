@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 744: Find Smallest Letter Greater Than Target"
-date = "2022-10-18"
+date = "2022-10-19"
 description = "Solution to Leetcode 744"
 tags = [
     
@@ -38,6 +38,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/744.md" >}}
+
+---
+
+
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

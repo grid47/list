@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1014: Best Sightseeing Pair"
-date = "2022-01-21"
+date = "2022-01-22"
 description = "Solution to Leetcode 1014"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

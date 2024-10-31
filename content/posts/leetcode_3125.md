@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3125: Maximum Number That Makes Result of Bitwise AND Zero"
-date = "2016-04-11"
+date = "2016-04-12"
 description = "Solution to Leetcode 3125"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

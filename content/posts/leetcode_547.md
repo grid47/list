@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 547: Number of Provinces"
-date = "2023-05-03"
+date = "2023-05-04"
 description = "Solution to Leetcode 547"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-provinces/description/)
 
 ---
-{{< youtube p5Ocm71wB0E >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -65,6 +65,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/547.md" >}}
+
+---
+
+{{< youtube p5Ocm71wB0E >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

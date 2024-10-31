@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2064: Minimized Maximum of Products Distributed to Any Store"
-date = "2019-03-08"
+date = "2019-03-09"
 description = "Solution to Leetcode 2064"
 tags = [
     
@@ -69,6 +69,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

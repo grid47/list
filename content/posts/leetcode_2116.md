@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2116: Check if a Parentheses String Can Be Valid"
-date = "2019-01-15"
+date = "2019-01-16"
 description = "Solution to Leetcode 2116"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1525: Number of Good Ways to Split a String"
-date = "2020-08-28"
+date = "2020-08-29"
 description = "Solution to Leetcode 1525"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-good-ways-to-split-a-string/description/)
 
 ---
-{{< youtube lRVpVUC5mQ4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -45,6 +45,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube lRVpVUC5mQ4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

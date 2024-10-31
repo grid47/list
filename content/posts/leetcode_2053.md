@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2053: Kth Distinct String in an Array"
-date = "2019-03-19"
+date = "2019-03-20"
 description = "Solution to Leetcode 2053"
 tags = [
     
@@ -35,6 +35,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

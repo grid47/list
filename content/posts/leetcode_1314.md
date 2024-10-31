@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1314: Matrix Block Sum"
-date = "2021-03-27"
+date = "2021-03-28"
 description = "Solution to Leetcode 1314"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

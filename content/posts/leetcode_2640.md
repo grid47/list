@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2640: Find the Score of All Prefixes of an Array"
-date = "2017-08-09"
+date = "2017-08-10"
 description = "Solution to Leetcode 2640"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

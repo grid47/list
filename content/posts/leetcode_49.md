@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 49: Group Anagrams"
-date = "2024-09-12"
+date = "2024-09-13"
 description = "Solution to Leetcode 49"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/group-anagrams/description/)
 
 ---
-{{< youtube eDmxPfVa81k >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -54,6 +54,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/49.md" >}}
+
+---
+
+{{< youtube eDmxPfVa81k >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

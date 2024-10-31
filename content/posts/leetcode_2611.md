@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2611: Mice and Cheese"
-date = "2017-09-07"
+date = "2017-09-08"
 description = "Solution to Leetcode 2611"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1880: Check if Word Equals Summation of Two Words"
-date = "2019-09-08"
+date = "2019-09-09"
 description = "Solution to Leetcode 1880"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

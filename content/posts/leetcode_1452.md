@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1452: People Whose List of Favorite Companies Is Not a Subset of Another List"
-date = "2020-11-09"
+date = "2020-11-10"
 description = "Solution to Leetcode 1452"
 tags = [
     
@@ -46,6 +46,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

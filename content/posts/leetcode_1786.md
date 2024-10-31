@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1786: Number of Restricted Paths From First to Last Node"
-date = "2019-12-11"
+date = "2019-12-12"
 description = "Solution to Leetcode 1786"
 tags = [
     
@@ -81,6 +81,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

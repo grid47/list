@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1061: Lexicographically Smallest Equivalent String"
-date = "2021-12-05"
+date = "2021-12-06"
 description = "Solution to Leetcode 1061"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lexicographically-smallest-equivalent-string/description/)
 
 ---
-{{< youtube YQ-q0oydRl4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -76,6 +76,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube YQ-q0oydRl4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

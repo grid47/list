@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1646: Get Maximum in Generated Array"
-date = "2020-04-29"
+date = "2020-04-30"
 description = "Solution to Leetcode 1646"
 tags = [
     
@@ -39,6 +39,10 @@ class Solution {
     }
 }
 {{< /highlight >}}
+
+
+
+---
 
 
 

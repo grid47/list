@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1779: Find Nearest Point That Has the Same X or Y Coordinate"
-date = "2019-12-18"
+date = "2019-12-19"
 description = "Solution to Leetcode 1779"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2007: Find Original Array From Doubled Array"
-date = "2019-05-04"
+date = "2019-05-05"
 description = "Solution to Leetcode 2007"
 tags = [
     
@@ -71,6 +71,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

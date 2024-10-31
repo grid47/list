@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2309: Greatest English Letter in Upper and Lower Case"
-date = "2018-07-06"
+date = "2018-07-07"
 description = "Solution to Leetcode 2309"
 tags = [
     
@@ -35,6 +35,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

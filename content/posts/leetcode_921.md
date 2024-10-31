@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 921: Minimum Add to Make Parentheses Valid"
-date = "2022-04-24"
+date = "2022-04-25"
 description = "Solution to Leetcode 921"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/)
 
 ---
-{{< youtube EPr9X0Y3vmo >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -46,6 +46,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/921.md" >}}
+
+---
+
+{{< youtube EPr9X0Y3vmo >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

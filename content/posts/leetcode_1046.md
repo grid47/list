@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1046: Last Stone Weight"
-date = "2021-12-20"
+date = "2021-12-21"
 description = "Solution to Leetcode 1046"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/last-stone-weight/description/)
 
 ---
-{{< youtube bmcFr1AdiJg >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -47,6 +47,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube bmcFr1AdiJg >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

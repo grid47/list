@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 6: Zigzag Conversion"
-date = "2024-10-25"
+date = "2024-10-26"
 description = "Solution to Leetcode 6"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/zigzag-conversion/description/)
 
 ---
-{{< youtube 2NMMVnxV6lo >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -56,6 +56,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/6.md" >}}
+
+---
+
+{{< youtube 2NMMVnxV6lo >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1250: Check If It Is a Good Array"
-date = "2021-05-30"
+date = "2021-05-31"
 description = "Solution to Leetcode 1250"
 tags = [
     
@@ -32,6 +32,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

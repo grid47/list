@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1920: Build Array from Permutation"
-date = "2019-07-30"
+date = "2019-07-31"
 description = "Solution to Leetcode 1920"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1888: Minimum Number of Flips to Make the Binary String Alternating"
-date = "2019-08-31"
+date = "2019-09-01"
 description = "Solution to Leetcode 1888"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/description/)
 
 ---
-{{< youtube MOeuK6gaC2A >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -50,6 +50,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube MOeuK6gaC2A >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

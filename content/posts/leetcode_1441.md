@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1441: Build an Array With Stack Operations"
-date = "2020-11-20"
+date = "2020-11-21"
 description = "Solution to Leetcode 1441"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

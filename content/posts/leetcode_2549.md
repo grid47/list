@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2549: Count Distinct Numbers on Board"
-date = "2017-11-08"
+date = "2017-11-09"
 description = "Solution to Leetcode 2549"
 tags = [
     
@@ -30,6 +30,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

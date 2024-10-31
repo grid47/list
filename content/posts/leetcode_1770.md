@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1770: Maximum Score from Performing Multiplication Operations"
-date = "2019-12-27"
+date = "2019-12-28"
 description = "Solution to Leetcode 1770"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

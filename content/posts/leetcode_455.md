@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 455: Assign Cookies"
-date = "2023-08-03"
+date = "2023-08-04"
 description = "Solution to Leetcode 455"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/assign-cookies/description/)
 
 ---
-{{< youtube AXaPmVMkVAE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -39,6 +39,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/455.md" >}}
+
+---
+
+{{< youtube AXaPmVMkVAE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1670: Design Front Middle Back Queue"
-date = "2020-04-05"
+date = "2020-04-06"
 description = "Solution to Leetcode 1670"
 tags = [
     
@@ -102,6 +102,10 @@ public:
  * int param_6 = obj->popBack();
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

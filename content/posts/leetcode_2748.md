@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2748: Number of Beautiful Pairs"
-date = "2017-04-23"
+date = "2017-04-24"
 description = "Solution to Leetcode 2748"
 tags = [
     
@@ -38,6 +38,10 @@ int countBeautifulPairs(vector<int>& nums) {
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

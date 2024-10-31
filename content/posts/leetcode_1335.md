@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1335: Minimum Difficulty of a Job Schedule"
-date = "2021-03-06"
+date = "2021-03-07"
 description = "Solution to Leetcode 1335"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/description/)
 
 ---
-{{< youtube h48x-eQaqk4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -56,6 +56,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube h48x-eQaqk4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

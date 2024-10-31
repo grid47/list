@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2928: Distribute Candies Among Children I"
-date = "2016-10-25"
+date = "2016-10-26"
 description = "Solution to Leetcode 2928"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

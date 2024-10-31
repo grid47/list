@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1381: Design a Stack With Increment Operation"
-date = "2021-01-19"
+date = "2021-01-20"
 description = "Solution to Leetcode 1381"
 tags = [
     
@@ -60,6 +60,10 @@ public:
  * obj->increment(k,val);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

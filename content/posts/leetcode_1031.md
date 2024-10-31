@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1031: Maximum Sum of Two Non-Overlapping Subarrays"
-date = "2022-01-04"
+date = "2022-01-05"
 description = "Solution to Leetcode 1031"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

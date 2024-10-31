@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1312: Minimum Insertion Steps to Make a String Palindrome"
-date = "2021-03-29"
+date = "2021-03-30"
 description = "Solution to Leetcode 1312"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/description/)
 
 ---
-{{< youtube ggQlIW5keAA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -48,6 +48,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube ggQlIW5keAA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

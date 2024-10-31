@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2828: Check if a String Is an Acronym of Words"
-date = "2017-02-02"
+date = "2017-02-03"
 description = "Solution to Leetcode 2828"
 tags = [
     
@@ -32,6 +32,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

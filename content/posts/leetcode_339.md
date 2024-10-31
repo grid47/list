@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 339: Nested List Weight Sum"
-date = "2023-11-27"
+date = "2023-11-28"
 description = "Solution to Leetcode 339"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/nested-list-weight-sum/description/)
 
 ---
-{{< youtube cZ5kfzhJhxE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -26,6 +26,10 @@ series = ["Leetcode"]
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/339.md" >}}
+
+---
+
+{{< youtube cZ5kfzhJhxE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

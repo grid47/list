@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2844: Minimum Operations to Make a Special Number"
-date = "2017-01-17"
+date = "2017-01-18"
 description = "Solution to Leetcode 2844"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

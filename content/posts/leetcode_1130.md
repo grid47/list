@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1130: Minimum Cost Tree From Leaf Values"
-date = "2021-09-27"
+date = "2021-09-28"
 description = "Solution to Leetcode 1130"
 tags = [
     
@@ -46,6 +46,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

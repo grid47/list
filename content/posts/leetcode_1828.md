@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1828: Queries on Number of Points Inside a Circle"
-date = "2019-10-30"
+date = "2019-10-31"
 description = "Solution to Leetcode 1828"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/queries-on-number-of-points-inside-a-circle/description/)
 
 ---
-{{< youtube fU4oOBSsVMg >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -41,6 +41,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube fU4oOBSsVMg >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

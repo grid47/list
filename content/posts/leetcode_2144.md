@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2144: Minimum Cost of Buying Candies With Discount"
-date = "2018-12-18"
+date = "2018-12-19"
 description = "Solution to Leetcode 2144"
 tags = [
     
@@ -35,6 +35,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

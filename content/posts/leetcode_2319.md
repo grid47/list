@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2319: Check if Matrix Is X-Matrix"
-date = "2018-06-26"
+date = "2018-06-27"
 description = "Solution to Leetcode 2319"
 tags = [
     
@@ -38,6 +38,10 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

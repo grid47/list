@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1965: Employees With Missing Information"
-date = "2019-06-15"
+date = "2019-06-16"
 description = "Solution to Leetcode 1965"
 tags = [
     
@@ -32,6 +32,10 @@ AS T
 WHERE T.salary IS NULL OR T.name IS NULL
 ORDER BY employee_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

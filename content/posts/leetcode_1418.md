@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1418: Display Table of Food Orders in a Restaurant"
-date = "2020-12-13"
+date = "2020-12-14"
 description = "Solution to Leetcode 1418"
 tags = [
     
@@ -51,6 +51,10 @@ continue;
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

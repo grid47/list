@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2009: Minimum Number of Operations to Make Array Continuous"
-date = "2019-05-02"
+date = "2019-05-03"
 description = "Solution to Leetcode 2009"
 tags = [
     
@@ -46,6 +46,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 839: Similar String Groups"
-date = "2022-07-15"
+date = "2022-07-16"
 description = "Solution to Leetcode 839"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/similar-string-groups/description/)
 
 ---
-{{< youtube SbLsabsSFt0 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -73,6 +73,10 @@ int numSimilarGroups(vector<string>& A) {
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/839.md" >}}
+
+---
+
+{{< youtube SbLsabsSFt0 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

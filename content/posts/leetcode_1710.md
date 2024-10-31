@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1710: Maximum Units on a Truck"
-date = "2020-02-25"
+date = "2020-02-26"
 description = "Solution to Leetcode 1710"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-units-on-a-truck/description/)
 
 ---
-{{< youtube SXgCMkAQUqM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -26,6 +26,10 @@ series = ["Leetcode"]
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube SXgCMkAQUqM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

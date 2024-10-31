@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2259: Remove Digit From Number to Maximize Result"
-date = "2018-08-25"
+date = "2018-08-26"
 description = "Solution to Leetcode 2259"
 tags = [
     
@@ -33,6 +33,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

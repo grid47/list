@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 48: Rotate Image"
-date = "2024-09-13"
+date = "2024-09-14"
 description = "Solution to Leetcode 48"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rotate-image/description/)
 
 ---
-{{< youtube fMSJSS7eO1w >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -37,6 +37,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/48.md" >}}
+
+---
+
+{{< youtube fMSJSS7eO1w >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

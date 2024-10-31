@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1579: Remove Max Number of Edges to Keep Graph Fully Traversable"
-date = "2020-07-05"
+date = "2020-07-06"
 description = "Solution to Leetcode 1579"
 tags = [
     
@@ -77,6 +77,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

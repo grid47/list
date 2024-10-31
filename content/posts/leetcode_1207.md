@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1207: Unique Number of Occurrences"
-date = "2021-07-12"
+date = "2021-07-13"
 description = "Solution to Leetcode 1207"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/unique-number-of-occurrences/description/)
 
 ---
-{{< youtube _NYimlZY1PE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -48,6 +48,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube _NYimlZY1PE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

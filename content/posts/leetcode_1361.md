@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1361: Validate Binary Tree Nodes"
-date = "2021-02-08"
+date = "2021-02-09"
 description = "Solution to Leetcode 1361"
 tags = [
     
@@ -96,6 +96,10 @@ if(!uf.uni(i, rc[i]))
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1219: Path with Maximum Gold"
-date = "2021-06-30"
+date = "2021-07-01"
 description = "Solution to Leetcode 1219"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

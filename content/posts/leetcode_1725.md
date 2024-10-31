@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1725: Number Of Rectangles That Can Form The Largest Square"
-date = "2020-02-10"
+date = "2020-02-11"
 description = "Solution to Leetcode 1725"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

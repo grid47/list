@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1267: Count Servers that Communicate"
-date = "2021-05-13"
+date = "2021-05-14"
 description = "Solution to Leetcode 1267"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

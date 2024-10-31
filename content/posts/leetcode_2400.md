@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2400: Number of Ways to Reach a Position After Exactly k Steps"
-date = "2018-04-06"
+date = "2018-04-07"
 description = "Solution to Leetcode 2400"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

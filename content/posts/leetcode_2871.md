@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2871: Split Array Into Maximum Number of Subarrays"
-date = "2016-12-21"
+date = "2016-12-22"
 description = "Solution to Leetcode 2871"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

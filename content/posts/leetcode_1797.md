@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1797: Design Authentication Manager"
-date = "2019-11-30"
+date = "2019-12-01"
 description = "Solution to Leetcode 1797"
 tags = [
     
@@ -71,6 +71,10 @@ public:
  * int param_3 = obj->countUnexpiredTokens(currentTime);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

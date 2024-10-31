@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2370: Longest Ideal Subsequence"
-date = "2018-05-06"
+date = "2018-05-07"
 description = "Solution to Leetcode 2370"
 tags = [
     
@@ -35,6 +35,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

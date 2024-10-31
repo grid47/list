@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2327: Number of People Aware of a Secret"
-date = "2018-06-18"
+date = "2018-06-19"
 description = "Solution to Leetcode 2327"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

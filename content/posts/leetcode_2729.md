@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2729: Check if The Number is Fascinating"
-date = "2017-05-12"
+date = "2017-05-13"
 description = "Solution to Leetcode 2729"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

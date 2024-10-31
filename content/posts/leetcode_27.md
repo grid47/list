@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 27: Remove Element"
-date = "2024-10-04"
+date = "2024-10-05"
 description = "Solution to Leetcode 27"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-element/description/)
 
 ---
-{{< youtube Pcd1ii9P9ZI >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -40,6 +40,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/27.md" >}}
+
+---
+
+{{< youtube Pcd1ii9P9ZI >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

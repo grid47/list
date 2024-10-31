@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2315: Count Asterisks"
-date = "2018-06-30"
+date = "2018-07-01"
 description = "Solution to Leetcode 2315"
 tags = [
     
@@ -33,6 +33,10 @@ int countAsterisks(string s) {
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

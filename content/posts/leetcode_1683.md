@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1683: Invalid Tweets"
-date = "2020-03-23"
+date = "2020-03-24"
 description = "Solution to Leetcode 1683"
 tags = [
     
@@ -25,6 +25,10 @@ series = ["Leetcode"]
 # Write your MySQL query statement below
 SELECT tweet_id FROM Tweets WHERE LENGTH(content) > 15;
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2283: Check if Number Has Equal Digit Count and Digit Value"
-date = "2018-08-01"
+date = "2018-08-02"
 description = "Solution to Leetcode 2283"
 tags = [
     
@@ -35,6 +35,10 @@ bool digitCount(string num) {
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

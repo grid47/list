@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2288: Apply Discount to Prices"
-date = "2018-07-27"
+date = "2018-07-28"
 description = "Solution to Leetcode 2288"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3044: Most Frequent Prime"
-date = "2016-07-01"
+date = "2016-07-02"
 description = "Solution to Leetcode 3044"
 tags = [
     
@@ -62,6 +62,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

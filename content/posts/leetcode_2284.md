@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2284: Sender With Largest Word Count"
-date = "2018-07-31"
+date = "2018-08-01"
 description = "Solution to Leetcode 2284"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

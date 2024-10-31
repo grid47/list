@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1751: Maximum Number of Events That Can Be Attended II"
-date = "2020-01-15"
+date = "2020-01-16"
 description = "Solution to Leetcode 1751"
 tags = [
     
@@ -74,6 +74,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

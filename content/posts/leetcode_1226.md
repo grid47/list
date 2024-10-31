@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1226: The Dining Philosophers"
-date = "2021-06-23"
+date = "2021-06-24"
 description = "Solution to Leetcode 1226"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/the-dining-philosophers/description/)
 
 ---
-{{< youtube cb6-GZiSaMY >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -61,6 +61,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube cb6-GZiSaMY >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1386: Cinema Seat Allocation"
-date = "2021-01-14"
+date = "2021-01-15"
 description = "Solution to Leetcode 1386"
 tags = [
     
@@ -41,6 +41,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

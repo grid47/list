@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1600: Throne Inheritance"
-date = "2020-06-14"
+date = "2020-06-15"
 description = "Solution to Leetcode 1600"
 tags = [
     
@@ -55,6 +55,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

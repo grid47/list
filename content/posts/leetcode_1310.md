@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1310: XOR Queries of a Subarray"
-date = "2021-03-31"
+date = "2021-04-01"
 description = "Solution to Leetcode 1310"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 188: Best Time to Buy and Sell Stock IV"
-date = "2024-04-26"
+date = "2024-04-27"
 description = "Solution to Leetcode 188"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/)
 
 ---
-{{< youtube BgBEgHwGj_A >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -47,6 +47,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/188.md" >}}
+
+---
+
+{{< youtube BgBEgHwGj_A >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 424: Longest Repeating Character Replacement"
-date = "2023-09-03"
+date = "2023-09-04"
 description = "Solution to Leetcode 424"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-repeating-character-replacement/description/)
 
 ---
-{{< youtube tkNWKvxI3mU >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -42,6 +42,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/424.md" >}}
+
+---
+
+{{< youtube tkNWKvxI3mU >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2331: Evaluate Boolean Binary Tree"
-date = "2018-06-14"
+date = "2018-06-15"
 description = "Solution to Leetcode 2331"
 tags = [
     
@@ -47,6 +47,10 @@ return evaluateTree(root->left) && evaluateTree(root->right);
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

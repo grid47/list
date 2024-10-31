@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2942: Find Words Containing Character"
-date = "2016-10-11"
+date = "2016-10-12"
 description = "Solution to Leetcode 2942"
 tags = [
     
@@ -40,6 +40,10 @@ private:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

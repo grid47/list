@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1611: Minimum One Bit Operations to Make Integers Zero"
-date = "2020-06-03"
+date = "2020-06-04"
 description = "Solution to Leetcode 1611"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

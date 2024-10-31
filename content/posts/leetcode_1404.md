@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1404: Number of Steps to Reduce a Number in Binary Representation to One"
-date = "2020-12-27"
+date = "2020-12-28"
 description = "Solution to Leetcode 1404"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

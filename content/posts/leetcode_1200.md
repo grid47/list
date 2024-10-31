@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1200: Minimum Absolute Difference"
-date = "2021-07-19"
+date = "2021-07-20"
 description = "Solution to Leetcode 1200"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-absolute-difference/description/)
 
 ---
-{{< youtube fa3sjQ0XBzM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -26,6 +26,10 @@ series = ["Leetcode"]
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube fa3sjQ0XBzM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

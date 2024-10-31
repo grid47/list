@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1179: Reformat Department Table"
-date = "2021-08-09"
+date = "2021-08-10"
 description = "Solution to Leetcode 1179"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reformat-department-table/description/)
 
 ---
-{{< youtube XIX8-ljI-qM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -42,6 +42,10 @@ order by id
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube XIX8-ljI-qM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

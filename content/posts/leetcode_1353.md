@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1353: Maximum Number of Events That Can Be Attended"
-date = "2021-02-16"
+date = "2021-02-17"
 description = "Solution to Leetcode 1353"
 tags = [
     
@@ -54,6 +54,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3296: Minimum Number of Seconds to Make Mountain Height Zero"
-date = "2015-10-23"
+date = "2015-10-24"
 description = "Solution to Leetcode 3296"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

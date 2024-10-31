@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 29: Divide Two Integers"
-date = "2024-10-02"
+date = "2024-10-03"
 description = "Solution to Leetcode 29"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/divide-two-integers/description/)
 
 ---
-{{< youtube LzcSE7-m6vY >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -48,6 +48,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/29.md" >}}
+
+---
+
+{{< youtube LzcSE7-m6vY >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

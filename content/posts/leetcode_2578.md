@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2578: Split With Minimum Sum"
-date = "2017-10-10"
+date = "2017-10-11"
 description = "Solution to Leetcode 2578"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

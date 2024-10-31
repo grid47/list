@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2415: Reverse Odd Levels of Binary Tree"
-date = "2018-03-22"
+date = "2018-03-23"
 description = "Solution to Leetcode 2415"
 tags = [
     
@@ -65,6 +65,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

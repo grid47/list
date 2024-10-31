@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2747: Count Zero Request Servers"
-date = "2017-04-24"
+date = "2017-04-25"
 description = "Solution to Leetcode 2747"
 tags = [
     
@@ -57,6 +57,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

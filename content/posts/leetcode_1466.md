@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero"
-date = "2020-10-26"
+date = "2020-10-27"
 description = "Solution to Leetcode 1466"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
 
 ---
-{{< youtube qL4UaMAdPts >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -58,6 +58,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube qL4UaMAdPts >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

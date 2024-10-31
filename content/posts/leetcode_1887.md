@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1887: Reduction Operations to Make the Array Elements Equal"
-date = "2019-09-01"
+date = "2019-09-02"
 description = "Solution to Leetcode 1887"
 tags = [
     
@@ -39,6 +39,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

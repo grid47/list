@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1368: Minimum Cost to Make at Least One Valid Path in a Grid"
-date = "2021-02-01"
+date = "2021-02-02"
 description = "Solution to Leetcode 1368"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

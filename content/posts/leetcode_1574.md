@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1574: Shortest Subarray to be Removed to Make Array Sorted"
-date = "2020-07-10"
+date = "2020-07-11"
 description = "Solution to Leetcode 1574"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

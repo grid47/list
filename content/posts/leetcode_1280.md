@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1280: Students and Examinations"
-date = "2021-04-30"
+date = "2021-05-01"
 description = "Solution to Leetcode 1280"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/students-and-examinations/description/)
 
 ---
-{{< youtube ThbkV4Fs7iE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -33,6 +33,10 @@ ORDER BY s.student_id, sub.subject_name;
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube ThbkV4Fs7iE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

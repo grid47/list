@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 451: Sort Characters By Frequency"
-date = "2023-08-07"
+date = "2023-08-08"
 description = "Solution to Leetcode 451"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sort-characters-by-frequency/description/)
 
 ---
-{{< youtube JTdpTHaGQoA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -48,6 +48,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/451.md" >}}
+
+---
+
+{{< youtube JTdpTHaGQoA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

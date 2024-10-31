@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2336: Smallest Number in Infinite Set"
-date = "2018-06-09"
+date = "2018-06-10"
 description = "Solution to Leetcode 2336"
 tags = [
     
@@ -53,6 +53,10 @@ public:
  * obj->addBack(num);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

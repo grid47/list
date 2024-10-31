@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 128: Longest Consecutive Sequence"
-date = "2024-06-25"
+date = "2024-06-26"
 description = "Solution to Leetcode 128"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-consecutive-sequence/description/)
 
 ---
-{{< youtube P6RZZMu_maU >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -46,6 +46,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/128.md" >}}
+
+---
+
+{{< youtube P6RZZMu_maU >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

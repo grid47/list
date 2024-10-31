@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1833: Maximum Ice Cream Bars"
-date = "2019-10-25"
+date = "2019-10-26"
 description = "Solution to Leetcode 1833"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

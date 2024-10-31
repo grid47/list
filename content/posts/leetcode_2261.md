@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2261: K Divisible Elements Subarrays"
-date = "2018-08-23"
+date = "2018-08-24"
 description = "Solution to Leetcode 2261"
 tags = [
     
@@ -44,6 +44,10 @@ hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

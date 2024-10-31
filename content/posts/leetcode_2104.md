@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2104: Sum of Subarray Ranges"
-date = "2019-01-27"
+date = "2019-01-28"
 description = "Solution to Leetcode 2104"
 tags = [
     
@@ -44,6 +44,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

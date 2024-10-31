@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 167: Two Sum II - Input Array Is Sorted"
-date = "2024-05-17"
+date = "2024-05-18"
 description = "Solution to Leetcode 167"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/)
 
 ---
-{{< youtube ciPrKYoOQkI >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -42,6 +42,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/167.md" >}}
+
+---
+
+{{< youtube ciPrKYoOQkI >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

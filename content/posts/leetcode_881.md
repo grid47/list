@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 881: Boats to Save People"
-date = "2022-06-03"
+date = "2022-06-04"
 description = "Solution to Leetcode 881"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/boats-to-save-people/description/)
 
 ---
-{{< youtube FygGZScawYs >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -44,6 +44,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/881.md" >}}
+
+---
+
+{{< youtube FygGZScawYs >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2707: Extra Characters in a String"
-date = "2017-06-03"
+date = "2017-06-04"
 description = "Solution to Leetcode 2707"
 tags = [
     
@@ -69,6 +69,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

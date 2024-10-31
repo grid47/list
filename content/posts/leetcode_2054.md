@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2054: Two Best Non-Overlapping Events"
-date = "2019-03-18"
+date = "2019-03-19"
 description = "Solution to Leetcode 2054"
 tags = [
     
@@ -83,6 +83,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

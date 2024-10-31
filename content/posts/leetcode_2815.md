@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2815: Max Pair Sum in an Array"
-date = "2017-02-15"
+date = "2017-02-16"
 description = "Solution to Leetcode 2815"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

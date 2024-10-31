@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1879: Minimum XOR Sum of Two Arrays"
-date = "2019-09-09"
+date = "2019-09-10"
 description = "Solution to Leetcode 1879"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1819: Number of Different Subsequences GCDs"
-date = "2019-11-08"
+date = "2019-11-09"
 description = "Solution to Leetcode 1819"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

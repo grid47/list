@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2037: Minimum Number of Moves to Seat Everyone"
-date = "2019-04-04"
+date = "2019-04-05"
 description = "Solution to Leetcode 2037"
 tags = [
     
@@ -35,6 +35,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

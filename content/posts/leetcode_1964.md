@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1964: Find the Longest Valid Obstacle Course at Each Position"
-date = "2019-06-16"
+date = "2019-06-17"
 description = "Solution to Leetcode 1964"
 tags = [
     
@@ -41,6 +41,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

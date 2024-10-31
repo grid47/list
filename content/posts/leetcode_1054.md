@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1054: Distant Barcodes"
-date = "2021-12-12"
+date = "2021-12-13"
 description = "Solution to Leetcode 1054"
 tags = [
     
@@ -39,6 +39,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

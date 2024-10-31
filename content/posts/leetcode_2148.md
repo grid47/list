@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2148: Count Elements With Strictly Smaller and Greater Elements "
-date = "2018-12-14"
+date = "2018-12-15"
 description = "Solution to Leetcode 2148"
 tags = [
     
@@ -44,6 +44,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

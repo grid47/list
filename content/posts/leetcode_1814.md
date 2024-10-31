@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1814: Count Nice Pairs in an Array"
-date = "2019-11-13"
+date = "2019-11-14"
 description = "Solution to Leetcode 1814"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 242: Valid Anagram"
-date = "2024-03-03"
+date = "2024-03-04"
 description = "Solution to Leetcode 242"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/valid-anagram/description/)
 
 ---
-{{< youtube QMXliZEU9dU >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -35,6 +35,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/242.md" >}}
+
+---
+
+{{< youtube QMXliZEU9dU >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

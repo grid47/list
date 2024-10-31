@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 838: Push Dominoes"
-date = "2022-07-16"
+date = "2022-07-17"
 description = "Solution to Leetcode 838"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/push-dominoes/description/)
 
 ---
-{{< youtube 0_XmKkgHSdI >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -46,6 +46,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/838.md" >}}
+
+---
+
+{{< youtube 0_XmKkgHSdI >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

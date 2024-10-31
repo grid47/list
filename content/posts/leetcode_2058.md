@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2058: Find the Minimum and Maximum Number of Nodes Between Critical Points"
-date = "2019-03-14"
+date = "2019-03-15"
 description = "Solution to Leetcode 2058"
 tags = [
     
@@ -67,6 +67,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

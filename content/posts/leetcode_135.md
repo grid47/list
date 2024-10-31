@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 135: Candy"
-date = "2024-06-18"
+date = "2024-06-19"
 description = "Solution to Leetcode 135"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/candy/description/)
 
 ---
-{{< youtube _l9N_LcplLs >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -49,6 +49,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/135.md" >}}
+
+---
+
+{{< youtube _l9N_LcplLs >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

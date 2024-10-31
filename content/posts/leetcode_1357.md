@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1357: Apply Discount Every n Orders"
-date = "2021-02-12"
+date = "2021-02-13"
 description = "Solution to Leetcode 1357"
 tags = [
     
@@ -50,6 +50,10 @@ public:
  * double param_1 = obj->getBill(product,amount);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

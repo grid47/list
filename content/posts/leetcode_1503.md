@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1503: Last Moment Before All Ants Fall Out of a Plank"
-date = "2020-09-19"
+date = "2020-09-20"
 description = "Solution to Leetcode 1503"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

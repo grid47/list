@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2965: Find Missing and Repeated Values"
-date = "2016-09-18"
+date = "2016-09-19"
 description = "Solution to Leetcode 2965"
 tags = [
     
@@ -91,6 +91,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2798: Number of Employees Who Met the Target"
-date = "2017-03-04"
+date = "2017-03-05"
 description = "Solution to Leetcode 2798"
 tags = [
     
@@ -32,6 +32,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

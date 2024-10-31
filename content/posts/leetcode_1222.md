@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1222: Queens That Can Attack the King"
-date = "2021-06-27"
+date = "2021-06-28"
 description = "Solution to Leetcode 1222"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

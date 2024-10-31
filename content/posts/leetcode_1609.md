@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1609: Even Odd Tree"
-date = "2020-06-05"
+date = "2020-06-06"
 description = "Solution to Leetcode 1609"
 tags = [
     
@@ -66,6 +66,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

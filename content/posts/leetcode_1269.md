@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1269: Number of Ways to Stay in the Same Place After Some Steps"
-date = "2021-05-11"
+date = "2021-05-12"
 description = "Solution to Leetcode 1269"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

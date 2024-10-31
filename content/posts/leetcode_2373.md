@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2373: Largest Local Values in a Matrix"
-date = "2018-05-03"
+date = "2018-05-04"
 description = "Solution to Leetcode 2373"
 tags = [
     
@@ -36,6 +36,10 @@ vector<vector<int>> largestLocal(vector<vector<int>>& g) {
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

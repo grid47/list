@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1668: Maximum Repeating Substring"
-date = "2020-04-07"
+date = "2020-04-08"
 description = "Solution to Leetcode 1668"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

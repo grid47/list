@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 105: Construct Binary Tree from Preorder and Inorder Traversal"
-date = "2024-07-18"
+date = "2024-07-19"
 description = "Solution to Leetcode 105"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/)
 
 ---
-{{< youtube GeltTz3Z1rw >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -49,6 +49,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/105.md" >}}
+
+---
+
+{{< youtube GeltTz3Z1rw >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

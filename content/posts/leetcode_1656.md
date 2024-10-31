@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1656: Design an Ordered Stream"
-date = "2020-04-19"
+date = "2020-04-20"
 description = "Solution to Leetcode 1656"
 tags = [
     
@@ -42,6 +42,10 @@ vector<string> insert(int id, string value) {
  * vector<string> param_1 = obj->insert(idKey,value);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1523: Count Odd Numbers in an Interval Range"
-date = "2020-08-30"
+date = "2020-08-31"
 description = "Solution to Leetcode 1523"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/description/)
 
 ---
-{{< youtube TkT-6WsmqY0 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -26,6 +26,10 @@ series = ["Leetcode"]
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube TkT-6WsmqY0 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

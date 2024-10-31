@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1476: Subrectangle Queries"
-date = "2020-10-16"
+date = "2020-10-17"
 description = "Solution to Leetcode 1476"
 tags = [
     
@@ -47,6 +47,10 @@ public:
  * int param_2 = obj->getValue(row,col);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

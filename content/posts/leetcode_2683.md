@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2683: Neighboring Bitwise XOR"
-date = "2017-06-27"
+date = "2017-06-28"
 description = "Solution to Leetcode 2683"
 tags = [
     
@@ -41,6 +41,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

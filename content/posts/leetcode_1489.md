@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree"
-date = "2020-10-03"
+date = "2020-10-04"
 description = "Solution to Leetcode 1489"
 tags = [
     
@@ -90,6 +90,10 @@ private:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

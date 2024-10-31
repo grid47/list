@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2197: Replace Non-Coprime Numbers in Array"
-date = "2018-10-26"
+date = "2018-10-27"
 description = "Solution to Leetcode 2197"
 tags = [
     
@@ -46,6 +46,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

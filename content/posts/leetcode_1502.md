@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1502: Can Make Arithmetic Progression From Sequence"
-date = "2020-09-20"
+date = "2020-09-21"
 description = "Solution to Leetcode 1502"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

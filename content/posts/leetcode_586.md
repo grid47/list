@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 586: Customer Placing the Largest Number of Orders"
-date = "2023-03-25"
+date = "2023-03-26"
 description = "Solution to Leetcode 586"
 tags = [
     
@@ -31,6 +31,10 @@ DESC LIMIT 1;
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/586.md" >}}
+
+---
+
+
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

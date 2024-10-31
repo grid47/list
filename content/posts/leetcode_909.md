@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 909: Snakes and Ladders"
-date = "2022-05-06"
+date = "2022-05-07"
 description = "Solution to Leetcode 909"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/snakes-and-ladders/description/)
 
 ---
-{{< youtube 6lH4nO3JfLk >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -57,6 +57,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/909.md" >}}
+
+---
+
+{{< youtube 6lH4nO3JfLk >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

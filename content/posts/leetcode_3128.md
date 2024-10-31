@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3128: Right Triangles"
-date = "2016-04-08"
+date = "2016-04-09"
 description = "Solution to Leetcode 3128"
 tags = [
     
@@ -68,6 +68,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

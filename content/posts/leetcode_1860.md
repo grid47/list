@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1860: Incremental Memory Leak"
-date = "2019-09-28"
+date = "2019-09-29"
 description = "Solution to Leetcode 1860"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

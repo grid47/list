@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2270: Number of Ways to Split Array"
-date = "2018-08-14"
+date = "2018-08-15"
 description = "Solution to Leetcode 2270"
 tags = [
     
@@ -44,6 +44,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

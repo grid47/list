@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1901: Find a Peak Element II"
-date = "2019-08-18"
+date = "2019-08-19"
 description = "Solution to Leetcode 1901"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

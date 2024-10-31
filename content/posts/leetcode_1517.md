@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1517: Find Users With Valid E-Mails"
-date = "2020-09-05"
+date = "2020-09-06"
 description = "Solution to Leetcode 1517"
 tags = [
     
@@ -27,6 +27,10 @@ SELECT *
 FROM Users
 WHERE REGEXP_LIKE(mail, '^[A-Za-z][A-Za-z0-9\.\_\-]*@leetcode[.]com$');
 {{< /highlight >}}
+
+
+
+---
 
 
 

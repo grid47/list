@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1648: Sell Diminishing-Valued Colored Balls"
-date = "2020-04-27"
+date = "2020-04-28"
 description = "Solution to Leetcode 1648"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sell-diminishing-valued-colored-balls/description/)
 
 ---
-{{< youtube oj7Rxz1r70g >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -55,6 +55,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube oj7Rxz1r70g >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

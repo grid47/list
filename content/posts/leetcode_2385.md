@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2385: Amount of Time for Binary Tree to Be Infected"
-date = "2018-04-21"
+date = "2018-04-22"
 description = "Solution to Leetcode 2385"
 tags = [
     
@@ -77,6 +77,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

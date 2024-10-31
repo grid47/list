@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1921: Eliminate Maximum Number of Monsters"
-date = "2019-07-29"
+date = "2019-07-30"
 description = "Solution to Leetcode 1921"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/eliminate-maximum-number-of-monsters/description/)
 
 ---
-{{< youtube 6QQRayzOTD4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -46,6 +46,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 6QQRayzOTD4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

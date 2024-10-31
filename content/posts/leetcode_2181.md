@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2181: Merge Nodes in Between Zeros"
-date = "2018-11-11"
+date = "2018-11-12"
 description = "Solution to Leetcode 2181"
 tags = [
     
@@ -46,6 +46,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

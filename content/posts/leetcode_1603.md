@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1603: Design Parking System"
-date = "2020-06-11"
+date = "2020-06-12"
 description = "Solution to Leetcode 1603"
 tags = [
     
@@ -66,6 +66,10 @@ public:
  * bool param_1 = obj->addCar(carType);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1952: Three Divisors"
-date = "2019-06-28"
+date = "2019-06-29"
 description = "Solution to Leetcode 1952"
 tags = [
     
@@ -32,6 +32,10 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

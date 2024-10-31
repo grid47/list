@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1006: Clumsy Factorial"
-date = "2022-01-29"
+date = "2022-01-30"
 description = "Solution to Leetcode 1006"
 tags = [
     
@@ -54,6 +54,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

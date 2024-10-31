@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3162: Find the Number of Good Pairs I"
-date = "2016-03-05"
+date = "2016-03-06"
 description = "Solution to Leetcode 3162"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

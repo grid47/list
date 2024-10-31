@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2947: Count Beautiful Substrings I"
-date = "2016-10-06"
+date = "2016-10-07"
 description = "Solution to Leetcode 2947"
 tags = [
     
@@ -39,6 +39,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1899: Merge Triplets to Form Target Triplet"
-date = "2019-08-20"
+date = "2019-08-21"
 description = "Solution to Leetcode 1899"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/merge-triplets-to-form-target-triplet/description/)
 
 ---
-{{< youtube kShkQLQZ9K4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -43,6 +43,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube kShkQLQZ9K4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

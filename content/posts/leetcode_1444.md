@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1444: Number of Ways of Cutting a Pizza"
-date = "2020-11-17"
+date = "2020-11-18"
 description = "Solution to Leetcode 1444"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

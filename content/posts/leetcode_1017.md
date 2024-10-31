@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1017: Convert to Base -2"
-date = "2022-01-18"
+date = "2022-01-19"
 description = "Solution to Leetcode 1017"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

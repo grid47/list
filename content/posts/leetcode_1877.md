@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1877: Minimize Maximum Pair Sum in Array"
-date = "2019-09-11"
+date = "2019-09-12"
 description = "Solution to Leetcode 1877"
 tags = [
     
@@ -33,6 +33,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

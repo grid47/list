@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2425: Bitwise XOR of All Pairings"
-date = "2018-03-12"
+date = "2018-03-13"
 description = "Solution to Leetcode 2425"
 tags = [
     
@@ -52,6 +52,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

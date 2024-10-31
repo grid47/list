@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2225: Find Players With Zero or One Losses"
-date = "2018-09-28"
+date = "2018-09-29"
 description = "Solution to Leetcode 2225"
 tags = [
     
@@ -44,6 +44,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

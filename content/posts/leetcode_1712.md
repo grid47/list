@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1712: Ways to Split Array Into Three Subarrays"
-date = "2020-02-23"
+date = "2020-02-24"
 description = "Solution to Leetcode 1712"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

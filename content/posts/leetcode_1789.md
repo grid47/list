@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1789: Primary Department for Each Employee"
-date = "2019-12-08"
+date = "2019-12-09"
 description = "Solution to Leetcode 1789"
 tags = [
     
@@ -32,6 +32,10 @@ FROM Employee
 GROUP BY employee_id
 HAVING COUNT(*) = 1
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1002: Find Common Characters"
-date = "2022-02-02"
+date = "2022-02-03"
 description = "Solution to Leetcode 1002"
 tags = [
     
@@ -43,6 +43,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

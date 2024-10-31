@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1302: Deepest Leaves Sum"
-date = "2021-04-08"
+date = "2021-04-09"
 description = "Solution to Leetcode 1302"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/deepest-leaves-sum/description/)
 
 ---
-{{< youtube ebJiQrgumP4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -57,6 +57,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube ebJiQrgumP4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

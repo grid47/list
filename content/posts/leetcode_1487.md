@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1487: Making File Names Unique"
-date = "2020-10-05"
+date = "2020-10-06"
 description = "Solution to Leetcode 1487"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

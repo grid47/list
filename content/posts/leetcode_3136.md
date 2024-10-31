@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3136: Valid Word"
-date = "2016-03-31"
+date = "2016-04-01"
 description = "Solution to Leetcode 3136"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2306: Naming a Company"
-date = "2018-07-09"
+date = "2018-07-10"
 description = "Solution to Leetcode 2306"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

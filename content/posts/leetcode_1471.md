@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1471: The k Strongest Values in an Array"
-date = "2020-10-21"
+date = "2020-10-22"
 description = "Solution to Leetcode 1471"
 tags = [
     
@@ -56,6 +56,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

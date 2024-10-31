@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 483: Smallest Good Base"
-date = "2023-07-06"
+date = "2023-07-07"
 description = "Solution to Leetcode 483"
 tags = [
     
@@ -45,6 +45,10 @@ class Solution {
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/483.md" >}}
+
+---
+
+
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

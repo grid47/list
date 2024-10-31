@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1356: Sort Integers by The Number of 1 Bits"
-date = "2021-02-13"
+date = "2021-02-14"
 description = "Solution to Leetcode 1356"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

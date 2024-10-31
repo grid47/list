@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2606: Find the Substring With Maximum Cost"
-date = "2017-09-12"
+date = "2017-09-13"
 description = "Solution to Leetcode 2606"
 tags = [
     
@@ -47,6 +47,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

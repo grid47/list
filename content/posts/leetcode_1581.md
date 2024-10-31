@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1581: Customer Who Visited but Did Not Make Any Transactions"
-date = "2020-07-03"
+date = "2020-07-04"
 description = "Solution to Leetcode 1581"
 tags = [
     
@@ -29,6 +29,10 @@ ON v.visit_id = t.visit_id
 WHERE t.amount IS NULL  and t.transaction_id IS NULL
 GROUP BY v.customer_id; 
 {{< /highlight >}}
+
+
+
+---
 
 
 

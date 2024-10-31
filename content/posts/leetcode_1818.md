@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1818: Minimum Absolute Sum Difference"
-date = "2019-11-09"
+date = "2019-11-10"
 description = "Solution to Leetcode 1818"
 tags = [
     
@@ -44,6 +44,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1883: Minimum Skips to Arrive at Meeting On Time"
-date = "2019-09-05"
+date = "2019-09-06"
 description = "Solution to Leetcode 1883"
 tags = [
     
@@ -55,6 +55,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

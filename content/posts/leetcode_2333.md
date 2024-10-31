@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2333: Minimum Sum of Squared Difference"
-date = "2018-06-12"
+date = "2018-06-13"
 description = "Solution to Leetcode 2333"
 tags = [
     
@@ -55,6 +55,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

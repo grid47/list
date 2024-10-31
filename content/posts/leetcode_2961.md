@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2961: Double Modular Exponentiation"
-date = "2016-09-22"
+date = "2016-09-23"
 description = "Solution to Leetcode 2961"
 tags = [
     
@@ -43,6 +43,10 @@ vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

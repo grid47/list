@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1319: Number of Operations to Make Network Connected"
-date = "2021-03-22"
+date = "2021-03-23"
 description = "Solution to Leetcode 1319"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/)
 
 ---
-{{< youtube vyXBp3S6-y4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -62,6 +62,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube vyXBp3S6-y4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

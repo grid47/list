@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1415: The k-th Lexicographical String of All Happy Strings of Length n"
-date = "2020-12-16"
+date = "2020-12-17"
 description = "Solution to Leetcode 1415"
 tags = [
     
@@ -60,6 +60,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

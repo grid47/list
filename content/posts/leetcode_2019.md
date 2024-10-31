@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2019: The Score of Students Solving Math Expression"
-date = "2019-04-22"
+date = "2019-04-23"
 description = "Solution to Leetcode 2019"
 tags = [
     
@@ -92,6 +92,10 @@ class Solution {
     }
 }
 {{< /highlight >}}
+
+
+
+---
 
 
 

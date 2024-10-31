@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 329: Longest Increasing Path in a Matrix"
-date = "2023-12-07"
+date = "2023-12-08"
 description = "Solution to Leetcode 329"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/)
 
 ---
-{{< youtube wCc_nd-GiEc >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -57,6 +57,10 @@ if(j < n - 1 && !vis[i][j + 1] && mtx[i][j + 1] > mtx[i][j]) res = max(res, 1 + 
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/329.md" >}}
+
+---
+
+{{< youtube wCc_nd-GiEc >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

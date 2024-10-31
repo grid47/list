@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1993: Operations on Tree"
-date = "2019-05-18"
+date = "2019-05-19"
 description = "Solution to Leetcode 1993"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/operations-on-tree/description/)
 
 ---
-{{< youtube qK4PtjrVD0U >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -118,6 +118,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube qK4PtjrVD0U >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

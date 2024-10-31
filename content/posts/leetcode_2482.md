@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2482: Difference Between Ones and Zeros in Row and Column"
-date = "2018-01-14"
+date = "2018-01-15"
 description = "Solution to Leetcode 2482"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/difference-between-ones-and-zeros-in-row-and-column/description/)
 
 ---
-{{< youtube JwuTsHDJVdI >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -44,6 +44,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube JwuTsHDJVdI >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

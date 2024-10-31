@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1084: Sales Analysis III"
-date = "2021-11-12"
+date = "2021-11-13"
 description = "Solution to Leetcode 1084"
 tags = [
     
@@ -31,6 +31,10 @@ GROUP BY p.product_id
 HAVING MIN(sale_date) >= CAST('2019-01-01' AS DATE) AND
        MAX(sale_date) <= CAST('2019-03-31' AS DATE);
 {{< /highlight >}}
+
+
+
+---
 
 
 

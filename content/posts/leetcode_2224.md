@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2224: Minimum Number of Operations to Convert Time"
-date = "2018-09-29"
+date = "2018-09-30"
 description = "Solution to Leetcode 2224"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

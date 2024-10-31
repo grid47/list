@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1081: Smallest Subsequence of Distinct Characters"
-date = "2021-11-15"
+date = "2021-11-16"
 description = "Solution to Leetcode 1081"
 tags = [
     
@@ -52,6 +52,10 @@ public:
 
 // that problem was there were
 {{< /highlight >}}
+
+
+
+---
 
 
 

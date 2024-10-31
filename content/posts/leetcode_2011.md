@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2011: Final Value of Variable After Performing Operations"
-date = "2019-04-30"
+date = "2019-05-01"
 description = "Solution to Leetcode 2011"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3305: Count of Substrings Containing Every Vowel and K Consonants I"
-date = "2015-10-14"
+date = "2015-10-15"
 description = "Solution to Leetcode 3305"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

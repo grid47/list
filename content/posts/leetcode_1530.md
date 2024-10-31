@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1530: Number of Good Leaf Nodes Pairs"
-date = "2020-08-23"
+date = "2020-08-24"
 description = "Solution to Leetcode 1530"
 tags = [
     
@@ -69,6 +69,10 @@ public:
     
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2849: Determine if a Cell Is Reachable at a Given Time"
-date = "2017-01-12"
+date = "2017-01-13"
 description = "Solution to Leetcode 2849"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

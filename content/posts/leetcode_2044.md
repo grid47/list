@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2044: Count Number of Maximum Bitwise-OR Subsets"
-date = "2019-03-28"
+date = "2019-03-29"
 description = "Solution to Leetcode 2044"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

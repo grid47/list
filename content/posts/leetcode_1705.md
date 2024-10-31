@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1705: Maximum Number of Eaten Apples"
-date = "2020-03-01"
+date = "2020-03-02"
 description = "Solution to Leetcode 1705"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

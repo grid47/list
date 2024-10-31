@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1577: Number of Ways Where Square of Number Is Equal to Product of Two Numbers"
-date = "2020-07-07"
+date = "2020-07-08"
 description = "Solution to Leetcode 1577"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

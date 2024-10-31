@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1380: Lucky Numbers in a Matrix"
-date = "2021-01-20"
+date = "2021-01-21"
 description = "Solution to Leetcode 1380"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 64: Minimum Path Sum"
-date = "2024-08-28"
+date = "2024-08-29"
 description = "Solution to Leetcode 64"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-path-sum/description/)
 
 ---
-{{< youtube pGMsrvt0fpk >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -40,6 +40,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/64.md" >}}
+
+---
+
+{{< youtube pGMsrvt0fpk >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

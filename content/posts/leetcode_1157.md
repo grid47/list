@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1157: Online Majority Element In Subarray"
-date = "2021-08-31"
+date = "2021-09-01"
 description = "Solution to Leetcode 1157"
 tags = [
     
@@ -62,6 +62,10 @@ public:
  * int param_1 = obj->query(left,right,threshold);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1424: Diagonal Traverse II"
-date = "2020-12-07"
+date = "2020-12-08"
 description = "Solution to Leetcode 1424"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     But right attempt is, queueing over a map which shares same diagonals
 */
 {{< /highlight >}}
+
+
+
+---
 
 
 

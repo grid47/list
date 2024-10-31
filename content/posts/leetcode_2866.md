@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2866: Beautiful Towers II"
-date = "2016-12-26"
+date = "2016-12-27"
 description = "Solution to Leetcode 2866"
 tags = [
     
@@ -56,6 +56,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

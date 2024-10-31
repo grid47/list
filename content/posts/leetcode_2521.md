@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2521: Distinct Prime Factors of Product of Array"
-date = "2017-12-06"
+date = "2017-12-07"
 description = "Solution to Leetcode 2521"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

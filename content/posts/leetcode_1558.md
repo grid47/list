@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1558: Minimum Numbers of Function Calls to Make Target Array"
-date = "2020-07-26"
+date = "2020-07-27"
 description = "Solution to Leetcode 1558"
 tags = [
     
@@ -57,6 +57,10 @@ public:
 
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3163: String Compression III"
-date = "2016-03-04"
+date = "2016-03-05"
 description = "Solution to Leetcode 3163"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

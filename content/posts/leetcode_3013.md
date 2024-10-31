@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3013: Divide an Array Into Subarrays With Minimum Cost II"
-date = "2016-08-01"
+date = "2016-08-02"
 description = "Solution to Leetcode 3013"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

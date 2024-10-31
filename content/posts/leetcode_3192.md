@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3192: Minimum Operations to Make Binary Array Elements Equal to One II"
-date = "2016-02-04"
+date = "2016-02-05"
 description = "Solution to Leetcode 3192"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

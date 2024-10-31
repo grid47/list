@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2245: Maximum Trailing Zeros in a Cornered Path"
-date = "2018-09-08"
+date = "2018-09-09"
 description = "Solution to Leetcode 2245"
 tags = [
     
@@ -63,6 +63,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

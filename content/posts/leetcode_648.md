@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 648: Replace Words"
-date = "2023-01-22"
+date = "2023-01-23"
 description = "Solution to Leetcode 648"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/replace-words/description/)
 
 ---
-{{< youtube 5liJnc8iNeY >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -79,6 +79,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/648.md" >}}
+
+---
+
+{{< youtube 5liJnc8iNeY >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

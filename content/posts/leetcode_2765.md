@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2765: Longest Alternating Subarray"
-date = "2017-04-06"
+date = "2017-04-07"
 description = "Solution to Leetcode 2765"
 tags = [
     
@@ -33,6 +33,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

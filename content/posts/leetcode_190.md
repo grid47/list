@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 190: Reverse Bits"
-date = "2024-04-24"
+date = "2024-04-25"
 description = "Solution to Leetcode 190"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reverse-bits/description/)
 
 ---
-{{< youtube epFf0wlbng0 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -36,6 +36,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/190.md" >}}
+
+---
+
+{{< youtube epFf0wlbng0 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2133: Check if Every Row and Column Contains All Numbers"
-date = "2018-12-29"
+date = "2018-12-30"
 description = "Solution to Leetcode 2133"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

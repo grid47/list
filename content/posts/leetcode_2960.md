@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2960: Count Tested Devices After Test Operations"
-date = "2016-09-23"
+date = "2016-09-24"
 description = "Solution to Leetcode 2960"
 tags = [
     
@@ -31,6 +31,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

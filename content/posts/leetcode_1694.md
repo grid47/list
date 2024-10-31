@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1694: Reformat Phone Number"
-date = "2020-03-12"
+date = "2020-03-13"
 description = "Solution to Leetcode 1694"
 tags = [
     
@@ -43,6 +43,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

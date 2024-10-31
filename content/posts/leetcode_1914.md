@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1914: Cyclically Rotating a Grid"
-date = "2019-08-05"
+date = "2019-08-06"
 description = "Solution to Leetcode 1914"
 tags = [
     
@@ -62,6 +62,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

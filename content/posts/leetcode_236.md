@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 236: Lowest Common Ancestor of a Binary Tree"
-date = "2024-03-09"
+date = "2024-03-10"
 description = "Solution to Leetcode 236"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)
 
 ---
-{{< youtube gRHnWbKiUIE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -44,6 +44,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/236.md" >}}
+
+---
+
+{{< youtube gRHnWbKiUIE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

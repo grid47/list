@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 153: Find Minimum in Rotated Sorted Array"
-date = "2024-05-31"
+date = "2024-06-01"
 description = "Solution to Leetcode 153"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/)
 
 ---
-{{< youtube H2U24n4bcQQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -49,6 +49,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/153.md" >}}
+
+---
+
+{{< youtube H2U24n4bcQQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1295: Find Numbers with Even Number of Digits"
-date = "2021-04-15"
+date = "2021-04-16"
 description = "Solution to Leetcode 1295"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/description/)
 
 ---
-{{< youtube HRp8mNJvLZ0 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -26,6 +26,10 @@ series = ["Leetcode"]
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube HRp8mNJvLZ0 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

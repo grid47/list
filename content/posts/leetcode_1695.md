@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1695: Maximum Erasure Value"
-date = "2020-03-11"
+date = "2020-03-12"
 description = "Solution to Leetcode 1695"
 tags = [
     
@@ -47,6 +47,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

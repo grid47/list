@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3190: Find Minimum Operations to Make All Elements Divisible by Three"
-date = "2016-02-06"
+date = "2016-02-07"
 description = "Solution to Leetcode 3190"
 tags = [
     
@@ -31,6 +31,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1913: Maximum Product Difference Between Two Pairs"
-date = "2019-08-06"
+date = "2019-08-07"
 description = "Solution to Leetcode 1913"
 tags = [
     
@@ -63,6 +63,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

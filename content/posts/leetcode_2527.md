@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2527: Find Xor-Beauty of Array"
-date = "2017-11-30"
+date = "2017-12-01"
 description = "Solution to Leetcode 2527"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

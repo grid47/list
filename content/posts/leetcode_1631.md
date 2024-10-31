@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1631: Path With Minimum Effort"
-date = "2020-05-14"
+date = "2020-05-15"
 description = "Solution to Leetcode 1631"
 tags = [
     
@@ -61,6 +61,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

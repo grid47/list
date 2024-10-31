@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2302: Count Subarrays With Score Less Than K"
-date = "2018-07-13"
+date = "2018-07-14"
 description = "Solution to Leetcode 2302"
 tags = [
     
@@ -39,6 +39,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

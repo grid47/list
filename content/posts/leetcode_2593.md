@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2593: Find Score of an Array After Marking All Elements"
-date = "2017-09-25"
+date = "2017-09-26"
 description = "Solution to Leetcode 2593"
 tags = [
     
@@ -46,6 +46,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

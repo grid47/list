@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2441: Largest Positive Integer That Exists With Its Negative"
-date = "2018-02-24"
+date = "2018-02-25"
 description = "Solution to Leetcode 2441"
 tags = [
     
@@ -35,6 +35,10 @@ int findMaxK(vector<int>& nums) {
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

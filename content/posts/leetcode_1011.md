@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1011: Capacity To Ship Packages Within D Days"
-date = "2022-01-24"
+date = "2022-01-25"
 description = "Solution to Leetcode 1011"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

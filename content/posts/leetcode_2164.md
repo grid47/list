@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2164: Sort Even and Odd Indices Independently"
-date = "2018-11-28"
+date = "2018-11-29"
 description = "Solution to Leetcode 2164"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

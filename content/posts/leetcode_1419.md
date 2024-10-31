@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1419: Minimum Number of Frogs Croaking"
-date = "2020-12-12"
+date = "2020-12-13"
 description = "Solution to Leetcode 1419"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

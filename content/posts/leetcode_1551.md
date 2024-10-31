@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1551: Minimum Operations to Make Array Equal"
-date = "2020-08-02"
+date = "2020-08-03"
 description = "Solution to Leetcode 1551"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-operations-to-make-array-equal/description/)
 
 ---
-{{< youtube A-i2sxmBqAA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -31,6 +31,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube A-i2sxmBqAA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

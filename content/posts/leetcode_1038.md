@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1038: Binary Search Tree to Greater Sum Tree"
-date = "2021-12-28"
+date = "2021-12-29"
 description = "Solution to Leetcode 1038"
 tags = [
     
@@ -44,6 +44,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1052: Grumpy Bookstore Owner"
-date = "2021-12-14"
+date = "2021-12-15"
 description = "Solution to Leetcode 1052"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

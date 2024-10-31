@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 168: Excel Sheet Column Title"
-date = "2024-05-16"
+date = "2024-05-17"
 description = "Solution to Leetcode 168"
 tags = [
     
@@ -39,6 +39,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/168.md" >}}
+
+---
+
+{{< youtube X_vJDpCCuoA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

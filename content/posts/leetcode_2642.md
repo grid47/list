@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2642: Design Graph With Shortest Path Calculator"
-date = "2017-08-07"
+date = "2017-08-08"
 description = "Solution to Leetcode 2642"
 tags = [
     
@@ -78,6 +78,10 @@ public:
  * int param_2 = obj->shortestPath(node1,node2);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

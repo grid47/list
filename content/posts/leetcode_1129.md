@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1129: Shortest Path with Alternating Colors"
-date = "2021-09-28"
+date = "2021-09-29"
 description = "Solution to Leetcode 1129"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-path-with-alternating-colors/description/)
 
 ---
-{{< youtube VaW0deOb2aQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -68,6 +68,10 @@ class Solution {
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube VaW0deOb2aQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

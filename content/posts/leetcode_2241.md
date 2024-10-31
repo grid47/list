@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2241: Design an ATM Machine"
-date = "2018-09-12"
+date = "2018-09-13"
 description = "Solution to Leetcode 2241"
 tags = [
     
@@ -92,6 +92,10 @@ public:
  * vector<int> param_2 = obj->withdraw(amount);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

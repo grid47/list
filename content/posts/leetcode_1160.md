@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1160: Find Words That Can Be Formed by Characters"
-date = "2021-08-28"
+date = "2021-08-29"
 description = "Solution to Leetcode 1160"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/description/)
 
 ---
-{{< youtube riRpJLMdrXs >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -44,6 +44,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube riRpJLMdrXs >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

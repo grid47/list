@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons"
-date = "2020-12-11"
+date = "2020-12-12"
 description = "Solution to Leetcode 1420"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

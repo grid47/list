@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2559: Count Vowel Strings in Ranges"
-date = "2017-10-29"
+date = "2017-10-30"
 description = "Solution to Leetcode 2559"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

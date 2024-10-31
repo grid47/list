@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2171: Removing Minimum Number of Magic Beans"
-date = "2018-11-21"
+date = "2018-11-22"
 description = "Solution to Leetcode 2171"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

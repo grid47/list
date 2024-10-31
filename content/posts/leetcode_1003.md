@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1003: Check If Word Is Valid After Substitutions"
-date = "2022-02-01"
+date = "2022-02-02"
 description = "Solution to Leetcode 1003"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2034: Stock Price Fluctuation "
-date = "2019-04-07"
+date = "2019-04-08"
 description = "Solution to Leetcode 2034"
 tags = [
     
@@ -65,6 +65,10 @@ public:
  * int param_4 = obj->minimum();
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2752: Customers with Maximum Number of Transactions on Consecutive Days"
-date = "2017-04-19"
+date = "2017-04-20"
 description = "Solution to Leetcode 2752"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

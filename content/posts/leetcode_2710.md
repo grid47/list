@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2710: Remove Trailing Zeros From a String"
-date = "2017-05-31"
+date = "2017-06-01"
 description = "Solution to Leetcode 2710"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

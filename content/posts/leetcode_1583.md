@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1583: Count Unhappy Friends"
-date = "2020-07-01"
+date = "2020-07-02"
 description = "Solution to Leetcode 1583"
 tags = [
     
@@ -59,6 +59,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

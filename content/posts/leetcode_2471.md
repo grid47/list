@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level"
-date = "2018-01-25"
+date = "2018-01-26"
 description = "Solution to Leetcode 2471"
 tags = [
     
@@ -61,6 +61,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

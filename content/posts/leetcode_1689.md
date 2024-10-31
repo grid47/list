@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1689: Partitioning Into Minimum Number Of Deci-Binary Numbers"
-date = "2020-03-17"
+date = "2020-03-18"
 description = "Solution to Leetcode 1689"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

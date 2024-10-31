@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1455: Check If a Word Occurs As a Prefix of Any Word in a Sentence"
-date = "2020-11-06"
+date = "2020-11-07"
 description = "Solution to Leetcode 1455"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1707: Maximum XOR With an Element From Array"
-date = "2020-02-28"
+date = "2020-02-29"
 description = "Solution to Leetcode 1707"
 tags = [
     
@@ -85,6 +85,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

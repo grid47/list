@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2901: Longest Unequal Adjacent Groups Subsequence II"
-date = "2016-11-21"
+date = "2016-11-22"
 description = "Solution to Leetcode 2901"
 tags = [
     
@@ -63,6 +63,10 @@ private:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

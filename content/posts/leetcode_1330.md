@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1330: Reverse Subarray To Maximize Array Value"
-date = "2021-03-11"
+date = "2021-03-12"
 description = "Solution to Leetcode 1330"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

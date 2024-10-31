@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 94: Binary Tree Inorder Traversal"
-date = "2024-07-29"
+date = "2024-07-30"
 description = "Solution to Leetcode 94"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/binary-tree-inorder-traversal/description/)
 
 ---
-{{< youtube g_S5WuasWUE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -43,6 +43,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/94.md" >}}
+
+---
+
+{{< youtube g_S5WuasWUE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

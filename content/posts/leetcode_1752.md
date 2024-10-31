@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1752: Check if Array Is Sorted and Rotated"
-date = "2020-01-14"
+date = "2020-01-15"
 description = "Solution to Leetcode 1752"
 tags = [
     
@@ -39,6 +39,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

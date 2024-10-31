@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1358: Number of Substrings Containing All Three Characters"
-date = "2021-02-11"
+date = "2021-02-12"
 description = "Solution to Leetcode 1358"
 tags = [
     
@@ -44,6 +44,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

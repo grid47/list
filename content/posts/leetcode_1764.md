@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1764: Form Array by Concatenating Subarrays of Another Array"
-date = "2020-01-02"
+date = "2020-01-03"
 description = "Solution to Leetcode 1764"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

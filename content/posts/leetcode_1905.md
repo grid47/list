@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1905: Count Sub Islands"
-date = "2019-08-14"
+date = "2019-08-15"
 description = "Solution to Leetcode 1905"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-sub-islands/description/)
 
 ---
-{{< youtube mLpW3qfbNJ8 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -78,6 +78,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube mLpW3qfbNJ8 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

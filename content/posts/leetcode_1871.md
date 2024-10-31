@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1871: Jump Game VII"
-date = "2019-09-17"
+date = "2019-09-18"
 description = "Solution to Leetcode 1871"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/jump-game-vii/description/)
 
 ---
-{{< youtube v1HpZUnQ4Yo >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -45,6 +45,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube v1HpZUnQ4Yo >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

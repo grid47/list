@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2517: Maximum Tastiness of Candy Basket"
-date = "2017-12-10"
+date = "2017-12-11"
 description = "Solution to Leetcode 2517"
 tags = [
     
@@ -61,6 +61,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

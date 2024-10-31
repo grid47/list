@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2542: Maximum Subsequence Score"
-date = "2017-11-15"
+date = "2017-11-16"
 description = "Solution to Leetcode 2542"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-subsequence-score/description/)
 
 ---
-{{< youtube vJ7ZWmfO1Rw >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -58,6 +58,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube vJ7ZWmfO1Rw >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

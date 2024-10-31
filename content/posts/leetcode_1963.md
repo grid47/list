@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1963: Minimum Number of Swaps to Make the String Balanced"
-date = "2019-06-17"
+date = "2019-06-18"
 description = "Solution to Leetcode 1963"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/description/)
 
 ---
-{{< youtube 3YDBT9ZrfaU >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -38,6 +38,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 3YDBT9ZrfaU >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

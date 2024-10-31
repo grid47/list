@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2335: Minimum Amount of Time to Fill Cups"
-date = "2018-06-10"
+date = "2018-06-11"
 description = "Solution to Leetcode 2335"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

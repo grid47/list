@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1266: Minimum Time Visiting All Points"
-date = "2021-05-14"
+date = "2021-05-15"
 description = "Solution to Leetcode 1266"
 tags = [
     
@@ -33,6 +33,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

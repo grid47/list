@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1733: Minimum Number of People to Teach"
-date = "2020-02-02"
+date = "2020-02-03"
 description = "Solution to Leetcode 1733"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-people-to-teach/description/)
 
 ---
-{{< youtube eHk8TQIhvCk >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -67,6 +67,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube eHk8TQIhvCk >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

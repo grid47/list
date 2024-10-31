@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 669: Trim a Binary Search Tree"
-date = "2023-01-01"
+date = "2023-01-02"
 description = "Solution to Leetcode 669"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/trim-a-binary-search-tree/description/)
 
 ---
-{{< youtube jwt5mTjEXGc >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -52,6 +52,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/669.md" >}}
+
+---
+
+{{< youtube jwt5mTjEXGc >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

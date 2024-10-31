@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1484: Group Sold Products By The Date"
-date = "2020-10-08"
+date = "2020-10-09"
 description = "Solution to Leetcode 1484"
 tags = [
     
@@ -29,6 +29,10 @@ FROM Activities
 GROUP BY sell_date
 ORDER BY sell_date ASC;
 {{< /highlight >}}
+
+
+
+---
 
 
 

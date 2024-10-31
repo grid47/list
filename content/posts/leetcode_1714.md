@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1714: Sum Of Special Evenly-Spaced Elements In Array"
-date = "2020-02-21"
+date = "2020-02-22"
 description = "Solution to Leetcode 1714"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

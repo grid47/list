@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2356: Number of Unique Subjects Taught by Each Teacher"
-date = "2018-05-20"
+date = "2018-05-21"
 description = "Solution to Leetcode 2356"
 tags = [
     
@@ -26,6 +26,10 @@ series = ["Leetcode"]
 SELECT teacher_id, COUNT(DISTINCT subject_id) AS cnt FROM Teacher
 GROUP BY teacher_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

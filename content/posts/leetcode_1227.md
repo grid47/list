@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1227: Airplane Seat Assignment Probability"
-date = "2021-06-22"
+date = "2021-06-23"
 description = "Solution to Leetcode 1227"
 tags = [
     
@@ -30,6 +30,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

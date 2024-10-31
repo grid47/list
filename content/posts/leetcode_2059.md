@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2059: Minimum Operations to Convert Number"
-date = "2019-03-13"
+date = "2019-03-14"
 description = "Solution to Leetcode 2059"
 tags = [
     
@@ -64,6 +64,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

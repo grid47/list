@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1886: Determine Whether Matrix Can Be Obtained By Rotation"
-date = "2019-09-02"
+date = "2019-09-03"
 description = "Solution to Leetcode 1886"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

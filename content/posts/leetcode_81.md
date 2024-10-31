@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 81: Search in Rotated Sorted Array II"
-date = "2024-08-11"
+date = "2024-08-12"
 description = "Solution to Leetcode 81"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/)
 
 ---
-{{< youtube oUnF7o88_Xc >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -62,6 +62,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/81.md" >}}
+
+---
+
+{{< youtube oUnF7o88_Xc >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

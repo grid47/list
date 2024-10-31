@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1947: Maximum Compatibility Score Sum"
-date = "2019-07-03"
+date = "2019-07-04"
 description = "Solution to Leetcode 1947"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

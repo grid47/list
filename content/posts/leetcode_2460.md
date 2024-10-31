@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2460: Apply Operations to an Array"
-date = "2018-02-05"
+date = "2018-02-06"
 description = "Solution to Leetcode 2460"
 tags = [
     
@@ -36,6 +36,10 @@ vector<int> applyOperations(vector<int>& A) {
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

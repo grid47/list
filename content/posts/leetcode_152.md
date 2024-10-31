@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 152: Maximum Product Subarray"
-date = "2024-06-01"
+date = "2024-06-02"
 description = "Solution to Leetcode 152"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-product-subarray/description/)
 
 ---
-{{< youtube lXVy6YWFcRM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -41,6 +41,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/152.md" >}}
+
+---
+
+{{< youtube lXVy6YWFcRM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

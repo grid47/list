@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2654: Minimum Number of Operations to Make All Array Elements Equal to 1"
-date = "2017-07-26"
+date = "2017-07-27"
 description = "Solution to Leetcode 2654"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

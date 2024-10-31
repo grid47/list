@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1376: Time Needed to Inform All Employees"
-date = "2021-01-24"
+date = "2021-01-25"
 description = "Solution to Leetcode 1376"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/time-needed-to-inform-all-employees/description/)
 
 ---
-{{< youtube d0xAcl58SXg >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -46,6 +46,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube d0xAcl58SXg >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

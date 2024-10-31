@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2469: Convert the Temperature"
-date = "2018-01-27"
+date = "2018-01-28"
 description = "Solution to Leetcode 2469"
 tags = [
     
@@ -29,6 +29,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

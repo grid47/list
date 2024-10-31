@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2583: Kth Largest Sum in a Binary Tree"
-date = "2017-10-05"
+date = "2017-10-06"
 description = "Solution to Leetcode 2583"
 tags = [
     
@@ -58,6 +58,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

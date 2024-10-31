@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 938: Range Sum of BST"
-date = "2022-04-07"
+date = "2022-04-08"
 description = "Solution to Leetcode 938"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/range-sum-of-bst/description/)
 
 ---
-{{< youtube ISUXXRnKmx0 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -49,6 +49,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/938.md" >}}
+
+---
+
+{{< youtube ISUXXRnKmx0 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

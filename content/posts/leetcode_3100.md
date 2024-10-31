@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3100: Water Bottles II"
-date = "2016-05-06"
+date = "2016-05-07"
 description = "Solution to Leetcode 3100"
 tags = [
     
@@ -47,6 +47,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

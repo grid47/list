@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1587: Bank Account Summary II"
-date = "2020-06-27"
+date = "2020-06-28"
 description = "Solution to Leetcode 1587"
 tags = [
     
@@ -30,6 +30,10 @@ ON s.account = t.account
 GROUP BY s.account
 HAVING balance > 10000;
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2000: Reverse Prefix of Word"
-date = "2019-05-11"
+date = "2019-05-12"
 description = "Solution to Leetcode 2000"
 tags = [
     
@@ -32,6 +32,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

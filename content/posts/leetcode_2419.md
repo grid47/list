@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2419: Longest Subarray With Maximum Bitwise AND"
-date = "2018-03-18"
+date = "2018-03-19"
 description = "Solution to Leetcode 2419"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

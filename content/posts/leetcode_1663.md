@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1663: Smallest String With A Given Numeric Value"
-date = "2020-04-12"
+date = "2020-04-13"
 description = "Solution to Leetcode 1663"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/description/)
 
 ---
-{{< youtube o3MRJfsoUrw >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -37,6 +37,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube o3MRJfsoUrw >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

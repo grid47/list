@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2039: The Time When the Network Becomes Idle"
-date = "2019-04-02"
+date = "2019-04-03"
 description = "Solution to Leetcode 2039"
 tags = [
     
@@ -81,6 +81,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

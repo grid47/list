@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2713: Maximum Strictly Increasing Cells in a Matrix"
-date = "2017-05-28"
+date = "2017-05-29"
 description = "Solution to Leetcode 2713"
 tags = [
     
@@ -57,6 +57,10 @@ public:
     }    
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

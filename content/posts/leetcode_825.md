@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 825: Friends Of Appropriate Ages"
-date = "2022-07-29"
+date = "2022-07-30"
 description = "Solution to Leetcode 825"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/friends-of-appropriate-ages/description/)
 
 ---
-{{< youtube 0_4H68f85HQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -44,6 +44,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/825.md" >}}
+
+---
+
+{{< youtube 0_4H68f85HQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

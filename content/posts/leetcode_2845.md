@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2845: Count of Interesting Subarrays"
-date = "2017-01-16"
+date = "2017-01-17"
 description = "Solution to Leetcode 2845"
 tags = [
     
@@ -43,6 +43,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

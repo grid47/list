@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1639: Number of Ways to Form a Target String Given a Dictionary"
-date = "2020-05-06"
+date = "2020-05-07"
 description = "Solution to Leetcode 1639"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/description/)
 
 ---
-{{< youtube l10Gtcr_Gqo >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -61,6 +61,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube l10Gtcr_Gqo >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

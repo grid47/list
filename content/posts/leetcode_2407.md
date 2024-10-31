@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2407: Longest Increasing Subsequence II"
-date = "2018-03-30"
+date = "2018-03-31"
 description = "Solution to Leetcode 2407"
 tags = [
     
@@ -81,6 +81,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

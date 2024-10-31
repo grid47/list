@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2222: Number of Ways to Select Buildings"
-date = "2018-10-01"
+date = "2018-10-02"
 description = "Solution to Leetcode 2222"
 tags = [
     
@@ -61,6 +61,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

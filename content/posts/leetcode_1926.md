@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1926: Nearest Exit from Entrance in Maze"
-date = "2019-07-24"
+date = "2019-07-25"
 description = "Solution to Leetcode 1926"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/description/)
 
 ---
-{{< youtube KufrcPzbwko >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -58,6 +58,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube KufrcPzbwko >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

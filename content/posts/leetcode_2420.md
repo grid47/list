@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2420: Find All Good Indices"
-date = "2018-03-17"
+date = "2018-03-18"
 description = "Solution to Leetcode 2420"
 tags = [
     
@@ -41,6 +41,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

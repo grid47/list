@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1026: Maximum Difference Between Node and Ancestor"
-date = "2022-01-09"
+date = "2022-01-10"
 description = "Solution to Leetcode 1026"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/description/)
 
 ---
-{{< youtube f37BCBHGFGA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -49,6 +49,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube f37BCBHGFGA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

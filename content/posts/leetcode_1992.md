@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1992: Find All Groups of Farmland"
-date = "2019-05-19"
+date = "2019-05-20"
 description = "Solution to Leetcode 1992"
 tags = [
     
@@ -57,6 +57,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

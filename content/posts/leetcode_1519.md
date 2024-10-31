@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1519: Number of Nodes in the Sub-Tree With the Same Label"
-date = "2020-09-03"
+date = "2020-09-04"
 description = "Solution to Leetcode 1519"
 tags = [
     
@@ -56,6 +56,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

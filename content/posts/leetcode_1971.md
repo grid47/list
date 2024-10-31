@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1971: Find if Path Exists in Graph"
-date = "2019-06-09"
+date = "2019-06-10"
 description = "Solution to Leetcode 1971"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-if-path-exists-in-graph/description/)
 
 ---
-{{< youtube knLFe7hEp3Y >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -53,6 +53,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube knLFe7hEp3Y >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

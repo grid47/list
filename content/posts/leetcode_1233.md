@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1233: Remove Sub-Folders from the Filesystem"
-date = "2021-06-16"
+date = "2021-06-17"
 description = "Solution to Leetcode 1233"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/description/)
 
 ---
-{{< youtube sFv6T_wLS4k >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -79,6 +79,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube sFv6T_wLS4k >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

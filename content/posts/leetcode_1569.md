@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1569: Number of Ways to Reorder Array to Get Same BST"
-date = "2020-07-15"
+date = "2020-07-16"
 description = "Solution to Leetcode 1569"
 tags = [
     
@@ -60,6 +60,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

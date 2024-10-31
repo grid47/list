@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3231: Minimum Number of Increasing Subsequence to Be Removed"
-date = "2015-12-27"
+date = "2015-12-28"
 description = "Solution to Leetcode 3231"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

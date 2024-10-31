@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3105: Longest Strictly Increasing or Strictly Decreasing Subarray"
-date = "2016-05-01"
+date = "2016-05-02"
 description = "Solution to Leetcode 3105"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

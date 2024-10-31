@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2744: Find Maximum Number of String Pairs"
-date = "2017-04-27"
+date = "2017-04-28"
 description = "Solution to Leetcode 2744"
 tags = [
     
@@ -34,6 +34,10 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

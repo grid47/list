@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1068: Product Sales Analysis I"
-date = "2021-11-28"
+date = "2021-11-29"
 description = "Solution to Leetcode 1068"
 tags = [
     
@@ -28,6 +28,10 @@ FROM Sales b
 LEFT JOIN Product a
 ON a.product_id = b.product_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

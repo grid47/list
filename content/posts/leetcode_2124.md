@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2124: Check if All A's Appears Before All B's"
-date = "2019-01-07"
+date = "2019-01-08"
 description = "Solution to Leetcode 2124"
 tags = [
     
@@ -29,6 +29,10 @@ bool checkString(string s) {
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

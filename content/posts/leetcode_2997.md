@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2997: Minimum Number of Operations to Make Array XOR Equal to K"
-date = "2016-08-17"
+date = "2016-08-18"
 description = "Solution to Leetcode 2997"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

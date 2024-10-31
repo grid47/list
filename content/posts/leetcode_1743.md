@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1743: Restore the Array From Adjacent Pairs"
-date = "2020-01-23"
+date = "2020-01-24"
 description = "Solution to Leetcode 1743"
 tags = [
     
@@ -55,6 +55,10 @@ public:
 
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

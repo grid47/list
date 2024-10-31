@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2147: Number of Ways to Divide a Long Corridor"
-date = "2018-12-15"
+date = "2018-12-16"
 description = "Solution to Leetcode 2147"
 tags = [
     
@@ -52,6 +52,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

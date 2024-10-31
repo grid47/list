@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2018: Check if Word Can Be Placed In Crossword"
-date = "2019-04-23"
+date = "2019-04-24"
 description = "Solution to Leetcode 2018"
 tags = [
     
@@ -69,6 +69,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

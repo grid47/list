@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1145: Binary Tree Coloring Game"
-date = "2021-09-12"
+date = "2021-09-13"
 description = "Solution to Leetcode 1145"
 tags = [
     
@@ -58,6 +58,10 @@ public:
 
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

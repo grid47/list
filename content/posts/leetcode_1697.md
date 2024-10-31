@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1697: Checking Existence of Edge Length Limited Paths"
-date = "2020-03-09"
+date = "2020-03-10"
 description = "Solution to Leetcode 1697"
 tags = [
     
@@ -63,6 +63,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

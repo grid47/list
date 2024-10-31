@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2841: Maximum Sum of Almost Unique Subarray"
-date = "2017-01-20"
+date = "2017-01-21"
 description = "Solution to Leetcode 2841"
 tags = [
     
@@ -67,6 +67,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

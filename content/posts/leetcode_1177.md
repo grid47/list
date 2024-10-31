@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1177: Can Make Palindrome from Substring"
-date = "2021-08-11"
+date = "2021-08-12"
 description = "Solution to Leetcode 1177"
 tags = [
     
@@ -49,6 +49,10 @@ int cnt = __builtin_popcount(pt[v[1]+1] ^ pt[v[0]]);
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

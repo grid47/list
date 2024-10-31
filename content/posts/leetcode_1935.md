@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1935: Maximum Number of Words You Can Type"
-date = "2019-07-15"
+date = "2019-07-16"
 description = "Solution to Leetcode 1935"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

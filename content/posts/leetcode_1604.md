@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1604: Alert Using Same Key-Card Three or More Times in a One Hour Period"
-date = "2020-06-10"
+date = "2020-06-11"
 description = "Solution to Leetcode 1604"
 tags = [
     
@@ -55,6 +55,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

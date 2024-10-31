@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 68: Text Justification"
-date = "2024-08-24"
+date = "2024-08-25"
 description = "Solution to Leetcode 68"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/text-justification/description/)
 
 ---
-{{< youtube smaxL16J504 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -65,6 +65,10 @@ private:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/68.md" >}}
+
+---
+
+{{< youtube smaxL16J504 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

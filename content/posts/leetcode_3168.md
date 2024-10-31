@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3168: Minimum Number of Chairs in a Waiting Room"
-date = "2016-02-28"
+date = "2016-02-29"
 description = "Solution to Leetcode 3168"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

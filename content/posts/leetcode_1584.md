@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1584: Min Cost to Connect All Points"
-date = "2020-06-30"
+date = "2020-07-01"
 description = "Solution to Leetcode 1584"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/min-cost-to-connect-all-points/description/)
 
 ---
-{{< youtube 8VPIrqwQ8sQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -89,6 +89,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 8VPIrqwQ8sQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

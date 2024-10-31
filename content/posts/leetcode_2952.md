@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2952: Minimum Number of Coins to be Added"
-date = "2016-10-01"
+date = "2016-10-02"
 description = "Solution to Leetcode 2952"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

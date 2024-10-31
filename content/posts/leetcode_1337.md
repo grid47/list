@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1337: The K Weakest Rows in a Matrix"
-date = "2021-03-04"
+date = "2021-03-05"
 description = "Solution to Leetcode 1337"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

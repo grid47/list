@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2030: Smallest K-Length Subsequence With Occurrences of a Letter"
-date = "2019-04-11"
+date = "2019-04-12"
 description = "Solution to Leetcode 2030"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

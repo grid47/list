@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1029: Two City Scheduling"
-date = "2022-01-06"
+date = "2022-01-07"
 description = "Solution to Leetcode 1029"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/two-city-scheduling/description/)
 
 ---
-{{< youtube d-B_gk_gJtQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -51,6 +51,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube d-B_gk_gJtQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 402: Remove K Digits"
-date = "2023-09-25"
+date = "2023-09-26"
 description = "Solution to Leetcode 402"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-k-digits/description/)
 
 ---
-{{< youtube cFabMOnJaq0 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -55,6 +55,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/402.md" >}}
+
+---
+
+{{< youtube cFabMOnJaq0 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

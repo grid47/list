@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1839: Longest Substring Of All Vowels in Order"
-date = "2019-10-19"
+date = "2019-10-20"
 description = "Solution to Leetcode 1839"
 tags = [
     
@@ -57,6 +57,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

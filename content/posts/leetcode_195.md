@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 195: Tenth Line"
-date = "2024-04-19"
+date = "2024-04-20"
 description = "Solution to Leetcode 195"
 tags = [
     
@@ -27,6 +27,10 @@ head -10 file.txt | tail -n+10 | head -1
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/195.md" >}}
+
+---
+
+
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

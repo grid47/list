@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3067: Count Pairs of Connectable Servers in a Weighted Tree Network"
-date = "2016-06-08"
+date = "2016-06-09"
 description = "Solution to Leetcode 3067"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2850: Minimum Moves to Spread Stones Over Grid"
-date = "2017-01-11"
+date = "2017-01-12"
 description = "Solution to Leetcode 2850"
 tags = [
     
@@ -63,6 +63,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

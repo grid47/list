@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 59: Spiral Matrix II"
-date = "2024-09-02"
+date = "2024-09-03"
 description = "Solution to Leetcode 59"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/spiral-matrix-ii/description/)
 
 ---
-{{< youtube RvLrWFBJ9fM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -52,6 +52,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/59.md" >}}
+
+---
+
+{{< youtube RvLrWFBJ9fM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

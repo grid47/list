@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1662: Check If Two String Arrays are Equivalent"
-date = "2020-04-13"
+date = "2020-04-14"
 description = "Solution to Leetcode 1662"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

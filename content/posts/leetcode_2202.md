@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2202: Maximize the Topmost Element After K Moves"
-date = "2018-10-21"
+date = "2018-10-22"
 description = "Solution to Leetcode 2202"
 tags = [
     
@@ -41,6 +41,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

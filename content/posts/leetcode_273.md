@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 273: Integer to English Words"
-date = "2024-02-01"
+date = "2024-02-02"
 description = "Solution to Leetcode 273"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/integer-to-english-words/description/)
 
 ---
-{{< youtube 1V1n7BEXSdw >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -52,6 +52,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/273.md" >}}
+
+---
+
+{{< youtube 1V1n7BEXSdw >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

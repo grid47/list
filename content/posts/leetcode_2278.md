@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2278: Percentage of Letter in String"
-date = "2018-08-06"
+date = "2018-08-07"
 description = "Solution to Leetcode 2278"
 tags = [
     
@@ -29,6 +29,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

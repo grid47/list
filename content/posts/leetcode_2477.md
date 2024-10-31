@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2477: Minimum Fuel Cost to Report to the Capital"
-date = "2018-01-19"
+date = "2018-01-20"
 description = "Solution to Leetcode 2477"
 tags = [
     
@@ -46,6 +46,10 @@ public:
      }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

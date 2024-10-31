@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1706: Where Will the Ball Fall"
-date = "2020-02-29"
+date = "2020-03-01"
 description = "Solution to Leetcode 1706"
 tags = [
     
@@ -43,6 +43,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

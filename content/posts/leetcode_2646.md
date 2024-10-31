@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2646: Minimize the Total Price of the Trips"
-date = "2017-08-03"
+date = "2017-08-04"
 description = "Solution to Leetcode 2646"
 tags = [
     
@@ -88,6 +88,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

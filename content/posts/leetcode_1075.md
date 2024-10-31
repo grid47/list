@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1075: Project Employees I"
-date = "2021-11-21"
+date = "2021-11-22"
 description = "Solution to Leetcode 1075"
 tags = [
     
@@ -29,6 +29,10 @@ LEFT JOIN Employee e
 ON p.employee_id = e.employee_id
 GROUP BY p.project_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

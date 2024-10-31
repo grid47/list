@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1467: Probability of a Two Boxes Having The Same Number of Distinct Balls"
-date = "2020-10-25"
+date = "2020-10-26"
 description = "Solution to Leetcode 1467"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

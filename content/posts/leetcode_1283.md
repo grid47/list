@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1283: Find the Smallest Divisor Given a Threshold"
-date = "2021-04-27"
+date = "2021-04-28"
 description = "Solution to Leetcode 1283"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

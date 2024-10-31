@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 189: Rotate Array"
-date = "2024-04-25"
+date = "2024-04-26"
 description = "Solution to Leetcode 189"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/rotate-array/description/)
 
 ---
-{{< youtube lTHTR_jsqAQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -45,6 +45,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/189.md" >}}
+
+---
+
+{{< youtube lTHTR_jsqAQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

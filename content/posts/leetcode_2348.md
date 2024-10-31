@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2348: Number of Zero-Filled Subarrays"
-date = "2018-05-28"
+date = "2018-05-29"
 description = "Solution to Leetcode 2348"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-zero-filled-subarrays/description/)
 
 ---
-{{< youtube 1Y_QfTQmfKg >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -37,6 +37,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 1Y_QfTQmfKg >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

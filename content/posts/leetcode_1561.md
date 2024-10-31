@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1561: Maximum Number of Coins You Can Get"
-date = "2020-07-23"
+date = "2020-07-24"
 description = "Solution to Leetcode 1561"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-number-of-coins-you-can-get/description/)
 
 ---
-{{< youtube hPe9Z3TiUrA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -83,6 +83,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube hPe9Z3TiUrA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2861: Maximum Number of Alloys"
-date = "2016-12-31"
+date = "2017-01-01"
 description = "Solution to Leetcode 2861"
 tags = [
     
@@ -63,6 +63,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

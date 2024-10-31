@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1599: Maximum Profit of Operating a Centennial Wheel"
-date = "2020-06-15"
+date = "2020-06-16"
 description = "Solution to Leetcode 1599"
 tags = [
     
@@ -60,6 +60,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

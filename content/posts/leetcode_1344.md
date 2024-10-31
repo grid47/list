@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1344: Angle Between Hands of a Clock"
-date = "2021-02-25"
+date = "2021-02-26"
 description = "Solution to Leetcode 1344"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/angle-between-hands-of-a-clock/description/)
 
 ---
-{{< youtube evs3Po8Km7c >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -37,6 +37,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube evs3Po8Km7c >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

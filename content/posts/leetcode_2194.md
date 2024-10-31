@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2194: Cells in a Range on an Excel Sheet"
-date = "2018-10-29"
+date = "2018-10-30"
 description = "Solution to Leetcode 2194"
 tags = [
     
@@ -33,6 +33,10 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

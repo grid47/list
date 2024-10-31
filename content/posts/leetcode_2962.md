@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2962: Count Subarrays Where Max Element Appears at Least K Times"
-date = "2016-09-21"
+date = "2016-09-22"
 description = "Solution to Leetcode 2962"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

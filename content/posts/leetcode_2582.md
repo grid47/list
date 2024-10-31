@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2582: Pass the Pillow"
-date = "2017-10-06"
+date = "2017-10-07"
 description = "Solution to Leetcode 2582"
 tags = [
     
@@ -29,6 +29,10 @@ public:
         }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

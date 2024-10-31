@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2522: Partition String Into Substrings With Values at Most K"
-date = "2017-12-05"
+date = "2017-12-06"
 description = "Solution to Leetcode 2522"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

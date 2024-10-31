@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1960: Maximum Product of the Length of Two Palindromic Substrings"
-date = "2019-06-20"
+date = "2019-06-21"
 description = "Solution to Leetcode 1960"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

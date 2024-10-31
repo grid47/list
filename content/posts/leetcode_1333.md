@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1333: Filter Restaurants by Vegan-Friendly, Price and Distance"
-date = "2021-03-08"
+date = "2021-03-09"
 description = "Solution to Leetcode 1333"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

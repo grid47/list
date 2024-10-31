@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 714: Best Time to Buy and Sell Stock with Transaction Fee"
-date = "2022-11-17"
+date = "2022-11-18"
 description = "Solution to Leetcode 714"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/)
 
 ---
-{{< youtube HLr_OnShK4s >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -39,6 +39,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/714.md" >}}
+
+---
+
+{{< youtube HLr_OnShK4s >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

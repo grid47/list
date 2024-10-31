@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1563: Stone Game V"
-date = "2020-07-21"
+date = "2020-07-22"
 description = "Solution to Leetcode 1563"
 tags = [
     
@@ -62,6 +62,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

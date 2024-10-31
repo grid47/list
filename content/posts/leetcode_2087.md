@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2087: Minimum Cost Homecoming of a Robot in a Grid"
-date = "2019-02-13"
+date = "2019-02-14"
 description = "Solution to Leetcode 2087"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

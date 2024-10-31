@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2956: Find Common Elements Between Two Arrays"
-date = "2016-09-27"
+date = "2016-09-28"
 description = "Solution to Leetcode 2956"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2188: Minimum Time to Finish the Race"
-date = "2018-11-04"
+date = "2018-11-05"
 description = "Solution to Leetcode 2188"
 tags = [
     
@@ -59,6 +59,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

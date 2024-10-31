@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1462: Course Schedule IV"
-date = "2020-10-30"
+date = "2020-10-31"
 description = "Solution to Leetcode 1462"
 tags = [
     
@@ -64,6 +64,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

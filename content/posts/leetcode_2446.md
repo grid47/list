@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2446: Determine if Two Events Have Conflict"
-date = "2018-02-19"
+date = "2018-02-20"
 description = "Solution to Leetcode 2446"
 tags = [
     
@@ -30,6 +30,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

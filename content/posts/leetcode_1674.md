@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1674: Minimum Moves to Make Array Complementary"
-date = "2020-04-01"
+date = "2020-04-02"
 description = "Solution to Leetcode 1674"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2069: Walking Robot Simulation II"
-date = "2019-03-03"
+date = "2019-03-04"
 description = "Solution to Leetcode 2069"
 tags = [
     
@@ -76,6 +76,10 @@ public:
  * string param_3 = obj->getDir();
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

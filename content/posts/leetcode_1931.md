@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1931: Painting a Grid With Three Different Colors"
-date = "2019-07-19"
+date = "2019-07-20"
 description = "Solution to Leetcode 1931"
 tags = [
     
@@ -47,6 +47,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

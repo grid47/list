@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 212: Word Search II"
-date = "2024-04-02"
+date = "2024-04-03"
 description = "Solution to Leetcode 212"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/word-search-ii/description/)
 
 ---
-{{< youtube vuzMYqf9CNE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -91,6 +91,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/212.md" >}}
+
+---
+
+{{< youtube vuzMYqf9CNE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1616: Split Two Strings to Make Palindrome"
-date = "2020-05-29"
+date = "2020-05-30"
 description = "Solution to Leetcode 1616"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

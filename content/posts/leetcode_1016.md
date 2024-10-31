@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1016: Binary String With Substrings Representing 1 To N"
-date = "2022-01-19"
+date = "2022-01-20"
 description = "Solution to Leetcode 1016"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

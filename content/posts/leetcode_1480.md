@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1480: Running Sum of 1d Array"
-date = "2020-10-12"
+date = "2020-10-13"
 description = "Solution to Leetcode 1480"
 tags = [
     
@@ -31,6 +31,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

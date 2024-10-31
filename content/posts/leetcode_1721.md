@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1721: Swapping Nodes in a Linked List"
-date = "2020-02-14"
+date = "2020-02-15"
 description = "Solution to Leetcode 1721"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/swapping-nodes-in-a-linked-list/description/)
 
 ---
-{{< youtube KUTRaNOzmoo >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -50,6 +50,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube KUTRaNOzmoo >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

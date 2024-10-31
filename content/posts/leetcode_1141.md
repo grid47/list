@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1141: User Activity for the Past 30 Days I"
-date = "2021-09-16"
+date = "2021-09-17"
 description = "Solution to Leetcode 1141"
 tags = [
     
@@ -28,6 +28,10 @@ FROM Activity
 WHERE activity_date > "2019-06-27" AND activity_date <= "2019-07-27"
 GROUP BY activity_date;
 {{< /highlight >}}
+
+
+
+---
 
 
 

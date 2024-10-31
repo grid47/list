@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition"
-date = "2020-09-24"
+date = "2020-09-25"
 description = "Solution to Leetcode 1498"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/)
 
 ---
-{{< youtube WZhNEfbGYEo >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -62,6 +62,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube WZhNEfbGYEo >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

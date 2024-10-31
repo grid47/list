@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2825: Make String a Subsequence Using Cyclic Increments"
-date = "2017-02-05"
+date = "2017-02-06"
 description = "Solution to Leetcode 2825"
 tags = [
     
@@ -33,6 +33,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

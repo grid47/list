@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2332: The Latest Time to Catch a Bus"
-date = "2018-06-13"
+date = "2018-06-14"
 description = "Solution to Leetcode 2332"
 tags = [
     
@@ -59,6 +59,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

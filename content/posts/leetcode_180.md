@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 180: Consecutive Numbers"
-date = "2024-05-04"
+date = "2024-05-05"
 description = "Solution to Leetcode 180"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/consecutive-numbers/description/)
 
 ---
-{{< youtube _nU4hBwsyTE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -34,6 +34,10 @@ def consecutive_numbers(logs: pd.DataFrame) -> pd.DataFrame:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/180.md" >}}
+
+---
+
+{{< youtube _nU4hBwsyTE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

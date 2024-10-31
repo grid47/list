@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2874: Maximum Value of an Ordered Triplet II"
-date = "2016-12-18"
+date = "2016-12-19"
 description = "Solution to Leetcode 2874"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

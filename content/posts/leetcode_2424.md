@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2424: Longest Uploaded Prefix"
-date = "2018-03-13"
+date = "2018-03-14"
 description = "Solution to Leetcode 2424"
 tags = [
     
@@ -48,6 +48,10 @@ public:
  * int param_2 = obj->longest();
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

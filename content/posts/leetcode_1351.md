@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1351: Count Negative Numbers in a Sorted Matrix"
-date = "2021-02-18"
+date = "2021-02-19"
 description = "Solution to Leetcode 1351"
 tags = [
     
@@ -35,6 +35,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

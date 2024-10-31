@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1461: Check If a String Contains All Binary Codes of Size K"
-date = "2020-10-31"
+date = "2020-11-01"
 description = "Solution to Leetcode 1461"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/description/)
 
 ---
-{{< youtube qU32rTy_kOM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -47,6 +47,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube qU32rTy_kOM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

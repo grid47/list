@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1802: Maximum Value at a Given Index in a Bounded Array"
-date = "2019-11-25"
+date = "2019-11-26"
 description = "Solution to Leetcode 1802"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

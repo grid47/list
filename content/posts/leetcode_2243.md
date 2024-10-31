@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2243: Calculate Digit Sum of a String"
-date = "2018-09-10"
+date = "2018-09-11"
 description = "Solution to Leetcode 2243"
 tags = [
     
@@ -36,6 +36,10 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

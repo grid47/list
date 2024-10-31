@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2033: Minimum Operations to Make a Uni-Value Grid"
-date = "2019-04-08"
+date = "2019-04-09"
 description = "Solution to Leetcode 2033"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

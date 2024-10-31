@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1757: Recyclable and Low Fat Products"
-date = "2020-01-09"
+date = "2020-01-10"
 description = "Solution to Leetcode 1757"
 tags = [
     
@@ -25,6 +25,10 @@ series = ["Leetcode"]
 # Write your MySQL query statement below
 SELECT product_id FROM Products WHERE low_fats="Y" AND recyclable="Y";
 {{< /highlight >}}
+
+
+
+---
 
 
 

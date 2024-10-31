@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1352: Product of the Last K Numbers"
-date = "2021-02-17"
+date = "2021-02-18"
 description = "Solution to Leetcode 1352"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/product-of-the-last-k-numbers/description/)
 
 ---
-{{< youtube fH1WYQCcMd8 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -53,6 +53,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube fH1WYQCcMd8 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

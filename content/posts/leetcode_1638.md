@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1638: Count Substrings That Differ by One Character"
-date = "2020-05-07"
+date = "2020-05-08"
 description = "Solution to Leetcode 1638"
 tags = [
     
@@ -47,6 +47,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

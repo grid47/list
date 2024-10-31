@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2354: Number of Excellent Pairs"
-date = "2018-05-22"
+date = "2018-05-23"
 description = "Solution to Leetcode 2354"
 tags = [
     
@@ -59,6 +59,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

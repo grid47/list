@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1536: Minimum Swaps to Arrange a Binary Grid"
-date = "2020-08-17"
+date = "2020-08-18"
 description = "Solution to Leetcode 1536"
 tags = [
     
@@ -67,6 +67,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

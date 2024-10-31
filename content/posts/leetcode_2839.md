@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2839: Check if Strings Can be Made Equal With Operations I"
-date = "2017-01-22"
+date = "2017-01-23"
 description = "Solution to Leetcode 2839"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

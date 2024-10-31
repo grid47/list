@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2462: Total Cost to Hire K Workers"
-date = "2018-02-03"
+date = "2018-02-04"
 description = "Solution to Leetcode 2462"
 tags = [
     
@@ -73,6 +73,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

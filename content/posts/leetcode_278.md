@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 278: First Bad Version"
-date = "2024-01-27"
+date = "2024-01-28"
 description = "Solution to Leetcode 278"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/first-bad-version/description/)
 
 ---
-{{< youtube E15djRphPj0 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -41,6 +41,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/278.md" >}}
+
+---
+
+{{< youtube E15djRphPj0 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

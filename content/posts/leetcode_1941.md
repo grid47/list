@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1941: Check if All Characters Have Equal Number of Occurrences"
-date = "2019-07-09"
+date = "2019-07-10"
 description = "Solution to Leetcode 1941"
 tags = [
     
@@ -32,6 +32,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1367: Linked List in Binary Tree"
-date = "2021-02-02"
+date = "2021-02-03"
 description = "Solution to Leetcode 1367"
 tags = [
     
@@ -58,6 +58,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

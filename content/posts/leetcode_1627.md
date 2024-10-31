@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1627: Graph Connectivity With Threshold"
-date = "2020-05-18"
+date = "2020-05-19"
 description = "Solution to Leetcode 1627"
 tags = [
     
@@ -65,6 +65,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

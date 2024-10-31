@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 300: Longest Increasing Subsequence"
-date = "2024-01-05"
+date = "2024-01-06"
 description = "Solution to Leetcode 300"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/longest-increasing-subsequence/description/)
 
 ---
-{{< youtube VZc93A5v1JI >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -40,6 +40,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/300.md" >}}
+
+---
+
+{{< youtube VZc93A5v1JI >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

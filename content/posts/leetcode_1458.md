@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1458: Max Dot Product of Two Subsequences"
-date = "2020-11-03"
+date = "2020-11-04"
 description = "Solution to Leetcode 1458"
 tags = [
     
@@ -56,6 +56,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

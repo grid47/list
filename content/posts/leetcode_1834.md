@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1834: Single-Threaded CPU"
-date = "2019-10-24"
+date = "2019-10-25"
 description = "Solution to Leetcode 1834"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/single-threaded-cpu/description/)
 
 ---
-{{< youtube RR1n-d4oYqE >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -59,6 +59,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube RR1n-d4oYqE >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

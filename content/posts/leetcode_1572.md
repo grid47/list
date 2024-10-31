@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1572: Matrix Diagonal Sum"
-date = "2020-07-12"
+date = "2020-07-13"
 description = "Solution to Leetcode 1572"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/matrix-diagonal-sum/description/)
 
 ---
-{{< youtube 5TLlr3y3Iww >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -35,6 +35,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 5TLlr3y3Iww >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

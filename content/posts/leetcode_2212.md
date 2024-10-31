@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2212: Maximum Points in an Archery Competition"
-date = "2018-10-11"
+date = "2018-10-12"
 description = "Solution to Leetcode 2212"
 tags = [
     
@@ -68,6 +68,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

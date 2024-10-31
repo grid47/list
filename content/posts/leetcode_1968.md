@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1968: Array With Elements Not Equal to Average of Neighbors"
-date = "2019-06-12"
+date = "2019-06-13"
 description = "Solution to Leetcode 1968"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/array-with-elements-not-equal-to-average-of-neighbors/description/)
 
 ---
-{{< youtube Wmb3YdVYfqM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -48,6 +48,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube Wmb3YdVYfqM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

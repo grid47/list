@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2231: Largest Number After Digit Swaps by Parity"
-date = "2018-09-22"
+date = "2018-09-23"
 description = "Solution to Leetcode 2231"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

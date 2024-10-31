@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2436: Minimum Split Into Subarrays With GCD Greater Than One"
-date = "2018-03-01"
+date = "2018-03-02"
 description = "Solution to Leetcode 2436"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

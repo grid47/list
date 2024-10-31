@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2870: Minimum Number of Operations to Make Array Empty"
-date = "2016-12-22"
+date = "2016-12-23"
 description = "Solution to Leetcode 2870"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

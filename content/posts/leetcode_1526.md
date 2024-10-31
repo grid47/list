@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1526: Minimum Number of Increments on Subarrays to Form a Target Array"
-date = "2020-08-27"
+date = "2020-08-28"
 description = "Solution to Leetcode 1526"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

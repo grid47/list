@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2455: Average Value of Even Numbers That Are Divisible by Three"
-date = "2018-02-10"
+date = "2018-02-11"
 description = "Solution to Leetcode 2455"
 tags = [
     
@@ -41,6 +41,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

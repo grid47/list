@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1848: Minimum Distance to the Target Element"
-date = "2019-10-10"
+date = "2019-10-11"
 description = "Solution to Leetcode 1848"
 tags = [
     
@@ -33,6 +33,10 @@ public:
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

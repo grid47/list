@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2123: Minimum Operations to Remove Adjacent Ones in Matrix"
-date = "2019-01-08"
+date = "2019-01-09"
 description = "Solution to Leetcode 2123"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

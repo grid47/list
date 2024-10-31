@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2275: Largest Combination With Bitwise AND Greater Than Zero"
-date = "2018-08-09"
+date = "2018-08-10"
 description = "Solution to Leetcode 2275"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

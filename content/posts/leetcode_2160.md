@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2160: Minimum Sum of Four Digit Number After Splitting Digits"
-date = "2018-12-02"
+date = "2018-12-03"
 description = "Solution to Leetcode 2160"
 tags = [
     
@@ -32,6 +32,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

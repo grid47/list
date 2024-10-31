@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1488: Avoid Flood in The City"
-date = "2020-10-04"
+date = "2020-10-05"
 description = "Solution to Leetcode 1488"
 tags = [
     
@@ -57,6 +57,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

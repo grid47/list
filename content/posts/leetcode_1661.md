@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1661: Average Time of Process per Machine"
-date = "2020-04-14"
+date = "2020-04-15"
 description = "Solution to Leetcode 1661"
 tags = [
     
@@ -29,6 +29,10 @@ JOIN Activity a2
 ON a1.machine_id = a2.machine_id AND a1.activity_type = 'end' AND a2.activity_type = 'start'
 GROUP BY machine_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

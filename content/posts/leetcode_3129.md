@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3129: Find All Possible Stable Binary Arrays I"
-date = "2016-04-07"
+date = "2016-04-08"
 description = "Solution to Leetcode 3129"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

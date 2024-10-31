@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2577: Minimum Time to Visit a Cell In a Grid"
-date = "2017-10-11"
+date = "2017-10-12"
 description = "Solution to Leetcode 2577"
 tags = [
     
@@ -59,6 +59,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

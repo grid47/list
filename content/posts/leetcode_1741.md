@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1741: Find Total Time Spent by Each Employee"
-date = "2020-01-25"
+date = "2020-01-26"
 description = "Solution to Leetcode 1741"
 tags = [
     
@@ -30,6 +30,10 @@ SELECT
 FROM Employees
 GROUP BY day, emp_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2834: Find the Minimum Possible Sum of a Beautiful Array"
-date = "2017-01-27"
+date = "2017-01-28"
 description = "Solution to Leetcode 2834"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

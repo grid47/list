@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2428: Maximum Sum of an Hourglass"
-date = "2018-03-09"
+date = "2018-03-10"
 description = "Solution to Leetcode 2428"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

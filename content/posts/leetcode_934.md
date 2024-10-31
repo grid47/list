@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 934: Shortest Bridge"
-date = "2022-04-11"
+date = "2022-04-12"
 description = "Solution to Leetcode 934"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-bridge/description/)
 
 ---
-{{< youtube 1RZijG2c1CA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -74,6 +74,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/934.md" >}}
+
+---
+
+{{< youtube 1RZijG2c1CA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

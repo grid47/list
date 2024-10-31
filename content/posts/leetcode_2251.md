@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2251: Number of Flowers in Full Bloom"
-date = "2018-09-02"
+date = "2018-09-03"
 description = "Solution to Leetcode 2251"
 tags = [
     
@@ -64,6 +64,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

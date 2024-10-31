@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2772: Apply Operations to Make All Array Elements Equal to Zero"
-date = "2017-03-30"
+date = "2017-03-31"
 description = "Solution to Leetcode 2772"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

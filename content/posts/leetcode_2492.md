@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2492: Minimum Score of a Path Between Two Cities"
-date = "2018-01-04"
+date = "2018-01-05"
 description = "Solution to Leetcode 2492"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/description/)
 
 ---
-{{< youtube 7epgOP3ezWM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -95,6 +95,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 7epgOP3ezWM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

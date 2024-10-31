@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1910: Remove All Occurrences of a Substring"
-date = "2019-08-09"
+date = "2019-08-10"
 description = "Solution to Leetcode 1910"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/remove-all-occurrences-of-a-substring/description/)
 
 ---
-{{< youtube d74CJIqw268 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -38,6 +38,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube d74CJIqw268 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

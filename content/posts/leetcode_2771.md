@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2771: Longest Non-decreasing Subarray From Two Arrays"
-date = "2017-03-31"
+date = "2017-04-01"
 description = "Solution to Leetcode 2771"
 tags = [
     
@@ -77,6 +77,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

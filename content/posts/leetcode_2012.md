@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2012: Sum of Beauty in the Array"
-date = "2019-04-29"
+date = "2019-04-30"
 description = "Solution to Leetcode 2012"
 tags = [
     
@@ -52,6 +52,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

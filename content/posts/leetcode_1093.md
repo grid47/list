@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1093: Statistics from a Large Sample"
-date = "2021-11-03"
+date = "2021-11-04"
 description = "Solution to Leetcode 1093"
 tags = [
     
@@ -60,6 +60,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

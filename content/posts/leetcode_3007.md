@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3007: Maximum Number That Sum of the Prices Is Less Than or Equal to K"
-date = "2016-08-07"
+date = "2016-08-08"
 description = "Solution to Leetcode 3007"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

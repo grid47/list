@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1793: Maximum Score of a Good Subarray"
-date = "2019-12-04"
+date = "2019-12-05"
 description = "Solution to Leetcode 1793"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2246: Longest Path With Different Adjacent Characters"
-date = "2018-09-07"
+date = "2018-09-08"
 description = "Solution to Leetcode 2246"
 tags = [
     
@@ -75,6 +75,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

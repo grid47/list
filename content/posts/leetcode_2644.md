@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2644: Find the Maximum Divisibility Score"
-date = "2017-08-05"
+date = "2017-08-06"
 description = "Solution to Leetcode 2644"
 tags = [
     
@@ -56,6 +56,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1642: Furthest Building You Can Reach"
-date = "2020-05-03"
+date = "2020-05-04"
 description = "Solution to Leetcode 1642"
 tags = [
     
@@ -64,6 +64,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

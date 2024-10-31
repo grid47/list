@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1795: Rearrange Products Table"
-date = "2019-12-02"
+date = "2019-12-03"
 description = "Solution to Leetcode 1795"
 tags = [
     
@@ -32,6 +32,10 @@ UNION
 SELECT product_id, 'store3', store3 AS price FROM Products
 WHERE store3 IS NOT NULL;
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1001: Grid Illumination"
-date = "2022-02-03"
+date = "2022-02-04"
 description = "Solution to Leetcode 1001"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/grid-illumination/description/)
 
 ---
-{{< youtube Mjbq8aGPBr8 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -66,6 +66,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube Mjbq8aGPBr8 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

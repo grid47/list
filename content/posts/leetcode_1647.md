@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1647: Minimum Deletions to Make Character Frequencies Unique"
-date = "2020-04-28"
+date = "2020-04-29"
 description = "Solution to Leetcode 1647"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

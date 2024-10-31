@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1220: Count Vowels Permutation"
-date = "2021-06-29"
+date = "2021-06-30"
 description = "Solution to Leetcode 1220"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/count-vowels-permutation/description/)
 
 ---
-{{< youtube VUVpTZVa7Ls >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -88,6 +88,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube VUVpTZVa7Ls >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

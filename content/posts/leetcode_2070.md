@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2070: Most Beautiful Item for Each Query"
-date = "2019-03-02"
+date = "2019-03-03"
 description = "Solution to Leetcode 2070"
 tags = [
     
@@ -52,6 +52,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

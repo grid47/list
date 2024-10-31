@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 538: Convert BST to Greater Tree"
-date = "2023-05-12"
+date = "2023-05-13"
 description = "Solution to Leetcode 538"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/convert-bst-to-greater-tree/description/)
 
 ---
-{{< youtube AFDxiYO9XzY >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -56,6 +56,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/538.md" >}}
+
+---
+
+{{< youtube AFDxiYO9XzY >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

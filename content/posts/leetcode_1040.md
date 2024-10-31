@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1040: Moving Stones Until Consecutive II"
-date = "2021-12-26"
+date = "2021-12-27"
 description = "Solution to Leetcode 1040"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

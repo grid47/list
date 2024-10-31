@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1473: Paint House III"
-date = "2020-10-19"
+date = "2020-10-20"
 description = "Solution to Leetcode 1473"
 tags = [
     
@@ -71,6 +71,10 @@ public:
 
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

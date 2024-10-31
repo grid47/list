@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1717: Maximum Score From Removing Substrings"
-date = "2020-02-18"
+date = "2020-02-19"
 description = "Solution to Leetcode 1717"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-score-from-removing-substrings/description/)
 
 ---
-{{< youtube 9wZ-TWBreTg >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -50,6 +50,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 9wZ-TWBreTg >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

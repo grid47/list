@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2349: Design a Number Container System"
-date = "2018-05-27"
+date = "2018-05-28"
 description = "Solution to Leetcode 2349"
 tags = [
     
@@ -57,6 +57,10 @@ public:
  * int param_2 = obj->find(number);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

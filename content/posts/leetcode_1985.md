@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1985: Find the Kth Largest Integer in the Array"
-date = "2019-05-26"
+date = "2019-05-27"
 description = "Solution to Leetcode 1985"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-the-kth-largest-integer-in-the-array/description/)
 
 ---
-{{< youtube lRCaNiqO3xI >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -56,6 +56,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube lRCaNiqO3xI >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

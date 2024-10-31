@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1148: Article Views I"
-date = "2021-09-09"
+date = "2021-09-10"
 description = "Solution to Leetcode 1148"
 tags = [
     
@@ -25,6 +25,10 @@ series = ["Leetcode"]
 # Write your MySQL query statement below
 SELECT DISTINCT author_id AS id FROM Views WHERE viewer_id=author_id ORDER BY id ASC;
 {{< /highlight >}}
+
+
+
+---
 
 
 

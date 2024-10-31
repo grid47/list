@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2183: Count Array Pairs Divisible by K"
-date = "2018-11-09"
+date = "2018-11-10"
 description = "Solution to Leetcode 2183"
 tags = [
     
@@ -52,6 +52,10 @@ class Solution {
     }
 }
 {{< /highlight >}}
+
+
+
+---
 
 
 

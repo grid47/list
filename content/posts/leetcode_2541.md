@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2541: Minimum Operations to Make Array Equal II"
-date = "2017-11-16"
+date = "2017-11-17"
 description = "Solution to Leetcode 2541"
 tags = [
     
@@ -47,6 +47,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

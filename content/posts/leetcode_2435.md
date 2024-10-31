@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2435: Paths in Matrix Whose Sum Is Divisible by K"
-date = "2018-03-02"
+date = "2018-03-03"
 description = "Solution to Leetcode 2435"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

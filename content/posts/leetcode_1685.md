@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1685: Sum of Absolute Differences in a Sorted Array"
-date = "2020-03-21"
+date = "2020-03-22"
 description = "Solution to Leetcode 1685"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/sum-of-absolute-differences-in-a-sorted-array/description/)
 
 ---
-{{< youtube WYe644djV30 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -39,6 +39,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube WYe644djV30 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

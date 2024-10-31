@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1729: Find Followers Count"
-date = "2020-02-06"
+date = "2020-02-07"
 description = "Solution to Leetcode 1729"
 tags = [
     
@@ -28,6 +28,10 @@ FROM Followers
 GROUP BY user_id
 ORDER BY user_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

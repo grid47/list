@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2645: Minimum Additions to Make Valid String"
-date = "2017-08-04"
+date = "2017-08-05"
 description = "Solution to Leetcode 2645"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

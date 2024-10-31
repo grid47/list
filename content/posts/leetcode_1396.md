@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1396: Design Underground System"
-date = "2021-01-04"
+date = "2021-01-05"
 description = "Solution to Leetcode 1396"
 tags = [
     
@@ -63,6 +63,10 @@ public:
  * double param_3 = obj->getAverageTime(startStation,endStation);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

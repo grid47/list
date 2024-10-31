@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1765: Map of Highest Peak"
-date = "2020-01-01"
+date = "2020-01-02"
 description = "Solution to Leetcode 1765"
 tags = [
     
@@ -60,6 +60,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

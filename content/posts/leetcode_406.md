@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 406: Queue Reconstruction by Height"
-date = "2023-09-21"
+date = "2023-09-22"
 description = "Solution to Leetcode 406"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/queue-reconstruction-by-height/description/)
 
 ---
-{{< youtube 6plztg2nnjY >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -43,6 +43,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/406.md" >}}
+
+---
+
+{{< youtube 6plztg2nnjY >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

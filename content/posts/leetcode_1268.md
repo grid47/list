@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1268: Search Suggestions System"
-date = "2021-05-12"
+date = "2021-05-13"
 description = "Solution to Leetcode 1268"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/search-suggestions-system/description/)
 
 ---
-{{< youtube PLNDfB0Vg9Y >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -49,6 +49,10 @@ for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube PLNDfB0Vg9Y >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

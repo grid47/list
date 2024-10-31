@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1760: Minimum Limit of Balls in a Bag"
-date = "2020-01-06"
+date = "2020-01-07"
 description = "Solution to Leetcode 1760"
 tags = [
     
@@ -43,6 +43,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

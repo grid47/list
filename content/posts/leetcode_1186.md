@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1186: Maximum Subarray Sum with One Deletion"
-date = "2021-08-02"
+date = "2021-08-03"
 description = "Solution to Leetcode 1186"
 tags = [
     
@@ -50,6 +50,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

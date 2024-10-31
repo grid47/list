@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1249: Minimum Remove to Make Valid Parentheses"
-date = "2021-05-31"
+date = "2021-06-01"
 description = "Solution to Leetcode 1249"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/description/)
 
 ---
-{{< youtube tMzZUDR_cH0 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -47,6 +47,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube tMzZUDR_cH0 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

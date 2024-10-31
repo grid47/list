@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 92: Reverse Linked List II"
-date = "2024-07-31"
+date = "2024-08-01"
 description = "Solution to Leetcode 92"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reverse-linked-list-ii/description/)
 
 ---
-{{< youtube RF_M9tX4Eag >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -57,6 +57,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/92.md" >}}
+
+---
+
+{{< youtube RF_M9tX4Eag >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

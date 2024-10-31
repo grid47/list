@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1557: Minimum Number of Vertices to Reach All Nodes"
-date = "2020-07-27"
+date = "2020-07-28"
 description = "Solution to Leetcode 1557"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/description/)
 
 ---
-{{< youtube oEy0bzfioG4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -38,6 +38,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube oEy0bzfioG4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

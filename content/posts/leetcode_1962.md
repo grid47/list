@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1962: Remove Stones to Minimize the Total"
-date = "2019-06-18"
+date = "2019-06-19"
 description = "Solution to Leetcode 1962"
 tags = [
     
@@ -48,6 +48,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

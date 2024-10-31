@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1123: Lowest Common Ancestor of Deepest Leaves"
-date = "2021-10-04"
+date = "2021-10-05"
 description = "Solution to Leetcode 1123"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

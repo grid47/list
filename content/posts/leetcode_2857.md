@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2857: Count Pairs of Points With Distance k"
-date = "2017-01-04"
+date = "2017-01-05"
 description = "Solution to Leetcode 2857"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

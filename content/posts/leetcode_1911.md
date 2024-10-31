@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1911: Maximum Alternating Subsequence Sum"
-date = "2019-08-08"
+date = "2019-08-09"
 description = "Solution to Leetcode 1911"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/maximum-alternating-subsequence-sum/description/)
 
 ---
-{{< youtube 4v42XOuU1XA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -39,6 +39,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 4v42XOuU1XA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1004: Max Consecutive Ones III"
-date = "2022-01-31"
+date = "2022-02-01"
 description = "Solution to Leetcode 1004"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/max-consecutive-ones-iii/description/)
 
 ---
-{{< youtube HsGKI02yw6M >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -41,6 +41,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube HsGKI02yw6M >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

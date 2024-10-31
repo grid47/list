@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2239: Find Closest Number to Zero"
-date = "2018-09-14"
+date = "2018-09-15"
 description = "Solution to Leetcode 2239"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-closest-number-to-zero/description/)
 
 ---
-{{< youtube dLlKA5DQKYs >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -33,6 +33,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube dLlKA5DQKYs >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

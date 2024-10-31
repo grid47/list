@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3122: Minimum Number of Operations to Satisfy Conditions"
-date = "2016-04-14"
+date = "2016-04-15"
 description = "Solution to Leetcode 3122"
 tags = [
     
@@ -57,6 +57,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

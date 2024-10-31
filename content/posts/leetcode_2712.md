@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2712: Minimum Cost to Make All Characters Equal"
-date = "2017-05-29"
+date = "2017-05-30"
 description = "Solution to Leetcode 2712"
 tags = [
     
@@ -89,6 +89,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

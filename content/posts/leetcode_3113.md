@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3113: Find the Number of Subarrays Where Boundary Elements Are Maximum"
-date = "2016-04-23"
+date = "2016-04-24"
 description = "Solution to Leetcode 3113"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

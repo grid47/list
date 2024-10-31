@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 139: Word Break"
-date = "2024-06-14"
+date = "2024-06-15"
 description = "Solution to Leetcode 139"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/word-break/description/)
 
 ---
-{{< youtube t0svbzZ1PWM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -51,6 +51,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/139.md" >}}
+
+---
+
+{{< youtube t0svbzZ1PWM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

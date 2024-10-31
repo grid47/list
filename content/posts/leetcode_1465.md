@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1465: Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts"
-date = "2020-10-27"
+date = "2020-10-28"
 description = "Solution to Leetcode 1465"
 tags = [
     
@@ -46,6 +46,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

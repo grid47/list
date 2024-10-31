@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1311: Get Watched Videos by Your Friends"
-date = "2021-03-30"
+date = "2021-03-31"
 description = "Solution to Leetcode 1311"
 tags = [
     
@@ -71,6 +71,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

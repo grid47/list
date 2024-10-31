@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3091: Apply Operations to Make Sum of Array Greater Than or Equal to k"
-date = "2016-05-15"
+date = "2016-05-16"
 description = "Solution to Leetcode 3091"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

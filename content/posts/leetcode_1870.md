@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1870: Minimum Speed to Arrive on Time"
-date = "2019-09-18"
+date = "2019-09-19"
 description = "Solution to Leetcode 1870"
 tags = [
     
@@ -56,6 +56,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

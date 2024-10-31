@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2101: Detonate the Maximum Bombs"
-date = "2019-01-30"
+date = "2019-01-31"
 description = "Solution to Leetcode 2101"
 tags = [
     
@@ -65,6 +65,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

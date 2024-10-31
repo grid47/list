@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1758: Minimum Changes To Make Alternating Binary String"
-date = "2020-01-08"
+date = "2020-01-09"
 description = "Solution to Leetcode 1758"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

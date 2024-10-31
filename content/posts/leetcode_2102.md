@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2102: Sequentially Ordinal Rank Tracker"
-date = "2019-01-29"
+date = "2019-01-30"
 description = "Solution to Leetcode 2102"
 tags = [
     
@@ -78,6 +78,10 @@ public:
  * string param_2 = obj->get();
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2906: Construct Product Matrix"
-date = "2016-11-16"
+date = "2016-11-17"
 description = "Solution to Leetcode 2906"
 tags = [
     
@@ -67,6 +67,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

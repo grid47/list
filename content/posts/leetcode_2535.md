@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2535: Difference Between Element Sum and Digit Sum of an Array"
-date = "2017-11-22"
+date = "2017-11-23"
 description = "Solution to Leetcode 2535"
 tags = [
     
@@ -33,6 +33,10 @@ int differenceOfSum(vector<int>& n) {
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

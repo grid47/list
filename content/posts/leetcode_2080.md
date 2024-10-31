@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2080: Range Frequency Queries"
-date = "2019-02-20"
+date = "2019-02-21"
 description = "Solution to Leetcode 2080"
 tags = [
     
@@ -43,6 +43,10 @@ public:
  * int param_1 = obj->query(left,right,value);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

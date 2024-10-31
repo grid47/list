@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2321: Maximum Score Of Spliced Array"
-date = "2018-06-24"
+date = "2018-06-25"
 description = "Solution to Leetcode 2321"
 tags = [
     
@@ -55,6 +55,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

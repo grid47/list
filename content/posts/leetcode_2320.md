@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2320: Count Number of Ways to Place Houses"
-date = "2018-06-25"
+date = "2018-06-26"
 description = "Solution to Leetcode 2320"
 tags = [
     
@@ -52,6 +52,10 @@ public:
 
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

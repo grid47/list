@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1261: Find Elements in a Contaminated Binary Tree"
-date = "2021-05-19"
+date = "2021-05-20"
 description = "Solution to Leetcode 1261"
 tags = [
     
@@ -58,6 +58,10 @@ public:
  * bool param_1 = obj->find(target);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

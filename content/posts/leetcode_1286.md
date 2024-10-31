@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1286: Iterator for Combination"
-date = "2021-04-24"
+date = "2021-04-25"
 description = "Solution to Leetcode 1286"
 tags = [
     
@@ -70,6 +70,10 @@ public:
  * bool param_2 = obj->hasNext();
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

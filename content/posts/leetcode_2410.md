@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2410: Maximum Matching of Players With Trainers"
-date = "2018-03-27"
+date = "2018-03-28"
 description = "Solution to Leetcode 2410"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

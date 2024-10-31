@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1457: Pseudo-Palindromic Paths in a Binary Tree"
-date = "2020-11-04"
+date = "2020-11-05"
 description = "Solution to Leetcode 1457"
 tags = [
     
@@ -50,6 +50,10 @@ public:
 
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

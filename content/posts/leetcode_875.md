@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 875: Koko Eating Bananas"
-date = "2022-06-09"
+date = "2022-06-10"
 description = "Solution to Leetcode 875"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/koko-eating-bananas/description/)
 
 ---
-{{< youtube ceYZ5RgwQwQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -41,6 +41,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/875.md" >}}
+
+---
+
+{{< youtube ceYZ5RgwQwQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 377: Combination Sum IV"
-date = "2023-10-20"
+date = "2023-10-21"
 description = "Solution to Leetcode 377"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/combination-sum-iv/description/)
 
 ---
-{{< youtube hg_U5GVEM-k >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -47,6 +47,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/377.md" >}}
+
+---
+
+{{< youtube hg_U5GVEM-k >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 935: Knight Dialer"
-date = "2022-04-10"
+date = "2022-04-11"
 description = "Solution to Leetcode 935"
 tags = [
     
@@ -62,6 +62,10 @@ long long path(int i, int j, int n, vector<vector<vector<long long>>> &mem) {
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/935.md" >}}
+
+---
+
+
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

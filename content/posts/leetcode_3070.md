@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3070: Count Submatrices with Top-Left Element and Sum Less Than k"
-date = "2016-06-05"
+date = "2016-06-06"
 description = "Solution to Leetcode 3070"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

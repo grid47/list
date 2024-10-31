@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2795: Parallel Execution of Promises for Individual Results Retrieval"
-date = "2017-03-07"
+date = "2017-03-08"
 description = "Solution to Leetcode 2795"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

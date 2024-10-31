@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2971: Find Polygon With the Largest Perimeter"
-date = "2016-09-12"
+date = "2016-09-13"
 description = "Solution to Leetcode 2971"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

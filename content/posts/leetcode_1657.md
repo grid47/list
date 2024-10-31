@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1657: Determine if Two Strings Are Close"
-date = "2020-04-18"
+date = "2020-04-19"
 description = "Solution to Leetcode 1657"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/determine-if-two-strings-are-close/description/)
 
 ---
-{{< youtube -jXQK-UeChU >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -57,6 +57,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube -jXQK-UeChU >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

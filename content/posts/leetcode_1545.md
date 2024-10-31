@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1545: Find Kth Bit in Nth Binary String"
-date = "2020-08-08"
+date = "2020-08-09"
 description = "Solution to Leetcode 1545"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/description/)
 
 ---
-{{< youtube 34QYE5HAFy4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -44,6 +44,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 34QYE5HAFy4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

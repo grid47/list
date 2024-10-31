@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1161: Maximum Level Sum of a Binary Tree"
-date = "2021-08-27"
+date = "2021-08-28"
 description = "Solution to Leetcode 1161"
 tags = [
     
@@ -61,6 +61,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 864: Shortest Path to Get All Keys"
-date = "2022-06-20"
+date = "2022-06-21"
 description = "Solution to Leetcode 864"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/shortest-path-to-get-all-keys/description/)
 
 ---
-{{< youtube fgR31bhbeVs >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -70,6 +70,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/864.md" >}}
+
+---
+
+{{< youtube fgR31bhbeVs >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

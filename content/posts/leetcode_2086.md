@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2086: Minimum Number of Food Buckets to Feed the Hamsters"
-date = "2019-02-14"
+date = "2019-02-15"
 description = "Solution to Leetcode 2086"
 tags = [
     
@@ -59,6 +59,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

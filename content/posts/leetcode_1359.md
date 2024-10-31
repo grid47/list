@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1359: Count All Valid Pickup and Delivery Options"
-date = "2021-02-10"
+date = "2021-02-11"
 description = "Solution to Leetcode 1359"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

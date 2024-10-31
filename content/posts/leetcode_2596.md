@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2596: Check Knight Tour Configuration"
-date = "2017-09-22"
+date = "2017-09-23"
 description = "Solution to Leetcode 2596"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-knight-tour-configuration/description/)
 
 ---
-{{< youtube OBht8NT_09c >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -50,6 +50,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube OBht8NT_09c >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

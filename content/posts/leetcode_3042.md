@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3042: Count Prefix and Suffix Pairs I"
-date = "2016-07-03"
+date = "2016-07-04"
 description = "Solution to Leetcode 3042"
 tags = [
     
@@ -57,6 +57,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

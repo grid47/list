@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1785: Minimum Elements to Add to Form a Given Sum"
-date = "2019-12-12"
+date = "2019-12-13"
 description = "Solution to Leetcode 1785"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

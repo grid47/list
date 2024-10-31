@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 332: Reconstruct Itinerary"
-date = "2023-12-04"
+date = "2023-12-05"
 description = "Solution to Leetcode 332"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/reconstruct-itinerary/description/)
 
 ---
-{{< youtube ZyB_gQ8vqGA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -53,6 +53,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/332.md" >}}
+
+---
+
+{{< youtube ZyB_gQ8vqGA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1974: Minimum Time to Type Word Using Special Typewriter"
-date = "2019-06-06"
+date = "2019-06-07"
 description = "Solution to Leetcode 1974"
 tags = [
     
@@ -34,6 +34,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

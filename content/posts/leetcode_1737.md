@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1737: Change Minimum Characters to Satisfy One of Three Conditions"
-date = "2020-01-29"
+date = "2020-01-30"
 description = "Solution to Leetcode 1737"
 tags = [
     
@@ -52,6 +52,10 @@ res = min(res, n - cb[i] + ca[i]);
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

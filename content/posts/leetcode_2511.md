@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2511: Maximum Enemy Forts That Can Be Captured"
-date = "2017-12-16"
+date = "2017-12-17"
 description = "Solution to Leetcode 2511"
 tags = [
     
@@ -36,6 +36,10 @@ int captureForts(vector<int>& forts) {
 }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

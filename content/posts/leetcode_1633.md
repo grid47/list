@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1633: Percentage of Users Attended a Contest"
-date = "2020-05-12"
+date = "2020-05-13"
 description = "Solution to Leetcode 1633"
 tags = [
     
@@ -28,6 +28,10 @@ FROM Register
 GROUP BY contest_id
 ORDER BY percentage DESC, contest_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2442: Count Number of Distinct Integers After Reverse Operations"
-date = "2018-02-23"
+date = "2018-02-24"
 description = "Solution to Leetcode 2442"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

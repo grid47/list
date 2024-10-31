@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2024: Maximize the Confusion of an Exam"
-date = "2019-04-17"
+date = "2019-04-18"
 description = "Solution to Leetcode 2024"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

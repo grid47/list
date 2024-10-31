@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1653: Minimum Deletions to Make String Balanced"
-date = "2020-04-22"
+date = "2020-04-23"
 description = "Solution to Leetcode 1653"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

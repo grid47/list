@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1637: Widest Vertical Area Between Two Points Containing No Points"
-date = "2020-05-08"
+date = "2020-05-09"
 description = "Solution to Leetcode 1637"
 tags = [
     
@@ -35,6 +35,10 @@ public:
 };
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

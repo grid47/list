@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2562: Find the Array Concatenation Value"
-date = "2017-10-26"
+date = "2017-10-27"
 description = "Solution to Leetcode 2562"
 tags = [
     
@@ -35,6 +35,10 @@ public:
   }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

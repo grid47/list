@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2860: Happy Students"
-date = "2017-01-01"
+date = "2017-01-02"
 description = "Solution to Leetcode 2860"
 tags = [
     
@@ -43,6 +43,10 @@ public:
 
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1979: Find Greatest Common Divisor of Array"
-date = "2019-06-01"
+date = "2019-06-02"
 description = "Solution to Leetcode 1979"
 tags = [
     
@@ -40,6 +40,10 @@ class Solution {
         }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

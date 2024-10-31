@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1027: Longest Arithmetic Subsequence"
-date = "2022-01-08"
+date = "2022-01-09"
 description = "Solution to Leetcode 1027"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

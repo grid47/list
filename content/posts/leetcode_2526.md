@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2526: Find Consecutive Integers from a Data Stream"
-date = "2017-12-01"
+date = "2017-12-02"
 description = "Solution to Leetcode 2526"
 tags = [
     
@@ -45,6 +45,10 @@ public:
  * bool param_1 = obj->consec(num);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1035: Uncrossed Lines"
-date = "2021-12-31"
+date = "2022-01-01"
 description = "Solution to Leetcode 1035"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/uncrossed-lines/description/)
 
 ---
-{{< youtube TFBZKlASq3g >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -54,6 +54,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube TFBZKlASq3g >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2934: Minimum Operations to Maximize Last Elements in Arrays"
-date = "2016-10-19"
+date = "2016-10-20"
 description = "Solution to Leetcode 2934"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

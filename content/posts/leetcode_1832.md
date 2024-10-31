@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1832: Check if the Sentence Is Pangram"
-date = "2019-10-26"
+date = "2019-10-27"
 description = "Solution to Leetcode 1832"
 tags = [
     
@@ -31,6 +31,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2576: Find the Maximum Number of Marked Indices"
-date = "2017-10-12"
+date = "2017-10-13"
 description = "Solution to Leetcode 2576"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

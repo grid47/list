@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2915: Length of the Longest Subsequence That Sums to Target"
-date = "2016-11-07"
+date = "2016-11-08"
 description = "Solution to Leetcode 2915"
 tags = [
     
@@ -47,6 +47,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

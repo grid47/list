@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1247: Minimum Swaps to Make Strings Equal"
-date = "2021-06-02"
+date = "2021-06-03"
 description = "Solution to Leetcode 1247"
 tags = [
     
@@ -36,6 +36,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

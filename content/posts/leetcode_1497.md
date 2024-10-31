@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1497: Check If Array Pairs Are Divisible by k"
-date = "2020-09-25"
+date = "2020-09-26"
 description = "Solution to Leetcode 1497"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1744: Can You Eat Your Favorite Candy on Your Favorite Day?"
-date = "2020-01-22"
+date = "2020-01-23"
 description = "Solution to Leetcode 1744"
 tags = [
     
@@ -47,6 +47,10 @@ if (mn <= day && day <= mx) {
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

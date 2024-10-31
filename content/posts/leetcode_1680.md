@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1680: Concatenation of Consecutive Binary Numbers"
-date = "2020-03-26"
+date = "2020-03-27"
 description = "Solution to Leetcode 1680"
 tags = [
     
@@ -39,6 +39,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

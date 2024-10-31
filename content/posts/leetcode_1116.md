@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1116: Print Zero Even Odd"
-date = "2021-10-11"
+date = "2021-10-12"
 description = "Solution to Leetcode 1116"
 tags = [
     
@@ -72,6 +72,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

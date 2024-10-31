@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1933: Check if String Is Decomposable Into Value-Equal Substrings"
-date = "2019-07-17"
+date = "2019-07-18"
 description = "Solution to Leetcode 1933"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

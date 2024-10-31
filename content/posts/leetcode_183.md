@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 183: Customers Who Never Order"
-date = "2024-05-01"
+date = "2024-05-02"
 description = "Solution to Leetcode 183"
 tags = [
     
@@ -27,6 +27,10 @@ select A.name AS Customers from Customers A WHERE A.id NOT IN (SELECT B.customer
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/183.md" >}}
+
+---
+
+
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

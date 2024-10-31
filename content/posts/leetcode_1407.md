@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1407: Top Travellers"
-date = "2020-12-24"
+date = "2020-12-25"
 description = "Solution to Leetcode 1407"
 tags = [
     
@@ -30,6 +30,10 @@ ON u.id = r.user_id
 GROUP BY u.id
 ORDER BY travelled_distance DESC, name ASC;
 {{< /highlight >}}
+
+
+
+---
 
 
 

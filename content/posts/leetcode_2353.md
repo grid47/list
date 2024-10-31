@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2353: Design a Food Rating System"
-date = "2018-05-23"
+date = "2018-05-24"
 description = "Solution to Leetcode 2353"
 tags = [
     
@@ -57,6 +57,10 @@ public:
  * string param_2 = obj->highestRated(cuisine);
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

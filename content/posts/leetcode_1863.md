@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1863: Sum of All Subset XOR Totals"
-date = "2019-09-25"
+date = "2019-09-26"
 description = "Solution to Leetcode 1863"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

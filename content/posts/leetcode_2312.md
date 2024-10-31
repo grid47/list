@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2312: Selling Pieces of Wood"
-date = "2018-07-03"
+date = "2018-07-04"
 description = "Solution to Leetcode 2312"
 tags = [
     
@@ -70,6 +70,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

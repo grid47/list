@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2932: Maximum Strong Pair XOR I"
-date = "2016-10-21"
+date = "2016-10-22"
 description = "Solution to Leetcode 2932"
 tags = [
     
@@ -38,6 +38,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

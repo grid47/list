@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2639: Find the Width of Columns of a Grid"
-date = "2017-08-10"
+date = "2017-08-11"
 description = "Solution to Leetcode 2639"
 tags = [
     
@@ -49,6 +49,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

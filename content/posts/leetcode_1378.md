@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1378: Replace Employee ID With The Unique Identifier"
-date = "2021-01-22"
+date = "2021-01-23"
 description = "Solution to Leetcode 1378"
 tags = [
     
@@ -28,6 +28,10 @@ FROM Employees e
 LEFT JOIN EmployeeUNI u
 ON u.id = e.id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

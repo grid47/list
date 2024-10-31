@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1010: Pairs of Songs With Total Durations Divisible by 60"
-date = "2022-01-25"
+date = "2022-01-26"
 description = "Solution to Leetcode 1010"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/description/)
 
 ---
-{{< youtube gM5Wu42UTQk >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -37,6 +37,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube gM5Wu42UTQk >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

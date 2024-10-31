@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1131: Maximum of Absolute Value Expression"
-date = "2021-09-26"
+date = "2021-09-27"
 description = "Solution to Leetcode 1131"
 tags = [
     
@@ -40,6 +40,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

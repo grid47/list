@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2709: Greatest Common Divisor Traversal"
-date = "2017-06-01"
+date = "2017-06-02"
 description = "Solution to Leetcode 2709"
 tags = [
     
@@ -100,6 +100,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

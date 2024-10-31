@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2589: Minimum Time to Complete All Tasks"
-date = "2017-09-29"
+date = "2017-09-30"
 description = "Solution to Leetcode 2589"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

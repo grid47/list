@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2166: Design Bitset"
-date = "2018-11-26"
+date = "2018-11-27"
 description = "Solution to Leetcode 2166"
 tags = [
     
@@ -79,6 +79,10 @@ public:
  * string param_7 = obj->toString();
  */
 {{< /highlight >}}
+
+
+
+---
 
 
 

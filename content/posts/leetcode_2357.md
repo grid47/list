@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2357: Make Array Zero by Subtracting Equal Amounts"
-date = "2018-05-19"
+date = "2018-05-20"
 description = "Solution to Leetcode 2357"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

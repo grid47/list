@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1508: Range Sum of Sorted Subarray Sums"
-date = "2020-09-14"
+date = "2020-09-15"
 description = "Solution to Leetcode 1508"
 tags = [
     
@@ -47,6 +47,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

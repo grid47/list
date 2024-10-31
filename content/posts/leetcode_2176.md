@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2176: Count Equal and Divisible Pairs in an Array"
-date = "2018-11-16"
+date = "2018-11-17"
 description = "Solution to Leetcode 2176"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

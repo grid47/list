@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1111: Maximum Nesting Depth of Two Valid Parentheses Strings"
-date = "2021-10-16"
+date = "2021-10-17"
 description = "Solution to Leetcode 1111"
 tags = [
     
@@ -37,6 +37,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

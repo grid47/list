@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1775: Equal Sum Arrays With Minimum Number of Operations"
-date = "2019-12-22"
+date = "2019-12-23"
 description = "Solution to Leetcode 1775"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

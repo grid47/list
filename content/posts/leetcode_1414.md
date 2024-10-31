@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1414: Find the Minimum Number of Fibonacci Numbers Whose Sum Is K"
-date = "2020-12-17"
+date = "2020-12-18"
 description = "Solution to Leetcode 1414"
 tags = [
     
@@ -42,6 +42,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1735: Count Ways to Make Array With Product"
-date = "2020-01-31"
+date = "2020-02-01"
 description = "Solution to Leetcode 1735"
 tags = [
     
@@ -72,6 +72,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

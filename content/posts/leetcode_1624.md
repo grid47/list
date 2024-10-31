@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1624: Largest Substring Between Two Equal Characters"
-date = "2020-05-21"
+date = "2020-05-22"
 description = "Solution to Leetcode 1624"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/largest-substring-between-two-equal-characters/description/)
 
 ---
-{{< youtube rfjeFs3JuYM >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -42,6 +42,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube rfjeFs3JuYM >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

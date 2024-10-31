@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1958: Check if Move is Legal"
-date = "2019-06-22"
+date = "2019-06-23"
 description = "Solution to Leetcode 1958"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/check-if-move-is-legal/description/)
 
 ---
-{{< youtube KxK33AcQZpQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -50,6 +50,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube KxK33AcQZpQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

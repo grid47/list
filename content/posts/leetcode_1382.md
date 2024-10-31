@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1382: Balance a Binary Search Tree"
-date = "2021-01-18"
+date = "2021-01-19"
 description = "Solution to Leetcode 1382"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/balance-a-binary-search-tree/description/)
 
 ---
-{{< youtube 0KGdtzgL9Ec >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -60,6 +60,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube 0KGdtzgL9Ec >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

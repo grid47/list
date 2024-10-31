@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1318: Minimum Flips to Make a OR b Equal to c"
-date = "2021-03-23"
+date = "2021-03-24"
 description = "Solution to Leetcode 1318"
 tags = [
     
@@ -53,6 +53,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

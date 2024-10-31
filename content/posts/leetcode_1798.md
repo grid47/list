@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1798: Maximum Number of Consecutive Values You Can Make"
-date = "2019-11-29"
+date = "2019-11-30"
 description = "Solution to Leetcode 1798"
 tags = [
     
@@ -43,6 +43,10 @@ public:
 
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

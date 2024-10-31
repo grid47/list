@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2137: Pour Water Between Buckets to Make Water Levels Equal"
-date = "2018-12-25"
+date = "2018-12-26"
 description = "Solution to Leetcode 2137"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

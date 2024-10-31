@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1315: Sum of Nodes with Even-Valued Grandparent"
-date = "2021-03-26"
+date = "2021-03-27"
 description = "Solution to Leetcode 1315"
 tags = [
     
@@ -45,6 +45,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1731: The Number of Employees Which Report to Each Employee"
-date = "2020-02-04"
+date = "2020-02-05"
 description = "Solution to Leetcode 1731"
 tags = [
     
@@ -30,6 +30,10 @@ ON e2.reports_to = e1.employee_id
 GROUP BY e1.employee_id
 ORDER BY e1.employee_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

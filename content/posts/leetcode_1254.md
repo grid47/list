@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1254: Number of Closed Islands"
-date = "2021-05-26"
+date = "2021-05-27"
 description = "Solution to Leetcode 1254"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/number-of-closed-islands/description/)
 
 ---
-{{< youtube ZH8TeWFYpx8 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -56,6 +56,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube ZH8TeWFYpx8 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

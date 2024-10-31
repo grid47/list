@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1541: Minimum Insertions to Balance a Parentheses String"
-date = "2020-08-12"
+date = "2020-08-13"
 description = "Solution to Leetcode 1541"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/description/)
 
 ---
-{{< youtube PEKAlnmbBCc >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -53,6 +53,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube PEKAlnmbBCc >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

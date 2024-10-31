@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2846: Minimum Edge Weight Equilibrium Queries in a Tree"
-date = "2017-01-15"
+date = "2017-01-16"
 description = "Solution to Leetcode 2846"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

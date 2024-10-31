@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1211: Queries Quality and Percentage"
-date = "2021-07-08"
+date = "2021-07-09"
 description = "Solution to Leetcode 1211"
 tags = [
     
@@ -31,6 +31,10 @@ FROM Queries
 GROUP BY query_name
 HAVING query_name is not null
 {{< /highlight >}}
+
+
+
+---
 
 
 

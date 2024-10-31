@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2084: Drop Type 1 Orders for Customers With Type 0 Orders"
-date = "2019-02-16"
+date = "2019-02-17"
 description = "Solution to Leetcode 2084"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2571: Minimum Operations to Reduce an Integer to 0"
-date = "2017-10-17"
+date = "2017-10-18"
 description = "Solution to Leetcode 2571"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

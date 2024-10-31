@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1978: Employees Whose Manager Left the Company"
-date = "2019-06-02"
+date = "2019-06-03"
 description = "Solution to Leetcode 1978"
 tags = [
     
@@ -28,6 +28,10 @@ FROM Employees
 WHERE manager_id NOT IN (SELECT employee_id FROM Employees)
 AND salary < 30000 ORDER BY employee_id;
 {{< /highlight >}}
+
+
+
+---
 
 
 

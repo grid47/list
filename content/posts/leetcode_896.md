@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 896: Monotonic Array"
-date = "2022-05-19"
+date = "2022-05-20"
 description = "Solution to Leetcode 896"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/monotonic-array/description/)
 
 ---
-{{< youtube stkYclqstaA >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -34,6 +34,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/896.md" >}}
+
+---
+
+{{< youtube stkYclqstaA >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

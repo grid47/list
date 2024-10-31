@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 138: Copy List with Random Pointer"
-date = "2024-06-15"
+date = "2024-06-16"
 description = "Solution to Leetcode 138"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/copy-list-with-random-pointer/description/)
 
 ---
-{{< youtube 5Y2EiZST97Y >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -62,6 +62,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/138.md" >}}
+
+---
+
+{{< youtube 5Y2EiZST97Y >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 225: Implement Stack using Queues"
-date = "2024-03-20"
+date = "2024-03-21"
 description = "Solution to Leetcode 225"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/implement-stack-using-queues/description/)
 
 ---
-{{< youtube rW4vm0-DLYc >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -63,6 +63,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/225.md" >}}
+
+---
+
+{{< youtube rW4vm0-DLYc >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

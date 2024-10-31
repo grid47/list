@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 3135: Equalize Strings by Adding or Removing Characters at Ends"
-date = "2016-04-01"
+date = "2016-04-02"
 description = "Solution to Leetcode 3135"
 tags = [
     
@@ -24,6 +24,10 @@ series = ["Leetcode"]
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+
+
+
+---
 
 
 

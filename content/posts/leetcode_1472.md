@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1472: Design Browser History"
-date = "2020-10-20"
+date = "2020-10-21"
 description = "Solution to Leetcode 1472"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/design-browser-history/description/)
 
 ---
-{{< youtube pvj8WQMPlGY >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -66,6 +66,10 @@ public:
 {{< /highlight >}}
 
 
+
+---
+
+{{< youtube pvj8WQMPlGY >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

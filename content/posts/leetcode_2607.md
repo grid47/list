@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2607: Make K-Subarray Sums Equal"
-date = "2017-09-11"
+date = "2017-09-12"
 description = "Solution to Leetcode 2607"
 tags = [
     
@@ -55,6 +55,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

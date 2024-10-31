@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1401: Circle and Rectangle Overlapping"
-date = "2020-12-30"
+date = "2020-12-31"
 description = "Solution to Leetcode 1401"
 tags = [
     
@@ -35,6 +35,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 2232: Minimize Result by Adding Parentheses to Expression"
-date = "2018-09-21"
+date = "2018-09-22"
 description = "Solution to Leetcode 2232"
 tags = [
     
@@ -76,6 +76,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

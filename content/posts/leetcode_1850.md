@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1850: Minimum Adjacent Swaps to Reach the Kth Smallest Number"
-date = "2019-10-08"
+date = "2019-10-09"
 description = "Solution to Leetcode 1850"
 tags = [
     
@@ -51,6 +51,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1720: Decode XORed Array"
-date = "2020-02-15"
+date = "2020-02-16"
 description = "Solution to Leetcode 1720"
 tags = [
     
@@ -33,6 +33,10 @@ vector<int> decode(vector<int>& encoded, int first) {
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

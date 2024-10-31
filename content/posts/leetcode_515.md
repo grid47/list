@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 515: Find Largest Value in Each Tree Row"
-date = "2023-06-04"
+date = "2023-06-05"
 description = "Solution to Leetcode 515"
 tags = [
     
@@ -18,7 +18,7 @@ series = ["Leetcode"]
 [`Problem Link`](https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/)
 
 ---
-{{< youtube 0EVQluJY224 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -60,6 +60,10 @@ public:
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/515.md" >}}
+
+---
+
+{{< youtube 0EVQluJY224 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

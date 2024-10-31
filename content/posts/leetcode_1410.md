@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1410: HTML Entity Parser"
-date = "2020-12-21"
+date = "2020-12-22"
 description = "Solution to Leetcode 1410"
 tags = [
     
@@ -65,6 +65,10 @@ public:
     }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 

@@ -1,8 +1,8 @@
 
 +++
-authors = ["Coded by Me, Explained by GPT"]
+authors = ["Crafted by Me"]
 title = "Leetcode 1589: Maximum Sum Obtained of Any Permutation"
-date = "2020-06-25"
+date = "2020-06-26"
 description = "Solution to Leetcode 1589"
 tags = [
     
@@ -45,6 +45,10 @@ public:
         }
 };
 {{< /highlight >}}
+
+
+
+---
 
 
 
