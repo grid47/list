@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -66,10 +68,6 @@ public:
  * bool param_1 = obj->addCar(carType);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

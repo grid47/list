@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -29,10 +31,6 @@ JOIN Activity a2
 ON a1.machine_id = a2.machine_id AND a1.activity_type = 'end' AND a2.activity_type = 'start'
 GROUP BY machine_id;
 {{< /highlight >}}
-
-
-
----
 
 
 

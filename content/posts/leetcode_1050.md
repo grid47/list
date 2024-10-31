@@ -19,16 +19,14 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
 # Write your MySQL query statement below
 SELECt actor_id, director_id FROM ActorDirector GROUP BY actor_id, director_id HAVING COUNT(timestamp) >= 3;
 {{< /highlight >}}
-
-
-
----
 
 
 

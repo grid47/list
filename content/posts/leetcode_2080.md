@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -43,10 +45,6 @@ public:
  * int param_1 = obj->query(left,right,value);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

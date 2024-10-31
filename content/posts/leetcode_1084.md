@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -31,10 +33,6 @@ GROUP BY p.product_id
 HAVING MIN(sale_date) >= CAST('2019-01-01' AS DATE) AND
        MAX(sale_date) <= CAST('2019-03-31' AS DATE);
 {{< /highlight >}}
-
-
-
----
 
 
 

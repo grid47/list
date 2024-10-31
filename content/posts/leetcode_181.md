@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+{{< youtube wnBab2aFdCc >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -29,10 +31,6 @@ WHERE e1.salary < e2.salary
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/181.md" >}}
-
----
-
-{{< youtube wnBab2aFdCc >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

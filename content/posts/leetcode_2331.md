@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -47,10 +49,6 @@ return evaluateTree(root->left) && evaluateTree(root->right);
     }
 };
 {{< /highlight >}}
-
-
-
----
 
 
 

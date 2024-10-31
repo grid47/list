@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -76,10 +78,6 @@ int c = count[r] - count[l] +1;
     }
 };
 {{< /highlight >}}
-
-
-
----
 
 
 

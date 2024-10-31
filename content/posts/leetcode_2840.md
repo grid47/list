@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -40,10 +42,6 @@ for (int i = 0; i < 26; i++) {
 return true;}
 };
 {{< /highlight >}}
-
-
-
----
 
 
 

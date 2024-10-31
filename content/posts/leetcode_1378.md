@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -28,10 +30,6 @@ FROM Employees e
 LEFT JOIN EmployeeUNI u
 ON u.id = e.id;
 {{< /highlight >}}
-
-
-
----
 
 
 

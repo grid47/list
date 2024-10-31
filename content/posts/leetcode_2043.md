@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -64,10 +66,6 @@ public:
  * bool param_3 = obj->withdraw(account,money);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

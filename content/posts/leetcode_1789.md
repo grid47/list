@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -32,10 +34,6 @@ FROM Employee
 GROUP BY employee_id
 HAVING COUNT(*) = 1
 {{< /highlight >}}
-
-
-
----
 
 
 

@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -52,10 +54,6 @@ res = min(res, n - cb[i] + ca[i]);
     }
 };
 {{< /highlight >}}
-
-
-
----
 
 
 

@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -60,10 +62,6 @@ public:
  * int param_2 = obj->count(tot);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

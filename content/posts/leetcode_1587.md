@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -30,10 +32,6 @@ ON s.account = t.account
 GROUP BY s.account
 HAVING balance > 10000;
 {{< /highlight >}}
-
-
-
----
 
 
 

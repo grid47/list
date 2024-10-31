@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -30,10 +32,6 @@ ON u.id = r.user_id
 GROUP BY u.id
 ORDER BY travelled_distance DESC, name ASC;
 {{< /highlight >}}
-
-
-
----
 
 
 

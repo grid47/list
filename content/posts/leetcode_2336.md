@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -53,10 +55,6 @@ public:
  * obj->addBack(num);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

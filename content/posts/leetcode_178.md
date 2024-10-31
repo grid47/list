@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+{{< youtube wmummY2FDa4 >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -30,10 +32,6 @@ ORDER BY Score desc;
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/178.md" >}}
-
----
-
-{{< youtube wmummY2FDa4 >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

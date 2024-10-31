@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -60,10 +62,6 @@ public:
  * obj->increment(k,val);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

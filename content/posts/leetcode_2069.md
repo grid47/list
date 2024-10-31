@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -76,10 +78,6 @@ public:
  * string param_3 = obj->getDir();
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

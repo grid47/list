@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -26,10 +28,6 @@ series = ["Leetcode"]
 SELECT teacher_id, COUNT(DISTINCT subject_id) AS cnt FROM Teacher
 GROUP BY teacher_id;
 {{< /highlight >}}
-
-
-
----
 
 
 

@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+{{< youtube wCc_nd-GiEc >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -57,10 +59,6 @@ if(j < n - 1 && !vis[i][j + 1] && mtx[i][j + 1] > mtx[i][j]) res = max(res, 1 + 
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/329.md" >}}
-
----
-
-{{< youtube wCc_nd-GiEc >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

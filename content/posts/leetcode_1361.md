@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -96,10 +98,6 @@ if(!uf.uni(i, rc[i]))
     }
 };
 {{< /highlight >}}
-
-
-
----
 
 
 

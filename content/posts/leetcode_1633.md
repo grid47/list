@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -28,10 +30,6 @@ FROM Register
 GROUP BY contest_id
 ORDER BY percentage DESC, contest_id;
 {{< /highlight >}}
-
-
-
----
 
 
 

@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+{{< youtube FROOb0_r1xQ >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -29,10 +31,6 @@ WHERE w1.temperature > w2.temperature AND DATEDIFF(w1.recordDate, w2.recordDate)
 {{< /highlight >}}
 
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/197.md" >}}
-
----
-
-{{< youtube FROOb0_r1xQ >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

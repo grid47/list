@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -78,10 +80,6 @@ public:
  * int param_2 = obj->shortestPath(node1,node2);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

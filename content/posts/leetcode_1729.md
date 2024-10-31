@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -28,10 +30,6 @@ FROM Followers
 GROUP BY user_id
 ORDER BY user_id;
 {{< /highlight >}}
-
-
-
----
 
 
 

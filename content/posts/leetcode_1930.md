@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+{{< youtube 3THUt0vAFLU >}}
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -40,10 +42,6 @@ if(fst[i] < lst[i]) res += unordered_set<char>(num.begin() + fst[i] + 1, num.beg
 {{< /highlight >}}
 
 
-
----
-
-{{< youtube 3THUt0vAFLU >}}
 
 {{< notice tip >}}
 [Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)

@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -58,10 +60,6 @@ d[e[0]][e[1]] = d[e[1]][e[0]] = e[2];
     }
 };
 {{< /highlight >}}
-
-
-
----
 
 
 

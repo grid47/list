@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -50,10 +52,6 @@ public:
  * double param_1 = obj->getBill(product,amount);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

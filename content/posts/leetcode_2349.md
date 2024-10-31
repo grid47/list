@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -57,10 +59,6 @@ public:
  * int param_2 = obj->find(number);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

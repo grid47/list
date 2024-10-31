@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -48,10 +50,6 @@ public:
     But right attempt is, queueing over a map which shares same diagonals
 */
 {{< /highlight >}}
-
-
-
----
 
 
 

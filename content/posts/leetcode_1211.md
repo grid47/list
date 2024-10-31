@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -31,10 +33,6 @@ FROM Queries
 GROUP BY query_name
 HAVING query_name is not null
 {{< /highlight >}}
-
-
-
----
 
 
 

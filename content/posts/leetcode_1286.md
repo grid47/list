@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -70,10 +72,6 @@ public:
  * bool param_2 = obj->hasNext();
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

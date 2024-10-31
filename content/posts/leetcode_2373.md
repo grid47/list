@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -36,10 +38,6 @@ vector<vector<int>> largestLocal(vector<vector<int>>& g) {
 }
 };
 {{< /highlight >}}
-
-
-
----
 
 
 

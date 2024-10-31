@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -44,10 +46,6 @@ hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
     }
 };
 {{< /highlight >}}
-
-
-
----
 
 
 

@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -63,10 +65,6 @@ public:
  * double param_3 = obj->getAverageTime(startStation,endStation);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 

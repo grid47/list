@@ -19,6 +19,8 @@ series = ["Leetcode"]
 
 ---
 
+
+
 **Code:**
 
 {{< highlight cpp >}}
@@ -42,10 +44,6 @@ vector<string> insert(int id, string value) {
  * vector<string> param_1 = obj->insert(idKey,value);
  */
 {{< /highlight >}}
-
-
-
----
 
 
 
