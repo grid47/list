@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 222: Count Complete Tree Nodes"
-date = "2024-03-24"
+date = "2024-03-25"
 description = "Solution to Leetcode 222"
 tags = [
     
@@ -30,6 +30,6 @@ series = ["Leetcode"]
 {{< youtube Bm9gkcn1Qbo >}}
 
 {{< notice tip >}}
-[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}
 

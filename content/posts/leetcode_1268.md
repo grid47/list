@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1268: Search Suggestions System"
-date = "2021-05-13"
+date = "2021-05-14"
 description = "Solution to Leetcode 1268"
 tags = [
     
@@ -53,6 +53,6 @@ for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
 {{< youtube PLNDfB0Vg9Y >}}
 
 {{< notice tip >}}
-[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}
 

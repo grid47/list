@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition"
-date = "2020-09-25"
+date = "2020-09-26"
 description = "Solution to Leetcode 1498"
 tags = [
     
@@ -66,6 +66,6 @@ public:
 {{< youtube WZhNEfbGYEo >}}
 
 {{< notice tip >}}
-[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}
 

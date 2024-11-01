@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1720: Decode XORed Array"
-date = "2020-02-16"
+date = "2020-02-17"
 description = "Solution to Leetcode 1720"
 tags = [
     
@@ -39,6 +39,6 @@ vector<int> decode(vector<int>& encoded, int first) {
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}
 

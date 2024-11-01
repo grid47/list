@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 620: Not Boring Movies"
-date = "2023-02-20"
+date = "2023-02-21"
 description = "Solution to Leetcode 620"
 tags = [
     
@@ -31,6 +31,6 @@ select * from Cinema c where MOD(c.id, 2) = 1 and c.description != "boring" orde
 
 
 {{< notice tip >}}
-[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}
 

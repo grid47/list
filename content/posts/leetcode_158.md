@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 158: Read N Characters Given read4 II - Call Multiple Times"
-date = "2024-05-27"
+date = "2024-05-28"
 description = "Solution to Leetcode 158"
 tags = [
     
@@ -30,6 +30,6 @@ series = ["Leetcode"]
 {{< youtube 7rrDr5BnJNw >}}
 
 {{< notice tip >}}
-[Check out my Momentum Learning course at Udemy! 🚀 "](https://www.udemy.com/course/blind-75-the-data-structures-and-algorithms-essentials/)
+Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}
 
