@@ -26,7 +26,10 @@ series = ["Leetcode"]
 UPDATE Salary SET sex=IF(sex='m','f','m');
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/627.md" >}}
+- by gpt
+        
 ---
 
 

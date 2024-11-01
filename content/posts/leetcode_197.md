@@ -28,7 +28,10 @@ FROM Weather AS w1, Weather AS w2
 WHERE w1.temperature > w2.temperature AND DATEDIFF(w1.recordDate, w2.recordDate) = 1;
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/197.md" >}}
+- by gpt
+        
 ---
 {{< youtube FROOb0_r1xQ >}}
 

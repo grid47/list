@@ -31,7 +31,10 @@ FROM
 WHERE num >= 5;
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/596.md" >}}
+- by gpt
+        
 ---
 
 

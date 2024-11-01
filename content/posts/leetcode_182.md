@@ -26,7 +26,10 @@ series = ["Leetcode"]
 select email from person group by email having count(*) > 1;
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/182.md" >}}
+- by gpt
+        
 ---
 
 

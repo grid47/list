@@ -26,7 +26,10 @@ series = ["Leetcode"]
 cat words.txt | tr -s ' ' '\n' | sort | uniq -c | sort -r | awk '{print $2 ,$1}'
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/192.md" >}}
+- by gpt
+        
 ---
 
 

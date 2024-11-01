@@ -26,7 +26,10 @@ series = ["Leetcode"]
 SELECT name FROM Customer WHERE referee_id IS NULL OR referee_id != 2;
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/584.md" >}}
+- by gpt
+        
 ---
 
 

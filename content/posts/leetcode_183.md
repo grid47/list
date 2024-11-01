@@ -26,7 +26,10 @@ series = ["Leetcode"]
 select A.name AS Customers from Customers A WHERE A.id NOT IN (SELECT B.customerId FROM Orders B);
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/183.md" >}}
+- by gpt
+        
 ---
 
 

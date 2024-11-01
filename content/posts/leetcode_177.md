@@ -33,7 +33,10 @@ SET M=N-1;
 END
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/177.md" >}}
+- by gpt
+        
 ---
 {{< youtube lMUMS3hKd74 >}}
 

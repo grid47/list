@@ -55,7 +55,10 @@ public:
 // solution.decode(solution.encode(url));
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/535.md" >}}
+- by gpt
+        
 ---
 {{< youtube VyBOaboQLGc >}}
 

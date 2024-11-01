@@ -64,7 +64,10 @@ private:
 };
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/68.md" >}}
+- by gpt
+        
 ---
 {{< youtube smaxL16J504 >}}
 

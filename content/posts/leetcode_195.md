@@ -26,7 +26,10 @@ series = ["Leetcode"]
 head -10 file.txt | tail -n+10 | head -1
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/195.md" >}}
+- by gpt
+        
 ---
 
 

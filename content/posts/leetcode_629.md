@@ -39,7 +39,10 @@ int kInversePairs(int n, int k) {
 };
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/629.md" >}}
+- by gpt
+        
 ---
 
 

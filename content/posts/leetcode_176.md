@@ -26,7 +26,10 @@ series = ["Leetcode"]
 SELECT MAX(Salary) AS "SecondHighestSalary" FROM Employee WHERE Salary < (SELECT MAX(Salary) FROM Employee);
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/176.md" >}}
+- by gpt
+        
 ---
 {{< youtube 3xc0_XIob1M >}}
 

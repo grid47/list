@@ -56,7 +56,10 @@ if(j < n - 1 && !vis[i][j + 1] && mtx[i][j + 1] > mtx[i][j]) res = max(res, 1 + 
 };
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/329.md" >}}
+- by gpt
+        
 ---
 {{< youtube wCc_nd-GiEc >}}
 

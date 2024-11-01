@@ -33,7 +33,10 @@ SELECT s.name
         WHERE c.name='RED');
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/607.md" >}}
+- by gpt
+        
 ---
 
 

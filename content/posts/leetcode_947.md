@@ -73,7 +73,10 @@ public:
 };
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/947.md" >}}
+- by gpt
+        
 ---
 
 

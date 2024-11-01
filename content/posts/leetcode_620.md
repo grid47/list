@@ -26,7 +26,10 @@ series = ["Leetcode"]
 select * from Cinema c where MOD(c.id, 2) = 1 and c.description != "boring" order by c.rating desc
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/620.md" >}}
+- by gpt
+        
 ---
 
 

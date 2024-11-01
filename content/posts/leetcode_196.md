@@ -29,7 +29,10 @@ WHERE p1.Email = p2.Email AND
 p1.Id > p2.Id
 {{< /highlight >}}
 
+
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/196.md" >}}
+- by gpt
+        
 ---
 {{< youtube TqjS05MEi1E >}}
 
