@@ -25,10 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/562.md" >}}
-- by gpt
-        
 ---
 {{< youtube 6FPsqiCS2g8 >}}
 

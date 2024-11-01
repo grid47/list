@@ -38,10 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1.md" >}}
-- by gpt
-        
 ---
 {{< youtube Yyyi12oaK94 >}}
 

@@ -28,10 +28,7 @@ SELECT e.name, b.bonus FROM Employee e
     WHERE b.bonus IS NULL OR b.bonus < 1000;
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/577.md" >}}
-- by gpt
-        
 ---
 
 

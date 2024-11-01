@@ -33,10 +33,7 @@ def consecutive_numbers(logs: pd.DataFrame) -> pd.DataFrame:
     return res
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/180.md" >}}
-- by gpt
-        
 ---
 {{< youtube _nU4hBwsyTE >}}
 

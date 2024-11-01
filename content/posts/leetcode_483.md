@@ -44,10 +44,7 @@ class Solution {
 };
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/483.md" >}}
-- by gpt
-        
 ---
 
 

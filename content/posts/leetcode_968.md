@@ -51,10 +51,7 @@ public:
 };
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/968.md" >}}
-- by gpt
-        
 ---
 
 

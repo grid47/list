@@ -29,10 +29,7 @@ FROM Scores s
 ORDER BY Score desc;
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/178.md" >}}
-- by gpt
-        
 ---
 {{< youtube wmummY2FDa4 >}}
 

@@ -58,10 +58,7 @@ class Solution {
  */
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/528.md" >}}
-- by gpt
-        
 ---
 {{< youtube oYjDXfo-mt0 >}}
 

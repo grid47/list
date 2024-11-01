@@ -26,10 +26,7 @@ series = ["Leetcode"]
 SELECT name, population, area FROM World WHERE area >= 3000000 OR population >= 25000000;
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/595.md" >}}
-- by gpt
-        
 ---
 
 

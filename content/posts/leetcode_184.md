@@ -32,10 +32,7 @@ WHERE E.DepartmentId = D.id
     (SELECT DepartmentId, max(Salary) AS MAX FROM Employee GROUP BY DepartmentId);
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/184.md" >}}
-- by gpt
-        
 ---
 {{< youtube LO0a31mkY6Q >}}
 

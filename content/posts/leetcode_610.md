@@ -26,10 +26,7 @@ series = ["Leetcode"]
 SELECT x, y, z,IF(x + y > z AND x + z > y AND y + z > x, 'Yes', 'No') AS triangle FROM Triangle;
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/610.md" >}}
-- by gpt
-        
 ---
 {{< youtube QWyzkiwBhFc >}}
 

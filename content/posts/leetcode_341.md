@@ -56,10 +56,7 @@ private:
 };
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/341.md" >}}
-- by gpt
-        
 ---
 
 

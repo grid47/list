@@ -47,10 +47,7 @@ flipEquiv(root1->left, root2->right) && flipEquiv(root1->right, root2->left));
 };
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/951.md" >}}
-- by gpt
-        
 ---
 {{< youtube izRDc1il9Pk >}}
 

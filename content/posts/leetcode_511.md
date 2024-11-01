@@ -28,10 +28,7 @@ FROM Activity
 GROUP BY player_id;
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/511.md" >}}
-- by gpt
-        
 ---
 {{< youtube r9OmoceJCSs >}}
 

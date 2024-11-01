@@ -26,10 +26,7 @@ series = ["Leetcode"]
 SELECT Person.firstName,Person.lastName,Address.city,Address.state FROM Person LEFT JOIN Address ON Person.personId = Address.personId
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/175.md" >}}
-- by gpt
-        
 ---
 {{< youtube iVz5triYt-8 >}}
 

@@ -72,10 +72,7 @@ int numSimilarGroups(vector<string>& A) {
 };
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/839.md" >}}
-- by gpt
-        
 ---
 {{< youtube SbLsabsSFt0 >}}
 

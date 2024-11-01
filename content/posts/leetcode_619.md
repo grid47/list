@@ -32,10 +32,7 @@ select (
 ) as num;
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/619.md" >}}
-- by gpt
-        
 ---
 
 

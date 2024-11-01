@@ -30,10 +30,7 @@ ORDER BY COUNT(*)
 DESC LIMIT 1;
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/586.md" >}}
-- by gpt
-        
 ---
 
 

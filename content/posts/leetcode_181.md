@@ -28,10 +28,7 @@ INNER JOIN employee e2 ON e1.id = e2.managerID
 WHERE e1.salary < e2.salary
 {{< /highlight >}}
 
-
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/181.md" >}}
-- by gpt
-        
 ---
 {{< youtube wnBab2aFdCc >}}
 
