@@ -50,7 +50,7 @@ int cnt = __builtin_popcount(pt[v[1]+1] ^ pt[v[0]]);
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1177.md" >}}
 ---
 
 

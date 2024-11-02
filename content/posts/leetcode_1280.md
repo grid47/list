@@ -32,7 +32,7 @@ GROUP BY s.student_id, s.student_name, sub.subject_name
 ORDER BY s.student_id, sub.subject_name;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1280.md" >}}
 ---
 {{< youtube ThbkV4Fs7iE >}}
 

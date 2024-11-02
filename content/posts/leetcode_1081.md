@@ -53,7 +53,7 @@ public:
 // that problem was there were
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1081.md" >}}
 ---
 
 

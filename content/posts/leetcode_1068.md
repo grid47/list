@@ -29,7 +29,7 @@ LEFT JOIN Product a
 ON a.product_id = b.product_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1068.md" >}}
 ---
 
 

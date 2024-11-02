@@ -60,7 +60,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1226.md" >}}
 ---
 {{< youtube cb6-GZiSaMY >}}
 

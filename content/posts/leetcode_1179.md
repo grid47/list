@@ -41,7 +41,7 @@ group by id
 order by id
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1179.md" >}}
 ---
 {{< youtube XIX8-ljI-qM >}}
 

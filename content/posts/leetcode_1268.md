@@ -48,7 +48,7 @@ for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1268.md" >}}
 ---
 {{< youtube PLNDfB0Vg9Y >}}
 

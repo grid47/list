@@ -32,7 +32,7 @@ GROUP BY query_name
 HAVING query_name is not null
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1211.md" >}}
 ---
 
 

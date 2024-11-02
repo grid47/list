@@ -30,7 +30,7 @@ ON p.product_id = u.product_id AND p.start_date <= u.purchase_date AND u.purchas
 GROUP BY p.product_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1251.md" >}}
 ---
 
 

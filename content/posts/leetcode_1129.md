@@ -67,7 +67,7 @@ class Solution {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1129.md" >}}
 ---
 {{< youtube VaW0deOb2aQ >}}
 

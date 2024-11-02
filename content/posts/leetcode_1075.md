@@ -30,7 +30,7 @@ ON p.employee_id = e.employee_id
 GROUP BY p.project_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1075.md" >}}
 ---
 
 
