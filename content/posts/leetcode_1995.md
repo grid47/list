@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1995: Count Special Quadruplets"
-date = "2019-05-18"
+date = "2018-05-17"
 description = "Solution to Leetcode 1995"
 tags = [
     

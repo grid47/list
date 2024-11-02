@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2234: Maximum Total Beauty of the Gardens"
-date = "2018-09-21"
+date = "2017-09-20"
 description = "Solution to Leetcode 2234"
 tags = [
     

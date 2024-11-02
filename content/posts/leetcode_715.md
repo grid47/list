@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 715: Range Module"
-date = "2022-11-18"
+date = "2021-11-17"
 description = "Solution to Leetcode 715"
 tags = [
     

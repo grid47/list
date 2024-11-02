@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 651: 4 Keys Keyboard"
-date = "2023-01-21"
+date = "2022-01-20"
 description = "Solution to Leetcode 651"
 tags = [
     

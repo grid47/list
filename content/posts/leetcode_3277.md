@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3277: Maximum XOR Score Subarray Queries"
-date = "2015-11-13"
+date = "2014-11-12"
 description = "Solution to Leetcode 3277"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 352: Data Stream as Disjoint Intervals"
-date = "2023-11-16"
+date = "2022-11-15"
 description = "Solution to Leetcode 352"
 tags = [
     

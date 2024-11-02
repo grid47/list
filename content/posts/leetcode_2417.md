@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2417: Closest Fair Integer"
-date = "2018-03-22"
+date = "2017-03-21"
 description = "Solution to Leetcode 2417"
 tags = [
     

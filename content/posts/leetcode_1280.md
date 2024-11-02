@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1280: Students and Examinations"
-date = "2021-05-02"
+date = "2020-05-01"
 description = "Solution to Leetcode 1280"
 tags = [
     

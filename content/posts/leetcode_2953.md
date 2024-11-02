@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2953: Count Complete Substrings"
-date = "2016-10-02"
+date = "2015-10-02"
 description = "Solution to Leetcode 2953"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1721: Swapping Nodes in a Linked List"
-date = "2020-02-16"
+date = "2019-02-15"
 description = "Solution to Leetcode 1721"
 tags = [
     

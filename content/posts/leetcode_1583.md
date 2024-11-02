@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1583: Count Unhappy Friends"
-date = "2020-07-03"
+date = "2019-07-03"
 description = "Solution to Leetcode 1583"
 tags = [
     

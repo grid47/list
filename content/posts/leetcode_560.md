@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 560: Subarray Sum Equals K"
-date = "2023-04-22"
+date = "2022-04-21"
 description = "Solution to Leetcode 560"
 tags = [
     

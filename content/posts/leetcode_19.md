@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 19: Remove Nth Node From End of List"
-date = "2024-10-14"
+date = "2023-10-14"
 description = "Solution to Leetcode 19"
 tags = [
     

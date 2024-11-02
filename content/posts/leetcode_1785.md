@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1785: Minimum Elements to Add to Form a Given Sum"
-date = "2019-12-14"
+date = "2018-12-13"
 description = "Solution to Leetcode 1785"
 tags = [
     

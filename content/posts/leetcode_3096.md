@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3096: Minimum Levels to Gain More Points"
-date = "2016-05-12"
+date = "2015-05-12"
 description = "Solution to Leetcode 3096"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 9: Palindrome Number"
-date = "2024-10-24"
+date = "2023-10-24"
 description = "Solution to Leetcode 9"
 tags = [
     

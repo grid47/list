@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1297: Maximum Number of Occurrences of a Substring"
-date = "2021-04-15"
+date = "2020-04-14"
 description = "Solution to Leetcode 1297"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2063: Vowels of All Substrings"
-date = "2019-03-11"
+date = "2018-03-10"
 description = "Solution to Leetcode 2063"
 tags = [
     

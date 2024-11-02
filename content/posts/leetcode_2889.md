@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2889: Reshape Data: Pivot"
-date = "2016-12-05"
+date = "2015-12-05"
 description = "Solution to Leetcode 2889"
 tags = [
     

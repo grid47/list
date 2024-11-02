@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3250: Find the Count of Monotonic Pairs I"
-date = "2015-12-10"
+date = "2014-12-09"
 description = "Solution to Leetcode 3250"
 tags = [
     

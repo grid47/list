@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2568: Minimum Impossible OR"
-date = "2017-10-22"
+date = "2016-10-21"
 description = "Solution to Leetcode 2568"
 tags = [
     

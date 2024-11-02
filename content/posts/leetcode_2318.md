@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2318: Number of Distinct Roll Sequences"
-date = "2018-06-29"
+date = "2017-06-28"
 description = "Solution to Leetcode 2318"
 tags = [
     

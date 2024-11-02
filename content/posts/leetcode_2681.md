@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2681: Power of Heroes"
-date = "2017-07-01"
+date = "2016-06-30"
 description = "Solution to Leetcode 2681"
 tags = [
     

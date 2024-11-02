@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1319: Number of Operations to Make Network Connected"
-date = "2021-03-24"
+date = "2020-03-23"
 description = "Solution to Leetcode 1319"
 tags = [
     

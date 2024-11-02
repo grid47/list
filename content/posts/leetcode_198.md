@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 198: House Robber"
-date = "2024-04-18"
+date = "2023-04-18"
 description = "Solution to Leetcode 198"
 tags = [
     

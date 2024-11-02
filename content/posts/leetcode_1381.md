@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1381: Design a Stack With Increment Operation"
-date = "2021-01-21"
+date = "2020-01-21"
 description = "Solution to Leetcode 1381"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2646: Minimize the Total Price of the Trips"
-date = "2017-08-05"
+date = "2016-08-04"
 description = "Solution to Leetcode 2646"
 tags = [
     

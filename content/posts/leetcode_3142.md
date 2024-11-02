@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3142: Check if Grid Satisfies Conditions"
-date = "2016-03-27"
+date = "2015-03-27"
 description = "Solution to Leetcode 3142"
 tags = [
     

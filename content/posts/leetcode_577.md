@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 577: Employee Bonus"
-date = "2023-04-05"
+date = "2022-04-04"
 description = "Solution to Leetcode 577"
 tags = [
     

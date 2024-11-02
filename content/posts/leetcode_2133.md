@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2133: Check if Every Row and Column Contains All Numbers"
-date = "2018-12-31"
+date = "2017-12-30"
 description = "Solution to Leetcode 2133"
 tags = [
     

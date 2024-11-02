@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1221: Split a String in Balanced Strings"
-date = "2021-06-30"
+date = "2020-06-29"
 description = "Solution to Leetcode 1221"
 tags = [
     

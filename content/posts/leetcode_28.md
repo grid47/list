@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 28: Find the Index of the First Occurrence in a String"
-date = "2024-10-05"
+date = "2023-10-05"
 description = "Solution to Leetcode 28"
 tags = [
     

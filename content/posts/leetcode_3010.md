@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3010: Divide an Array Into Subarrays With Minimum Cost I"
-date = "2016-08-06"
+date = "2015-08-06"
 description = "Solution to Leetcode 3010"
 tags = [
     

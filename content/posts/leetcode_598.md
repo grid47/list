@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 598: Range Addition II"
-date = "2023-03-15"
+date = "2022-03-14"
 description = "Solution to Leetcode 598"
 tags = [
     

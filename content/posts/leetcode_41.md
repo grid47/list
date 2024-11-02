@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 41: First Missing Positive"
-date = "2024-09-22"
+date = "2023-09-22"
 description = "Solution to Leetcode 41"
 tags = [
     

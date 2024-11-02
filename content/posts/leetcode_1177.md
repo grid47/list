@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1177: Can Make Palindrome from Substring"
-date = "2021-08-13"
+date = "2020-08-12"
 description = "Solution to Leetcode 1177"
 tags = [
     

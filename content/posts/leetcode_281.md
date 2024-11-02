@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 281: Zigzag Iterator"
-date = "2024-01-26"
+date = "2023-01-25"
 description = "Solution to Leetcode 281"
 tags = [
     

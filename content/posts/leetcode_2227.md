@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2227: Encrypt and Decrypt Strings"
-date = "2018-09-28"
+date = "2017-09-27"
 description = "Solution to Leetcode 2227"
 tags = [
     

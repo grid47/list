@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1268: Search Suggestions System"
-date = "2021-05-14"
+date = "2020-05-13"
 description = "Solution to Leetcode 1268"
 tags = [
     

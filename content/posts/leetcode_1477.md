@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1477: Find Two Non-overlapping Sub-arrays Each With Target Sum"
-date = "2020-10-17"
+date = "2019-10-17"
 description = "Solution to Leetcode 1477"
 tags = [
     

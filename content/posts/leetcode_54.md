@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 54: Spiral Matrix"
-date = "2024-09-09"
+date = "2023-09-09"
 description = "Solution to Leetcode 54"
 tags = [
     

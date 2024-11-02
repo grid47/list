@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2842: Count K-Subsequences of a String With Maximum Beauty"
-date = "2017-01-21"
+date = "2016-01-21"
 description = "Solution to Leetcode 2842"
 tags = [
     

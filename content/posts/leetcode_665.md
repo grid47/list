@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 665: Non-decreasing Array"
-date = "2023-01-07"
+date = "2022-01-06"
 description = "Solution to Leetcode 665"
 tags = [
     

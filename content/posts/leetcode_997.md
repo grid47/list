@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 997: Find the Town Judge"
-date = "2022-02-09"
+date = "2021-02-08"
 description = "Solution to Leetcode 997"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 643: Maximum Average Subarray I"
-date = "2023-01-29"
+date = "2022-01-28"
 description = "Solution to Leetcode 643"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 629: K Inverse Pairs Array"
-date = "2023-02-12"
+date = "2022-02-11"
 description = "Solution to Leetcode 629"
 tags = [
     

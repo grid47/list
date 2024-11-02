@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1851: Minimum Interval to Include Each Query"
-date = "2019-10-09"
+date = "2018-10-08"
 description = "Solution to Leetcode 1851"
 tags = [
     

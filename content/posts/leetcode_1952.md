@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1952: Three Divisors"
-date = "2019-06-30"
+date = "2018-06-29"
 description = "Solution to Leetcode 1952"
 tags = [
     

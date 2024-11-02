@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1178: Number of Valid Words for Each Puzzle"
-date = "2021-08-12"
+date = "2020-08-11"
 description = "Solution to Leetcode 1178"
 tags = [
     

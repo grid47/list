@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 843: Guess the Word"
-date = "2022-07-13"
+date = "2021-07-12"
 description = "Solution to Leetcode 843"
 tags = [
     

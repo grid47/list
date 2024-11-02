@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 641: Design Circular Deque"
-date = "2023-01-31"
+date = "2022-01-30"
 description = "Solution to Leetcode 641"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3229: Minimum Operations to Make Array Equal to Target"
-date = "2015-12-31"
+date = "2014-12-30"
 description = "Solution to Leetcode 3229"
 tags = [
     

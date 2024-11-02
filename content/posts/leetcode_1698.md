@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1698: Number of Distinct Substrings in a String"
-date = "2020-03-10"
+date = "2019-03-10"
 description = "Solution to Leetcode 1698"
 tags = [
     

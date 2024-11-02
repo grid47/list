@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2462: Total Cost to Hire K Workers"
-date = "2018-02-05"
+date = "2017-02-04"
 description = "Solution to Leetcode 2462"
 tags = [
     

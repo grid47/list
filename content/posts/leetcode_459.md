@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 459: Repeated Substring Pattern"
-date = "2023-08-01"
+date = "2022-07-31"
 description = "Solution to Leetcode 459"
 tags = [
     

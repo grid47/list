@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1787: Make the XOR of All Segments Equal to Zero"
-date = "2019-12-12"
+date = "2018-12-11"
 description = "Solution to Leetcode 1787"
 tags = [
     

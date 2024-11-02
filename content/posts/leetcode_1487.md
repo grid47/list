@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1487: Making File Names Unique"
-date = "2020-10-07"
+date = "2019-10-07"
 description = "Solution to Leetcode 1487"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1525: Number of Good Ways to Split a String"
-date = "2020-08-30"
+date = "2019-08-30"
 description = "Solution to Leetcode 1525"
 tags = [
     

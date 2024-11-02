@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 222: Count Complete Tree Nodes"
-date = "2024-03-25"
+date = "2023-03-25"
 description = "Solution to Leetcode 222"
 tags = [
     

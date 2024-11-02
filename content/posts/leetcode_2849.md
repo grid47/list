@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2849: Determine if a Cell Is Reachable at a Given Time"
-date = "2017-01-14"
+date = "2016-01-14"
 description = "Solution to Leetcode 2849"
 tags = [
     

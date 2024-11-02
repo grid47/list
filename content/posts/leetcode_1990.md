@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1990: Count the Number of Experiments"
-date = "2019-05-23"
+date = "2018-05-22"
 description = "Solution to Leetcode 1990"
 tags = [
     

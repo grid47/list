@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 180: Consecutive Numbers"
-date = "2024-05-06"
+date = "2023-05-06"
 description = "Solution to Leetcode 180"
 tags = [
     

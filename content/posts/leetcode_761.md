@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 761: Special Binary String"
-date = "2022-10-03"
+date = "2021-10-02"
 description = "Solution to Leetcode 761"
 tags = [
     

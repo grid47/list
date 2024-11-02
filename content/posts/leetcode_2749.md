@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2749: Minimum Operations to Make the Integer Zero"
-date = "2017-04-24"
+date = "2016-04-23"
 description = "Solution to Leetcode 2749"
 tags = [
     

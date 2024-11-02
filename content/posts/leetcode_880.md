@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 880: Decoded String at Index"
-date = "2022-06-06"
+date = "2021-06-05"
 description = "Solution to Leetcode 880"
 tags = [
     

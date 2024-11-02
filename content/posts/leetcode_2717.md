@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2717: Semi-Ordered Permutation"
-date = "2017-05-26"
+date = "2016-05-25"
 description = "Solution to Leetcode 2717"
 tags = [
     

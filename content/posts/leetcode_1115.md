@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1115: Print FooBar Alternately"
-date = "2021-10-14"
+date = "2020-10-13"
 description = "Solution to Leetcode 1115"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1894: Find the Student that Will Replace the Chalk"
-date = "2019-08-27"
+date = "2018-08-26"
 description = "Solution to Leetcode 1894"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1676: Lowest Common Ancestor of a Binary Tree IV"
-date = "2020-04-01"
+date = "2019-04-01"
 description = "Solution to Leetcode 1676"
 tags = [
     

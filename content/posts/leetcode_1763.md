@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1763: Longest Nice Substring"
-date = "2020-01-05"
+date = "2019-01-04"
 description = "Solution to Leetcode 1763"
 tags = [
     

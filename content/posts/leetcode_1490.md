@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1490: Clone N-ary Tree"
-date = "2020-10-04"
+date = "2019-10-04"
 description = "Solution to Leetcode 1490"
 tags = [
     

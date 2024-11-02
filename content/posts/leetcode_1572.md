@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1572: Matrix Diagonal Sum"
-date = "2020-07-14"
+date = "2019-07-14"
 description = "Solution to Leetcode 1572"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1048: Longest String Chain"
-date = "2021-12-20"
+date = "2020-12-19"
 description = "Solution to Leetcode 1048"
 tags = [
     

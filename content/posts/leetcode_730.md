@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 730: Count Different Palindromic Subsequences"
-date = "2022-11-03"
+date = "2021-11-02"
 description = "Solution to Leetcode 730"
 tags = [
     

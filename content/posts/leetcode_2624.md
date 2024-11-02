@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2624: Snail Traversal"
-date = "2017-08-27"
+date = "2016-08-26"
 description = "Solution to Leetcode 2624"
 tags = [
     

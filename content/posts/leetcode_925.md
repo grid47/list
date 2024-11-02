@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 925: Long Pressed Name"
-date = "2022-04-22"
+date = "2021-04-21"
 description = "Solution to Leetcode 925"
 tags = [
     

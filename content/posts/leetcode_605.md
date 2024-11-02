@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 605: Can Place Flowers"
-date = "2023-03-08"
+date = "2022-03-07"
 description = "Solution to Leetcode 605"
 tags = [
     

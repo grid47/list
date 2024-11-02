@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1592: Rearrange Spaces Between Words"
-date = "2020-06-24"
+date = "2019-06-24"
 description = "Solution to Leetcode 1592"
 tags = [
     

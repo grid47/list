@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1213: Intersection of Three Sorted Arrays"
-date = "2021-07-08"
+date = "2020-07-07"
 description = "Solution to Leetcode 1213"
 tags = [
     

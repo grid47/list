@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2410: Maximum Matching of Players With Trainers"
-date = "2018-03-29"
+date = "2017-03-28"
 description = "Solution to Leetcode 2410"
 tags = [
     

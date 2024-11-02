@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2721: Execute Asynchronous Functions in Parallel"
-date = "2017-05-22"
+date = "2016-05-21"
 description = "Solution to Leetcode 2721"
 tags = [
     

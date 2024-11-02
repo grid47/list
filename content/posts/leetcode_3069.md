@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3069: Distribute Elements Into Two Arrays I"
-date = "2016-06-08"
+date = "2015-06-08"
 description = "Solution to Leetcode 3069"
 tags = [
     

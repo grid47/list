@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2353: Design a Food Rating System"
-date = "2018-05-25"
+date = "2017-05-24"
 description = "Solution to Leetcode 2353"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 399: Evaluate Division"
-date = "2023-09-30"
+date = "2022-09-29"
 description = "Solution to Leetcode 399"
 tags = [
     

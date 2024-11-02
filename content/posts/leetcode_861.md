@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 861: Score After Flipping Matrix"
-date = "2022-06-25"
+date = "2021-06-24"
 description = "Solution to Leetcode 861"
 tags = [
     

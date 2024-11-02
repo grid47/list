@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2803: Factorial Generator"
-date = "2017-03-01"
+date = "2016-02-29"
 description = "Solution to Leetcode 2803"
 tags = [
     

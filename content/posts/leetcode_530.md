@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 530: Minimum Absolute Difference in BST"
-date = "2023-05-22"
+date = "2022-05-21"
 description = "Solution to Leetcode 530"
 tags = [
     

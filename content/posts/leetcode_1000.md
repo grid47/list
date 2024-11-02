@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1000: Minimum Cost to Merge Stones"
-date = "2022-02-06"
+date = "2021-02-05"
 description = "Solution to Leetcode 1000"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2049: Count Nodes With the Highest Score"
-date = "2019-03-25"
+date = "2018-03-24"
 description = "Solution to Leetcode 2049"
 tags = [
     

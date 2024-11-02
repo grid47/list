@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 78: Subsets"
-date = "2024-08-16"
+date = "2023-08-16"
 description = "Solution to Leetcode 78"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3206: Alternating Groups I"
-date = "2016-01-23"
+date = "2015-01-22"
 description = "Solution to Leetcode 3206"
 tags = [
     

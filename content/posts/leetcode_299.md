@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 299: Bulls and Cows"
-date = "2024-01-08"
+date = "2023-01-07"
 description = "Solution to Leetcode 299"
 tags = [
     

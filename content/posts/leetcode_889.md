@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 889: Construct Binary Tree from Preorder and Postorder Traversal"
-date = "2022-05-28"
+date = "2021-05-27"
 description = "Solution to Leetcode 889"
 tags = [
     

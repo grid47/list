@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2369: Check if There is a Valid Partition For The Array"
-date = "2018-05-09"
+date = "2017-05-08"
 description = "Solution to Leetcode 2369"
 tags = [
     

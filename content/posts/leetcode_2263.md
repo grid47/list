@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2263: Make Array Non-decreasing or Non-increasing"
-date = "2018-08-23"
+date = "2017-08-22"
 description = "Solution to Leetcode 2263"
 tags = [
     

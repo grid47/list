@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2739: Total Distance Traveled"
-date = "2017-05-04"
+date = "2016-05-03"
 description = "Solution to Leetcode 2739"
 tags = [
     

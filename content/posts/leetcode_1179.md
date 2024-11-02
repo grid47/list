@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1179: Reformat Department Table"
-date = "2021-08-11"
+date = "2020-08-10"
 description = "Solution to Leetcode 1179"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2644: Find the Maximum Divisibility Score"
-date = "2017-08-07"
+date = "2016-08-06"
 description = "Solution to Leetcode 2644"
 tags = [
     

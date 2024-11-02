@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 269: Alien Dictionary"
-date = "2024-02-07"
+date = "2023-02-06"
 description = "Solution to Leetcode 269"
 tags = [
     

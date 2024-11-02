@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1017: Convert to Base -2"
-date = "2022-01-20"
+date = "2021-01-19"
 description = "Solution to Leetcode 1017"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1939: Users That Actively Request Confirmation Messages"
-date = "2019-07-13"
+date = "2018-07-12"
 description = "Solution to Leetcode 1939"
 tags = [
     

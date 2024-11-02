@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 71: Simplify Path"
-date = "2024-08-23"
+date = "2023-08-23"
 description = "Solution to Leetcode 71"
 tags = [
     

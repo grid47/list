@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3183: The Number of Ways to Make the Sum"
-date = "2016-02-15"
+date = "2015-02-14"
 description = "Solution to Leetcode 3183"
 tags = [
     

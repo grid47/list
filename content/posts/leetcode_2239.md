@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2239: Find Closest Number to Zero"
-date = "2018-09-16"
+date = "2017-09-15"
 description = "Solution to Leetcode 2239"
 tags = [
     

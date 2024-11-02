@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1461: Check If a String Contains All Binary Codes of Size K"
-date = "2020-11-02"
+date = "2019-11-02"
 description = "Solution to Leetcode 1461"
 tags = [
     

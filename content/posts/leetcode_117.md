@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 117: Populating Next Right Pointers in Each Node II"
-date = "2024-07-08"
+date = "2023-07-08"
 description = "Solution to Leetcode 117"
 tags = [
     

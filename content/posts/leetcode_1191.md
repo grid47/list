@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1191: K-Concatenation Maximum Sum"
-date = "2021-07-30"
+date = "2020-07-29"
 description = "Solution to Leetcode 1191"
 tags = [
     

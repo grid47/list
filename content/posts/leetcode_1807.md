@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1807: Evaluate the Bracket Pairs of a String"
-date = "2019-11-22"
+date = "2018-11-21"
 description = "Solution to Leetcode 1807"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1476: Subrectangle Queries"
-date = "2020-10-18"
+date = "2019-10-18"
 description = "Solution to Leetcode 1476"
 tags = [
     

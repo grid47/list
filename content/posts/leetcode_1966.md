@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1966: Binary Searchable Numbers in an Unsorted Array"
-date = "2019-06-16"
+date = "2018-06-15"
 description = "Solution to Leetcode 1966"
 tags = [
     

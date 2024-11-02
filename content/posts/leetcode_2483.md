@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2483: Minimum Penalty for a Shop"
-date = "2018-01-15"
+date = "2017-01-14"
 description = "Solution to Leetcode 2483"
 tags = [
     

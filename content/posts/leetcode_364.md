@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 364: Nested List Weight Sum II"
-date = "2023-11-04"
+date = "2022-11-03"
 description = "Solution to Leetcode 364"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1770: Maximum Score from Performing Multiplication Operations"
-date = "2019-12-29"
+date = "2018-12-28"
 description = "Solution to Leetcode 1770"
 tags = [
     

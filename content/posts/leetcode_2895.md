@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2895: Minimum Processing Time"
-date = "2016-11-29"
+date = "2015-11-29"
 description = "Solution to Leetcode 2895"
 tags = [
     

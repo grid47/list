@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3089: Find Bursty Behavior"
-date = "2016-05-19"
+date = "2015-05-19"
 description = "Solution to Leetcode 3089"
 tags = [
     

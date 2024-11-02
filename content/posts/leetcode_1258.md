@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1258: Synonymous Sentences"
-date = "2021-05-24"
+date = "2020-05-23"
 description = "Solution to Leetcode 1258"
 tags = [
     

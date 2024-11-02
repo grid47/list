@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2959: Number of Possible Sets of Closing Branches"
-date = "2016-09-26"
+date = "2015-09-26"
 description = "Solution to Leetcode 2959"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 300: Longest Increasing Subsequence"
-date = "2024-01-07"
+date = "2023-01-06"
 description = "Solution to Leetcode 300"
 tags = [
     

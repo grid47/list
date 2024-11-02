@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 536: Construct Binary Tree from String"
-date = "2023-05-16"
+date = "2022-05-15"
 description = "Solution to Leetcode 536"
 tags = [
     

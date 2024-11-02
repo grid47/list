@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 701: Insert into a Binary Search Tree"
-date = "2022-12-02"
+date = "2021-12-01"
 description = "Solution to Leetcode 701"
 tags = [
     

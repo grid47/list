@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2438: Range Product Queries of Powers"
-date = "2018-03-01"
+date = "2017-02-28"
 description = "Solution to Leetcode 2438"
 tags = [
     

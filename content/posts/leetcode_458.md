@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 458: Poor Pigs"
-date = "2023-08-02"
+date = "2022-08-01"
 description = "Solution to Leetcode 458"
 tags = [
     

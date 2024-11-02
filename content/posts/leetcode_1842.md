@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1842: Next Palindrome Using Same Digits"
-date = "2019-10-18"
+date = "2018-10-17"
 description = "Solution to Leetcode 1842"
 tags = [
     

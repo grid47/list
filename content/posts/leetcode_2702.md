@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2702: Minimum Operations to Make Numbers Non-positive"
-date = "2017-06-10"
+date = "2016-06-09"
 description = "Solution to Leetcode 2702"
 tags = [
     

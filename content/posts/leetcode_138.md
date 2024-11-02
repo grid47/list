@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 138: Copy List with Random Pointer"
-date = "2024-06-17"
+date = "2023-06-17"
 description = "Solution to Leetcode 138"
 tags = [
     

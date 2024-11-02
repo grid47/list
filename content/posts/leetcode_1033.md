@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1033: Moving Stones Until Consecutive"
-date = "2022-01-04"
+date = "2021-01-03"
 description = "Solution to Leetcode 1033"
 tags = [
     

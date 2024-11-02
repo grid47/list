@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1288: Remove Covered Intervals"
-date = "2021-04-24"
+date = "2020-04-23"
 description = "Solution to Leetcode 1288"
 tags = [
     

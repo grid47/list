@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1551: Minimum Operations to Make Array Equal"
-date = "2020-08-04"
+date = "2019-08-04"
 description = "Solution to Leetcode 1551"
 tags = [
     

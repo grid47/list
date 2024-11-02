@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2218: Maximum Value of K Coins From Piles"
-date = "2018-10-07"
+date = "2017-10-06"
 description = "Solution to Leetcode 2218"
 tags = [
     

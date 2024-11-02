@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree"
-date = "2021-01-23"
+date = "2020-01-23"
 description = "Solution to Leetcode 1379"
 tags = [
     

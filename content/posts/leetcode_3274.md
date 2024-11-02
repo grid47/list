@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3274: Check if Two Chessboard Squares Have the Same Color"
-date = "2015-11-16"
+date = "2014-11-15"
 description = "Solution to Leetcode 3274"
 tags = [
     

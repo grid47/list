@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3257: Maximum Value Sum by Placing Three Rooks II"
-date = "2015-12-03"
+date = "2014-12-02"
 description = "Solution to Leetcode 3257"
 tags = [
     

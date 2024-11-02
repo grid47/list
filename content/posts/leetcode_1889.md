@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1889: Minimum Space Wasted From Packaging"
-date = "2019-09-01"
+date = "2018-08-31"
 description = "Solution to Leetcode 1889"
 tags = [
     

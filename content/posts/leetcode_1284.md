@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1284: Minimum Number of Flips to Convert Binary Matrix to Zero Matrix"
-date = "2021-04-28"
+date = "2020-04-27"
 description = "Solution to Leetcode 1284"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1585: Check If String Is Transformable With Substring Sort Operations"
-date = "2020-07-01"
+date = "2019-07-01"
 description = "Solution to Leetcode 1585"
 tags = [
     

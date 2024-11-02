@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2690: Infinite Method Object"
-date = "2017-06-22"
+date = "2016-06-21"
 description = "Solution to Leetcode 2690"
 tags = [
     

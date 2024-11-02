@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1450: Number of Students Doing Homework at a Given Time"
-date = "2020-11-13"
+date = "2019-11-13"
 description = "Solution to Leetcode 1450"
 tags = [
     

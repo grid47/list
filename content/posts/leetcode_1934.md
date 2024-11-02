@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1934: Confirmation Rate"
-date = "2019-07-18"
+date = "2018-07-17"
 description = "Solution to Leetcode 1934"
 tags = [
     

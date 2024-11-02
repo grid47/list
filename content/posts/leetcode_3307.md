@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3307: Find the K-th Character in String Game II"
-date = "2015-10-14"
+date = "2014-10-13"
 description = "Solution to Leetcode 3307"
 tags = [
     

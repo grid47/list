@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 859: Buddy Strings"
-date = "2022-06-27"
+date = "2021-06-26"
 description = "Solution to Leetcode 859"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1751: Maximum Number of Events That Can Be Attended II"
-date = "2020-01-17"
+date = "2019-01-16"
 description = "Solution to Leetcode 1751"
 tags = [
     

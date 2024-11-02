@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1711: Count Good Meals"
-date = "2020-02-26"
+date = "2019-02-25"
 description = "Solution to Leetcode 1711"
 tags = [
     

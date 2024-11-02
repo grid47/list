@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 757: Set Intersection Size At Least Two"
-date = "2022-10-07"
+date = "2021-10-06"
 description = "Solution to Leetcode 757"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1760: Minimum Limit of Balls in a Bag"
-date = "2020-01-08"
+date = "2019-01-07"
 description = "Solution to Leetcode 1760"
 tags = [
     

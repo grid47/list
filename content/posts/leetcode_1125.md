@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1125: Smallest Sufficient Team"
-date = "2021-10-04"
+date = "2020-10-03"
 description = "Solution to Leetcode 1125"
 tags = [
     

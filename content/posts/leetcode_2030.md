@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2030: Smallest K-Length Subsequence With Occurrences of a Letter"
-date = "2019-04-13"
+date = "2018-04-12"
 description = "Solution to Leetcode 2030"
 tags = [
     

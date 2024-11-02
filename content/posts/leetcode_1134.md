@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1134: Armstrong Number"
-date = "2021-09-25"
+date = "2020-09-24"
 description = "Solution to Leetcode 1134"
 tags = [
     

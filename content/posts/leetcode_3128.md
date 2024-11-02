@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3128: Right Triangles"
-date = "2016-04-10"
+date = "2015-04-10"
 description = "Solution to Leetcode 3128"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2240: Number of Ways to Buy Pens and Pencils"
-date = "2018-09-15"
+date = "2017-09-14"
 description = "Solution to Leetcode 2240"
 tags = [
     

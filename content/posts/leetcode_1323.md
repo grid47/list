@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1323: Maximum 69 Number"
-date = "2021-03-20"
+date = "2020-03-19"
 description = "Solution to Leetcode 1323"
 tags = [
     

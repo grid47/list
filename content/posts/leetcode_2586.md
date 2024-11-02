@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2586: Count the Number of Vowel Strings in Range"
-date = "2017-10-04"
+date = "2016-10-03"
 description = "Solution to Leetcode 2586"
 tags = [
     

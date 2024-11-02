@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2489: Number of Substrings With Fixed Ratio"
-date = "2018-01-09"
+date = "2017-01-08"
 description = "Solution to Leetcode 2489"
 tags = [
     

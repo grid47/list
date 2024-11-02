@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3053: Classifying Triangles by Lengths"
-date = "2016-06-24"
+date = "2015-06-24"
 description = "Solution to Leetcode 3053"
 tags = [
     

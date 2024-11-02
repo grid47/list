@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3110: Score of a String"
-date = "2016-04-28"
+date = "2015-04-28"
 description = "Solution to Leetcode 3110"
 tags = [
     

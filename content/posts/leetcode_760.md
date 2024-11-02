@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 760: Find Anagram Mappings"
-date = "2022-10-04"
+date = "2021-10-03"
 description = "Solution to Leetcode 760"
 tags = [
     

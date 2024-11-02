@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2102: Sequentially Ordinal Rank Tracker"
-date = "2019-01-31"
+date = "2018-01-30"
 description = "Solution to Leetcode 2102"
 tags = [
     

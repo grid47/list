@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 741: Cherry Pickup"
-date = "2022-10-23"
+date = "2021-10-22"
 description = "Solution to Leetcode 741"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2622: Cache With Time Limit"
-date = "2017-08-29"
+date = "2016-08-28"
 description = "Solution to Leetcode 2622"
 tags = [
     

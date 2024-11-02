@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 395: Longest Substring with At Least K Repeating Characters"
-date = "2023-10-04"
+date = "2022-10-03"
 description = "Solution to Leetcode 395"
 tags = [
     

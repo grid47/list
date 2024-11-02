@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance"
-date = "2021-03-09"
+date = "2020-03-08"
 description = "Solution to Leetcode 1334"
 tags = [
     

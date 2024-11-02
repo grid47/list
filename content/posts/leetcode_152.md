@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 152: Maximum Product Subarray"
-date = "2024-06-03"
+date = "2023-06-03"
 description = "Solution to Leetcode 152"
 tags = [
     

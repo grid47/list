@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 329: Longest Increasing Path in a Matrix"
-date = "2023-12-09"
+date = "2022-12-08"
 description = "Solution to Leetcode 329"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1888: Minimum Number of Flips to Make the Binary String Alternating"
-date = "2019-09-02"
+date = "2018-09-01"
 description = "Solution to Leetcode 1888"
 tags = [
     

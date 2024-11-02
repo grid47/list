@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1187: Make Array Strictly Increasing"
-date = "2021-08-03"
+date = "2020-08-02"
 description = "Solution to Leetcode 1187"
 tags = [
     

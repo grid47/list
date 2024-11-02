@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 62: Unique Paths"
-date = "2024-09-01"
+date = "2023-09-01"
 description = "Solution to Leetcode 62"
 tags = [
     

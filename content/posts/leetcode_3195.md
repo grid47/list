@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3195: Find the Minimum Area to Cover All Ones I"
-date = "2016-02-03"
+date = "2015-02-02"
 description = "Solution to Leetcode 3195"
 tags = [
     

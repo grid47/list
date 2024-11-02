@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 775: Global and Local Inversions"
-date = "2022-09-19"
+date = "2021-09-18"
 description = "Solution to Leetcode 775"
 tags = [
     

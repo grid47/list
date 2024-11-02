@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 30: Substring with Concatenation of All Words"
-date = "2024-10-03"
+date = "2023-10-03"
 description = "Solution to Leetcode 30"
 tags = [
     

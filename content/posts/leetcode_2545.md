@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2545: Sort the Students by Their Kth Score"
-date = "2017-11-14"
+date = "2016-11-13"
 description = "Solution to Leetcode 2545"
 tags = [
     

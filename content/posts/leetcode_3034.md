@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3034: Number of Subarrays That Match a Pattern I"
-date = "2016-07-13"
+date = "2015-07-13"
 description = "Solution to Leetcode 3034"
 tags = [
     

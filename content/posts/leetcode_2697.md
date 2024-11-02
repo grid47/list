@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2697: Lexicographically Smallest Palindrome"
-date = "2017-06-15"
+date = "2016-06-14"
 description = "Solution to Leetcode 2697"
 tags = [
     

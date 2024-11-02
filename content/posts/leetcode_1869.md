@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1869: Longer Contiguous Segments of Ones than Zeros"
-date = "2019-09-21"
+date = "2018-09-20"
 description = "Solution to Leetcode 1869"
 tags = [
     

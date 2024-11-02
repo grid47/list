@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1837: Sum of Digits in Base K"
-date = "2019-10-23"
+date = "2018-10-22"
 description = "Solution to Leetcode 1837"
 tags = [
     

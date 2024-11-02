@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1230: Toss Strange Coins"
-date = "2021-06-21"
+date = "2020-06-20"
 description = "Solution to Leetcode 1230"
 tags = [
     

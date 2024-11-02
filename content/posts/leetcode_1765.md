@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1765: Map of Highest Peak"
-date = "2020-01-03"
+date = "2019-01-02"
 description = "Solution to Leetcode 1765"
 tags = [
     

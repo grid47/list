@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 987: Vertical Order Traversal of a Binary Tree"
-date = "2022-02-19"
+date = "2021-02-18"
 description = "Solution to Leetcode 987"
 tags = [
     

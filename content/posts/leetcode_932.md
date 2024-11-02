@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 932: Beautiful Array"
-date = "2022-04-15"
+date = "2021-04-14"
 description = "Solution to Leetcode 932"
 tags = [
     

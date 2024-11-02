@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 675: Cut Off Trees for Golf Event"
-date = "2022-12-28"
+date = "2021-12-27"
 description = "Solution to Leetcode 675"
 tags = [
     

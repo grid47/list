@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2383: Minimum Hours of Training to Win a Competition"
-date = "2018-04-25"
+date = "2017-04-24"
 description = "Solution to Leetcode 2383"
 tags = [
     

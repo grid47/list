@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2052: Minimum Cost to Separate Sentence Into Rows"
-date = "2019-03-22"
+date = "2018-03-21"
 description = "Solution to Leetcode 2052"
 tags = [
     

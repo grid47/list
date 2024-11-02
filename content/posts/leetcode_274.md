@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 274: H-Index"
-date = "2024-02-02"
+date = "2023-02-01"
 description = "Solution to Leetcode 274"
 tags = [
     

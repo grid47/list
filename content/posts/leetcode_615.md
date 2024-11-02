@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 615: Average Salary: Departments VS Company"
-date = "2023-02-26"
+date = "2022-02-25"
 description = "Solution to Leetcode 615"
 tags = [
     

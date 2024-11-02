@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2994: Friday Purchases II "
-date = "2016-08-22"
+date = "2015-08-22"
 description = "Solution to Leetcode 2994"
 tags = [
     

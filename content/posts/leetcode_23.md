@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 23: Merge k Sorted Lists"
-date = "2024-10-10"
+date = "2023-10-10"
 description = "Solution to Leetcode 23"
 tags = [
     

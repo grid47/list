@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3223: Minimum Length of String After Operations"
-date = "2016-01-06"
+date = "2015-01-05"
 description = "Solution to Leetcode 3223"
 tags = [
     

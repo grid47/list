@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1562: Find Latest Group of Size M"
-date = "2020-07-24"
+date = "2019-07-24"
 description = "Solution to Leetcode 1562"
 tags = [
     

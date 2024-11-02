@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3301: Maximize the Total Height of Unique Towers"
-date = "2015-10-20"
+date = "2014-10-19"
 description = "Solution to Leetcode 3301"
 tags = [
     

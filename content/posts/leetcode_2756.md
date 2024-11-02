@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2756: Query Batching"
-date = "2017-04-17"
+date = "2016-04-16"
 description = "Solution to Leetcode 2756"
 tags = [
     

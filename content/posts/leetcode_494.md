@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 494: Target Sum"
-date = "2023-06-27"
+date = "2022-06-26"
 description = "Solution to Leetcode 494"
 tags = [
     

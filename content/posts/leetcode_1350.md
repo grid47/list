@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1350: Students With Invalid Departments"
-date = "2021-02-21"
+date = "2020-02-21"
 description = "Solution to Leetcode 1350"
 tags = [
     

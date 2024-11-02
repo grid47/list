@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1190: Reverse Substrings Between Each Pair of Parentheses"
-date = "2021-07-31"
+date = "2020-07-30"
 description = "Solution to Leetcode 1190"
 tags = [
     

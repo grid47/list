@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1821: Find Customers With Positive Revenue this Year"
-date = "2019-11-08"
+date = "2018-11-07"
 description = "Solution to Leetcode 1821"
 tags = [
     

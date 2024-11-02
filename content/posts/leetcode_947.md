@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 947: Most Stones Removed with Same Row or Column"
-date = "2022-03-31"
+date = "2021-03-30"
 description = "Solution to Leetcode 947"
 tags = [
     

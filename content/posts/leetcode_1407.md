@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1407: Top Travellers"
-date = "2020-12-26"
+date = "2019-12-26"
 description = "Solution to Leetcode 1407"
 tags = [
     

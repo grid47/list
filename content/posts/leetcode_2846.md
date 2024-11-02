@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2846: Minimum Edge Weight Equilibrium Queries in a Tree"
-date = "2017-01-17"
+date = "2016-01-17"
 description = "Solution to Leetcode 2846"
 tags = [
     

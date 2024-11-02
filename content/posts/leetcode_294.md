@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 294: Flip Game II"
-date = "2024-01-13"
+date = "2023-01-12"
 description = "Solution to Leetcode 294"
 tags = [
     

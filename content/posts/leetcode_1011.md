@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1011: Capacity To Ship Packages Within D Days"
-date = "2022-01-26"
+date = "2021-01-25"
 description = "Solution to Leetcode 1011"
 tags = [
     

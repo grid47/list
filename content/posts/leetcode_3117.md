@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3117: Minimum Sum of Values by Dividing Array"
-date = "2016-04-21"
+date = "2015-04-21"
 description = "Solution to Leetcode 3117"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 582: Kill Process"
-date = "2023-03-31"
+date = "2022-03-30"
 description = "Solution to Leetcode 582"
 tags = [
     

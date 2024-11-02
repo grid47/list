@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1959: Minimum Total Space Wasted With K Resizing Operations"
-date = "2019-06-23"
+date = "2018-06-22"
 description = "Solution to Leetcode 1959"
 tags = [
     

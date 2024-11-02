@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3032: Count Numbers With Unique Digits II"
-date = "2016-07-15"
+date = "2015-07-15"
 description = "Solution to Leetcode 3032"
 tags = [
     

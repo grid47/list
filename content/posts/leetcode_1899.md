@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1899: Merge Triplets to Form Target Triplet"
-date = "2019-08-22"
+date = "2018-08-21"
 description = "Solution to Leetcode 1899"
 tags = [
     

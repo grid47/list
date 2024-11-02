@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1529: Minimum Suffix Flips"
-date = "2020-08-26"
+date = "2019-08-26"
 description = "Solution to Leetcode 1529"
 tags = [
     

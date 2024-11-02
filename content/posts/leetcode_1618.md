@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1618: Maximum Font to Fit a Sentence in a Screen"
-date = "2020-05-29"
+date = "2019-05-29"
 description = "Solution to Leetcode 1618"
 tags = [
     

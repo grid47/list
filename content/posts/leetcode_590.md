@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 590: N-ary Tree Postorder Traversal"
-date = "2023-03-23"
+date = "2022-03-22"
 description = "Solution to Leetcode 590"
 tags = [
     

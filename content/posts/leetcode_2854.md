@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2854: Rolling Average Steps"
-date = "2017-01-09"
+date = "2016-01-09"
 description = "Solution to Leetcode 2854"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 34: Find First and Last Position of Element in Sorted Array"
-date = "2024-09-29"
+date = "2023-09-29"
 description = "Solution to Leetcode 34"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3029: Minimum Time to Revert Word to Initial State I"
-date = "2016-07-18"
+date = "2015-07-18"
 description = "Solution to Leetcode 3029"
 tags = [
     

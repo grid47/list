@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1663: Smallest String With A Given Numeric Value"
-date = "2020-04-14"
+date = "2019-04-14"
 description = "Solution to Leetcode 1663"
 tags = [
     

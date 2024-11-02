@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1256: Encode Number"
-date = "2021-05-26"
+date = "2020-05-25"
 description = "Solution to Leetcode 1256"
 tags = [
     

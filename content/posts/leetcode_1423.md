@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1423: Maximum Points You Can Obtain from Cards"
-date = "2020-12-10"
+date = "2019-12-10"
 description = "Solution to Leetcode 1423"
 tags = [
     

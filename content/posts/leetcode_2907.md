@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2907: Maximum Profitable Triplets With Increasing Prices I"
-date = "2016-11-17"
+date = "2015-11-17"
 description = "Solution to Leetcode 2907"
 tags = [
     

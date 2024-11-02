@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2974: Minimum Number Game"
-date = "2016-09-11"
+date = "2015-09-11"
 description = "Solution to Leetcode 2974"
 tags = [
     

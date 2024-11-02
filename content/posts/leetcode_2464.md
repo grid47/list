@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2464: Minimum Subarrays in a Valid Split"
-date = "2018-02-03"
+date = "2017-02-02"
 description = "Solution to Leetcode 2464"
 tags = [
     

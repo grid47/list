@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 96: Unique Binary Search Trees"
-date = "2024-07-29"
+date = "2023-07-29"
 description = "Solution to Leetcode 96"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1898: Maximum Number of Removable Characters"
-date = "2019-08-23"
+date = "2018-08-22"
 description = "Solution to Leetcode 1898"
 tags = [
     

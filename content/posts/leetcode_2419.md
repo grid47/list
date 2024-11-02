@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2419: Longest Subarray With Maximum Bitwise AND"
-date = "2018-03-20"
+date = "2017-03-19"
 description = "Solution to Leetcode 2419"
 tags = [
     

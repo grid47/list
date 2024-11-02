@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3319: K-th Largest Perfect Subtree Size in Binary Tree"
-date = "2015-10-02"
+date = "2014-10-01"
 description = "Solution to Leetcode 3319"
 tags = [
     

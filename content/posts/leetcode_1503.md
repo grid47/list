@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1503: Last Moment Before All Ants Fall Out of a Plank"
-date = "2020-09-21"
+date = "2019-09-21"
 description = "Solution to Leetcode 1503"
 tags = [
     

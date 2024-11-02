@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2423: Remove Letter To Equalize Frequency"
-date = "2018-03-16"
+date = "2017-03-15"
 description = "Solution to Leetcode 2423"
 tags = [
     

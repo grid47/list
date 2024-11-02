@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 527: Word Abbreviation"
-date = "2023-05-25"
+date = "2022-05-24"
 description = "Solution to Leetcode 527"
 tags = [
     

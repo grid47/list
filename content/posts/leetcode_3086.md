@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3086: Minimum Moves to Pick K Ones"
-date = "2016-05-22"
+date = "2015-05-22"
 description = "Solution to Leetcode 3086"
 tags = [
     

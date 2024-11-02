@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1900: The Earliest and Latest Rounds Where Players Compete"
-date = "2019-08-21"
+date = "2018-08-20"
 description = "Solution to Leetcode 1900"
 tags = [
     

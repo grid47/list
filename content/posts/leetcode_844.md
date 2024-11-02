@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 844: Backspace String Compare"
-date = "2022-07-12"
+date = "2021-07-11"
 description = "Solution to Leetcode 844"
 tags = [
     

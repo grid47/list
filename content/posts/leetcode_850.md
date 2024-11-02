@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 850: Rectangle Area II"
-date = "2022-07-06"
+date = "2021-07-05"
 description = "Solution to Leetcode 850"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 430: Flatten a Multilevel Doubly Linked List"
-date = "2023-08-30"
+date = "2022-08-29"
 description = "Solution to Leetcode 430"
 tags = [
     

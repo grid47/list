@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1162: As Far from Land as Possible"
-date = "2021-08-28"
+date = "2020-08-27"
 description = "Solution to Leetcode 1162"
 tags = [
     

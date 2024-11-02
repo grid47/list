@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 528: Random Pick with Weight"
-date = "2023-05-24"
+date = "2022-05-23"
 description = "Solution to Leetcode 528"
 tags = [
     

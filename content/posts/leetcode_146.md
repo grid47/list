@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 146: LRU Cache"
-date = "2024-06-09"
+date = "2023-06-09"
 description = "Solution to Leetcode 146"
 tags = [
     

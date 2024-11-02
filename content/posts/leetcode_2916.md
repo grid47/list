@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2916: Subarrays Distinct Element Sum of Squares II"
-date = "2016-11-08"
+date = "2015-11-08"
 description = "Solution to Leetcode 2916"
 tags = [
     

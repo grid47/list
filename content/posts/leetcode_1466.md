@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero"
-date = "2020-10-28"
+date = "2019-10-28"
 description = "Solution to Leetcode 1466"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2532: Time to Cross a Bridge"
-date = "2017-11-27"
+date = "2016-11-26"
 description = "Solution to Leetcode 2532"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2995: Viewers Turned Streamers"
-date = "2016-08-21"
+date = "2015-08-21"
 description = "Solution to Leetcode 2995"
 tags = [
     

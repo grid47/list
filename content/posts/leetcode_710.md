@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 710: Random Pick with Blacklist"
-date = "2022-11-23"
+date = "2021-11-22"
 description = "Solution to Leetcode 710"
 tags = [
     

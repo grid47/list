@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2271: Maximum White Tiles Covered by a Carpet"
-date = "2018-08-15"
+date = "2017-08-14"
 description = "Solution to Leetcode 2271"
 tags = [
     

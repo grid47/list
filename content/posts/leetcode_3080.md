@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3080: Mark Elements on Array by Performing Queries"
-date = "2016-05-28"
+date = "2015-05-28"
 description = "Solution to Leetcode 3080"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2047: Number of Valid Words in a Sentence"
-date = "2019-03-27"
+date = "2018-03-26"
 description = "Solution to Leetcode 2047"
 tags = [
     

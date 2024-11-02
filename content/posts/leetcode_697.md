@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 697: Degree of an Array"
-date = "2022-12-06"
+date = "2021-12-05"
 description = "Solution to Leetcode 697"
 tags = [
     

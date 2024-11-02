@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 573: Squirrel Simulation"
-date = "2023-04-09"
+date = "2022-04-08"
 description = "Solution to Leetcode 573"
 tags = [
     

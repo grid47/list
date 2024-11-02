@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 792: Number of Matching Subsequences"
-date = "2022-09-02"
+date = "2021-09-01"
 description = "Solution to Leetcode 792"
 tags = [
     

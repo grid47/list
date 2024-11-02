@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2097: Valid Arrangement of Pairs"
-date = "2019-02-05"
+date = "2018-02-04"
 description = "Solution to Leetcode 2097"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3144: Minimum Substring Partition of Equal Character Frequency"
-date = "2016-03-25"
+date = "2015-03-25"
 description = "Solution to Leetcode 3144"
 tags = [
     

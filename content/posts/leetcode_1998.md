@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1998: GCD Sort of an Array"
-date = "2019-05-15"
+date = "2018-05-14"
 description = "Solution to Leetcode 1998"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 961: N-Repeated Element in Size 2N Array"
-date = "2022-03-17"
+date = "2021-03-16"
 description = "Solution to Leetcode 961"
 tags = [
     

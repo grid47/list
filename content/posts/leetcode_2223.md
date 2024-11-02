@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2223: Sum of Scores of Built Strings"
-date = "2018-10-02"
+date = "2017-10-01"
 description = "Solution to Leetcode 2223"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2800: Shortest String That Contains Three Strings"
-date = "2017-03-04"
+date = "2016-03-03"
 description = "Solution to Leetcode 2800"
 tags = [
     

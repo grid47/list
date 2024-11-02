@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 150: Evaluate Reverse Polish Notation"
-date = "2024-06-05"
+date = "2023-06-05"
 description = "Solution to Leetcode 150"
 tags = [
     

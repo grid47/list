@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 984: String Without AAA or BBB"
-date = "2022-02-22"
+date = "2021-02-21"
 description = "Solution to Leetcode 984"
 tags = [
     

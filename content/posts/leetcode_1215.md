@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1215: Stepping Numbers"
-date = "2021-07-06"
+date = "2020-07-05"
 description = "Solution to Leetcode 1215"
 tags = [
     

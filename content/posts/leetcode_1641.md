@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1641: Count Sorted Vowel Strings"
-date = "2020-05-06"
+date = "2019-05-06"
 description = "Solution to Leetcode 1641"
 tags = [
     

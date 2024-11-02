@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3210: Find the Encrypted String"
-date = "2016-01-19"
+date = "2015-01-18"
 description = "Solution to Leetcode 3210"
 tags = [
     

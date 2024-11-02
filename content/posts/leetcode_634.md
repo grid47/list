@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 634: Find the Derangement of An Array"
-date = "2023-02-07"
+date = "2022-02-06"
 description = "Solution to Leetcode 634"
 tags = [
     

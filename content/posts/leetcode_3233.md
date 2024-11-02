@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3233: Find the Count of Numbers Which Are Not Special"
-date = "2015-12-27"
+date = "2014-12-26"
 description = "Solution to Leetcode 3233"
 tags = [
     

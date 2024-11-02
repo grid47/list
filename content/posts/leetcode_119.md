@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 119: Pascal's Triangle II"
-date = "2024-07-06"
+date = "2023-07-06"
 description = "Solution to Leetcode 119"
 tags = [
     

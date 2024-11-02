@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3278: Find Candidates for Data Scientist Position II"
-date = "2015-11-12"
+date = "2014-11-11"
 description = "Solution to Leetcode 3278"
 tags = [
     

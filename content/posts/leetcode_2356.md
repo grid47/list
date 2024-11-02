@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2356: Number of Unique Subjects Taught by Each Teacher"
-date = "2018-05-22"
+date = "2017-05-21"
 description = "Solution to Leetcode 2356"
 tags = [
     

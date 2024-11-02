@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3066: Minimum Operations to Exceed Threshold Value II"
-date = "2016-06-11"
+date = "2015-06-11"
 description = "Solution to Leetcode 3066"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 718: Maximum Length of Repeated Subarray"
-date = "2022-11-15"
+date = "2021-11-14"
 description = "Solution to Leetcode 718"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 517: Super Washing Machines"
-date = "2023-06-04"
+date = "2022-06-03"
 description = "Solution to Leetcode 517"
 tags = [
     

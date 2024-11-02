@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1750: Minimum Length of String After Deleting Similar Ends"
-date = "2020-01-18"
+date = "2019-01-17"
 description = "Solution to Leetcode 1750"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1404: Number of Steps to Reduce a Number in Binary Representation to One"
-date = "2020-12-29"
+date = "2019-12-29"
 description = "Solution to Leetcode 1404"
 tags = [
     

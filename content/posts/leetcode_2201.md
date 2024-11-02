@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2201: Count Artifacts That Can Be Extracted"
-date = "2018-10-24"
+date = "2017-10-23"
 description = "Solution to Leetcode 2201"
 tags = [
     

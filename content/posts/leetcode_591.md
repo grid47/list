@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 591: Tag Validator"
-date = "2023-03-22"
+date = "2022-03-21"
 description = "Solution to Leetcode 591"
 tags = [
     

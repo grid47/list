@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1574: Shortest Subarray to be Removed to Make Array Sorted"
-date = "2020-07-12"
+date = "2019-07-12"
 description = "Solution to Leetcode 1574"
 tags = [
     

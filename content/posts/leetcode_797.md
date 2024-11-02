@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 797: All Paths From Source to Target"
-date = "2022-08-28"
+date = "2021-08-27"
 description = "Solution to Leetcode 797"
 tags = [
     

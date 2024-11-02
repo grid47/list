@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1877: Minimize Maximum Pair Sum in Array"
-date = "2019-09-13"
+date = "2018-09-12"
 description = "Solution to Leetcode 1877"
 tags = [
     

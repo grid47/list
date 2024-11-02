@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1871: Jump Game VII"
-date = "2019-09-19"
+date = "2018-09-18"
 description = "Solution to Leetcode 1871"
 tags = [
     

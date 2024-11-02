@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1486: XOR Operation in an Array"
-date = "2020-10-08"
+date = "2019-10-08"
 description = "Solution to Leetcode 1486"
 tags = [
     

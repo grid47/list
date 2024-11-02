@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 55: Jump Game"
-date = "2024-09-08"
+date = "2023-09-08"
 description = "Solution to Leetcode 55"
 tags = [
     

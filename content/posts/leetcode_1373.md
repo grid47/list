@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1373: Maximum Sum BST in Binary Tree"
-date = "2021-01-29"
+date = "2020-01-29"
 description = "Solution to Leetcode 1373"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1495: Friendly Movies Streamed Last Month"
-date = "2020-09-29"
+date = "2019-09-29"
 description = "Solution to Leetcode 1495"
 tags = [
     

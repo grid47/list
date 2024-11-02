@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 999: Available Captures for Rook"
-date = "2022-02-07"
+date = "2021-02-06"
 description = "Solution to Leetcode 999"
 tags = [
     

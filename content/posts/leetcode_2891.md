@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2891: Method Chaining"
-date = "2016-12-03"
+date = "2015-12-03"
 description = "Solution to Leetcode 2891"
 tags = [
     

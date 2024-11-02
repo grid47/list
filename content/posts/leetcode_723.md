@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 723: Candy Crush"
-date = "2022-11-10"
+date = "2021-11-09"
 description = "Solution to Leetcode 723"
 tags = [
     

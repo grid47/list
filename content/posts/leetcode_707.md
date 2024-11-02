@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 707: Design Linked List"
-date = "2022-11-26"
+date = "2021-11-25"
 description = "Solution to Leetcode 707"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 235: Lowest Common Ancestor of a Binary Search Tree"
-date = "2024-03-12"
+date = "2023-03-12"
 description = "Solution to Leetcode 235"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 958: Check Completeness of a Binary Tree"
-date = "2022-03-20"
+date = "2021-03-19"
 description = "Solution to Leetcode 958"
 tags = [
     

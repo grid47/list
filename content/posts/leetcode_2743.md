@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2743: Count Substrings Without Repeating Character"
-date = "2017-04-30"
+date = "2016-04-29"
 description = "Solution to Leetcode 2743"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 297: Serialize and Deserialize Binary Tree"
-date = "2024-01-10"
+date = "2023-01-09"
 description = "Solution to Leetcode 297"
 tags = [
     

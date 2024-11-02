@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1365: How Many Numbers Are Smaller Than the Current Number"
-date = "2021-02-06"
+date = "2020-02-06"
 description = "Solution to Leetcode 1365"
 tags = [
     

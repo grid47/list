@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 288: Unique Word Abbreviation"
-date = "2024-01-19"
+date = "2023-01-18"
 description = "Solution to Leetcode 288"
 tags = [
     

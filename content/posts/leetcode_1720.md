@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1720: Decode XORed Array"
-date = "2020-02-17"
+date = "2019-02-16"
 description = "Solution to Leetcode 1720"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1139: Largest 1-Bordered Square"
-date = "2021-09-20"
+date = "2020-09-19"
 description = "Solution to Leetcode 1139"
 tags = [
     

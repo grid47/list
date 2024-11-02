@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1791: Find Center of Star Graph"
-date = "2019-12-08"
+date = "2018-12-07"
 description = "Solution to Leetcode 1791"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2645: Minimum Additions to Make Valid String"
-date = "2017-08-06"
+date = "2016-08-05"
 description = "Solution to Leetcode 2645"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1004: Max Consecutive Ones III"
-date = "2022-02-02"
+date = "2021-02-01"
 description = "Solution to Leetcode 1004"
 tags = [
     

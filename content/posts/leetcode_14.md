@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 14: Longest Common Prefix"
-date = "2024-10-19"
+date = "2023-10-19"
 description = "Solution to Leetcode 14"
 tags = [
     

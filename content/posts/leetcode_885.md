@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 885: Spiral Matrix III"
-date = "2022-06-01"
+date = "2021-05-31"
 description = "Solution to Leetcode 885"
 tags = [
     

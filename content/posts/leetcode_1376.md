@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1376: Time Needed to Inform All Employees"
-date = "2021-01-26"
+date = "2020-01-26"
 description = "Solution to Leetcode 1376"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 507: Perfect Number"
-date = "2023-06-14"
+date = "2022-06-13"
 description = "Solution to Leetcode 507"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2166: Design Bitset"
-date = "2018-11-28"
+date = "2017-11-27"
 description = "Solution to Leetcode 2166"
 tags = [
     

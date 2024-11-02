@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2914: Minimum Number of Changes to Make Binary String Beautiful"
-date = "2016-11-10"
+date = "2015-11-10"
 description = "Solution to Leetcode 2914"
 tags = [
     

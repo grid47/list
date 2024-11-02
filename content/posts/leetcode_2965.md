@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2965: Find Missing and Repeated Values"
-date = "2016-09-20"
+date = "2015-09-20"
 description = "Solution to Leetcode 2965"
 tags = [
     

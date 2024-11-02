@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2533: Number of Good Binary Strings"
-date = "2017-11-26"
+date = "2016-11-25"
 description = "Solution to Leetcode 2533"
 tags = [
     

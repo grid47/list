@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 122: Best Time to Buy and Sell Stock II"
-date = "2024-07-03"
+date = "2023-07-03"
 description = "Solution to Leetcode 122"
 tags = [
     

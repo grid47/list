@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3159: Find Occurrences of an Element in an Array"
-date = "2016-03-10"
+date = "2015-03-10"
 description = "Solution to Leetcode 3159"
 tags = [
     

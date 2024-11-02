@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1377: Frog Position After T Seconds"
-date = "2021-01-25"
+date = "2020-01-25"
 description = "Solution to Leetcode 1377"
 tags = [
     

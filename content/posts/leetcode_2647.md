@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2647: Color the Triangle Red"
-date = "2017-08-04"
+date = "2016-08-03"
 description = "Solution to Leetcode 2647"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2844: Minimum Operations to Make a Special Number"
-date = "2017-01-19"
+date = "2016-01-19"
 description = "Solution to Leetcode 2844"
 tags = [
     

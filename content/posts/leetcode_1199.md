@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1199: Minimum Time to Build Blocks"
-date = "2021-07-22"
+date = "2020-07-21"
 description = "Solution to Leetcode 1199"
 tags = [
     

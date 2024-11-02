@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 214: Shortest Palindrome"
-date = "2024-04-02"
+date = "2023-04-02"
 description = "Solution to Leetcode 214"
 tags = [
     

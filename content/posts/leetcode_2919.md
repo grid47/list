@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2919: Minimum Increment Operations to Make Array Beautiful"
-date = "2016-11-05"
+date = "2015-11-05"
 description = "Solution to Leetcode 2919"
 tags = [
     

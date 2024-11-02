@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3147: Taking Maximum Energy From the Mystic Dungeon"
-date = "2016-03-22"
+date = "2015-03-22"
 description = "Solution to Leetcode 3147"
 tags = [
     

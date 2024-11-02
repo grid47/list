@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 516: Longest Palindromic Subsequence"
-date = "2023-06-05"
+date = "2022-06-04"
 description = "Solution to Leetcode 516"
 tags = [
     

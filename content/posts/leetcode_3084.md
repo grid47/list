@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3084: Count Substrings Starting and Ending with Given Character"
-date = "2016-05-24"
+date = "2015-05-24"
 description = "Solution to Leetcode 3084"
 tags = [
     

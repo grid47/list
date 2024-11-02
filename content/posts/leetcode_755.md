@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 755: Pour Water"
-date = "2022-10-09"
+date = "2021-10-08"
 description = "Solution to Leetcode 755"
 tags = [
     

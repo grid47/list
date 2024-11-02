@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1273: Delete Tree Nodes"
-date = "2021-05-09"
+date = "2020-05-08"
 description = "Solution to Leetcode 1273"
 tags = [
     

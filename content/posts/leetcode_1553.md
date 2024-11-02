@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1553: Minimum Number of Days to Eat N Oranges"
-date = "2020-08-02"
+date = "2019-08-02"
 description = "Solution to Leetcode 1553"
 tags = [
     

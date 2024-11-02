@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 970: Powerful Integers"
-date = "2022-03-08"
+date = "2021-03-07"
 description = "Solution to Leetcode 970"
 tags = [
     

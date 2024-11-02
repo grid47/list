@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3289: The Two Sneaky Numbers of Digitville"
-date = "2015-11-01"
+date = "2014-10-31"
 description = "Solution to Leetcode 3289"
 tags = [
     

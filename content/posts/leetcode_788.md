@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 788: Rotated Digits"
-date = "2022-09-06"
+date = "2021-09-05"
 description = "Solution to Leetcode 788"
 tags = [
     

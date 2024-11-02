@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1679: Max Number of K-Sum Pairs"
-date = "2020-03-29"
+date = "2019-03-29"
 description = "Solution to Leetcode 1679"
 tags = [
     

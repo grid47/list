@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 724: Find Pivot Index"
-date = "2022-11-09"
+date = "2021-11-08"
 description = "Solution to Leetcode 724"
 tags = [
     

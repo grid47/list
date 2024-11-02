@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3049: Earliest Second to Mark Indices II"
-date = "2016-06-28"
+date = "2015-06-28"
 description = "Solution to Leetcode 3049"
 tags = [
     

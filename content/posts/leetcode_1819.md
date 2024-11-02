@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1819: Number of Different Subsequences GCDs"
-date = "2019-11-10"
+date = "2018-11-09"
 description = "Solution to Leetcode 1819"
 tags = [
     

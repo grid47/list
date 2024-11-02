@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1632: Rank Transform of a Matrix"
-date = "2020-05-15"
+date = "2019-05-15"
 description = "Solution to Leetcode 1632"
 tags = [
     

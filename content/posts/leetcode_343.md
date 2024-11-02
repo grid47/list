@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 343: Integer Break"
-date = "2023-11-25"
+date = "2022-11-24"
 description = "Solution to Leetcode 343"
 tags = [
     

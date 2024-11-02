@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2354: Number of Excellent Pairs"
-date = "2018-05-24"
+date = "2017-05-23"
 description = "Solution to Leetcode 2354"
 tags = [
     

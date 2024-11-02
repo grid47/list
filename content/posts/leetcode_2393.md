@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2393: Count Strictly Increasing Subarrays"
-date = "2018-04-15"
+date = "2017-04-14"
 description = "Solution to Leetcode 2393"
 tags = [
     

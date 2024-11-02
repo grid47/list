@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2426: Number of Pairs Satisfying Inequality"
-date = "2018-03-13"
+date = "2017-03-12"
 description = "Solution to Leetcode 2426"
 tags = [
     

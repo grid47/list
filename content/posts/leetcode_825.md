@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 825: Friends Of Appropriate Ages"
-date = "2022-07-31"
+date = "2021-07-30"
 description = "Solution to Leetcode 825"
 tags = [
     

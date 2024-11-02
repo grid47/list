@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 35: Search Insert Position"
-date = "2024-09-28"
+date = "2023-09-28"
 description = "Solution to Leetcode 35"
 tags = [
     

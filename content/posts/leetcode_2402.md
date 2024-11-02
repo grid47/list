@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2402: Meeting Rooms III"
-date = "2018-04-06"
+date = "2017-04-05"
 description = "Solution to Leetcode 2402"
 tags = [
     

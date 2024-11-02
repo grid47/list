@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1296: Divide Array in Sets of K Consecutive Numbers"
-date = "2021-04-16"
+date = "2020-04-15"
 description = "Solution to Leetcode 1296"
 tags = [
     

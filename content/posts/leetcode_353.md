@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 353: Design Snake Game"
-date = "2023-11-15"
+date = "2022-11-14"
 description = "Solution to Leetcode 353"
 tags = [
     

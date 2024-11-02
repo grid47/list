@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2037: Minimum Number of Moves to Seat Everyone"
-date = "2019-04-06"
+date = "2018-04-05"
 description = "Solution to Leetcode 2037"
 tags = [
     

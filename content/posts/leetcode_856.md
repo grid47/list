@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 856: Score of Parentheses"
-date = "2022-06-30"
+date = "2021-06-29"
 description = "Solution to Leetcode 856"
 tags = [
     

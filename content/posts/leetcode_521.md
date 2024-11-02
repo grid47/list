@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 521: Longest Uncommon Subsequence I"
-date = "2023-05-31"
+date = "2022-05-30"
 description = "Solution to Leetcode 521"
 tags = [
     

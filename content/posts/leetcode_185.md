@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 185: Department Top Three Salaries"
-date = "2024-05-01"
+date = "2023-05-01"
 description = "Solution to Leetcode 185"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 87: Scramble String"
-date = "2024-08-07"
+date = "2023-08-07"
 description = "Solution to Leetcode 87"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 612: Shortest Distance in a Plane"
-date = "2023-03-01"
+date = "2022-02-28"
 description = "Solution to Leetcode 612"
 tags = [
     

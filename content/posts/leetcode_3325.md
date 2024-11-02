@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3325: Count Substrings With K-Frequency Characters I"
-date = "2015-09-26"
+date = "2014-09-25"
 description = "Solution to Leetcode 3325"
 tags = [
     

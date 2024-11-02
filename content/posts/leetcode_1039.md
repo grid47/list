@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1039: Minimum Score Triangulation of Polygon"
-date = "2021-12-29"
+date = "2020-12-28"
 description = "Solution to Leetcode 1039"
 tags = [
     

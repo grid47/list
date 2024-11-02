@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3216: Lexicographically Smallest String After a Swap"
-date = "2016-01-13"
+date = "2015-01-12"
 description = "Solution to Leetcode 3216"
 tags = [
     

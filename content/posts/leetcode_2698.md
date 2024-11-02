@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2698: Find the Punishment Number of an Integer"
-date = "2017-06-14"
+date = "2016-06-13"
 description = "Solution to Leetcode 2698"
 tags = [
     

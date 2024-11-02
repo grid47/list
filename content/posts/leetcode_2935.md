@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2935: Maximum Strong Pair XOR II"
-date = "2016-10-20"
+date = "2015-10-20"
 description = "Solution to Leetcode 2935"
 tags = [
     

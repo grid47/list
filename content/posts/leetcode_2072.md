@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2072: The Winner University"
-date = "2019-03-02"
+date = "2018-03-01"
 description = "Solution to Leetcode 2072"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1058: Minimize Rounding Error to Meet Target"
-date = "2021-12-10"
+date = "2020-12-09"
 description = "Solution to Leetcode 1058"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3163: String Compression III"
-date = "2016-03-06"
+date = "2015-03-06"
 description = "Solution to Leetcode 3163"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2881: Create a New Column"
-date = "2016-12-13"
+date = "2015-12-13"
 description = "Solution to Leetcode 2881"
 tags = [
     

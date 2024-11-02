@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2711: Difference of Number of Distinct Values on Diagonals"
-date = "2017-06-01"
+date = "2016-05-31"
 description = "Solution to Leetcode 2711"
 tags = [
     

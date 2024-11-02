@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1034: Coloring A Border"
-date = "2022-01-03"
+date = "2021-01-02"
 description = "Solution to Leetcode 1034"
 tags = [
     

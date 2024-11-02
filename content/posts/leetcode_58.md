@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 58: Length of Last Word"
-date = "2024-09-05"
+date = "2023-09-05"
 description = "Solution to Leetcode 58"
 tags = [
     

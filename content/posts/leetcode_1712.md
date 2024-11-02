@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1712: Ways to Split Array Into Three Subarrays"
-date = "2020-02-25"
+date = "2019-02-24"
 description = "Solution to Leetcode 1712"
 tags = [
     

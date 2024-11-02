@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1547: Minimum Cost to Cut a Stick"
-date = "2020-08-08"
+date = "2019-08-08"
 description = "Solution to Leetcode 1547"
 tags = [
     

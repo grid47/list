@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2789: Largest Element in an Array after Merge Operations"
-date = "2017-03-15"
+date = "2016-03-14"
 description = "Solution to Leetcode 2789"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1473: Paint House III"
-date = "2020-10-21"
+date = "2019-10-21"
 description = "Solution to Leetcode 1473"
 tags = [
     

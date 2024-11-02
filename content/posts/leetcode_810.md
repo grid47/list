@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 810: Chalkboard XOR Game"
-date = "2022-08-15"
+date = "2021-08-14"
 description = "Solution to Leetcode 810"
 tags = [
     

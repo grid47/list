@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 469: Convex Polygon"
-date = "2023-07-22"
+date = "2022-07-21"
 description = "Solution to Leetcode 469"
 tags = [
     

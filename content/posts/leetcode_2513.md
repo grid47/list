@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2513: Minimize the Maximum of Two Arrays"
-date = "2017-12-16"
+date = "2016-12-15"
 description = "Solution to Leetcode 2513"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 201: Bitwise AND of Numbers Range"
-date = "2024-04-15"
+date = "2023-04-15"
 description = "Solution to Leetcode 201"
 tags = [
     

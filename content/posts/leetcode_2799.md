@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2799: Count Complete Subarrays in an Array"
-date = "2017-03-05"
+date = "2016-03-04"
 description = "Solution to Leetcode 2799"
 tags = [
     

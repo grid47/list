@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1797: Design Authentication Manager"
-date = "2019-12-02"
+date = "2018-12-01"
 description = "Solution to Leetcode 1797"
 tags = [
     

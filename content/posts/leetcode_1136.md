@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1136: Parallel Courses"
-date = "2021-09-23"
+date = "2020-09-22"
 description = "Solution to Leetcode 1136"
 tags = [
     

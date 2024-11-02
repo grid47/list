@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 693: Binary Number with Alternating Bits"
-date = "2022-12-10"
+date = "2021-12-09"
 description = "Solution to Leetcode 693"
 tags = [
     

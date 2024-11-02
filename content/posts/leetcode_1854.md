@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1854: Maximum Population Year"
-date = "2019-10-06"
+date = "2018-10-05"
 description = "Solution to Leetcode 1854"
 tags = [
     

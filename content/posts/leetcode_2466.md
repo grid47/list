@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2466: Count Ways To Build Good Strings"
-date = "2018-02-01"
+date = "2017-01-31"
 description = "Solution to Leetcode 2466"
 tags = [
     

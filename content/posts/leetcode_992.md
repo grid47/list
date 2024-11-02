@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 992: Subarrays with K Different Integers"
-date = "2022-02-14"
+date = "2021-02-13"
 description = "Solution to Leetcode 992"
 tags = [
     

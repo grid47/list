@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 413: Arithmetic Slices"
-date = "2023-09-16"
+date = "2022-09-15"
 description = "Solution to Leetcode 413"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1200: Minimum Absolute Difference"
-date = "2021-07-21"
+date = "2020-07-20"
 description = "Solution to Leetcode 1200"
 tags = [
     

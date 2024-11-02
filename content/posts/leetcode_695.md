@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 695: Max Area of Island"
-date = "2022-12-08"
+date = "2021-12-07"
 description = "Solution to Leetcode 695"
 tags = [
     

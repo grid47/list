@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1210: Minimum Moves to Reach Target with Rotations"
-date = "2021-07-11"
+date = "2020-07-10"
 description = "Solution to Leetcode 1210"
 tags = [
     

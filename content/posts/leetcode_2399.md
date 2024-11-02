@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2399: Check Distances Between Same Letters"
-date = "2018-04-09"
+date = "2017-04-08"
 description = "Solution to Leetcode 2399"
 tags = [
     

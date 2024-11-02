@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 237: Delete Node in a Linked List"
-date = "2024-03-10"
+date = "2023-03-10"
 description = "Solution to Leetcode 237"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1093: Statistics from a Large Sample"
-date = "2021-11-05"
+date = "2020-11-04"
 description = "Solution to Leetcode 1093"
 tags = [
     

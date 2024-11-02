@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1928: Minimum Cost to Reach Destination in Time"
-date = "2019-07-24"
+date = "2018-07-23"
 description = "Solution to Leetcode 1928"
 tags = [
     

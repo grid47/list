@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 769: Max Chunks To Make Sorted"
-date = "2022-09-25"
+date = "2021-09-24"
 description = "Solution to Leetcode 769"
 tags = [
     

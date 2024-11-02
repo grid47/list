@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2338: Count the Number of Ideal Arrays"
-date = "2018-06-09"
+date = "2017-06-08"
 description = "Solution to Leetcode 2338"
 tags = [
     

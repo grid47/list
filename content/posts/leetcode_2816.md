@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2816: Double a Number Represented as a Linked List"
-date = "2017-02-16"
+date = "2016-02-16"
 description = "Solution to Leetcode 2816"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2384: Largest Palindromic Number"
-date = "2018-04-24"
+date = "2017-04-23"
 description = "Solution to Leetcode 2384"
 tags = [
     

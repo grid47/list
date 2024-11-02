@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1740: Find Distance in a Binary Tree"
-date = "2020-01-28"
+date = "2019-01-27"
 description = "Solution to Leetcode 1740"
 tags = [
     

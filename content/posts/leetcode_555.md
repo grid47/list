@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 555: Split Concatenated Strings"
-date = "2023-04-27"
+date = "2022-04-26"
 description = "Solution to Leetcode 555"
 tags = [
     

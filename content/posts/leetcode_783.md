@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 783: Minimum Distance Between BST Nodes"
-date = "2022-09-11"
+date = "2021-09-10"
 description = "Solution to Leetcode 783"
 tags = [
     

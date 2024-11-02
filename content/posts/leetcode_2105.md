@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2105: Watering Plants II"
-date = "2019-01-28"
+date = "2018-01-27"
 description = "Solution to Leetcode 2105"
 tags = [
     

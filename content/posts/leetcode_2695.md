@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2695: Array Wrapper"
-date = "2017-06-17"
+date = "2016-06-16"
 description = "Solution to Leetcode 2695"
 tags = [
     

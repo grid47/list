@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 837: New 21 Game"
-date = "2022-07-19"
+date = "2021-07-18"
 description = "Solution to Leetcode 837"
 tags = [
     

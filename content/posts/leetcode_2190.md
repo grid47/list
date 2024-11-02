@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2190: Most Frequent Number Following Key In an Array"
-date = "2018-11-04"
+date = "2017-11-03"
 description = "Solution to Leetcode 2190"
 tags = [
     

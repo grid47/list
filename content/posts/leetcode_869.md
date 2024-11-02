@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 869: Reordered Power of 2"
-date = "2022-06-17"
+date = "2021-06-16"
 description = "Solution to Leetcode 869"
 tags = [
     

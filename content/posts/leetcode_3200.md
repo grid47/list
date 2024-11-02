@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3200: Maximum Height of a Triangle"
-date = "2016-01-29"
+date = "2015-01-28"
 description = "Solution to Leetcode 3200"
 tags = [
     

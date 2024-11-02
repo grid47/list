@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1394: Find Lucky Integer in an Array"
-date = "2021-01-08"
+date = "2020-01-08"
 description = "Solution to Leetcode 1394"
 tags = [
     

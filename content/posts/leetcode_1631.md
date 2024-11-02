@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1631: Path With Minimum Effort"
-date = "2020-05-16"
+date = "2019-05-16"
 description = "Solution to Leetcode 1631"
 tags = [
     

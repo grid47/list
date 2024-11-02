@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2938: Separate Black and White Balls"
-date = "2016-10-17"
+date = "2015-10-17"
 description = "Solution to Leetcode 2938"
 tags = [
     

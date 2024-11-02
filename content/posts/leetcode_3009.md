@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3009: Maximum Number of Intersections on the Chart"
-date = "2016-08-07"
+date = "2015-08-07"
 description = "Solution to Leetcode 3009"
 tags = [
     

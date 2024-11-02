@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1126: Active Businesses"
-date = "2021-10-03"
+date = "2020-10-02"
 description = "Solution to Leetcode 1126"
 tags = [
     

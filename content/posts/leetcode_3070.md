@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3070: Count Submatrices with Top-Left Element and Sum Less Than k"
-date = "2016-06-07"
+date = "2015-06-07"
 description = "Solution to Leetcode 3070"
 tags = [
     

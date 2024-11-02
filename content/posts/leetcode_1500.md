@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1500: Design a File Sharing System"
-date = "2020-09-24"
+date = "2019-09-24"
 description = "Solution to Leetcode 1500"
 tags = [
     

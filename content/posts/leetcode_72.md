@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 72: Edit Distance"
-date = "2024-08-22"
+date = "2023-08-22"
 description = "Solution to Leetcode 72"
 tags = [
     

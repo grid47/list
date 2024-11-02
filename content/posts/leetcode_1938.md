@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1938: Maximum Genetic Difference Query"
-date = "2019-07-14"
+date = "2018-07-13"
 description = "Solution to Leetcode 1938"
 tags = [
     

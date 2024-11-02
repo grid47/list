@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2069: Walking Robot Simulation II"
-date = "2019-03-05"
+date = "2018-03-04"
 description = "Solution to Leetcode 2069"
 tags = [
     

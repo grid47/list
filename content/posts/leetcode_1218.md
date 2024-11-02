@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1218: Longest Arithmetic Subsequence of Given Difference"
-date = "2021-07-03"
+date = "2020-07-02"
 description = "Solution to Leetcode 1218"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 447: Number of Boomerangs"
-date = "2023-08-13"
+date = "2022-08-12"
 description = "Solution to Leetcode 447"
 tags = [
     

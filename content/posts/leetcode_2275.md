@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2275: Largest Combination With Bitwise AND Greater Than Zero"
-date = "2018-08-11"
+date = "2017-08-10"
 description = "Solution to Leetcode 2275"
 tags = [
     

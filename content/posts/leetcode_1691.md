@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1691: Maximum Height by Stacking Cuboids "
-date = "2020-03-17"
+date = "2019-03-17"
 description = "Solution to Leetcode 1691"
 tags = [
     

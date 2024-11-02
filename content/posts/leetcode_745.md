@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 745: Prefix and Suffix Search"
-date = "2022-10-19"
+date = "2021-10-18"
 description = "Solution to Leetcode 745"
 tags = [
     

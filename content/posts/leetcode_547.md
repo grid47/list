@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 547: Number of Provinces"
-date = "2023-05-05"
+date = "2022-05-04"
 description = "Solution to Leetcode 547"
 tags = [
     

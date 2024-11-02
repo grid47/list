@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 891: Sum of Subsequence Widths"
-date = "2022-05-26"
+date = "2021-05-25"
 description = "Solution to Leetcode 891"
 tags = [
     

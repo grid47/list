@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3281: Maximize Score of Numbers in Ranges"
-date = "2015-11-09"
+date = "2014-11-08"
 description = "Solution to Leetcode 3281"
 tags = [
     

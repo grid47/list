@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2322: Minimum Score After Removals on a Tree"
-date = "2018-06-25"
+date = "2017-06-24"
 description = "Solution to Leetcode 2322"
 tags = [
     

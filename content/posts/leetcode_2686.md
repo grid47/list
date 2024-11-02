@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2686: Immediate Food Delivery III"
-date = "2017-06-26"
+date = "2016-06-25"
 description = "Solution to Leetcode 2686"
 tags = [
     

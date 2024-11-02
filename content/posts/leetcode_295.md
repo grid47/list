@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 295: Find Median from Data Stream"
-date = "2024-01-12"
+date = "2023-01-11"
 description = "Solution to Leetcode 295"
 tags = [
     

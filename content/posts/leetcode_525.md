@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 525: Contiguous Array"
-date = "2023-05-27"
+date = "2022-05-26"
 description = "Solution to Leetcode 525"
 tags = [
     

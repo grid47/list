@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2192: All Ancestors of a Node in a Directed Acyclic Graph"
-date = "2018-11-02"
+date = "2017-11-01"
 description = "Solution to Leetcode 2192"
 tags = [
     

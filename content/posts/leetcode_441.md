@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 441: Arranging Coins"
-date = "2023-08-19"
+date = "2022-08-18"
 description = "Solution to Leetcode 441"
 tags = [
     

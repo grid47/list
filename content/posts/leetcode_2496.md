@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2496: Maximum Value of a String in an Array"
-date = "2018-01-02"
+date = "2017-01-01"
 description = "Solution to Leetcode 2496"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2866: Beautiful Towers II"
-date = "2016-12-28"
+date = "2015-12-28"
 description = "Solution to Leetcode 2866"
 tags = [
     

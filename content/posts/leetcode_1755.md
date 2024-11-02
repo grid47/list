@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1755: Closest Subsequence Sum"
-date = "2020-01-13"
+date = "2019-01-12"
 description = "Solution to Leetcode 1755"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 771: Jewels and Stones"
-date = "2022-09-23"
+date = "2021-09-22"
 description = "Solution to Leetcode 771"
 tags = [
     

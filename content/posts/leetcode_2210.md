@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2210: Count Hills and Valleys in an Array"
-date = "2018-10-15"
+date = "2017-10-14"
 description = "Solution to Leetcode 2210"
 tags = [
     

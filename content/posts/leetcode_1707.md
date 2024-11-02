@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1707: Maximum XOR With an Element From Array"
-date = "2020-03-01"
+date = "2019-03-01"
 description = "Solution to Leetcode 1707"
 tags = [
     

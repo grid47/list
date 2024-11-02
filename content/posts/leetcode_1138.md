@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1138: Alphabet Board Path"
-date = "2021-09-21"
+date = "2020-09-20"
 description = "Solution to Leetcode 1138"
 tags = [
     

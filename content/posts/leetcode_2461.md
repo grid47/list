@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2461: Maximum Sum of Distinct Subarrays With Length K"
-date = "2018-02-06"
+date = "2017-02-05"
 description = "Solution to Leetcode 2461"
 tags = [
     

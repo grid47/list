@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 738: Monotone Increasing Digits"
-date = "2022-10-26"
+date = "2021-10-25"
 description = "Solution to Leetcode 738"
 tags = [
     

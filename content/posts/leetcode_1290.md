@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1290: Convert Binary Number in a Linked List to Integer"
-date = "2021-04-22"
+date = "2020-04-21"
 description = "Solution to Leetcode 1290"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1825: Finding MK Average"
-date = "2019-11-04"
+date = "2018-11-03"
 description = "Solution to Leetcode 1825"
 tags = [
     

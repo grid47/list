@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 648: Replace Words"
-date = "2023-01-24"
+date = "2022-01-23"
 description = "Solution to Leetcode 648"
 tags = [
     

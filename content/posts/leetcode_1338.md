@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1338: Reduce Array Size to The Half"
-date = "2021-03-05"
+date = "2020-03-04"
 description = "Solution to Leetcode 1338"
 tags = [
     

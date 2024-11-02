@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3220: Odd and Even Transactions"
-date = "2016-01-09"
+date = "2015-01-08"
 description = "Solution to Leetcode 3220"
 tags = [
     

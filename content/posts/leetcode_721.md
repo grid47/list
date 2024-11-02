@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 721: Accounts Merge"
-date = "2022-11-12"
+date = "2021-11-11"
 description = "Solution to Leetcode 721"
 tags = [
     

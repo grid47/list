@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 686: Repeated String Match"
-date = "2022-12-17"
+date = "2021-12-16"
 description = "Solution to Leetcode 686"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1645: Hopper Company Queries II"
-date = "2020-05-02"
+date = "2019-05-02"
 description = "Solution to Leetcode 1645"
 tags = [
     

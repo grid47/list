@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1940: Longest Common Subsequence Between Sorted Arrays"
-date = "2019-07-12"
+date = "2018-07-11"
 description = "Solution to Leetcode 1940"
 tags = [
     

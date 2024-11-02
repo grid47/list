@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1834: Single-Threaded CPU"
-date = "2019-10-26"
+date = "2018-10-25"
 description = "Solution to Leetcode 1834"
 tags = [
     

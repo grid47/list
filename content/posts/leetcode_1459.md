@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1459: Rectangles Area"
-date = "2020-11-04"
+date = "2019-11-04"
 description = "Solution to Leetcode 1459"
 tags = [
     

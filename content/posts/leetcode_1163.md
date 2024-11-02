@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1163: Last Substring in Lexicographical Order"
-date = "2021-08-27"
+date = "2020-08-26"
 description = "Solution to Leetcode 1163"
 tags = [
     

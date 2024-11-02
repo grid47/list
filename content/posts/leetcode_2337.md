@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2337: Move Pieces to Obtain a String"
-date = "2018-06-10"
+date = "2017-06-09"
 description = "Solution to Leetcode 2337"
 tags = [
     

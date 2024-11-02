@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1254: Number of Closed Islands"
-date = "2021-05-28"
+date = "2020-05-27"
 description = "Solution to Leetcode 1254"
 tags = [
     

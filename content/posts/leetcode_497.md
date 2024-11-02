@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 497: Random Point in Non-overlapping Rectangles"
-date = "2023-06-24"
+date = "2022-06-23"
 description = "Solution to Leetcode 497"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 883: Projection Area of 3D Shapes"
-date = "2022-06-03"
+date = "2021-06-02"
 description = "Solution to Leetcode 883"
 tags = [
     

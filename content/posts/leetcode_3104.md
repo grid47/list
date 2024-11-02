@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3104: Find Longest Self-Contained Substring"
-date = "2016-05-04"
+date = "2015-05-04"
 description = "Solution to Leetcode 3104"
 tags = [
     

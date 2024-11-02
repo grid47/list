@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 217: Contains Duplicate"
-date = "2024-03-30"
+date = "2023-03-30"
 description = "Solution to Leetcode 217"
 tags = [
     

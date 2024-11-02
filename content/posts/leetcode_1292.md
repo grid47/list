@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold"
-date = "2021-04-20"
+date = "2020-04-19"
 description = "Solution to Leetcode 1292"
 tags = [
     

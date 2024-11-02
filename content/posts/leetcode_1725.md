@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1725: Number Of Rectangles That Can Form The Largest Square"
-date = "2020-02-12"
+date = "2019-02-11"
 description = "Solution to Leetcode 1725"
 tags = [
     

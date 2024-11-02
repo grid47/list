@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1814: Count Nice Pairs in an Array"
-date = "2019-11-15"
+date = "2018-11-14"
 description = "Solution to Leetcode 1814"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 257: Binary Tree Paths"
-date = "2024-02-19"
+date = "2023-02-18"
 description = "Solution to Leetcode 257"
 tags = [
     

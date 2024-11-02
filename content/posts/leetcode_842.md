@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 842: Split Array into Fibonacci Sequence"
-date = "2022-07-14"
+date = "2021-07-13"
 description = "Solution to Leetcode 842"
 tags = [
     

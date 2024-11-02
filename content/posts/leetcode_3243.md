@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3243: Shortest Distance After Road Addition Queries I"
-date = "2015-12-17"
+date = "2014-12-16"
 description = "Solution to Leetcode 3243"
 tags = [
     

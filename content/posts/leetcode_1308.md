@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1308: Running Total for Different Genders"
-date = "2021-04-04"
+date = "2020-04-03"
 description = "Solution to Leetcode 1308"
 tags = [
     

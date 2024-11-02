@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1875: Group Employees of the Same Salary"
-date = "2019-09-15"
+date = "2018-09-14"
 description = "Solution to Leetcode 1875"
 tags = [
     

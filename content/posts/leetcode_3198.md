@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3198: Find Cities in Each State"
-date = "2016-01-31"
+date = "2015-01-30"
 description = "Solution to Leetcode 3198"
 tags = [
     

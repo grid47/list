@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1836: Remove Duplicates From an Unsorted Linked List"
-date = "2019-10-24"
+date = "2018-10-23"
 description = "Solution to Leetcode 1836"
 tags = [
     

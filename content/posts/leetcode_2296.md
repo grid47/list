@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2296: Design a Text Editor"
-date = "2018-07-21"
+date = "2017-07-20"
 description = "Solution to Leetcode 2296"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1035: Uncrossed Lines"
-date = "2022-01-02"
+date = "2021-01-01"
 description = "Solution to Leetcode 1035"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3269: Constructing Two Increasing Arrays"
-date = "2015-11-21"
+date = "2014-11-20"
 description = "Solution to Leetcode 3269"
 tags = [
     

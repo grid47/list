@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 326: Power of Three"
-date = "2023-12-12"
+date = "2022-12-11"
 description = "Solution to Leetcode 326"
 tags = [
     

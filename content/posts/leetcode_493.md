@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 493: Reverse Pairs"
-date = "2023-06-28"
+date = "2022-06-27"
 description = "Solution to Leetcode 493"
 tags = [
     

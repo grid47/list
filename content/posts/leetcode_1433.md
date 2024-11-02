@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1433: Check If a String Can Break Another String"
-date = "2020-11-30"
+date = "2019-11-30"
 description = "Solution to Leetcode 1433"
 tags = [
     

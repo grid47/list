@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1122: Relative Sort Array"
-date = "2021-10-07"
+date = "2020-10-06"
 description = "Solution to Leetcode 1122"
 tags = [
     

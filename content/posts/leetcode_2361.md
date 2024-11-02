@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2361: Minimum Costs Using the Train Line"
-date = "2018-05-17"
+date = "2017-05-16"
 description = "Solution to Leetcode 2361"
 tags = [
     

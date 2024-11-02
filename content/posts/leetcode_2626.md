@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2626: Array Reduce Transformation"
-date = "2017-08-25"
+date = "2016-08-24"
 description = "Solution to Leetcode 2626"
 tags = [
     

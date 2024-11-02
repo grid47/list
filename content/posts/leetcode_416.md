@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 416: Partition Equal Subset Sum"
-date = "2023-09-13"
+date = "2022-09-12"
 description = "Solution to Leetcode 416"
 tags = [
     

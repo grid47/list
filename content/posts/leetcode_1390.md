@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1390: Four Divisors"
-date = "2021-01-12"
+date = "2020-01-12"
 description = "Solution to Leetcode 1390"
 tags = [
     

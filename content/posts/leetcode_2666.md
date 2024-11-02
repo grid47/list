@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2666: Allow One Function Call"
-date = "2017-07-16"
+date = "2016-07-15"
 description = "Solution to Leetcode 2666"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3266: Final Array State After K Multiplication Operations II"
-date = "2015-11-24"
+date = "2014-11-23"
 description = "Solution to Leetcode 3266"
 tags = [
     

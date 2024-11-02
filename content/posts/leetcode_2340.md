@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2340: Minimum Adjacent Swaps to Make a Valid Array"
-date = "2018-06-07"
+date = "2017-06-06"
 description = "Solution to Leetcode 2340"
 tags = [
     

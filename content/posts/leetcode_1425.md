@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1425: Constrained Subsequence Sum"
-date = "2020-12-08"
+date = "2019-12-08"
 description = "Solution to Leetcode 1425"
 tags = [
     

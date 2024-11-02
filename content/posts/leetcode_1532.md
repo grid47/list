@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1532: The Most Recent Three Orders"
-date = "2020-08-23"
+date = "2019-08-23"
 description = "Solution to Leetcode 1532"
 tags = [
     

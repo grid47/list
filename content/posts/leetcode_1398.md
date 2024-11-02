@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1398: Customers Who Bought Products A and B but Not C"
-date = "2021-01-04"
+date = "2020-01-04"
 description = "Solution to Leetcode 1398"
 tags = [
     

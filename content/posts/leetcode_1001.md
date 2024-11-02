@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1001: Grid Illumination"
-date = "2022-02-05"
+date = "2021-02-04"
 description = "Solution to Leetcode 1001"
 tags = [
     
@@ -65,7 +65,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1001.md" >}}
 ---
 {{< youtube Mjbq8aGPBr8 >}}
 

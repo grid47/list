@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 946: Validate Stack Sequences"
-date = "2022-04-01"
+date = "2021-03-31"
 description = "Solution to Leetcode 946"
 tags = [
     

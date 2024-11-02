@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2890: Reshape Data: Melt"
-date = "2016-12-04"
+date = "2015-12-04"
 description = "Solution to Leetcode 2890"
 tags = [
     

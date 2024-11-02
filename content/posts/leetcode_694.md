@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 694: Number of Distinct Islands"
-date = "2022-12-09"
+date = "2021-12-08"
 description = "Solution to Leetcode 694"
 tags = [
     

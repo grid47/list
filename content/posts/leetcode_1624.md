@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1624: Largest Substring Between Two Equal Characters"
-date = "2020-05-23"
+date = "2019-05-23"
 description = "Solution to Leetcode 1624"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2095: Delete the Middle Node of a Linked List"
-date = "2019-02-07"
+date = "2018-02-06"
 description = "Solution to Leetcode 2095"
 tags = [
     

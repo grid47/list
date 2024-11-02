@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1092: Shortest Common Supersequence "
-date = "2021-11-06"
+date = "2020-11-05"
 description = "Solution to Leetcode 1092"
 tags = [
     

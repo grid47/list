@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3201: Find the Maximum Length of Valid Subsequence I"
-date = "2016-01-28"
+date = "2015-01-27"
 description = "Solution to Leetcode 3201"
 tags = [
     

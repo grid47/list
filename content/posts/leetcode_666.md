@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 666: Path Sum IV"
-date = "2023-01-06"
+date = "2022-01-05"
 description = "Solution to Leetcode 666"
 tags = [
     

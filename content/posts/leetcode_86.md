@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 86: Partition List"
-date = "2024-08-08"
+date = "2023-08-08"
 description = "Solution to Leetcode 86"
 tags = [
     

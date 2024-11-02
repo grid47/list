@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1387: Sort Integers by The Power Value"
-date = "2021-01-15"
+date = "2020-01-15"
 description = "Solution to Leetcode 1387"
 tags = [
     

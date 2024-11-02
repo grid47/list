@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 876: Middle of the Linked List"
-date = "2022-06-10"
+date = "2021-06-09"
 description = "Solution to Leetcode 876"
 tags = [
     

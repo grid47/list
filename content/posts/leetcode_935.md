@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 935: Knight Dialer"
-date = "2022-04-12"
+date = "2021-04-11"
 description = "Solution to Leetcode 935"
 tags = [
     

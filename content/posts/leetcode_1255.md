@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1255: Maximum Score Words Formed by Letters"
-date = "2021-05-27"
+date = "2020-05-26"
 description = "Solution to Leetcode 1255"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2585: Number of Ways to Earn Points"
-date = "2017-10-05"
+date = "2016-10-04"
 description = "Solution to Leetcode 2585"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 950: Reveal Cards In Increasing Order"
-date = "2022-03-28"
+date = "2021-03-27"
 description = "Solution to Leetcode 950"
 tags = [
     

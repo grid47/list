@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1358: Number of Substrings Containing All Three Characters"
-date = "2021-02-13"
+date = "2020-02-13"
 description = "Solution to Leetcode 1358"
 tags = [
     

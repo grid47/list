@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1783: Grand Slam Titles"
-date = "2019-12-16"
+date = "2018-12-15"
 description = "Solution to Leetcode 1783"
 tags = [
     

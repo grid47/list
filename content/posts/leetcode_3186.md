@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3186: Maximum Total Damage With Spell Casting"
-date = "2016-02-12"
+date = "2015-02-11"
 description = "Solution to Leetcode 3186"
 tags = [
     

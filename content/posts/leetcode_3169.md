@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3169: Count Days Without Meetings"
-date = "2016-02-29"
+date = "2015-02-28"
 description = "Solution to Leetcode 3169"
 tags = [
     

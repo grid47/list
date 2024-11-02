@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 411: Minimum Unique Word Abbreviation"
-date = "2023-09-18"
+date = "2022-09-17"
 description = "Solution to Leetcode 411"
 tags = [
     

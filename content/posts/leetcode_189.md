@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 189: Rotate Array"
-date = "2024-04-27"
+date = "2023-04-27"
 description = "Solution to Leetcode 189"
 tags = [
     

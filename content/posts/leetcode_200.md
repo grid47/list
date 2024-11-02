@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 200: Number of Islands"
-date = "2024-04-16"
+date = "2023-04-16"
 description = "Solution to Leetcode 200"
 tags = [
     

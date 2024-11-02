@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2982: Find Longest Special Substring That Occurs Thrice II"
-date = "2016-09-03"
+date = "2015-09-03"
 description = "Solution to Leetcode 2982"
 tags = [
     

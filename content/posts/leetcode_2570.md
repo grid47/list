@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2570: Merge Two 2D Arrays by Summing Values"
-date = "2017-10-20"
+date = "2016-10-19"
 description = "Solution to Leetcode 2570"
 tags = [
     

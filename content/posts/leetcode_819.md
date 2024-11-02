@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 819: Most Common Word"
-date = "2022-08-06"
+date = "2021-08-05"
 description = "Solution to Leetcode 819"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 568: Maximum Vacation Days"
-date = "2023-04-14"
+date = "2022-04-13"
 description = "Solution to Leetcode 568"
 tags = [
     

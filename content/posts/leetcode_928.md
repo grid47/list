@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 928: Minimize Malware Spread II"
-date = "2022-04-19"
+date = "2021-04-18"
 description = "Solution to Leetcode 928"
 tags = [
     

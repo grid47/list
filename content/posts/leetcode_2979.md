@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2979: Most Expensive Item That Can Not Be Bought"
-date = "2016-09-06"
+date = "2015-09-06"
 description = "Solution to Leetcode 2979"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2788: Split Strings by Separator"
-date = "2017-03-16"
+date = "2016-03-15"
 description = "Solution to Leetcode 2788"
 tags = [
     

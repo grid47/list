@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 394: Decode String"
-date = "2023-10-05"
+date = "2022-10-04"
 description = "Solution to Leetcode 394"
 tags = [
     

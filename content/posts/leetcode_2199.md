@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2199: Finding the Topic of Each Post"
-date = "2018-10-26"
+date = "2017-10-25"
 description = "Solution to Leetcode 2199"
 tags = [
     

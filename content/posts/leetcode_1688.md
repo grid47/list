@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1688: Count of Matches in Tournament"
-date = "2020-03-20"
+date = "2019-03-20"
 description = "Solution to Leetcode 1688"
 tags = [
     

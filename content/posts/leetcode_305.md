@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 305: Number of Islands II"
-date = "2024-01-02"
+date = "2023-01-01"
 description = "Solution to Leetcode 305"
 tags = [
     

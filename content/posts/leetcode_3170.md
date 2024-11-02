@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3170: Lexicographically Minimum String After Removing Stars"
-date = "2016-02-28"
+date = "2015-02-27"
 description = "Solution to Leetcode 3170"
 tags = [
     

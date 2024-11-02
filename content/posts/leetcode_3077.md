@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3077: Maximum Strength of K Disjoint Subarrays"
-date = "2016-05-31"
+date = "2015-05-31"
 description = "Solution to Leetcode 3077"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2498: Frog Jump II"
-date = "2017-12-31"
+date = "2016-12-30"
 description = "Solution to Leetcode 2498"
 tags = [
     

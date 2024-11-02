@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1570: Dot Product of Two Sparse Vectors"
-date = "2020-07-16"
+date = "2019-07-16"
 description = "Solution to Leetcode 1570"
 tags = [
     

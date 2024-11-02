@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3275: K-th Nearest Obstacle Queries"
-date = "2015-11-15"
+date = "2014-11-14"
 description = "Solution to Leetcode 3275"
 tags = [
     

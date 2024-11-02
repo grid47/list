@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition"
-date = "2020-09-26"
+date = "2019-09-26"
 description = "Solution to Leetcode 1498"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 739: Daily Temperatures"
-date = "2022-10-25"
+date = "2021-10-24"
 description = "Solution to Leetcode 739"
 tags = [
     

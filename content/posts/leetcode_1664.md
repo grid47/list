@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1664: Ways to Make a Fair Array"
-date = "2020-04-13"
+date = "2019-04-13"
 description = "Solution to Leetcode 1664"
 tags = [
     

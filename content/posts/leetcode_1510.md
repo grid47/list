@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1510: Stone Game IV"
-date = "2020-09-14"
+date = "2019-09-14"
 description = "Solution to Leetcode 1510"
 tags = [
     

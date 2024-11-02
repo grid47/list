@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3041: Maximize Consecutive Elements in an Array After Modification"
-date = "2016-07-06"
+date = "2015-07-06"
 description = "Solution to Leetcode 3041"
 tags = [
     

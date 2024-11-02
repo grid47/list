@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1858: Longest Word With All Prefixes"
-date = "2019-10-02"
+date = "2018-10-01"
 description = "Solution to Leetcode 1858"
 tags = [
     

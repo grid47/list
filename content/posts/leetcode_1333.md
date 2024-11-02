@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1333: Filter Restaurants by Vegan-Friendly, Price and Distance"
-date = "2021-03-10"
+date = "2020-03-09"
 description = "Solution to Leetcode 1333"
 tags = [
     

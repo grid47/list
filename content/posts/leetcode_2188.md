@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2188: Minimum Time to Finish the Race"
-date = "2018-11-06"
+date = "2017-11-05"
 description = "Solution to Leetcode 2188"
 tags = [
     

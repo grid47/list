@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 226: Invert Binary Tree"
-date = "2024-03-21"
+date = "2023-03-21"
 description = "Solution to Leetcode 226"
 tags = [
     

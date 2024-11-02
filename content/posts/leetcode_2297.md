@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2297: Jump Game VIII"
-date = "2018-07-20"
+date = "2017-07-19"
 description = "Solution to Leetcode 2297"
 tags = [
     

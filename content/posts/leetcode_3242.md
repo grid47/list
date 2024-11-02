@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3242: Design Neighbor Sum Service"
-date = "2015-12-18"
+date = "2014-12-17"
 description = "Solution to Leetcode 3242"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3052: Maximize Items"
-date = "2016-06-25"
+date = "2015-06-25"
 description = "Solution to Leetcode 3052"
 tags = [
     

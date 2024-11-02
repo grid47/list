@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1496: Path Crossing"
-date = "2020-09-28"
+date = "2019-09-28"
 description = "Solution to Leetcode 1496"
 tags = [
     

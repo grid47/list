@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 635: Design Log Storage System"
-date = "2023-02-06"
+date = "2022-02-05"
 description = "Solution to Leetcode 635"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3309: Maximum Possible Number by Binary Concatenation"
-date = "2015-10-12"
+date = "2014-10-11"
 description = "Solution to Leetcode 3309"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3063: Linked List Frequency"
-date = "2016-06-14"
+date = "2015-06-14"
 description = "Solution to Leetcode 3063"
 tags = [
     

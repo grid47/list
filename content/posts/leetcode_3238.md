@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3238: Find the Number of Winning Players"
-date = "2015-12-22"
+date = "2014-12-21"
 description = "Solution to Leetcode 3238"
 tags = [
     

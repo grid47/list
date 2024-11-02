@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3138: Minimum Length of Anagram Concatenation"
-date = "2016-03-31"
+date = "2015-03-31"
 description = "Solution to Leetcode 3138"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2066: Account Balance"
-date = "2019-03-08"
+date = "2018-03-07"
 description = "Solution to Leetcode 2066"
 tags = [
     

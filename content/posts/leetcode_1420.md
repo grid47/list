@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1420: Build Array Where You Can Find The Maximum Exactly K Comparisons"
-date = "2020-12-13"
+date = "2019-12-13"
 description = "Solution to Leetcode 1420"
 tags = [
     

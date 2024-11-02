@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 927: Three Equal Parts"
-date = "2022-04-20"
+date = "2021-04-19"
 description = "Solution to Leetcode 927"
 tags = [
     

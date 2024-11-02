@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 867: Transpose Matrix"
-date = "2022-06-19"
+date = "2021-06-18"
 description = "Solution to Leetcode 867"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1658: Minimum Operations to Reduce X to Zero"
-date = "2020-04-19"
+date = "2019-04-19"
 description = "Solution to Leetcode 1658"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3045: Count Prefix and Suffix Pairs II"
-date = "2016-07-02"
+date = "2015-07-02"
 description = "Solution to Leetcode 3045"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 818: Race Car"
-date = "2022-08-07"
+date = "2021-08-06"
 description = "Solution to Leetcode 818"
 tags = [
     

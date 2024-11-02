@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1922: Count Good Numbers"
-date = "2019-07-30"
+date = "2018-07-29"
 description = "Solution to Leetcode 1922"
 tags = [
     

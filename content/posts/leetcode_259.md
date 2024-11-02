@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 259: 3Sum Smaller"
-date = "2024-02-17"
+date = "2023-02-16"
 description = "Solution to Leetcode 259"
 tags = [
     

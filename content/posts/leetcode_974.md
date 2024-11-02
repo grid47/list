@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 974: Subarray Sums Divisible by K"
-date = "2022-03-04"
+date = "2021-03-03"
 description = "Solution to Leetcode 974"
 tags = [
     

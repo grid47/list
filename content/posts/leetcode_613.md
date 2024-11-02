@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 613: Shortest Distance in a Line"
-date = "2023-02-28"
+date = "2022-02-27"
 description = "Solution to Leetcode 613"
 tags = [
     

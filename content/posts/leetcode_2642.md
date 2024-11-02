@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2642: Design Graph With Shortest Path Calculator"
-date = "2017-08-09"
+date = "2016-08-08"
 description = "Solution to Leetcode 2642"
 tags = [
     

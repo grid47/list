@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2237: Count Positions on Street With Required Brightness"
-date = "2018-09-18"
+date = "2017-09-17"
 description = "Solution to Leetcode 2237"
 tags = [
     

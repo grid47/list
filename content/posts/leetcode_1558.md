@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1558: Minimum Numbers of Function Calls to Make Target Array"
-date = "2020-07-28"
+date = "2019-07-28"
 description = "Solution to Leetcode 1558"
 tags = [
     

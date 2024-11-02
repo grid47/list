@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 268: Missing Number"
-date = "2024-02-08"
+date = "2023-02-07"
 description = "Solution to Leetcode 268"
 tags = [
     

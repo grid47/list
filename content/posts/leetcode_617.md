@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 617: Merge Two Binary Trees"
-date = "2023-02-24"
+date = "2022-02-23"
 description = "Solution to Leetcode 617"
 tags = [
     

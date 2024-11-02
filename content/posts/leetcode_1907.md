@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1907: Count Salary Categories"
-date = "2019-08-14"
+date = "2018-08-13"
 description = "Solution to Leetcode 1907"
 tags = [
     

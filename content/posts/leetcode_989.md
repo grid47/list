@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 989: Add to Array-Form of Integer"
-date = "2022-02-17"
+date = "2021-02-16"
 description = "Solution to Leetcode 989"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 83: Remove Duplicates from Sorted List"
-date = "2024-08-11"
+date = "2023-08-11"
 description = "Solution to Leetcode 83"
 tags = [
     

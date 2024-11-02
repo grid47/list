@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 798: Smallest Rotation with Highest Score"
-date = "2022-08-27"
+date = "2021-08-26"
 description = "Solution to Leetcode 798"
 tags = [
     

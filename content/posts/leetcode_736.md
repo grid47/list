@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 736: Parse Lisp Expression"
-date = "2022-10-28"
+date = "2021-10-27"
 description = "Solution to Leetcode 736"
 tags = [
     

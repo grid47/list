@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2569: Handling Sum Queries After Update"
-date = "2017-10-21"
+date = "2016-10-20"
 description = "Solution to Leetcode 2569"
 tags = [
     

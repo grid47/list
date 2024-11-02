@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3180: Maximum Total Reward Using Operations I"
-date = "2016-02-18"
+date = "2015-02-17"
 description = "Solution to Leetcode 3180"
 tags = [
     

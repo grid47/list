@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 569: Median Employee Salary"
-date = "2023-04-13"
+date = "2022-04-12"
 description = "Solution to Leetcode 569"
 tags = [
     

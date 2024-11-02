@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3121: Count the Number of Special Characters II"
-date = "2016-04-17"
+date = "2015-04-17"
 description = "Solution to Leetcode 3121"
 tags = [
     

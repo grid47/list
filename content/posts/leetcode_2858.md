@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2858: Minimum Edge Reversals So Every Node Is Reachable"
-date = "2017-01-05"
+date = "2016-01-05"
 description = "Solution to Leetcode 2858"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 982: Triples with Bitwise AND Equal To Zero"
-date = "2022-02-24"
+date = "2021-02-23"
 description = "Solution to Leetcode 982"
 tags = [
     

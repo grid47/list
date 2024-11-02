@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1318: Minimum Flips to Make a OR b Equal to c"
-date = "2021-03-25"
+date = "2020-03-24"
 description = "Solution to Leetcode 1318"
 tags = [
     

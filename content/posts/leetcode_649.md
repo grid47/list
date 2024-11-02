@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 649: Dota2 Senate"
-date = "2023-01-23"
+date = "2022-01-22"
 description = "Solution to Leetcode 649"
 tags = [
     

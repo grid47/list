@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 676: Implement Magic Dictionary"
-date = "2022-12-27"
+date = "2021-12-26"
 description = "Solution to Leetcode 676"
 tags = [
     

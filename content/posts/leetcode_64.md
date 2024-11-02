@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 64: Minimum Path Sum"
-date = "2024-08-30"
+date = "2023-08-30"
 description = "Solution to Leetcode 64"
 tags = [
     

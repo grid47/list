@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1282: Group the People Given the Group Size They Belong To"
-date = "2021-04-30"
+date = "2020-04-29"
 description = "Solution to Leetcode 1282"
 tags = [
     

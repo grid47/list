@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1879: Minimum XOR Sum of Two Arrays"
-date = "2019-09-11"
+date = "2018-09-10"
 description = "Solution to Leetcode 1879"
 tags = [
     

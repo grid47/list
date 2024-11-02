@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2017: Grid Game"
-date = "2019-04-26"
+date = "2018-04-25"
 description = "Solution to Leetcode 2017"
 tags = [
     

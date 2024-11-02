@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2413: Smallest Even Multiple"
-date = "2018-03-26"
+date = "2017-03-25"
 description = "Solution to Leetcode 2413"
 tags = [
     

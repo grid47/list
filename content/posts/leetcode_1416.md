@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1416: Restore The Array"
-date = "2020-12-17"
+date = "2019-12-17"
 description = "Solution to Leetcode 1416"
 tags = [
     

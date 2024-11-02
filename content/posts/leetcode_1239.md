@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1239: Maximum Length of a Concatenated String with Unique Characters"
-date = "2021-06-12"
+date = "2020-06-11"
 description = "Solution to Leetcode 1239"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1655: Distribute Repeating Integers"
-date = "2020-04-22"
+date = "2019-04-22"
 description = "Solution to Leetcode 1655"
 tags = [
     

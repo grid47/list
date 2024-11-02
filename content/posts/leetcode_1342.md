@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1342: Number of Steps to Reduce a Number to Zero"
-date = "2021-03-01"
+date = "2020-02-29"
 description = "Solution to Leetcode 1342"
 tags = [
     

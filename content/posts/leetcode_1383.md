@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1383: Maximum Performance of a Team"
-date = "2021-01-19"
+date = "2020-01-19"
 description = "Solution to Leetcode 1383"
 tags = [
     

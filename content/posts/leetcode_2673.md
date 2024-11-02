@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2673: Make Costs of Paths Equal in a Binary Tree"
-date = "2017-07-09"
+date = "2016-07-08"
 description = "Solution to Leetcode 2673"
 tags = [
     

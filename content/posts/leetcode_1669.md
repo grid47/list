@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1669: Merge In Between Linked Lists"
-date = "2020-04-08"
+date = "2019-04-08"
 description = "Solution to Leetcode 1669"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2731: Movement of Robots"
-date = "2017-05-12"
+date = "2016-05-11"
 description = "Solution to Leetcode 2731"
 tags = [
     

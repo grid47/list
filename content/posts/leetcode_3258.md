@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3258: Count Substrings That Satisfy K-Constraint I"
-date = "2015-12-02"
+date = "2014-12-01"
 description = "Solution to Leetcode 3258"
 tags = [
     

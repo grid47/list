@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 419: Battleships in a Board"
-date = "2023-09-10"
+date = "2022-09-09"
 description = "Solution to Leetcode 419"
 tags = [
     

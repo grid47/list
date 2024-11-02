@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1123: Lowest Common Ancestor of Deepest Leaves"
-date = "2021-10-06"
+date = "2020-10-05"
 description = "Solution to Leetcode 1123"
 tags = [
     

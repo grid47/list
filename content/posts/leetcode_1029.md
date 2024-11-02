@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1029: Two City Scheduling"
-date = "2022-01-08"
+date = "2021-01-07"
 description = "Solution to Leetcode 1029"
 tags = [
     

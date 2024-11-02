@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2107: Number of Unique Flavors After Sharing K Candies"
-date = "2019-01-26"
+date = "2018-01-25"
 description = "Solution to Leetcode 2107"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2742: Painting the Walls"
-date = "2017-05-01"
+date = "2016-04-30"
 description = "Solution to Leetcode 2742"
 tags = [
     

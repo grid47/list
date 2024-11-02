@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2584: Split the Array to Make Coprime Products"
-date = "2017-10-06"
+date = "2016-10-05"
 description = "Solution to Leetcode 2584"
 tags = [
     

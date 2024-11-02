@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2507: Smallest Value After Replacing With Sum of Prime Factors"
-date = "2017-12-22"
+date = "2016-12-21"
 description = "Solution to Leetcode 2507"
 tags = [
     

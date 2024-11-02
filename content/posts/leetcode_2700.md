@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2700: Differences Between Two Objects"
-date = "2017-06-12"
+date = "2016-06-11"
 description = "Solution to Leetcode 2700"
 tags = [
     

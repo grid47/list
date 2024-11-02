@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1027: Longest Arithmetic Subsequence"
-date = "2022-01-10"
+date = "2021-01-09"
 description = "Solution to Leetcode 1027"
 tags = [
     

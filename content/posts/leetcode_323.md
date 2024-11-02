@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 323: Number of Connected Components in an Undirected Graph"
-date = "2023-12-15"
+date = "2022-12-14"
 description = "Solution to Leetcode 323"
 tags = [
     

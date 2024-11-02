@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 593: Valid Square"
-date = "2023-03-20"
+date = "2022-03-19"
 description = "Solution to Leetcode 593"
 tags = [
     

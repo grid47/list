@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2795: Parallel Execution of Promises for Individual Results Retrieval"
-date = "2017-03-09"
+date = "2016-03-08"
 description = "Solution to Leetcode 2795"
 tags = [
     

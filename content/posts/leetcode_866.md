@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 866: Prime Palindrome"
-date = "2022-06-20"
+date = "2021-06-19"
 description = "Solution to Leetcode 866"
 tags = [
     

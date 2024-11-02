@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 362: Design Hit Counter"
-date = "2023-11-06"
+date = "2022-11-05"
 description = "Solution to Leetcode 362"
 tags = [
     

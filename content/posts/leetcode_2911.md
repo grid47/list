@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2911: Minimum Changes to Make K Semi-palindromes"
-date = "2016-11-13"
+date = "2015-11-13"
 description = "Solution to Leetcode 2911"
 tags = [
     

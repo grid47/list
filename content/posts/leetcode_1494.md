@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1494: Parallel Courses II"
-date = "2020-09-30"
+date = "2019-09-30"
 description = "Solution to Leetcode 1494"
 tags = [
     

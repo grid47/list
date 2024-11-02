@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3316: Find Maximum Removals From Source String"
-date = "2015-10-05"
+date = "2014-10-04"
 description = "Solution to Leetcode 3316"
 tags = [
     

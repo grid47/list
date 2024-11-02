@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 553: Optimal Division"
-date = "2023-04-29"
+date = "2022-04-28"
 description = "Solution to Leetcode 553"
 tags = [
     

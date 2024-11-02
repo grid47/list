@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 746: Min Cost Climbing Stairs"
-date = "2022-10-18"
+date = "2021-10-17"
 description = "Solution to Leetcode 746"
 tags = [
     

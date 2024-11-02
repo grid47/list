@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2216: Minimum Deletions to Make Array Beautiful"
-date = "2018-10-09"
+date = "2017-10-08"
 description = "Solution to Leetcode 2216"
 tags = [
     

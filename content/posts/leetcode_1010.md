@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1010: Pairs of Songs With Total Durations Divisible by 60"
-date = "2022-01-27"
+date = "2021-01-26"
 description = "Solution to Leetcode 1010"
 tags = [
     

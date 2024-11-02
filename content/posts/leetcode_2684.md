@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2684: Maximum Number of Moves in a Grid"
-date = "2017-06-28"
+date = "2016-06-27"
 description = "Solution to Leetcode 2684"
 tags = [
     

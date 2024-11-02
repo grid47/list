@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 456: 132 Pattern"
-date = "2023-08-04"
+date = "2022-08-03"
 description = "Solution to Leetcode 456"
 tags = [
     

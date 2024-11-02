@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1185: Day of the Week"
-date = "2021-08-05"
+date = "2020-08-04"
 description = "Solution to Leetcode 1185"
 tags = [
     

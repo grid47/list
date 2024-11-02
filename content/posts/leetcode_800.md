@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 800: Similar RGB Color"
-date = "2022-08-25"
+date = "2021-08-24"
 description = "Solution to Leetcode 800"
 tags = [
     

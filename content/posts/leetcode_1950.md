@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1950: Maximum of Minimum Values in All Subarrays"
-date = "2019-07-02"
+date = "2018-07-01"
 description = "Solution to Leetcode 1950"
 tags = [
     

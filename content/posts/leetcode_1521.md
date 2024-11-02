@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1521: Find a Value of a Mysterious Function Closest to Target"
-date = "2020-09-03"
+date = "2019-09-03"
 description = "Solution to Leetcode 1521"
 tags = [
     

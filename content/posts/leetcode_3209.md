@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3209: Number of Subarrays With AND Value of K"
-date = "2016-01-20"
+date = "2015-01-19"
 description = "Solution to Leetcode 3209"
 tags = [
     

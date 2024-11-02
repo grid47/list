@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 446: Arithmetic Slices II - Subsequence"
-date = "2023-08-14"
+date = "2022-08-13"
 description = "Solution to Leetcode 446"
 tags = [
     

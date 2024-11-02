@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1705: Maximum Number of Eaten Apples"
-date = "2020-03-03"
+date = "2019-03-03"
 description = "Solution to Leetcode 1705"
 tags = [
     

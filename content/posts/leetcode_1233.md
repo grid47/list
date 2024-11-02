@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1233: Remove Sub-Folders from the Filesystem"
-date = "2021-06-18"
+date = "2020-06-17"
 description = "Solution to Leetcode 1233"
 tags = [
     

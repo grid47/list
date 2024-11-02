@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3124: Find Longest Calls"
-date = "2016-04-14"
+date = "2015-04-14"
 description = "Solution to Leetcode 3124"
 tags = [
     

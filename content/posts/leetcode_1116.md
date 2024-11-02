@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1116: Print Zero Even Odd"
-date = "2021-10-13"
+date = "2020-10-12"
 description = "Solution to Leetcode 1116"
 tags = [
     

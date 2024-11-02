@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1617: Count Subtrees With Max Distance Between Cities"
-date = "2020-05-30"
+date = "2019-05-30"
 description = "Solution to Leetcode 1617"
 tags = [
     

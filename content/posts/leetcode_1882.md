@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1882: Process Tasks Using Servers"
-date = "2019-09-08"
+date = "2018-09-07"
 description = "Solution to Leetcode 1882"
 tags = [
     

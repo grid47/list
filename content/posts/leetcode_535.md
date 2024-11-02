@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 535: Encode and Decode TinyURL"
-date = "2023-05-17"
+date = "2022-05-16"
 description = "Solution to Leetcode 535"
 tags = [
     

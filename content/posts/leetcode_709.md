@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 709: To Lower Case"
-date = "2022-11-24"
+date = "2021-11-23"
 description = "Solution to Leetcode 709"
 tags = [
     

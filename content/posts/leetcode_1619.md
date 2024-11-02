@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1619: Mean of Array After Removing Some Elements"
-date = "2020-05-28"
+date = "2019-05-28"
 description = "Solution to Leetcode 1619"
 tags = [
     

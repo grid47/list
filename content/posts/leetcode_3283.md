@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3283: Maximum Number of Moves to Kill All Pawns"
-date = "2015-11-07"
+date = "2014-11-06"
 description = "Solution to Leetcode 3283"
 tags = [
     

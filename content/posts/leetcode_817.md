@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 817: Linked List Components"
-date = "2022-08-08"
+date = "2021-08-07"
 description = "Solution to Leetcode 817"
 tags = [
     

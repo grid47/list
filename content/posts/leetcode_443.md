@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 443: String Compression"
-date = "2023-08-17"
+date = "2022-08-16"
 description = "Solution to Leetcode 443"
 tags = [
     

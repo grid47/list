@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 202: Happy Number"
-date = "2024-04-14"
+date = "2023-04-14"
 description = "Solution to Leetcode 202"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 197: Rising Temperature"
-date = "2024-04-19"
+date = "2023-04-19"
 description = "Solution to Leetcode 197"
 tags = [
     

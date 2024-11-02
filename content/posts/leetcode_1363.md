@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1363: Largest Multiple of Three"
-date = "2021-02-08"
+date = "2020-02-08"
 description = "Solution to Leetcode 1363"
 tags = [
     

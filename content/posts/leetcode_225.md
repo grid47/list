@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 225: Implement Stack using Queues"
-date = "2024-03-22"
+date = "2023-03-22"
 description = "Solution to Leetcode 225"
 tags = [
     

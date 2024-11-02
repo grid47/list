@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 908: Smallest Range I"
-date = "2022-05-09"
+date = "2021-05-08"
 description = "Solution to Leetcode 908"
 tags = [
     

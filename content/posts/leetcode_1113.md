@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1113: Reported Posts"
-date = "2021-10-16"
+date = "2020-10-15"
 description = "Solution to Leetcode 1113"
 tags = [
     

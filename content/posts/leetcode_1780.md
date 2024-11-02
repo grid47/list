@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1780: Check if Number is a Sum of Powers of Three"
-date = "2019-12-19"
+date = "2018-12-18"
 description = "Solution to Leetcode 1780"
 tags = [
     

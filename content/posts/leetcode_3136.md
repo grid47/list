@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3136: Valid Word"
-date = "2016-04-02"
+date = "2015-04-02"
 description = "Solution to Leetcode 3136"
 tags = [
     

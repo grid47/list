@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1620: Coordinate With Maximum Network Quality"
-date = "2020-05-27"
+date = "2019-05-27"
 description = "Solution to Leetcode 1620"
 tags = [
     

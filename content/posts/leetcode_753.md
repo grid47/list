@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 753: Cracking the Safe"
-date = "2022-10-11"
+date = "2021-10-10"
 description = "Solution to Leetcode 753"
 tags = [
     

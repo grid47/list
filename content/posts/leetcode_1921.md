@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1921: Eliminate Maximum Number of Monsters"
-date = "2019-07-31"
+date = "2018-07-30"
 description = "Solution to Leetcode 1921"
 tags = [
     

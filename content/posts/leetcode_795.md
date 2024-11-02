@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 795: Number of Subarrays with Bounded Maximum"
-date = "2022-08-30"
+date = "2021-08-29"
 description = "Solution to Leetcode 795"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1976: Number of Ways to Arrive at Destination"
-date = "2019-06-06"
+date = "2018-06-05"
 description = "Solution to Leetcode 1976"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 779: K-th Symbol in Grammar"
-date = "2022-09-15"
+date = "2021-09-14"
 description = "Solution to Leetcode 779"
 tags = [
     

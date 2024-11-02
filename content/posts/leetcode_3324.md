@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3324: Find the Sequence of Strings Appeared on the Screen"
-date = "2015-09-27"
+date = "2014-09-26"
 description = "Solution to Leetcode 3324"
 tags = [
     

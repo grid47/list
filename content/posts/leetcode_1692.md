@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1692: Count Ways to Distribute Candies"
-date = "2020-03-16"
+date = "2019-03-16"
 description = "Solution to Leetcode 1692"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 713: Subarray Product Less Than K"
-date = "2022-11-20"
+date = "2021-11-19"
 description = "Solution to Leetcode 713"
 tags = [
     

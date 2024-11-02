@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 31: Next Permutation"
-date = "2024-10-02"
+date = "2023-10-02"
 description = "Solution to Leetcode 31"
 tags = [
     

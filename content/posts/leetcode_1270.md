@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1270: All People Report to the Given Manager"
-date = "2021-05-12"
+date = "2020-05-11"
 description = "Solution to Leetcode 1270"
 tags = [
     

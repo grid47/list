@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 625: Minimum Factorization"
-date = "2023-02-16"
+date = "2022-02-15"
 description = "Solution to Leetcode 625"
 tags = [
     

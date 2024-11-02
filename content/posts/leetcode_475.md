@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 475: Heaters"
-date = "2023-07-16"
+date = "2022-07-15"
 description = "Solution to Leetcode 475"
 tags = [
     

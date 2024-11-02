@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2364: Count Number of Bad Pairs"
-date = "2018-05-14"
+date = "2017-05-13"
 description = "Solution to Leetcode 2364"
 tags = [
     

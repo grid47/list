@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 393: UTF-8 Validation"
-date = "2023-10-06"
+date = "2022-10-05"
 description = "Solution to Leetcode 393"
 tags = [
     

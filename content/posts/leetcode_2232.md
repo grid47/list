@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2232: Minimize Result by Adding Parentheses to Expression"
-date = "2018-09-23"
+date = "2017-09-22"
 description = "Solution to Leetcode 2232"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2254: Design Video Sharing Platform"
-date = "2018-09-01"
+date = "2017-08-31"
 description = "Solution to Leetcode 2254"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1667: Fix Names in a Table"
-date = "2020-04-10"
+date = "2019-04-10"
 description = "Solution to Leetcode 1667"
 tags = [
     

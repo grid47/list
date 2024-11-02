@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2067: Number of Equal Count Substrings"
-date = "2019-03-07"
+date = "2018-03-06"
 description = "Solution to Leetcode 2067"
 tags = [
     

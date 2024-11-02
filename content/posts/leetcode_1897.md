@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1897: Redistribute Characters to Make All Strings Equal"
-date = "2019-08-24"
+date = "2018-08-23"
 description = "Solution to Leetcode 1897"
 tags = [
     

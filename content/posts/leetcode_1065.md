@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1065: Index Pairs of a String"
-date = "2021-12-03"
+date = "2020-12-02"
 description = "Solution to Leetcode 1065"
 tags = [
     

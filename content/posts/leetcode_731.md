@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 731: My Calendar II"
-date = "2022-11-02"
+date = "2021-11-01"
 description = "Solution to Leetcode 731"
 tags = [
     

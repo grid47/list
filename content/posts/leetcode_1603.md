@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1603: Design Parking System"
-date = "2020-06-13"
+date = "2019-06-13"
 description = "Solution to Leetcode 1603"
 tags = [
     

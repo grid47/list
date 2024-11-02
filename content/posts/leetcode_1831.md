@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1831: Maximum Transaction Each Day"
-date = "2019-10-29"
+date = "2018-10-28"
 description = "Solution to Leetcode 1831"
 tags = [
     

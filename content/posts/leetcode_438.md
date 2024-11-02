@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 438: Find All Anagrams in a String"
-date = "2023-08-22"
+date = "2022-08-21"
 description = "Solution to Leetcode 438"
 tags = [
     

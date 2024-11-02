@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3028: Ant on the Boundary"
-date = "2016-07-19"
+date = "2015-07-19"
 description = "Solution to Leetcode 3028"
 tags = [
     

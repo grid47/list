@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3160: Find the Number of Distinct Colors Among the Balls"
-date = "2016-03-09"
+date = "2015-03-09"
 description = "Solution to Leetcode 3160"
 tags = [
     

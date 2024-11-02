@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 814: Binary Tree Pruning"
-date = "2022-08-11"
+date = "2021-08-10"
 description = "Solution to Leetcode 814"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3105: Longest Strictly Increasing or Strictly Decreasing Subarray"
-date = "2016-05-03"
+date = "2015-05-03"
 description = "Solution to Leetcode 3105"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 486: Predict the Winner"
-date = "2023-07-05"
+date = "2022-07-04"
 description = "Solution to Leetcode 486"
 tags = [
     

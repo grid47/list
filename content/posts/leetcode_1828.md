@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1828: Queries on Number of Points Inside a Circle"
-date = "2019-11-01"
+date = "2018-10-31"
 description = "Solution to Leetcode 1828"
 tags = [
     

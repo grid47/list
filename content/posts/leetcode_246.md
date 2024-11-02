@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 246: Strobogrammatic Number"
-date = "2024-03-01"
+date = "2023-03-01"
 description = "Solution to Leetcode 246"
 tags = [
     

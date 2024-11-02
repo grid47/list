@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1064: Fixed Point"
-date = "2021-12-04"
+date = "2020-12-03"
 description = "Solution to Leetcode 1064"
 tags = [
     

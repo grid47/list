@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 478: Generate Random Point in a Circle"
-date = "2023-07-13"
+date = "2022-07-12"
 description = "Solution to Leetcode 478"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 851: Loud and Rich"
-date = "2022-07-05"
+date = "2021-07-04"
 description = "Solution to Leetcode 851"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1024: Video Stitching"
-date = "2022-01-13"
+date = "2021-01-12"
 description = "Solution to Leetcode 1024"
 tags = [
     

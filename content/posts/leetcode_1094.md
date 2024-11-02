@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1094: Car Pooling"
-date = "2021-11-04"
+date = "2020-11-03"
 description = "Solution to Leetcode 1094"
 tags = [
     

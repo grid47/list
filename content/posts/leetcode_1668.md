@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1668: Maximum Repeating Substring"
-date = "2020-04-09"
+date = "2019-04-09"
 description = "Solution to Leetcode 1668"
 tags = [
     

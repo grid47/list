@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1545: Find Kth Bit in Nth Binary String"
-date = "2020-08-10"
+date = "2019-08-10"
 description = "Solution to Leetcode 1545"
 tags = [
     

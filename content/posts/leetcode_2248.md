@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2248: Intersection of Multiple Arrays"
-date = "2018-09-07"
+date = "2017-09-06"
 description = "Solution to Leetcode 2248"
 tags = [
     

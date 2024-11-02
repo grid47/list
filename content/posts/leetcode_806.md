@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 806: Number of Lines To Write String"
-date = "2022-08-19"
+date = "2021-08-18"
 description = "Solution to Leetcode 806"
 tags = [
     

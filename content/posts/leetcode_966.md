@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 966: Vowel Spellchecker"
-date = "2022-03-12"
+date = "2021-03-11"
 description = "Solution to Leetcode 966"
 tags = [
     

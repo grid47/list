@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1749: Maximum Absolute Sum of Any Subarray"
-date = "2020-01-19"
+date = "2019-01-18"
 description = "Solution to Leetcode 1749"
 tags = [
     

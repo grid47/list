@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1913: Maximum Product Difference Between Two Pairs"
-date = "2019-08-08"
+date = "2018-08-07"
 description = "Solution to Leetcode 1913"
 tags = [
     

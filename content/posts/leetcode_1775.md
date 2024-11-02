@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1775: Equal Sum Arrays With Minimum Number of Operations"
-date = "2019-12-24"
+date = "2018-12-23"
 description = "Solution to Leetcode 1775"
 tags = [
     

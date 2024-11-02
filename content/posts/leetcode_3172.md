@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3172: Second Day Verification"
-date = "2016-02-26"
+date = "2015-02-25"
 description = "Solution to Leetcode 3172"
 tags = [
     

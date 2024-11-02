@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2879: Display the First Three Rows"
-date = "2016-12-15"
+date = "2015-12-15"
 description = "Solution to Leetcode 2879"
 tags = [
     

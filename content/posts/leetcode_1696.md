@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1696: Jump Game VI"
-date = "2020-03-12"
+date = "2019-03-12"
 description = "Solution to Leetcode 1696"
 tags = [
     

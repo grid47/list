@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1246: Palindrome Removal"
-date = "2021-06-05"
+date = "2020-06-04"
 description = "Solution to Leetcode 1246"
 tags = [
     

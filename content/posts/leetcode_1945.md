@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1945: Sum of Digits of String After Convert"
-date = "2019-07-07"
+date = "2018-07-06"
 description = "Solution to Leetcode 1945"
 tags = [
     

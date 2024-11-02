@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1331: Rank Transform of an Array"
-date = "2021-03-12"
+date = "2020-03-11"
 description = "Solution to Leetcode 1331"
 tags = [
     

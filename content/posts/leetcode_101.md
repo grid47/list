@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 101: Symmetric Tree"
-date = "2024-07-24"
+date = "2023-07-24"
 description = "Solution to Leetcode 101"
 tags = [
     

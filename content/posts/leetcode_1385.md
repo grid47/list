@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1385: Find the Distance Value Between Two Arrays"
-date = "2021-01-17"
+date = "2020-01-17"
 description = "Solution to Leetcode 1385"
 tags = [
     

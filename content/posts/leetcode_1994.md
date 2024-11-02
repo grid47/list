@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1994: The Number of Good Subsets"
-date = "2019-05-19"
+date = "2018-05-18"
 description = "Solution to Leetcode 1994"
 tags = [
     

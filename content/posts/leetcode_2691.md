@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2691: Immutability Helper"
-date = "2017-06-21"
+date = "2016-06-20"
 description = "Solution to Leetcode 2691"
 tags = [
     

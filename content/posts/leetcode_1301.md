@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1301: Number of Paths with Max Score"
-date = "2021-04-11"
+date = "2020-04-10"
 description = "Solution to Leetcode 1301"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 749: Contain Virus"
-date = "2022-10-15"
+date = "2021-10-14"
 description = "Solution to Leetcode 749"
 tags = [
     

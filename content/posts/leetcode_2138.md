@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2138: Divide a String Into Groups of Size k"
-date = "2018-12-26"
+date = "2017-12-25"
 description = "Solution to Leetcode 2138"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 129: Sum Root to Leaf Numbers"
-date = "2024-06-26"
+date = "2023-06-26"
 description = "Solution to Leetcode 129"
 tags = [
     

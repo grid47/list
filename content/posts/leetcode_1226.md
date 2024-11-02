@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1226: The Dining Philosophers"
-date = "2021-06-25"
+date = "2020-06-24"
 description = "Solution to Leetcode 1226"
 tags = [
     

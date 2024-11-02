@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 706: Design HashMap"
-date = "2022-11-27"
+date = "2021-11-26"
 description = "Solution to Leetcode 706"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 781: Rabbits in Forest"
-date = "2022-09-13"
+date = "2021-09-12"
 description = "Solution to Leetcode 781"
 tags = [
     

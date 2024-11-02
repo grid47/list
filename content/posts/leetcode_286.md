@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 286: Walls and Gates"
-date = "2024-01-21"
+date = "2023-01-20"
 description = "Solution to Leetcode 286"
 tags = [
     

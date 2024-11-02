@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 125: Valid Palindrome"
-date = "2024-06-30"
+date = "2023-06-30"
 description = "Solution to Leetcode 125"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 799: Champagne Tower"
-date = "2022-08-26"
+date = "2021-08-25"
 description = "Solution to Leetcode 799"
 tags = [
     

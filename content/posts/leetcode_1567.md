@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1567: Maximum Length of Subarray With Positive Product"
-date = "2020-07-19"
+date = "2019-07-19"
 description = "Solution to Leetcode 1567"
 tags = [
     

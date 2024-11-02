@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1103: Distribute Candies to People"
-date = "2021-10-26"
+date = "2020-10-25"
 description = "Solution to Leetcode 1103"
 tags = [
     

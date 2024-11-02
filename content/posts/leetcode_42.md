@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 42: Trapping Rain Water"
-date = "2024-09-21"
+date = "2023-09-21"
 description = "Solution to Leetcode 42"
 tags = [
     

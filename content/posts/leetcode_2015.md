@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2015: Average Height of Buildings in Each Segment"
-date = "2019-04-28"
+date = "2018-04-27"
 description = "Solution to Leetcode 2015"
 tags = [
     

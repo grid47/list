@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 583: Delete Operation for Two Strings"
-date = "2023-03-30"
+date = "2022-03-29"
 description = "Solution to Leetcode 583"
 tags = [
     

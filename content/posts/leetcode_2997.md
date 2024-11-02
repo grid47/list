@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2997: Minimum Number of Operations to Make Array XOR Equal to K"
-date = "2016-08-19"
+date = "2015-08-19"
 description = "Solution to Leetcode 2997"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1237: Find Positive Integer Solution for a Given Equation"
-date = "2021-06-14"
+date = "2020-06-13"
 description = "Solution to Leetcode 1237"
 tags = [
     

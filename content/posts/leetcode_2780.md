@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2780: Minimum Index of a Valid Split"
-date = "2017-03-24"
+date = "2016-03-23"
 description = "Solution to Leetcode 2780"
 tags = [
     

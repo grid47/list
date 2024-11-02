@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2139: Minimum Moves to Reach Target Score"
-date = "2018-12-25"
+date = "2017-12-24"
 description = "Solution to Leetcode 2139"
 tags = [
     

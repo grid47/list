@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2074: Reverse Nodes in Even Length Groups"
-date = "2019-02-28"
+date = "2018-02-27"
 description = "Solution to Leetcode 2074"
 tags = [
     

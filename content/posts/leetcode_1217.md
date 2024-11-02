@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1217: Minimum Cost to Move Chips to The Same Position"
-date = "2021-07-04"
+date = "2020-07-03"
 description = "Solution to Leetcode 1217"
 tags = [
     

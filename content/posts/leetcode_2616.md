@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2616: Minimize the Maximum Difference of Pairs"
-date = "2017-09-04"
+date = "2016-09-03"
 description = "Solution to Leetcode 2616"
 tags = [
     

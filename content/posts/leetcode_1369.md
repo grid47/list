@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1369: Get the Second Most Recent Activity"
-date = "2021-02-02"
+date = "2020-02-02"
 description = "Solution to Leetcode 1369"
 tags = [
     

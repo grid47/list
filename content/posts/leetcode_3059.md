@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3059: Find All Unique Email Domains"
-date = "2016-06-18"
+date = "2015-06-18"
 description = "Solution to Leetcode 3059"
 tags = [
     

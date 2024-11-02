@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2062: Count Vowel Substrings of a String"
-date = "2019-03-12"
+date = "2018-03-11"
 description = "Solution to Leetcode 2062"
 tags = [
     

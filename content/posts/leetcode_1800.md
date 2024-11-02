@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1800: Maximum Ascending Subarray Sum"
-date = "2019-11-29"
+date = "2018-11-28"
 description = "Solution to Leetcode 1800"
 tags = [
     

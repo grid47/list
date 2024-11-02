@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 603: Consecutive Available Seats"
-date = "2023-03-10"
+date = "2022-03-09"
 description = "Solution to Leetcode 603"
 tags = [
     

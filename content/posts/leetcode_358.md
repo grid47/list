@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 358: Rearrange String k Distance Apart"
-date = "2023-11-10"
+date = "2022-11-09"
 description = "Solution to Leetcode 358"
 tags = [
     

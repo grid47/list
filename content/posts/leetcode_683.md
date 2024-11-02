@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 683: K Empty Slots"
-date = "2022-12-20"
+date = "2021-12-19"
 description = "Solution to Leetcode 683"
 tags = [
     

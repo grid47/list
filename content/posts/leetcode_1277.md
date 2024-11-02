@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1277: Count Square Submatrices with All Ones"
-date = "2021-05-05"
+date = "2020-05-04"
 description = "Solution to Leetcode 1277"
 tags = [
     

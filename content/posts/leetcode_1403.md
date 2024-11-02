@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1403: Minimum Subsequence in Non-Increasing Order"
-date = "2020-12-30"
+date = "2019-12-30"
 description = "Solution to Leetcode 1403"
 tags = [
     

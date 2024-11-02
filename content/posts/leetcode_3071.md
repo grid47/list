@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3071: Minimum Operations to Write the Letter Y on a Grid"
-date = "2016-06-06"
+date = "2015-06-06"
 description = "Solution to Leetcode 3071"
 tags = [
     

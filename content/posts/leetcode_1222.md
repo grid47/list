@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1222: Queens That Can Attack the King"
-date = "2021-06-29"
+date = "2020-06-28"
 description = "Solution to Leetcode 1222"
 tags = [
     

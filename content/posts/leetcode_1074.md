@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1074: Number of Submatrices That Sum to Target"
-date = "2021-11-24"
+date = "2020-11-23"
 description = "Solution to Leetcode 1074"
 tags = [
     

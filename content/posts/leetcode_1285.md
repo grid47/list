@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1285: Find the Start and End Number of Continuous Ranges"
-date = "2021-04-27"
+date = "2020-04-26"
 description = "Solution to Leetcode 1285"
 tags = [
     

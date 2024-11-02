@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1518: Water Bottles"
-date = "2020-09-06"
+date = "2019-09-06"
 description = "Solution to Leetcode 1518"
 tags = [
     

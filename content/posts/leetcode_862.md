@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 862: Shortest Subarray with Sum at Least K"
-date = "2022-06-24"
+date = "2021-06-23"
 description = "Solution to Leetcode 862"
 tags = [
     
