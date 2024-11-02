@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2243: Calculate Digit Sum of a String"
-date = "2017-09-11"
+date = "2018-09-12"
 description = "Solution to Leetcode 2243"
 tags = [
     

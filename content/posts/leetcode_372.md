@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 372: Super Pow"
-date = "2022-10-26"
+date = "2023-10-27"
 description = "Solution to Leetcode 372"
 tags = [
     

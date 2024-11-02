@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 501: Find Mode in Binary Search Tree"
-date = "2022-06-19"
+date = "2023-06-20"
 description = "Solution to Leetcode 501"
 tags = [
     

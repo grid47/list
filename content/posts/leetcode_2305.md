@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2305: Fair Distribution of Cookies"
-date = "2017-07-11"
+date = "2018-07-12"
 description = "Solution to Leetcode 2305"
 tags = [
     

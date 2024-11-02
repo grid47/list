@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1042: Flower Planting With No Adjacent"
-date = "2020-12-25"
+date = "2021-12-26"
 description = "Solution to Leetcode 1042"
 tags = [
     

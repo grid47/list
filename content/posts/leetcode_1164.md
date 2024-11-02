@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1164: Product Price at a Given Date"
-date = "2020-08-25"
+date = "2021-08-26"
 description = "Solution to Leetcode 1164"
 tags = [
     

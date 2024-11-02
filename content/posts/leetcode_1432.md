@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1432: Max Difference You Can Get From Changing an Integer"
-date = "2019-12-01"
+date = "2020-12-01"
 description = "Solution to Leetcode 1432"
 tags = [
     

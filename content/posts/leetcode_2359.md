@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2359: Find Closest Node to Given Two Nodes"
-date = "2017-05-18"
+date = "2018-05-19"
 description = "Solution to Leetcode 2359"
 tags = [
     

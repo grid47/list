@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 230: Kth Smallest Element in a BST"
-date = "2023-03-17"
+date = "2024-03-17"
 description = "Solution to Leetcode 230"
 tags = [
     

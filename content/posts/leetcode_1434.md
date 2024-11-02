@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1434: Number of Ways to Wear Different Hats to Each Other"
-date = "2019-11-29"
+date = "2020-11-29"
 description = "Solution to Leetcode 1434"
 tags = [
     

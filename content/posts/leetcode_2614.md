@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2614: Prime In Diagonal"
-date = "2016-09-05"
+date = "2017-09-06"
 description = "Solution to Leetcode 2614"
 tags = [
     

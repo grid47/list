@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1109: Corporate Flight Bookings"
-date = "2020-10-19"
+date = "2021-10-20"
 description = "Solution to Leetcode 1109"
 tags = [
     

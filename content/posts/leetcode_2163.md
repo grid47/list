@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2163: Minimum Difference in Sums After Removal of Elements"
-date = "2017-11-30"
+date = "2018-12-01"
 description = "Solution to Leetcode 2163"
 tags = [
     

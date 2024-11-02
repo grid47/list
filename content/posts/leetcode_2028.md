@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2028: Find Missing Observations"
-date = "2018-04-14"
+date = "2019-04-15"
 description = "Solution to Leetcode 2028"
 tags = [
     

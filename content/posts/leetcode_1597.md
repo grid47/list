@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1597: Build Binary Expression Tree From Infix Expression"
-date = "2019-06-19"
+date = "2020-06-19"
 description = "Solution to Leetcode 1597"
 tags = [
     

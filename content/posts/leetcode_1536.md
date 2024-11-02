@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1536: Minimum Swaps to Arrange a Binary Grid"
-date = "2019-08-19"
+date = "2020-08-19"
 description = "Solution to Leetcode 1536"
 tags = [
     

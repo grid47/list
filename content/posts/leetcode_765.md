@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 765: Couples Holding Hands"
-date = "2021-09-28"
+date = "2022-09-29"
 description = "Solution to Leetcode 765"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1595: Minimum Cost to Connect Two Groups of Points"
-date = "2019-06-21"
+date = "2020-06-21"
 description = "Solution to Leetcode 1595"
 tags = [
     

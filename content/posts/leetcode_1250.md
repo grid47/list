@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1250: Check If It Is a Good Array"
-date = "2020-05-31"
+date = "2021-06-01"
 description = "Solution to Leetcode 1250"
 tags = [
     

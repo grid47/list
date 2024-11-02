@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 444: Sequence Reconstruction"
-date = "2022-08-15"
+date = "2023-08-16"
 description = "Solution to Leetcode 444"
 tags = [
     

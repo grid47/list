@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 969: Pancake Sorting"
-date = "2021-03-08"
+date = "2022-03-09"
 description = "Solution to Leetcode 969"
 tags = [
     

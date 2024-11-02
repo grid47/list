@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2261: K Divisible Elements Subarrays"
-date = "2017-08-24"
+date = "2018-08-25"
 description = "Solution to Leetcode 2261"
 tags = [
     

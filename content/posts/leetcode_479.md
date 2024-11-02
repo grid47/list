@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 479: Largest Palindrome Product"
-date = "2022-07-11"
+date = "2023-07-12"
 description = "Solution to Leetcode 479"
 tags = [
     

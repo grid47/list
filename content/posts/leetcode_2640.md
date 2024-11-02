@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2640: Find the Score of All Prefixes of an Array"
-date = "2016-08-10"
+date = "2017-08-11"
 description = "Solution to Leetcode 2640"
 tags = [
     

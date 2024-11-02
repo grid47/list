@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2561: Rearranging Fruits"
-date = "2016-10-28"
+date = "2017-10-29"
 description = "Solution to Leetcode 2561"
 tags = [
     

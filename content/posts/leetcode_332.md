@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 332: Reconstruct Itinerary"
-date = "2022-12-05"
+date = "2023-12-06"
 description = "Solution to Leetcode 332"
 tags = [
     

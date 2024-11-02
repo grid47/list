@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3265: Count Almost Equal Pairs I"
-date = "2014-11-24"
+date = "2015-11-25"
 description = "Solution to Leetcode 3265"
 tags = [
     

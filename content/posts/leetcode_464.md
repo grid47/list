@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 464: Can I Win"
-date = "2022-07-26"
+date = "2023-07-27"
 description = "Solution to Leetcode 464"
 tags = [
     

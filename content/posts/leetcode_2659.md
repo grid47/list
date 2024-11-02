@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2659: Make Array Empty"
-date = "2016-07-22"
+date = "2017-07-23"
 description = "Solution to Leetcode 2659"
 tags = [
     

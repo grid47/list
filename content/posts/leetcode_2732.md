@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2732: Find a Good Subset of the Matrix"
-date = "2016-05-10"
+date = "2017-05-11"
 description = "Solution to Leetcode 2732"
 tags = [
     

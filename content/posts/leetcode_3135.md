@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3135: Equalize Strings by Adding or Removing Characters at Ends"
-date = "2015-04-03"
+date = "2016-04-03"
 description = "Solution to Leetcode 3135"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2200: Find All K-Distant Indices in an Array"
-date = "2017-10-24"
+date = "2018-10-25"
 description = "Solution to Leetcode 2200"
 tags = [
     

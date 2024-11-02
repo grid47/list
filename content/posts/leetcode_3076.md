@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3076: Shortest Uncommon Substring in an Array"
-date = "2015-06-01"
+date = "2016-06-01"
 description = "Solution to Leetcode 3076"
 tags = [
     

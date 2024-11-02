@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 177: Nth Highest Salary"
-date = "2023-05-09"
+date = "2024-05-09"
 description = "Solution to Leetcode 177"
 tags = [
     

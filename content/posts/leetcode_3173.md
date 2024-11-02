@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3173: Bitwise OR of Adjacent Elements"
-date = "2015-02-24"
+date = "2016-02-25"
 description = "Solution to Leetcode 3173"
 tags = [
     

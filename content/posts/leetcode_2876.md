@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2876: Count Visited Nodes in a Directed Graph"
-date = "2015-12-18"
+date = "2016-12-18"
 description = "Solution to Leetcode 2876"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3215: Count Triplets with Even XOR Set Bits II"
-date = "2015-01-13"
+date = "2016-01-14"
 description = "Solution to Leetcode 3215"
 tags = [
     

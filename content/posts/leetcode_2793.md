@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2793: Status of Flight Tickets"
-date = "2016-03-10"
+date = "2017-03-11"
 description = "Solution to Leetcode 2793"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1395: Count Number of Teams"
-date = "2020-01-07"
+date = "2021-01-07"
 description = "Solution to Leetcode 1395"
 tags = [
     

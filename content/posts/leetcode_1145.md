@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1145: Binary Tree Coloring Game"
-date = "2020-09-13"
+date = "2021-09-14"
 description = "Solution to Leetcode 1145"
 tags = [
     

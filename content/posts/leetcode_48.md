@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 48: Rotate Image"
-date = "2023-09-15"
+date = "2024-09-15"
 description = "Solution to Leetcode 48"
 tags = [
     

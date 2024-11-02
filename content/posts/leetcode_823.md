@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 823: Binary Trees With Factors"
-date = "2021-08-01"
+date = "2022-08-02"
 description = "Solution to Leetcode 823"
 tags = [
     

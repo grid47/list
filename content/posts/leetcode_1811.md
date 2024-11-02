@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1811: Find Interview Candidates"
-date = "2018-11-17"
+date = "2019-11-18"
 description = "Solution to Leetcode 1811"
 tags = [
     

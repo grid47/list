@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2314: The First Day of the Maximum Recorded Degree in Each City"
-date = "2017-07-02"
+date = "2018-07-03"
 description = "Solution to Leetcode 2314"
 tags = [
     

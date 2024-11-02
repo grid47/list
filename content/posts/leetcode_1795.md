@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1795: Rearrange Products Table"
-date = "2018-12-03"
+date = "2019-12-04"
 description = "Solution to Leetcode 1795"
 tags = [
     

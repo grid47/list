@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1833: Maximum Ice Cream Bars"
-date = "2018-10-26"
+date = "2019-10-27"
 description = "Solution to Leetcode 1833"
 tags = [
     

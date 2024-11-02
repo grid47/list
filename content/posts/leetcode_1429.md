@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1429: First Unique Number"
-date = "2019-12-04"
+date = "2020-12-04"
 description = "Solution to Leetcode 1429"
 tags = [
     

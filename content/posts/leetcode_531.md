@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 531: Lonely Pixel I"
-date = "2022-05-20"
+date = "2023-05-21"
 description = "Solution to Leetcode 531"
 tags = [
     

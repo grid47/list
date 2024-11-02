@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 480: Sliding Window Median"
-date = "2022-07-10"
+date = "2023-07-11"
 description = "Solution to Leetcode 480"
 tags = [
     

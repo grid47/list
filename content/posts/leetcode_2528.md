@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2528: Maximize the Minimum Powered City"
-date = "2016-11-30"
+date = "2017-12-01"
 description = "Solution to Leetcode 2528"
 tags = [
     

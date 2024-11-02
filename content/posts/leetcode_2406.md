@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2406: Divide Intervals Into Minimum Number of Groups"
-date = "2017-04-01"
+date = "2018-04-02"
 description = "Solution to Leetcode 2406"
 tags = [
     

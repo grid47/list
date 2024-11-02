@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1969: Minimum Non-Zero Product of the Array Elements"
-date = "2018-06-12"
+date = "2019-06-13"
 description = "Solution to Leetcode 1969"
 tags = [
     

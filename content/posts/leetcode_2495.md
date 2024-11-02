@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2495: Number of Subarrays Having Even Product"
-date = "2017-01-02"
+date = "2018-01-03"
 description = "Solution to Leetcode 2495"
 tags = [
     

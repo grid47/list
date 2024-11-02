@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2853: Highest Salaries Difference"
-date = "2016-01-10"
+date = "2017-01-10"
 description = "Solution to Leetcode 2853"
 tags = [
     

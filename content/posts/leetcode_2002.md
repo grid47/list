@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2002: Maximum Product of the Length of Two Palindromic Subsequences"
-date = "2018-05-10"
+date = "2019-05-11"
 description = "Solution to Leetcode 2002"
 tags = [
     

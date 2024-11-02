@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 849: Maximize Distance to Closest Person"
-date = "2021-07-06"
+date = "2022-07-07"
 description = "Solution to Leetcode 849"
 tags = [
     

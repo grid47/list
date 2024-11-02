@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1336: Number of Transactions per Visit"
-date = "2020-03-06"
+date = "2021-03-07"
 description = "Solution to Leetcode 1336"
 tags = [
     

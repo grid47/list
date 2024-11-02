@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 500: Keyboard Row"
-date = "2022-06-20"
+date = "2023-06-21"
 description = "Solution to Leetcode 500"
 tags = [
     

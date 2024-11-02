@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 832: Flipping an Image"
-date = "2021-07-23"
+date = "2022-07-24"
 description = "Solution to Leetcode 832"
 tags = [
     

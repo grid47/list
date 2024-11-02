@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1543: Fix Product Name Format"
-date = "2019-08-12"
+date = "2020-08-12"
 description = "Solution to Leetcode 1543"
 tags = [
     

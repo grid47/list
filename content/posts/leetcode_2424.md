@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2424: Longest Uploaded Prefix"
-date = "2017-03-14"
+date = "2018-03-15"
 description = "Solution to Leetcode 2424"
 tags = [
     

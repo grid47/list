@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1020: Number of Enclaves"
-date = "2021-01-16"
+date = "2022-01-17"
 description = "Solution to Leetcode 1020"
 tags = [
     

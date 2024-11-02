@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1015: Smallest Integer Divisible by K"
-date = "2021-01-21"
+date = "2022-01-22"
 description = "Solution to Leetcode 1015"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 203: Remove Linked List Elements"
-date = "2023-04-13"
+date = "2024-04-13"
 description = "Solution to Leetcode 203"
 tags = [
     

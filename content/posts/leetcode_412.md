@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 412: Fizz Buzz"
-date = "2022-09-16"
+date = "2023-09-17"
 description = "Solution to Leetcode 412"
 tags = [
     

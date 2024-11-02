@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 506: Relative Ranks"
-date = "2022-06-14"
+date = "2023-06-15"
 description = "Solution to Leetcode 506"
 tags = [
     

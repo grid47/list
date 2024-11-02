@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2277: Closest Node to Path in Tree"
-date = "2017-08-08"
+date = "2018-08-09"
 description = "Solution to Leetcode 2277"
 tags = [
     

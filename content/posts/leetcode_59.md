@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 59: Spiral Matrix II"
-date = "2023-09-04"
+date = "2024-09-04"
 description = "Solution to Leetcode 59"
 tags = [
     

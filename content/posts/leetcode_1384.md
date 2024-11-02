@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1384: Total Sales Amount by Year"
-date = "2020-01-18"
+date = "2021-01-18"
 description = "Solution to Leetcode 1384"
 tags = [
     

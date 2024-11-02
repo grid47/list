@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1173: Immediate Food Delivery I"
-date = "2020-08-16"
+date = "2021-08-17"
 description = "Solution to Leetcode 1173"
 tags = [
     

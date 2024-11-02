@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2055: Plates Between Candles"
-date = "2018-03-18"
+date = "2019-03-19"
 description = "Solution to Leetcode 2055"
 tags = [
     

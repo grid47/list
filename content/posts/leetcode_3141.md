@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3141: Maximum Hamming Distances"
-date = "2015-03-28"
+date = "2016-03-28"
 description = "Solution to Leetcode 3141"
 tags = [
     

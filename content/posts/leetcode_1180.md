@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1180: Count Substrings with Only One Distinct Letter"
-date = "2020-08-09"
+date = "2021-08-10"
 description = "Solution to Leetcode 1180"
 tags = [
     

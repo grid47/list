@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1789: Primary Department for Each Employee"
-date = "2018-12-09"
+date = "2019-12-10"
 description = "Solution to Leetcode 1789"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1936: Add Minimum Number of Rungs"
-date = "2018-07-15"
+date = "2019-07-16"
 description = "Solution to Leetcode 1936"
 tags = [
     

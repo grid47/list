@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1144: Decrease Elements To Make Array Zigzag"
-date = "2020-09-14"
+date = "2021-09-15"
 description = "Solution to Leetcode 1144"
 tags = [
     

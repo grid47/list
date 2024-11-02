@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1916: Count Ways to Build Rooms in an Ant Colony"
-date = "2018-08-04"
+date = "2019-08-05"
 description = "Solution to Leetcode 1916"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 965: Univalued Binary Tree"
-date = "2021-03-12"
+date = "2022-03-13"
 description = "Solution to Leetcode 965"
 tags = [
     

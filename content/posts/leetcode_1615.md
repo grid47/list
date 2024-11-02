@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1615: Maximal Network Rank"
-date = "2019-06-01"
+date = "2020-06-01"
 description = "Solution to Leetcode 1615"
 tags = [
     

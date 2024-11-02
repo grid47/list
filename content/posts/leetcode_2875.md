@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2875: Minimum Size Subarray in Infinite Array"
-date = "2015-12-19"
+date = "2016-12-19"
 description = "Solution to Leetcode 2875"
 tags = [
     

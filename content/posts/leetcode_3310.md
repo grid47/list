@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3310: Remove Methods From Project"
-date = "2014-10-10"
+date = "2015-10-11"
 description = "Solution to Leetcode 3310"
 tags = [
     

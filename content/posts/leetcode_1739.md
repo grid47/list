@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1739: Building Boxes"
-date = "2019-01-28"
+date = "2020-01-29"
 description = "Solution to Leetcode 1739"
 tags = [
     

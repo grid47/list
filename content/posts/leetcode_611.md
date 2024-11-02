@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 611: Valid Triangle Number"
-date = "2022-03-01"
+date = "2023-03-02"
 description = "Solution to Leetcode 611"
 tags = [
     

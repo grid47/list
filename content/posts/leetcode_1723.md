@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1723: Find Minimum Time to Finish All Jobs"
-date = "2019-02-13"
+date = "2020-02-14"
 description = "Solution to Leetcode 1723"
 tags = [
     

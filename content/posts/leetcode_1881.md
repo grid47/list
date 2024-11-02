@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1881: Maximum Value after Insertion"
-date = "2018-09-08"
+date = "2019-09-09"
 description = "Solution to Leetcode 1881"
 tags = [
     

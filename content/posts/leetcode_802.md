@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 802: Find Eventual Safe States"
-date = "2021-08-22"
+date = "2022-08-23"
 description = "Solution to Leetcode 802"
 tags = [
     

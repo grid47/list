@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3199: Count Triplets with Even XOR Set Bits I"
-date = "2015-01-29"
+date = "2016-01-30"
 description = "Solution to Leetcode 3199"
 tags = [
     

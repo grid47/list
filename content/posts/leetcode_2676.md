@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2676: Throttle"
-date = "2016-07-05"
+date = "2017-07-06"
 description = "Solution to Leetcode 2676"
 tags = [
     

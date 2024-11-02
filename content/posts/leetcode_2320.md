@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2320: Count Number of Ways to Place Houses"
-date = "2017-06-26"
+date = "2018-06-27"
 description = "Solution to Leetcode 2320"
 tags = [
     

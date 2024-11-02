@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3171: Find Subarray With Bitwise OR Closest to K"
-date = "2015-02-26"
+date = "2016-02-27"
 description = "Solution to Leetcode 3171"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1633: Percentage of Users Attended a Contest"
-date = "2019-05-14"
+date = "2020-05-14"
 description = "Solution to Leetcode 1633"
 tags = [
     

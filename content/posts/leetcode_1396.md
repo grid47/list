@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1396: Design Underground System"
-date = "2020-01-06"
+date = "2021-01-06"
 description = "Solution to Leetcode 1396"
 tags = [
     

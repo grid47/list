@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2176: Count Equal and Divisible Pairs in an Array"
-date = "2017-11-17"
+date = "2018-11-18"
 description = "Solution to Leetcode 2176"
 tags = [
     

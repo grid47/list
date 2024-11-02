@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2649: Nested Array Generator"
-date = "2016-08-01"
+date = "2017-08-02"
 description = "Solution to Leetcode 2649"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3056: Snaps Analysis"
-date = "2015-06-21"
+date = "2016-06-21"
 description = "Solution to Leetcode 3056"
 tags = [
     

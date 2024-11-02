@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1640: Check Array Formation Through Concatenation"
-date = "2019-05-07"
+date = "2020-05-07"
 description = "Solution to Leetcode 1640"
 tags = [
     

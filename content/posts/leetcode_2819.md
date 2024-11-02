@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2819: Minimum Relative Loss After Buying Chocolates"
-date = "2016-02-13"
+date = "2017-02-13"
 description = "Solution to Leetcode 2819"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1526: Minimum Number of Increments on Subarrays to Form a Target Array"
-date = "2019-08-29"
+date = "2020-08-29"
 description = "Solution to Leetcode 1526"
 tags = [
     

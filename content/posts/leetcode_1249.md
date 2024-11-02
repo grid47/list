@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1249: Minimum Remove to Make Valid Parentheses"
-date = "2020-06-01"
+date = "2021-06-02"
 description = "Solution to Leetcode 1249"
 tags = [
     

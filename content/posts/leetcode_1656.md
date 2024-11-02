@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1656: Design an Ordered Stream"
-date = "2019-04-21"
+date = "2020-04-21"
 description = "Solution to Leetcode 1656"
 tags = [
     

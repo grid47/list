@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 433: Minimum Genetic Mutation"
-date = "2022-08-26"
+date = "2023-08-27"
 description = "Solution to Leetcode 433"
 tags = [
     

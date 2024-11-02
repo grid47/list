@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1241: Number of Comments per Post"
-date = "2020-06-09"
+date = "2021-06-10"
 description = "Solution to Leetcode 1241"
 tags = [
     

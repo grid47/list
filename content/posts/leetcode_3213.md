@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3213: Construct String with Minimum Cost"
-date = "2015-01-15"
+date = "2016-01-16"
 description = "Solution to Leetcode 3213"
 tags = [
     

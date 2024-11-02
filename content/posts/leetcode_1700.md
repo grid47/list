@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1700: Number of Students Unable to Eat Lunch"
-date = "2019-03-08"
+date = "2020-03-08"
 description = "Solution to Leetcode 1700"
 tags = [
     

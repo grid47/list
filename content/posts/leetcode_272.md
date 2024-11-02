@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 272: Closest Binary Search Tree Value II"
-date = "2023-02-03"
+date = "2024-02-04"
 description = "Solution to Leetcode 272"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1675: Minimize Deviation in Array"
-date = "2019-04-02"
+date = "2020-04-02"
 description = "Solution to Leetcode 1675"
 tags = [
     

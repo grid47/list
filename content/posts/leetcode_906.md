@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 906: Super Palindromes"
-date = "2021-05-10"
+date = "2022-05-11"
 description = "Solution to Leetcode 906"
 tags = [
     

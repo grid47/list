@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3224: Minimum Array Changes to Make Differences Equal"
-date = "2015-01-04"
+date = "2016-01-05"
 description = "Solution to Leetcode 3224"
 tags = [
     

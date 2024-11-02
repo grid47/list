@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2663: Lexicographically Smallest Beautiful String"
-date = "2016-07-18"
+date = "2017-07-19"
 description = "Solution to Leetcode 2663"
 tags = [
     

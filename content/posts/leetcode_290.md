@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 290: Word Pattern"
-date = "2023-01-16"
+date = "2024-01-17"
 description = "Solution to Leetcode 290"
 tags = [
     

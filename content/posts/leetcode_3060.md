@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3060: User Activities within Time Bounds"
-date = "2015-06-17"
+date = "2016-06-17"
 description = "Solution to Leetcode 3060"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 65: Valid Number"
-date = "2023-08-29"
+date = "2024-08-29"
 description = "Solution to Leetcode 65"
 tags = [
     

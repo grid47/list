@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2957: Remove Adjacent Almost-Equal Characters"
-date = "2015-09-28"
+date = "2016-09-28"
 description = "Solution to Leetcode 2957"
 tags = [
     

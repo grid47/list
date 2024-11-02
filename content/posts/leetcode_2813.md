@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2813: Maximum Elegance of a K-Length Subsequence"
-date = "2016-02-19"
+date = "2017-02-19"
 description = "Solution to Leetcode 2813"
 tags = [
     

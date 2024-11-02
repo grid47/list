@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1713: Minimum Operations to Make a Subsequence"
-date = "2019-02-23"
+date = "2020-02-24"
 description = "Solution to Leetcode 1713"
 tags = [
     

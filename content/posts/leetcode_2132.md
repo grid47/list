@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2132: Stamping the Grid"
-date = "2017-12-31"
+date = "2019-01-01"
 description = "Solution to Leetcode 2132"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 427: Construct Quad Tree"
-date = "2022-09-01"
+date = "2023-09-02"
 description = "Solution to Leetcode 427"
 tags = [
     

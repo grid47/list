@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1261: Find Elements in a Contaminated Binary Tree"
-date = "2020-05-20"
+date = "2021-05-21"
 description = "Solution to Leetcode 1261"
 tags = [
     

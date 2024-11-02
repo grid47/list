@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1156: Swap For Longest Repeated Character Substring"
-date = "2020-09-02"
+date = "2021-09-03"
 description = "Solution to Leetcode 1156"
 tags = [
     

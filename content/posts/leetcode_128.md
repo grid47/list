@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 128: Longest Consecutive Sequence"
-date = "2023-06-27"
+date = "2024-06-27"
 description = "Solution to Leetcode 128"
 tags = [
     

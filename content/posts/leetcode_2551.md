@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2551: Put Marbles in Bags"
-date = "2016-11-07"
+date = "2017-11-08"
 description = "Solution to Leetcode 2551"
 tags = [
     

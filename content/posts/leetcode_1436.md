@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1436: Destination City"
-date = "2019-11-27"
+date = "2020-11-27"
 description = "Solution to Leetcode 1436"
 tags = [
     

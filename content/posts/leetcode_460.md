@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 460: LFU Cache"
-date = "2022-07-30"
+date = "2023-07-31"
 description = "Solution to Leetcode 460"
 tags = [
     

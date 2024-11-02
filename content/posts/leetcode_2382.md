@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2382: Maximum Segment Sum After Removals"
-date = "2017-04-25"
+date = "2018-04-26"
 description = "Solution to Leetcode 2382"
 tags = [
     

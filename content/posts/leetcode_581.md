@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 581: Shortest Unsorted Continuous Subarray"
-date = "2022-03-31"
+date = "2023-04-01"
 description = "Solution to Leetcode 581"
 tags = [
     

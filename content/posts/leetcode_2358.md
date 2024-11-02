@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2358: Maximum Number of Groups Entering a Competition"
-date = "2017-05-19"
+date = "2018-05-20"
 description = "Solution to Leetcode 2358"
 tags = [
     

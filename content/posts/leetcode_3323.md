@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3323: Minimize Connected Groups by Inserting Interval"
-date = "2014-09-27"
+date = "2015-09-28"
 description = "Solution to Leetcode 3323"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 670: Maximum Swap"
-date = "2022-01-01"
+date = "2023-01-02"
 description = "Solution to Leetcode 670"
 tags = [
     

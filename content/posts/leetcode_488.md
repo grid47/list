@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 488: Zuma Game"
-date = "2022-07-02"
+date = "2023-07-03"
 description = "Solution to Leetcode 488"
 tags = [
     

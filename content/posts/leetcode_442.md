@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 442: Find All Duplicates in an Array"
-date = "2022-08-17"
+date = "2023-08-18"
 description = "Solution to Leetcode 442"
 tags = [
     

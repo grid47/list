@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2958: Length of Longest Subarray With at Most K Frequency"
-date = "2015-09-27"
+date = "2016-09-27"
 description = "Solution to Leetcode 2958"
 tags = [
     

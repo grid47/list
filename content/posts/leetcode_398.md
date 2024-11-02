@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 398: Random Pick Index"
-date = "2022-09-30"
+date = "2023-10-01"
 description = "Solution to Leetcode 398"
 tags = [
     

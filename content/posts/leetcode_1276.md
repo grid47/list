@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1276: Number of Burgers with No Waste of Ingredients"
-date = "2020-05-05"
+date = "2021-05-06"
 description = "Solution to Leetcode 1276"
 tags = [
     

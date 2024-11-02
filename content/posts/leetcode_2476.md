@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2476: Closest Nodes Queries in a Binary Search Tree"
-date = "2017-01-21"
+date = "2018-01-22"
 description = "Solution to Leetcode 2476"
 tags = [
     

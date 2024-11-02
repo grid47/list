@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 793: Preimage Size of Factorial Zeroes Function"
-date = "2021-08-31"
+date = "2022-09-01"
 description = "Solution to Leetcode 793"
 tags = [
     

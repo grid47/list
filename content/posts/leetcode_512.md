@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 512: Game Play Analysis II"
-date = "2022-06-08"
+date = "2023-06-09"
 description = "Solution to Leetcode 512"
 tags = [
     

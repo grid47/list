@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 601: Human Traffic of Stadium"
-date = "2022-03-11"
+date = "2023-03-12"
 description = "Solution to Leetcode 601"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2244: Minimum Rounds to Complete All Tasks"
-date = "2017-09-10"
+date = "2018-09-11"
 description = "Solution to Leetcode 2244"
 tags = [
     

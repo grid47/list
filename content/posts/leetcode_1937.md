@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1937: Maximum Number of Points with Cost"
-date = "2018-07-14"
+date = "2019-07-15"
 description = "Solution to Leetcode 1937"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 450: Delete Node in a BST"
-date = "2022-08-09"
+date = "2023-08-10"
 description = "Solution to Leetcode 450"
 tags = [
     

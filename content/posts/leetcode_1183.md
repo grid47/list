@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1183: Maximum Number of Ones"
-date = "2020-08-06"
+date = "2021-08-07"
 description = "Solution to Leetcode 1183"
 tags = [
     

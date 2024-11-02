@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2043: Simple Bank System"
-date = "2018-03-30"
+date = "2019-03-31"
 description = "Solution to Leetcode 2043"
 tags = [
     

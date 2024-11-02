@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2516: Take K of Each Character From Left and Right"
-date = "2016-12-12"
+date = "2017-12-13"
 description = "Solution to Leetcode 2516"
 tags = [
     

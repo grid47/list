@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1219: Path with Maximum Gold"
-date = "2020-07-01"
+date = "2021-07-02"
 description = "Solution to Leetcode 1219"
 tags = [
     

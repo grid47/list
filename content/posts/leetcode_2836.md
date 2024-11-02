@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2836: Maximize Value of Function in a Ball Passing Game"
-date = "2016-01-27"
+date = "2017-01-27"
 description = "Solution to Leetcode 2836"
 tags = [
     

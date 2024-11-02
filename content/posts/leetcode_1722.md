@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1722: Minimize Hamming Distance After Swap Operations"
-date = "2019-02-14"
+date = "2020-02-15"
 description = "Solution to Leetcode 1722"
 tags = [
     

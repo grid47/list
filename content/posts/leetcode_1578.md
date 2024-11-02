@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1578: Minimum Time to Make Rope Colorful"
-date = "2019-07-08"
+date = "2020-07-08"
 description = "Solution to Leetcode 1578"
 tags = [
     

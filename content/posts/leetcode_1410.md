@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1410: HTML Entity Parser"
-date = "2019-12-23"
+date = "2020-12-23"
 description = "Solution to Leetcode 1410"
 tags = [
     

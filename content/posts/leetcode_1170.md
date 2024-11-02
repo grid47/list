@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1170: Compare Strings by Frequency of the Smallest Character"
-date = "2020-08-19"
+date = "2021-08-20"
 description = "Solution to Leetcode 1170"
 tags = [
     

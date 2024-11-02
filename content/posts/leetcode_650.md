@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 650: 2 Keys Keyboard"
-date = "2022-01-21"
+date = "2023-01-22"
 description = "Solution to Leetcode 650"
 tags = [
     

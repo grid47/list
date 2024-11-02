@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 816: Ambiguous Coordinates"
-date = "2021-08-08"
+date = "2022-08-09"
 description = "Solution to Leetcode 816"
 tags = [
     

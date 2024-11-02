@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2127: Maximum Employees to Be Invited to a Meeting"
-date = "2018-01-05"
+date = "2019-01-06"
 description = "Solution to Leetcode 2127"
 tags = [
     

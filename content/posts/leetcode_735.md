@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 735: Asteroid Collision"
-date = "2021-10-28"
+date = "2022-10-29"
 description = "Solution to Leetcode 735"
 tags = [
     

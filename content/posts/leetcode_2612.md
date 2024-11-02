@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2612: Minimum Reverse Operations"
-date = "2016-09-07"
+date = "2017-09-08"
 description = "Solution to Leetcode 2612"
 tags = [
     

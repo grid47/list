@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1609: Even Odd Tree"
-date = "2019-06-07"
+date = "2020-06-07"
 description = "Solution to Leetcode 1609"
 tags = [
     

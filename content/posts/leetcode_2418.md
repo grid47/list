@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2418: Sort the People"
-date = "2017-03-20"
+date = "2018-03-21"
 description = "Solution to Leetcode 2418"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1867: Orders With Maximum Quantity Above Average"
-date = "2018-09-22"
+date = "2019-09-23"
 description = "Solution to Leetcode 1867"
 tags = [
     

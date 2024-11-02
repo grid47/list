@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 699: Falling Squares"
-date = "2021-12-03"
+date = "2022-12-04"
 description = "Solution to Leetcode 699"
 tags = [
     

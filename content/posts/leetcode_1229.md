@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1229: Meeting Scheduler"
-date = "2020-06-21"
+date = "2021-06-22"
 description = "Solution to Leetcode 1229"
 tags = [
     

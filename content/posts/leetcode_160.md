@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 160: Intersection of Two Linked Lists"
-date = "2023-05-26"
+date = "2024-05-26"
 description = "Solution to Leetcode 160"
 tags = [
     

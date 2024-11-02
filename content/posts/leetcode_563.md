@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 563: Binary Tree Tilt"
-date = "2022-04-18"
+date = "2023-04-19"
 description = "Solution to Leetcode 563"
 tags = [
     

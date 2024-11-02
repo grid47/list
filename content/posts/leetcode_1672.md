@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1672: Richest Customer Wealth"
-date = "2019-04-05"
+date = "2020-04-05"
 description = "Solution to Leetcode 1672"
 tags = [
     

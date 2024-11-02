@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1194: Tournament Winners"
-date = "2020-07-26"
+date = "2021-07-27"
 description = "Solution to Leetcode 1194"
 tags = [
     

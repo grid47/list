@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2883: Drop Missing Data"
-date = "2015-12-11"
+date = "2016-12-11"
 description = "Solution to Leetcode 2883"
 tags = [
     

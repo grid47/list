@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 331: Verify Preorder Serialization of a Binary Tree"
-date = "2022-12-06"
+date = "2023-12-07"
 description = "Solution to Leetcode 331"
 tags = [
     

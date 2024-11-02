@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1393: Capital Gain/Loss"
-date = "2020-01-09"
+date = "2021-01-09"
 description = "Solution to Leetcode 1393"
 tags = [
     

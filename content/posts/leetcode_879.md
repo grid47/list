@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 879: Profitable Schemes"
-date = "2021-06-06"
+date = "2022-06-07"
 description = "Solution to Leetcode 879"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3221: Maximum Array Hopping Score II"
-date = "2015-01-07"
+date = "2016-01-08"
 description = "Solution to Leetcode 3221"
 tags = [
     

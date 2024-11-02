@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2288: Apply Discount to Prices"
-date = "2017-07-28"
+date = "2018-07-29"
 description = "Solution to Leetcode 2288"
 tags = [
     

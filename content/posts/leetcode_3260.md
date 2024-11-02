@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3260: Find the Largest Palindrome Divisible by K"
-date = "2014-11-29"
+date = "2015-11-30"
 description = "Solution to Leetcode 3260"
 tags = [
     

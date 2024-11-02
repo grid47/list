@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 452: Minimum Number of Arrows to Burst Balloons"
-date = "2022-08-07"
+date = "2023-08-08"
 description = "Solution to Leetcode 452"
 tags = [
     

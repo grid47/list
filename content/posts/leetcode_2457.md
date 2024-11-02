@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2457: Minimum Addition to Make Integer Beautiful"
-date = "2017-02-09"
+date = "2018-02-10"
 description = "Solution to Leetcode 2457"
 tags = [
     

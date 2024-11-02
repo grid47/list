@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 69: Sqrt(x)"
-date = "2023-08-25"
+date = "2024-08-25"
 description = "Solution to Leetcode 69"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3030: Find the Grid of Region Average"
-date = "2015-07-17"
+date = "2016-07-17"
 description = "Solution to Leetcode 3030"
 tags = [
     

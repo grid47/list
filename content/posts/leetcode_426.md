@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 426: Convert Binary Search Tree to Sorted Doubly Linked List"
-date = "2022-09-02"
+date = "2023-09-03"
 description = "Solution to Leetcode 426"
 tags = [
     

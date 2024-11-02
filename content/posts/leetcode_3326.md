@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3326: Minimum Division Operations to Make Array Non Decreasing"
-date = "2014-09-24"
+date = "2015-09-25"
 description = "Solution to Leetcode 3326"
 tags = [
     

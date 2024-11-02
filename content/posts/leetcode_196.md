@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 196: Delete Duplicate Emails"
-date = "2023-04-20"
+date = "2024-04-20"
 description = "Solution to Leetcode 196"
 tags = [
     

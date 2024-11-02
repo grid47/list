@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 378: Kth Smallest Element in a Sorted Matrix"
-date = "2022-10-20"
+date = "2023-10-21"
 description = "Solution to Leetcode 378"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 971: Flip Binary Tree To Match Preorder Traversal"
-date = "2021-03-06"
+date = "2022-03-07"
 description = "Solution to Leetcode 971"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 514: Freedom Trail"
-date = "2022-06-06"
+date = "2023-06-07"
 description = "Solution to Leetcode 514"
 tags = [
     

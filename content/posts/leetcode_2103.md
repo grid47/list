@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2103: Rings and Rods"
-date = "2018-01-29"
+date = "2019-01-30"
 description = "Solution to Leetcode 2103"
 tags = [
     

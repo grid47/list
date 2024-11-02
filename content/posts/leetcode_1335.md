@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1335: Minimum Difficulty of a Job Schedule"
-date = "2020-03-07"
+date = "2021-03-08"
 description = "Solution to Leetcode 1335"
 tags = [
     

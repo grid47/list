@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1523: Count Odd Numbers in an Interval Range"
-date = "2019-09-01"
+date = "2020-09-01"
 description = "Solution to Leetcode 1523"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1142: User Activity for the Past 30 Days II"
-date = "2020-09-16"
+date = "2021-09-17"
 description = "Solution to Leetcode 1142"
 tags = [
     

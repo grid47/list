@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 471: Encode String with Shortest Length"
-date = "2022-07-19"
+date = "2023-07-20"
 description = "Solution to Leetcode 471"
 tags = [
     

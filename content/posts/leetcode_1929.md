@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1929: Concatenation of Array"
-date = "2018-07-22"
+date = "2019-07-23"
 description = "Solution to Leetcode 1929"
 tags = [
     

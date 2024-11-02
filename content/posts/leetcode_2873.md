@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2873: Maximum Value of an Ordered Triplet I"
-date = "2015-12-21"
+date = "2016-12-21"
 description = "Solution to Leetcode 2873"
 tags = [
     

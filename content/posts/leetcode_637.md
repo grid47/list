@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 637: Average of Levels in Binary Tree"
-date = "2022-02-03"
+date = "2023-02-04"
 description = "Solution to Leetcode 637"
 tags = [
     

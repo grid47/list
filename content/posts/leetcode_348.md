@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 348: Design Tic-Tac-Toe"
-date = "2022-11-19"
+date = "2023-11-20"
 description = "Solution to Leetcode 348"
 tags = [
     

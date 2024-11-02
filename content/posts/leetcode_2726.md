@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2726: Calculator with Method Chaining"
-date = "2016-05-16"
+date = "2017-05-17"
 description = "Solution to Leetcode 2726"
 tags = [
     

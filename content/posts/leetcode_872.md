@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 872: Leaf-Similar Trees"
-date = "2021-06-13"
+date = "2022-06-14"
 description = "Solution to Leetcode 872"
 tags = [
     

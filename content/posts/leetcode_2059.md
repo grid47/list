@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2059: Minimum Operations to Convert Number"
-date = "2018-03-14"
+date = "2019-03-15"
 description = "Solution to Leetcode 2059"
 tags = [
     

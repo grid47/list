@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2090: K Radius Subarray Averages"
-date = "2018-02-11"
+date = "2019-02-12"
 description = "Solution to Leetcode 2090"
 tags = [
     

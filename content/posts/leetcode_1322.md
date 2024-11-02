@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1322: Ads Performance"
-date = "2020-03-20"
+date = "2021-03-21"
 description = "Solution to Leetcode 1322"
 tags = [
     

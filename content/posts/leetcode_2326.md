@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2326: Spiral Matrix IV"
-date = "2017-06-20"
+date = "2018-06-21"
 description = "Solution to Leetcode 2326"
 tags = [
     

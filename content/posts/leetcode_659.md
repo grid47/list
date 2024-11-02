@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 659: Split Array into Consecutive Subsequences"
-date = "2022-01-12"
+date = "2023-01-13"
 description = "Solution to Leetcode 659"
 tags = [
     

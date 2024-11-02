@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2781: Length of the Longest Valid Substring"
-date = "2016-03-22"
+date = "2017-03-23"
 description = "Solution to Leetcode 2781"
 tags = [
     

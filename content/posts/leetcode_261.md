@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 261: Graph Valid Tree"
-date = "2023-02-14"
+date = "2024-02-15"
 description = "Solution to Leetcode 261"
 tags = [
     

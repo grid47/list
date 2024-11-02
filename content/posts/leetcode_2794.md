@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2794: Create Object from Two Arrays"
-date = "2016-03-09"
+date = "2017-03-10"
 description = "Solution to Leetcode 2794"
 tags = [
     

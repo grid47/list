@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3024: Type of Triangle"
-date = "2015-07-23"
+date = "2016-07-23"
 description = "Solution to Leetcode 3024"
 tags = [
     

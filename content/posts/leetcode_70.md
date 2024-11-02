@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 70: Climbing Stairs"
-date = "2023-08-24"
+date = "2024-08-24"
 description = "Solution to Leetcode 70"
 tags = [
     

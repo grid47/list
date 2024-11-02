@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 734: Sentence Similarity"
-date = "2021-10-29"
+date = "2022-10-30"
 description = "Solution to Leetcode 734"
 tags = [
     

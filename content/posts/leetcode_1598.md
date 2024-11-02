@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1598: Crawler Log Folder"
-date = "2019-06-18"
+date = "2020-06-18"
 description = "Solution to Leetcode 1598"
 tags = [
     

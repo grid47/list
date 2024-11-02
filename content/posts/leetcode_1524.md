@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1524: Number of Sub-arrays With Odd Sum"
-date = "2019-08-31"
+date = "2020-08-31"
 description = "Solution to Leetcode 1524"
 tags = [
     

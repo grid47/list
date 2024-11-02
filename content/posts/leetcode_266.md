@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 266: Palindrome Permutation"
-date = "2023-02-09"
+date = "2024-02-10"
 description = "Solution to Leetcode 266"
 tags = [
     

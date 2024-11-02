@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2460: Apply Operations to an Array"
-date = "2017-02-06"
+date = "2018-02-07"
 description = "Solution to Leetcode 2460"
 tags = [
     

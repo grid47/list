@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 621: Task Scheduler"
-date = "2022-02-19"
+date = "2023-02-20"
 description = "Solution to Leetcode 621"
 tags = [
     

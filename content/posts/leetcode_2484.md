@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2484: Count Palindromic Subsequences"
-date = "2017-01-13"
+date = "2018-01-14"
 description = "Solution to Leetcode 2484"
 tags = [
     

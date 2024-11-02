@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1471: The k Strongest Values in an Array"
-date = "2019-10-23"
+date = "2020-10-23"
 description = "Solution to Leetcode 1471"
 tags = [
     

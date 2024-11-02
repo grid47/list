@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2392: Build a Matrix With Conditions"
-date = "2017-04-15"
+date = "2018-04-16"
 description = "Solution to Leetcode 2392"
 tags = [
     

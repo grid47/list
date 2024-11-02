@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1412: Find the Quiet Students in All Exams"
-date = "2019-12-21"
+date = "2020-12-21"
 description = "Solution to Leetcode 1412"
 tags = [
     

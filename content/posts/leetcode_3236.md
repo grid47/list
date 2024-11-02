@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3236: CEO Subordinate Hierarchy"
-date = "2014-12-23"
+date = "2015-12-24"
 description = "Solution to Leetcode 3236"
 tags = [
     

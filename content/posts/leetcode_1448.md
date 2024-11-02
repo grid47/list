@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1448: Count Good Nodes in Binary Tree"
-date = "2019-11-15"
+date = "2020-11-15"
 description = "Solution to Leetcode 1448"
 tags = [
     

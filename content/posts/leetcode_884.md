@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 884: Uncommon Words from Two Sentences"
-date = "2021-06-01"
+date = "2022-06-02"
 description = "Solution to Leetcode 884"
 tags = [
     

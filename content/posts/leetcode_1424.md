@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1424: Diagonal Traverse II"
-date = "2019-12-09"
+date = "2020-12-09"
 description = "Solution to Leetcode 1424"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1861: Rotating the Box"
-date = "2018-09-28"
+date = "2019-09-29"
 description = "Solution to Leetcode 1861"
 tags = [
     

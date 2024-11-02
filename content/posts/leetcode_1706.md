@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1706: Where Will the Ball Fall"
-date = "2019-03-02"
+date = "2020-03-02"
 description = "Solution to Leetcode 1706"
 tags = [
     

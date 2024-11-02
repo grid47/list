@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1784: Check if Binary String Has at Most One Segment of Ones"
-date = "2018-12-14"
+date = "2019-12-15"
 description = "Solution to Leetcode 1784"
 tags = [
     

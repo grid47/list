@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2600: K Items With the Maximum Sum"
-date = "2016-09-19"
+date = "2017-09-20"
 description = "Solution to Leetcode 2600"
 tags = [
     

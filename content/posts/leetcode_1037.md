@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1037: Valid Boomerang"
-date = "2020-12-30"
+date = "2021-12-31"
 description = "Solution to Leetcode 1037"
 tags = [
     

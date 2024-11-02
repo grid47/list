@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1321: Restaurant Growth"
-date = "2020-03-21"
+date = "2021-03-22"
 description = "Solution to Leetcode 1321"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2479: Maximum XOR of Two Non-Overlapping Subtrees"
-date = "2017-01-18"
+date = "2018-01-19"
 description = "Solution to Leetcode 2479"
 tags = [
     

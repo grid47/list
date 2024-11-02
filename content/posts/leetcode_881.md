@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 881: Boats to Save People"
-date = "2021-06-04"
+date = "2022-06-05"
 description = "Solution to Leetcode 881"
 tags = [
     

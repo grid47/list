@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3247: Number of Subsequences with Odd Sum"
-date = "2014-12-12"
+date = "2015-12-13"
 description = "Solution to Leetcode 3247"
 tags = [
     

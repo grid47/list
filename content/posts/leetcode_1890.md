@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1890: The Latest Login in 2020"
-date = "2018-08-30"
+date = "2019-08-31"
 description = "Solution to Leetcode 1890"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2775: Undefined to Null"
-date = "2016-03-28"
+date = "2017-03-29"
 description = "Solution to Leetcode 2775"
 tags = [
     

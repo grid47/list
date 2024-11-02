@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1855: Maximum Distance Between a Pair of Values"
-date = "2018-10-04"
+date = "2019-10-05"
 description = "Solution to Leetcode 1855"
 tags = [
     

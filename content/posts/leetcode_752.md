@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 752: Open the Lock"
-date = "2021-10-11"
+date = "2022-10-12"
 description = "Solution to Leetcode 752"
 tags = [
     

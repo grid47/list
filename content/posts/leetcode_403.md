@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 403: Frog Jump"
-date = "2022-09-25"
+date = "2023-09-26"
 description = "Solution to Leetcode 403"
 tags = [
     

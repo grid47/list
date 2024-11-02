@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2241: Design an ATM Machine"
-date = "2017-09-13"
+date = "2018-09-14"
 description = "Solution to Leetcode 2241"
 tags = [
     

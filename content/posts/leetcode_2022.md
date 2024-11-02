@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2022: Convert 1D Array Into 2D Array"
-date = "2018-04-20"
+date = "2019-04-21"
 description = "Solution to Leetcode 2022"
 tags = [
     

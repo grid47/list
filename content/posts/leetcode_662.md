@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 662: Maximum Width of Binary Tree"
-date = "2022-01-09"
+date = "2023-01-10"
 description = "Solution to Leetcode 662"
 tags = [
     

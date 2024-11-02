@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 638: Shopping Offers"
-date = "2022-02-02"
+date = "2023-02-03"
 description = "Solution to Leetcode 638"
 tags = [
     

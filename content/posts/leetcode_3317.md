@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3317: Find the Number of Possible Ways for an Event"
-date = "2014-10-03"
+date = "2015-10-04"
 description = "Solution to Leetcode 3317"
 tags = [
     

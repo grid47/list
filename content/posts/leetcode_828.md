@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 828: Count Unique Characters of All Substrings of a Given String"
-date = "2021-07-27"
+date = "2022-07-28"
 description = "Solution to Leetcode 828"
 tags = [
     

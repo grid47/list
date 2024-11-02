@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2722: Join Two Arrays by ID"
-date = "2016-05-20"
+date = "2017-05-21"
 description = "Solution to Leetcode 2722"
 tags = [
     

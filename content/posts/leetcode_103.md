@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 103: Binary Tree Zigzag Level Order Traversal"
-date = "2023-07-22"
+date = "2024-07-22"
 description = "Solution to Leetcode 103"
 tags = [
     

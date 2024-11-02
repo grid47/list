@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2434: Using a Robot to Print the Lexicographically Smallest String"
-date = "2017-03-04"
+date = "2018-03-05"
 description = "Solution to Leetcode 2434"
 tags = [
     

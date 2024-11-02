@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1744: Can You Eat Your Favorite Candy on Your Favorite Day?"
-date = "2019-01-23"
+date = "2020-01-24"
 description = "Solution to Leetcode 1744"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1591: Strange Printer II"
-date = "2019-06-25"
+date = "2020-06-25"
 description = "Solution to Leetcode 1591"
 tags = [
     

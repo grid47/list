@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1421: NPV Queries"
-date = "2019-12-12"
+date = "2020-12-12"
 description = "Solution to Leetcode 1421"
 tags = [
     

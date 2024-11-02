@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1146: Snapshot Array"
-date = "2020-09-12"
+date = "2021-09-13"
 description = "Solution to Leetcode 1146"
 tags = [
     

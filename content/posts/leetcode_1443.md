@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1443: Minimum Time to Collect All Apples in a Tree"
-date = "2019-11-20"
+date = "2020-11-20"
 description = "Solution to Leetcode 1443"
 tags = [
     

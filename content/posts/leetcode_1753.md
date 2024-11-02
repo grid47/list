@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1753: Maximum Score From Removing Stones"
-date = "2019-01-14"
+date = "2020-01-15"
 description = "Solution to Leetcode 1753"
 tags = [
     

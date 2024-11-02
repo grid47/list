@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2258: Escape the Spreading Fire"
-date = "2017-08-27"
+date = "2018-08-28"
 description = "Solution to Leetcode 2258"
 tags = [
     

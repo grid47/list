@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1610: Maximum Number of Visible Points"
-date = "2019-06-06"
+date = "2020-06-06"
 description = "Solution to Leetcode 1610"
 tags = [
     

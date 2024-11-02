@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 401: Binary Watch"
-date = "2022-09-27"
+date = "2023-09-28"
 description = "Solution to Leetcode 401"
 tags = [
     

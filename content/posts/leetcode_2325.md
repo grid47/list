@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2325: Decode the Message"
-date = "2017-06-21"
+date = "2018-06-22"
 description = "Solution to Leetcode 2325"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2792: Count Nodes That Are Great Enough"
-date = "2016-03-11"
+date = "2017-03-12"
 description = "Solution to Leetcode 2792"
 tags = [
     

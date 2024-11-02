@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 376: Wiggle Subsequence"
-date = "2022-10-22"
+date = "2023-10-23"
 description = "Solution to Leetcode 376"
 tags = [
     

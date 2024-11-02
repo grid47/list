@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1343: Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold"
-date = "2020-02-28"
+date = "2021-02-28"
 description = "Solution to Leetcode 1343"
 tags = [
     

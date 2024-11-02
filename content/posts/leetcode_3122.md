@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3122: Minimum Number of Operations to Satisfy Conditions"
-date = "2015-04-16"
+date = "2016-04-16"
 description = "Solution to Leetcode 3122"
 tags = [
     

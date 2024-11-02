@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 181: Employees Earning More Than Their Managers"
-date = "2023-05-05"
+date = "2024-05-05"
 description = "Solution to Leetcode 181"
 tags = [
     

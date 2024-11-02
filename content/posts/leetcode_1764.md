@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1764: Form Array by Concatenating Subarrays of Another Array"
-date = "2019-01-03"
+date = "2020-01-04"
 description = "Solution to Leetcode 1764"
 tags = [
     

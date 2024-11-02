@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2324: Product Sales Analysis IV"
-date = "2017-06-22"
+date = "2018-06-23"
 description = "Solution to Leetcode 2324"
 tags = [
     

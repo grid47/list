@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1375: Number of Times Binary String Is Prefix-Aligned"
-date = "2020-01-27"
+date = "2021-01-27"
 description = "Solution to Leetcode 1375"
 tags = [
     

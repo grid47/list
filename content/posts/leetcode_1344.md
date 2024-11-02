@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1344: Angle Between Hands of a Clock"
-date = "2020-02-27"
+date = "2021-02-27"
 description = "Solution to Leetcode 1344"
 tags = [
     

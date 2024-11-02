@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2838: Maximum Coins Heroes Can Collect"
-date = "2016-01-25"
+date = "2017-01-25"
 description = "Solution to Leetcode 2838"
 tags = [
     

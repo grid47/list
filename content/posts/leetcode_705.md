@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 705: Design HashSet"
-date = "2021-11-27"
+date = "2022-11-28"
 description = "Solution to Leetcode 705"
 tags = [
     

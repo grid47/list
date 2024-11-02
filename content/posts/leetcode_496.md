@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 496: Next Greater Element I"
-date = "2022-06-24"
+date = "2023-06-25"
 description = "Solution to Leetcode 496"
 tags = [
     

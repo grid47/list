@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2985: Calculate Compressed Mean"
-date = "2015-08-31"
+date = "2016-08-31"
 description = "Solution to Leetcode 2985"
 tags = [
     

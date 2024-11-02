@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3177: Find the Maximum Length of a Good Subsequence II"
-date = "2015-02-20"
+date = "2016-02-21"
 description = "Solution to Leetcode 3177"
 tags = [
     

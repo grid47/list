@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 915: Partition Array into Disjoint Intervals"
-date = "2021-05-01"
+date = "2022-05-02"
 description = "Solution to Leetcode 915"
 tags = [
     

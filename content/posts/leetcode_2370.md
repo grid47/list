@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2370: Longest Ideal Subsequence"
-date = "2017-05-07"
+date = "2018-05-08"
 description = "Solution to Leetcode 2370"
 tags = [
     

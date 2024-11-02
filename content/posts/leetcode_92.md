@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 92: Reverse Linked List II"
-date = "2023-08-02"
+date = "2024-08-02"
 description = "Solution to Leetcode 92"
 tags = [
     

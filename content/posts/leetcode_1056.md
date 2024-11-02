@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1056: Confusing Number"
-date = "2020-12-11"
+date = "2021-12-12"
 description = "Solution to Leetcode 1056"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1924: Erect the Fence II"
-date = "2018-07-27"
+date = "2019-07-28"
 description = "Solution to Leetcode 1924"
 tags = [
     

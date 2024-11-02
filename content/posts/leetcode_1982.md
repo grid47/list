@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1982: Find Array Given Subset Sums"
-date = "2018-05-30"
+date = "2019-05-31"
 description = "Solution to Leetcode 1982"
 tags = [
     

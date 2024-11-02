@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 455: Assign Cookies"
-date = "2022-08-04"
+date = "2023-08-05"
 description = "Solution to Leetcode 455"
 tags = [
     

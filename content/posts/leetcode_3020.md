@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3020: Find the Maximum Number of Elements in Subset"
-date = "2015-07-27"
+date = "2016-07-27"
 description = "Solution to Leetcode 3020"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1845: Seat Reservation Manager"
-date = "2018-10-14"
+date = "2019-10-15"
 description = "Solution to Leetcode 1845"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 361: Bomb Enemy"
-date = "2022-11-06"
+date = "2023-11-07"
 description = "Solution to Leetcode 361"
 tags = [
     

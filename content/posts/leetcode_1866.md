@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1866: Number of Ways to Rearrange Sticks With K Sticks Visible"
-date = "2018-09-23"
+date = "2019-09-24"
 description = "Solution to Leetcode 1866"
 tags = [
     

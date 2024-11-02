@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2433: Find The Original Array of Prefix Xor"
-date = "2017-03-05"
+date = "2018-03-06"
 description = "Solution to Leetcode 2433"
 tags = [
     

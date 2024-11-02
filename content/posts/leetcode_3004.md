@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3004: Maximum Subtree of the Same Color"
-date = "2015-08-12"
+date = "2016-08-12"
 description = "Solution to Leetcode 3004"
 tags = [
     

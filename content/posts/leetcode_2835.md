@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2835: Minimum Operations to Form Subsequence With Target Sum"
-date = "2016-01-28"
+date = "2017-01-28"
 description = "Solution to Leetcode 2835"
 tags = [
     

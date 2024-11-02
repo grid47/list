@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1902: Depth of BST Given Insertion Order"
-date = "2018-08-18"
+date = "2019-08-19"
 description = "Solution to Leetcode 1902"
 tags = [
     

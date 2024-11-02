@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 826: Most Profit Assigning Work"
-date = "2021-07-29"
+date = "2022-07-30"
 description = "Solution to Leetcode 826"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 36: Valid Sudoku"
-date = "2023-09-27"
+date = "2024-09-27"
 description = "Solution to Leetcode 36"
 tags = [
     

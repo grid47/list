@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1901: Find a Peak Element II"
-date = "2018-08-19"
+date = "2019-08-20"
 description = "Solution to Leetcode 1901"
 tags = [
     

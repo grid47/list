@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2474: Customers With Strictly Increasing Purchases"
-date = "2017-01-23"
+date = "2018-01-24"
 description = "Solution to Leetcode 2474"
 tags = [
     

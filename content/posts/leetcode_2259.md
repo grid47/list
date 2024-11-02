@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2259: Remove Digit From Number to Maximize Result"
-date = "2017-08-26"
+date = "2018-08-27"
 description = "Solution to Leetcode 2259"
 tags = [
     

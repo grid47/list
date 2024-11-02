@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 369: Plus One Linked List"
-date = "2022-10-29"
+date = "2023-10-30"
 description = "Solution to Leetcode 369"
 tags = [
     

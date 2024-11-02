@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1299: Replace Elements with Greatest Element on Right Side"
-date = "2020-04-12"
+date = "2021-04-13"
 description = "Solution to Leetcode 1299"
 tags = [
     

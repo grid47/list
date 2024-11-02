@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 717: 1-bit and 2-bit Characters"
-date = "2021-11-15"
+date = "2022-11-16"
 description = "Solution to Leetcode 717"
 tags = [
     

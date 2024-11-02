@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 263: Ugly Number"
-date = "2023-02-12"
+date = "2024-02-13"
 description = "Solution to Leetcode 263"
 tags = [
     

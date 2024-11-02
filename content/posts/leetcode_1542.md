@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1542: Find Longest Awesome Substring"
-date = "2019-08-13"
+date = "2020-08-13"
 description = "Solution to Leetcode 1542"
 tags = [
     

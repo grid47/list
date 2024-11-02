@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 698: Partition to K Equal Sum Subsets"
-date = "2021-12-04"
+date = "2022-12-05"
 description = "Solution to Leetcode 698"
 tags = [
     

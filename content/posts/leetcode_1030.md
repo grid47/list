@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1030: Matrix Cells in Distance Order"
-date = "2021-01-06"
+date = "2022-01-07"
 description = "Solution to Leetcode 1030"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 126: Word Ladder II"
-date = "2023-06-29"
+date = "2024-06-29"
 description = "Solution to Leetcode 126"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2377: Sort the Olympic Table"
-date = "2017-04-30"
+date = "2018-05-01"
 description = "Solution to Leetcode 2377"
 tags = [
     

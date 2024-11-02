@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1918: Kth Smallest Subarray Sum"
-date = "2018-08-02"
+date = "2019-08-03"
 description = "Solution to Leetcode 1918"
 tags = [
     

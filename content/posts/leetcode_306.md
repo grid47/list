@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 306: Additive Number"
-date = "2022-12-31"
+date = "2024-01-01"
 description = "Solution to Leetcode 306"
 tags = [
     

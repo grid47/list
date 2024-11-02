@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 597: Friend Requests I: Overall Acceptance Rate"
-date = "2022-03-15"
+date = "2023-03-16"
 description = "Solution to Leetcode 597"
 tags = [
     

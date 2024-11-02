@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 626: Exchange Seats"
-date = "2022-02-14"
+date = "2023-02-15"
 description = "Solution to Leetcode 626"
 tags = [
     

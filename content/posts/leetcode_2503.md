@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2503: Maximum Number of Points From Grid Queries"
-date = "2016-12-25"
+date = "2017-12-26"
 description = "Solution to Leetcode 2503"
 tags = [
     

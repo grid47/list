@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1188: Design Bounded Blocking Queue"
-date = "2020-08-01"
+date = "2021-08-02"
 description = "Solution to Leetcode 1188"
 tags = [
     

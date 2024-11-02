@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 169: Majority Element"
-date = "2023-05-17"
+date = "2024-05-17"
 description = "Solution to Leetcode 169"
 tags = [
     

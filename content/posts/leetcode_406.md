@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 406: Queue Reconstruction by Height"
-date = "2022-09-22"
+date = "2023-09-23"
 description = "Solution to Leetcode 406"
 tags = [
     

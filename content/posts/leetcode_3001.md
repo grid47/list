@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3001: Minimum Moves to Capture The Queen"
-date = "2015-08-15"
+date = "2016-08-15"
 description = "Solution to Leetcode 3001"
 tags = [
     

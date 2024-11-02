@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1492: The kth Factor of n"
-date = "2019-10-02"
+date = "2020-10-02"
 description = "Solution to Leetcode 1492"
 tags = [
     

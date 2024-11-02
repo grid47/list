@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 43: Multiply Strings"
-date = "2023-09-20"
+date = "2024-09-20"
 description = "Solution to Leetcode 43"
 tags = [
     

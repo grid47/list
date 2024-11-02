@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1479: Sales by Day of the Week"
-date = "2019-10-15"
+date = "2020-10-15"
 description = "Solution to Leetcode 1479"
 tags = [
     

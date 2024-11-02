@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 656: Coin Path"
-date = "2022-01-15"
+date = "2023-01-16"
 description = "Solution to Leetcode 656"
 tags = [
     

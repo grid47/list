@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 586: Customer Placing the Largest Number of Orders"
-date = "2022-03-26"
+date = "2023-03-27"
 description = "Solution to Leetcode 586"
 tags = [
     

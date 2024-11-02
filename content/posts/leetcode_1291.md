@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1291: Sequential Digits"
-date = "2020-04-20"
+date = "2021-04-21"
 description = "Solution to Leetcode 1291"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2716: Minimize String Length"
-date = "2016-05-26"
+date = "2017-05-27"
 description = "Solution to Leetcode 2716"
 tags = [
     

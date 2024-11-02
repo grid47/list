@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 977: Squares of a Sorted Array"
-date = "2021-02-28"
+date = "2022-03-01"
 description = "Solution to Leetcode 977"
 tags = [
     

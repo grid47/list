@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2375: Construct Smallest Number From DI String"
-date = "2017-05-02"
+date = "2018-05-03"
 description = "Solution to Leetcode 2375"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1520: Maximum Number of Non-Overlapping Substrings"
-date = "2019-09-04"
+date = "2020-09-04"
 description = "Solution to Leetcode 1520"
 tags = [
     

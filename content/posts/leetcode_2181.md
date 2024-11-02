@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2181: Merge Nodes in Between Zeros"
-date = "2017-11-12"
+date = "2018-11-13"
 description = "Solution to Leetcode 2181"
 tags = [
     

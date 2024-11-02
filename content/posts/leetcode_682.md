@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 682: Baseball Game"
-date = "2021-12-20"
+date = "2022-12-21"
 description = "Solution to Leetcode 682"
 tags = [
     

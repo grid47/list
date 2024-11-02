@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1357: Apply Discount Every n Orders"
-date = "2020-02-14"
+date = "2021-02-14"
 description = "Solution to Leetcode 1357"
 tags = [
     

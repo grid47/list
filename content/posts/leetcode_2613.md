@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2613: Beautiful Pairs"
-date = "2016-09-06"
+date = "2017-09-07"
 description = "Solution to Leetcode 2613"
 tags = [
     

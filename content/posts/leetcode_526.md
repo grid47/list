@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 526: Beautiful Arrangement"
-date = "2022-05-25"
+date = "2023-05-26"
 description = "Solution to Leetcode 526"
 tags = [
     

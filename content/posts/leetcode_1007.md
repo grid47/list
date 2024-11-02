@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1007: Minimum Domino Rotations For Equal Row"
-date = "2021-01-29"
+date = "2022-01-30"
 description = "Solution to Leetcode 1007"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 363: Max Sum of Rectangle No Larger Than K"
-date = "2022-11-04"
+date = "2023-11-05"
 description = "Solution to Leetcode 363"
 tags = [
     

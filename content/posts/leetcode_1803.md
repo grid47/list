@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1803: Count Pairs With XOR in a Range"
-date = "2018-11-25"
+date = "2019-11-26"
 description = "Solution to Leetcode 1803"
 tags = [
     

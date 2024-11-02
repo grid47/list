@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2387: Median of a Row Wise Sorted Matrix"
-date = "2017-04-20"
+date = "2018-04-21"
 description = "Solution to Leetcode 2387"
 tags = [
     

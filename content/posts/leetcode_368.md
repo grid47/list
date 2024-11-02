@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 368: Largest Divisible Subset"
-date = "2022-10-30"
+date = "2023-10-31"
 description = "Solution to Leetcode 368"
 tags = [
     

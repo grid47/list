@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2155: All Divisions With the Highest Score of a Binary Array"
-date = "2017-12-08"
+date = "2018-12-09"
 description = "Solution to Leetcode 2155"
 tags = [
     

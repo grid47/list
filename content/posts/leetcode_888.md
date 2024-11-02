@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 888: Fair Candy Swap"
-date = "2021-05-28"
+date = "2022-05-29"
 description = "Solution to Leetcode 888"
 tags = [
     

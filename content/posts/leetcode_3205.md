@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3205: Maximum Array Hopping Score I"
-date = "2015-01-23"
+date = "2016-01-24"
 description = "Solution to Leetcode 3205"
 tags = [
     

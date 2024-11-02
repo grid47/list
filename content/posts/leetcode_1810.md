@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1810: Minimum Path Cost in a Hidden Grid"
-date = "2018-11-18"
+date = "2019-11-19"
 description = "Solution to Leetcode 1810"
 tags = [
     

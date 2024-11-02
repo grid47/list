@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1105: Filling Bookcase Shelves"
-date = "2020-10-23"
+date = "2021-10-24"
 description = "Solution to Leetcode 1105"
 tags = [
     

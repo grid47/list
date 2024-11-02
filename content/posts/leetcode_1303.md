@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1303: Find the Team Size"
-date = "2020-04-08"
+date = "2021-04-09"
 description = "Solution to Leetcode 1303"
 tags = [
     

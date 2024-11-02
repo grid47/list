@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3061: Calculate Trapping Rain Water"
-date = "2015-06-16"
+date = "2016-06-16"
 description = "Solution to Leetcode 3061"
 tags = [
     

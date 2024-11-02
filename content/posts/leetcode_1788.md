@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1788: Maximize the Beauty of the Garden"
-date = "2018-12-10"
+date = "2019-12-11"
 description = "Solution to Leetcode 1788"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 595: Big Countries"
-date = "2022-03-17"
+date = "2023-03-18"
 description = "Solution to Leetcode 595"
 tags = [
     

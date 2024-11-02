@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 141: Linked List Cycle"
-date = "2023-06-14"
+date = "2024-06-14"
 description = "Solution to Leetcode 141"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1129: Shortest Path with Alternating Colors"
-date = "2020-09-29"
+date = "2021-09-30"
 description = "Solution to Leetcode 1129"
 tags = [
     

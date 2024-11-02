@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 545: Boundary of Binary Tree"
-date = "2022-05-06"
+date = "2023-05-07"
 description = "Solution to Leetcode 545"
 tags = [
     

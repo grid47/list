@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1382: Balance a Binary Search Tree"
-date = "2020-01-20"
+date = "2021-01-20"
 description = "Solution to Leetcode 1382"
 tags = [
     

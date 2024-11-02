@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3014: Minimum Number of Pushes to Type Word I"
-date = "2015-08-02"
+date = "2016-08-02"
 description = "Solution to Leetcode 3014"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3019: Number of Changing Keys"
-date = "2015-07-28"
+date = "2016-07-28"
 description = "Solution to Leetcode 3019"
 tags = [
     

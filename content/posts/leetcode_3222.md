@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3222: Find the Winning Player in Coin Game"
-date = "2015-01-06"
+date = "2016-01-07"
 description = "Solution to Leetcode 3222"
 tags = [
     

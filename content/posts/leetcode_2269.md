@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2269: Find the K-Beauty of a Number"
-date = "2017-08-16"
+date = "2018-08-17"
 description = "Solution to Leetcode 2269"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1626: Best Team With No Conflicts"
-date = "2019-05-21"
+date = "2020-05-21"
 description = "Solution to Leetcode 1626"
 tags = [
     

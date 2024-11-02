@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 811: Subdomain Visit Count"
-date = "2021-08-13"
+date = "2022-08-14"
 description = "Solution to Leetcode 811"
 tags = [
     

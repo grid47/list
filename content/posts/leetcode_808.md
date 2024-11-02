@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 808: Soup Servings"
-date = "2021-08-16"
+date = "2022-08-17"
 description = "Solution to Leetcode 808"
 tags = [
     

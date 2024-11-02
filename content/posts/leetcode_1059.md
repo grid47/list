@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1059: All Paths from Source Lead to Destination"
-date = "2020-12-08"
+date = "2021-12-09"
 description = "Solution to Leetcode 1059"
 tags = [
     

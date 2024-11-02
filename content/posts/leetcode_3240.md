@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3240: Minimum Number of Flips to Make Binary Grid Palindromic II"
-date = "2014-12-19"
+date = "2015-12-20"
 description = "Solution to Leetcode 3240"
 tags = [
     

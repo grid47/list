@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 440: K-th Smallest in Lexicographical Order"
-date = "2022-08-19"
+date = "2023-08-20"
 description = "Solution to Leetcode 440"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2004: The Number of Seniors and Juniors to Join the Company"
-date = "2018-05-08"
+date = "2019-05-09"
 description = "Solution to Leetcode 2004"
 tags = [
     

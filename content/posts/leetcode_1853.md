@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1853: Convert Date Format"
-date = "2018-10-06"
+date = "2019-10-07"
 description = "Solution to Leetcode 1853"
 tags = [
     

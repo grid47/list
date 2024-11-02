@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 585: Investments in 2016"
-date = "2022-03-27"
+date = "2023-03-28"
 description = "Solution to Leetcode 585"
 tags = [
     

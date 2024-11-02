@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1843: Suspicious Bank Accounts"
-date = "2018-10-16"
+date = "2019-10-17"
 description = "Solution to Leetcode 1843"
 tags = [
     

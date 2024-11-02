@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2565: Subsequence With the Minimum Score"
-date = "2016-10-24"
+date = "2017-10-25"
 description = "Solution to Leetcode 2565"
 tags = [
     

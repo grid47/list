@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1730: Shortest Path to Get Food"
-date = "2019-02-06"
+date = "2020-02-07"
 description = "Solution to Leetcode 1730"
 tags = [
     

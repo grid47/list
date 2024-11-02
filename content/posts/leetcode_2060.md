@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2060: Check if an Original String Exists Given Two Encoded Strings"
-date = "2018-03-13"
+date = "2019-03-14"
 description = "Solution to Leetcode 2060"
 tags = [
     

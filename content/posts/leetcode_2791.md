@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2791: Count Paths That Can Form a Palindrome in a Tree"
-date = "2016-03-12"
+date = "2017-03-13"
 description = "Solution to Leetcode 2791"
 tags = [
     

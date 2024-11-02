@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3023: Find Pattern in Infinite Stream I"
-date = "2015-07-24"
+date = "2016-07-24"
 description = "Solution to Leetcode 3023"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2553: Separate the Digits in an Array"
-date = "2016-11-05"
+date = "2017-11-06"
 description = "Solution to Leetcode 2553"
 tags = [
     

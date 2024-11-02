@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3044: Most Frequent Prime"
-date = "2015-07-03"
+date = "2016-07-03"
 description = "Solution to Leetcode 3044"
 tags = [
     

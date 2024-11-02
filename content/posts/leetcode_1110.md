@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1110: Delete Nodes And Return Forest"
-date = "2020-10-18"
+date = "2021-10-19"
 description = "Solution to Leetcode 1110"
 tags = [
     

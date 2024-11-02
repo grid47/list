@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 628: Maximum Product of Three Numbers"
-date = "2022-02-12"
+date = "2023-02-13"
 description = "Solution to Leetcode 628"
 tags = [
     

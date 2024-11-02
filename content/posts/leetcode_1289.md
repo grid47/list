@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1289: Minimum Falling Path Sum II"
-date = "2020-04-22"
+date = "2021-04-23"
 description = "Solution to Leetcode 1289"
 tags = [
     

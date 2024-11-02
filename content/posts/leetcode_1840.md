@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1840: Maximum Building Height"
-date = "2018-10-19"
+date = "2019-10-20"
 description = "Solution to Leetcode 1840"
 tags = [
     

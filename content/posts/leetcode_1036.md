@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1036: Escape a Large Maze"
-date = "2020-12-31"
+date = "2022-01-01"
 description = "Solution to Leetcode 1036"
 tags = [
     

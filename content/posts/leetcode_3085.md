@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3085: Minimum Deletions to Make String K-Special"
-date = "2015-05-23"
+date = "2016-05-23"
 description = "Solution to Leetcode 3085"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3285: Find Indices of Stable Mountains"
-date = "2014-11-04"
+date = "2015-11-05"
 description = "Solution to Leetcode 3285"
 tags = [
     

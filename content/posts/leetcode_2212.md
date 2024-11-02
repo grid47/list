@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2212: Maximum Points in an Archery Competition"
-date = "2017-10-12"
+date = "2018-10-13"
 description = "Solution to Leetcode 2212"
 tags = [
     

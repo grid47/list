@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 319: Bulb Switcher"
-date = "2022-12-18"
+date = "2023-12-19"
 description = "Solution to Leetcode 319"
 tags = [
     

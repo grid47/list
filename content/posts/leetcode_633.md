@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 633: Sum of Square Numbers"
-date = "2022-02-07"
+date = "2023-02-08"
 description = "Solution to Leetcode 633"
 tags = [
     

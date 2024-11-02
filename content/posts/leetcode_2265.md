@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2265: Count Nodes Equal to Average of Subtree"
-date = "2017-08-20"
+date = "2018-08-21"
 description = "Solution to Leetcode 2265"
 tags = [
     

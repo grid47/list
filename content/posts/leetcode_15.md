@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 15: 3Sum"
-date = "2023-10-18"
+date = "2024-10-18"
 description = "Solution to Leetcode 15"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2682: Find the Losers of the Circular Game"
-date = "2016-06-29"
+date = "2017-06-30"
 description = "Solution to Leetcode 2682"
 tags = [
     

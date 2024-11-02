@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 39: Combination Sum"
-date = "2023-09-24"
+date = "2024-09-24"
 description = "Solution to Leetcode 39"
 tags = [
     

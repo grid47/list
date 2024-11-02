@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1768: Merge Strings Alternately"
-date = "2018-12-30"
+date = "2019-12-31"
 description = "Solution to Leetcode 1768"
 tags = [
     

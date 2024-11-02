@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1324: Print Words Vertically"
-date = "2020-03-18"
+date = "2021-03-19"
 description = "Solution to Leetcode 1324"
 tags = [
     

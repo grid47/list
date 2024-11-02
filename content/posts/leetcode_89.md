@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 89: Gray Code"
-date = "2023-08-05"
+date = "2024-08-05"
 description = "Solution to Leetcode 89"
 tags = [
     

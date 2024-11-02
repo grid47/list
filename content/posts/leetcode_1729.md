@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1729: Find Followers Count"
-date = "2019-02-07"
+date = "2020-02-08"
 description = "Solution to Leetcode 1729"
 tags = [
     

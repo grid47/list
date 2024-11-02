@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 836: Rectangle Overlap"
-date = "2021-07-19"
+date = "2022-07-20"
 description = "Solution to Leetcode 836"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3003: Maximize the Number of Partitions After Operations"
-date = "2015-08-13"
+date = "2016-08-13"
 description = "Solution to Leetcode 3003"
 tags = [
     

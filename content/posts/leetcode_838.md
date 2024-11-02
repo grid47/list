@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 838: Push Dominoes"
-date = "2021-07-17"
+date = "2022-07-18"
 description = "Solution to Leetcode 838"
 tags = [
     

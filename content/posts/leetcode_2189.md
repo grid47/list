@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2189: Number of Ways to Build House of Cards"
-date = "2017-11-04"
+date = "2018-11-05"
 description = "Solution to Leetcode 2189"
 tags = [
     

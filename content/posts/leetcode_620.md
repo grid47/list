@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 620: Not Boring Movies"
-date = "2022-02-20"
+date = "2023-02-21"
 description = "Solution to Leetcode 620"
 tags = [
     

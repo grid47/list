@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2367: Number of Arithmetic Triplets"
-date = "2017-05-10"
+date = "2018-05-11"
 description = "Solution to Leetcode 2367"
 tags = [
     

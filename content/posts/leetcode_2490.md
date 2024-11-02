@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2490: Circular Sentence"
-date = "2017-01-07"
+date = "2018-01-08"
 description = "Solution to Leetcode 2490"
 tags = [
     

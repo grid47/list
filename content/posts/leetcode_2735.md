@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2735: Collecting Chocolates"
-date = "2016-05-07"
+date = "2017-05-08"
 description = "Solution to Leetcode 2735"
 tags = [
     

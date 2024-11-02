@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3046: Split the Array"
-date = "2015-07-01"
+date = "2016-07-01"
 description = "Solution to Leetcode 3046"
 tags = [
     

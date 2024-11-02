@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3127: Make a Square with the Same Color"
-date = "2015-04-11"
+date = "2016-04-11"
 description = "Solution to Leetcode 3127"
 tags = [
     

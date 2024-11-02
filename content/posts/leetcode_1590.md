@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1590: Make Sum Divisible by P"
-date = "2019-06-26"
+date = "2020-06-26"
 description = "Solution to Leetcode 1590"
 tags = [
     

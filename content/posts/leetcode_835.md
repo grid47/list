@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 835: Image Overlap"
-date = "2021-07-20"
+date = "2022-07-21"
 description = "Solution to Leetcode 835"
 tags = [
     

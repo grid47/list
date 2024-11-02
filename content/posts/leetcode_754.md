@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 754: Reach a Number"
-date = "2021-10-09"
+date = "2022-10-10"
 description = "Solution to Leetcode 754"
 tags = [
     

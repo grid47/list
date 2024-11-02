@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1943: Describe the Painting"
-date = "2018-07-08"
+date = "2019-07-09"
 description = "Solution to Leetcode 1943"
 tags = [
     

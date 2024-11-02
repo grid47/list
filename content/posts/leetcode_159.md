@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 159: Longest Substring with At Most Two Distinct Characters"
-date = "2023-05-27"
+date = "2024-05-27"
 description = "Solution to Leetcode 159"
 tags = [
     

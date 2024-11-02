@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1859: Sorting the Sentence"
-date = "2018-09-30"
+date = "2019-10-01"
 description = "Solution to Leetcode 1859"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1773: Count Items Matching a Rule"
-date = "2018-12-25"
+date = "2019-12-26"
 description = "Solution to Leetcode 1773"
 tags = [
     

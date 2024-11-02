@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2044: Count Number of Maximum Bitwise-OR Subsets"
-date = "2018-03-29"
+date = "2019-03-30"
 description = "Solution to Leetcode 2044"
 tags = [
     

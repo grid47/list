@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 190: Reverse Bits"
-date = "2023-04-26"
+date = "2024-04-26"
 description = "Solution to Leetcode 190"
 tags = [
     

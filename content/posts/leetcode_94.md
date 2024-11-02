@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 94: Binary Tree Inorder Traversal"
-date = "2023-07-31"
+date = "2024-07-31"
 description = "Solution to Leetcode 94"
 tags = [
     

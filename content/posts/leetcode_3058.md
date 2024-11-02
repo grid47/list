@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3058: Friends With No Mutual Friends"
-date = "2015-06-19"
+date = "2016-06-19"
 description = "Solution to Leetcode 3058"
 tags = [
     

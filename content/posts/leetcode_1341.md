@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1341: Movie Rating"
-date = "2020-03-01"
+date = "2021-03-02"
 description = "Solution to Leetcode 1341"
 tags = [
     

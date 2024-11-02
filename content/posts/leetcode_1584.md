@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1584: Min Cost to Connect All Points"
-date = "2019-07-02"
+date = "2020-07-02"
 description = "Solution to Leetcode 1584"
 tags = [
     

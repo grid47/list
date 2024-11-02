@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3287: Find the Maximum Sequence Value of Array"
-date = "2014-11-02"
+date = "2015-11-03"
 description = "Solution to Leetcode 3287"
 tags = [
     

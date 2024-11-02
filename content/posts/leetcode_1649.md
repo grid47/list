@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1649: Create Sorted Array through Instructions"
-date = "2019-04-28"
+date = "2020-04-28"
 description = "Solution to Leetcode 1649"
 tags = [
     

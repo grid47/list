@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 559: Maximum Depth of N-ary Tree"
-date = "2022-04-22"
+date = "2023-04-23"
 description = "Solution to Leetcode 559"
 tags = [
     

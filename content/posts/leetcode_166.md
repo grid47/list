@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 166: Fraction to Recurring Decimal"
-date = "2023-05-20"
+date = "2024-05-20"
 description = "Solution to Leetcode 166"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1527: Patients With a Condition"
-date = "2019-08-28"
+date = "2020-08-28"
 description = "Solution to Leetcode 1527"
 tags = [
     

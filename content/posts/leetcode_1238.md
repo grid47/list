@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1238: Circular Permutation in Binary Representation"
-date = "2020-06-12"
+date = "2021-06-13"
 description = "Solution to Leetcode 1238"
 tags = [
     

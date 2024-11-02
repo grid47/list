@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 532: K-diff Pairs in an Array"
-date = "2022-05-19"
+date = "2023-05-20"
 description = "Solution to Leetcode 532"
 tags = [
     

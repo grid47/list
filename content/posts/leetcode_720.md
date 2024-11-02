@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 720: Longest Word in Dictionary"
-date = "2021-11-12"
+date = "2022-11-13"
 description = "Solution to Leetcode 720"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 303: Range Sum Query - Immutable"
-date = "2023-01-03"
+date = "2024-01-04"
 description = "Solution to Leetcode 303"
 tags = [
     

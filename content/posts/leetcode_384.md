@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 384: Shuffle an Array"
-date = "2022-10-14"
+date = "2023-10-15"
 description = "Solution to Leetcode 384"
 tags = [
     

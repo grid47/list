@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1380: Lucky Numbers in a Matrix"
-date = "2020-01-22"
+date = "2021-01-22"
 description = "Solution to Leetcode 1380"
 tags = [
     

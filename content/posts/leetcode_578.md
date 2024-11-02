@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 578: Get Highest Answer Rate Question"
-date = "2022-04-03"
+date = "2023-04-04"
 description = "Solution to Leetcode 578"
 tags = [
     

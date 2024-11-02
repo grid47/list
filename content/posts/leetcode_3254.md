@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3254: Find the Power of K-Size Subarrays I"
-date = "2014-12-05"
+date = "2015-12-06"
 description = "Solution to Leetcode 3254"
 tags = [
     

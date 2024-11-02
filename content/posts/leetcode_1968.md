@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1968: Array With Elements Not Equal to Average of Neighbors"
-date = "2018-06-13"
+date = "2019-06-14"
 description = "Solution to Leetcode 1968"
 tags = [
     

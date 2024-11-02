@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1564: Put Boxes Into the Warehouse I"
-date = "2019-07-22"
+date = "2020-07-22"
 description = "Solution to Leetcode 1564"
 tags = [
     

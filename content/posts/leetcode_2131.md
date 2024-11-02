@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2131: Longest Palindrome by Concatenating Two Letter Words"
-date = "2018-01-01"
+date = "2019-01-02"
 description = "Solution to Leetcode 2131"
 tags = [
     

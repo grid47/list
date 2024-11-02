@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2689: Extract Kth Character From The Rope Tree"
-date = "2016-06-22"
+date = "2017-06-23"
 description = "Solution to Leetcode 2689"
 tags = [
     

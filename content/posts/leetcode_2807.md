@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2807: Insert Greatest Common Divisors in Linked List"
-date = "2016-02-25"
+date = "2017-02-25"
 description = "Solution to Leetcode 2807"
 tags = [
     

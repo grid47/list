@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2740: Find the Value of the Partition"
-date = "2016-05-02"
+date = "2017-05-03"
 description = "Solution to Leetcode 2740"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 238: Product of Array Except Self"
-date = "2023-03-09"
+date = "2024-03-09"
 description = "Solution to Leetcode 238"
 tags = [
     

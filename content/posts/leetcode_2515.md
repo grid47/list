@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2515: Shortest Distance to Target String in a Circular Array"
-date = "2016-12-13"
+date = "2017-12-14"
 description = "Solution to Leetcode 2515"
 tags = [
     

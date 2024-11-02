@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2110: Number of Smooth Descent Periods of a Stock"
-date = "2018-01-22"
+date = "2019-01-23"
 description = "Solution to Leetcode 2110"
 tags = [
     

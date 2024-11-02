@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1946: Largest Number After Mutating Substring"
-date = "2018-07-05"
+date = "2019-07-06"
 description = "Solution to Leetcode 1946"
 tags = [
     

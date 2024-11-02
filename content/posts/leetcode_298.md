@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 298: Binary Tree Longest Consecutive Sequence"
-date = "2023-01-08"
+date = "2024-01-09"
 description = "Solution to Leetcode 298"
 tags = [
     

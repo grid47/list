@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 102: Binary Tree Level Order Traversal"
-date = "2023-07-23"
+date = "2024-07-23"
 description = "Solution to Leetcode 102"
 tags = [
     

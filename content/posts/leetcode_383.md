@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 383: Ransom Note"
-date = "2022-10-15"
+date = "2023-10-16"
 description = "Solution to Leetcode 383"
 tags = [
     

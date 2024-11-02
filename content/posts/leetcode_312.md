@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 312: Burst Balloons"
-date = "2022-12-25"
+date = "2023-12-26"
 description = "Solution to Leetcode 312"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1513: Number of Substrings With Only 1s"
-date = "2019-09-11"
+date = "2020-09-11"
 description = "Solution to Leetcode 1513"
 tags = [
     

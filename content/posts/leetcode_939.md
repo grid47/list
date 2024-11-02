@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 939: Minimum Area Rectangle"
-date = "2021-04-07"
+date = "2022-04-08"
 description = "Solution to Leetcode 939"
 tags = [
     

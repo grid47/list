@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 211: Design Add and Search Words Data Structure"
-date = "2023-04-05"
+date = "2024-04-05"
 description = "Solution to Leetcode 211"
 tags = [
     

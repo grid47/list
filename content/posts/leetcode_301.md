@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 301: Remove Invalid Parentheses"
-date = "2023-01-05"
+date = "2024-01-06"
 description = "Solution to Leetcode 301"
 tags = [
     

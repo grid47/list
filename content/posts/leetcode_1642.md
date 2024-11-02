@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1642: Furthest Building You Can Reach"
-date = "2019-05-05"
+date = "2020-05-05"
 description = "Solution to Leetcode 1642"
 tags = [
     

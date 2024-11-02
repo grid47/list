@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 239: Sliding Window Maximum"
-date = "2023-03-08"
+date = "2024-03-08"
 description = "Solution to Leetcode 239"
 tags = [
     

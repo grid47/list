@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 136: Single Number"
-date = "2023-06-19"
+date = "2024-06-19"
 description = "Solution to Leetcode 136"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1088: Confusing Number II"
-date = "2020-11-09"
+date = "2021-11-10"
 description = "Solution to Leetcode 1088"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3284: Sum of Consecutive Subarrays"
-date = "2014-11-05"
+date = "2015-11-06"
 description = "Solution to Leetcode 3284"
 tags = [
     

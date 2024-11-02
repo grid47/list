@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3090: Maximum Length Substring With Two Occurrences"
-date = "2015-05-18"
+date = "2016-05-18"
 description = "Solution to Leetcode 3090"
 tags = [
     

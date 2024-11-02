@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1927: Sum Game"
-date = "2018-07-24"
+date = "2019-07-25"
 description = "Solution to Leetcode 1927"
 tags = [
     

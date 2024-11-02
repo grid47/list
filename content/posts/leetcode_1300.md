@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1300: Sum of Mutated Array Closest to Target"
-date = "2020-04-11"
+date = "2021-04-12"
 description = "Solution to Leetcode 1300"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 967: Numbers With Same Consecutive Differences"
-date = "2021-03-10"
+date = "2022-03-11"
 description = "Solution to Leetcode 967"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 147: Insertion Sort List"
-date = "2023-06-08"
+date = "2024-06-08"
 description = "Solution to Leetcode 147"
 tags = [
     

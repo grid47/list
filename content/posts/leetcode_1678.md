@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1678: Goal Parser Interpretation"
-date = "2019-03-30"
+date = "2020-03-30"
 description = "Solution to Leetcode 1678"
 tags = [
     

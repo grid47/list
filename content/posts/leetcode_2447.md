@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2447: Number of Subarrays With GCD Equal to K"
-date = "2017-02-19"
+date = "2018-02-20"
 description = "Solution to Leetcode 2447"
 tags = [
     

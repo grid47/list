@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 325: Maximum Size Subarray Sum Equals k"
-date = "2022-12-12"
+date = "2023-12-13"
 description = "Solution to Leetcode 325"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 860: Lemonade Change"
-date = "2021-06-25"
+date = "2022-06-26"
 description = "Solution to Leetcode 860"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1366: Rank Teams by Votes"
-date = "2020-02-05"
+date = "2021-02-05"
 description = "Solution to Leetcode 1366"
 tags = [
     

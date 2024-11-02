@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3271: Hash Divided String"
-date = "2014-11-18"
+date = "2015-11-19"
 description = "Solution to Leetcode 3271"
 tags = [
     

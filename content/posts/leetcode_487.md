@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 487: Max Consecutive Ones II"
-date = "2022-07-03"
+date = "2023-07-04"
 description = "Solution to Leetcode 487"
 tags = [
     

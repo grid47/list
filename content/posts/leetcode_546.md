@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 546: Remove Boxes"
-date = "2022-05-05"
+date = "2023-05-06"
 description = "Solution to Leetcode 546"
 tags = [
     

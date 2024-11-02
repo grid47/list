@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2909: Minimum Sum of Mountain Triplets II"
-date = "2015-11-15"
+date = "2016-11-15"
 description = "Solution to Leetcode 2909"
 tags = [
     

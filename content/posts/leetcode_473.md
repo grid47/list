@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 473: Matchsticks to Square"
-date = "2022-07-17"
+date = "2023-07-18"
 description = "Solution to Leetcode 473"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1374: Generate a String With Characters That Have Odd Counts"
-date = "2020-01-28"
+date = "2021-01-28"
 description = "Solution to Leetcode 1374"
 tags = [
     

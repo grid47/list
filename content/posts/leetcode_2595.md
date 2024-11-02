@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2595: Number of Even and Odd Bits"
-date = "2016-09-24"
+date = "2017-09-25"
 description = "Solution to Leetcode 2595"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3270: Find the Key of the Numbers"
-date = "2014-11-19"
+date = "2015-11-20"
 description = "Solution to Leetcode 3270"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1197: Minimum Knight Moves"
-date = "2020-07-23"
+date = "2021-07-24"
 description = "Solution to Leetcode 1197"
 tags = [
     

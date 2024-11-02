@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 296: Best Meeting Point"
-date = "2023-01-10"
+date = "2024-01-11"
 description = "Solution to Leetcode 296"
 tags = [
     

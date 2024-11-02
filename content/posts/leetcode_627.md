@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 627: Swap Salary"
-date = "2022-02-13"
+date = "2023-02-14"
 description = "Solution to Leetcode 627"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2008: Maximum Earnings From Taxi"
-date = "2018-05-04"
+date = "2019-05-05"
 description = "Solution to Leetcode 2008"
 tags = [
     

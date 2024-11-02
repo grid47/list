@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 679: 24 Game"
-date = "2021-12-23"
+date = "2022-12-24"
 description = "Solution to Leetcode 679"
 tags = [
     

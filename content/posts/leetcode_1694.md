@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1694: Reformat Phone Number"
-date = "2019-03-14"
+date = "2020-03-14"
 description = "Solution to Leetcode 1694"
 tags = [
     

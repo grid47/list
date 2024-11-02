@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1627: Graph Connectivity With Threshold"
-date = "2019-05-20"
+date = "2020-05-20"
 description = "Solution to Leetcode 1627"
 tags = [
     

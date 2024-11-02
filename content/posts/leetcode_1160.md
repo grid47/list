@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1160: Find Words That Can Be Formed by Characters"
-date = "2020-08-29"
+date = "2021-08-30"
 description = "Solution to Leetcode 1160"
 tags = [
     

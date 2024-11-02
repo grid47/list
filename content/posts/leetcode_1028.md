@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1028: Recover a Tree From Preorder Traversal"
-date = "2021-01-08"
+date = "2022-01-09"
 description = "Solution to Leetcode 1028"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2282: Number of People That Can Be Seen in a Grid"
-date = "2017-08-03"
+date = "2018-08-04"
 description = "Solution to Leetcode 2282"
 tags = [
     

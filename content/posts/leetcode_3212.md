@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3212: Count Submatrices With Equal Frequency of X and Y"
-date = "2015-01-16"
+date = "2016-01-17"
 description = "Solution to Leetcode 3212"
 tags = [
     

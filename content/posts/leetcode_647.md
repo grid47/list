@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 647: Palindromic Substrings"
-date = "2022-01-24"
+date = "2023-01-25"
 description = "Solution to Leetcode 647"
 tags = [
     

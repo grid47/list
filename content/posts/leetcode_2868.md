@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2868: The Wording Game"
-date = "2015-12-26"
+date = "2016-12-26"
 description = "Solution to Leetcode 2868"
 tags = [
     

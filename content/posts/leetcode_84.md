@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 84: Largest Rectangle in Histogram"
-date = "2023-08-10"
+date = "2024-08-10"
 description = "Solution to Leetcode 84"
 tags = [
     

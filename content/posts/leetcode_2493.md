@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2493: Divide Nodes Into the Maximum Number of Groups"
-date = "2017-01-04"
+date = "2018-01-05"
 description = "Solution to Leetcode 2493"
 tags = [
     

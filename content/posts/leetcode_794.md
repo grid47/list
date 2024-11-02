@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 794: Valid Tic-Tac-Toe State"
-date = "2021-08-30"
+date = "2022-08-31"
 description = "Solution to Leetcode 794"
 tags = [
     

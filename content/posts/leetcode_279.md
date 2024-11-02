@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 279: Perfect Squares"
-date = "2023-01-27"
+date = "2024-01-28"
 description = "Solution to Leetcode 279"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 747: Largest Number At Least Twice of Others"
-date = "2021-10-16"
+date = "2022-10-17"
 description = "Solution to Leetcode 747"
 tags = [
     

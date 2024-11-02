@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 767: Reorganize String"
-date = "2021-09-26"
+date = "2022-09-27"
 description = "Solution to Leetcode 767"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2477: Minimum Fuel Cost to Report to the Capital"
-date = "2017-01-20"
+date = "2018-01-21"
 description = "Solution to Leetcode 2477"
 tags = [
     

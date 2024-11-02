@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3026: Maximum Good Subarray Sum"
-date = "2015-07-21"
+date = "2016-07-21"
 description = "Solution to Leetcode 3026"
 tags = [
     

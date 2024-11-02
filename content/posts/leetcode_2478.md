@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2478: Number of Beautiful Partitions"
-date = "2017-01-19"
+date = "2018-01-20"
 description = "Solution to Leetcode 2478"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 302: Smallest Rectangle Enclosing Black Pixels"
-date = "2023-01-04"
+date = "2024-01-05"
 description = "Solution to Leetcode 302"
 tags = [
     

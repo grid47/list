@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2597: The Number of Beautiful Subsets"
-date = "2016-09-22"
+date = "2017-09-23"
 description = "Solution to Leetcode 2597"
 tags = [
     

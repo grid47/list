@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3189: Minimum Moves to Get a Peaceful Board"
-date = "2015-02-08"
+date = "2016-02-09"
 description = "Solution to Leetcode 3189"
 tags = [
     

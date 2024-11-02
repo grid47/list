@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1026: Maximum Difference Between Node and Ancestor"
-date = "2021-01-10"
+date = "2022-01-11"
 description = "Solution to Leetcode 1026"
 tags = [
     

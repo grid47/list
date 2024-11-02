@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2923: Find Champion I"
-date = "2015-11-01"
+date = "2016-11-01"
 description = "Solution to Leetcode 2923"
 tags = [
     

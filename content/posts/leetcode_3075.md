@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3075: Maximize Happiness of Selected Children"
-date = "2015-06-02"
+date = "2016-06-02"
 description = "Solution to Leetcode 3075"
 tags = [
     

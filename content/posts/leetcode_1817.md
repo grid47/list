@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1817: Finding the Users Active Minutes"
-date = "2018-11-11"
+date = "2019-11-12"
 description = "Solution to Leetcode 1817"
 tags = [
     

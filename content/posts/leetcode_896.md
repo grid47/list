@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 896: Monotonic Array"
-date = "2021-05-20"
+date = "2022-05-21"
 description = "Solution to Leetcode 896"
 tags = [
     

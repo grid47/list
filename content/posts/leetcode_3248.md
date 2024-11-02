@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3248: Snake in Matrix"
-date = "2014-12-11"
+date = "2015-12-12"
 description = "Solution to Leetcode 3248"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2128: Remove All Ones With Row and Column Flips"
-date = "2018-01-04"
+date = "2019-01-05"
 description = "Solution to Leetcode 2128"
 tags = [
     

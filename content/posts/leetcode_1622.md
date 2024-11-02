@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1622: Fancy Sequence"
-date = "2019-05-25"
+date = "2020-05-25"
 description = "Solution to Leetcode 1622"
 tags = [
     

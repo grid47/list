@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 789: Escape The Ghosts"
-date = "2021-09-04"
+date = "2022-09-05"
 description = "Solution to Leetcode 789"
 tags = [
     

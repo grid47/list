@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1561: Maximum Number of Coins You Can Get"
-date = "2019-07-25"
+date = "2020-07-25"
 description = "Solution to Leetcode 1561"
 tags = [
     

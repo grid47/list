@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1822: Sign of the Product of an Array"
-date = "2018-11-06"
+date = "2019-11-07"
 description = "Solution to Leetcode 1822"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1224: Maximum Equal Frequency"
-date = "2020-06-26"
+date = "2021-06-27"
 description = "Solution to Leetcode 1224"
 tags = [
     

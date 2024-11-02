@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2603: Collect Coins in a Tree"
-date = "2016-09-16"
+date = "2017-09-17"
 description = "Solution to Leetcode 2603"
 tags = [
     

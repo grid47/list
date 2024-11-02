@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 422: Valid Word Square"
-date = "2022-09-06"
+date = "2023-09-07"
 description = "Solution to Leetcode 422"
 tags = [
     

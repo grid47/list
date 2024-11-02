@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1386: Cinema Seat Allocation"
-date = "2020-01-16"
+date = "2021-01-16"
 description = "Solution to Leetcode 1386"
 tags = [
     

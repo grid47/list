@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 431: Encode N-ary Tree to Binary Tree"
-date = "2022-08-28"
+date = "2023-08-29"
 description = "Solution to Leetcode 431"
 tags = [
     

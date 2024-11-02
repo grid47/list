@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1806: Minimum Number of Operations to Reinitialize a Permutation"
-date = "2018-11-22"
+date = "2019-11-23"
 description = "Solution to Leetcode 1806"
 tags = [
     

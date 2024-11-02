@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1248: Count Number of Nice Subarrays"
-date = "2020-06-02"
+date = "2021-06-03"
 description = "Solution to Leetcode 1248"
 tags = [
     

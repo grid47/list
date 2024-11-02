@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 570: Managers with at Least 5 Direct Reports"
-date = "2022-04-11"
+date = "2023-04-12"
 description = "Solution to Leetcode 570"
 tags = [
     

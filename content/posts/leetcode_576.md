@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 576: Out of Boundary Paths"
-date = "2022-04-05"
+date = "2023-04-06"
 description = "Solution to Leetcode 576"
 tags = [
     

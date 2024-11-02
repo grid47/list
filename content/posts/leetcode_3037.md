@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3037: Find Pattern in Infinite Stream II"
-date = "2015-07-10"
+date = "2016-07-10"
 description = "Solution to Leetcode 3037"
 tags = [
     

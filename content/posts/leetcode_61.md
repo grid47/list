@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 61: Rotate List"
-date = "2023-09-02"
+date = "2024-09-02"
 description = "Solution to Leetcode 61"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 74: Search a 2D Matrix"
-date = "2023-08-20"
+date = "2024-08-20"
 description = "Solution to Leetcode 74"
 tags = [
     

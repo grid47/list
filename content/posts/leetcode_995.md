@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 995: Minimum Number of K Consecutive Bit Flips"
-date = "2021-02-10"
+date = "2022-02-11"
 description = "Solution to Leetcode 995"
 tags = [
     

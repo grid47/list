@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2857: Count Pairs of Points With Distance k"
-date = "2016-01-06"
+date = "2017-01-06"
 description = "Solution to Leetcode 2857"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 342: Power of Four"
-date = "2022-11-25"
+date = "2023-11-26"
 description = "Solution to Leetcode 342"
 tags = [
     

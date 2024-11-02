@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1906: Minimum Absolute Difference Queries"
-date = "2018-08-14"
+date = "2019-08-15"
 description = "Solution to Leetcode 1906"
 tags = [
     

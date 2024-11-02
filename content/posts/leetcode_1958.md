@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1958: Check if Move is Legal"
-date = "2018-06-23"
+date = "2019-06-24"
 description = "Solution to Leetcode 1958"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1512: Number of Good Pairs"
-date = "2019-09-12"
+date = "2020-09-12"
 description = "Solution to Leetcode 1512"
 tags = [
     

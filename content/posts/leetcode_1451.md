@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1451: Rearrange Words in a Sentence"
-date = "2019-11-12"
+date = "2020-11-12"
 description = "Solution to Leetcode 1451"
 tags = [
     

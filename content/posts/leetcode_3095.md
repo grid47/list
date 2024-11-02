@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3095: Shortest Subarray With OR at Least K I"
-date = "2015-05-13"
+date = "2016-05-13"
 description = "Solution to Leetcode 3095"
 tags = [
     

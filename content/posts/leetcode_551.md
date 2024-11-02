@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 551: Student Attendance Record I"
-date = "2022-04-30"
+date = "2023-05-01"
 description = "Solution to Leetcode 551"
 tags = [
     

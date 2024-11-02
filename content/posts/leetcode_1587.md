@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1587: Bank Account Summary II"
-date = "2019-06-29"
+date = "2020-06-29"
 description = "Solution to Leetcode 1587"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1912: Design Movie Rental System"
-date = "2018-08-08"
+date = "2019-08-09"
 description = "Solution to Leetcode 1912"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2100: Find Good Days to Rob the Bank"
-date = "2018-02-01"
+date = "2019-02-02"
 description = "Solution to Leetcode 2100"
 tags = [
     

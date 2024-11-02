@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1499: Max Value of Equation"
-date = "2019-09-25"
+date = "2020-09-25"
 description = "Solution to Leetcode 1499"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 898: Bitwise ORs of Subarrays"
-date = "2021-05-18"
+date = "2022-05-19"
 description = "Solution to Leetcode 898"
 tags = [
     

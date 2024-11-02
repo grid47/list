@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2432: The Employee That Worked on the Longest Task"
-date = "2017-03-06"
+date = "2018-03-07"
 description = "Solution to Leetcode 2432"
 tags = [
     

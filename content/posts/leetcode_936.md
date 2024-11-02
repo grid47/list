@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 936: Stamping The Sequence"
-date = "2021-04-10"
+date = "2022-04-11"
 description = "Solution to Leetcode 936"
 tags = [
     

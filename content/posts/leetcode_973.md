@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 973: K Closest Points to Origin"
-date = "2021-03-04"
+date = "2022-03-05"
 description = "Solution to Leetcode 973"
 tags = [
     

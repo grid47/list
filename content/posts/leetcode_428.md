@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 428: Serialize and Deserialize N-ary Tree"
-date = "2022-08-31"
+date = "2023-09-01"
 description = "Solution to Leetcode 428"
 tags = [
     

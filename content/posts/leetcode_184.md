@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 184: Department Highest Salary"
-date = "2023-05-02"
+date = "2024-05-02"
 description = "Solution to Leetcode 184"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1431: Kids With the Greatest Number of Candies"
-date = "2019-12-02"
+date = "2020-12-02"
 description = "Solution to Leetcode 1431"
 tags = [
     

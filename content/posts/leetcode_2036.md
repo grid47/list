@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2036: Maximum Alternating Subarray Sum"
-date = "2018-04-06"
+date = "2019-04-07"
 description = "Solution to Leetcode 2036"
 tags = [
     

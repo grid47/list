@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1736: Latest Time by Replacing Hidden Digits"
-date = "2019-01-31"
+date = "2020-02-01"
 description = "Solution to Leetcode 1736"
 tags = [
     

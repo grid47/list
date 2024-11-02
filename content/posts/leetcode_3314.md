@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3314: Construct the Minimum Bitwise Array I"
-date = "2014-10-06"
+date = "2015-10-07"
 description = "Solution to Leetcode 3314"
 tags = [
     

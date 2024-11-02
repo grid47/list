@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3259: Maximum Energy Boost From Two Drinks"
-date = "2014-11-30"
+date = "2015-12-01"
 description = "Solution to Leetcode 3259"
 tags = [
     

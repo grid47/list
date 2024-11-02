@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2505: Bitwise OR of All Subsequence Sums"
-date = "2016-12-23"
+date = "2017-12-24"
 description = "Solution to Leetcode 2505"
 tags = [
     

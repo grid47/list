@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 743: Network Delay Time"
-date = "2021-10-20"
+date = "2022-10-21"
 description = "Solution to Leetcode 743"
 tags = [
     

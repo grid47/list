@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2832: Maximal Range That Each Element Is Maximum in It"
-date = "2016-01-31"
+date = "2017-01-31"
 description = "Solution to Leetcode 2832"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 748: Shortest Completing Word"
-date = "2021-10-15"
+date = "2022-10-16"
 description = "Solution to Leetcode 748"
 tags = [
     

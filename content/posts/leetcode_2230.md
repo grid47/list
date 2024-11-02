@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2230: The Users That Are Eligible for Discount"
-date = "2017-09-24"
+date = "2018-09-25"
 description = "Solution to Leetcode 2230"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1409: Queries on a Permutation With Key"
-date = "2019-12-24"
+date = "2020-12-24"
 description = "Solution to Leetcode 1409"
 tags = [
     

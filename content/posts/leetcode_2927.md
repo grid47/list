@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2927: Distribute Candies Among Children III"
-date = "2015-10-28"
+date = "2016-10-28"
 description = "Solution to Leetcode 2927"
 tags = [
     

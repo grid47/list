@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 109: Convert Sorted List to Binary Search Tree"
-date = "2023-07-16"
+date = "2024-07-16"
 description = "Solution to Leetcode 109"
 tags = [
     

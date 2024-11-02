@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2910: Minimum Number of Groups to Create a Valid Assignment"
-date = "2015-11-14"
+date = "2016-11-14"
 description = "Solution to Leetcode 2910"
 tags = [
     

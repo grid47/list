@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1161: Maximum Level Sum of a Binary Tree"
-date = "2020-08-28"
+date = "2021-08-29"
 description = "Solution to Leetcode 1161"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1794: Count Pairs of Equal Substrings With Minimum Difference"
-date = "2018-12-04"
+date = "2019-12-05"
 description = "Solution to Leetcode 1794"
 tags = [
     

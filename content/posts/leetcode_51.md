@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 51: N-Queens"
-date = "2023-09-12"
+date = "2024-09-12"
 description = "Solution to Leetcode 51"
 tags = [
     

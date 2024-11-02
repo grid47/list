@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 120: Triangle"
-date = "2023-07-05"
+date = "2024-07-05"
 description = "Solution to Leetcode 120"
 tags = [
     

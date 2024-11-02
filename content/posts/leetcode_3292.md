@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3292: Minimum Number of Valid Strings to Form Target II"
-date = "2014-10-28"
+date = "2015-10-29"
 description = "Solution to Leetcode 3292"
 tags = [
     

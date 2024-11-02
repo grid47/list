@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3025: Find the Number of Ways to Place People I"
-date = "2015-07-22"
+date = "2016-07-22"
 description = "Solution to Leetcode 3025"
 tags = [
     

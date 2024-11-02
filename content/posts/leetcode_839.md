@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 839: Similar String Groups"
-date = "2021-07-16"
+date = "2022-07-17"
 description = "Solution to Leetcode 839"
 tags = [
     

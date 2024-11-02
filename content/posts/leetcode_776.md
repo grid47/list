@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 776: Split BST"
-date = "2021-09-17"
+date = "2022-09-18"
 description = "Solution to Leetcode 776"
 tags = [
     

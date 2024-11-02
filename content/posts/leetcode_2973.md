@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2973: Find Number of Coins to Place in Tree Nodes"
-date = "2015-09-12"
+date = "2016-09-12"
 description = "Solution to Leetcode 2973"
 tags = [
     

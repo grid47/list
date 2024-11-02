@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 696: Count Binary Substrings"
-date = "2021-12-06"
+date = "2022-12-07"
 description = "Solution to Leetcode 696"
 tags = [
     

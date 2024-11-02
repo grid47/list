@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1540: Can Convert String in K Moves"
-date = "2019-08-15"
+date = "2020-08-15"
 description = "Solution to Leetcode 1540"
 tags = [
     

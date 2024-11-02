@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1038: Binary Search Tree to Greater Sum Tree"
-date = "2020-12-29"
+date = "2021-12-30"
 description = "Solution to Leetcode 1038"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3115: Maximum Prime Difference"
-date = "2015-04-23"
+date = "2016-04-23"
 description = "Solution to Leetcode 3115"
 tags = [
     

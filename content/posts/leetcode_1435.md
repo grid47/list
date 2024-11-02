@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1435: Create a Session Bar Chart"
-date = "2019-11-28"
+date = "2020-11-28"
 description = "Solution to Leetcode 1435"
 tags = [
     

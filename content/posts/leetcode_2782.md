@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2782: Number of Unique Categories"
-date = "2016-03-21"
+date = "2017-03-22"
 description = "Solution to Leetcode 2782"
 tags = [
     

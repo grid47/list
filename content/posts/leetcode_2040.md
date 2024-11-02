@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2040: Kth Smallest Product of Two Sorted Arrays"
-date = "2018-04-02"
+date = "2019-04-03"
 description = "Solution to Leetcode 2040"
 tags = [
     

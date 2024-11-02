@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 228: Summary Ranges"
-date = "2023-03-19"
+date = "2024-03-19"
 description = "Solution to Leetcode 228"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2092: Find All People With Secret"
-date = "2018-02-09"
+date = "2019-02-10"
 description = "Solution to Leetcode 2092"
 tags = [
     

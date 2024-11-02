@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 392: Is Subsequence"
-date = "2022-10-06"
+date = "2023-10-07"
 description = "Solution to Leetcode 392"
 tags = [
     

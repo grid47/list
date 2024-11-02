@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 960: Delete Columns to Make Sorted III"
-date = "2021-03-17"
+date = "2022-03-18"
 description = "Solution to Leetcode 960"
 tags = [
     

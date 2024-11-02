@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 899: Orderly Queue"
-date = "2021-05-17"
+date = "2022-05-18"
 description = "Solution to Leetcode 899"
 tags = [
     

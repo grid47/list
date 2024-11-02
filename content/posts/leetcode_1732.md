@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1732: Find the Highest Altitude"
-date = "2019-02-04"
+date = "2020-02-05"
 description = "Solution to Leetcode 1732"
 tags = [
     

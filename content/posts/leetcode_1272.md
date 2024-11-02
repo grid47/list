@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1272: Remove Interval"
-date = "2020-05-09"
+date = "2021-05-10"
 description = "Solution to Leetcode 1272"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2357: Make Array Zero by Subtracting Equal Amounts"
-date = "2017-05-20"
+date = "2018-05-21"
 description = "Solution to Leetcode 2357"
 tags = [
     

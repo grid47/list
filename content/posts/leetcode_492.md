@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 492: Construct the Rectangle"
-date = "2022-06-28"
+date = "2023-06-29"
 description = "Solution to Leetcode 492"
 tags = [
     

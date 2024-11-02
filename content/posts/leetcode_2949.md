@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2949: Count Beautiful Substrings II"
-date = "2015-10-06"
+date = "2016-10-06"
 description = "Solution to Leetcode 2949"
 tags = [
     

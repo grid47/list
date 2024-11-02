@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3098: Find the Sum of Subsequence Powers"
-date = "2015-05-10"
+date = "2016-05-10"
 description = "Solution to Leetcode 3098"
 tags = [
     

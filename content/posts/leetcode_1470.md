@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1470: Shuffle the Array"
-date = "2019-10-24"
+date = "2020-10-24"
 description = "Solution to Leetcode 1470"
 tags = [
     

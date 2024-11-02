@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1212: Team Scores in Football Tournament"
-date = "2020-07-08"
+date = "2021-07-09"
 description = "Solution to Leetcode 1212"
 tags = [
     

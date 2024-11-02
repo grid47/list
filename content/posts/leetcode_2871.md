@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2871: Split Array Into Maximum Number of Subarrays"
-date = "2015-12-23"
+date = "2016-12-23"
 description = "Solution to Leetcode 2871"
 tags = [
     

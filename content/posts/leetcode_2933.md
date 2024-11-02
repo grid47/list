@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2933: High-Access Employees"
-date = "2015-10-22"
+date = "2016-10-22"
 description = "Solution to Leetcode 2933"
 tags = [
     

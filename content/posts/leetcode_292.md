@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 292: Nim Game"
-date = "2023-01-14"
+date = "2024-01-15"
 description = "Solution to Leetcode 292"
 tags = [
     

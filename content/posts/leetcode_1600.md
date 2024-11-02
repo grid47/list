@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1600: Throne Inheritance"
-date = "2019-06-16"
+date = "2020-06-16"
 description = "Solution to Leetcode 1600"
 tags = [
     

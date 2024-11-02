@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 562: Longest Line of Consecutive One in Matrix"
-date = "2022-04-19"
+date = "2023-04-20"
 description = "Solution to Leetcode 562"
 tags = [
     

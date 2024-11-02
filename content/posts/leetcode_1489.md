@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1489: Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree"
-date = "2019-10-05"
+date = "2020-10-05"
 description = "Solution to Leetcode 1489"
 tags = [
     

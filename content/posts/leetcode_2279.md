@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2279: Maximum Bags With Full Capacity of Rocks"
-date = "2017-08-06"
+date = "2018-08-07"
 description = "Solution to Leetcode 2279"
 tags = [
     

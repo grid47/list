@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 365: Water and Jug Problem"
-date = "2022-11-02"
+date = "2023-11-03"
 description = "Solution to Leetcode 365"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 390: Elimination Game"
-date = "2022-10-08"
+date = "2023-10-09"
 description = "Solution to Leetcode 390"
 tags = [
     

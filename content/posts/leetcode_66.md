@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 66: Plus One"
-date = "2023-08-28"
+date = "2024-08-28"
 description = "Solution to Leetcode 66"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1235: Maximum Profit in Job Scheduling"
-date = "2020-06-15"
+date = "2021-06-16"
 description = "Solution to Leetcode 1235"
 tags = [
     

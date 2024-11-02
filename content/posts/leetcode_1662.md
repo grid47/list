@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1662: Check If Two String Arrays are Equivalent"
-date = "2019-04-15"
+date = "2020-04-15"
 description = "Solution to Leetcode 1662"
 tags = [
     

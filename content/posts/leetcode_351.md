@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 351: Android Unlock Patterns"
-date = "2022-11-16"
+date = "2023-11-17"
 description = "Solution to Leetcode 351"
 tags = [
     

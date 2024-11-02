@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 565: Array Nesting"
-date = "2022-04-16"
+date = "2023-04-17"
 description = "Solution to Leetcode 565"
 tags = [
     

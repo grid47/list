@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 91: Decode Ways"
-date = "2023-08-03"
+date = "2024-08-03"
 description = "Solution to Leetcode 91"
 tags = [
     

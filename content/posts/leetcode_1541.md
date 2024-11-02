@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1541: Minimum Insertions to Balance a Parentheses String"
-date = "2019-08-14"
+date = "2020-08-14"
 description = "Solution to Leetcode 1541"
 tags = [
     

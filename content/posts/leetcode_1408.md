@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1408: String Matching in an Array"
-date = "2019-12-25"
+date = "2020-12-25"
 description = "Solution to Leetcode 1408"
 tags = [
     

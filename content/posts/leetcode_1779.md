@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1779: Find Nearest Point That Has the Same X or Y Coordinate"
-date = "2018-12-19"
+date = "2019-12-20"
 description = "Solution to Leetcode 1779"
 tags = [
     

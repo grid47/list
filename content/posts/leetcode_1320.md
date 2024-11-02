@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1320: Minimum Distance to Type a Word Using Two Fingers"
-date = "2020-03-22"
+date = "2021-03-23"
 description = "Solution to Leetcode 1320"
 tags = [
     

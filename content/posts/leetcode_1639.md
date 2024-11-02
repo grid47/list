@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1639: Number of Ways to Form a Target String Given a Dictionary"
-date = "2019-05-08"
+date = "2020-05-08"
 description = "Solution to Leetcode 1639"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3126: Server Utilization Time"
-date = "2015-04-12"
+date = "2016-04-12"
 description = "Solution to Leetcode 3126"
 tags = [
     

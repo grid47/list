@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1530: Number of Good Leaf Nodes Pairs"
-date = "2019-08-25"
+date = "2020-08-25"
 description = "Solution to Leetcode 1530"
 tags = [
     

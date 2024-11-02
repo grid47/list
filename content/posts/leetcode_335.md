@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 335: Self Crossing"
-date = "2022-12-02"
+date = "2023-12-03"
 description = "Solution to Leetcode 335"
 tags = [
     

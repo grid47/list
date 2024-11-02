@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1731: The Number of Employees Which Report to Each Employee"
-date = "2019-02-05"
+date = "2020-02-06"
 description = "Solution to Leetcode 1731"
 tags = [
     

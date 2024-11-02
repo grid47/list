@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 668: Kth Smallest Number in Multiplication Table"
-date = "2022-01-03"
+date = "2023-01-04"
 description = "Solution to Leetcode 668"
 tags = [
     

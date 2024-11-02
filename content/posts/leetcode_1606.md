@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1606: Find Servers That Handled Most Number of Requests"
-date = "2019-06-10"
+date = "2020-06-10"
 description = "Solution to Leetcode 1606"
 tags = [
     

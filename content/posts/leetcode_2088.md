@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2088: Count Fertile Pyramids in a Land"
-date = "2018-02-13"
+date = "2019-02-14"
 description = "Solution to Leetcode 2088"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 759: Employee Free Time"
-date = "2021-10-04"
+date = "2022-10-05"
 description = "Solution to Leetcode 759"
 tags = [
     

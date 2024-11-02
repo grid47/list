@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2951: Find the Peaks"
-date = "2015-10-04"
+date = "2016-10-04"
 description = "Solution to Leetcode 2951"
 tags = [
     

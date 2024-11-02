@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3002: Maximum Size of a Set After Removals"
-date = "2015-08-14"
+date = "2016-08-14"
 description = "Solution to Leetcode 3002"
 tags = [
     

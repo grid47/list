@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2443: Sum of Number and Its Reverse"
-date = "2017-02-23"
+date = "2018-02-24"
 description = "Solution to Leetcode 2443"
 tags = [
     

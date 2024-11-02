@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1001: Grid Illumination"
-date = "2021-02-04"
+date = "2022-02-05"
 description = "Solution to Leetcode 1001"
 tags = [
     

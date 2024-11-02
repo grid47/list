@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 824: Goat Latin"
-date = "2021-07-31"
+date = "2022-08-01"
 description = "Solution to Leetcode 824"
 tags = [
     

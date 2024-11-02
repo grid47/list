@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1826: Faulty Sensor"
-date = "2018-11-02"
+date = "2019-11-03"
 description = "Solution to Leetcode 1826"
 tags = [
     

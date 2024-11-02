@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2685: Count the Number of Complete Components"
-date = "2016-06-26"
+date = "2017-06-27"
 description = "Solution to Leetcode 2685"
 tags = [
     

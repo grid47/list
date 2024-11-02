@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1402: Reducing Dishes"
-date = "2019-12-31"
+date = "2020-12-31"
 description = "Solution to Leetcode 1402"
 tags = [
     

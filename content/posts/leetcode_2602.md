@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2602: Minimum Operations to Make All Array Elements Equal"
-date = "2016-09-17"
+date = "2017-09-18"
 description = "Solution to Leetcode 2602"
 tags = [
     

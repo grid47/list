@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 988: Smallest String Starting From Leaf"
-date = "2021-02-17"
+date = "2022-02-18"
 description = "Solution to Leetcode 988"
 tags = [
     

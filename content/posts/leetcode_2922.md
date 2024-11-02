@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2922: Market Analysis III"
-date = "2015-11-02"
+date = "2016-11-02"
 description = "Solution to Leetcode 2922"
 tags = [
     

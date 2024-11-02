@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1332: Remove Palindromic Subsequences"
-date = "2020-03-10"
+date = "2021-03-11"
 description = "Solution to Leetcode 1332"
 tags = [
     

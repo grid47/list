@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1677: Product's Worth Over Invoices"
-date = "2019-03-31"
+date = "2020-03-31"
 description = "Solution to Leetcode 1677"
 tags = [
     

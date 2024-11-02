@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2226: Maximum Candies Allocated to K Children"
-date = "2017-09-28"
+date = "2018-09-29"
 description = "Solution to Leetcode 2226"
 tags = [
     

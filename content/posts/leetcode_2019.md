@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2019: The Score of Students Solving Math Expression"
-date = "2018-04-23"
+date = "2019-04-24"
 description = "Solution to Leetcode 2019"
 tags = [
     

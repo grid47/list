@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1681: Minimum Incompatibility"
-date = "2019-03-27"
+date = "2020-03-27"
 description = "Solution to Leetcode 1681"
 tags = [
     

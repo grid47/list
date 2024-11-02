@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2082: The Number of Rich Customers"
-date = "2018-02-19"
+date = "2019-02-20"
 description = "Solution to Leetcode 2082"
 tags = [
     

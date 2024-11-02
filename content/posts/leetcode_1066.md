@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1066: Campus Bikes II"
-date = "2020-12-01"
+date = "2021-12-02"
 description = "Solution to Leetcode 1066"
 tags = [
     

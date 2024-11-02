@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3137: Minimum Number of Operations to Make Word K-Periodic"
-date = "2015-04-01"
+date = "2016-04-01"
 description = "Solution to Leetcode 3137"
 tags = [
     

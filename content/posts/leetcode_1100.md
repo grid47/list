@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1100: Find K-Length Substrings With No Repeated Characters"
-date = "2020-10-28"
+date = "2021-10-29"
 description = "Solution to Leetcode 1100"
 tags = [
     

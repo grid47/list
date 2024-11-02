@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1208: Get Equal Substrings Within Budget"
-date = "2020-07-12"
+date = "2021-07-13"
 description = "Solution to Leetcode 1208"
 tags = [
     

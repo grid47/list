@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1685: Sum of Absolute Differences in a Sorted Array"
-date = "2019-03-23"
+date = "2020-03-23"
 description = "Solution to Leetcode 1685"
 tags = [
     

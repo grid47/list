@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 256: Paint House"
-date = "2023-02-19"
+date = "2024-02-20"
 description = "Solution to Leetcode 256"
 tags = [
     

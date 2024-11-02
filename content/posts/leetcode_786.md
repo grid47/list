@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 786: K-th Smallest Prime Fraction"
-date = "2021-09-07"
+date = "2022-09-08"
 description = "Solution to Leetcode 786"
 tags = [
     

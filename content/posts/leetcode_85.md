@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 85: Maximal Rectangle"
-date = "2023-08-09"
+date = "2024-08-09"
 description = "Solution to Leetcode 85"
 tags = [
     

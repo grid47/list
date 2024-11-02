@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2984: Find Peak Calling Hours for Each City"
-date = "2015-09-01"
+date = "2016-09-01"
 description = "Solution to Leetcode 2984"
 tags = [
     

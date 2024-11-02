@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3149: Find the Minimum Cost Array Permutation"
-date = "2015-03-20"
+date = "2016-03-20"
 description = "Solution to Leetcode 3149"
 tags = [
     

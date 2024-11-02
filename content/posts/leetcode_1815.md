@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1815: Maximum Number of Groups Getting Fresh Donuts"
-date = "2018-11-13"
+date = "2019-11-14"
 description = "Solution to Leetcode 1815"
 tags = [
     

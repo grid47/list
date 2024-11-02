@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 278: First Bad Version"
-date = "2023-01-28"
+date = "2024-01-29"
 description = "Solution to Leetcode 278"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 391: Perfect Rectangle"
-date = "2022-10-07"
+date = "2023-10-08"
 description = "Solution to Leetcode 391"
 tags = [
     

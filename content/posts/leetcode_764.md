@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 764: Largest Plus Sign"
-date = "2021-09-29"
+date = "2022-09-30"
 description = "Solution to Leetcode 764"
 tags = [
     

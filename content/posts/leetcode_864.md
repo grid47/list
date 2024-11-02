@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 864: Shortest Path to Get All Keys"
-date = "2021-06-21"
+date = "2022-06-22"
 description = "Solution to Leetcode 864"
 tags = [
     

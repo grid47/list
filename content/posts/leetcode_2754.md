@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2754: Bind Function to Context"
-date = "2016-04-18"
+date = "2017-04-19"
 description = "Solution to Leetcode 2754"
 tags = [
     

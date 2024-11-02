@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 178: Rank Scores"
-date = "2023-05-08"
+date = "2024-05-08"
 description = "Solution to Leetcode 178"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3193: Count the Number of Inversions"
-date = "2015-02-04"
+date = "2016-02-05"
 description = "Solution to Leetcode 3193"
 tags = [
     

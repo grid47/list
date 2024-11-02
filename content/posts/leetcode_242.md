@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 242: Valid Anagram"
-date = "2023-03-05"
+date = "2024-03-05"
 description = "Solution to Leetcode 242"
 tags = [
     

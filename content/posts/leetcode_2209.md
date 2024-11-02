@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2209: Minimum White Tiles After Covering With Carpets"
-date = "2017-10-15"
+date = "2018-10-16"
 description = "Solution to Leetcode 2209"
 tags = [
     

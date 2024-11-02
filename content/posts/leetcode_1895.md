@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1895: Largest Magic Square"
-date = "2018-08-25"
+date = "2019-08-26"
 description = "Solution to Leetcode 1895"
 tags = [
     

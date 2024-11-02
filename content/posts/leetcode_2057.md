@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2057: Smallest Index With Equal Value"
-date = "2018-03-16"
+date = "2019-03-17"
 description = "Solution to Leetcode 2057"
 tags = [
     

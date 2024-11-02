@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 402: Remove K Digits"
-date = "2022-09-26"
+date = "2023-09-27"
 description = "Solution to Leetcode 402"
 tags = [
     

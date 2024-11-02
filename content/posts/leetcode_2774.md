@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2774: Array Upper Bound"
-date = "2016-03-29"
+date = "2017-03-30"
 description = "Solution to Leetcode 2774"
 tags = [
     

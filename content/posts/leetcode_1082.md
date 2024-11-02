@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1082: Sales Analysis I"
-date = "2020-11-15"
+date = "2021-11-16"
 description = "Solution to Leetcode 1082"
 tags = [
     

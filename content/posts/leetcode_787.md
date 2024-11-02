@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 787: Cheapest Flights Within K Stops"
-date = "2021-09-06"
+date = "2022-09-07"
 description = "Solution to Leetcode 787"
 tags = [
     

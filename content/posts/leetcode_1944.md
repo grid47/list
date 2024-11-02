@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1944: Number of Visible People in a Queue"
-date = "2018-07-07"
+date = "2019-07-08"
 description = "Solution to Leetcode 1944"
 tags = [
     

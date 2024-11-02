@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 990: Satisfiability of Equality Equations"
-date = "2021-02-15"
+date = "2022-02-16"
 description = "Solution to Leetcode 990"
 tags = [
     

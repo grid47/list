@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 38: Count and Say"
-date = "2023-09-25"
+date = "2024-09-25"
 description = "Solution to Leetcode 38"
 tags = [
     

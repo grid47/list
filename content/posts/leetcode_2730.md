@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2730: Find the Longest Semi-Repetitive Substring"
-date = "2016-05-12"
+date = "2017-05-13"
 description = "Solution to Leetcode 2730"
 tags = [
     

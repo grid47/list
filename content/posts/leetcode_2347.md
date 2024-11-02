@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2347: Best Poker Hand"
-date = "2017-05-30"
+date = "2018-05-31"
 description = "Solution to Leetcode 2347"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 111: Minimum Depth of Binary Tree"
-date = "2023-07-14"
+date = "2024-07-14"
 description = "Solution to Leetcode 111"
 tags = [
     

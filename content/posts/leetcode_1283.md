@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1283: Find the Smallest Divisor Given a Threshold"
-date = "2020-04-28"
+date = "2021-04-29"
 description = "Solution to Leetcode 1283"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2164: Sort Even and Odd Indices Independently"
-date = "2017-11-29"
+date = "2018-11-30"
 description = "Solution to Leetcode 2164"
 tags = [
     

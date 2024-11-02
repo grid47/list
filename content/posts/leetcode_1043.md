@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1043: Partition Array for Maximum Sum"
-date = "2020-12-24"
+date = "2021-12-25"
 description = "Solution to Leetcode 1043"
 tags = [
     

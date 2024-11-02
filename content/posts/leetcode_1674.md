@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1674: Minimum Moves to Make Array Complementary"
-date = "2019-04-03"
+date = "2020-04-03"
 description = "Solution to Leetcode 1674"
 tags = [
     

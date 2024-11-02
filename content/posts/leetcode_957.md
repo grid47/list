@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 957: Prison Cells After N Days"
-date = "2021-03-20"
+date = "2022-03-21"
 description = "Solution to Leetcode 957"
 tags = [
     

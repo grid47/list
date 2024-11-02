@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 67: Add Binary"
-date = "2023-08-27"
+date = "2024-08-27"
 description = "Solution to Leetcode 67"
 tags = [
     

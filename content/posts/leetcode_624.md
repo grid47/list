@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 624: Maximum Distance in Arrays"
-date = "2022-02-16"
+date = "2023-02-17"
 description = "Solution to Leetcode 624"
 tags = [
     

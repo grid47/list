@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 5: Longest Palindromic Substring"
-date = "2023-10-28"
+date = "2024-10-28"
 description = "Solution to Leetcode 5"
 tags = [
     

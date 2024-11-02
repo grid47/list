@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1820: Maximum Number of Accepted Invitations"
-date = "2018-11-08"
+date = "2019-11-09"
 description = "Solution to Leetcode 1820"
 tags = [
     

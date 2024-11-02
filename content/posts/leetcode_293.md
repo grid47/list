@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 293: Flip Game"
-date = "2023-01-13"
+date = "2024-01-14"
 description = "Solution to Leetcode 293"
 tags = [
     

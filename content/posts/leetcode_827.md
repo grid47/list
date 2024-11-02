@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 827: Making A Large Island"
-date = "2021-07-28"
+date = "2022-07-29"
 description = "Solution to Leetcode 827"
 tags = [
     

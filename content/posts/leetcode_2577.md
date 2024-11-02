@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2577: Minimum Time to Visit a Cell In a Grid"
-date = "2016-10-12"
+date = "2017-10-13"
 description = "Solution to Leetcode 2577"
 tags = [
     

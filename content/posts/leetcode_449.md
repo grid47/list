@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 449: Serialize and Deserialize BST"
-date = "2022-08-10"
+date = "2023-08-11"
 description = "Solution to Leetcode 449"
 tags = [
     

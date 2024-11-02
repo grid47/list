@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2058: Find the Minimum and Maximum Number of Nodes Between Critical Points"
-date = "2018-03-15"
+date = "2019-03-16"
 description = "Solution to Leetcode 2058"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 978: Longest Turbulent Subarray"
-date = "2021-02-27"
+date = "2022-02-28"
 description = "Solution to Leetcode 978"
 tags = [
     

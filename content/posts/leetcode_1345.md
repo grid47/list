@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1345: Jump Game IV"
-date = "2020-02-26"
+date = "2021-02-26"
 description = "Solution to Leetcode 1345"
 tags = [
     

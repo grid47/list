@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1302: Deepest Leaves Sum"
-date = "2020-04-09"
+date = "2021-04-10"
 description = "Solution to Leetcode 1302"
 tags = [
     

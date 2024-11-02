@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1774: Closest Dessert Cost"
-date = "2018-12-24"
+date = "2019-12-25"
 description = "Solution to Leetcode 1774"
 tags = [
     

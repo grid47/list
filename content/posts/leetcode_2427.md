@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2427: Number of Common Factors"
-date = "2017-03-11"
+date = "2018-03-12"
 description = "Solution to Leetcode 2427"
 tags = [
     

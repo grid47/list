@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1771: Maximize Palindrome Length From Subsequences"
-date = "2018-12-27"
+date = "2019-12-28"
 description = "Solution to Leetcode 1771"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2705: Compact Object"
-date = "2016-06-06"
+date = "2017-06-07"
 description = "Solution to Leetcode 2705"
 tags = [
     

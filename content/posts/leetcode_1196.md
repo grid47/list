@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1196: How Many Apples Can You Put into the Basket"
-date = "2020-07-24"
+date = "2021-07-25"
 description = "Solution to Leetcode 1196"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 983: Minimum Cost For Tickets"
-date = "2021-02-22"
+date = "2022-02-23"
 description = "Solution to Leetcode 983"
 tags = [
     

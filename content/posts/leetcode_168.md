@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 168: Excel Sheet Column Title"
-date = "2023-05-18"
+date = "2024-05-18"
 description = "Solution to Leetcode 168"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 920: Number of Music Playlists"
-date = "2021-04-26"
+date = "2022-04-27"
 description = "Solution to Leetcode 920"
 tags = [
     

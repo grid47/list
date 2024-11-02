@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1172: Dinner Plate Stacks"
-date = "2020-08-17"
+date = "2021-08-18"
 description = "Solution to Leetcode 1172"
 tags = [
     

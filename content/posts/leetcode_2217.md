@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2217: Find Palindrome With Fixed Length"
-date = "2017-10-07"
+date = "2018-10-08"
 description = "Solution to Leetcode 2217"
 tags = [
     

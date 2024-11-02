@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1856: Maximum Subarray Min-Product"
-date = "2018-10-03"
+date = "2019-10-04"
 description = "Solution to Leetcode 1856"
 tags = [
     

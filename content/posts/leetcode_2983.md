@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2983: Palindrome Rearrangement Queries"
-date = "2015-09-02"
+date = "2016-09-02"
 description = "Solution to Leetcode 2983"
 tags = [
     

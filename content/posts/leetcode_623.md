@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 623: Add One Row to Tree"
-date = "2022-02-17"
+date = "2023-02-18"
 description = "Solution to Leetcode 623"
 tags = [
     

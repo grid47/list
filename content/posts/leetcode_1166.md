@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1166: Design File System"
-date = "2020-08-23"
+date = "2021-08-24"
 description = "Solution to Leetcode 1166"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 773: Sliding Puzzle"
-date = "2021-09-20"
+date = "2022-09-21"
 description = "Solution to Leetcode 773"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2944: Minimum Number of Coins for Fruits"
-date = "2015-10-11"
+date = "2016-10-11"
 description = "Solution to Leetcode 2944"
 tags = [
     

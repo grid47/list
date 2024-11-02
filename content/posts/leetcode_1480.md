@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1480: Running Sum of 1d Array"
-date = "2019-10-14"
+date = "2020-10-14"
 description = "Solution to Leetcode 1480"
 tags = [
     

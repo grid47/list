@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2560: House Robber IV"
-date = "2016-10-29"
+date = "2017-10-30"
 description = "Solution to Leetcode 2560"
 tags = [
     

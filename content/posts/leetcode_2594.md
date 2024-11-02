@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2594: Minimum Time to Repair Cars"
-date = "2016-09-25"
+date = "2017-09-26"
 description = "Solution to Leetcode 2594"
 tags = [
     

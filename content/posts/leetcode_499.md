@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 499: The Maze III"
-date = "2022-06-21"
+date = "2023-06-22"
 description = "Solution to Leetcode 499"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 199: Binary Tree Right Side View"
-date = "2023-04-17"
+date = "2024-04-17"
 description = "Solution to Leetcode 199"
 tags = [
     

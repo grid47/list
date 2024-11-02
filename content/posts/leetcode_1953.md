@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1953: Maximum Number of Weeks for Which You Can Work"
-date = "2018-06-28"
+date = "2019-06-29"
 description = "Solution to Leetcode 1953"
 tags = [
     

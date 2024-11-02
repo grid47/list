@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3241: Time Taken to Mark All Nodes"
-date = "2014-12-18"
+date = "2015-12-19"
 description = "Solution to Leetcode 3241"
 tags = [
     

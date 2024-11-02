@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 561: Array Partition"
-date = "2022-04-20"
+date = "2023-04-21"
 description = "Solution to Leetcode 561"
 tags = [
     

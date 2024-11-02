@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 49: Group Anagrams"
-date = "2023-09-14"
+date = "2024-09-14"
 description = "Solution to Leetcode 49"
 tags = [
     

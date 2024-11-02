@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 614: Second Degree Follower"
-date = "2022-02-26"
+date = "2023-02-27"
 description = "Solution to Leetcode 614"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 905: Sort Array By Parity"
-date = "2021-05-11"
+date = "2022-05-12"
 description = "Solution to Leetcode 905"
 tags = [
     

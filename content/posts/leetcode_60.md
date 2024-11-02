@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 60: Permutation Sequence"
-date = "2023-09-03"
+date = "2024-09-03"
 description = "Solution to Leetcode 60"
 tags = [
     

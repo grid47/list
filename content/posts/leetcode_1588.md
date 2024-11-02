@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1588: Sum of All Odd Length Subarrays"
-date = "2019-06-28"
+date = "2020-06-28"
 description = "Solution to Leetcode 1588"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 106: Construct Binary Tree from Inorder and Postorder Traversal"
-date = "2023-07-19"
+date = "2024-07-19"
 description = "Solution to Leetcode 106"
 tags = [
     

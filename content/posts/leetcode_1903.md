@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1903: Largest Odd Number in String"
-date = "2018-08-17"
+date = "2019-08-18"
 description = "Solution to Leetcode 1903"
 tags = [
     

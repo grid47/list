@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3184: Count Pairs That Form a Complete Day I"
-date = "2015-02-13"
+date = "2016-02-14"
 description = "Solution to Leetcode 3184"
 tags = [
     

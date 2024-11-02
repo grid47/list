@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2882: Drop Duplicate Rows"
-date = "2015-12-12"
+date = "2016-12-12"
 description = "Solution to Leetcode 2882"
 tags = [
     

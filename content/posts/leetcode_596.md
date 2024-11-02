@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 596: Classes More Than 5 Students"
-date = "2022-03-16"
+date = "2023-03-17"
 description = "Solution to Leetcode 596"
 tags = [
     

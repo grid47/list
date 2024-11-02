@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1310: XOR Queries of a Subarray"
-date = "2020-04-01"
+date = "2021-04-02"
 description = "Solution to Leetcode 1310"
 tags = [
     

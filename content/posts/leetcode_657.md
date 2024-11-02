@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 657: Robot Return to Origin"
-date = "2022-01-14"
+date = "2023-01-15"
 description = "Solution to Leetcode 657"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1614: Maximum Nesting Depth of the Parentheses"
-date = "2019-06-02"
+date = "2020-06-02"
 description = "Solution to Leetcode 1614"
 tags = [
     

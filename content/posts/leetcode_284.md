@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 284: Peeking Iterator"
-date = "2023-01-22"
+date = "2024-01-23"
 description = "Solution to Leetcode 284"
 tags = [
     

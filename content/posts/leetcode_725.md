@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 725: Split Linked List in Parts"
-date = "2021-11-07"
+date = "2022-11-08"
 description = "Solution to Leetcode 725"
 tags = [
     

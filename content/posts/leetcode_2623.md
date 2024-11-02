@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2623: Memoize"
-date = "2016-08-27"
+date = "2017-08-28"
 description = "Solution to Leetcode 2623"
 tags = [
     

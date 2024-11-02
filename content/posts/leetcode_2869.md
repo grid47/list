@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2869: Minimum Operations to Collect Elements"
-date = "2015-12-25"
+date = "2016-12-25"
 description = "Solution to Leetcode 2869"
 tags = [
     

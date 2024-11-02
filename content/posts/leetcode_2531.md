@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2531: Make Number of Distinct Characters Equal"
-date = "2016-11-27"
+date = "2017-11-28"
 description = "Solution to Leetcode 2531"
 tags = [
     

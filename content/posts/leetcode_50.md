@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 50: Pow(x, n)"
-date = "2023-09-13"
+date = "2024-09-13"
 description = "Solution to Leetcode 50"
 tags = [
     

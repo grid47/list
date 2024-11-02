@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3078: Match Alphanumerical Pattern in Matrix I"
-date = "2015-05-30"
+date = "2016-05-30"
 description = "Solution to Leetcode 3078"
 tags = [
     

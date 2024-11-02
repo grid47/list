@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2620: Counter"
-date = "2016-08-30"
+date = "2017-08-31"
 description = "Solution to Leetcode 2620"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1841: League Statistics"
-date = "2018-10-18"
+date = "2019-10-19"
 description = "Solution to Leetcode 1841"
 tags = [
     

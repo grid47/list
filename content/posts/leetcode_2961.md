@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2961: Double Modular Exponentiation"
-date = "2015-09-24"
+date = "2016-09-24"
 description = "Solution to Leetcode 2961"
 tags = [
     

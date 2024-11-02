@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2108: Find First Palindromic String in the Array"
-date = "2018-01-24"
+date = "2019-01-25"
 description = "Solution to Leetcode 2108"
 tags = [
     

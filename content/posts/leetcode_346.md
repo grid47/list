@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 346: Moving Average from Data Stream"
-date = "2022-11-21"
+date = "2023-11-22"
 description = "Solution to Leetcode 346"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 584: Find Customer Referee"
-date = "2022-03-28"
+date = "2023-03-29"
 description = "Solution to Leetcode 584"
 tags = [
     

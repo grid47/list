@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2946: Matrix Similarity After Cyclic Shifts"
-date = "2015-10-09"
+date = "2016-10-09"
 description = "Solution to Leetcode 2946"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1717: Maximum Score From Removing Substrings"
-date = "2019-02-19"
+date = "2020-02-20"
 description = "Solution to Leetcode 1717"
 tags = [
     

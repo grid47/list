@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1999: Smallest Greater Multiple Made of Two Digits"
-date = "2018-05-13"
+date = "2019-05-14"
 description = "Solution to Leetcode 1999"
 tags = [
     

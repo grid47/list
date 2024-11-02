@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 669: Trim a Binary Search Tree"
-date = "2022-01-02"
+date = "2023-01-03"
 description = "Solution to Leetcode 669"
 tags = [
     

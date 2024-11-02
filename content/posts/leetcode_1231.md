@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1231: Divide Chocolate"
-date = "2020-06-19"
+date = "2021-06-20"
 description = "Solution to Leetcode 1231"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 663: Equal Tree Partition"
-date = "2022-01-08"
+date = "2023-01-09"
 description = "Solution to Leetcode 663"
 tags = [
     

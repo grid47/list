@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1098: Unpopular Books"
-date = "2020-10-30"
+date = "2021-10-31"
 description = "Solution to Leetcode 1098"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3118: Friday Purchase III "
-date = "2015-04-20"
+date = "2016-04-20"
 description = "Solution to Leetcode 3118"
 tags = [
     

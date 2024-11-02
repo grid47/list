@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2061: Number of Spaces Cleaning Robot Cleaned"
-date = "2018-03-12"
+date = "2019-03-13"
 description = "Solution to Leetcode 2061"
 tags = [
     

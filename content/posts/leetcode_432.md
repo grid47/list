@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 432: All O`one Data Structure"
-date = "2022-08-27"
+date = "2023-08-28"
 description = "Solution to Leetcode 432"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 909: Snakes and Ladders"
-date = "2021-05-07"
+date = "2022-05-08"
 description = "Solution to Leetcode 909"
 tags = [
     

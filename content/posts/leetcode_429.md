@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 429: N-ary Tree Level Order Traversal"
-date = "2022-08-30"
+date = "2023-08-31"
 description = "Solution to Leetcode 429"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1438: Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit"
-date = "2019-11-25"
+date = "2020-11-25"
 description = "Solution to Leetcode 1438"
 tags = [
     

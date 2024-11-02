@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1046: Last Stone Weight"
-date = "2020-12-21"
+date = "2021-12-22"
 description = "Solution to Leetcode 1046"
 tags = [
     

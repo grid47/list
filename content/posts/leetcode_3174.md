@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3174: Clear Digits"
-date = "2015-02-23"
+date = "2016-02-24"
 description = "Solution to Leetcode 3174"
 tags = [
     

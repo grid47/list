@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3161: Block Placement Queries"
-date = "2015-03-08"
+date = "2016-03-08"
 description = "Solution to Leetcode 3161"
 tags = [
     

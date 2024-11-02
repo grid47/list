@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1984: Minimum Difference Between Highest and Lowest of K Scores"
-date = "2018-05-28"
+date = "2019-05-29"
 description = "Solution to Leetcode 1984"
 tags = [
     

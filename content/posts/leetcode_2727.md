@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2727: Is Object Empty"
-date = "2016-05-15"
+date = "2017-05-16"
 description = "Solution to Leetcode 2727"
 tags = [
     

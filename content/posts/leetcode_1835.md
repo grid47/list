@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1835: Find XOR Sum of All Pairs Bitwise AND"
-date = "2018-10-24"
+date = "2019-10-25"
 description = "Solution to Leetcode 1835"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 847: Shortest Path Visiting All Nodes"
-date = "2021-07-08"
+date = "2022-07-09"
 description = "Solution to Leetcode 847"
 tags = [
     

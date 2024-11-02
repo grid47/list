@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 994: Rotting Oranges"
-date = "2021-02-11"
+date = "2022-02-12"
 description = "Solution to Leetcode 994"
 tags = [
     

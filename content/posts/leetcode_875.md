@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 875: Koko Eating Bananas"
-date = "2021-06-10"
+date = "2022-06-11"
 description = "Solution to Leetcode 875"
 tags = [
     

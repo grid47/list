@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2544: Alternating Digit Sum"
-date = "2016-11-14"
+date = "2017-11-15"
 description = "Solution to Leetcode 2544"
 tags = [
     

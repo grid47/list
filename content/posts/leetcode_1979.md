@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1979: Find Greatest Common Divisor of Array"
-date = "2018-06-02"
+date = "2019-06-03"
 description = "Solution to Leetcode 1979"
 tags = [
     

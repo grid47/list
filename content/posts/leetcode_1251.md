@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1251: Average Selling Price"
-date = "2020-05-30"
+date = "2021-05-31"
 description = "Solution to Leetcode 1251"
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 330: Patching Array"
-date = "2022-12-07"
+date = "2023-12-08"
 description = "Solution to Leetcode 330"
 tags = [
     

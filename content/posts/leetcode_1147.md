@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1147: Longest Chunked Palindrome Decomposition"
-date = "2020-09-11"
+date = "2021-09-12"
 description = "Solution to Leetcode 1147"
 tags = [
     

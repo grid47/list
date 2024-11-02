@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1847: Closest Room"
-date = "2018-10-12"
+date = "2019-10-13"
 description = "Solution to Leetcode 1847"
 tags = [
     

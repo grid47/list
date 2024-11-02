@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2023: Number of Pairs of Strings With Concatenation Equal to Target"
-date = "2018-04-19"
+date = "2019-04-20"
 description = "Solution to Leetcode 2023"
 tags = [
     

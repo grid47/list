@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 408: Valid Word Abbreviation"
-date = "2022-09-20"
+date = "2023-09-21"
 description = "Solution to Leetcode 408"
 tags = [
     

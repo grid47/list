@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1792: Maximum Average Pass Ratio"
-date = "2018-12-06"
+date = "2019-12-07"
 description = "Solution to Leetcode 1792"
 tags = [
     

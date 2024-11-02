@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2143: Choose Numbers From Two Arrays in Range"
-date = "2017-12-20"
+date = "2018-12-21"
 description = "Solution to Leetcode 2143"
 tags = [
     
