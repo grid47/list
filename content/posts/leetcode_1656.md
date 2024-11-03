@@ -43,7 +43,7 @@ vector<string> insert(int id, string value) {
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1656.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1657: Determine if Two Strings Are Close](https://grid47.xyz/posts/leetcode_1657) |

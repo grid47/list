@@ -52,7 +52,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1541.md" >}}
 ---
 {{< youtube PEKAlnmbBCc >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1542: Find Longest Awesome Substring](https://grid47.xyz/posts/leetcode_1542) |

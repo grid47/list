@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1650.md" >}}
 ---
 {{< youtube gvYVa5ax66U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1651: Hopper Company Queries III](https://grid47.xyz/posts/leetcode_1651) |

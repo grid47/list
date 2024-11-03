@@ -34,7 +34,7 @@ int minimumDifference(vector<int>& nums, int k) {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1984.md" >}}
 ---
 {{< youtube JU5XdBZZtlk >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1985: Find the Kth Largest Integer in the Array](https://grid47.xyz/posts/leetcode_1985) |

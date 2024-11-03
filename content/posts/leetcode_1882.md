@@ -54,7 +54,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1882.md" >}}
 ---
 {{< youtube XKA22PecuMQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1883: Minimum Skips to Arrive at Meeting On Time](https://grid47.xyz/posts/leetcode_1883) |

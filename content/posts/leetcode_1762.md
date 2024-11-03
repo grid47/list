@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1762.md" >}}
 ---
 {{< youtube dI_FGn8-V-U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1763: Longest Nice Substring](https://grid47.xyz/posts/leetcode_1763) |

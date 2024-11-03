@@ -26,7 +26,7 @@ series = ["Leetcode"]
 SELECT tweet_id FROM Tweets WHERE LENGTH(content) > 15;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1683.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1684: Count the Number of Consistent Strings](https://grid47.xyz/posts/leetcode_1684) |

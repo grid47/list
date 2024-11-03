@@ -31,7 +31,7 @@ GROUP BY s.account
 HAVING balance > 10000;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1587.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1588: Sum of All Odd Length Subarrays](https://grid47.xyz/posts/leetcode_1588) |

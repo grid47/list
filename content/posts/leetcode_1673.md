@@ -45,7 +45,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1673.md" >}}
 ---
 {{< youtube GBJFxSD3B_s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1674: Minimum Moves to Make Array Complementary](https://grid47.xyz/posts/leetcode_1674) |

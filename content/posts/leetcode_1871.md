@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1871.md" >}}
 ---
 {{< youtube v1HpZUnQ4Yo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1872: Stone Game VIII](https://grid47.xyz/posts/leetcode_1872) |

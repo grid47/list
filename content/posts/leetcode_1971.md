@@ -52,7 +52,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1971.md" >}}
 ---
 {{< youtube knLFe7hEp3Y >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1972: First and Last Call On the Same Day](https://grid47.xyz/posts/leetcode_1972) |

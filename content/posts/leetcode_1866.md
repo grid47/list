@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1866.md" >}}
 ---
 {{< youtube O761YBjGxGA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1867: Orders With Maximum Quantity Above Average](https://grid47.xyz/posts/leetcode_1867) |

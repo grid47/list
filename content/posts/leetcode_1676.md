@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1676.md" >}}
 ---
 {{< youtube F8iSNXblKSU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1677: Product's Worth Over Invoices](https://grid47.xyz/posts/leetcode_1677) |

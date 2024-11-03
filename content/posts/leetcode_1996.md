@@ -47,7 +47,7 @@ class Solution {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1996.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1997: First Day Where You Have Been in All the Rooms](https://grid47.xyz/posts/leetcode_1997) |

@@ -26,7 +26,7 @@ series = ["Leetcode"]
 SELECT * FROM Patients WHERE REGEXP_LIKE(conditions,'\\bDIAB1');
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1527.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1528: Shuffle String](https://grid47.xyz/posts/leetcode_1528) |

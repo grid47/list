@@ -57,7 +57,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1620.md" >}}
 ---
 {{< youtube TqKDnzkRsh0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1621: Number of Sets of K Non-Overlapping Line Segments](https://grid47.xyz/posts/leetcode_1621) |

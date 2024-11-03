@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1822.md" >}}
 ---
 {{< youtube 5qwGgOEHL3U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1823: Find the Winner of the Circular Game](https://grid47.xyz/posts/leetcode_1823) |

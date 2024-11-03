@@ -53,7 +53,7 @@ res = min(res, n - cb[i] + ca[i]);
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1737.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1738: Find Kth Largest XOR Coordinate Value](https://grid47.xyz/posts/leetcode_1738) |

@@ -53,7 +53,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1849.md" >}}
 ---
 {{< youtube eDtMmysldaw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1850: Minimum Adjacent Swaps to Reach the Kth Smallest Number](https://grid47.xyz/posts/leetcode_1850) |

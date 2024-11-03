@@ -42,7 +42,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1768.md" >}}
 ---
 {{< youtube oFuFTMu2Tgg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1769: Minimum Number of Operations to Move All Balls to Each Box](https://grid47.xyz/posts/leetcode_1769) |

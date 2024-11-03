@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1553.md" >}}
 ---
 {{< youtube LziQ6Qx9sks >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1554: Strings Differ by One Character](https://grid47.xyz/posts/leetcode_1554) |

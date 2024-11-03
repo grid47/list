@@ -70,7 +70,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1857.md" >}}
 ---
 {{< youtube SGAHkdqtj5s >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1858: Longest Word With All Prefixes](https://grid47.xyz/posts/leetcode_1858) |

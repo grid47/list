@@ -60,7 +60,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1639.md" >}}
 ---
 {{< youtube l10Gtcr_Gqo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1640: Check Array Formation Through Concatenation](https://grid47.xyz/posts/leetcode_1640) |

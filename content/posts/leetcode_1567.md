@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1567.md" >}}
 ---
 {{< youtube bFer5PdsgpY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1568: Minimum Number of Days to Disconnect Island](https://grid47.xyz/posts/leetcode_1568) |

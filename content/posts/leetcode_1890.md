@@ -30,7 +30,7 @@ WHERE YEAR(time_stamp) = 2020 #filtering for login dates with year 2020 in times
 GROUP BY user_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1890.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1891: Cutting Ribbons](https://grid47.xyz/posts/leetcode_1891) |

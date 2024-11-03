@@ -77,7 +77,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1905.md" >}}
 ---
 {{< youtube mLpW3qfbNJ8 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1906: Minimum Absolute Difference Queries](https://grid47.xyz/posts/leetcode_1906) |

@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1570.md" >}}
 ---
 {{< youtube 7OWu2_tTBN4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1571: Warehouse Manager](https://grid47.xyz/posts/leetcode_1571) |

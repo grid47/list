@@ -43,7 +43,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1535.md" >}}
 ---
 {{< youtube v6On1TQfMTU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1536: Minimum Swaps to Arrange a Binary Grid](https://grid47.xyz/posts/leetcode_1536) |

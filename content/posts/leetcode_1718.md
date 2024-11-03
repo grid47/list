@@ -71,7 +71,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1718.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1719: Number Of Ways To Reconstruct A Tree](https://grid47.xyz/posts/leetcode_1719) |

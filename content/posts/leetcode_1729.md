@@ -29,7 +29,7 @@ GROUP BY user_id
 ORDER BY user_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1729.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1730: Shortest Path to Get Food](https://grid47.xyz/posts/leetcode_1730) |

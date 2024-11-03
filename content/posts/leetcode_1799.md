@@ -59,7 +59,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1799.md" >}}
 ---
 {{< youtube W4ruG1rTKw0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1800: Maximum Ascending Subarray Sum](https://grid47.xyz/posts/leetcode_1800) |

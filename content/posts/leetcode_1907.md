@@ -29,7 +29,7 @@ UNION
 SELECT 'High Salary', SUM(income > 50000) FROM Accounts;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1907.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1908: Game of Nim](https://grid47.xyz/posts/leetcode_1908) |

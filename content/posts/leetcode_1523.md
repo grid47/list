@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1523.md" >}}
 ---
 {{< youtube TkT-6WsmqY0 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1524: Number of Sub-arrays With Odd Sum](https://grid47.xyz/posts/leetcode_1524) |

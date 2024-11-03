@@ -33,7 +33,7 @@ SELECT product_id, 'store3', store3 AS price FROM Products
 WHERE store3 IS NOT NULL;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1795.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1796: Second Largest Digit in a String](https://grid47.xyz/posts/leetcode_1796) |

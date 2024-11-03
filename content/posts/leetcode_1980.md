@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1980.md" >}}
 ---
 {{< youtube aHqn4Dynd1k >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1981: Minimize the Difference Between Target and Chosen Elements](https://grid47.xyz/posts/leetcode_1981) |

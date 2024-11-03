@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1828.md" >}}
 ---
 {{< youtube fU4oOBSsVMg >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1829: Maximum XOR for Each Query](https://grid47.xyz/posts/leetcode_1829) |

@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1910.md" >}}
 ---
 {{< youtube d74CJIqw268 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1911: Maximum Alternating Subsequence Sum](https://grid47.xyz/posts/leetcode_1911) |

@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1566.md" >}}
 ---
 {{< youtube aJAV_VgmjdE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1567: Maximum Length of Subarray With Positive Product](https://grid47.xyz/posts/leetcode_1567) |

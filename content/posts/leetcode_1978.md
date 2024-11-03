@@ -29,7 +29,7 @@ WHERE manager_id NOT IN (SELECT employee_id FROM Employees)
 AND salary < 30000 ORDER BY employee_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1978.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1979: Find Greatest Common Divisor of Array](https://grid47.xyz/posts/leetcode_1979) |

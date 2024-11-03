@@ -30,7 +30,7 @@ ON a1.machine_id = a2.machine_id AND a1.activity_type = 'end' AND a2.activity_ty
 GROUP BY machine_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1661.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1662: Check If Two String Arrays are Equivalent](https://grid47.xyz/posts/leetcode_1662) |

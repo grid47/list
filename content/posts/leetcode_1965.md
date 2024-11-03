@@ -33,7 +33,7 @@ WHERE T.salary IS NULL OR T.name IS NULL
 ORDER BY employee_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1965.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1966: Binary Searchable Numbers in an Unsorted Array](https://grid47.xyz/posts/leetcode_1966) |

@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1576.md" >}}
 ---
 {{< youtube SJBDLYqrIsM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1577: Number of Ways Where Square of Number Is Equal to Product of Two Numbers](https://grid47.xyz/posts/leetcode_1577) |

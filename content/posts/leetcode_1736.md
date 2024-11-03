@@ -68,7 +68,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1736.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1737: Change Minimum Characters to Satisfy One of Three Conditions](https://grid47.xyz/posts/leetcode_1737) |

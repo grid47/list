@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1838.md" >}}
 ---
 {{< youtube vgBrQ0NM5vE >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1839: Longest Substring Of All Vowels in Order](https://grid47.xyz/posts/leetcode_1839) |

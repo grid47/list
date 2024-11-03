@@ -36,7 +36,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1663.md" >}}
 ---
 {{< youtube o3MRJfsoUrw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1664: Ways to Make a Fair Array](https://grid47.xyz/posts/leetcode_1664) |

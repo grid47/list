@@ -31,7 +31,7 @@ FROM Employees
 GROUP BY day, emp_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1741.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1742: Maximum Number of Balls in a Box](https://grid47.xyz/posts/leetcode_1742) |

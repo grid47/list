@@ -31,7 +31,7 @@ GROUP BY e1.employee_id
 ORDER BY e1.employee_id;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1731.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1732: Find the Highest Altitude](https://grid47.xyz/posts/leetcode_1732) |

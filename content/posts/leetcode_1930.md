@@ -39,7 +39,7 @@ if(fst[i] < lst[i]) res += unordered_set<char>(num.begin() + fst[i] + 1, num.beg
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1930.md" >}}
 ---
 {{< youtube 3THUt0vAFLU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1931: Painting a Grid With Three Different Colors](https://grid47.xyz/posts/leetcode_1931) |

@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1544.md" >}}
 ---
 {{< youtube Q-ycCXbUOck >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1545: Find Kth Bit in Nth Binary String](https://grid47.xyz/posts/leetcode_1545) |

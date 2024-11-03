@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1629.md" >}}
 ---
 {{< youtube vblPQwsmemw >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1630: Arithmetic Subarrays](https://grid47.xyz/posts/leetcode_1630) |

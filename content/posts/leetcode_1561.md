@@ -82,7 +82,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1561.md" >}}
 ---
 {{< youtube hPe9Z3TiUrA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1562: Find Latest Group of Size M](https://grid47.xyz/posts/leetcode_1562) |

@@ -44,7 +44,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1525.md" >}}
 ---
 {{< youtube lRVpVUC5mQ4 >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1526: Minimum Number of Increments on Subarrays to Form a Target Array](https://grid47.xyz/posts/leetcode_1526) |

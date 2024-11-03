@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1721.md" >}}
 ---
 {{< youtube KUTRaNOzmoo >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1722: Minimize Hamming Distance After Swap Operations](https://grid47.xyz/posts/leetcode_1722) |

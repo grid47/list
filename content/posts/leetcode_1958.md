@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1958.md" >}}
 ---
 {{< youtube KxK33AcQZpQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1959: Minimum Total Space Wasted With K Resizing Operations](https://grid47.xyz/posts/leetcode_1959) |

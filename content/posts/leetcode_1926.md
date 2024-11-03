@@ -57,7 +57,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1926.md" >}}
 ---
 {{< youtube KufrcPzbwko >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1927: Sum Game](https://grid47.xyz/posts/leetcode_1927) |

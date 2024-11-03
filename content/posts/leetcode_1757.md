@@ -26,7 +26,7 @@ series = ["Leetcode"]
 SELECT product_id FROM Products WHERE low_fats="Y" AND recyclable="Y";
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1757.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1758: Minimum Changes To Make Alternating Binary String](https://grid47.xyz/posts/leetcode_1758) |

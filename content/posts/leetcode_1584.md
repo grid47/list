@@ -88,7 +88,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1584.md" >}}
 ---
 {{< youtube 8VPIrqwQ8sQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1585: Check If String Is Transformable With Substring Sort Operations](https://grid47.xyz/posts/leetcode_1585) |

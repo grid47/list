@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1856.md" >}}
 ---
 {{< youtube YLesLbNkyjA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1857: Largest Color Value in a Directed Graph](https://grid47.xyz/posts/leetcode_1857) |

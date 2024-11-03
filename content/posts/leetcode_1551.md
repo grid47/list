@@ -30,7 +30,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1551.md" >}}
 ---
 {{< youtube A-i2sxmBqAA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1552: Magnetic Force Between Two Balls](https://grid47.xyz/posts/leetcode_1552) |

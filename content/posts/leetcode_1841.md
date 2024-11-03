@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1841.md" >}}
 ---
 {{< youtube y6_Hn_yS1Ow >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1842: Next Palindrome Using Same Digits](https://grid47.xyz/posts/leetcode_1842) |

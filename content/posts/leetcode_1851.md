@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1851.md" >}}
 ---
 {{< youtube 5hQ5WWW5awQ >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1852: Distinct Numbers in Each Subarray](https://grid47.xyz/posts/leetcode_1852) |

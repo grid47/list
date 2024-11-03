@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1641.md" >}}
 ---
 {{< youtube gdH4yfgfwiU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1642: Furthest Building You Can Reach](https://grid47.xyz/posts/leetcode_1642) |

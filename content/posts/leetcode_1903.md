@@ -35,7 +35,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1903.md" >}}
 ---
 {{< youtube IIt_ARZzclY >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1904: The Number of Full Rounds You Have Played](https://grid47.xyz/posts/leetcode_1904) |

@@ -56,7 +56,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1657.md" >}}
 ---
 {{< youtube -jXQK-UeChU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1658: Minimum Operations to Reduce X to Zero](https://grid47.xyz/posts/leetcode_1658) |

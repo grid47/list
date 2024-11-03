@@ -30,7 +30,7 @@ WHERE t.amount IS NULL  and t.transaction_id IS NULL
 GROUP BY v.customer_id; 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1581.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1582: Special Positions in a Binary Matrix](https://grid47.xyz/posts/leetcode_1582) |

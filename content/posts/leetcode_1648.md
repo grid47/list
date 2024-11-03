@@ -54,7 +54,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1648.md" >}}
 ---
 {{< youtube oj7Rxz1r70g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1649: Create Sorted Array through Instructions](https://grid47.xyz/posts/leetcode_1649) |

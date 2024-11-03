@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1658.md" >}}
 ---
 {{< youtube iPqrN6Bb-NI >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1659: Maximize Grid Happiness](https://grid47.xyz/posts/leetcode_1659) |

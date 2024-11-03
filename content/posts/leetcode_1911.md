@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1911.md" >}}
 ---
 {{< youtube 4v42XOuU1XA >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1912: Design Movie Rental System](https://grid47.xyz/posts/leetcode_1912) |

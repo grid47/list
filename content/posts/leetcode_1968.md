@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1968.md" >}}
 ---
 {{< youtube Wmb3YdVYfqM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1969: Minimum Non-Zero Product of the Array Elements](https://grid47.xyz/posts/leetcode_1969) |

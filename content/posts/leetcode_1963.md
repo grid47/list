@@ -37,7 +37,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1963.md" >}}
 ---
 {{< youtube 3YDBT9ZrfaU >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1964: Find the Longest Valid Obstacle Course at Each Position](https://grid47.xyz/posts/leetcode_1964) |

@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1624.md" >}}
 ---
 {{< youtube rfjeFs3JuYM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1625: Lexicographically Smallest String After Applying Operations](https://grid47.xyz/posts/leetcode_1625) |

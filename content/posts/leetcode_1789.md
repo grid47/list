@@ -33,7 +33,7 @@ GROUP BY employee_id
 HAVING COUNT(*) = 1
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1789.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1790: Check if One String Swap Can Make Strings Equal](https://grid47.xyz/posts/leetcode_1790) |

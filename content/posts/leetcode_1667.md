@@ -26,7 +26,7 @@ series = ["Leetcode"]
 SELECT Users.user_id, CONCAT(UPPER(SUBSTR(Users.name, 1, 1)), LOWER(SUBSTR(Users.name, 2))) AS name FROM Users ORDER BY Users.user_id ASC;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1667.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1668: Maximum Repeating Substring](https://grid47.xyz/posts/leetcode_1668) |

@@ -48,7 +48,7 @@ if (mn <= day && day <= mx) {
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1744.md" >}}
 ---
 
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1745: Palindrome Partitioning IV](https://grid47.xyz/posts/leetcode_1745) |

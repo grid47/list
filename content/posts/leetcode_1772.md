@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1772.md" >}}
 ---
 {{< youtube 5629LqqeLAM >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1773: Count Items Matching a Rule](https://grid47.xyz/posts/leetcode_1773) |

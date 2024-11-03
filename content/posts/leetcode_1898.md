@@ -60,7 +60,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1898.md" >}}
 ---
 {{< youtube NMP3nRPyX5g >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1899: Merge Triplets to Form Target Triplet](https://grid47.xyz/posts/leetcode_1899) |

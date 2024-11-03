@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1539.md" >}}
 ---
 {{< youtube p0P1JNHAB-c >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1540: Can Convert String in K Moves](https://grid47.xyz/posts/leetcode_1540) |

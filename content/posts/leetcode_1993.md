@@ -117,7 +117,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1993.md" >}}
 ---
 {{< youtube qK4PtjrVD0U >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1994: The Number of Good Subsets](https://grid47.xyz/posts/leetcode_1994) |

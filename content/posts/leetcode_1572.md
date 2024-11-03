@@ -34,7 +34,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1572.md" >}}
 ---
 {{< youtube 5TLlr3y3Iww >}}
 | [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1573: Number of Ways to Split a String](https://grid47.xyz/posts/leetcode_1573) |
