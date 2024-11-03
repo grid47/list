@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1161: Maximum Level Sum of a Binary Tree"
 date = "2021-08-29"
-description = "Solution to Leetcode 1161"
+description = "In-depth solution and explanation for Leetcode 1161: Maximum Level Sum of a Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

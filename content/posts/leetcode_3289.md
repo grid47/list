@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3289: The Two Sneaky Numbers of Digitville"
 date = "2015-11-01"
-description = "Solution to Leetcode 3289"
+description = "In-depth solution and explanation for Leetcode 3289: The Two Sneaky Numbers of Digitville in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

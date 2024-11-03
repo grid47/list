@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 96: Unique Binary Search Trees"
 date = "2024-07-29"
-description = "Solution to Leetcode 96"
+description = "In-depth solution and explanation for Leetcode 96: Unique Binary Search Trees in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

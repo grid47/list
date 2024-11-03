@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3083: Existence of a Substring in a String and Its Reverse"
 date = "2016-05-25"
-description = "Solution to Leetcode 3083"
+description = "In-depth solution and explanation for Leetcode 3083: Existence of a Substring in a String and Its Reverse in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1287: Element Appearing More Than 25% In Sorted Array"
 date = "2021-04-25"
-description = "Solution to Leetcode 1287"
+description = "In-depth solution and explanation for Leetcode 1287: Element Appearing More Than 25% In Sorted Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

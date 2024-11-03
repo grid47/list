@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1297: Maximum Number of Occurrences of a Substring"
 date = "2021-04-15"
-description = "Solution to Leetcode 1297"
+description = "In-depth solution and explanation for Leetcode 1297: Maximum Number of Occurrences of a Substring in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

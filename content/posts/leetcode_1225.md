@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1225: Report Contiguous Dates"
 date = "2021-06-26"
-description = "Solution to Leetcode 1225"
+description = "In-depth solution and explanation for Leetcode 1225: Report Contiguous Dates in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

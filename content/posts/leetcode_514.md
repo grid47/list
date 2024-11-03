@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 514: Freedom Trail"
 date = "2023-06-07"
-description = "Solution to Leetcode 514"
+description = "In-depth solution and explanation for Leetcode 514: Freedom Trail in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

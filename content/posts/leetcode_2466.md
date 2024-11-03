@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2466: Count Ways To Build Good Strings"
 date = "2018-02-01"
-description = "Solution to Leetcode 2466"
+description = "In-depth solution and explanation for Leetcode 2466: Count Ways To Build Good Strings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

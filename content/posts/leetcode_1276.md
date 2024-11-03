@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1276: Number of Burgers with No Waste of Ingredients"
 date = "2021-05-06"
-description = "Solution to Leetcode 1276"
+description = "In-depth solution and explanation for Leetcode 1276: Number of Burgers with No Waste of Ingredients in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

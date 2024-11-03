@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 382: Linked List Random Node"
 date = "2023-10-17"
-description = "Solution to Leetcode 382"
+description = "In-depth solution and explanation for Leetcode 382: Linked List Random Node in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

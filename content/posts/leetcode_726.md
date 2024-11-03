@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 726: Number of Atoms"
 date = "2022-11-07"
-description = "Solution to Leetcode 726"
+description = "In-depth solution and explanation for Leetcode 726: Number of Atoms in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1526: Minimum Number of Increments on Subarrays to Form a Target Array"
 date = "2020-08-29"
-description = "Solution to Leetcode 1526"
+description = "In-depth solution and explanation for Leetcode 1526: Minimum Number of Increments on Subarrays to Form a Target Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

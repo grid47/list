@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3194: Minimum Average of Smallest and Largest Elements"
 date = "2016-02-04"
-description = "Solution to Leetcode 3194"
+description = "In-depth solution and explanation for Leetcode 3194: Minimum Average of Smallest and Largest Elements in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

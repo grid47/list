@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 387: First Unique Character in a String"
 date = "2023-10-12"
-description = "Solution to Leetcode 387"
+description = "In-depth solution and explanation for Leetcode 387: First Unique Character in a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

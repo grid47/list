@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3030: Find the Grid of Region Average"
 date = "2016-07-17"
-description = "Solution to Leetcode 3030"
+description = "In-depth solution and explanation for Leetcode 3030: Find the Grid of Region Average in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

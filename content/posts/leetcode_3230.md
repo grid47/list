@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3230: Customer Purchasing Behavior Analysis"
 date = "2015-12-30"
-description = "Solution to Leetcode 3230"
+description = "In-depth solution and explanation for Leetcode 3230: Customer Purchasing Behavior Analysis in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

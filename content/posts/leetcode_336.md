@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 336: Palindrome Pairs"
 date = "2023-12-02"
-description = "Solution to Leetcode 336"
+description = "In-depth solution and explanation for Leetcode 336: Palindrome Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

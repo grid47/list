@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2472: Maximum Number of Non-overlapping Palindrome Substrings"
 date = "2018-01-26"
-description = "Solution to Leetcode 2472"
+description = "In-depth solution and explanation for Leetcode 2472: Maximum Number of Non-overlapping Palindrome Substrings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

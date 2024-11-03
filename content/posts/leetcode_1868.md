@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1868: Product of Two Run-Length Encoded Arrays"
 date = "2019-09-22"
-description = "Solution to Leetcode 1868"
+description = "In-depth solution and explanation for Leetcode 1868: Product of Two Run-Length Encoded Arrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

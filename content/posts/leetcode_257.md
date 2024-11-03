@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 257: Binary Tree Paths"
 date = "2024-02-19"
-description = "Solution to Leetcode 257"
+description = "In-depth solution and explanation for Leetcode 257: Binary Tree Paths in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

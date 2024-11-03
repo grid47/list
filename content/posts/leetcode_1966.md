@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1966: Binary Searchable Numbers in an Unsorted Array"
 date = "2019-06-16"
-description = "Solution to Leetcode 1966"
+description = "In-depth solution and explanation for Leetcode 1966: Binary Searchable Numbers in an Unsorted Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

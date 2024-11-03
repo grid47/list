@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2560: House Robber IV"
 date = "2017-10-30"
-description = "Solution to Leetcode 2560"
+description = "In-depth solution and explanation for Leetcode 2560: House Robber IV in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

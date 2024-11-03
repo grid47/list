@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2922: Market Analysis III"
 date = "2016-11-02"
-description = "Solution to Leetcode 2922"
+description = "In-depth solution and explanation for Leetcode 2922: Market Analysis III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2232: Minimize Result by Adding Parentheses to Expression"
 date = "2018-09-23"
-description = "Solution to Leetcode 2232"
+description = "In-depth solution and explanation for Leetcode 2232: Minimize Result by Adding Parentheses to Expression in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

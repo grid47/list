@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1269: Number of Ways to Stay in the Same Place After Some Steps"
 date = "2021-05-13"
-description = "Solution to Leetcode 1269"
+description = "In-depth solution and explanation for Leetcode 1269: Number of Ways to Stay in the Same Place After Some Steps in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

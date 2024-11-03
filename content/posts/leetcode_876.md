@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 876: Middle of the Linked List"
 date = "2022-06-10"
-description = "Solution to Leetcode 876"
+description = "In-depth solution and explanation for Leetcode 876: Middle of the Linked List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

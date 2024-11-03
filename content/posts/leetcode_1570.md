@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1570: Dot Product of Two Sparse Vectors"
 date = "2020-07-16"
-description = "Solution to Leetcode 1570"
+description = "In-depth solution and explanation for Leetcode 1570: Dot Product of Two Sparse Vectors in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

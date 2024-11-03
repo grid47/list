@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 662: Maximum Width of Binary Tree"
 date = "2023-01-10"
-description = "Solution to Leetcode 662"
+description = "In-depth solution and explanation for Leetcode 662: Maximum Width of Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

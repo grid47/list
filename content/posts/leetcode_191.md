@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 191: Number of 1 Bits"
 date = "2024-04-25"
-description = "Solution to Leetcode 191"
+description = "In-depth solution and explanation for Leetcode 191: Number of 1 Bits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

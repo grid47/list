@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 953: Verifying an Alien Dictionary"
 date = "2022-03-25"
-description = "Solution to Leetcode 953"
+description = "In-depth solution and explanation for Leetcode 953: Verifying an Alien Dictionary in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

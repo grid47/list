@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3288: Length of the Longest Increasing Path"
 date = "2015-11-02"
-description = "Solution to Leetcode 3288"
+description = "In-depth solution and explanation for Leetcode 3288: Length of the Longest Increasing Path in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

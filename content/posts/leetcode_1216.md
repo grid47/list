@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1216: Valid Palindrome III"
 date = "2021-07-05"
-description = "Solution to Leetcode 1216"
+description = "In-depth solution and explanation for Leetcode 1216: Valid Palindrome III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

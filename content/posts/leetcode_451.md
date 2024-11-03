@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 451: Sort Characters By Frequency"
 date = "2023-08-09"
-description = "Solution to Leetcode 451"
+description = "In-depth solution and explanation for Leetcode 451: Sort Characters By Frequency in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

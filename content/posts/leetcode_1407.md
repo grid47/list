@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1407: Top Travellers"
 date = "2020-12-26"
-description = "Solution to Leetcode 1407"
+description = "In-depth solution and explanation for Leetcode 1407: Top Travellers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -31,7 +31,7 @@ GROUP BY u.id
 ORDER BY travelled_distance DESC, name ASC;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1407.md" >}}
 ---
 
 

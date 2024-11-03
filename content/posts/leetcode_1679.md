@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1679: Max Number of K-Sum Pairs"
 date = "2020-03-29"
-description = "Solution to Leetcode 1679"
+description = "In-depth solution and explanation for Leetcode 1679: Max Number of K-Sum Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

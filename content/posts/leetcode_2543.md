@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2543: Check if Point Is Reachable"
 date = "2017-11-16"
-description = "Solution to Leetcode 2543"
+description = "In-depth solution and explanation for Leetcode 2543: Check if Point Is Reachable in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

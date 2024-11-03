@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2272: Substring With Largest Variance"
 date = "2018-08-14"
-description = "Solution to Leetcode 2272"
+description = "In-depth solution and explanation for Leetcode 2272: Substring With Largest Variance in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

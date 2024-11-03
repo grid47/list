@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 808: Soup Servings"
 date = "2022-08-17"
-description = "Solution to Leetcode 808"
+description = "In-depth solution and explanation for Leetcode 808: Soup Servings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

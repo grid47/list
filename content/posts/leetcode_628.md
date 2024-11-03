@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 628: Maximum Product of Three Numbers"
 date = "2023-02-13"
-description = "Solution to Leetcode 628"
+description = "In-depth solution and explanation for Leetcode 628: Maximum Product of Three Numbers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

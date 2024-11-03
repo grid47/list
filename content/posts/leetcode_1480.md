@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1480: Running Sum of 1d Array"
 date = "2020-10-14"
-description = "Solution to Leetcode 1480"
+description = "In-depth solution and explanation for Leetcode 1480: Running Sum of 1d Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -32,7 +32,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1480.md" >}}
 ---
 
 

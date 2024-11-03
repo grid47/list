@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 106: Construct Binary Tree from Inorder and Postorder Traversal"
 date = "2024-07-19"
-description = "Solution to Leetcode 106"
+description = "In-depth solution and explanation for Leetcode 106: Construct Binary Tree from Inorder and Postorder Traversal in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

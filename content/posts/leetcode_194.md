@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 194: Transpose File"
 date = "2024-04-22"
-description = "Solution to Leetcode 194"
+description = "In-depth solution and explanation for Leetcode 194: Transpose File in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

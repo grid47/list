@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 918: Maximum Sum Circular Subarray"
 date = "2022-04-29"
-description = "Solution to Leetcode 918"
+description = "In-depth solution and explanation for Leetcode 918: Maximum Sum Circular Subarray in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

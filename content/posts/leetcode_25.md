@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 25: Reverse Nodes in k-Group"
 date = "2024-10-08"
-description = "Solution to Leetcode 25"
+description = "In-depth solution and explanation for Leetcode 25: Reverse Nodes in k-Group in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

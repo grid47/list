@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 91: Decode Ways"
 date = "2024-08-03"
-description = "Solution to Leetcode 91"
+description = "In-depth solution and explanation for Leetcode 91: Decode Ways in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

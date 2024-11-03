@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2740: Find the Value of the Partition"
 date = "2017-05-03"
-description = "Solution to Leetcode 2740"
+description = "In-depth solution and explanation for Leetcode 2740: Find the Value of the Partition in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

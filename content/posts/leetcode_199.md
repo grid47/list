@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 199: Binary Tree Right Side View"
 date = "2024-04-17"
-description = "Solution to Leetcode 199"
+description = "In-depth solution and explanation for Leetcode 199: Binary Tree Right Side View in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

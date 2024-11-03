@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 925: Long Pressed Name"
 date = "2022-04-22"
-description = "Solution to Leetcode 925"
+description = "In-depth solution and explanation for Leetcode 925: Long Pressed Name in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

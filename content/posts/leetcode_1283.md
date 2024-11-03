@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1283: Find the Smallest Divisor Given a Threshold"
 date = "2021-04-29"
-description = "Solution to Leetcode 1283"
+description = "In-depth solution and explanation for Leetcode 1283: Find the Smallest Divisor Given a Threshold in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

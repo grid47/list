@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 550: Game Play Analysis IV"
 date = "2023-05-02"
-description = "Solution to Leetcode 550"
+description = "In-depth solution and explanation for Leetcode 550: Game Play Analysis IV in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

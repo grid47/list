@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 511: Game Play Analysis I"
 date = "2023-06-10"
-description = "Solution to Leetcode 511"
+description = "In-depth solution and explanation for Leetcode 511: Game Play Analysis I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1877: Minimize Maximum Pair Sum in Array"
 date = "2019-09-13"
-description = "Solution to Leetcode 1877"
+description = "In-depth solution and explanation for Leetcode 1877: Minimize Maximum Pair Sum in Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

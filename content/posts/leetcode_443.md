@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 443: String Compression"
 date = "2023-08-17"
-description = "Solution to Leetcode 443"
+description = "In-depth solution and explanation for Leetcode 443: String Compression in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

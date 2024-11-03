@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1706: Where Will the Ball Fall"
 date = "2020-03-02"
-description = "Solution to Leetcode 1706"
+description = "In-depth solution and explanation for Leetcode 1706: Where Will the Ball Fall in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

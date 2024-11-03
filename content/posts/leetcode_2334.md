@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2334: Subarray With Elements Greater Than Varying Threshold"
 date = "2018-06-13"
-description = "Solution to Leetcode 2334"
+description = "In-depth solution and explanation for Leetcode 2334: Subarray With Elements Greater Than Varying Threshold in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

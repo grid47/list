@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 968: Binary Tree Cameras"
 date = "2022-03-10"
-description = "Solution to Leetcode 968"
+description = "In-depth solution and explanation for Leetcode 968: Binary Tree Cameras in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

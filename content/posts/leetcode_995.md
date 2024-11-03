@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 995: Minimum Number of K Consecutive Bit Flips"
 date = "2022-02-11"
-description = "Solution to Leetcode 995"
+description = "In-depth solution and explanation for Leetcode 995: Minimum Number of K Consecutive Bit Flips in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

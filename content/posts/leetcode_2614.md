@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2614: Prime In Diagonal"
 date = "2017-09-06"
-description = "Solution to Leetcode 2614"
+description = "In-depth solution and explanation for Leetcode 2614: Prime In Diagonal in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

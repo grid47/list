@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3236: CEO Subordinate Hierarchy"
 date = "2015-12-24"
-description = "Solution to Leetcode 3236"
+description = "In-depth solution and explanation for Leetcode 3236: CEO Subordinate Hierarchy in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

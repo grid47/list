@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 355: Design Twitter"
 date = "2023-11-13"
-description = "Solution to Leetcode 355"
+description = "In-depth solution and explanation for Leetcode 355: Design Twitter in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1422: Maximum Score After Splitting a String"
 date = "2020-12-11"
-description = "Solution to Leetcode 1422"
+description = "In-depth solution and explanation for Leetcode 1422: Maximum Score After Splitting a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1422.md" >}}
 ---
 
 

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2320: Count Number of Ways to Place Houses"
 date = "2018-06-27"
-description = "Solution to Leetcode 2320"
+description = "In-depth solution and explanation for Leetcode 2320: Count Number of Ways to Place Houses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

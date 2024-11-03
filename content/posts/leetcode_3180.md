@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3180: Maximum Total Reward Using Operations I"
 date = "2016-02-18"
-description = "Solution to Leetcode 3180"
+description = "In-depth solution and explanation for Leetcode 3180: Maximum Total Reward Using Operations I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

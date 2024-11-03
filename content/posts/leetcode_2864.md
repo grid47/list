@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2864: Maximum Odd Binary Number"
 date = "2016-12-30"
-description = "Solution to Leetcode 2864"
+description = "In-depth solution and explanation for Leetcode 2864: Maximum Odd Binary Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

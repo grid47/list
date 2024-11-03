@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2118: Build the Equation"
 date = "2019-01-15"
-description = "Solution to Leetcode 2118"
+description = "In-depth solution and explanation for Leetcode 2118: Build the Equation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

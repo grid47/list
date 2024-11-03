@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2935: Maximum Strong Pair XOR II"
 date = "2016-10-20"
-description = "Solution to Leetcode 2935"
+description = "In-depth solution and explanation for Leetcode 2935: Maximum Strong Pair XOR II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 519: Random Flip Matrix"
 date = "2023-06-02"
-description = "Solution to Leetcode 519"
+description = "In-depth solution and explanation for Leetcode 519: Random Flip Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

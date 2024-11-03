@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1508: Range Sum of Sorted Subarray Sums"
 date = "2020-09-16"
-description = "Solution to Leetcode 1508"
+description = "In-depth solution and explanation for Leetcode 1508: Range Sum of Sorted Subarray Sums in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

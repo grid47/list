@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 977: Squares of a Sorted Array"
 date = "2022-03-01"
-description = "Solution to Leetcode 977"
+description = "In-depth solution and explanation for Leetcode 977: Squares of a Sorted Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1234: Replace the Substring for Balanced String"
 date = "2021-06-17"
-description = "Solution to Leetcode 1234"
+description = "In-depth solution and explanation for Leetcode 1234: Replace the Substring for Balanced String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

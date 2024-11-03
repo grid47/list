@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 502: IPO"
 date = "2023-06-19"
-description = "Solution to Leetcode 502"
+description = "In-depth solution and explanation for Leetcode 502: IPO in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

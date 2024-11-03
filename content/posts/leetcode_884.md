@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 884: Uncommon Words from Two Sentences"
 date = "2022-06-02"
-description = "Solution to Leetcode 884"
+description = "In-depth solution and explanation for Leetcode 884: Uncommon Words from Two Sentences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

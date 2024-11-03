@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 532: K-diff Pairs in an Array"
 date = "2023-05-20"
-description = "Solution to Leetcode 532"
+description = "In-depth solution and explanation for Leetcode 532: K-diff Pairs in an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

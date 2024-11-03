@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 405: Convert a Number to Hexadecimal"
 date = "2023-09-24"
-description = "Solution to Leetcode 405"
+description = "In-depth solution and explanation for Leetcode 405: Convert a Number to Hexadecimal in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

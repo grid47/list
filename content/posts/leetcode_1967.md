@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1967: Number of Strings That Appear as Substrings in Word"
 date = "2019-06-15"
-description = "Solution to Leetcode 1967"
+description = "In-depth solution and explanation for Leetcode 1967: Number of Strings That Appear as Substrings in Word in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

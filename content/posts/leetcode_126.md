@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 126: Word Ladder II"
 date = "2024-06-29"
-description = "Solution to Leetcode 126"
+description = "In-depth solution and explanation for Leetcode 126: Word Ladder II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

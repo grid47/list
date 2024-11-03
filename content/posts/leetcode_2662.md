@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2662: Minimum Cost of a Path With Special Roads"
 date = "2017-07-20"
-description = "Solution to Leetcode 2662"
+description = "In-depth solution and explanation for Leetcode 2662: Minimum Cost of a Path With Special Roads in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

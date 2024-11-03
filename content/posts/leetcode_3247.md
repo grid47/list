@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3247: Number of Subsequences with Odd Sum"
 date = "2015-12-13"
-description = "Solution to Leetcode 3247"
+description = "In-depth solution and explanation for Leetcode 3247: Number of Subsequences with Odd Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

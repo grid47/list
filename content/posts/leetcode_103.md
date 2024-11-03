@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 103: Binary Tree Zigzag Level Order Traversal"
 date = "2024-07-22"
-description = "Solution to Leetcode 103"
+description = "In-depth solution and explanation for Leetcode 103: Binary Tree Zigzag Level Order Traversal in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1756: Design Most Recently Used Queue"
 date = "2020-01-12"
-description = "Solution to Leetcode 1756"
+description = "In-depth solution and explanation for Leetcode 1756: Design Most Recently Used Queue in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

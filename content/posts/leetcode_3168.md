@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3168: Minimum Number of Chairs in a Waiting Room"
 date = "2016-03-01"
-description = "Solution to Leetcode 3168"
+description = "In-depth solution and explanation for Leetcode 3168: Minimum Number of Chairs in a Waiting Room in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

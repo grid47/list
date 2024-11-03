@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2755: Deep Merge of Two Objects"
 date = "2017-04-18"
-description = "Solution to Leetcode 2755"
+description = "In-depth solution and explanation for Leetcode 2755: Deep Merge of Two Objects in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3082: Find the Sum of the Power of All Subsequences"
 date = "2016-05-26"
-description = "Solution to Leetcode 3082"
+description = "In-depth solution and explanation for Leetcode 3082: Find the Sum of the Power of All Subsequences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1768: Merge Strings Alternately"
 date = "2019-12-31"
-description = "Solution to Leetcode 1768"
+description = "In-depth solution and explanation for Leetcode 1768: Merge Strings Alternately in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2327: Number of People Aware of a Secret"
 date = "2018-06-20"
-description = "Solution to Leetcode 2327"
+description = "In-depth solution and explanation for Leetcode 2327: Number of People Aware of a Secret in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1770: Maximum Score from Performing Multiplication Operations"
 date = "2019-12-29"
-description = "Solution to Leetcode 1770"
+description = "In-depth solution and explanation for Leetcode 1770: Maximum Score from Performing Multiplication Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

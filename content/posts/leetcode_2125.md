@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2125: Number of Laser Beams in a Bank"
 date = "2019-01-08"
-description = "Solution to Leetcode 2125"
+description = "In-depth solution and explanation for Leetcode 2125: Number of Laser Beams in a Bank in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

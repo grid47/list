@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1852: Distinct Numbers in Each Subarray"
 date = "2019-10-08"
-description = "Solution to Leetcode 1852"
+description = "In-depth solution and explanation for Leetcode 1852: Distinct Numbers in Each Subarray in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

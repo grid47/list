@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1157: Online Majority Element In Subarray"
 date = "2021-09-02"
-description = "Solution to Leetcode 1157"
+description = "In-depth solution and explanation for Leetcode 1157: Online Majority Element In Subarray in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

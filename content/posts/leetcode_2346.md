@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2346: Compute the Rank as a Percentage"
 date = "2018-06-01"
-description = "Solution to Leetcode 2346"
+description = "In-depth solution and explanation for Leetcode 2346: Compute the Rank as a Percentage in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

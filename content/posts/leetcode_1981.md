@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1981: Minimize the Difference Between Target and Chosen Elements"
 date = "2019-06-01"
-description = "Solution to Leetcode 1981"
+description = "In-depth solution and explanation for Leetcode 1981: Minimize the Difference Between Target and Chosen Elements in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

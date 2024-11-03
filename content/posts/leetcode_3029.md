@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3029: Minimum Time to Revert Word to Initial State I"
 date = "2016-07-18"
-description = "Solution to Leetcode 3029"
+description = "In-depth solution and explanation for Leetcode 3029: Minimum Time to Revert Word to Initial State I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

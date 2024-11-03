@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 597: Friend Requests I: Overall Acceptance Rate"
 date = "2023-03-16"
-description = "Solution to Leetcode 597"
+description = "In-depth solution and explanation for Leetcode 597: Friend Requests I: Overall Acceptance Rate in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

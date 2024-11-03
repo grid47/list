@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2658: Maximum Number of Fish in a Grid"
 date = "2017-07-24"
-description = "Solution to Leetcode 2658"
+description = "In-depth solution and explanation for Leetcode 2658: Maximum Number of Fish in a Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

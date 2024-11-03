@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 654: Maximum Binary Tree"
 date = "2023-01-18"
-description = "Solution to Leetcode 654"
+description = "In-depth solution and explanation for Leetcode 654: Maximum Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

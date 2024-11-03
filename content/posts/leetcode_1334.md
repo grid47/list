@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance"
 date = "2021-03-09"
-description = "Solution to Leetcode 1334"
+description = "In-depth solution and explanation for Leetcode 1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -59,7 +59,7 @@ d[e[0]][e[1]] = d[e[1]][e[0]] = e[2];
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1334.md" >}}
 ---
 
 

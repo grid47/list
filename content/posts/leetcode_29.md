@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 29: Divide Two Integers"
 date = "2024-10-04"
-description = "Solution to Leetcode 29"
+description = "In-depth solution and explanation for Leetcode 29: Divide Two Integers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

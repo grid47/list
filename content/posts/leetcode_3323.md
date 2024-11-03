@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3323: Minimize Connected Groups by Inserting Interval"
 date = "2015-09-28"
-description = "Solution to Leetcode 3323"
+description = "In-depth solution and explanation for Leetcode 3323: Minimize Connected Groups by Inserting Interval in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

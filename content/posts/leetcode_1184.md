@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1184: Distance Between Bus Stops"
 date = "2021-08-06"
-description = "Solution to Leetcode 1184"
+description = "In-depth solution and explanation for Leetcode 1184: Distance Between Bus Stops in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

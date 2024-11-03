@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1151: Minimum Swaps to Group All 1's Together"
 date = "2021-09-08"
-description = "Solution to Leetcode 1151"
+description = "In-depth solution and explanation for Leetcode 1151: Minimum Swaps to Group All 1's Together in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

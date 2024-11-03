@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 746: Min Cost Climbing Stairs"
 date = "2022-10-18"
-description = "Solution to Leetcode 746"
+description = "In-depth solution and explanation for Leetcode 746: Min Cost Climbing Stairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

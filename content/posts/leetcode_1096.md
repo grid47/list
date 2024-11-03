@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1096: Brace Expansion II"
 date = "2021-11-02"
-description = "Solution to Leetcode 1096"
+description = "In-depth solution and explanation for Leetcode 1096: Brace Expansion II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

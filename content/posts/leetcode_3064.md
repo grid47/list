@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3064: Guess the Number Using Bitwise Questions I"
 date = "2016-06-13"
-description = "Solution to Leetcode 3064"
+description = "In-depth solution and explanation for Leetcode 3064: Guess the Number Using Bitwise Questions I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1418: Display Table of Food Orders in a Restaurant"
 date = "2020-12-15"
-description = "Solution to Leetcode 1418"
+description = "In-depth solution and explanation for Leetcode 1418: Display Table of Food Orders in a Restaurant in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -52,7 +52,7 @@ continue;
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1418.md" >}}
 ---
 
 

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 667: Beautiful Arrangement II"
 date = "2023-01-05"
-description = "Solution to Leetcode 667"
+description = "In-depth solution and explanation for Leetcode 667: Beautiful Arrangement II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

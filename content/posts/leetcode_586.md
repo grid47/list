@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 586: Customer Placing the Largest Number of Orders"
 date = "2023-03-27"
-description = "Solution to Leetcode 586"
+description = "In-depth solution and explanation for Leetcode 586: Customer Placing the Largest Number of Orders in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

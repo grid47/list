@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3266: Final Array State After K Multiplication Operations II"
 date = "2015-11-24"
-description = "Solution to Leetcode 3266"
+description = "In-depth solution and explanation for Leetcode 3266: Final Array State After K Multiplication Operations II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3148: Maximum Difference Score in a Grid"
 date = "2016-03-21"
-description = "Solution to Leetcode 3148"
+description = "In-depth solution and explanation for Leetcode 3148: Maximum Difference Score in a Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1061: Lexicographically Smallest Equivalent String"
 date = "2021-12-07"
-description = "Solution to Leetcode 1061"
+description = "In-depth solution and explanation for Leetcode 1061: Lexicographically Smallest Equivalent String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2243: Calculate Digit Sum of a String"
 date = "2018-09-12"
-description = "Solution to Leetcode 2243"
+description = "In-depth solution and explanation for Leetcode 2243: Calculate Digit Sum of a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

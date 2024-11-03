@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1143: Longest Common Subsequence"
 date = "2021-09-16"
-description = "Solution to Leetcode 1143"
+description = "In-depth solution and explanation for Leetcode 1143: Longest Common Subsequence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

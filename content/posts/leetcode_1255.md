@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1255: Maximum Score Words Formed by Letters"
 date = "2021-05-27"
-description = "Solution to Leetcode 1255"
+description = "In-depth solution and explanation for Leetcode 1255: Maximum Score Words Formed by Letters in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

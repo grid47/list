@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2488: Count Subarrays With Median K"
 date = "2018-01-10"
-description = "Solution to Leetcode 2488"
+description = "In-depth solution and explanation for Leetcode 2488: Count Subarrays With Median K in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

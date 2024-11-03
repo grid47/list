@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 57: Insert Interval"
 date = "2024-09-06"
-description = "Solution to Leetcode 57"
+description = "In-depth solution and explanation for Leetcode 57: Insert Interval in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

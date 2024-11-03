@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3108: Minimum Cost Walk in Weighted Graph"
 date = "2016-04-30"
-description = "Solution to Leetcode 3108"
+description = "In-depth solution and explanation for Leetcode 3108: Minimum Cost Walk in Weighted Graph in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

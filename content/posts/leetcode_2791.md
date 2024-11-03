@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2791: Count Paths That Can Form a Palindrome in a Tree"
 date = "2017-03-13"
-description = "Solution to Leetcode 2791"
+description = "In-depth solution and explanation for Leetcode 2791: Count Paths That Can Form a Palindrome in a Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

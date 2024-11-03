@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2387: Median of a Row Wise Sorted Matrix"
 date = "2018-04-21"
-description = "Solution to Leetcode 2387"
+description = "In-depth solution and explanation for Leetcode 2387: Median of a Row Wise Sorted Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

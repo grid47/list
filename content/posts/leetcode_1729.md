@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1729: Find Followers Count"
 date = "2020-02-08"
-description = "Solution to Leetcode 1729"
+description = "In-depth solution and explanation for Leetcode 1729: Find Followers Count in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

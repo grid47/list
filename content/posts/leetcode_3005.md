@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3005: Count Elements With Maximum Frequency"
 date = "2016-08-11"
-description = "Solution to Leetcode 3005"
+description = "In-depth solution and explanation for Leetcode 3005: Count Elements With Maximum Frequency in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

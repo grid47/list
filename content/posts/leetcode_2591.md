@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2591: Distribute Money to Maximum Children"
 date = "2017-09-29"
-description = "Solution to Leetcode 2591"
+description = "In-depth solution and explanation for Leetcode 2591: Distribute Money to Maximum Children in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

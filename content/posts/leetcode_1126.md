@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1126: Active Businesses"
 date = "2021-10-03"
-description = "Solution to Leetcode 1126"
+description = "In-depth solution and explanation for Leetcode 1126: Active Businesses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

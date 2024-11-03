@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3281: Maximize Score of Numbers in Ranges"
 date = "2015-11-09"
-description = "Solution to Leetcode 3281"
+description = "In-depth solution and explanation for Leetcode 3281: Maximize Score of Numbers in Ranges in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

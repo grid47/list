@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 730: Count Different Palindromic Subsequences"
 date = "2022-11-03"
-description = "Solution to Leetcode 730"
+description = "In-depth solution and explanation for Leetcode 730: Count Different Palindromic Subsequences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

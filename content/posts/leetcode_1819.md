@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1819: Number of Different Subsequences GCDs"
 date = "2019-11-10"
-description = "Solution to Leetcode 1819"
+description = "In-depth solution and explanation for Leetcode 1819: Number of Different Subsequences GCDs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

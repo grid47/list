@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1650: Lowest Common Ancestor of a Binary Tree III"
 date = "2020-04-27"
-description = "Solution to Leetcode 1650"
+description = "In-depth solution and explanation for Leetcode 1650: Lowest Common Ancestor of a Binary Tree III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

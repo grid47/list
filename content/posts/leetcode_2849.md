@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2849: Determine if a Cell Is Reachable at a Given Time"
 date = "2017-01-14"
-description = "Solution to Leetcode 2849"
+description = "In-depth solution and explanation for Leetcode 2849: Determine if a Cell Is Reachable at a Given Time in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

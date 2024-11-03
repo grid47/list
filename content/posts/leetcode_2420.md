@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2420: Find All Good Indices"
 date = "2018-03-19"
-description = "Solution to Leetcode 2420"
+description = "In-depth solution and explanation for Leetcode 2420: Find All Good Indices in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

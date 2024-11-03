@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2331: Evaluate Boolean Binary Tree"
 date = "2018-06-16"
-description = "Solution to Leetcode 2331"
+description = "In-depth solution and explanation for Leetcode 2331: Evaluate Boolean Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

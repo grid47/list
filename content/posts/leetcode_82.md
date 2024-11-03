@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 82: Remove Duplicates from Sorted List II"
 date = "2024-08-12"
-description = "Solution to Leetcode 82"
+description = "In-depth solution and explanation for Leetcode 82: Remove Duplicates from Sorted List II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

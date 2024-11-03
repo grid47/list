@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1794: Count Pairs of Equal Substrings With Minimum Difference"
 date = "2019-12-05"
-description = "Solution to Leetcode 1794"
+description = "In-depth solution and explanation for Leetcode 1794: Count Pairs of Equal Substrings With Minimum Difference in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1632: Rank Transform of a Matrix"
 date = "2020-05-15"
-description = "Solution to Leetcode 1632"
+description = "In-depth solution and explanation for Leetcode 1632: Rank Transform of a Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

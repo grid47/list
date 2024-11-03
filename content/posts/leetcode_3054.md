@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3054: Binary Tree Nodes"
 date = "2016-06-23"
-description = "Solution to Leetcode 3054"
+description = "In-depth solution and explanation for Leetcode 3054: Binary Tree Nodes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

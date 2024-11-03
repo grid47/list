@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3133: Minimum Array End"
 date = "2016-04-05"
-description = "Solution to Leetcode 3133"
+description = "In-depth solution and explanation for Leetcode 3133: Minimum Array End in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

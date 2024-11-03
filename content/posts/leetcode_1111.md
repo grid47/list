@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1111: Maximum Nesting Depth of Two Valid Parentheses Strings"
 date = "2021-10-18"
-description = "Solution to Leetcode 1111"
+description = "In-depth solution and explanation for Leetcode 1111: Maximum Nesting Depth of Two Valid Parentheses Strings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

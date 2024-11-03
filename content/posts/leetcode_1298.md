@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1298: Maximum Candies You Can Get from Boxes"
 date = "2021-04-14"
-description = "Solution to Leetcode 1298"
+description = "In-depth solution and explanation for Leetcode 1298: Maximum Candies You Can Get from Boxes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

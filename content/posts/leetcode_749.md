@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 749: Contain Virus"
 date = "2022-10-15"
-description = "Solution to Leetcode 749"
+description = "In-depth solution and explanation for Leetcode 749: Contain Virus in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

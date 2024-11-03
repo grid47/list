@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1889: Minimum Space Wasted From Packaging"
 date = "2019-09-01"
-description = "Solution to Leetcode 1889"
+description = "In-depth solution and explanation for Leetcode 1889: Minimum Space Wasted From Packaging in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

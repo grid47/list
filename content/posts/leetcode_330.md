@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 330: Patching Array"
 date = "2023-12-08"
-description = "Solution to Leetcode 330"
+description = "In-depth solution and explanation for Leetcode 330: Patching Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

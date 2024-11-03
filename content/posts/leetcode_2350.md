@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2350: Shortest Impossible Sequence of Rolls"
 date = "2018-05-28"
-description = "Solution to Leetcode 2350"
+description = "In-depth solution and explanation for Leetcode 2350: Shortest Impossible Sequence of Rolls in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2131: Longest Palindrome by Concatenating Two Letter Words"
 date = "2019-01-02"
-description = "Solution to Leetcode 2131"
+description = "In-depth solution and explanation for Leetcode 2131: Longest Palindrome by Concatenating Two Letter Words in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

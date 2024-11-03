@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 600: Non-negative Integers without Consecutive Ones"
 date = "2023-03-13"
-description = "Solution to Leetcode 600"
+description = "In-depth solution and explanation for Leetcode 600: Non-negative Integers without Consecutive Ones in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

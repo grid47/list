@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2523: Closest Prime Numbers in Range"
 date = "2017-12-06"
-description = "Solution to Leetcode 2523"
+description = "In-depth solution and explanation for Leetcode 2523: Closest Prime Numbers in Range in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

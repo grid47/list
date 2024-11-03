@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3305: Count of Substrings Containing Every Vowel and K Consonants I"
 date = "2015-10-16"
-description = "Solution to Leetcode 3305"
+description = "In-depth solution and explanation for Leetcode 3305: Count of Substrings Containing Every Vowel and K Consonants I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

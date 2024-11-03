@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1630: Arithmetic Subarrays"
 date = "2020-05-17"
-description = "Solution to Leetcode 1630"
+description = "In-depth solution and explanation for Leetcode 1630: Arithmetic Subarrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

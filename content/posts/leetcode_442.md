@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 442: Find All Duplicates in an Array"
 date = "2023-08-18"
-description = "Solution to Leetcode 442"
+description = "In-depth solution and explanation for Leetcode 442: Find All Duplicates in an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 385: Mini Parser"
 date = "2023-10-14"
-description = "Solution to Leetcode 385"
+description = "In-depth solution and explanation for Leetcode 385: Mini Parser in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

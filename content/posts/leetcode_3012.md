@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3012: Minimize Length of Array Using Operations"
 date = "2016-08-04"
-description = "Solution to Leetcode 3012"
+description = "In-depth solution and explanation for Leetcode 3012: Minimize Length of Array Using Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

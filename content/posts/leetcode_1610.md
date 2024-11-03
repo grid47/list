@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1610: Maximum Number of Visible Points"
 date = "2020-06-06"
-description = "Solution to Leetcode 1610"
+description = "In-depth solution and explanation for Leetcode 1610: Maximum Number of Visible Points in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

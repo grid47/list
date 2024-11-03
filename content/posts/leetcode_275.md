@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 275: H-Index II"
 date = "2024-02-01"
-description = "Solution to Leetcode 275"
+description = "In-depth solution and explanation for Leetcode 275: H-Index II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

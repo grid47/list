@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1767: Find the Subtasks That Did Not Execute"
 date = "2020-01-01"
-description = "Solution to Leetcode 1767"
+description = "In-depth solution and explanation for Leetcode 1767: Find the Subtasks That Did Not Execute in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

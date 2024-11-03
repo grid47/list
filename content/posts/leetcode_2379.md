@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2379: Minimum Recolors to Get K Consecutive Black Blocks"
 date = "2018-04-29"
-description = "Solution to Leetcode 2379"
+description = "In-depth solution and explanation for Leetcode 2379: Minimum Recolors to Get K Consecutive Black Blocks in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

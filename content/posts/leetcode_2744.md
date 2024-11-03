@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2744: Find Maximum Number of String Pairs"
 date = "2017-04-29"
-description = "Solution to Leetcode 2744"
+description = "In-depth solution and explanation for Leetcode 2744: Find Maximum Number of String Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1021: Remove Outermost Parentheses"
 date = "2022-01-16"
-description = "Solution to Leetcode 1021"
+description = "In-depth solution and explanation for Leetcode 1021: Remove Outermost Parentheses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3184: Count Pairs That Form a Complete Day I"
 date = "2016-02-14"
-description = "Solution to Leetcode 3184"
+description = "In-depth solution and explanation for Leetcode 3184: Count Pairs That Form a Complete Day I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

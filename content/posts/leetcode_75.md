@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 75: Sort Colors"
 date = "2024-08-19"
-description = "Solution to Leetcode 75"
+description = "In-depth solution and explanation for Leetcode 75: Sort Colors in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

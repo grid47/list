@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1744: Can You Eat Your Favorite Candy on Your Favorite Day?"
 date = "2020-01-24"
-description = "Solution to Leetcode 1744"
+description = "In-depth solution and explanation for Leetcode 1744: Can You Eat Your Favorite Candy on Your Favorite Day? in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

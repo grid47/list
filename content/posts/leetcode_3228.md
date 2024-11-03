@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3228: Maximum Number of Operations to Move Ones to the End"
 date = "2016-01-01"
-description = "Solution to Leetcode 3228"
+description = "In-depth solution and explanation for Leetcode 3228: Maximum Number of Operations to Move Ones to the End in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 351: Android Unlock Patterns"
 date = "2023-11-17"
-description = "Solution to Leetcode 351"
+description = "In-depth solution and explanation for Leetcode 351: Android Unlock Patterns in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

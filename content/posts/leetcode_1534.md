@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1534: Count Good Triplets"
 date = "2020-08-21"
-description = "Solution to Leetcode 1534"
+description = "In-depth solution and explanation for Leetcode 1534: Count Good Triplets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

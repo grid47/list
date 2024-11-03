@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 554: Brick Wall"
 date = "2023-04-28"
-description = "Solution to Leetcode 554"
+description = "In-depth solution and explanation for Leetcode 554: Brick Wall in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

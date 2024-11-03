@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 705: Design HashSet"
 date = "2022-11-28"
-description = "Solution to Leetcode 705"
+description = "In-depth solution and explanation for Leetcode 705: Design HashSet in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

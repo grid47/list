@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1327: List the Products Ordered in a Period"
 date = "2021-03-16"
-description = "Solution to Leetcode 1327"
+description = "In-depth solution and explanation for Leetcode 1327: List the Products Ordered in a Period in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -31,7 +31,7 @@ GROUP BY p.product_name
 HAVING SUM(o.unit) >= 100;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1327.md" >}}
 ---
 
 

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2339: All the Matches of the League"
 date = "2018-06-08"
-description = "Solution to Leetcode 2339"
+description = "In-depth solution and explanation for Leetcode 2339: All the Matches of the League in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1597: Build Binary Expression Tree From Infix Expression"
 date = "2020-06-19"
-description = "Solution to Leetcode 1597"
+description = "In-depth solution and explanation for Leetcode 1597: Build Binary Expression Tree From Infix Expression in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

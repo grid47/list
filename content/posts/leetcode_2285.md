@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2285: Maximum Total Importance of Roads"
 date = "2018-08-01"
-description = "Solution to Leetcode 2285"
+description = "In-depth solution and explanation for Leetcode 2285: Maximum Total Importance of Roads in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

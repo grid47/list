@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1080: Insufficient Nodes in Root to Leaf Paths"
 date = "2021-11-18"
-description = "Solution to Leetcode 1080"
+description = "In-depth solution and explanation for Leetcode 1080: Insufficient Nodes in Root to Leaf Paths in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

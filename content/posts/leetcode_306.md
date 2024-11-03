@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 306: Additive Number"
 date = "2024-01-01"
-description = "Solution to Leetcode 306"
+description = "In-depth solution and explanation for Leetcode 306: Additive Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

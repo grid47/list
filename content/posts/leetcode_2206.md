@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2206: Divide Array Into Equal Pairs"
 date = "2018-10-19"
-description = "Solution to Leetcode 2206"
+description = "In-depth solution and explanation for Leetcode 2206: Divide Array Into Equal Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

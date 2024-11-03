@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2577: Minimum Time to Visit a Cell In a Grid"
 date = "2017-10-13"
-description = "Solution to Leetcode 2577"
+description = "In-depth solution and explanation for Leetcode 2577: Minimum Time to Visit a Cell In a Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

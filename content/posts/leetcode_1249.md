@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1249: Minimum Remove to Make Valid Parentheses"
 date = "2021-06-02"
-description = "Solution to Leetcode 1249"
+description = "In-depth solution and explanation for Leetcode 1249: Minimum Remove to Make Valid Parentheses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

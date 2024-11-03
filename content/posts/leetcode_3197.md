@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3197: Find the Minimum Area to Cover All Ones II"
 date = "2016-02-01"
-description = "Solution to Leetcode 3197"
+description = "In-depth solution and explanation for Leetcode 3197: Find the Minimum Area to Cover All Ones II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

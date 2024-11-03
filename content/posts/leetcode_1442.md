@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1442: Count Triplets That Can Form Two Arrays of Equal XOR"
 date = "2020-11-21"
-description = "Solution to Leetcode 1442"
+description = "In-depth solution and explanation for Leetcode 1442: Count Triplets That Can Form Two Arrays of Equal XOR in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -40,7 +40,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1442.md" >}}
 ---
 
 

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1452: People Whose List of Favorite Companies Is Not a Subset of Another List"
 date = "2020-11-11"
-description = "Solution to Leetcode 1452"
+description = "In-depth solution and explanation for Leetcode 1452: People Whose List of Favorite Companies Is Not a Subset of Another List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1452.md" >}}
 ---
 
 

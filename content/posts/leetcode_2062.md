@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2062: Count Vowel Substrings of a String"
 date = "2019-03-12"
-description = "Solution to Leetcode 2062"
+description = "In-depth solution and explanation for Leetcode 2062: Count Vowel Substrings of a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

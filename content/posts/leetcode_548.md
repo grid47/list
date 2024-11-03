@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 548: Split Array with Equal Sum"
 date = "2023-05-04"
-description = "Solution to Leetcode 548"
+description = "In-depth solution and explanation for Leetcode 548: Split Array with Equal Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

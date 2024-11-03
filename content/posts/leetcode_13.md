@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 13: Roman to Integer"
 date = "2024-10-20"
-description = "Solution to Leetcode 13"
+description = "In-depth solution and explanation for Leetcode 13: Roman to Integer in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

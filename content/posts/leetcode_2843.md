@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2843:   Count Symmetric Integers"
 date = "2017-01-20"
-description = "Solution to Leetcode 2843"
+description = "In-depth solution and explanation for Leetcode 2843:   Count Symmetric Integers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

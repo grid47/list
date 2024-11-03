@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 625: Minimum Factorization"
 date = "2023-02-16"
-description = "Solution to Leetcode 625"
+description = "In-depth solution and explanation for Leetcode 625: Minimum Factorization in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

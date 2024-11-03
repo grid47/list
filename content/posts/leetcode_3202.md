@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3202: Find the Maximum Length of Valid Subsequence II"
 date = "2016-01-27"
-description = "Solution to Leetcode 3202"
+description = "In-depth solution and explanation for Leetcode 3202: Find the Maximum Length of Valid Subsequence II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

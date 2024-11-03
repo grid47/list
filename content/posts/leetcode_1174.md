@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1174: Immediate Food Delivery II"
 date = "2021-08-16"
-description = "Solution to Leetcode 1174"
+description = "In-depth solution and explanation for Leetcode 1174: Immediate Food Delivery II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

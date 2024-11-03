@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2355: Maximum Number of Books You Can Take"
 date = "2018-05-23"
-description = "Solution to Leetcode 2355"
+description = "In-depth solution and explanation for Leetcode 2355: Maximum Number of Books You Can Take in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

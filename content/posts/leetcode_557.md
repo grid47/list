@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 557: Reverse Words in a String III"
 date = "2023-04-25"
-description = "Solution to Leetcode 557"
+description = "In-depth solution and explanation for Leetcode 557: Reverse Words in a String III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

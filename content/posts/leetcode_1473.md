@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1473: Paint House III"
 date = "2020-10-21"
-description = "Solution to Leetcode 1473"
+description = "In-depth solution and explanation for Leetcode 1473: Paint House III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -72,7 +72,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1473.md" >}}
 ---
 
 

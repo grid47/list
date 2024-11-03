@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1755: Closest Subsequence Sum"
 date = "2020-01-13"
-description = "Solution to Leetcode 1755"
+description = "In-depth solution and explanation for Leetcode 1755: Closest Subsequence Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

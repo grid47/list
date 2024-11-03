@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2233: Maximum Product After K Increments"
 date = "2018-09-22"
-description = "Solution to Leetcode 2233"
+description = "In-depth solution and explanation for Leetcode 2233: Maximum Product After K Increments in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

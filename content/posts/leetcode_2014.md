@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2014: Longest Subsequence Repeated k Times"
 date = "2019-04-29"
-description = "Solution to Leetcode 2014"
+description = "In-depth solution and explanation for Leetcode 2014: Longest Subsequence Repeated k Times in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 270: Closest Binary Search Tree Value"
 date = "2024-02-06"
-description = "Solution to Leetcode 270"
+description = "In-depth solution and explanation for Leetcode 270: Closest Binary Search Tree Value in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

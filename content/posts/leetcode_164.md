@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 164: Maximum Gap"
 date = "2024-05-22"
-description = "Solution to Leetcode 164"
+description = "In-depth solution and explanation for Leetcode 164: Maximum Gap in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

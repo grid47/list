@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2265: Count Nodes Equal to Average of Subtree"
 date = "2018-08-21"
-description = "Solution to Leetcode 2265"
+description = "In-depth solution and explanation for Leetcode 2265: Count Nodes Equal to Average of Subtree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

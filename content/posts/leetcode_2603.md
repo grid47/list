@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2603: Collect Coins in a Tree"
 date = "2017-09-17"
-description = "Solution to Leetcode 2603"
+description = "In-depth solution and explanation for Leetcode 2603: Collect Coins in a Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

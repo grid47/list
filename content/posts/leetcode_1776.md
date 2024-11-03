@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1776: Car Fleet II"
 date = "2019-12-23"
-description = "Solution to Leetcode 1776"
+description = "In-depth solution and explanation for Leetcode 1776: Car Fleet II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3166: Calculate Parking Fees and Duration"
 date = "2016-03-03"
-description = "Solution to Leetcode 3166"
+description = "In-depth solution and explanation for Leetcode 3166: Calculate Parking Fees and Duration in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

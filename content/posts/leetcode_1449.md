@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1449: Form Largest Integer With Digits That Add up to Target"
 date = "2020-11-14"
-description = "Solution to Leetcode 1449"
+description = "In-depth solution and explanation for Leetcode 1449: Form Largest Integer With Digits That Add up to Target in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1449.md" >}}
 ---
 
 

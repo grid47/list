@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1185: Day of the Week"
 date = "2021-08-05"
-description = "Solution to Leetcode 1185"
+description = "In-depth solution and explanation for Leetcode 1185: Day of the Week in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

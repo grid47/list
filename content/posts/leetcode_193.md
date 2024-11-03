@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 193: Valid Phone Numbers"
 date = "2024-04-23"
-description = "Solution to Leetcode 193"
+description = "In-depth solution and explanation for Leetcode 193: Valid Phone Numbers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

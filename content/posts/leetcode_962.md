@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 962: Maximum Width Ramp"
 date = "2022-03-16"
-description = "Solution to Leetcode 962"
+description = "In-depth solution and explanation for Leetcode 962: Maximum Width Ramp in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

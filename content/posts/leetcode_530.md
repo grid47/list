@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 530: Minimum Absolute Difference in BST"
 date = "2023-05-22"
-description = "Solution to Leetcode 530"
+description = "In-depth solution and explanation for Leetcode 530: Minimum Absolute Difference in BST in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

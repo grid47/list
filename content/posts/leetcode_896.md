@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 896: Monotonic Array"
 date = "2022-05-21"
-description = "Solution to Leetcode 896"
+description = "In-depth solution and explanation for Leetcode 896: Monotonic Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3320: Count The Number of Winning Sequences"
 date = "2015-10-01"
-description = "Solution to Leetcode 3320"
+description = "In-depth solution and explanation for Leetcode 3320: Count The Number of Winning Sequences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

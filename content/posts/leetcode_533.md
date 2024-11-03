@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 533: Lonely Pixel II"
 date = "2023-05-19"
-description = "Solution to Leetcode 533"
+description = "In-depth solution and explanation for Leetcode 533: Lonely Pixel II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1301: Number of Paths with Max Score"
 date = "2021-04-11"
-description = "Solution to Leetcode 1301"
+description = "In-depth solution and explanation for Leetcode 1301: Number of Paths with Max Score in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1301.md" >}}
 ---
 
 

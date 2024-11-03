@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 636: Exclusive Time of Functions"
 date = "2023-02-05"
-description = "Solution to Leetcode 636"
+description = "In-depth solution and explanation for Leetcode 636: Exclusive Time of Functions in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

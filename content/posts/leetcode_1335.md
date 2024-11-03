@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1335: Minimum Difficulty of a Job Schedule"
 date = "2021-03-08"
-description = "Solution to Leetcode 1335"
+description = "In-depth solution and explanation for Leetcode 1335: Minimum Difficulty of a Job Schedule in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -55,7 +55,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1335.md" >}}
 ---
 {{< youtube h48x-eQaqk4 >}}
 

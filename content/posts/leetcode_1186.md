@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1186: Maximum Subarray Sum with One Deletion"
 date = "2021-08-04"
-description = "Solution to Leetcode 1186"
+description = "In-depth solution and explanation for Leetcode 1186: Maximum Subarray Sum with One Deletion in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

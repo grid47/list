@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 449: Serialize and Deserialize BST"
 date = "2023-08-11"
-description = "Solution to Leetcode 449"
+description = "In-depth solution and explanation for Leetcode 449: Serialize and Deserialize BST in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

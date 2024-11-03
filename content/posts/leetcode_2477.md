@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2477: Minimum Fuel Cost to Report to the Capital"
 date = "2018-01-21"
-description = "Solution to Leetcode 2477"
+description = "In-depth solution and explanation for Leetcode 2477: Minimum Fuel Cost to Report to the Capital in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

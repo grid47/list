@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1749: Maximum Absolute Sum of Any Subarray"
 date = "2020-01-19"
-description = "Solution to Leetcode 1749"
+description = "In-depth solution and explanation for Leetcode 1749: Maximum Absolute Sum of Any Subarray in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

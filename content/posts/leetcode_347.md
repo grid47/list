@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 347: Top K Frequent Elements"
 date = "2023-11-21"
-description = "Solution to Leetcode 347"
+description = "In-depth solution and explanation for Leetcode 347: Top K Frequent Elements in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

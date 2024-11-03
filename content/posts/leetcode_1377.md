@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1377: Frog Position After T Seconds"
 date = "2021-01-25"
-description = "Solution to Leetcode 1377"
+description = "In-depth solution and explanation for Leetcode 1377: Frog Position After T Seconds in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1377.md" >}}
 ---
 
 

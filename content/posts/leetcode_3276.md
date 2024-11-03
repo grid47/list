@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3276: Select Cells in Grid With Maximum Score"
 date = "2015-11-14"
-description = "Solution to Leetcode 3276"
+description = "In-depth solution and explanation for Leetcode 3276: Select Cells in Grid With Maximum Score in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

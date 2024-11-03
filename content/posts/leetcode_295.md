@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 295: Find Median from Data Stream"
 date = "2024-01-12"
-description = "Solution to Leetcode 295"
+description = "In-depth solution and explanation for Leetcode 295: Find Median from Data Stream in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

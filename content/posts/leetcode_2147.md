@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2147: Number of Ways to Divide a Long Corridor"
 date = "2018-12-17"
-description = "Solution to Leetcode 2147"
+description = "In-depth solution and explanation for Leetcode 2147: Number of Ways to Divide a Long Corridor in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

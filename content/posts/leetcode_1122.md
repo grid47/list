@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1122: Relative Sort Array"
 date = "2021-10-07"
-description = "Solution to Leetcode 1122"
+description = "In-depth solution and explanation for Leetcode 1122: Relative Sort Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

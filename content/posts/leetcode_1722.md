@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1722: Minimize Hamming Distance After Swap Operations"
 date = "2020-02-15"
-description = "Solution to Leetcode 1722"
+description = "In-depth solution and explanation for Leetcode 1722: Minimize Hamming Distance After Swap Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

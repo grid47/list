@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1775: Equal Sum Arrays With Minimum Number of Operations"
 date = "2019-12-24"
-description = "Solution to Leetcode 1775"
+description = "In-depth solution and explanation for Leetcode 1775: Equal Sum Arrays With Minimum Number of Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

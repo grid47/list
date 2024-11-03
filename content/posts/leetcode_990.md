@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 990: Satisfiability of Equality Equations"
 date = "2022-02-16"
-description = "Solution to Leetcode 990"
+description = "In-depth solution and explanation for Leetcode 990: Satisfiability of Equality Equations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

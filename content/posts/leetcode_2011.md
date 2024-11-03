@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2011: Final Value of Variable After Performing Operations"
 date = "2019-05-02"
-description = "Solution to Leetcode 2011"
+description = "In-depth solution and explanation for Leetcode 2011: Final Value of Variable After Performing Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

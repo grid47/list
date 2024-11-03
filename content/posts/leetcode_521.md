@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 521: Longest Uncommon Subsequence I"
 date = "2023-05-31"
-description = "Solution to Leetcode 521"
+description = "In-depth solution and explanation for Leetcode 521: Longest Uncommon Subsequence I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

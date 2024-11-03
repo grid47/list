@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 562: Longest Line of Consecutive One in Matrix"
 date = "2023-04-20"
-description = "Solution to Leetcode 562"
+description = "In-depth solution and explanation for Leetcode 562: Longest Line of Consecutive One in Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 794: Valid Tic-Tac-Toe State"
 date = "2022-08-31"
-description = "Solution to Leetcode 794"
+description = "In-depth solution and explanation for Leetcode 794: Valid Tic-Tac-Toe State in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

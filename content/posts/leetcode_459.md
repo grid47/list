@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 459: Repeated Substring Pattern"
 date = "2023-08-01"
-description = "Solution to Leetcode 459"
+description = "In-depth solution and explanation for Leetcode 459: Repeated Substring Pattern in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

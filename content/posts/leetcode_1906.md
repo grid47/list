@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1906: Minimum Absolute Difference Queries"
 date = "2019-08-15"
-description = "Solution to Leetcode 1906"
+description = "In-depth solution and explanation for Leetcode 1906: Minimum Absolute Difference Queries in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

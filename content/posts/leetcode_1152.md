@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1152: Analyze User Website Visit Pattern"
 date = "2021-09-07"
-description = "Solution to Leetcode 1152"
+description = "In-depth solution and explanation for Leetcode 1152: Analyze User Website Visit Pattern in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

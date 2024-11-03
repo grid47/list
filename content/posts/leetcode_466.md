@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 466: Count The Repetitions"
 date = "2023-07-25"
-description = "Solution to Leetcode 466"
+description = "In-depth solution and explanation for Leetcode 466: Count The Repetitions in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2225: Find Players With Zero or One Losses"
 date = "2018-09-30"
-description = "Solution to Leetcode 2225"
+description = "In-depth solution and explanation for Leetcode 2225: Find Players With Zero or One Losses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

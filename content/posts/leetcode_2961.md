@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2961: Double Modular Exponentiation"
 date = "2016-09-24"
-description = "Solution to Leetcode 2961"
+description = "In-depth solution and explanation for Leetcode 2961: Double Modular Exponentiation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2956: Find Common Elements Between Two Arrays"
 date = "2016-09-29"
-description = "Solution to Leetcode 2956"
+description = "In-depth solution and explanation for Leetcode 2956: Find Common Elements Between Two Arrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

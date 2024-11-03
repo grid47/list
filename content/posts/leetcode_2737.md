@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2737: Find the Closest Marked Node"
 date = "2017-05-06"
-description = "Solution to Leetcode 2737"
+description = "In-depth solution and explanation for Leetcode 2737: Find the Closest Marked Node in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

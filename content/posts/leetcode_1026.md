@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1026: Maximum Difference Between Node and Ancestor"
 date = "2022-01-11"
-description = "Solution to Leetcode 1026"
+description = "In-depth solution and explanation for Leetcode 1026: Maximum Difference Between Node and Ancestor in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

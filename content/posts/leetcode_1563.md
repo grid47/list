@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1563: Stone Game V"
 date = "2020-07-23"
-description = "Solution to Leetcode 1563"
+description = "In-depth solution and explanation for Leetcode 1563: Stone Game V in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

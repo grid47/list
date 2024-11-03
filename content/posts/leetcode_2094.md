@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2094: Finding 3-Digit Even Numbers"
 date = "2019-02-08"
-description = "Solution to Leetcode 2094"
+description = "In-depth solution and explanation for Leetcode 2094: Finding 3-Digit Even Numbers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 24: Swap Nodes in Pairs"
 date = "2024-10-09"
-description = "Solution to Leetcode 24"
+description = "In-depth solution and explanation for Leetcode 24: Swap Nodes in Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

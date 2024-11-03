@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 864: Shortest Path to Get All Keys"
 date = "2022-06-22"
-description = "Solution to Leetcode 864"
+description = "In-depth solution and explanation for Leetcode 864: Shortest Path to Get All Keys in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

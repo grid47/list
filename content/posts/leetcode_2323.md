@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2323: Find Minimum Time to Finish All Jobs II"
 date = "2018-06-24"
-description = "Solution to Leetcode 2323"
+description = "In-depth solution and explanation for Leetcode 2323: Find Minimum Time to Finish All Jobs II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

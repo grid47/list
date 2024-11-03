@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1928: Minimum Cost to Reach Destination in Time"
 date = "2019-07-24"
-description = "Solution to Leetcode 1928"
+description = "In-depth solution and explanation for Leetcode 1928: Minimum Cost to Reach Destination in Time in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

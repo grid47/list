@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2501: Longest Square Streak in an Array"
 date = "2017-12-28"
-description = "Solution to Leetcode 2501"
+description = "In-depth solution and explanation for Leetcode 2501: Longest Square Streak in an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

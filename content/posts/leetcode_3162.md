@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3162: Find the Number of Good Pairs I"
 date = "2016-03-07"
-description = "Solution to Leetcode 3162"
+description = "In-depth solution and explanation for Leetcode 3162: Find the Number of Good Pairs I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

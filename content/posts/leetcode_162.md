@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 162: Find Peak Element"
 date = "2024-05-24"
-description = "Solution to Leetcode 162"
+description = "In-depth solution and explanation for Leetcode 162: Find Peak Element in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

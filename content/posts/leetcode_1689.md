@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1689: Partitioning Into Minimum Number Of Deci-Binary Numbers"
 date = "2020-03-19"
-description = "Solution to Leetcode 1689"
+description = "In-depth solution and explanation for Leetcode 1689: Partitioning Into Minimum Number Of Deci-Binary Numbers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3014: Minimum Number of Pushes to Type Word I"
 date = "2016-08-02"
-description = "Solution to Leetcode 3014"
+description = "In-depth solution and explanation for Leetcode 3014: Minimum Number of Pushes to Type Word I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

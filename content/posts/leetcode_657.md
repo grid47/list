@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 657: Robot Return to Origin"
 date = "2023-01-15"
-description = "Solution to Leetcode 657"
+description = "In-depth solution and explanation for Leetcode 657: Robot Return to Origin in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

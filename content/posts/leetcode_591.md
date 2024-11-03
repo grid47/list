@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 591: Tag Validator"
 date = "2023-03-22"
-description = "Solution to Leetcode 591"
+description = "In-depth solution and explanation for Leetcode 591: Tag Validator in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

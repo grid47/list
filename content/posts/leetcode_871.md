@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 871: Minimum Number of Refueling Stops"
 date = "2022-06-15"
-description = "Solution to Leetcode 871"
+description = "In-depth solution and explanation for Leetcode 871: Minimum Number of Refueling Stops in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

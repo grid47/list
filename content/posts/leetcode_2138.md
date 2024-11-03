@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2138: Divide a String Into Groups of Size k"
 date = "2018-12-26"
-description = "Solution to Leetcode 2138"
+description = "In-depth solution and explanation for Leetcode 2138: Divide a String Into Groups of Size k in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

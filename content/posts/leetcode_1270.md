@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1270: All People Report to the Given Manager"
 date = "2021-05-12"
-description = "Solution to Leetcode 1270"
+description = "In-depth solution and explanation for Leetcode 1270: All People Report to the Given Manager in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2875: Minimum Size Subarray in Infinite Array"
 date = "2016-12-19"
-description = "Solution to Leetcode 2875"
+description = "In-depth solution and explanation for Leetcode 2875: Minimum Size Subarray in Infinite Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

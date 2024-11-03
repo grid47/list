@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2986: Find Third Transaction"
 date = "2016-08-30"
-description = "Solution to Leetcode 2986"
+description = "In-depth solution and explanation for Leetcode 2986: Find Third Transaction in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

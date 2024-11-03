@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1816: Truncate Sentence"
 date = "2019-11-13"
-description = "Solution to Leetcode 1816"
+description = "In-depth solution and explanation for Leetcode 1816: Truncate Sentence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

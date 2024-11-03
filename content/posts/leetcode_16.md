@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 16: 3Sum Closest"
 date = "2024-10-17"
-description = "Solution to Leetcode 16"
+description = "In-depth solution and explanation for Leetcode 16: 3Sum Closest in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

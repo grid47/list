@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 26: Remove Duplicates from Sorted Array"
 date = "2024-10-07"
-description = "Solution to Leetcode 26"
+description = "In-depth solution and explanation for Leetcode 26: Remove Duplicates from Sorted Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

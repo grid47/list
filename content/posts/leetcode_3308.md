@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3308: Find Top Performing Driver"
 date = "2015-10-13"
-description = "Solution to Leetcode 3308"
+description = "In-depth solution and explanation for Leetcode 3308: Find Top Performing Driver in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

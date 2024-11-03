@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2816: Double a Number Represented as a Linked List"
 date = "2017-02-16"
-description = "Solution to Leetcode 2816"
+description = "In-depth solution and explanation for Leetcode 2816: Double a Number Represented as a Linked List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

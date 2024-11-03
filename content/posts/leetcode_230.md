@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 230: Kth Smallest Element in a BST"
 date = "2024-03-17"
-description = "Solution to Leetcode 230"
+description = "In-depth solution and explanation for Leetcode 230: Kth Smallest Element in a BST in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

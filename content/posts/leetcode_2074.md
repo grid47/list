@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2074: Reverse Nodes in Even Length Groups"
 date = "2019-02-28"
-description = "Solution to Leetcode 2074"
+description = "In-depth solution and explanation for Leetcode 2074: Reverse Nodes in Even Length Groups in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

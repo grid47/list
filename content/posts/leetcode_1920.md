@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1920: Build Array from Permutation"
 date = "2019-08-01"
-description = "Solution to Leetcode 1920"
+description = "In-depth solution and explanation for Leetcode 1920: Build Array from Permutation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2480: Form a Chemical Bond"
 date = "2018-01-18"
-description = "Solution to Leetcode 2480"
+description = "In-depth solution and explanation for Leetcode 2480: Form a Chemical Bond in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

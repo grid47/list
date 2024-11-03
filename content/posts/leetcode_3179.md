@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3179: Find the N-th Value After K Seconds"
 date = "2016-02-19"
-description = "Solution to Leetcode 3179"
+description = "In-depth solution and explanation for Leetcode 3179: Find the N-th Value After K Seconds in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

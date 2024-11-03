@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3100: Water Bottles II"
 date = "2016-05-08"
-description = "Solution to Leetcode 3100"
+description = "In-depth solution and explanation for Leetcode 3100: Water Bottles II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

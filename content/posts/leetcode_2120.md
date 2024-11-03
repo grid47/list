@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2120: Execution of All Suffix Instructions Staying in a Grid"
 date = "2019-01-13"
-description = "Solution to Leetcode 2120"
+description = "In-depth solution and explanation for Leetcode 2120: Execution of All Suffix Instructions Staying in a Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

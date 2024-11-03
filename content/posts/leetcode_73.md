@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 73: Set Matrix Zeroes"
 date = "2024-08-21"
-description = "Solution to Leetcode 73"
+description = "In-depth solution and explanation for Leetcode 73: Set Matrix Zeroes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

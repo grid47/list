@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2095: Delete the Middle Node of a Linked List"
 date = "2019-02-07"
-description = "Solution to Leetcode 2095"
+description = "In-depth solution and explanation for Leetcode 2095: Delete the Middle Node of a Linked List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

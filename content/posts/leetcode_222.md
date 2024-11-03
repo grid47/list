@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 222: Count Complete Tree Nodes"
 date = "2024-03-25"
-description = "Solution to Leetcode 222"
+description = "In-depth solution and explanation for Leetcode 222: Count Complete Tree Nodes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

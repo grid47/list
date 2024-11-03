@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2793: Status of Flight Tickets"
 date = "2017-03-11"
-description = "Solution to Leetcode 2793"
+description = "In-depth solution and explanation for Leetcode 2793: Status of Flight Tickets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

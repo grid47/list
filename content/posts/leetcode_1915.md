@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1915: Number of Wonderful Substrings"
 date = "2019-08-06"
-description = "Solution to Leetcode 1915"
+description = "In-depth solution and explanation for Leetcode 1915: Number of Wonderful Substrings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

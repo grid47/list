@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 151: Reverse Words in a String"
 date = "2024-06-04"
-description = "Solution to Leetcode 151"
+description = "In-depth solution and explanation for Leetcode 151: Reverse Words in a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

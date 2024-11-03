@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3079: Find the Sum of Encrypted Integers"
 date = "2016-05-29"
-description = "Solution to Leetcode 3079"
+description = "In-depth solution and explanation for Leetcode 3079: Find the Sum of Encrypted Integers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

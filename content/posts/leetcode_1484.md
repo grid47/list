@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1484: Group Sold Products By The Date"
 date = "2020-10-10"
-description = "Solution to Leetcode 1484"
+description = "In-depth solution and explanation for Leetcode 1484: Group Sold Products By The Date in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -30,7 +30,7 @@ GROUP BY sell_date
 ORDER BY sell_date ASC;
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1484.md" >}}
 ---
 
 

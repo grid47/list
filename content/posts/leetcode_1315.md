@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1315: Sum of Nodes with Even-Valued Grandparent"
 date = "2021-03-28"
-description = "Solution to Leetcode 1315"
+description = "In-depth solution and explanation for Leetcode 1315: Sum of Nodes with Even-Valued Grandparent in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -46,7 +46,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1315.md" >}}
 ---
 
 

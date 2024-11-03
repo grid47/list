@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 760: Find Anagram Mappings"
 date = "2022-10-04"
-description = "Solution to Leetcode 760"
+description = "In-depth solution and explanation for Leetcode 760: Find Anagram Mappings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

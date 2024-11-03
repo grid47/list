@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 944: Delete Columns to Make Sorted"
 date = "2022-04-03"
-description = "Solution to Leetcode 944"
+description = "In-depth solution and explanation for Leetcode 944: Delete Columns to Make Sorted in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

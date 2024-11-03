@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2954: Count the Number of Infection Sequences"
 date = "2016-10-01"
-description = "Solution to Leetcode 2954"
+description = "In-depth solution and explanation for Leetcode 2954: Count the Number of Infection Sequences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

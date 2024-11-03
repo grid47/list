@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 973: K Closest Points to Origin"
 date = "2022-03-05"
-description = "Solution to Leetcode 973"
+description = "In-depth solution and explanation for Leetcode 973: K Closest Points to Origin in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

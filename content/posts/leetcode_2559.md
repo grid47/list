@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2559: Count Vowel Strings in Ranges"
 date = "2017-10-31"
-description = "Solution to Leetcode 2559"
+description = "In-depth solution and explanation for Leetcode 2559: Count Vowel Strings in Ranges in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

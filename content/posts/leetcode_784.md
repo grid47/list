@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 784: Letter Case Permutation"
 date = "2022-09-10"
-description = "Solution to Leetcode 784"
+description = "In-depth solution and explanation for Leetcode 784: Letter Case Permutation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

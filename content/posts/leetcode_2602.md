@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2602: Minimum Operations to Make All Array Elements Equal"
 date = "2017-09-18"
-description = "Solution to Leetcode 2602"
+description = "In-depth solution and explanation for Leetcode 2602: Minimum Operations to Make All Array Elements Equal in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

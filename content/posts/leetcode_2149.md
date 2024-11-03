@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2149: Rearrange Array Elements by Sign"
 date = "2018-12-15"
-description = "Solution to Leetcode 2149"
+description = "In-depth solution and explanation for Leetcode 2149: Rearrange Array Elements by Sign in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

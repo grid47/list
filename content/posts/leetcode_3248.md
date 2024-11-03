@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3248: Snake in Matrix"
 date = "2015-12-12"
-description = "Solution to Leetcode 3248"
+description = "In-depth solution and explanation for Leetcode 3248: Snake in Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1665: Minimum Initial Energy to Finish Tasks"
 date = "2020-04-12"
-description = "Solution to Leetcode 1665"
+description = "In-depth solution and explanation for Leetcode 1665: Minimum Initial Energy to Finish Tasks in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

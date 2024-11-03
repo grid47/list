@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 249: Group Shifted Strings"
 date = "2024-02-27"
-description = "Solution to Leetcode 249"
+description = "In-depth solution and explanation for Leetcode 249: Group Shifted Strings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

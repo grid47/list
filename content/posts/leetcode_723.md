@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 723: Candy Crush"
 date = "2022-11-10"
-description = "Solution to Leetcode 723"
+description = "In-depth solution and explanation for Leetcode 723: Candy Crush in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3034: Number of Subarrays That Match a Pattern I"
 date = "2016-07-13"
-description = "Solution to Leetcode 3034"
+description = "In-depth solution and explanation for Leetcode 3034: Number of Subarrays That Match a Pattern I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

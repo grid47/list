@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 471: Encode String with Shortest Length"
 date = "2023-07-20"
-description = "Solution to Leetcode 471"
+description = "In-depth solution and explanation for Leetcode 471: Encode String with Shortest Length in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

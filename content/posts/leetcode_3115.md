@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3115: Maximum Prime Difference"
 date = "2016-04-23"
-description = "Solution to Leetcode 3115"
+description = "In-depth solution and explanation for Leetcode 3115: Maximum Prime Difference in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3311: Construct 2D Grid Matching Graph Layout"
 date = "2015-10-10"
-description = "Solution to Leetcode 3311"
+description = "In-depth solution and explanation for Leetcode 3311: Construct 2D Grid Matching Graph Layout in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

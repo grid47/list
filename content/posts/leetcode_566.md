@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 566: Reshape the Matrix"
 date = "2023-04-16"
-description = "Solution to Leetcode 566"
+description = "In-depth solution and explanation for Leetcode 566: Reshape the Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

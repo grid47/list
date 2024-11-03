@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3013: Divide an Array Into Subarrays With Minimum Cost II"
 date = "2016-08-03"
-description = "Solution to Leetcode 3013"
+description = "In-depth solution and explanation for Leetcode 3013: Divide an Array Into Subarrays With Minimum Cost II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

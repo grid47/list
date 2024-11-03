@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 711: Number of Distinct Islands II"
 date = "2022-11-22"
-description = "Solution to Leetcode 711"
+description = "In-depth solution and explanation for Leetcode 711: Number of Distinct Islands II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

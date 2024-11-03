@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1232: Check If It Is a Straight Line"
 date = "2021-06-19"
-description = "Solution to Leetcode 1232"
+description = "In-depth solution and explanation for Leetcode 1232: Check If It Is a Straight Line in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

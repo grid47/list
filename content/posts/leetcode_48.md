@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 48: Rotate Image"
 date = "2024-09-15"
-description = "Solution to Leetcode 48"
+description = "In-depth solution and explanation for Leetcode 48: Rotate Image in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

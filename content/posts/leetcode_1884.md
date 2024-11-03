@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1884: Egg Drop With 2 Eggs and N Floors"
 date = "2019-09-06"
-description = "Solution to Leetcode 1884"
+description = "In-depth solution and explanation for Leetcode 1884: Egg Drop With 2 Eggs and N Floors in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

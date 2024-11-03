@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 985: Sum of Even Numbers After Queries"
 date = "2022-02-21"
-description = "Solution to Leetcode 985"
+description = "In-depth solution and explanation for Leetcode 985: Sum of Even Numbers After Queries in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

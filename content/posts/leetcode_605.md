@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 605: Can Place Flowers"
 date = "2023-03-08"
-description = "Solution to Leetcode 605"
+description = "In-depth solution and explanation for Leetcode 605: Can Place Flowers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3282: Reach End of Array With Max Score"
 date = "2015-11-08"
-description = "Solution to Leetcode 3282"
+description = "In-depth solution and explanation for Leetcode 3282: Reach End of Array With Max Score in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

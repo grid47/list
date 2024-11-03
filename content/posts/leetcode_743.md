@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 743: Network Delay Time"
 date = "2022-10-21"
-description = "Solution to Leetcode 743"
+description = "In-depth solution and explanation for Leetcode 743: Network Delay Time in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

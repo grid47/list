@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 561: Array Partition"
 date = "2023-04-21"
-description = "Solution to Leetcode 561"
+description = "In-depth solution and explanation for Leetcode 561: Array Partition in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

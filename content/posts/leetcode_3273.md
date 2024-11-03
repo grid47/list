@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3273: Minimum Amount of Damage Dealt to Bob"
 date = "2015-11-17"
-description = "Solution to Leetcode 3273"
+description = "In-depth solution and explanation for Leetcode 3273: Minimum Amount of Damage Dealt to Bob in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

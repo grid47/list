@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1042: Flower Planting With No Adjacent"
 date = "2021-12-26"
-description = "Solution to Leetcode 1042"
+description = "In-depth solution and explanation for Leetcode 1042: Flower Planting With No Adjacent in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

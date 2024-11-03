@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1243: Array Transformation"
 date = "2021-06-08"
-description = "Solution to Leetcode 1243"
+description = "In-depth solution and explanation for Leetcode 1243: Array Transformation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

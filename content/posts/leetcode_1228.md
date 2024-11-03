@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1228: Missing Number In Arithmetic Progression"
 date = "2021-06-23"
-description = "Solution to Leetcode 1228"
+description = "In-depth solution and explanation for Leetcode 1228: Missing Number In Arithmetic Progression in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

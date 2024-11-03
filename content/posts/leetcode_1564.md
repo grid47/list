@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1564: Put Boxes Into the Warehouse I"
 date = "2020-07-22"
-description = "Solution to Leetcode 1564"
+description = "In-depth solution and explanation for Leetcode 1564: Put Boxes Into the Warehouse I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

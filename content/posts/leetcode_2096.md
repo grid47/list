@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2096: Step-By-Step Directions From a Binary Tree Node to Another"
 date = "2019-02-06"
-description = "Solution to Leetcode 2096"
+description = "In-depth solution and explanation for Leetcode 2096: Step-By-Step Directions From a Binary Tree Node to Another in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

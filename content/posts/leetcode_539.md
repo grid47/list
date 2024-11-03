@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 539: Minimum Time Difference"
 date = "2023-05-13"
-description = "Solution to Leetcode 539"
+description = "In-depth solution and explanation for Leetcode 539: Minimum Time Difference in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

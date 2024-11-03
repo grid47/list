@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1022: Sum of Root To Leaf Binary Numbers"
 date = "2022-01-15"
-description = "Solution to Leetcode 1022"
+description = "In-depth solution and explanation for Leetcode 1022: Sum of Root To Leaf Binary Numbers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

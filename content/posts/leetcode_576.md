@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 576: Out of Boundary Paths"
 date = "2023-04-06"
-description = "Solution to Leetcode 576"
+description = "In-depth solution and explanation for Leetcode 576: Out of Boundary Paths in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

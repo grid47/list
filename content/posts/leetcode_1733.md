@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1733: Minimum Number of People to Teach"
 date = "2020-02-04"
-description = "Solution to Leetcode 1733"
+description = "In-depth solution and explanation for Leetcode 1733: Minimum Number of People to Teach in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

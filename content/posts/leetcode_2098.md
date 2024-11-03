@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2098: Subsequence of Size K With the Largest Even Sum"
 date = "2019-02-04"
-description = "Solution to Leetcode 2098"
+description = "In-depth solution and explanation for Leetcode 2098: Subsequence of Size K With the Largest Even Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

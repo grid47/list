@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2833: Furthest Point From Origin"
 date = "2017-01-30"
-description = "Solution to Leetcode 2833"
+description = "In-depth solution and explanation for Leetcode 2833: Furthest Point From Origin in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

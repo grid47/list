@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1465: Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts"
 date = "2020-10-29"
-description = "Solution to Leetcode 1465"
+description = "In-depth solution and explanation for Leetcode 1465: Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -47,7 +47,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1465.md" >}}
 ---
 
 

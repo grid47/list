@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 534: Game Play Analysis III"
 date = "2023-05-18"
-description = "Solution to Leetcode 534"
+description = "In-depth solution and explanation for Leetcode 534: Game Play Analysis III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1325: Delete Leaves With a Given Value"
 date = "2021-03-18"
-description = "Solution to Leetcode 1325"
+description = "In-depth solution and explanation for Leetcode 1325: Delete Leaves With a Given Value in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -43,7 +43,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1325.md" >}}
 ---
 
 

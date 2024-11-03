@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1169: Invalid Transactions"
 date = "2021-08-21"
-description = "Solution to Leetcode 1169"
+description = "In-depth solution and explanation for Leetcode 1169: Invalid Transactions in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3170: Lexicographically Minimum String After Removing Stars"
 date = "2016-02-28"
-description = "Solution to Leetcode 3170"
+description = "In-depth solution and explanation for Leetcode 3170: Lexicographically Minimum String After Removing Stars in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

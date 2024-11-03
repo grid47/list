@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 350: Intersection of Two Arrays II"
 date = "2023-11-18"
-description = "Solution to Leetcode 350"
+description = "In-depth solution and explanation for Leetcode 350: Intersection of Two Arrays II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

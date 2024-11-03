@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3015: Count the Number of Houses at a Certain Distance I"
 date = "2016-08-01"
-description = "Solution to Leetcode 3015"
+description = "In-depth solution and explanation for Leetcode 3015: Count the Number of Houses at a Certain Distance I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

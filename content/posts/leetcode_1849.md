@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1849: Splitting a String Into Descending Consecutive Values"
 date = "2019-10-11"
-description = "Solution to Leetcode 1849"
+description = "In-depth solution and explanation for Leetcode 1849: Splitting a String Into Descending Consecutive Values in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

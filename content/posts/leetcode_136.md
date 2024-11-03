@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 136: Single Number"
 date = "2024-06-19"
-description = "Solution to Leetcode 136"
+description = "In-depth solution and explanation for Leetcode 136: Single Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

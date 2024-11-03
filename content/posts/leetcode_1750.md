@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1750: Minimum Length of String After Deleting Similar Ends"
 date = "2020-01-18"
-description = "Solution to Leetcode 1750"
+description = "In-depth solution and explanation for Leetcode 1750: Minimum Length of String After Deleting Similar Ends in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

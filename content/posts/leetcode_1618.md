@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1618: Maximum Font to Fit a Sentence in a Screen"
 date = "2020-05-29"
-description = "Solution to Leetcode 1618"
+description = "In-depth solution and explanation for Leetcode 1618: Maximum Font to Fit a Sentence in a Screen in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

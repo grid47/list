@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2447: Number of Subarrays With GCD Equal to K"
 date = "2018-02-20"
-description = "Solution to Leetcode 2447"
+description = "In-depth solution and explanation for Leetcode 2447: Number of Subarrays With GCD Equal to K in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

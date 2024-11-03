@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2465: Number of Distinct Averages"
 date = "2018-02-02"
-description = "Solution to Leetcode 2465"
+description = "In-depth solution and explanation for Leetcode 2465: Number of Distinct Averages in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

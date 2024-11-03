@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1128: Number of Equivalent Domino Pairs"
 date = "2021-10-01"
-description = "Solution to Leetcode 1128"
+description = "In-depth solution and explanation for Leetcode 1128: Number of Equivalent Domino Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

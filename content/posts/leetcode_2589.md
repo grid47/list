@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2589: Minimum Time to Complete All Tasks"
 date = "2017-10-01"
-description = "Solution to Leetcode 2589"
+description = "In-depth solution and explanation for Leetcode 2589: Minimum Time to Complete All Tasks in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

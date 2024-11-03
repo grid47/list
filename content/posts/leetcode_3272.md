@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3272: Find the Count of Good Integers"
 date = "2015-11-18"
-description = "Solution to Leetcode 3272"
+description = "In-depth solution and explanation for Leetcode 3272: Find the Count of Good Integers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1616: Split Two Strings to Make Palindrome"
 date = "2020-05-31"
-description = "Solution to Leetcode 1616"
+description = "In-depth solution and explanation for Leetcode 1616: Split Two Strings to Make Palindrome in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

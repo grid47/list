@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3165: Maximum Sum of Subsequence With Non-adjacent Elements"
 date = "2016-03-04"
-description = "Solution to Leetcode 3165"
+description = "In-depth solution and explanation for Leetcode 3165: Maximum Sum of Subsequence With Non-adjacent Elements in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

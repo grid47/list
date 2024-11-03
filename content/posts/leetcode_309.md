@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 309: Best Time to Buy and Sell Stock with Cooldown"
 date = "2023-12-29"
-description = "Solution to Leetcode 309"
+description = "In-depth solution and explanation for Leetcode 309: Best Time to Buy and Sell Stock with Cooldown in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

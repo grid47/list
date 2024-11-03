@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 413: Arithmetic Slices"
 date = "2023-09-16"
-description = "Solution to Leetcode 413"
+description = "In-depth solution and explanation for Leetcode 413: Arithmetic Slices in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

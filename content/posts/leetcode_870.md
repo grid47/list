@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 870: Advantage Shuffle"
 date = "2022-06-16"
-description = "Solution to Leetcode 870"
+description = "In-depth solution and explanation for Leetcode 870: Advantage Shuffle in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

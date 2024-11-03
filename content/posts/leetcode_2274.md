@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2274: Maximum Consecutive Floors Without Special Floors"
 date = "2018-08-12"
-description = "Solution to Leetcode 2274"
+description = "In-depth solution and explanation for Leetcode 2274: Maximum Consecutive Floors Without Special Floors in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

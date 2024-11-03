@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1326: Minimum Number of Taps to Open to Water a Garden"
 date = "2021-03-17"
-description = "Solution to Leetcode 1326"
+description = "In-depth solution and explanation for Leetcode 1326: Minimum Number of Taps to Open to Water a Garden in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -79,7 +79,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1326.md" >}}
 ---
 
 

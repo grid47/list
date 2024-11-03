@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1162: As Far from Land as Possible"
 date = "2021-08-28"
-description = "Solution to Leetcode 1162"
+description = "In-depth solution and explanation for Leetcode 1162: As Far from Land as Possible in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

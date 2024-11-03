@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2102: Sequentially Ordinal Rank Tracker"
 date = "2019-01-31"
-description = "Solution to Leetcode 2102"
+description = "In-depth solution and explanation for Leetcode 2102: Sequentially Ordinal Rank Tracker in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

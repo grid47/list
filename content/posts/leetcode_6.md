@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 6: Zigzag Conversion"
 date = "2024-10-27"
-description = "Solution to Leetcode 6"
+description = "In-depth solution and explanation for Leetcode 6: Zigzag Conversion in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1433: Check If a String Can Break Another String"
 date = "2020-11-30"
-description = "Solution to Leetcode 1433"
+description = "In-depth solution and explanation for Leetcode 1433: Check If a String Can Break Another String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -39,7 +39,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1433.md" >}}
 ---
 
 

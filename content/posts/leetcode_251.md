@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 251: Flatten 2D Vector"
 date = "2024-02-25"
-description = "Solution to Leetcode 251"
+description = "In-depth solution and explanation for Leetcode 251: Flatten 2D Vector in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

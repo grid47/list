@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 696: Count Binary Substrings"
 date = "2022-12-07"
-description = "Solution to Leetcode 696"
+description = "In-depth solution and explanation for Leetcode 696: Count Binary Substrings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

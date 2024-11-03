@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2056: Number of Valid Move Combinations On Chessboard"
 date = "2019-03-18"
-description = "Solution to Leetcode 2056"
+description = "In-depth solution and explanation for Leetcode 2056: Number of Valid Move Combinations On Chessboard in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

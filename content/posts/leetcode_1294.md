@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1294: Weather Type in Each Country"
 date = "2021-04-18"
-description = "Solution to Leetcode 1294"
+description = "In-depth solution and explanation for Leetcode 1294: Weather Type in Each Country in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

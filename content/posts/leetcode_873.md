@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 873: Length of Longest Fibonacci Subsequence"
 date = "2022-06-13"
-description = "Solution to Leetcode 873"
+description = "In-depth solution and explanation for Leetcode 873: Length of Longest Fibonacci Subsequence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

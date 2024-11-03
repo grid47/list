@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2273: Find Resultant Array After Removing Anagrams"
 date = "2018-08-13"
-description = "Solution to Leetcode 2273"
+description = "In-depth solution and explanation for Leetcode 2273: Find Resultant Array After Removing Anagrams in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 176: Second Highest Salary"
 date = "2024-05-10"
-description = "Solution to Leetcode 176"
+description = "In-depth solution and explanation for Leetcode 176: Second Highest Salary in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

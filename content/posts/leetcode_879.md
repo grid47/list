@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 879: Profitable Schemes"
 date = "2022-06-07"
-description = "Solution to Leetcode 879"
+description = "In-depth solution and explanation for Leetcode 879: Profitable Schemes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

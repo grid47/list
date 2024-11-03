@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1033: Moving Stones Until Consecutive"
 date = "2022-01-04"
-description = "Solution to Leetcode 1033"
+description = "In-depth solution and explanation for Leetcode 1033: Moving Stones Until Consecutive in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2679: Sum in a Matrix"
 date = "2017-07-03"
-description = "Solution to Leetcode 2679"
+description = "In-depth solution and explanation for Leetcode 2679: Sum in a Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

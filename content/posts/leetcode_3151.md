@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3151: Special Array I"
 date = "2016-03-18"
-description = "Solution to Leetcode 3151"
+description = "In-depth solution and explanation for Leetcode 3151: Special Array I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

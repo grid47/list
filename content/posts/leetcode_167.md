@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 167: Two Sum II - Input Array Is Sorted"
 date = "2024-05-19"
-description = "Solution to Leetcode 167"
+description = "In-depth solution and explanation for Leetcode 167: Two Sum II - Input Array Is Sorted in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

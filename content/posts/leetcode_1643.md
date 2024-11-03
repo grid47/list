@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1643: Kth Smallest Instructions"
 date = "2020-05-04"
-description = "Solution to Leetcode 1643"
+description = "In-depth solution and explanation for Leetcode 1643: Kth Smallest Instructions in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

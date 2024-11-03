@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 135: Candy"
 date = "2024-06-20"
-description = "Solution to Leetcode 135"
+description = "In-depth solution and explanation for Leetcode 135: Candy in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

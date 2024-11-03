@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1053: Previous Permutation With One Swap"
 date = "2021-12-15"
-description = "Solution to Leetcode 1053"
+description = "In-depth solution and explanation for Leetcode 1053: Previous Permutation With One Swap in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

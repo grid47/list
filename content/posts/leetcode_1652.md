@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1652: Defuse the Bomb"
 date = "2020-04-25"
-description = "Solution to Leetcode 1652"
+description = "In-depth solution and explanation for Leetcode 1652: Defuse the Bomb in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

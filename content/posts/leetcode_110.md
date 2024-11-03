@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 110: Balanced Binary Tree"
 date = "2024-07-15"
-description = "Solution to Leetcode 110"
+description = "In-depth solution and explanation for Leetcode 110: Balanced Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

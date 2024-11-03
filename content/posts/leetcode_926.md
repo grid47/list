@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 926: Flip String to Monotone Increasing"
 date = "2022-04-21"
-description = "Solution to Leetcode 926"
+description = "In-depth solution and explanation for Leetcode 926: Flip String to Monotone Increasing in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

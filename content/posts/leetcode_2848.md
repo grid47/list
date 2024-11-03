@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2848: Points That Intersect With Cars"
 date = "2017-01-15"
-description = "Solution to Leetcode 2848"
+description = "In-depth solution and explanation for Leetcode 2848: Points That Intersect With Cars in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

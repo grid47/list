@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 584: Find Customer Referee"
 date = "2023-03-29"
-description = "Solution to Leetcode 584"
+description = "In-depth solution and explanation for Leetcode 584: Find Customer Referee in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

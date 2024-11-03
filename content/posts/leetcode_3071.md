@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3071: Minimum Operations to Write the Letter Y on a Grid"
 date = "2016-06-06"
-description = "Solution to Leetcode 3071"
+description = "In-depth solution and explanation for Leetcode 3071: Minimum Operations to Write the Letter Y on a Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

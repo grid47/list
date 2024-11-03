@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 74: Search a 2D Matrix"
 date = "2024-08-20"
-description = "Solution to Leetcode 74"
+description = "In-depth solution and explanation for Leetcode 74: Search a 2D Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 863: All Nodes Distance K in Binary Tree"
 date = "2022-06-23"
-description = "Solution to Leetcode 863"
+description = "In-depth solution and explanation for Leetcode 863: All Nodes Distance K in Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

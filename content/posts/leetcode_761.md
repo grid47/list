@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 761: Special Binary String"
 date = "2022-10-03"
-description = "Solution to Leetcode 761"
+description = "In-depth solution and explanation for Leetcode 761: Special Binary String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

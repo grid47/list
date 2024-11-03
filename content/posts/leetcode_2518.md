@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2518: Number of Great Partitions"
 date = "2017-12-11"
-description = "Solution to Leetcode 2518"
+description = "In-depth solution and explanation for Leetcode 2518: Number of Great Partitions in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

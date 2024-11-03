@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2436: Minimum Split Into Subarrays With GCD Greater Than One"
 date = "2018-03-03"
-description = "Solution to Leetcode 2436"
+description = "In-depth solution and explanation for Leetcode 2436: Minimum Split Into Subarrays With GCD Greater Than One in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

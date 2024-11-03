@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1328: Break a Palindrome"
 date = "2021-03-15"
-description = "Solution to Leetcode 1328"
+description = "In-depth solution and explanation for Leetcode 1328: Break a Palindrome in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -38,7 +38,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1328.md" >}}
 ---
 {{< youtube B5v5rDR7c9A >}}
 

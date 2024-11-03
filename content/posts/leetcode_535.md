@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 535: Encode and Decode TinyURL"
 date = "2023-05-17"
-description = "Solution to Leetcode 535"
+description = "In-depth solution and explanation for Leetcode 535: Encode and Decode TinyURL in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

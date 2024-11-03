@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 427: Construct Quad Tree"
 date = "2023-09-02"
-description = "Solution to Leetcode 427"
+description = "In-depth solution and explanation for Leetcode 427: Construct Quad Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

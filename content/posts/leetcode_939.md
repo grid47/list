@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 939: Minimum Area Rectangle"
 date = "2022-04-08"
-description = "Solution to Leetcode 939"
+description = "In-depth solution and explanation for Leetcode 939: Minimum Area Rectangle in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

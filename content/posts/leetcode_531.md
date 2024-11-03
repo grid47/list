@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 531: Lonely Pixel I"
 date = "2023-05-21"
-description = "Solution to Leetcode 531"
+description = "In-depth solution and explanation for Leetcode 531: Lonely Pixel I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

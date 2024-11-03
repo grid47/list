@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3026: Maximum Good Subarray Sum"
 date = "2016-07-21"
-description = "Solution to Leetcode 3026"
+description = "In-depth solution and explanation for Leetcode 3026: Maximum Good Subarray Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

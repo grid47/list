@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1808: Maximize Number of Nice Divisors"
 date = "2019-11-21"
-description = "Solution to Leetcode 1808"
+description = "In-depth solution and explanation for Leetcode 1808: Maximize Number of Nice Divisors in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

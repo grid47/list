@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2776: Convert Callback Based Function to Promise Based Function"
 date = "2017-03-28"
-description = "Solution to Leetcode 2776"
+description = "In-depth solution and explanation for Leetcode 2776: Convert Callback Based Function to Promise Based Function in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

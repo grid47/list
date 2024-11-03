@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 78: Subsets"
 date = "2024-08-16"
-description = "Solution to Leetcode 78"
+description = "In-depth solution and explanation for Leetcode 78: Subsets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

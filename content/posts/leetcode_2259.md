@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2259: Remove Digit From Number to Maximize Result"
 date = "2018-08-27"
-description = "Solution to Leetcode 2259"
+description = "In-depth solution and explanation for Leetcode 2259: Remove Digit From Number to Maximize Result in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

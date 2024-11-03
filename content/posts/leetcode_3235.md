@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3235: Check if the Rectangle Corner Is Reachable"
 date = "2015-12-25"
-description = "Solution to Leetcode 3235"
+description = "In-depth solution and explanation for Leetcode 3235: Check if the Rectangle Corner Is Reachable in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

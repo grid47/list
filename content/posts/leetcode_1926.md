@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1926: Nearest Exit from Entrance in Maze"
 date = "2019-07-26"
-description = "Solution to Leetcode 1926"
+description = "In-depth solution and explanation for Leetcode 1926: Nearest Exit from Entrance in Maze in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

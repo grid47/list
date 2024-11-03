@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 904: Fruit Into Baskets"
 date = "2022-05-13"
-description = "Solution to Leetcode 904"
+description = "In-depth solution and explanation for Leetcode 904: Fruit Into Baskets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

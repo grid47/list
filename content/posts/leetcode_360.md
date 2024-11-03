@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 360: Sort Transformed Array"
 date = "2023-11-08"
-description = "Solution to Leetcode 360"
+description = "In-depth solution and explanation for Leetcode 360: Sort Transformed Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

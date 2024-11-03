@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1952: Three Divisors"
 date = "2019-06-30"
-description = "Solution to Leetcode 1952"
+description = "In-depth solution and explanation for Leetcode 1952: Three Divisors in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

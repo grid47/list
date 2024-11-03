@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3033: Modify the Matrix"
 date = "2016-07-14"
-description = "Solution to Leetcode 3033"
+description = "In-depth solution and explanation for Leetcode 3033: Modify the Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

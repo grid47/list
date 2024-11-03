@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1211: Queries Quality and Percentage"
 date = "2021-07-10"
-description = "Solution to Leetcode 1211"
+description = "In-depth solution and explanation for Leetcode 1211: Queries Quality and Percentage in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

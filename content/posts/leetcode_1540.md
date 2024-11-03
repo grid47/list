@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1540: Can Convert String in K Moves"
 date = "2020-08-15"
-description = "Solution to Leetcode 1540"
+description = "In-depth solution and explanation for Leetcode 1540: Can Convert String in K Moves in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

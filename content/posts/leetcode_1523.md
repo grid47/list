@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1523: Count Odd Numbers in an Interval Range"
 date = "2020-09-01"
-description = "Solution to Leetcode 1523"
+description = "In-depth solution and explanation for Leetcode 1523: Count Odd Numbers in an Interval Range in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

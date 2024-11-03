@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 89: Gray Code"
 date = "2024-08-05"
-description = "Solution to Leetcode 89"
+description = "In-depth solution and explanation for Leetcode 89: Gray Code in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

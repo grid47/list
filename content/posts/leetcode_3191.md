@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3191: Minimum Operations to Make Binary Array Elements Equal to One I"
 date = "2016-02-07"
-description = "Solution to Leetcode 3191"
+description = "In-depth solution and explanation for Leetcode 3191: Minimum Operations to Make Binary Array Elements Equal to One I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

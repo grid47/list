@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1343: Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold"
 date = "2021-02-28"
-description = "Solution to Leetcode 1343"
+description = "In-depth solution and explanation for Leetcode 1343: Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -41,7 +41,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1343.md" >}}
 ---
 
 

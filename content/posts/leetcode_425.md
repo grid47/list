@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 425: Word Squares"
 date = "2023-09-04"
-description = "Solution to Leetcode 425"
+description = "In-depth solution and explanation for Leetcode 425: Word Squares in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

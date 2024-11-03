@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1055: Shortest Way to Form String"
 date = "2021-12-13"
-description = "Solution to Leetcode 1055"
+description = "In-depth solution and explanation for Leetcode 1055: Shortest Way to Form String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

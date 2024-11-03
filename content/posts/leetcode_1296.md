@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1296: Divide Array in Sets of K Consecutive Numbers"
 date = "2021-04-16"
-description = "Solution to Leetcode 1296"
+description = "In-depth solution and explanation for Leetcode 1296: Divide Array in Sets of K Consecutive Numbers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

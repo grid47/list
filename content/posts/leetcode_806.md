@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 806: Number of Lines To Write String"
 date = "2022-08-19"
-description = "Solution to Leetcode 806"
+description = "In-depth solution and explanation for Leetcode 806: Number of Lines To Write String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

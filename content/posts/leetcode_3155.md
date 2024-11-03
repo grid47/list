@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3155: Maximum Number of Upgradable Servers"
 date = "2016-03-14"
-description = "Solution to Leetcode 3155"
+description = "In-depth solution and explanation for Leetcode 3155: Maximum Number of Upgradable Servers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

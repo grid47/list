@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 520: Detect Capital"
 date = "2023-06-01"
-description = "Solution to Leetcode 520"
+description = "In-depth solution and explanation for Leetcode 520: Detect Capital in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2365: Task Scheduler II"
 date = "2018-05-13"
-description = "Solution to Leetcode 2365"
+description = "In-depth solution and explanation for Leetcode 2365: Task Scheduler II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

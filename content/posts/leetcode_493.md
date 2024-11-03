@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 493: Reverse Pairs"
 date = "2023-06-28"
-description = "Solution to Leetcode 493"
+description = "In-depth solution and explanation for Leetcode 493: Reverse Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

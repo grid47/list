@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 339: Nested List Weight Sum"
 date = "2023-11-29"
-description = "Solution to Leetcode 339"
+description = "In-depth solution and explanation for Leetcode 339: Nested List Weight Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

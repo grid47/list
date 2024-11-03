@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1380: Lucky Numbers in a Matrix"
 date = "2021-01-22"
-description = "Solution to Leetcode 1380"
+description = "In-depth solution and explanation for Leetcode 1380: Lucky Numbers in a Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -50,7 +50,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1380.md" >}}
 ---
 
 

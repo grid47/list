@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1406: Stone Game III"
 date = "2020-12-27"
-description = "Solution to Leetcode 1406"
+description = "In-depth solution and explanation for Leetcode 1406: Stone Game III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -60,7 +60,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1406.md" >}}
 ---
 
 

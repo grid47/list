@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 211: Design Add and Search Words Data Structure"
 date = "2024-04-05"
-description = "Solution to Leetcode 211"
+description = "In-depth solution and explanation for Leetcode 211: Design Add and Search Words Data Structure in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

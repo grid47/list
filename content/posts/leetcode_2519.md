@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2519: Count the Number of K-Big Indices"
 date = "2017-12-10"
-description = "Solution to Leetcode 2519"
+description = "In-depth solution and explanation for Leetcode 2519: Count the Number of K-Big Indices in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

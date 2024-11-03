@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1999: Smallest Greater Multiple Made of Two Digits"
 date = "2019-05-14"
-description = "Solution to Leetcode 1999"
+description = "In-depth solution and explanation for Leetcode 1999: Smallest Greater Multiple Made of Two Digits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2747: Count Zero Request Servers"
 date = "2017-04-26"
-description = "Solution to Leetcode 2747"
+description = "In-depth solution and explanation for Leetcode 2747: Count Zero Request Servers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 680: Valid Palindrome II"
 date = "2022-12-23"
-description = "Solution to Leetcode 680"
+description = "In-depth solution and explanation for Leetcode 680: Valid Palindrome II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

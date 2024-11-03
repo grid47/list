@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3145: Find Products of Elements of Big Array"
 date = "2016-03-24"
-description = "Solution to Leetcode 3145"
+description = "In-depth solution and explanation for Leetcode 3145: Find Products of Elements of Big Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 540: Single Element in a Sorted Array"
 date = "2023-05-12"
-description = "Solution to Leetcode 540"
+description = "In-depth solution and explanation for Leetcode 540: Single Element in a Sorted Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

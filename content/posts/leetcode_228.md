@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 228: Summary Ranges"
 date = "2024-03-19"
-description = "Solution to Leetcode 228"
+description = "In-depth solution and explanation for Leetcode 228: Summary Ranges in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

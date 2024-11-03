@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 747: Largest Number At Least Twice of Others"
 date = "2022-10-17"
-description = "Solution to Leetcode 747"
+description = "In-depth solution and explanation for Leetcode 747: Largest Number At Least Twice of Others in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1990: Count the Number of Experiments"
 date = "2019-05-23"
-description = "Solution to Leetcode 1990"
+description = "In-depth solution and explanation for Leetcode 1990: Count the Number of Experiments in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

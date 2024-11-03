@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 178: Rank Scores"
 date = "2024-05-08"
-description = "Solution to Leetcode 178"
+description = "In-depth solution and explanation for Leetcode 178: Rank Scores in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

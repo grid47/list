@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1542: Find Longest Awesome Substring"
 date = "2020-08-13"
-description = "Solution to Leetcode 1542"
+description = "In-depth solution and explanation for Leetcode 1542: Find Longest Awesome Substring in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

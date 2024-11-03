@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2207: Maximize Number of Subsequences in a String"
 date = "2018-10-18"
-description = "Solution to Leetcode 2207"
+description = "In-depth solution and explanation for Leetcode 2207: Maximize Number of Subsequences in a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

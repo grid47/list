@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 840: Magic Squares In Grid"
 date = "2022-07-16"
-description = "Solution to Leetcode 840"
+description = "In-depth solution and explanation for Leetcode 840: Magic Squares In Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

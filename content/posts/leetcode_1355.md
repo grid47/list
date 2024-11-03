@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1355: Activity Participants"
 date = "2021-02-16"
-description = "Solution to Leetcode 1355"
+description = "In-depth solution and explanation for Leetcode 1355: Activity Participants in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1355.md" >}}
 ---
 
 

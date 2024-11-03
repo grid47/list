@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2415: Reverse Odd Levels of Binary Tree"
 date = "2018-03-24"
-description = "Solution to Leetcode 2415"
+description = "In-depth solution and explanation for Leetcode 2415: Reverse Odd Levels of Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

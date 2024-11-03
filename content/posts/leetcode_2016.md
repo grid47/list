@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2016: Maximum Difference Between Increasing Elements"
 date = "2019-04-27"
-description = "Solution to Leetcode 2016"
+description = "In-depth solution and explanation for Leetcode 2016: Maximum Difference Between Increasing Elements in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

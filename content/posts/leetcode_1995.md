@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1995: Count Special Quadruplets"
 date = "2019-05-18"
-description = "Solution to Leetcode 1995"
+description = "In-depth solution and explanation for Leetcode 1995: Count Special Quadruplets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

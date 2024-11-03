@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1172: Dinner Plate Stacks"
 date = "2021-08-18"
-description = "Solution to Leetcode 1172"
+description = "In-depth solution and explanation for Leetcode 1172: Dinner Plate Stacks in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

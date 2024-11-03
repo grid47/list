@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 325: Maximum Size Subarray Sum Equals k"
 date = "2023-12-13"
-description = "Solution to Leetcode 325"
+description = "In-depth solution and explanation for Leetcode 325: Maximum Size Subarray Sum Equals k in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

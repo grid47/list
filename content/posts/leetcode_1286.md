@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1286: Iterator for Combination"
 date = "2021-04-26"
-description = "Solution to Leetcode 1286"
+description = "In-depth solution and explanation for Leetcode 1286: Iterator for Combination in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 499: The Maze III"
 date = "2023-06-22"
-description = "Solution to Leetcode 499"
+description = "In-depth solution and explanation for Leetcode 499: The Maze III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

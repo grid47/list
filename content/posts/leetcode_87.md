@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 87: Scramble String"
 date = "2024-08-07"
-description = "Solution to Leetcode 87"
+description = "In-depth solution and explanation for Leetcode 87: Scramble String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3267: Count Almost Equal Pairs II"
 date = "2015-11-23"
-description = "Solution to Leetcode 3267"
+description = "In-depth solution and explanation for Leetcode 3267: Count Almost Equal Pairs II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3327: Check if DFS Strings Are Palindromes"
 date = "2015-09-24"
-description = "Solution to Leetcode 3327"
+description = "In-depth solution and explanation for Leetcode 3327: Check if DFS Strings Are Palindromes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

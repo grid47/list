@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1515: Best Position for a Service Centre"
 date = "2020-09-09"
-description = "Solution to Leetcode 1515"
+description = "In-depth solution and explanation for Leetcode 1515: Best Position for a Service Centre in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

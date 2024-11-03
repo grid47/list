@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2909: Minimum Sum of Mountain Triplets II"
 date = "2016-11-15"
-description = "Solution to Leetcode 2909"
+description = "In-depth solution and explanation for Leetcode 2909: Minimum Sum of Mountain Triplets II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

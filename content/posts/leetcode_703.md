@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 703: Kth Largest Element in a Stream"
 date = "2022-11-30"
-description = "Solution to Leetcode 703"
+description = "In-depth solution and explanation for Leetcode 703: Kth Largest Element in a Stream in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 798: Smallest Rotation with Highest Score"
 date = "2022-08-27"
-description = "Solution to Leetcode 798"
+description = "In-depth solution and explanation for Leetcode 798: Smallest Rotation with Highest Score in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

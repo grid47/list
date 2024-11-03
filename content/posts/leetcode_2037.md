@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2037: Minimum Number of Moves to Seat Everyone"
 date = "2019-04-06"
-description = "Solution to Leetcode 2037"
+description = "In-depth solution and explanation for Leetcode 2037: Minimum Number of Moves to Seat Everyone in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

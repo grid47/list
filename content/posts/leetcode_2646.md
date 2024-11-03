@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2646: Minimize the Total Price of the Trips"
 date = "2017-08-05"
-description = "Solution to Leetcode 2646"
+description = "In-depth solution and explanation for Leetcode 2646: Minimize the Total Price of the Trips in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2876: Count Visited Nodes in a Directed Graph"
 date = "2016-12-18"
-description = "Solution to Leetcode 2876"
+description = "In-depth solution and explanation for Leetcode 2876: Count Visited Nodes in a Directed Graph in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

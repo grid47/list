@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 900: RLE Iterator"
 date = "2022-05-17"
-description = "Solution to Leetcode 900"
+description = "In-depth solution and explanation for Leetcode 900: RLE Iterator in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

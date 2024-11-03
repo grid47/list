@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 334: Increasing Triplet Subsequence"
 date = "2023-12-04"
-description = "Solution to Leetcode 334"
+description = "In-depth solution and explanation for Leetcode 334: Increasing Triplet Subsequence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

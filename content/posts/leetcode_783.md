@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 783: Minimum Distance Between BST Nodes"
 date = "2022-09-11"
-description = "Solution to Leetcode 783"
+description = "In-depth solution and explanation for Leetcode 783: Minimum Distance Between BST Nodes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

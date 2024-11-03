@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1739: Building Boxes"
 date = "2020-01-29"
-description = "Solution to Leetcode 1739"
+description = "In-depth solution and explanation for Leetcode 1739: Building Boxes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

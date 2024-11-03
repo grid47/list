@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 278: First Bad Version"
 date = "2024-01-29"
-description = "Solution to Leetcode 278"
+description = "In-depth solution and explanation for Leetcode 278: First Bad Version in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 582: Kill Process"
 date = "2023-03-31"
-description = "Solution to Leetcode 582"
+description = "In-depth solution and explanation for Leetcode 582: Kill Process in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

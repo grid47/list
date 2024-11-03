@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2840: Check if Strings Can be Made Equal With Operations II"
 date = "2017-01-23"
-description = "Solution to Leetcode 2840"
+description = "In-depth solution and explanation for Leetcode 2840: Check if Strings Can be Made Equal With Operations II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

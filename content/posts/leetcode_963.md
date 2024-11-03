@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 963: Minimum Area Rectangle II"
 date = "2022-03-15"
-description = "Solution to Leetcode 963"
+description = "In-depth solution and explanation for Leetcode 963: Minimum Area Rectangle II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

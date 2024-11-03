@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1357: Apply Discount Every n Orders"
 date = "2021-02-14"
-description = "Solution to Leetcode 1357"
+description = "In-depth solution and explanation for Leetcode 1357: Apply Discount Every n Orders in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -51,7 +51,7 @@ public:
  */
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1357.md" >}}
 ---
 
 

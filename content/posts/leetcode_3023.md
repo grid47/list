@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3023: Find Pattern in Infinite Stream I"
 date = "2016-07-24"
-description = "Solution to Leetcode 3023"
+description = "In-depth solution and explanation for Leetcode 3023: Find Pattern in Infinite Stream I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

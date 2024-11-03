@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 201: Bitwise AND of Numbers Range"
 date = "2024-04-15"
-description = "Solution to Leetcode 201"
+description = "In-depth solution and explanation for Leetcode 201: Bitwise AND of Numbers Range in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

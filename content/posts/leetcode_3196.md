@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3196: Maximize Total Cost of Alternating Subarrays"
 date = "2016-02-02"
-description = "Solution to Leetcode 3196"
+description = "In-depth solution and explanation for Leetcode 3196: Maximize Total Cost of Alternating Subarrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

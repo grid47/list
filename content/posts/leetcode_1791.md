@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1791: Find Center of Star Graph"
 date = "2019-12-08"
-description = "Solution to Leetcode 1791"
+description = "In-depth solution and explanation for Leetcode 1791: Find Center of Star Graph in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1059: All Paths from Source Lead to Destination"
 date = "2021-12-09"
-description = "Solution to Leetcode 1059"
+description = "In-depth solution and explanation for Leetcode 1059: All Paths from Source Lead to Destination in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

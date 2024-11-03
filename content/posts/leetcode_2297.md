@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2297: Jump Game VIII"
 date = "2018-07-20"
-description = "Solution to Leetcode 2297"
+description = "In-depth solution and explanation for Leetcode 2297: Jump Game VIII in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3318: Find X-Sum of All K-Long Subarrays I"
 date = "2015-10-03"
-description = "Solution to Leetcode 3318"
+description = "In-depth solution and explanation for Leetcode 3318: Find X-Sum of All K-Long Subarrays I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

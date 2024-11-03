@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1288: Remove Covered Intervals"
 date = "2021-04-24"
-description = "Solution to Leetcode 1288"
+description = "In-depth solution and explanation for Leetcode 1288: Remove Covered Intervals in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

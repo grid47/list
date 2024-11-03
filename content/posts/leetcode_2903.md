@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2903: Find Indices With Index and Value Difference I"
 date = "2016-11-21"
-description = "Solution to Leetcode 2903"
+description = "In-depth solution and explanation for Leetcode 2903: Find Indices With Index and Value Difference I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

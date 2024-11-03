@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1827: Minimum Operations to Make the Array Increasing"
 date = "2019-11-02"
-description = "Solution to Leetcode 1827"
+description = "In-depth solution and explanation for Leetcode 1827: Minimum Operations to Make the Array Increasing in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

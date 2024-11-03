@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 441: Arranging Coins"
 date = "2023-08-19"
-description = "Solution to Leetcode 441"
+description = "In-depth solution and explanation for Leetcode 441: Arranging Coins in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

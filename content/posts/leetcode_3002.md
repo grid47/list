@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3002: Maximum Size of a Set After Removals"
 date = "2016-08-14"
-description = "Solution to Leetcode 3002"
+description = "In-depth solution and explanation for Leetcode 3002: Maximum Size of a Set After Removals in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

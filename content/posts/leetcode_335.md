@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 335: Self Crossing"
 date = "2023-12-03"
-description = "Solution to Leetcode 335"
+description = "In-depth solution and explanation for Leetcode 335: Self Crossing in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

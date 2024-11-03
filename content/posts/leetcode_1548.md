@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1548: The Most Similar Path in a Graph"
 date = "2020-08-07"
-description = "Solution to Leetcode 1548"
+description = "In-depth solution and explanation for Leetcode 1548: The Most Similar Path in a Graph in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

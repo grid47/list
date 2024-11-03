@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 333: Largest BST Subtree"
 date = "2023-12-05"
-description = "Solution to Leetcode 333"
+description = "In-depth solution and explanation for Leetcode 333: Largest BST Subtree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

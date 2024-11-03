@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1737: Change Minimum Characters to Satisfy One of Three Conditions"
 date = "2020-01-31"
-description = "Solution to Leetcode 1737"
+description = "In-depth solution and explanation for Leetcode 1737: Change Minimum Characters to Satisfy One of Three Conditions in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

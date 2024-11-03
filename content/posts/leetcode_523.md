@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 523: Continuous Subarray Sum"
 date = "2023-05-29"
-description = "Solution to Leetcode 523"
+description = "In-depth solution and explanation for Leetcode 523: Continuous Subarray Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

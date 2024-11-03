@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1822: Sign of the Product of an Array"
 date = "2019-11-07"
-description = "Solution to Leetcode 1822"
+description = "In-depth solution and explanation for Leetcode 1822: Sign of the Product of an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

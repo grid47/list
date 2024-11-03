@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2996: Smallest Missing Integer Greater Than Sequential Prefix Sum"
 date = "2016-08-20"
-description = "Solution to Leetcode 2996"
+description = "In-depth solution and explanation for Leetcode 2996: Smallest Missing Integer Greater Than Sequential Prefix Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

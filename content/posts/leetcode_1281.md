@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1281: Subtract the Product and Sum of Digits of an Integer"
 date = "2021-05-01"
-description = "Solution to Leetcode 1281"
+description = "In-depth solution and explanation for Leetcode 1281: Subtract the Product and Sum of Digits of an Integer in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

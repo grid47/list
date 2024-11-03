@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number"
 date = "2018-11-17"
-description = "Solution to Leetcode 2177"
+description = "In-depth solution and explanation for Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

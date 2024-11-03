@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2805: Custom Interval"
 date = "2017-02-27"
-description = "Solution to Leetcode 2805"
+description = "In-depth solution and explanation for Leetcode 2805: Custom Interval in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

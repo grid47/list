@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1963: Minimum Number of Swaps to Make the String Balanced"
 date = "2019-06-19"
-description = "Solution to Leetcode 1963"
+description = "In-depth solution and explanation for Leetcode 1963: Minimum Number of Swaps to Make the String Balanced in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

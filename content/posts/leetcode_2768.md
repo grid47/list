@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2768: Number of Black Blocks"
 date = "2017-04-05"
-description = "Solution to Leetcode 2768"
+description = "In-depth solution and explanation for Leetcode 2768: Number of Black Blocks in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

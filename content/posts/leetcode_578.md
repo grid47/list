@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 578: Get Highest Answer Rate Question"
 date = "2023-04-04"
-description = "Solution to Leetcode 578"
+description = "In-depth solution and explanation for Leetcode 578: Get Highest Answer Rate Question in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

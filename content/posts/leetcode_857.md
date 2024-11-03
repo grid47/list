@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 857: Minimum Cost to Hire K Workers"
 date = "2022-06-29"
-description = "Solution to Leetcode 857"
+description = "In-depth solution and explanation for Leetcode 857: Minimum Cost to Hire K Workers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

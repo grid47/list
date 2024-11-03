@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 553: Optimal Division"
 date = "2023-04-29"
-description = "Solution to Leetcode 553"
+description = "In-depth solution and explanation for Leetcode 553: Optimal Division in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

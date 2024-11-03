@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1692: Count Ways to Distribute Candies"
 date = "2020-03-16"
-description = "Solution to Leetcode 1692"
+description = "In-depth solution and explanation for Leetcode 1692: Count Ways to Distribute Candies in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

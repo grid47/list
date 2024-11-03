@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1070: Product Sales Analysis III"
 date = "2021-11-28"
-description = "Solution to Leetcode 1070"
+description = "In-depth solution and explanation for Leetcode 1070: Product Sales Analysis III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

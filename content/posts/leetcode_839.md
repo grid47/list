@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 839: Similar String Groups"
 date = "2022-07-17"
-description = "Solution to Leetcode 839"
+description = "In-depth solution and explanation for Leetcode 839: Similar String Groups in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

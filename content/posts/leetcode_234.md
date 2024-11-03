@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 234: Palindrome Linked List"
 date = "2024-03-13"
-description = "Solution to Leetcode 234"
+description = "In-depth solution and explanation for Leetcode 234: Palindrome Linked List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

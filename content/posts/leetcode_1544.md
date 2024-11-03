@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1544: Make The String Great"
 date = "2020-08-11"
-description = "Solution to Leetcode 1544"
+description = "In-depth solution and explanation for Leetcode 1544: Make The String Great in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

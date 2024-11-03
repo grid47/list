@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2933: High-Access Employees"
 date = "2016-10-22"
-description = "Solution to Leetcode 2933"
+description = "In-depth solution and explanation for Leetcode 2933: High-Access Employees in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

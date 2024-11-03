@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1763: Longest Nice Substring"
 date = "2020-01-05"
-description = "Solution to Leetcode 1763"
+description = "In-depth solution and explanation for Leetcode 1763: Longest Nice Substring in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3053: Classifying Triangles by Lengths"
 date = "2016-06-24"
-description = "Solution to Leetcode 3053"
+description = "In-depth solution and explanation for Leetcode 3053: Classifying Triangles by Lengths in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

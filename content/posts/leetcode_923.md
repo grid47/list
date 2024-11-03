@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 923: 3Sum With Multiplicity"
 date = "2022-04-24"
-description = "Solution to Leetcode 923"
+description = "In-depth solution and explanation for Leetcode 923: 3Sum With Multiplicity in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

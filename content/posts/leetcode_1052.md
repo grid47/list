@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1052: Grumpy Bookstore Owner"
 date = "2021-12-16"
-description = "Solution to Leetcode 1052"
+description = "In-depth solution and explanation for Leetcode 1052: Grumpy Bookstore Owner in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

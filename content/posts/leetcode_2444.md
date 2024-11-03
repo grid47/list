@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2444: Count Subarrays With Fixed Bounds"
 date = "2018-02-23"
-description = "Solution to Leetcode 2444"
+description = "In-depth solution and explanation for Leetcode 2444: Count Subarrays With Fixed Bounds in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

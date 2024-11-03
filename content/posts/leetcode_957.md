@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 957: Prison Cells After N Days"
 date = "2022-03-21"
-description = "Solution to Leetcode 957"
+description = "In-depth solution and explanation for Leetcode 957: Prison Cells After N Days in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

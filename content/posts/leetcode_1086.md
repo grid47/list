@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1086: High Five"
 date = "2021-11-12"
-description = "Solution to Leetcode 1086"
+description = "In-depth solution and explanation for Leetcode 1086: High Five in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

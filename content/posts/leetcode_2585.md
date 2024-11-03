@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2585: Number of Ways to Earn Points"
 date = "2017-10-05"
-description = "Solution to Leetcode 2585"
+description = "In-depth solution and explanation for Leetcode 2585: Number of Ways to Earn Points in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

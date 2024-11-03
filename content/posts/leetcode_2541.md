@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2541: Minimum Operations to Make Array Equal II"
 date = "2017-11-18"
-description = "Solution to Leetcode 2541"
+description = "In-depth solution and explanation for Leetcode 2541: Minimum Operations to Make Array Equal II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

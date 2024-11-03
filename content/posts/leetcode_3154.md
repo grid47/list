@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3154: Find Number of Ways to Reach the K-th Stair"
 date = "2016-03-15"
-description = "Solution to Leetcode 3154"
+description = "In-depth solution and explanation for Leetcode 3154: Find Number of Ways to Reach the K-th Stair in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

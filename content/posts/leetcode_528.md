@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 528: Random Pick with Weight"
 date = "2023-05-24"
-description = "Solution to Leetcode 528"
+description = "In-depth solution and explanation for Leetcode 528: Random Pick with Weight in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 134: Gas Station"
 date = "2024-06-21"
-description = "Solution to Leetcode 134"
+description = "In-depth solution and explanation for Leetcode 134: Gas Station in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 663: Equal Tree Partition"
 date = "2023-01-09"
-description = "Solution to Leetcode 663"
+description = "In-depth solution and explanation for Leetcode 663: Equal Tree Partition in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

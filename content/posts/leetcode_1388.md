@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1388: Pizza With 3n Slices"
 date = "2021-01-14"
-description = "Solution to Leetcode 1388"
+description = "In-depth solution and explanation for Leetcode 1388: Pizza With 3n Slices in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -54,7 +54,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1388.md" >}}
 ---
 
 

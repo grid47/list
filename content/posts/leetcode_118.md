@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 118: Pascal's Triangle"
 date = "2024-07-07"
-description = "Solution to Leetcode 118"
+description = "In-depth solution and explanation for Leetcode 118: Pascal's Triangle in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1434: Number of Ways to Wear Different Hats to Each Other"
 date = "2020-11-29"
-description = "Solution to Leetcode 1434"
+description = "In-depth solution and explanation for Leetcode 1434: Number of Ways to Wear Different Hats to Each Other in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -52,7 +52,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1434.md" >}}
 ---
 
 

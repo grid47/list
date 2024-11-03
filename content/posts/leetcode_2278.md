@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2278: Percentage of Letter in String"
 date = "2018-08-08"
-description = "Solution to Leetcode 2278"
+description = "In-depth solution and explanation for Leetcode 2278: Percentage of Letter in String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

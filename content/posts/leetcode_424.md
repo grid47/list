@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 424: Longest Repeating Character Replacement"
 date = "2023-09-05"
-description = "Solution to Leetcode 424"
+description = "In-depth solution and explanation for Leetcode 424: Longest Repeating Character Replacement in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

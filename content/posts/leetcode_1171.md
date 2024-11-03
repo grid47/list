@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1171: Remove Zero Sum Consecutive Nodes from Linked List"
 date = "2021-08-19"
-description = "Solution to Leetcode 1171"
+description = "In-depth solution and explanation for Leetcode 1171: Remove Zero Sum Consecutive Nodes from Linked List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

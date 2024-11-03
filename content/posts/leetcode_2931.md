@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2931: Maximum Spending After Buying Items"
 date = "2016-10-24"
-description = "Solution to Leetcode 2931"
+description = "In-depth solution and explanation for Leetcode 2931: Maximum Spending After Buying Items in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

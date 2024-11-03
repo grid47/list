@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3065: Minimum Operations to Exceed Threshold Value I"
 date = "2016-06-12"
-description = "Solution to Leetcode 3065"
+description = "In-depth solution and explanation for Leetcode 3065: Minimum Operations to Exceed Threshold Value I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 788: Rotated Digits"
 date = "2022-09-06"
-description = "Solution to Leetcode 788"
+description = "In-depth solution and explanation for Leetcode 788: Rotated Digits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

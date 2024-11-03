@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3177: Find the Maximum Length of a Good Subsequence II"
 date = "2016-02-21"
-description = "Solution to Leetcode 3177"
+description = "In-depth solution and explanation for Leetcode 3177: Find the Maximum Length of a Good Subsequence II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

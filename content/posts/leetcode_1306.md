@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1306: Jump Game III"
 date = "2021-04-06"
-description = "Solution to Leetcode 1306"
+description = "In-depth solution and explanation for Leetcode 1306: Jump Game III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -48,7 +48,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1306.md" >}}
 ---
 {{< youtube 9oUhzPLmLZQ >}}
 

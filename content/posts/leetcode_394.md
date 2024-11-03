@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 394: Decode String"
 date = "2023-10-05"
-description = "Solution to Leetcode 394"
+description = "In-depth solution and explanation for Leetcode 394: Decode String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

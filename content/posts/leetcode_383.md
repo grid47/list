@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 383: Ransom Note"
 date = "2023-10-16"
-description = "Solution to Leetcode 383"
+description = "In-depth solution and explanation for Leetcode 383: Ransom Note in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 660: Remove 9"
 date = "2023-01-12"
-description = "Solution to Leetcode 660"
+description = "In-depth solution and explanation for Leetcode 660: Remove 9 in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

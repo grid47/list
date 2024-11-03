@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 138: Copy List with Random Pointer"
 date = "2024-06-17"
-description = "Solution to Leetcode 138"
+description = "In-depth solution and explanation for Leetcode 138: Copy List with Random Pointer in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

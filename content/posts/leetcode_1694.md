@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1694: Reformat Phone Number"
 date = "2020-03-14"
-description = "Solution to Leetcode 1694"
+description = "In-depth solution and explanation for Leetcode 1694: Reformat Phone Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

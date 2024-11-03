@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2214: Minimum Health to Beat Game"
 date = "2018-10-11"
-description = "Solution to Leetcode 2214"
+description = "In-depth solution and explanation for Leetcode 2214: Minimum Health to Beat Game in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

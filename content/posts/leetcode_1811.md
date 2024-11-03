@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1811: Find Interview Candidates"
 date = "2019-11-18"
-description = "Solution to Leetcode 1811"
+description = "In-depth solution and explanation for Leetcode 1811: Find Interview Candidates in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

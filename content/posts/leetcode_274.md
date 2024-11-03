@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 274: H-Index"
 date = "2024-02-02"
-description = "Solution to Leetcode 274"
+description = "In-depth solution and explanation for Leetcode 274: H-Index in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

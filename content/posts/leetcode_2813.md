@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2813: Maximum Elegance of a K-Length Subsequence"
 date = "2017-02-19"
-description = "Solution to Leetcode 2813"
+description = "In-depth solution and explanation for Leetcode 2813: Maximum Elegance of a K-Length Subsequence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1095: Find in Mountain Array"
 date = "2021-11-03"
-description = "Solution to Leetcode 1095"
+description = "In-depth solution and explanation for Leetcode 1095: Find in Mountain Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

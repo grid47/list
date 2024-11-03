@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2015: Average Height of Buildings in Each Segment"
 date = "2019-04-28"
-description = "Solution to Leetcode 2015"
+description = "In-depth solution and explanation for Leetcode 2015: Average Height of Buildings in Each Segment in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

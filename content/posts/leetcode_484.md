@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 484: Find Permutation"
 date = "2023-07-07"
-description = "Solution to Leetcode 484"
+description = "In-depth solution and explanation for Leetcode 484: Find Permutation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

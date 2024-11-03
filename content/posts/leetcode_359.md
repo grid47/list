@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 359: Logger Rate Limiter"
 date = "2023-11-09"
-description = "Solution to Leetcode 359"
+description = "In-depth solution and explanation for Leetcode 359: Logger Rate Limiter in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

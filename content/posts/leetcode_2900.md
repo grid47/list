@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2900: Longest Unequal Adjacent Groups Subsequence I"
 date = "2016-11-24"
-description = "Solution to Leetcode 2900"
+description = "In-depth solution and explanation for Leetcode 2900: Longest Unequal Adjacent Groups Subsequence I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

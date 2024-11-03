@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2380: Time Needed to Rearrange a Binary String"
 date = "2018-04-28"
-description = "Solution to Leetcode 2380"
+description = "In-depth solution and explanation for Leetcode 2380: Time Needed to Rearrange a Binary String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

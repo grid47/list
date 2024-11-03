@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2582: Pass the Pillow"
 date = "2017-10-08"
-description = "Solution to Leetcode 2582"
+description = "In-depth solution and explanation for Leetcode 2582: Pass the Pillow in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

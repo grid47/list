@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 941: Valid Mountain Array"
 date = "2022-04-06"
-description = "Solution to Leetcode 941"
+description = "In-depth solution and explanation for Leetcode 941: Valid Mountain Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

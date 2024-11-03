@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3207: Maximum Points After Enemy Battles"
 date = "2016-01-22"
-description = "Solution to Leetcode 3207"
+description = "In-depth solution and explanation for Leetcode 3207: Maximum Points After Enemy Battles in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

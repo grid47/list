@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1787: Make the XOR of All Segments Equal to Zero"
 date = "2019-12-12"
-description = "Solution to Leetcode 1787"
+description = "In-depth solution and explanation for Leetcode 1787: Make the XOR of All Segments Equal to Zero in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

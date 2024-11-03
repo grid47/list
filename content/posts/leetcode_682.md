@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 682: Baseball Game"
 date = "2022-12-21"
-description = "Solution to Leetcode 682"
+description = "In-depth solution and explanation for Leetcode 682: Baseball Game in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

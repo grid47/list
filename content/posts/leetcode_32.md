@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 32: Longest Valid Parentheses"
 date = "2024-10-01"
-description = "Solution to Leetcode 32"
+description = "In-depth solution and explanation for Leetcode 32: Longest Valid Parentheses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

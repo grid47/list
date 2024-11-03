@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2391: Minimum Amount of Time to Collect Garbage"
 date = "2018-04-17"
-description = "Solution to Leetcode 2391"
+description = "In-depth solution and explanation for Leetcode 2391: Minimum Amount of Time to Collect Garbage in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

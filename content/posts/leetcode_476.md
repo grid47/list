@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 476: Number Complement"
 date = "2023-07-15"
-description = "Solution to Leetcode 476"
+description = "In-depth solution and explanation for Leetcode 476: Number Complement in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

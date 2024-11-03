@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 614: Second Degree Follower"
 date = "2023-02-27"
-description = "Solution to Leetcode 614"
+description = "In-depth solution and explanation for Leetcode 614: Second Degree Follower in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

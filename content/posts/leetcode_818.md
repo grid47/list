@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 818: Race Car"
 date = "2022-08-07"
-description = "Solution to Leetcode 818"
+description = "In-depth solution and explanation for Leetcode 818: Race Car in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

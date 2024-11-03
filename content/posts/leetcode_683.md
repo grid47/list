@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 683: K Empty Slots"
 date = "2022-12-20"
-description = "Solution to Leetcode 683"
+description = "In-depth solution and explanation for Leetcode 683: K Empty Slots in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

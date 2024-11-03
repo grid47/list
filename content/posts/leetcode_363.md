@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 363: Max Sum of Rectangle No Larger Than K"
 date = "2023-11-05"
-description = "Solution to Leetcode 363"
+description = "In-depth solution and explanation for Leetcode 363: Max Sum of Rectangle No Larger Than K in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

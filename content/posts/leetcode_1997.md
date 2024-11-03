@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1997: First Day Where You Have Been in All the Rooms"
 date = "2019-05-16"
-description = "Solution to Leetcode 1997"
+description = "In-depth solution and explanation for Leetcode 1997: First Day Where You Have Been in All the Rooms in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

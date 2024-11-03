@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1085: Sum of Digits in the Minimum Number"
 date = "2021-11-13"
-description = "Solution to Leetcode 1085"
+description = "In-depth solution and explanation for Leetcode 1085: Sum of Digits in the Minimum Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

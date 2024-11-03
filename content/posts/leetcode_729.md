@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 729: My Calendar I"
 date = "2022-11-04"
-description = "Solution to Leetcode 729"
+description = "In-depth solution and explanation for Leetcode 729: My Calendar I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

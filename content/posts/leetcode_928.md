@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 928: Minimize Malware Spread II"
 date = "2022-04-19"
-description = "Solution to Leetcode 928"
+description = "In-depth solution and explanation for Leetcode 928: Minimize Malware Spread II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

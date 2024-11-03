@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3123: Find Edges in Shortest Paths"
 date = "2016-04-15"
-description = "Solution to Leetcode 3123"
+description = "In-depth solution and explanation for Leetcode 3123: Find Edges in Shortest Paths in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

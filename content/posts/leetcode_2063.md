@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2063: Vowels of All Substrings"
 date = "2019-03-11"
-description = "Solution to Leetcode 2063"
+description = "In-depth solution and explanation for Leetcode 2063: Vowels of All Substrings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

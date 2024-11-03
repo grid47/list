@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1664: Ways to Make a Fair Array"
 date = "2020-04-13"
-description = "Solution to Leetcode 1664"
+description = "In-depth solution and explanation for Leetcode 1664: Ways to Make a Fair Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

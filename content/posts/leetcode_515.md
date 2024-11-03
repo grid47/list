@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 515: Find Largest Value in Each Tree Row"
 date = "2023-06-06"
-description = "Solution to Leetcode 515"
+description = "In-depth solution and explanation for Leetcode 515: Find Largest Value in Each Tree Row in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

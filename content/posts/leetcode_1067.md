@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1067: Digit Count in Range"
 date = "2021-12-01"
-description = "Solution to Leetcode 1067"
+description = "In-depth solution and explanation for Leetcode 1067: Digit Count in Range in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

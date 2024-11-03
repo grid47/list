@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1495: Friendly Movies Streamed Last Month"
 date = "2020-09-29"
-description = "Solution to Leetcode 1495"
+description = "In-depth solution and explanation for Leetcode 1495: Friendly Movies Streamed Last Month in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1495.md" >}}
 ---
 
 

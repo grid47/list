@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 895: Maximum Frequency Stack"
 date = "2022-05-22"
-description = "Solution to Leetcode 895"
+description = "In-depth solution and explanation for Leetcode 895: Maximum Frequency Stack in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

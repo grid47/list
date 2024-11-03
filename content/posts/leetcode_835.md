@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 835: Image Overlap"
 date = "2022-07-21"
-description = "Solution to Leetcode 835"
+description = "In-depth solution and explanation for Leetcode 835: Image Overlap in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

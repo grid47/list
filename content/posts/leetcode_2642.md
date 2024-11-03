@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2642: Design Graph With Shortest Path Calculator"
 date = "2017-08-09"
-description = "Solution to Leetcode 2642"
+description = "In-depth solution and explanation for Leetcode 2642: Design Graph With Shortest Path Calculator in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

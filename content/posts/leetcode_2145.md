@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2145: Count the Hidden Sequences"
 date = "2018-12-19"
-description = "Solution to Leetcode 2145"
+description = "In-depth solution and explanation for Leetcode 2145: Count the Hidden Sequences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2239: Find Closest Number to Zero"
 date = "2018-09-16"
-description = "Solution to Leetcode 2239"
+description = "In-depth solution and explanation for Leetcode 2239: Find Closest Number to Zero in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

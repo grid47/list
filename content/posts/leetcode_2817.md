@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2817: Minimum Absolute Difference Between Elements With Constraint"
 date = "2017-02-15"
-description = "Solution to Leetcode 2817"
+description = "In-depth solution and explanation for Leetcode 2817: Minimum Absolute Difference Between Elements With Constraint in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

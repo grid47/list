@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1662: Check If Two String Arrays are Equivalent"
 date = "2020-04-15"
-description = "Solution to Leetcode 1662"
+description = "In-depth solution and explanation for Leetcode 1662: Check If Two String Arrays are Equivalent in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

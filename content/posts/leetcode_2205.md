@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2205: The Number of Users That Are Eligible for Discount"
 date = "2018-10-20"
-description = "Solution to Leetcode 2205"
+description = "In-depth solution and explanation for Leetcode 2205: The Number of Users That Are Eligible for Discount in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

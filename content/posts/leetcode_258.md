@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 258: Add Digits"
 date = "2024-02-18"
-description = "Solution to Leetcode 258"
+description = "In-depth solution and explanation for Leetcode 258: Add Digits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

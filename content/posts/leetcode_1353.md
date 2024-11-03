@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1353: Maximum Number of Events That Can Be Attended"
 date = "2021-02-18"
-description = "Solution to Leetcode 1353"
+description = "In-depth solution and explanation for Leetcode 1353: Maximum Number of Events That Can Be Attended in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -55,7 +55,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1353.md" >}}
 ---
 
 

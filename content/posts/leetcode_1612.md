@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1612: Check If Two Expression Trees are Equivalent"
 date = "2020-06-04"
-description = "Solution to Leetcode 1612"
+description = "In-depth solution and explanation for Leetcode 1612: Check If Two Expression Trees are Equivalent in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

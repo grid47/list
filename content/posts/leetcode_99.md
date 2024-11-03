@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 99: Recover Binary Search Tree"
 date = "2024-07-26"
-description = "Solution to Leetcode 99"
+description = "In-depth solution and explanation for Leetcode 99: Recover Binary Search Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 947: Most Stones Removed with Same Row or Column"
 date = "2022-03-31"
-description = "Solution to Leetcode 947"
+description = "In-depth solution and explanation for Leetcode 947: Most Stones Removed with Same Row or Column in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

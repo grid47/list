@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1134: Armstrong Number"
 date = "2021-09-25"
-description = "Solution to Leetcode 1134"
+description = "In-depth solution and explanation for Leetcode 1134: Armstrong Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

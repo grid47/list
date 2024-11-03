@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3085: Minimum Deletions to Make String K-Special"
 date = "2016-05-23"
-description = "Solution to Leetcode 3085"
+description = "In-depth solution and explanation for Leetcode 3085: Minimum Deletions to Make String K-Special in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

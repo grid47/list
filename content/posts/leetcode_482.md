@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 482: License Key Formatting"
 date = "2023-07-09"
-description = "Solution to Leetcode 482"
+description = "In-depth solution and explanation for Leetcode 482: License Key Formatting in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

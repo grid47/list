@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1673: Find the Most Competitive Subsequence"
 date = "2020-04-04"
-description = "Solution to Leetcode 1673"
+description = "In-depth solution and explanation for Leetcode 1673: Find the Most Competitive Subsequence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2366: Minimum Replacements to Sort the Array"
 date = "2018-05-12"
-description = "Solution to Leetcode 2366"
+description = "In-depth solution and explanation for Leetcode 2366: Minimum Replacements to Sort the Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

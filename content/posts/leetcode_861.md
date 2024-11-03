@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 861: Score After Flipping Matrix"
 date = "2022-06-25"
-description = "Solution to Leetcode 861"
+description = "In-depth solution and explanation for Leetcode 861: Score After Flipping Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

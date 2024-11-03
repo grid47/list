@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3003: Maximize the Number of Partitions After Operations"
 date = "2016-08-13"
-description = "Solution to Leetcode 3003"
+description = "In-depth solution and explanation for Leetcode 3003: Maximize the Number of Partitions After Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1913: Maximum Product Difference Between Two Pairs"
 date = "2019-08-08"
-description = "Solution to Leetcode 1913"
+description = "In-depth solution and explanation for Leetcode 1913: Maximum Product Difference Between Two Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

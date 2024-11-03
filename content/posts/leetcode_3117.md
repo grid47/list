@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3117: Minimum Sum of Values by Dividing Array"
 date = "2016-04-21"
-description = "Solution to Leetcode 3117"
+description = "In-depth solution and explanation for Leetcode 3117: Minimum Sum of Values by Dividing Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

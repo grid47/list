@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1797: Design Authentication Manager"
 date = "2019-12-02"
-description = "Solution to Leetcode 1797"
+description = "In-depth solution and explanation for Leetcode 1797: Design Authentication Manager in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

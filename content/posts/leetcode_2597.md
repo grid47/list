@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2597: The Number of Beautiful Subsets"
 date = "2017-09-23"
-description = "Solution to Leetcode 2597"
+description = "In-depth solution and explanation for Leetcode 2597: The Number of Beautiful Subsets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

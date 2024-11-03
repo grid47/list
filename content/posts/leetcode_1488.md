@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1488: Avoid Flood in The City"
 date = "2020-10-06"
-description = "Solution to Leetcode 1488"
+description = "In-depth solution and explanation for Leetcode 1488: Avoid Flood in The City in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -58,7 +58,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1488.md" >}}
 ---
 
 

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 324: Wiggle Sort II"
 date = "2023-12-14"
-description = "Solution to Leetcode 324"
+description = "In-depth solution and explanation for Leetcode 324: Wiggle Sort II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

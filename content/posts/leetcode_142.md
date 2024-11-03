@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 142: Linked List Cycle II"
 date = "2024-06-13"
-description = "Solution to Leetcode 142"
+description = "In-depth solution and explanation for Leetcode 142: Linked List Cycle II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

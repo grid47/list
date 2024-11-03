@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3110: Score of a String"
 date = "2016-04-28"
-description = "Solution to Leetcode 3110"
+description = "In-depth solution and explanation for Leetcode 3110: Score of a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

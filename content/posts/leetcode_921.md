@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 921: Minimum Add to Make Parentheses Valid"
 date = "2022-04-26"
-description = "Solution to Leetcode 921"
+description = "In-depth solution and explanation for Leetcode 921: Minimum Add to Make Parentheses Valid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

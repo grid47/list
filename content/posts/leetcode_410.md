@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 410: Split Array Largest Sum"
 date = "2023-09-19"
-description = "Solution to Leetcode 410"
+description = "In-depth solution and explanation for Leetcode 410: Split Array Largest Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

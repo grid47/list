@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3118: Friday Purchase III "
 date = "2016-04-20"
-description = "Solution to Leetcode 3118"
+description = "In-depth solution and explanation for Leetcode 3118: Friday Purchase III  in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

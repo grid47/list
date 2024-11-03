@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 882: Reachable Nodes In Subdivided Graph"
 date = "2022-06-04"
-description = "Solution to Leetcode 882"
+description = "In-depth solution and explanation for Leetcode 882: Reachable Nodes In Subdivided Graph in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1658: Minimum Operations to Reduce X to Zero"
 date = "2020-04-19"
-description = "Solution to Leetcode 1658"
+description = "In-depth solution and explanation for Leetcode 1658: Minimum Operations to Reduce X to Zero in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

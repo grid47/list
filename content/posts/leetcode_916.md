@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 916: Word Subsets"
 date = "2022-05-01"
-description = "Solution to Leetcode 916"
+description = "In-depth solution and explanation for Leetcode 916: Word Subsets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2209: Minimum White Tiles After Covering With Carpets"
 date = "2018-10-16"
-description = "Solution to Leetcode 2209"
+description = "In-depth solution and explanation for Leetcode 2209: Minimum White Tiles After Covering With Carpets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

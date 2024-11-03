@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1799: Maximize Score After N Operations"
 date = "2019-11-30"
-description = "Solution to Leetcode 1799"
+description = "In-depth solution and explanation for Leetcode 1799: Maximize Score After N Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

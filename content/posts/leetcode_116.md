@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 116: Populating Next Right Pointers in Each Node"
 date = "2024-07-09"
-description = "Solution to Leetcode 116"
+description = "In-depth solution and explanation for Leetcode 116: Populating Next Right Pointers in Each Node in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

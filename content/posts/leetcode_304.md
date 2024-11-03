@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 304: Range Sum Query 2D - Immutable"
 date = "2024-01-03"
-description = "Solution to Leetcode 304"
+description = "In-depth solution and explanation for Leetcode 304: Range Sum Query 2D - Immutable in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

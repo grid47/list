@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 46: Permutations"
 date = "2024-09-17"
-description = "Solution to Leetcode 46"
+description = "In-depth solution and explanation for Leetcode 46: Permutations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

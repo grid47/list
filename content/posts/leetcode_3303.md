@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3303: Find the Occurrence of First Almost Equal Substring"
 date = "2015-10-18"
-description = "Solution to Leetcode 3303"
+description = "In-depth solution and explanation for Leetcode 3303: Find the Occurrence of First Almost Equal Substring in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 181: Employees Earning More Than Their Managers"
 date = "2024-05-05"
-description = "Solution to Leetcode 181"
+description = "In-depth solution and explanation for Leetcode 181: Employees Earning More Than Their Managers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

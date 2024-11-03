@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2314: The First Day of the Maximum Recorded Degree in Each City"
 date = "2018-07-03"
-description = "Solution to Leetcode 2314"
+description = "In-depth solution and explanation for Leetcode 2314: The First Day of the Maximum Recorded Degree in Each City in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

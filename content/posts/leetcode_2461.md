@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2461: Maximum Sum of Distinct Subarrays With Length K"
 date = "2018-02-06"
-description = "Solution to Leetcode 2461"
+description = "In-depth solution and explanation for Leetcode 2461: Maximum Sum of Distinct Subarrays With Length K in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

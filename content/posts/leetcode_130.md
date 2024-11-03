@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 130: Surrounded Regions"
 date = "2024-06-25"
-description = "Solution to Leetcode 130"
+description = "In-depth solution and explanation for Leetcode 130: Surrounded Regions in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

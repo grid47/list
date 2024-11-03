@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1611: Minimum One Bit Operations to Make Integers Zero"
 date = "2020-06-05"
-description = "Solution to Leetcode 1611"
+description = "In-depth solution and explanation for Leetcode 1611: Minimum One Bit Operations to Make Integers Zero in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

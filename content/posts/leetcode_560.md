@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 560: Subarray Sum Equals K"
 date = "2023-04-22"
-description = "Solution to Leetcode 560"
+description = "In-depth solution and explanation for Leetcode 560: Subarray Sum Equals K in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

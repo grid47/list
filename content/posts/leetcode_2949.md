@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2949: Count Beautiful Substrings II"
 date = "2016-10-06"
-description = "Solution to Leetcode 2949"
+description = "In-depth solution and explanation for Leetcode 2949: Count Beautiful Substrings II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

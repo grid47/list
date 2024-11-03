@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 283: Move Zeroes"
 date = "2024-01-24"
-description = "Solution to Leetcode 283"
+description = "In-depth solution and explanation for Leetcode 283: Move Zeroes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

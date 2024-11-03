@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1764: Form Array by Concatenating Subarrays of Another Array"
 date = "2020-01-04"
-description = "Solution to Leetcode 1764"
+description = "In-depth solution and explanation for Leetcode 1764: Form Array by Concatenating Subarrays of Another Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

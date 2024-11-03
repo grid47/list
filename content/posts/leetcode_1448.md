@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1448: Count Good Nodes in Binary Tree"
 date = "2020-11-15"
-description = "Solution to Leetcode 1448"
+description = "In-depth solution and explanation for Leetcode 1448: Count Good Nodes in Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -49,7 +49,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1448.md" >}}
 ---
 {{< youtube 2AdOBLcj2wk >}}
 

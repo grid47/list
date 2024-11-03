@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1672: Richest Customer Wealth"
 date = "2020-04-05"
-description = "Solution to Leetcode 1672"
+description = "In-depth solution and explanation for Leetcode 1672: Richest Customer Wealth in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

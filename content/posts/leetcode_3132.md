@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3132: Find the Integer Added to Array II"
 date = "2016-04-06"
-description = "Solution to Leetcode 3132"
+description = "In-depth solution and explanation for Leetcode 3132: Find the Integer Added to Array II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

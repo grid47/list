@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 366: Find Leaves of Binary Tree"
 date = "2023-11-02"
-description = "Solution to Leetcode 366"
+description = "In-depth solution and explanation for Leetcode 366: Find Leaves of Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

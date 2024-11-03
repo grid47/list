@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2899: Last Visited Integers"
 date = "2016-11-25"
-description = "Solution to Leetcode 2899"
+description = "In-depth solution and explanation for Leetcode 2899: Last Visited Integers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

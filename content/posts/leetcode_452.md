@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 452: Minimum Number of Arrows to Burst Balloons"
 date = "2023-08-08"
-description = "Solution to Leetcode 452"
+description = "In-depth solution and explanation for Leetcode 452: Minimum Number of Arrows to Burst Balloons in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

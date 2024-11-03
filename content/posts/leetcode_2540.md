@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2540: Minimum Common Value"
 date = "2017-11-19"
-description = "Solution to Leetcode 2540"
+description = "In-depth solution and explanation for Leetcode 2540: Minimum Common Value in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

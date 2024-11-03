@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 945: Minimum Increment to Make Array Unique"
 date = "2022-04-02"
-description = "Solution to Leetcode 945"
+description = "In-depth solution and explanation for Leetcode 945: Minimum Increment to Make Array Unique in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

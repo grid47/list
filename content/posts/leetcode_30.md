@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 30: Substring with Concatenation of All Words"
 date = "2024-10-03"
-description = "Solution to Leetcode 30"
+description = "In-depth solution and explanation for Leetcode 30: Substring with Concatenation of All Words in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

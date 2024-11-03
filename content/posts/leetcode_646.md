@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 646: Maximum Length of Pair Chain"
 date = "2023-01-26"
-description = "Solution to Leetcode 646"
+description = "In-depth solution and explanation for Leetcode 646: Maximum Length of Pair Chain in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

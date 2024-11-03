@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1207: Unique Number of Occurrences"
 date = "2021-07-14"
-description = "Solution to Leetcode 1207"
+description = "In-depth solution and explanation for Leetcode 1207: Unique Number of Occurrences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

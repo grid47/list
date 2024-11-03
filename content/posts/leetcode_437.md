@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 437: Path Sum III"
 date = "2023-08-23"
-description = "Solution to Leetcode 437"
+description = "In-depth solution and explanation for Leetcode 437: Path Sum III in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

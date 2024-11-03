@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 736: Parse Lisp Expression"
 date = "2022-10-28"
-description = "Solution to Leetcode 736"
+description = "In-depth solution and explanation for Leetcode 736: Parse Lisp Expression in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

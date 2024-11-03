@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2702: Minimum Operations to Make Numbers Non-positive"
 date = "2017-06-10"
-description = "Solution to Leetcode 2702"
+description = "In-depth solution and explanation for Leetcode 2702: Minimum Operations to Make Numbers Non-positive in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

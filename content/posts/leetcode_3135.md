@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3135: Equalize Strings by Adding or Removing Characters at Ends"
 date = "2016-04-03"
-description = "Solution to Leetcode 3135"
+description = "In-depth solution and explanation for Leetcode 3135: Equalize Strings by Adding or Removing Characters at Ends in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

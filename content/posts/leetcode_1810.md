@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1810: Minimum Path Cost in a Hidden Grid"
 date = "2019-11-19"
-description = "Solution to Leetcode 1810"
+description = "In-depth solution and explanation for Leetcode 1810: Minimum Path Cost in a Hidden Grid in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

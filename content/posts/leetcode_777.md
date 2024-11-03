@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 777: Swap Adjacent in LR String"
 date = "2022-09-17"
-description = "Solution to Leetcode 777"
+description = "In-depth solution and explanation for Leetcode 777: Swap Adjacent in LR String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

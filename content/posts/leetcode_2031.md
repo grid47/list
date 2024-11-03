@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2031: Count Subarrays With More Ones Than Zeros"
 date = "2019-04-12"
-description = "Solution to Leetcode 2031"
+description = "In-depth solution and explanation for Leetcode 2031: Count Subarrays With More Ones Than Zeros in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

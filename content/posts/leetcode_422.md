@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 422: Valid Word Square"
 date = "2023-09-07"
-description = "Solution to Leetcode 422"
+description = "In-depth solution and explanation for Leetcode 422: Valid Word Square in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

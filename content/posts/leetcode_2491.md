@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2491: Divide Players Into Teams of Equal Skill"
 date = "2018-01-07"
-description = "Solution to Leetcode 2491"
+description = "In-depth solution and explanation for Leetcode 2491: Divide Players Into Teams of Equal Skill in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

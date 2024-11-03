@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2529: Maximum Count of Positive Integer and Negative Integer"
 date = "2017-11-30"
-description = "Solution to Leetcode 2529"
+description = "In-depth solution and explanation for Leetcode 2529: Maximum Count of Positive Integer and Negative Integer in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

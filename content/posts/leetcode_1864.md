@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1864: Minimum Number of Swaps to Make the Binary String Alternating"
 date = "2019-09-26"
-description = "Solution to Leetcode 1864"
+description = "In-depth solution and explanation for Leetcode 1864: Minimum Number of Swaps to Make the Binary String Alternating in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

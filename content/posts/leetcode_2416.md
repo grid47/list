@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2416: Sum of Prefix Scores of Strings"
 date = "2018-03-23"
-description = "Solution to Leetcode 2416"
+description = "In-depth solution and explanation for Leetcode 2416: Sum of Prefix Scores of Strings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1258: Synonymous Sentences"
 date = "2021-05-24"
-description = "Solution to Leetcode 1258"
+description = "In-depth solution and explanation for Leetcode 1258: Synonymous Sentences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

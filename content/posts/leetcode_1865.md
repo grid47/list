@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1865: Finding Pairs With a Certain Sum"
 date = "2019-09-25"
-description = "Solution to Leetcode 1865"
+description = "In-depth solution and explanation for Leetcode 1865: Finding Pairs With a Certain Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 753: Cracking the Safe"
 date = "2022-10-11"
-description = "Solution to Leetcode 753"
+description = "In-depth solution and explanation for Leetcode 753: Cracking the Safe in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

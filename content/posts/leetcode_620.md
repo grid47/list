@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 620: Not Boring Movies"
 date = "2023-02-21"
-description = "Solution to Leetcode 620"
+description = "In-depth solution and explanation for Leetcode 620: Not Boring Movies in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

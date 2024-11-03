@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 891: Sum of Subsequence Widths"
 date = "2022-05-26"
-description = "Solution to Leetcode 891"
+description = "In-depth solution and explanation for Leetcode 891: Sum of Subsequence Widths in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

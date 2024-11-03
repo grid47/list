@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2245: Maximum Trailing Zeros in a Cornered Path"
 date = "2018-09-10"
-description = "Solution to Leetcode 2245"
+description = "In-depth solution and explanation for Leetcode 2245: Maximum Trailing Zeros in a Cornered Path in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

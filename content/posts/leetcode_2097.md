@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2097: Valid Arrangement of Pairs"
 date = "2019-02-05"
-description = "Solution to Leetcode 2097"
+description = "In-depth solution and explanation for Leetcode 2097: Valid Arrangement of Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

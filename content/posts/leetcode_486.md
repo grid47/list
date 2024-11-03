@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 486: Predict the Winner"
 date = "2023-07-05"
-description = "Solution to Leetcode 486"
+description = "In-depth solution and explanation for Leetcode 486: Predict the Winner in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

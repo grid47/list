@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 796: Rotate String"
 date = "2022-08-29"
-description = "Solution to Leetcode 796"
+description = "In-depth solution and explanation for Leetcode 796: Rotate String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 239: Sliding Window Maximum"
 date = "2024-03-08"
-description = "Solution to Leetcode 239"
+description = "In-depth solution and explanation for Leetcode 239: Sliding Window Maximum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

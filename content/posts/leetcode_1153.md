@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1153: String Transforms Into Another String"
 date = "2021-09-06"
-description = "Solution to Leetcode 1153"
+description = "In-depth solution and explanation for Leetcode 1153: String Transforms Into Another String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1814: Count Nice Pairs in an Array"
 date = "2019-11-15"
-description = "Solution to Leetcode 1814"
+description = "In-depth solution and explanation for Leetcode 1814: Count Nice Pairs in an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

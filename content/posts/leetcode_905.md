@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 905: Sort Array By Parity"
 date = "2022-05-12"
-description = "Solution to Leetcode 905"
+description = "In-depth solution and explanation for Leetcode 905: Sort Array By Parity in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

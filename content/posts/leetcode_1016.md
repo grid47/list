@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1016: Binary String With Substrings Representing 1 To N"
 date = "2022-01-21"
-description = "Solution to Leetcode 1016"
+description = "In-depth solution and explanation for Leetcode 1016: Binary String With Substrings Representing 1 To N in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

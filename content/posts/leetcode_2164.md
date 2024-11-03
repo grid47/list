@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2164: Sort Even and Odd Indices Independently"
 date = "2018-11-30"
-description = "Solution to Leetcode 2164"
+description = "In-depth solution and explanation for Leetcode 2164: Sort Even and Odd Indices Independently in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1940: Longest Common Subsequence Between Sorted Arrays"
 date = "2019-07-12"
-description = "Solution to Leetcode 1940"
+description = "In-depth solution and explanation for Leetcode 1940: Longest Common Subsequence Between Sorted Arrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

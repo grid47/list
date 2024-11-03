@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2292: Products With Three or More Orders in Two Consecutive Years"
 date = "2018-07-25"
-description = "Solution to Leetcode 2292"
+description = "In-depth solution and explanation for Leetcode 2292: Products With Three or More Orders in Two Consecutive Years in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

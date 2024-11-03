@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1525: Number of Good Ways to Split a String"
 date = "2020-08-30"
-description = "Solution to Leetcode 1525"
+description = "In-depth solution and explanation for Leetcode 1525: Number of Good Ways to Split a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

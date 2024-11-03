@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1989: Maximum Number of People That Can Be Caught in Tag"
 date = "2019-05-24"
-description = "Solution to Leetcode 1989"
+description = "In-depth solution and explanation for Leetcode 1989: Maximum Number of People That Can Be Caught in Tag in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

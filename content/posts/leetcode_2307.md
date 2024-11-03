@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2307: Check for Contradictions in Equations"
 date = "2018-07-10"
-description = "Solution to Leetcode 2307"
+description = "In-depth solution and explanation for Leetcode 2307: Check for Contradictions in Equations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

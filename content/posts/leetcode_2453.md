@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2453: Destroy Sequential Targets"
 date = "2018-02-14"
-description = "Solution to Leetcode 2453"
+description = "In-depth solution and explanation for Leetcode 2453: Destroy Sequential Targets in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

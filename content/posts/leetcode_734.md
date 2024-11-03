@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 734: Sentence Similarity"
 date = "2022-10-30"
-description = "Solution to Leetcode 734"
+description = "In-depth solution and explanation for Leetcode 734: Sentence Similarity in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

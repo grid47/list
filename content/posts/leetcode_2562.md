@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2562: Find the Array Concatenation Value"
 date = "2017-10-28"
-description = "Solution to Leetcode 2562"
+description = "In-depth solution and explanation for Leetcode 2562: Find the Array Concatenation Value in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 687: Longest Univalue Path"
 date = "2022-12-16"
-description = "Solution to Leetcode 687"
+description = "In-depth solution and explanation for Leetcode 687: Longest Univalue Path in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3137: Minimum Number of Operations to Make Word K-Periodic"
 date = "2016-04-01"
-description = "Solution to Leetcode 3137"
+description = "In-depth solution and explanation for Leetcode 3137: Minimum Number of Operations to Make Word K-Periodic in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

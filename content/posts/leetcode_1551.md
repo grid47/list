@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1551: Minimum Operations to Make Array Equal"
 date = "2020-08-04"
-description = "Solution to Leetcode 1551"
+description = "In-depth solution and explanation for Leetcode 1551: Minimum Operations to Make Array Equal in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

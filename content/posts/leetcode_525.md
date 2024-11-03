@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 525: Contiguous Array"
 date = "2023-05-27"
-description = "Solution to Leetcode 525"
+description = "In-depth solution and explanation for Leetcode 525: Contiguous Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

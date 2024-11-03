@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 969: Pancake Sorting"
 date = "2022-03-09"
-description = "Solution to Leetcode 969"
+description = "In-depth solution and explanation for Leetcode 969: Pancake Sorting in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 432: All O`one Data Structure"
 date = "2023-08-28"
-description = "Solution to Leetcode 432"
+description = "In-depth solution and explanation for Leetcode 432: All O`one Data Structure in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2126: Destroying Asteroids"
 date = "2019-01-07"
-description = "Solution to Leetcode 2126"
+description = "In-depth solution and explanation for Leetcode 2126: Destroying Asteroids in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

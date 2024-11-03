@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 472: Concatenated Words"
 date = "2023-07-19"
-description = "Solution to Leetcode 472"
+description = "In-depth solution and explanation for Leetcode 472: Concatenated Words in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

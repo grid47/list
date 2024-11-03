@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 14: Longest Common Prefix"
 date = "2024-10-19"
-description = "Solution to Leetcode 14"
+description = "In-depth solution and explanation for Leetcode 14: Longest Common Prefix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

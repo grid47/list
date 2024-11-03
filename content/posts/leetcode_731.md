@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 731: My Calendar II"
 date = "2022-11-02"
-description = "Solution to Leetcode 731"
+description = "In-depth solution and explanation for Leetcode 731: My Calendar II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

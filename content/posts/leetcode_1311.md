@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1311: Get Watched Videos by Your Friends"
 date = "2021-04-01"
-description = "Solution to Leetcode 1311"
+description = "In-depth solution and explanation for Leetcode 1311: Get Watched Videos by Your Friends in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -72,7 +72,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1311.md" >}}
 ---
 
 

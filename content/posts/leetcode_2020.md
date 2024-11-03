@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2020: Number of Accounts That Did Not Stream"
 date = "2019-04-23"
-description = "Solution to Leetcode 2020"
+description = "In-depth solution and explanation for Leetcode 2020: Number of Accounts That Did Not Stream in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

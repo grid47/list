@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2765: Longest Alternating Subarray"
 date = "2017-04-08"
-description = "Solution to Leetcode 2765"
+description = "In-depth solution and explanation for Leetcode 2765: Longest Alternating Subarray in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2536: Increment Submatrices by One"
 date = "2017-11-23"
-description = "Solution to Leetcode 2536"
+description = "In-depth solution and explanation for Leetcode 2536: Increment Submatrices by One in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

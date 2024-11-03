@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 999: Available Captures for Rook"
 date = "2022-02-07"
-description = "Solution to Leetcode 999"
+description = "In-depth solution and explanation for Leetcode 999: Available Captures for Rook in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

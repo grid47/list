@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3295: Report Spam Message"
 date = "2015-10-26"
-description = "Solution to Leetcode 3295"
+description = "In-depth solution and explanation for Leetcode 3295: Report Spam Message in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

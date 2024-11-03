@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero"
 date = "2020-10-28"
-description = "Solution to Leetcode 1466"
+description = "In-depth solution and explanation for Leetcode 1466: Reorder Routes to Make All Paths Lead to the City Zero in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -57,7 +57,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1466.md" >}}
 ---
 {{< youtube qL4UaMAdPts >}}
 

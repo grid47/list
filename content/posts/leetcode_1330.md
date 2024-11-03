@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1330: Reverse Subarray To Maximize Array Value"
 date = "2021-03-13"
-description = "Solution to Leetcode 1330"
+description = "In-depth solution and explanation for Leetcode 1330: Reverse Subarray To Maximize Array Value in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -43,7 +43,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1330.md" >}}
 ---
 
 

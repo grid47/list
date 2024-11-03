@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1866: Number of Ways to Rearrange Sticks With K Sticks Visible"
 date = "2019-09-24"
-description = "Solution to Leetcode 1866"
+description = "In-depth solution and explanation for Leetcode 1866: Number of Ways to Rearrange Sticks With K Sticks Visible in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

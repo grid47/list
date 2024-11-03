@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1867: Orders With Maximum Quantity Above Average"
 date = "2019-09-23"
-description = "Solution to Leetcode 1867"
+description = "In-depth solution and explanation for Leetcode 1867: Orders With Maximum Quantity Above Average in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

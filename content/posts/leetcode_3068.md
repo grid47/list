@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3068: Find the Maximum Sum of Node Values"
 date = "2016-06-09"
-description = "Solution to Leetcode 3068"
+description = "In-depth solution and explanation for Leetcode 3068: Find the Maximum Sum of Node Values in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

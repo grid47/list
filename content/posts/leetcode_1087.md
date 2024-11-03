@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1087: Brace Expansion"
 date = "2021-11-11"
-description = "Solution to Leetcode 1087"
+description = "In-depth solution and explanation for Leetcode 1087: Brace Expansion in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

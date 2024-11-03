@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 312: Burst Balloons"
 date = "2023-12-26"
-description = "Solution to Leetcode 312"
+description = "In-depth solution and explanation for Leetcode 312: Burst Balloons in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

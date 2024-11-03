@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1356: Sort Integers by The Number of 1 Bits"
 date = "2021-02-15"
-description = "Solution to Leetcode 1356"
+description = "In-depth solution and explanation for Leetcode 1356: Sort Integers by The Number of 1 Bits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -50,7 +50,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1356.md" >}}
 ---
 
 

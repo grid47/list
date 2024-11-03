@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1805: Number of Different Integers in a String"
 date = "2019-11-24"
-description = "Solution to Leetcode 1805"
+description = "In-depth solution and explanation for Leetcode 1805: Number of Different Integers in a String in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

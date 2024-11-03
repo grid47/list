@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3307: Find the K-th Character in String Game II"
 date = "2015-10-14"
-description = "Solution to Leetcode 3307"
+description = "In-depth solution and explanation for Leetcode 3307: Find the K-th Character in String Game II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

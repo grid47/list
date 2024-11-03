@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1164: Product Price at a Given Date"
 date = "2021-08-26"
-description = "Solution to Leetcode 1164"
+description = "In-depth solution and explanation for Leetcode 1164: Product Price at a Given Date in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

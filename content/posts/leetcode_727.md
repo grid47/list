@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 727: Minimum Window Subsequence"
 date = "2022-11-06"
-description = "Solution to Leetcode 727"
+description = "In-depth solution and explanation for Leetcode 727: Minimum Window Subsequence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

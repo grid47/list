@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2166: Design Bitset"
 date = "2018-11-28"
-description = "Solution to Leetcode 2166"
+description = "In-depth solution and explanation for Leetcode 2166: Design Bitset in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1992: Find All Groups of Farmland"
 date = "2019-05-21"
-description = "Solution to Leetcode 1992"
+description = "In-depth solution and explanation for Leetcode 1992: Find All Groups of Farmland in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

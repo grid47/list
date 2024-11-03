@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1098: Unpopular Books"
 date = "2021-10-31"
-description = "Solution to Leetcode 1098"
+description = "In-depth solution and explanation for Leetcode 1098: Unpopular Books in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

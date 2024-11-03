@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 475: Heaters"
 date = "2023-07-16"
-description = "Solution to Leetcode 475"
+description = "In-depth solution and explanation for Leetcode 475: Heaters in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

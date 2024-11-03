@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1305: All Elements in Two Binary Search Trees"
 date = "2021-04-07"
-description = "Solution to Leetcode 1305"
+description = "In-depth solution and explanation for Leetcode 1305: All Elements in Two Binary Search Trees in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -64,7 +64,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1305.md" >}}
 ---
 
 

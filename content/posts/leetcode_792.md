@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 792: Number of Matching Subsequences"
 date = "2022-09-02"
-description = "Solution to Leetcode 792"
+description = "In-depth solution and explanation for Leetcode 792: Number of Matching Subsequences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

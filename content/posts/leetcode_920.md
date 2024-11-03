@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 920: Number of Music Playlists"
 date = "2022-04-27"
-description = "Solution to Leetcode 920"
+description = "In-depth solution and explanation for Leetcode 920: Number of Music Playlists in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

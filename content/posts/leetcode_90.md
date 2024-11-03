@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 90: Subsets II"
 date = "2024-08-04"
-description = "Solution to Leetcode 90"
+description = "In-depth solution and explanation for Leetcode 90: Subsets II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

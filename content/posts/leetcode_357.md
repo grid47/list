@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 357: Count Numbers with Unique Digits"
 date = "2023-11-11"
-description = "Solution to Leetcode 357"
+description = "In-depth solution and explanation for Leetcode 357: Count Numbers with Unique Digits in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

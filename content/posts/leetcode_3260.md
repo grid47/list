@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 3260: Find the Largest Palindrome Divisible by K"
 date = "2015-11-30"
-description = "Solution to Leetcode 3260"
+description = "In-depth solution and explanation for Leetcode 3260: Find the Largest Palindrome Divisible by K in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1561: Maximum Number of Coins You Can Get"
 date = "2020-07-25"
-description = "Solution to Leetcode 1561"
+description = "In-depth solution and explanation for Leetcode 1561: Maximum Number of Coins You Can Get in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

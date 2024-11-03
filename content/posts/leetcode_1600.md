@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1600: Throne Inheritance"
 date = "2020-06-16"
-description = "Solution to Leetcode 1600"
+description = "In-depth solution and explanation for Leetcode 1600: Throne Inheritance in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

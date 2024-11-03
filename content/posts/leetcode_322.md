@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 322: Coin Change"
 date = "2023-12-16"
-description = "Solution to Leetcode 322"
+description = "In-depth solution and explanation for Leetcode 322: Coin Change in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

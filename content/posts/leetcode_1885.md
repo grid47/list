@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1885: Count Pairs in Two Arrays"
 date = "2019-09-05"
-description = "Solution to Leetcode 1885"
+description = "In-depth solution and explanation for Leetcode 1885: Count Pairs in Two Arrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2640: Find the Score of All Prefixes of an Array"
 date = "2017-08-11"
-description = "Solution to Leetcode 2640"
+description = "In-depth solution and explanation for Leetcode 2640: Find the Score of All Prefixes of an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1856: Maximum Subarray Min-Product"
 date = "2019-10-04"
-description = "Solution to Leetcode 1856"
+description = "In-depth solution and explanation for Leetcode 1856: Maximum Subarray Min-Product in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

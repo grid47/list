@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1455: Check If a Word Occurs As a Prefix of Any Word in a Sentence"
 date = "2020-11-08"
-description = "Solution to Leetcode 1455"
+description = "In-depth solution and explanation for Leetcode 1455: Check If a Word Occurs As a Prefix of Any Word in a Sentence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -25,7 +25,7 @@ series = ["Leetcode"]
 
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1455.md" >}}
 ---
 
 

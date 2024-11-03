@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 712: Minimum ASCII Delete Sum for Two Strings"
 date = "2022-11-21"
-description = "Solution to Leetcode 712"
+description = "In-depth solution and explanation for Leetcode 712: Minimum ASCII Delete Sum for Two Strings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition"
 date = "2020-09-26"
-description = "Solution to Leetcode 1498"
+description = "In-depth solution and explanation for Leetcode 1498: Number of Subsequences That Satisfy the Given Sum Condition in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
@@ -61,7 +61,7 @@ public:
 };
 {{< /highlight >}}
 
-
+{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1498.md" >}}
 ---
 {{< youtube WZhNEfbGYEo >}}
 

@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1031: Maximum Sum of Two Non-Overlapping Subarrays"
 date = "2022-01-06"
-description = "Solution to Leetcode 1031"
+description = "In-depth solution and explanation for Leetcode 1031: Maximum Sum of Two Non-Overlapping Subarrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

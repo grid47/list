@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1535: Find the Winner of an Array Game"
 date = "2020-08-20"
-description = "Solution to Leetcode 1535"
+description = "In-depth solution and explanation for Leetcode 1535: Find the Winner of an Array Game in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

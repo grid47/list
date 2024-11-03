@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1719: Number Of Ways To Reconstruct A Tree"
 date = "2020-02-18"
-description = "Solution to Leetcode 1719"
+description = "In-depth solution and explanation for Leetcode 1719: Number Of Ways To Reconstruct A Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

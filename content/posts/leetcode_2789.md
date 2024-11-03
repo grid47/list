@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2789: Largest Element in an Array after Merge Operations"
 date = "2017-03-15"
-description = "Solution to Leetcode 2789"
+description = "In-depth solution and explanation for Leetcode 2789: Largest Element in an Array after Merge Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

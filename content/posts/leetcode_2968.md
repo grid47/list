@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 2968: Apply Operations to Maximize Frequency Score"
 date = "2016-09-17"
-description = "Solution to Leetcode 2968"
+description = "In-depth solution and explanation for Leetcode 2968: Apply Operations to Maximize Frequency Score in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]

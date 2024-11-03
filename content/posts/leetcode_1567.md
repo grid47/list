@@ -3,7 +3,7 @@
 authors = ["Crafted by Me"]
 title = "Leetcode 1567: Maximum Length of Subarray With Positive Product"
 date = "2020-07-19"
-description = "Solution to Leetcode 1567"
+description = "In-depth solution and explanation for Leetcode 1567: Maximum Length of Subarray With Positive Product in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
 ]
