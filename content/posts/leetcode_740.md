@@ -45,7 +45,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/740.md" >}}
 ---
 {{< youtube MnbTKT4-KLc >}}
-| Next : [LeetCode #741: Cherry Pickup](https://grid47.xyz/posts/leetcode_741) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #741: Cherry Pickup](https://grid47.xyz/posts/leetcode_741) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

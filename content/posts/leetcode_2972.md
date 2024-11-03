@@ -28,7 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-| Next : [LeetCode #2973: Find Number of Coins to Place in Tree Nodes](https://grid47.xyz/posts/leetcode_2973) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #2973: Find Number of Coins to Place in Tree Nodes](https://grid47.xyz/posts/leetcode_2973) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

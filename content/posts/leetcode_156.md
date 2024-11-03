@@ -28,7 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/156.md" >}}
 ---
 {{< youtube cpW3M1gmJwY >}}
-| Next : [LeetCode #157: Read N Characters Given Read4](https://grid47.xyz/posts/leetcode_157) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #157: Read N Characters Given Read4](https://grid47.xyz/posts/leetcode_157) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

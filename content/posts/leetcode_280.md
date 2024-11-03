@@ -28,7 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/280.md" >}}
 ---
 {{< youtube vGsyTE4s34w >}}
-| Next : [LeetCode #281: Zigzag Iterator](https://grid47.xyz/posts/leetcode_281) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #281: Zigzag Iterator](https://grid47.xyz/posts/leetcode_281) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

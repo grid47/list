@@ -31,7 +31,7 @@ WHERE w1.temperature > w2.temperature AND DATEDIFF(w1.recordDate, w2.recordDate)
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/197.md" >}}
 ---
 {{< youtube FROOb0_r1xQ >}}
-| Next : [LeetCode #198: House Robber](https://grid47.xyz/posts/leetcode_198) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #198: House Robber](https://grid47.xyz/posts/leetcode_198) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

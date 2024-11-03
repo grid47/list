@@ -50,7 +50,7 @@ public:
 
 ---
 {{< youtube bFer5PdsgpY >}}
-| Next : [LeetCode #1568: Minimum Number of Days to Disconnect Island](https://grid47.xyz/posts/leetcode_1568) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1568: Minimum Number of Days to Disconnect Island](https://grid47.xyz/posts/leetcode_1568) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

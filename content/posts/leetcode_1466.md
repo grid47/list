@@ -60,7 +60,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1466.md" >}}
 ---
 {{< youtube qL4UaMAdPts >}}
-| Next : [LeetCode #1467: Probability of a Two Boxes Having The Same Number of Distinct Balls](https://grid47.xyz/posts/leetcode_1467) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1467: Probability of a Two Boxes Having The Same Number of Distinct Balls](https://grid47.xyz/posts/leetcode_1467) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

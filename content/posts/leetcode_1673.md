@@ -48,7 +48,7 @@ public:
 
 ---
 {{< youtube GBJFxSD3B_s >}}
-| Next : [LeetCode #1674: Minimum Moves to Make Array Complementary](https://grid47.xyz/posts/leetcode_1674) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1674: Minimum Moves to Make Array Complementary](https://grid47.xyz/posts/leetcode_1674) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

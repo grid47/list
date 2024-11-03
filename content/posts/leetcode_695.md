@@ -52,7 +52,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/695.md" >}}
 ---
 {{< youtube rowp_Frq_eI >}}
-| Next : [LeetCode #696: Count Binary Substrings](https://grid47.xyz/posts/leetcode_696) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #696: Count Binary Substrings](https://grid47.xyz/posts/leetcode_696) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

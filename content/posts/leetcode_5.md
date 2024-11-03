@@ -51,7 +51,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/5.md" >}}
 ---
 {{< youtube XYQecbcd6_c >}}
-| Next : [LeetCode #6: Zigzag Conversion](https://grid47.xyz/posts/leetcode_6) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #6: Zigzag Conversion](https://grid47.xyz/posts/leetcode_6) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

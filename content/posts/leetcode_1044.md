@@ -28,7 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1044.md" >}}
 ---
 {{< youtube pCVCoCn-8fw >}}
-| Next : [LeetCode #1045: Customers Who Bought All Products](https://grid47.xyz/posts/leetcode_1045) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1045: Customers Who Bought All Products](https://grid47.xyz/posts/leetcode_1045) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

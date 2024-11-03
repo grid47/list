@@ -44,7 +44,7 @@ order by id
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1179.md" >}}
 ---
 {{< youtube XIX8-ljI-qM >}}
-| Next : [LeetCode #1180: Count Substrings with Only One Distinct Letter](https://grid47.xyz/posts/leetcode_1180) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1180: Count Substrings with Only One Distinct Letter](https://grid47.xyz/posts/leetcode_1180) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

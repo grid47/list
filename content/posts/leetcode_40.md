@@ -57,7 +57,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/40.md" >}}
 ---
 {{< youtube FAjCxGNlxgk >}}
-| Next : [LeetCode #41: First Missing Positive](https://grid47.xyz/posts/leetcode_41) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #41: First Missing Positive](https://grid47.xyz/posts/leetcode_41) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

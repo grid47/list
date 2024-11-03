@@ -42,7 +42,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/169.md" >}}
 ---
 {{< youtube M1IL4hz0QrE >}}
-| Next : [LeetCode #170: Two Sum III - Data structure design](https://grid47.xyz/posts/leetcode_170) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #170: Two Sum III - Data structure design](https://grid47.xyz/posts/leetcode_170) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

@@ -55,7 +55,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/97.md" >}}
 ---
 {{< youtube 3Rw3p9LrgvE >}}
-| Next : [LeetCode #98: Validate Binary Search Tree](https://grid47.xyz/posts/leetcode_98) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #98: Validate Binary Search Tree](https://grid47.xyz/posts/leetcode_98) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

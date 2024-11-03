@@ -50,7 +50,7 @@ flipEquiv(root1->left, root2->right) && flipEquiv(root1->right, root2->left));
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/951.md" >}}
 ---
 {{< youtube izRDc1il9Pk >}}
-| Next : [LeetCode #952: Largest Component Size by Common Factor](https://grid47.xyz/posts/leetcode_952) |
+| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #952: Largest Component Size by Common Factor](https://grid47.xyz/posts/leetcode_952) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
