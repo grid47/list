@@ -62,8 +62,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1367.md" >}}
 ---
 
-
-| Next : [LeetCode #1368: Minimum Cost to Make at Least One Valid Path in a Grid](grid47.xyz/leetcode_1368) |
+| Next : [LeetCode #1368: Minimum Cost to Make at Least One Valid Path in a Grid](https://grid47.xyz/posts/leetcode_1368) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

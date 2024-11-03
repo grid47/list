@@ -58,8 +58,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/535.md" >}}
 ---
 {{< youtube VyBOaboQLGc >}}
-
-| Next : [LeetCode #536: Construct Binary Tree from String](grid47.xyz/leetcode_536) |
+| Next : [LeetCode #536: Construct Binary Tree from String](https://grid47.xyz/posts/leetcode_536) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

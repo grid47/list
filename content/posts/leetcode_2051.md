@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-
-| Next : [LeetCode #2052: Minimum Cost to Separate Sentence Into Rows](grid47.xyz/leetcode_2052) |
+| Next : [LeetCode #2052: Minimum Cost to Separate Sentence Into Rows](https://grid47.xyz/posts/leetcode_2052) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

@@ -80,8 +80,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/639.md" >}}
 ---
 
-
-| Next : [LeetCode #640: Solve the Equation](grid47.xyz/leetcode_640) |
+| Next : [LeetCode #640: Solve the Equation](https://grid47.xyz/posts/leetcode_640) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

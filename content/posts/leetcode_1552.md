@@ -55,8 +55,7 @@ public:
 
 ---
 
-
-| Next : [LeetCode #1553: Minimum Number of Days to Eat N Oranges](grid47.xyz/leetcode_1553) |
+| Next : [LeetCode #1553: Minimum Number of Days to Eat N Oranges](https://grid47.xyz/posts/leetcode_1553) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

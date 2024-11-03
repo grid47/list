@@ -51,8 +51,7 @@ return evaluateTree(root->left) && evaluateTree(root->right);
 
 ---
 
-
-| Next : [LeetCode #2332: The Latest Time to Catch a Bus](grid47.xyz/leetcode_2332) |
+| Next : [LeetCode #2332: The Latest Time to Catch a Bus](https://grid47.xyz/posts/leetcode_2332) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

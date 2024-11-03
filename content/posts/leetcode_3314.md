@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-
-| Next : [LeetCode #3315: Construct the Minimum Bitwise Array II](grid47.xyz/leetcode_3315) |
+| Next : [LeetCode #3315: Construct the Minimum Bitwise Array II](https://grid47.xyz/posts/leetcode_3315) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

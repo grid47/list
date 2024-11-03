@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/284.md" >}}
 ---
 {{< youtube g92eLjGcroI >}}
-
-| Next : [LeetCode #285: Inorder Successor in BST](grid47.xyz/leetcode_285) |
+| Next : [LeetCode #285: Inorder Successor in BST](https://grid47.xyz/posts/leetcode_285) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

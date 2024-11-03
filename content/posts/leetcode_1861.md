@@ -56,8 +56,7 @@ public:
 
 ---
 {{< youtube 2LRnTMOiqSI >}}
-
-| Next : [LeetCode #1862: Sum of Floored Pairs](grid47.xyz/leetcode_1862) |
+| Next : [LeetCode #1862: Sum of Floored Pairs](https://grid47.xyz/posts/leetcode_1862) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

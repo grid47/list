@@ -38,8 +38,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/121.md" >}}
 ---
 {{< youtube kJZrMGpyWpk >}}
-
-| Next : [LeetCode #122: Best Time to Buy and Sell Stock II](grid47.xyz/leetcode_122) |
+| Next : [LeetCode #122: Best Time to Buy and Sell Stock II](https://grid47.xyz/posts/leetcode_122) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

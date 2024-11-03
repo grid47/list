@@ -50,8 +50,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/22.md" >}}
 ---
 {{< youtube 7aSAbqCWhwE >}}
-
-| Next : [LeetCode #23: Merge k Sorted Lists](grid47.xyz/leetcode_23) |
+| Next : [LeetCode #23: Merge k Sorted Lists](https://grid47.xyz/posts/leetcode_23) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

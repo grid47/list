@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-
-| Next : [LeetCode #3036: Number of Subarrays That Match a Pattern II](grid47.xyz/leetcode_3036) |
+| Next : [LeetCode #3036: Number of Subarrays That Match a Pattern II](https://grid47.xyz/posts/leetcode_3036) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

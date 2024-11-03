@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1198.md" >}}
 ---
 {{< youtube RMiofZrTmWo >}}
-
-| Next : [LeetCode #1199: Minimum Time to Build Blocks](grid47.xyz/leetcode_1199) |
+| Next : [LeetCode #1199: Minimum Time to Build Blocks](https://grid47.xyz/posts/leetcode_1199) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

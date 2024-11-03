@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-
-| Next : [LeetCode #3259: Maximum Energy Boost From Two Drinks](grid47.xyz/leetcode_3259) |
+| Next : [LeetCode #3259: Maximum Energy Boost From Two Drinks](https://grid47.xyz/posts/leetcode_3259) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

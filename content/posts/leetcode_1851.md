@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 {{< youtube 5hQ5WWW5awQ >}}
-
-| Next : [LeetCode #1852: Distinct Numbers in Each Subarray](grid47.xyz/leetcode_1852) |
+| Next : [LeetCode #1852: Distinct Numbers in Each Subarray](https://grid47.xyz/posts/leetcode_1852) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

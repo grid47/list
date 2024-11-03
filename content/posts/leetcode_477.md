@@ -41,8 +41,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/477.md" >}}
 ---
 
-
-| Next : [LeetCode #478: Generate Random Point in a Circle](grid47.xyz/leetcode_478) |
+| Next : [LeetCode #478: Generate Random Point in a Circle](https://grid47.xyz/posts/leetcode_478) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

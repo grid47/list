@@ -40,8 +40,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/945.md" >}}
 ---
 
-
-| Next : [LeetCode #946: Validate Stack Sequences](grid47.xyz/leetcode_946) |
+| Next : [LeetCode #946: Validate Stack Sequences](https://grid47.xyz/posts/leetcode_946) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

@@ -48,8 +48,7 @@ hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
 
 ---
 
-
-| Next : [LeetCode #2262: Total Appeal of A String](grid47.xyz/leetcode_2262) |
+| Next : [LeetCode #2262: Total Appeal of A String](https://grid47.xyz/posts/leetcode_2262) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

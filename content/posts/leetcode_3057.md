@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-
-| Next : [LeetCode #3058: Friends With No Mutual Friends](grid47.xyz/leetcode_3058) |
+| Next : [LeetCode #3058: Friends With No Mutual Friends](https://grid47.xyz/posts/leetcode_3058) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

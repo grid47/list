@@ -62,8 +62,7 @@ public:
 
 ---
 
-
-| Next : [LeetCode #1775: Equal Sum Arrays With Minimum Number of Operations](grid47.xyz/leetcode_1775) |
+| Next : [LeetCode #1775: Equal Sum Arrays With Minimum Number of Operations](https://grid47.xyz/posts/leetcode_1775) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

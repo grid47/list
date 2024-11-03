@@ -46,8 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/238.md" >}}
 ---
 {{< youtube yKZFurr4GQA >}}
-
-| Next : [LeetCode #239: Sliding Window Maximum](grid47.xyz/leetcode_239) |
+| Next : [LeetCode #239: Sliding Window Maximum](https://grid47.xyz/posts/leetcode_239) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

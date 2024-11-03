@@ -97,8 +97,7 @@ public:
 
 ---
 
-
-| Next : [LeetCode #2147: Number of Ways to Divide a Long Corridor](grid47.xyz/leetcode_2147) |
+| Next : [LeetCode #2147: Number of Ways to Divide a Long Corridor](https://grid47.xyz/posts/leetcode_2147) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

@@ -55,8 +55,7 @@ public:
 
 ---
 {{< youtube knLFe7hEp3Y >}}
-
-| Next : [LeetCode #1972: First and Last Call On the Same Day](grid47.xyz/leetcode_1972) |
+| Next : [LeetCode #1972: First and Last Call On the Same Day](https://grid47.xyz/posts/leetcode_1972) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

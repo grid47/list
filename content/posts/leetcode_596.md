@@ -34,8 +34,7 @@ WHERE num >= 5;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/596.md" >}}
 ---
 
-
-| Next : [LeetCode #597: Friend Requests I: Overall Acceptance Rate](grid47.xyz/leetcode_597) |
+| Next : [LeetCode #597: Friend Requests I: Overall Acceptance Rate](https://grid47.xyz/posts/leetcode_597) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

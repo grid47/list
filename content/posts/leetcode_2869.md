@@ -37,8 +37,7 @@ public:
 
 ---
 
-
-| Next : [LeetCode #2870: Minimum Number of Operations to Make Array Empty](grid47.xyz/leetcode_2870) |
+| Next : [LeetCode #2870: Minimum Number of Operations to Make Array Empty](https://grid47.xyz/posts/leetcode_2870) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

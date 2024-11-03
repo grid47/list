@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-
-| Next : [LeetCode #3327: Check if DFS Strings Are Palindromes](grid47.xyz/leetcode_3327) |
+| Next : [LeetCode #3327: Check if DFS Strings Are Palindromes](https://grid47.xyz/posts/leetcode_3327) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

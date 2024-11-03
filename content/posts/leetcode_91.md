@@ -48,8 +48,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/91.md" >}}
 ---
 {{< youtube 6aEyTjOwlJU >}}
-
-| Next : [LeetCode #92: Reverse Linked List II](grid47.xyz/leetcode_92) |
+| Next : [LeetCode #92: Reverse Linked List II](https://grid47.xyz/posts/leetcode_92) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

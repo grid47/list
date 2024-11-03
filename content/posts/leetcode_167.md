@@ -44,8 +44,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/167.md" >}}
 ---
 {{< youtube ciPrKYoOQkI >}}
-
-| Next : [LeetCode #168: Excel Sheet Column Title](grid47.xyz/leetcode_168) |
+| Next : [LeetCode #168: Excel Sheet Column Title](https://grid47.xyz/posts/leetcode_168) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

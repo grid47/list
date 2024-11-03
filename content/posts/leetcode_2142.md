@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-
-| Next : [LeetCode #2143: Choose Numbers From Two Arrays in Range](grid47.xyz/leetcode_2143) |
+| Next : [LeetCode #2143: Choose Numbers From Two Arrays in Range](https://grid47.xyz/posts/leetcode_2143) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

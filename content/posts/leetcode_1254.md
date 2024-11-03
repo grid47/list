@@ -58,8 +58,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1254.md" >}}
 ---
 {{< youtube ZH8TeWFYpx8 >}}
-
-| Next : [LeetCode #1255: Maximum Score Words Formed by Letters](grid47.xyz/leetcode_1255) |
+| Next : [LeetCode #1255: Maximum Score Words Formed by Letters](https://grid47.xyz/posts/leetcode_1255) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

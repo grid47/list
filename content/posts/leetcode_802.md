@@ -59,8 +59,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/802.md" >}}
 ---
 {{< youtube Re_v0j0CRsg >}}
-
-| Next : [LeetCode #803: Bricks Falling When Hit](grid47.xyz/leetcode_803) |
+| Next : [LeetCode #803: Bricks Falling When Hit](https://grid47.xyz/posts/leetcode_803) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

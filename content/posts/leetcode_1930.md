@@ -42,8 +42,7 @@ if(fst[i] < lst[i]) res += unordered_set<char>(num.begin() + fst[i] + 1, num.beg
 
 ---
 {{< youtube 3THUt0vAFLU >}}
-
-| Next : [LeetCode #1931: Painting a Grid With Three Different Colors](grid47.xyz/leetcode_1931) |
+| Next : [LeetCode #1931: Painting a Grid With Three Different Colors](https://grid47.xyz/posts/leetcode_1931) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

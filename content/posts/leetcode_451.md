@@ -50,8 +50,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/451.md" >}}
 ---
 {{< youtube JTdpTHaGQoA >}}
-
-| Next : [LeetCode #452: Minimum Number of Arrows to Burst Balloons](grid47.xyz/leetcode_452) |
+| Next : [LeetCode #452: Minimum Number of Arrows to Burst Balloons](https://grid47.xyz/posts/leetcode_452) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

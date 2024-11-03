@@ -28,8 +28,7 @@ series = ["Leetcode"]
 
 ---
 
-
-| Next : [LeetCode #2701: Consecutive Transactions with Increasing Amounts](grid47.xyz/leetcode_2701) |
+| Next : [LeetCode #2701: Consecutive Transactions with Increasing Amounts](https://grid47.xyz/posts/leetcode_2701) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

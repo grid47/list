@@ -44,8 +44,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/885.md" >}}
 ---
 {{< youtube 0qep3f9cqVs >}}
-
-| Next : [LeetCode #886: Possible Bipartition](grid47.xyz/leetcode_886) |
+| Next : [LeetCode #886: Possible Bipartition](https://grid47.xyz/posts/leetcode_886) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

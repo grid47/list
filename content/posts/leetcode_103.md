@@ -64,8 +64,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/103.md" >}}
 ---
 {{< youtube igbboQbiwqw >}}
-
-| Next : [LeetCode #104: Maximum Depth of Binary Tree](grid47.xyz/leetcode_104) |
+| Next : [LeetCode #104: Maximum Depth of Binary Tree](https://grid47.xyz/posts/leetcode_104) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

@@ -42,8 +42,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/27.md" >}}
 ---
 {{< youtube Pcd1ii9P9ZI >}}
-
-| Next : [LeetCode #28: Find the Index of the First Occurrence in a String](grid47.xyz/leetcode_28) |
+| Next : [LeetCode #28: Find the Index of the First Occurrence in a String](https://grid47.xyz/posts/leetcode_28) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

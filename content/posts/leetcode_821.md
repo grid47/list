@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/821.md" >}}
 ---
 
-
-| Next : [LeetCode #822: Card Flipping Game](grid47.xyz/leetcode_822) |
+| Next : [LeetCode #822: Card Flipping Game](https://grid47.xyz/posts/leetcode_822) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

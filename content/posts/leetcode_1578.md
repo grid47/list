@@ -54,8 +54,7 @@ public:
 
 ---
 
-
-| Next : [LeetCode #1579: Remove Max Number of Edges to Keep Graph Fully Traversable](grid47.xyz/leetcode_1579) |
+| Next : [LeetCode #1579: Remove Max Number of Edges to Keep Graph Fully Traversable](https://grid47.xyz/posts/leetcode_1579) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

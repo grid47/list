@@ -61,8 +61,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/433.md" >}}
 ---
 {{< youtube XLvyInrFjm4 >}}
-
-| Next : [LeetCode #434: Number of Segments in a String](grid47.xyz/leetcode_434) |
+| Next : [LeetCode #434: Number of Segments in a String](https://grid47.xyz/posts/leetcode_434) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

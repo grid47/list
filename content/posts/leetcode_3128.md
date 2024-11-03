@@ -72,8 +72,7 @@ public:
 
 ---
 
-
-| Next : [LeetCode #3129: Find All Possible Stable Binary Arrays I](grid47.xyz/leetcode_3129) |
+| Next : [LeetCode #3129: Find All Possible Stable Binary Arrays I](https://grid47.xyz/posts/leetcode_3129) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

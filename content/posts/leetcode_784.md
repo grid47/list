@@ -49,8 +49,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/784.md" >}}
 ---
 {{< youtube qcWClV0FRTs >}}
-
-| Next : [LeetCode #785: Is Graph Bipartite?](grid47.xyz/leetcode_785) |
+| Next : [LeetCode #785: Is Graph Bipartite?](https://grid47.xyz/posts/leetcode_785) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

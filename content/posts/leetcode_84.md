@@ -74,8 +74,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/84.md" >}}
 ---
 {{< youtube zx5Sw9130L0 >}}
-
-| Next : [LeetCode #85: Maximal Rectangle](grid47.xyz/leetcode_85) |
+| Next : [LeetCode #85: Maximal Rectangle](https://grid47.xyz/posts/leetcode_85) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

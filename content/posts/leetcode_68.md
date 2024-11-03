@@ -67,8 +67,7 @@ private:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/68.md" >}}
 ---
 {{< youtube smaxL16J504 >}}
-
-| Next : [LeetCode #69: Sqrt(x)](grid47.xyz/leetcode_69) |
+| Next : [LeetCode #69: Sqrt(x)](https://grid47.xyz/posts/leetcode_69) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

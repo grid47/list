@@ -40,8 +40,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/35.md" >}}
 ---
 {{< youtube K-RYzDZkzCI >}}
-
-| Next : [LeetCode #36: Valid Sudoku](grid47.xyz/leetcode_36) |
+| Next : [LeetCode #36: Valid Sudoku](https://grid47.xyz/posts/leetcode_36) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

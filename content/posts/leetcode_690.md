@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/690.md" >}}
 ---
 {{< youtube 8uMRWVfsfmQ >}}
-
-| Next : [LeetCode #691: Stickers to Spell Word](grid47.xyz/leetcode_691) |
+| Next : [LeetCode #691: Stickers to Spell Word](https://grid47.xyz/posts/leetcode_691) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

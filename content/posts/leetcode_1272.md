@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1272.md" >}}
 ---
 {{< youtube UJ0jNXPA-sw >}}
-
-| Next : [LeetCode #1273: Delete Tree Nodes](grid47.xyz/leetcode_1273) |
+| Next : [LeetCode #1273: Delete Tree Nodes](https://grid47.xyz/posts/leetcode_1273) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1108.md" >}}
 ---
 {{< youtube FP0Na-pL0qk >}}
-
-| Next : [LeetCode #1109: Corporate Flight Bookings](grid47.xyz/leetcode_1109) |
+| Next : [LeetCode #1109: Corporate Flight Bookings](https://grid47.xyz/posts/leetcode_1109) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

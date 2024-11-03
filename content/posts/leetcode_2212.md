@@ -72,8 +72,7 @@ public:
 
 ---
 
-
-| Next : [LeetCode #2213: Longest Substring of One Repeating Character](grid47.xyz/leetcode_2213) |
+| Next : [LeetCode #2213: Longest Substring of One Repeating Character](https://grid47.xyz/posts/leetcode_2213) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

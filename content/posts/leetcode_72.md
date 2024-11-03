@@ -53,8 +53,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/72.md" >}}
 ---
 {{< youtube XYi2-LPrwm4 >}}
-
-| Next : [LeetCode #73: Set Matrix Zeroes](grid47.xyz/leetcode_73) |
+| Next : [LeetCode #73: Set Matrix Zeroes](https://grid47.xyz/posts/leetcode_73) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

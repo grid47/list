@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1495.md" >}}
 ---
 
-
-| Next : [LeetCode #1496: Path Crossing](grid47.xyz/leetcode_1496) |
+| Next : [LeetCode #1496: Path Crossing](https://grid47.xyz/posts/leetcode_1496) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

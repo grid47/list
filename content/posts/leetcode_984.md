@@ -39,8 +39,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/984.md" >}}
 ---
 
-
-| Next : [LeetCode #985: Sum of Even Numbers After Queries](grid47.xyz/leetcode_985) |
+| Next : [LeetCode #985: Sum of Even Numbers After Queries](https://grid47.xyz/posts/leetcode_985) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

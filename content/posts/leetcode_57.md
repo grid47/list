@@ -51,8 +51,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/57.md" >}}
 ---
 {{< youtube A8NUOmlwOlM >}}
-
-| Next : [LeetCode #58: Length of Last Word](grid47.xyz/leetcode_58) |
+| Next : [LeetCode #58: Length of Last Word](https://grid47.xyz/posts/leetcode_58) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

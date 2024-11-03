@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1152.md" >}}
 ---
 {{< youtube cqC7kiLG0Dc >}}
-
-| Next : [LeetCode #1153: String Transforms Into Another String](grid47.xyz/leetcode_1153) |
+| Next : [LeetCode #1153: String Transforms Into Another String](https://grid47.xyz/posts/leetcode_1153) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

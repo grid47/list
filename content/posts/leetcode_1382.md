@@ -62,8 +62,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1382.md" >}}
 ---
 {{< youtube 0KGdtzgL9Ec >}}
-
-| Next : [LeetCode #1383: Maximum Performance of a Team](grid47.xyz/leetcode_1383) |
+| Next : [LeetCode #1383: Maximum Performance of a Team](https://grid47.xyz/posts/leetcode_1383) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

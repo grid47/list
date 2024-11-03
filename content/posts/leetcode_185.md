@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/185.md" >}}
 ---
 {{< youtube fbtJV7Kwib0 >}}
-
-| Next : [LeetCode #186: Reverse Words in a String II](grid47.xyz/leetcode_186) |
+| Next : [LeetCode #186: Reverse Words in a String II](https://grid47.xyz/posts/leetcode_186) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

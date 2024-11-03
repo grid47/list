@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/148.md" >}}
 ---
 {{< youtube TGveA1oFhrc >}}
-
-| Next : [LeetCode #149: Max Points on a Line](grid47.xyz/leetcode_149) |
+| Next : [LeetCode #149: Max Points on a Line](https://grid47.xyz/posts/leetcode_149) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

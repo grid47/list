@@ -44,8 +44,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1090.md" >}}
 ---
 {{< youtube E0OkE3G95vU >}}
-
-| Next : [LeetCode #1091: Shortest Path in Binary Matrix](grid47.xyz/leetcode_1091) |
+| Next : [LeetCode #1091: Shortest Path in Binary Matrix](https://grid47.xyz/posts/leetcode_1091) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

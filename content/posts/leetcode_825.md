@@ -46,8 +46,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/825.md" >}}
 ---
 {{< youtube 0_4H68f85HQ >}}
-
-| Next : [LeetCode #826: Most Profit Assigning Work](grid47.xyz/leetcode_826) |
+| Next : [LeetCode #826: Most Profit Assigning Work](https://grid47.xyz/posts/leetcode_826) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

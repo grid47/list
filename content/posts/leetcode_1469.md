@@ -28,8 +28,7 @@ series = ["Leetcode"]
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1469.md" >}}
 ---
 
-
-| Next : [LeetCode #1470: Shuffle the Array](grid47.xyz/leetcode_1470) |
+| Next : [LeetCode #1470: Shuffle the Array](https://grid47.xyz/posts/leetcode_1470) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

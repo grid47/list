@@ -34,8 +34,7 @@ public:
 
 ---
 
-
-| Next : [LeetCode #2550: Count Collisions of Monkeys on a Polygon](grid47.xyz/leetcode_2550) |
+| Next : [LeetCode #2550: Count Collisions of Monkeys on a Polygon](https://grid47.xyz/posts/leetcode_2550) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)

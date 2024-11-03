@@ -39,8 +39,7 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1344.md" >}}
 ---
 {{< youtube evs3Po8Km7c >}}
-
-| Next : [LeetCode #1345: Jump Game IV](grid47.xyz/leetcode_1345) |
+| Next : [LeetCode #1345: Jump Game IV](https://grid47.xyz/posts/leetcode_1345) |
 | --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
