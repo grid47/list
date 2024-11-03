@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 787: Cheapest Flights Within K Stops"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 787: Cheapest Flights Within K Stops in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Dynamic Programming","Breadth-First Search","Graph","Heap","Shortest Path"]
 categories = [
     "Medium"
 ]

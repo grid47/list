@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 3232: Find if Digit Game Can Be Won"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3232: Find if Digit Game Can Be Won in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Easy"
 ]

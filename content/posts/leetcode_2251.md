@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 2251: Number of Flowers in Full Bloom"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2251: Number of Flowers in Full Bloom in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Hard"
 ]

@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 542: 01 Matrix"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 542: 01 Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Dynamic Programming","Breadth-First Search","Matrix"]
 categories = [
     "Medium"
 ]

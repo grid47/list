@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 1623: All Valid Triplets That Can Represent a Country"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1623: All Valid Triplets That Can Represent a Country in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Easy"
 ]

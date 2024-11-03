@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 533: Lonely Pixel II"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 533: Lonely Pixel II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Hash Table","Matrix"]
 categories = [
     "Medium"
 ]

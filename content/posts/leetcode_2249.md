@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 2249: Count Lattice Points Inside a Circle"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2249: Count Lattice Points Inside a Circle in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

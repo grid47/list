@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 721: Accounts Merge"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 721: Accounts Merge in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","String","Depth-First Search","Breadth-First Search","Union Find"]
 categories = [
     "Medium"
 ]

@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 898: Bitwise ORs of Subarrays"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 898: Bitwise ORs of Subarrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Dynamic Programming","Bit Manipulation"]
 categories = [
     "Medium"
 ]

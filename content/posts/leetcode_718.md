@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 718: Maximum Length of Repeated Subarray"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 718: Maximum Length of Repeated Subarray in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Binary Search","Dynamic Programming","Sliding Window","Rolling Hash"]
 categories = [
     "Medium"
 ]

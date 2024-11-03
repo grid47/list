@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 771: Jewels and Stones"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 771: Jewels and Stones in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Hash Table","String"]
 categories = [
     "Easy"
 ]

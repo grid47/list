@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 975: Odd Even Jump"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 975: Odd Even Jump in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Dynamic Programming","Stack","Monotonic Stack","Ordered Map"]
 categories = [
     "Hard"
 ]

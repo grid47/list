@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 430: Flatten a Multilevel Doubly Linked List"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 430: Flatten a Multilevel Doubly Linked List in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Linked List","Depth-First Search"]
 categories = [
     "Medium"
 ]

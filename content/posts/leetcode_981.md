@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 981: Time Based Key-Value Store"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 981: Time Based Key-Value Store in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Hash Table","String","Binary Search","Design"]
 categories = [
     "Medium"
 ]

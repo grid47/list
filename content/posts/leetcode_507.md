@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 507: Perfect Number"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 507: Perfect Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Math"]
 categories = [
     "Easy"
 ]

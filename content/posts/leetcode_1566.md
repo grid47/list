@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 1566: Detect Pattern of Length M Repeated K or More Times"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1566: Detect Pattern of Length M Repeated K or More Times in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Easy"
 ]

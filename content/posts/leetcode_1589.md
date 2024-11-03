@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 1589: Maximum Sum Obtained of Any Permutation"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1589: Maximum Sum Obtained of Any Permutation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

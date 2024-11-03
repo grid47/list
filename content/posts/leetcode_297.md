@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 297: Serialize and Deserialize Binary Tree"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 297: Serialize and Deserialize Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Tree","Depth-First Search","Breadth-First Search","Design"]
 categories = [
     "Hard"
 ]

@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 797: All Paths From Source to Target"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 797: All Paths From Source to Target in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Backtracking","Depth-First Search","Breadth-First Search","Graph"]
 categories = [
     "Medium"
 ]

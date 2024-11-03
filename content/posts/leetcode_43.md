@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 43: Multiply Strings"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 43: Multiply Strings in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Math","String"]
 categories = [
     "Medium"
 ]

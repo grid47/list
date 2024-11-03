@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 207: Course Schedule"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 207: Course Schedule in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Graph","Topological Sort","Depth-First Search","Breadth-First Search"]
 categories = [
     "Medium"
 ]

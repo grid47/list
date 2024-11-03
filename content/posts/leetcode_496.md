@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 496: Next Greater Element I"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 496: Next Greater Element I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Hash Table","Stack","Monotonic Stack"]
 categories = [
     "Easy"
 ]

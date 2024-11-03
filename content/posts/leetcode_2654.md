@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 2654: Minimum Number of Operations to Make All Array Elements Equal to 1"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2654: Minimum Number of Operations to Make All Array Elements Equal to 1 in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 1495: Friendly Movies Streamed Last Month"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1495: Friendly Movies Streamed Last Month in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Easy"
 ]

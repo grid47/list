@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 632: Smallest Range Covering Elements from K Lists"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 632: Smallest Range Covering Elements from K Lists in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Hash Table","Sliding Window","Heap"]
 categories = [
     "Hard"
 ]

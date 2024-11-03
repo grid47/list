@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 1959: Minimum Total Space Wasted With K Resizing Operations"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1959: Minimum Total Space Wasted With K Resizing Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

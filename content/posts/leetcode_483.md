@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 483: Smallest Good Base"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 483: Smallest Good Base in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Math","Binary Search"]
 categories = [
     "Hard"
 ]

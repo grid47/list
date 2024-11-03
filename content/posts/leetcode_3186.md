@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 3186: Maximum Total Damage With Spell Casting"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3186: Maximum Total Damage With Spell Casting in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

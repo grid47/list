@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 2045: Second Minimum Time to Reach Destination"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2045: Second Minimum Time to Reach Destination in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Hard"
 ]

@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 2419: Longest Subarray With Maximum Bitwise AND"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2419: Longest Subarray With Maximum Bitwise AND in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 2497: Maximum Star Sum of a Graph"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2497: Maximum Star Sum of a Graph in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 3067: Count Pairs of Connectable Servers in a Weighted Tree Network"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3067: Count Pairs of Connectable Servers in a Weighted Tree Network in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

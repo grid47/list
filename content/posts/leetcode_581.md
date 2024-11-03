@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 581: Shortest Unsorted Continuous Subarray"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 581: Shortest Unsorted Continuous Subarray in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Stack","Greedy","Sorting","Monotonic Stack"]
 categories = [
     "Medium"
 ]

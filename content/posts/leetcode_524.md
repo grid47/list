@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 524: Longest Word in Dictionary through Deleting"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 524: Longest Word in Dictionary through Deleting in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Two Pointers","String","Sorting"]
 categories = [
     "Medium"
 ]

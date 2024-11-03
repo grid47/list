@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 1282: Group the People Given the Group Size They Belong To"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1282: Group the People Given the Group Size They Belong To in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 2582: Pass the Pillow"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2582: Pass the Pillow in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Easy"
 ]

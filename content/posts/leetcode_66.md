@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 66: Plus One"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 66: Plus One in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Math"]
 categories = [
     "Easy"
 ]

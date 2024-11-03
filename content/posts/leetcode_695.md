@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 695: Max Area of Island"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 695: Max Area of Island in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Array","Depth-First Search","Breadth-First Search","Matrix"]
 categories = [
     "Medium"
 ]

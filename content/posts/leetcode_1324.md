@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 1324: Print Words Vertically"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1324: Print Words Vertically in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = []
 categories = [
     "Medium"
 ]

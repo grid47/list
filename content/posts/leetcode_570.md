@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 570: Managers with at Least 5 Direct Reports"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 570: Managers with at Least 5 Direct Reports in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Database"]
 categories = [
     "Medium"
 ]

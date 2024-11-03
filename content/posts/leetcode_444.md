@@ -4,9 +4,7 @@ authors = ["Crafted by Me"]
 title = "Leetcode 444: Sequence Reconstruction"
 date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 444: Sequence Reconstruction in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
-tags = [
-    
-]
+tags = ["Graph","Topological Sort"]
 categories = [
     "Medium"
 ]
