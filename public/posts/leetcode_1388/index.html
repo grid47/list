@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-01-14T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-01-14T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-01-14T00:00:00Z">
-                January 14, 2021
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,36 +179,36 @@
         <p><a href="https://leetcode.com/problems/pizza-with-3n-slices/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cnt</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="n">INT_MIN</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">fst</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">fst</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fst</span><span class="p">,</span> <span class="n">cnt</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">((</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">%</span> <span class="n">n</span> <span class="o">!=</span> <span class="n">fst</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fst</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">fst</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxSizeSlices</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)));</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> mem;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> fst, <span style="color:#66d9ef">int</span> cnt) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> n) <span style="color:#66d9ef">return</span> INT_MIN;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mem[idx][cnt][fst <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[idx][cnt][fst <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, fst, cnt);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">%</span> n <span style="color:#f92672">!=</span> fst) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> max(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, fst, cnt <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> nums[idx]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[idx][cnt][fst <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxSizeSlices</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        mem.resize(n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(n<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> max(res, dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, i, n<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> nums[i]);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode445s1hbhb">
   
 
@@ -276,21 +262,21 @@
 <ol>
 <li>
 <p><strong>Class and Member Variables</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> mem;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
 </span></span></code></pre></div><ul>
 <li>The <code>Solution</code> class contains member variables: <code>n</code> for the number of slices, <code>mem</code> for memoization, and <code>nums</code> for the array of pizza slices.</li>
 </ul>
 </li>
 <li>
 <p><strong>Dynamic Programming Function</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cnt</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="n">INT_MIN</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">fst</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">fst</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> fst, <span style="color:#66d9ef">int</span> cnt) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> n) <span style="color:#66d9ef">return</span> INT_MIN;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mem[idx][cnt][fst <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[idx][cnt][fst <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
 </span></span></code></pre></div><ul>
 <li>The <code>dp</code> function calculates the maximum slices that can be obtained starting from index <code>idx</code>, where <code>fst</code> indicates the first selected slice, and <code>cnt</code> indicates how many slices remain to be selected.</li>
 <li>It checks the base cases: if no slices are left to choose, return 0; if all slices have been considered, return a minimum value; if the result is already computed, return it.</li>
@@ -298,10 +284,10 @@
 </li>
 <li>
 <p><strong>Recursion Logic</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fst</span><span class="p">,</span> <span class="n">cnt</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">((</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">%</span> <span class="n">n</span> <span class="o">!=</span> <span class="n">fst</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fst</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, fst, cnt);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">%</span> n <span style="color:#f92672">!=</span> fst) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> max(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, fst, cnt <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> nums[idx]);
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>The function first explores the option of skipping the current slice by calling <code>dp(idx + 1, fst, cnt)</code>.</li>
 <li>It then considers selecting the current slice. The condition <code>(idx + 1) % n != fst</code> ensures that the slice selected does not overlap with the first slice selected, adhering to the circular constraint.</li>
@@ -309,24 +295,24 @@
 </li>
 <li>
 <p><strong>Memoization Update</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">cnt</span><span class="p">][</span><span class="n">fst</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[idx][cnt][fst <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li>The calculated answer for the current state is stored in the memoization table before returning.</li>
 </ul>
 </li>
 <li>
 <p><strong>Main Function</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxSizeSlices</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)));</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxSizeSlices</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        mem.resize(n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(n<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> max(res, dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, i, n<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> nums[i]);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li>The <code>maxSizeSlices</code> function initializes the necessary variables and the memoization table.</li>
 <li>It then iterates through each slice, initiating the recursive computation for maximum slices starting from that slice. It considers the first slice selected and computes the maximum possible slices based on the recursive logic.</li>
@@ -374,6 +360,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Dxup4m4Krck?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
 <table>
   <thead>
       <tr>

@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2019-11-30T00:00:00+00:00">
-    <meta property="article:modified_time" content="2019-11-30T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-11-30T00:00:00Z">
-                November 30, 2019
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,42 +179,42 @@
         <p><a href="https://leetcode.com/problems/maximize-score-after-n-operations/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="mi">20000</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">msk</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(((</span><span class="n">msk</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(((</span><span class="n">msk</span> <span class="o">&gt;&gt;</span> <span class="n">j</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">__gcd</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">msk</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span>                
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxScore</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode901s1hbhb">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> memo[<span style="color:#ae81ff">8</span>][<span style="color:#ae81ff">20000</span>] <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> msk) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[idx][msk] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx][msk];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(((msk <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> nums.size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> j) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(((msk <span style="color:#f92672">&gt;&gt;</span> j) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                msk <span style="color:#f92672">^=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i);
+</span></span><span style="display:flex;"><span>                msk <span style="color:#f92672">^=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j);
+</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> max(ans, (idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> __gcd(nums[i], nums[j]) <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, msk));
+</span></span><span style="display:flex;"><span>                msk <span style="color:#f92672">^=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i);
+</span></span><span style="display:flex;"><span>                msk <span style="color:#f92672">^=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j);                
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[idx][msk] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxScore</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<h2 id="hahahugoshortcode900s1hbhb">
   
 
   
@@ -277,65 +263,65 @@
   </a>
 </h3>
 <p>The code can be broken down into several sections:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="mi">20000</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> memo[<span style="color:#ae81ff">8</span>][<span style="color:#ae81ff">20000</span>] <span style="color:#f92672">=</span> {};
 </span></span></code></pre></div><ul>
 <li>A class named <code>Solution</code> is defined with public access.</li>
 <li>Three member variables are declared: <code>n</code> to store half the size of the <code>nums</code> vector, <code>nums</code> to hold the input values, and <code>memo</code> for memoization.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">msk</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> msk) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span></code></pre></div><ul>
 <li>The <code>dp</code> function is defined, which takes the current index <code>idx</code> and the bitmask <code>msk</code> as parameters.</li>
 <li>If <code>idx</code> equals <code>n</code>, the function returns 0, indicating no more pairs can be formed.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">];</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[idx][msk] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx][msk];
 </span></span></code></pre></div><ul>
 <li>The memoization check is performed. If a result for the current state exists, it is returned immediately.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(((</span><span class="n">msk</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(((msk <span style="color:#f92672">&gt;&gt;</span> i) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
 </span></span></code></pre></div><ul>
 <li>The <code>ans</code> variable is initialized to track the maximum score.</li>
 <li>The first loop iterates through all numbers. If the current number has already been used (as determined by checking the corresponding bit in <code>msk</code>), it skips to the next iteration.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(((</span><span class="n">msk</span> <span class="o">&gt;&gt;</span> <span class="n">j</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> nums.size(); j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> j) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(((msk <span style="color:#f92672">&gt;&gt;</span> j) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
 </span></span></code></pre></div><ul>
 <li>The second loop iterates through all numbers again to find a valid pair. It ensures that <code>i</code> is not equal to <code>j</code> and that the number at index <code>j</code> has not been used yet.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                msk <span style="color:#f92672">^=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i);
+</span></span><span style="display:flex;"><span>                msk <span style="color:#f92672">^=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j);
 </span></span></code></pre></div><ul>
 <li>Both bits corresponding to the indices <code>i</code> and <code>j</code> are set in <code>msk</code>, indicating that these numbers are now used.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">__gcd</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">msk</span><span class="p">));</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> max(ans, (idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> __gcd(nums[i], nums[j]) <span style="color:#f92672">+</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, msk));
 </span></span></code></pre></div><ul>
 <li>The score for the current pairing is calculated as ((\text{idx} + 1) \times \text{GCD}(\text{num}_i, \text{num}_j)), and the result of the recursive call for the next index is added.</li>
 <li>The maximum score found so far is stored in <code>ans</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span>                
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                msk <span style="color:#f92672">^=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> i);
+</span></span><span style="display:flex;"><span>                msk <span style="color:#f92672">^=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> j);                
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[idx][msk] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li>The bitmask is reset for the next iteration by clearing the bits for <code>i</code> and <code>j</code>.</li>
 <li>The computed result is stored in <code>memo</code> for the current state.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxScore</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxScore</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li>The <code>maxScore</code> function initializes <code>n</code>, sets the <code>nums</code> vector, clears the memoization table with <code>memset</code>, and begins the recursive DP process by calling <code>dp(0, 0)</code>.</li>
 </ul>
@@ -368,7 +354,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode901s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode900s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2019-05-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2019-05-20T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-05-20T00:00:00Z">
-                May 20, 2019
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,99 +179,99 @@
         <p><a href="https://leetcode.com/problems/operations-on-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LockingTree</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nodes</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">chd</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">LockingTree</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">parent</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">nodes</span> <span class="o">=</span> <span class="n">parent</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// chd.resize(parent.size(), vector&lt;int&gt;());
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// for(int i = 1; i &lt; parent.size(); i++) 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//     chd[parent[i]].push_back(i);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="n">temp</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">parent</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">temp</span><span class="p">[</span><span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">chd</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">lock</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">==</span><span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">=</span><span class="n">user</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">       <span class="c1">//  if(mp.count(num)) return false;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="c1">//  
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="c1">//  mp[num] = user;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="c1">//  return true;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">unlock</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">!=</span><span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">==</span><span class="n">user</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>        
-</span></span><span class="line"><span class="cl">        <span class="c1">// if(!mp[num]) return false;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// if(mp[num] != user) return false;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// mp.erase(num);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// return true;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">check</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// cout&lt;&lt; num &lt;&lt; mp[num];        
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">!=</span><span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// cout&lt;&lt; num &lt;&lt; &#34;-&#34;&lt;&lt; nodes[num];
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">check</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">num</span><span class="p">]))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">desc</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">total</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">chd</span><span class="p">[</span><span class="n">num</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> 
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">total</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">desc</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">total</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">upgrade</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">!=</span><span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">&#34;hi&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">&#34;hi1&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">desc</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">total</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your LockingTree object will be instantiated and called as such:
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * LockingTree* obj = new LockingTree(parent);
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_1 = obj-&gt;lock(num,user);
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_2 = obj-&gt;unlock(num,user);
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_3 = obj-&gt;upgrade(num,user);
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LockingTree</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nodes;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> chd;
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    LockingTree(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> parent) {
+</span></span><span style="display:flex;"><span>        nodes <span style="color:#f92672">=</span> parent;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// chd.resize(parent.size(), vector&lt;int&gt;());
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// for(int i = 1; i &lt; parent.size(); i++) 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//     chd[parent[i]].push_back(i);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>temp(parent.size());
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>parent.size();i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>            temp[parent[i]].push_back(i);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        chd<span style="color:#f92672">=</span>temp;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">lock</span>(<span style="color:#66d9ef">int</span> num, <span style="color:#66d9ef">int</span> user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.find(num)<span style="color:#f92672">==</span>mp.end()){
+</span></span><span style="display:flex;"><span>            mp[num]<span style="color:#f92672">=</span>user;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">//  if(mp.count(num)) return false;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#75715e">//  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#75715e">//  mp[num] = user;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#75715e">//  return true;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">unlock</span>(<span style="color:#66d9ef">int</span> num, <span style="color:#66d9ef">int</span> user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.find(num)<span style="color:#f92672">!=</span>mp.end()){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[num]<span style="color:#f92672">==</span>user){
+</span></span><span style="display:flex;"><span>                mp.erase(num);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// if(!mp[num]) return false;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// if(mp[num] != user) return false;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// mp.erase(num);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// return true;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// cout&lt;&lt; num &lt;&lt; mp[num];        
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(mp.find(num)<span style="color:#f92672">!=</span>mp.end()) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(num)) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// cout&lt;&lt; num &lt;&lt; &#34;-&#34;&lt;&lt; nodes[num];
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(nodes[num] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> check(nodes[num])) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">desc</span>(<span style="color:#66d9ef">int</span> num, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>total) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> n : chd[num]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp.count(n)) 
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                mp.erase(n);
+</span></span><span style="display:flex;"><span>                total<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            desc(n, total);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">upgrade</span>(<span style="color:#66d9ef">int</span> num, <span style="color:#66d9ef">int</span> user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.find(num)<span style="color:#f92672">!=</span>mp.end()) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        cout<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;hi&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(check(num)) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        cout<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;hi1&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> total <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        desc(num, total);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(total <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        mp[num] <span style="color:#f92672">=</span> user;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Your LockingTree object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * LockingTree* obj = new LockingTree(parent);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_1 = obj-&gt;lock(num,user);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_2 = obj-&gt;unlock(num,user);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_3 = obj-&gt;upgrade(num,user);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
 <h2 id="hahahugoshortcode1115s1hbhb">
   
 
@@ -341,22 +327,22 @@
   </a>
 </h3>
 <p>Here is a detailed explanation of the provided code:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LockingTree</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nodes</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">chd</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span> <span class="c1">// Map to track locked nodes and their user IDs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LockingTree</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nodes;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> chd;
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp; <span style="color:#75715e">// Map to track locked nodes and their user IDs
 </span></span></span></code></pre></div><p>We define a class <code>LockingTree</code> with three member variables: <code>nodes</code> to store the parent information, <code>chd</code> for the children of each node, and <code>mp</code> which maps locked nodes to the users who locked them.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">LockingTree</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">parent</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">nodes</span> <span class="o">=</span> <span class="n">parent</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="n">temp</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">parent</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">temp</span><span class="p">[</span><span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">chd</span><span class="o">=</span><span class="n">temp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    LockingTree(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> parent) {
+</span></span><span style="display:flex;"><span>        nodes <span style="color:#f92672">=</span> parent;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>temp(parent.size());
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;i<span style="color:#f92672">&lt;</span>parent.size();i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>            temp[parent[i]].push_back(i);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        chd<span style="color:#f92672">=</span>temp;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>The constructor initializes the tree based on the parent array. It creates a children list by iterating through the parent array and adding child nodes to their respective parents.</p>
 <h4 id="lock-operation">
   Lock Operation
@@ -365,14 +351,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">lock</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">==</span><span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">=</span><span class="n">user</span><span class="p">;</span> <span class="c1">// Lock the node for the user
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">lock</span>(<span style="color:#66d9ef">int</span> num, <span style="color:#66d9ef">int</span> user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.find(num)<span style="color:#f92672">==</span>mp.end()){
+</span></span><span style="display:flex;"><span>            mp[num]<span style="color:#f92672">=</span>user; <span style="color:#75715e">// Lock the node for the user
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>The <code>lock</code> method checks if the node <code>num</code> is already locked. If it is not, it locks the node by inserting it into the map with the user&rsquo;s ID and returns <code>true</code>. If it is locked, it returns <code>false</code>.</p>
 <h4 id="unlock-operation">
   Unlock Operation
@@ -381,16 +367,16 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">unlock</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">!=</span><span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">()){</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">]</span><span class="o">==</span><span class="n">user</span><span class="p">){</span> <span class="c1">// Check if the unlocking user matches
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">num</span><span class="p">);</span> <span class="c1">// Unlock the node
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// User does not match
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>        
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">unlock</span>(<span style="color:#66d9ef">int</span> num, <span style="color:#66d9ef">int</span> user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.find(num)<span style="color:#f92672">!=</span>mp.end()){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[num]<span style="color:#f92672">==</span>user){ <span style="color:#75715e">// Check if the unlocking user matches
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                mp.erase(num); <span style="color:#75715e">// Unlock the node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// User does not match
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;        
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>The <code>unlock</code> method checks if the node is locked and whether the user unlocking it is the same one who locked it. If both conditions are met, it unlocks the node by removing it from the map and returns <code>true</code>. Otherwise, it returns <code>false</code>.</p>
 <h4 id="check-operation">
   Check Operation
@@ -399,11 +385,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">check</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">!=</span><span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// Node is locked
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">check</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">num</span><span class="p">]))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// Check parent
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.find(num)<span style="color:#f92672">!=</span>mp.end()) <span style="color:#66d9ef">return</span> true; <span style="color:#75715e">// Node is locked
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(nodes[num] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> check(nodes[num])) <span style="color:#66d9ef">return</span> true; <span style="color:#75715e">// Check parent
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>The <code>check</code> method verifies if a node or any of its ancestors are locked. It returns <code>true</code> if it finds a locked ancestor, otherwise <code>false</code>.</p>
 <h4 id="descendants-traversal">
   Descendants Traversal
@@ -412,15 +398,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">desc</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">total</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">chd</span><span class="p">[</span><span class="n">num</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c1">// Unlock the descendant
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">total</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">desc</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">total</span><span class="p">);</span> <span class="c1">// Recursive call for children
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">desc</span>(<span style="color:#66d9ef">int</span> num, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>total) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> n : chd[num]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp.count(n)) {
+</span></span><span style="display:flex;"><span>                mp.erase(n); <span style="color:#75715e">// Unlock the descendant
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                total<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            desc(n, total); <span style="color:#75715e">// Recursive call for children
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>The <code>desc</code> method is used to count and unlock all locked descendants of a given node. It iterates through the children, unlocking each one and incrementing the total count.</p>
 <h4 id="upgrade-operation">
   Upgrade Operation
@@ -429,19 +415,19 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">upgrade</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">!=</span><span class="n">mp</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Cannot upgrade if locked
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">check</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Cannot upgrade if an ancestor is locked
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">desc</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">total</span><span class="p">);</span> <span class="c1">// Count locked descendants
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">total</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// No locked descendants to upgrade
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span><span class="p">;</span> <span class="c1">// Lock the current node
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">upgrade</span>(<span style="color:#66d9ef">int</span> num, <span style="color:#66d9ef">int</span> user) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.find(num)<span style="color:#f92672">!=</span>mp.end()) <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// Cannot upgrade if locked
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(check(num)) <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// Cannot upgrade if an ancestor is locked
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> total <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        desc(num, total); <span style="color:#75715e">// Count locked descendants
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(total <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// No locked descendants to upgrade
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        mp[num] <span style="color:#f92672">=</span> user; <span style="color:#75715e">// Lock the current node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>The <code>upgrade</code> method checks if the node is already locked or has locked ancestors. If neither is true, it counts locked descendants using <code>desc</code>. If at least one locked descendant is found, it locks the current node and returns <code>true</code>; otherwise, it returns <code>false</code>.</p>
 <h3 id="complexity">
   Complexity
@@ -484,23 +470,23 @@
   </a>
 </h3>
 <p>Here’s how you can utilize the <code>LockingTree</code> class:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">parent</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span> <span class="c1">// Example parent array
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">LockingTree</span><span class="o">*</span> <span class="n">tree</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LockingTree</span><span class="p">(</span><span class="n">parent</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Should return true
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Should return true
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">unlock</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Should return true
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">upgrade</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Should return true
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tree</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Should return false (already locked)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
-</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">tree</span><span class="p">;</span> <span class="c1">// Clean up
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> parent <span style="color:#f92672">=</span> {<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>}; <span style="color:#75715e">// Example parent array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    LockingTree<span style="color:#f92672">*</span> tree <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LockingTree(parent);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> tree<span style="color:#f92672">-&gt;</span>lock(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// Should return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> tree<span style="color:#f92672">-&gt;</span>lock(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// Should return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> tree<span style="color:#f92672">-&gt;</span>unlock(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// Should return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> tree<span style="color:#f92672">-&gt;</span>upgrade(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>) <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// Should return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> tree<span style="color:#f92672">-&gt;</span>lock(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>) <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// Should return false (already locked)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> tree; <span style="color:#75715e">// Clean up
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>This example initializes a <code>LockingTree</code>, performs various lock and unlock operations, and demonstrates how the locking mechanism works effectively in a hierarchical structure.</p>
  
 </div>

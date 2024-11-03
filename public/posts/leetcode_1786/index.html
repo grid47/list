@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2019-12-13T00:00:00+00:00">
-    <meta property="article:modified_time" content="2019-12-13T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-12-13T00:00:00Z">
-                December 13, 2019
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,64 +179,64 @@
         <p><a href="https://leetcode.com/problems/number-of-restricted-paths-from-first-to-last-node/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define pii pair&lt;int, int&gt;
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countRestrictedPaths</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">es</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;&gt;</span> <span class="n">gph</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">es</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">d</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dst</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pii</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">        <span class="n">dst</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="p">[</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">u</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                
-</span></span><span class="line"><span class="cl">               <span class="c1">// if(t != dst[nxt]) continue;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">,</span> <span class="n">nxt</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">gph</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">dp</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">gph</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dp</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">v</span> <span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">            <span class="n">w</span> <span class="o">=</span> <span class="n">dst</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="n">val</span> <span class="o">=</span> <span class="n">dst</span><span class="p">[</span><span class="n">v</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span> <span class="o">%</span> <span class="n">mod</span><span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">gph</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">dp</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define pii pair&lt;int, int&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> countRestrictedPaths(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> es) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pii<span style="color:#f92672">&gt;&gt;</span> gph(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> es.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> u <span style="color:#f92672">=</span> es[i][<span style="color:#ae81ff">0</span>], v <span style="color:#f92672">=</span> es[i][<span style="color:#ae81ff">1</span>], d <span style="color:#f92672">=</span> es[i][<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>            gph[u].push_back({d, v});
+</span></span><span style="display:flex;"><span>            gph[v].push_back({d, u});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dst(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, INT_MAX);
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>pii, vector<span style="color:#f92672">&lt;</span>pii<span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>        pq.push({<span style="color:#ae81ff">0</span>, n});
+</span></span><span style="display:flex;"><span>        dst[n] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> [d, u] <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span> x: gph[u]) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> nxt <span style="color:#f92672">=</span> x.second, t <span style="color:#f92672">=</span> x.first;
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>               <span style="color:#75715e">// if(t != dst[nxt]) continue;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(dst[nxt] <span style="color:#f92672">&gt;</span> t <span style="color:#f92672">+</span> d) {
+</span></span><span style="display:flex;"><span>                    dst[nxt] <span style="color:#f92672">=</span> t <span style="color:#f92672">+</span> d;
+</span></span><span style="display:flex;"><span>                    pq.push({t <span style="color:#f92672">+</span> d, nxt});
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dfs</span>(gph, dst, n, dp);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pii<span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>gph, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>dst, <span style="color:#66d9ef">int</span> s, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>dp) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (dp[s] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> dp[s];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, w <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>v : gph[s]) {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            w <span style="color:#f92672">=</span> dst[s];
+</span></span><span style="display:flex;"><span>            val <span style="color:#f92672">=</span> dst[v.second];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (val <span style="color:#f92672">&gt;</span> w) {
+</span></span><span style="display:flex;"><span>                sum <span style="color:#f92672">=</span> (sum <span style="color:#f92672">%</span> mod<span style="color:#f92672">+</span> dfs(gph, dst, v.second, dp) <span style="color:#f92672">%</span> mod) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp[s] <span style="color:#f92672">=</span> sum <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode887s1hbhb">
   
 
@@ -298,80 +284,80 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define pii pair&lt;int, int&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define pii pair&lt;int, int&gt;
 </span></span></span></code></pre></div><ul>
 <li>We define a shorthand <code>pii</code> for a pair of integers to improve code readability, particularly when dealing with edges represented as pairs of nodes and weights.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countRestrictedPaths</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">es</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> countRestrictedPaths(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> es) {
 </span></span></code></pre></div><ul>
 <li>We define a class <code>Solution</code> with a public method <code>countRestrictedPaths</code> that takes the number of nodes <code>n</code> and a vector of edges <code>es</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;&gt;</span> <span class="n">gph</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">es</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">d</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pii<span style="color:#f92672">&gt;&gt;</span> gph(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> es.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> u <span style="color:#f92672">=</span> es[i][<span style="color:#ae81ff">0</span>], v <span style="color:#f92672">=</span> es[i][<span style="color:#ae81ff">1</span>], d <span style="color:#f92672">=</span> es[i][<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>            gph[u].push_back({d, v});
+</span></span><span style="display:flex;"><span>            gph[v].push_back({d, u});
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>We create an adjacency list <code>gph</code> to represent the graph. For each edge, we store both directions (from <code>u</code> to <code>v</code> and from <code>v</code> to <code>u</code>), with their corresponding weights.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dst</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pii</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">        <span class="n">dst</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dst(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, INT_MAX);
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>pii, vector<span style="color:#f92672">&lt;</span>pii<span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>        pq.push({<span style="color:#ae81ff">0</span>, n});
+</span></span><span style="display:flex;"><span>        dst[n] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span></code></pre></div><ul>
 <li>We initialize a distance array <code>dst</code> to track the shortest distances from node <code>n</code>, setting all distances to infinity initially.</li>
 <li>We utilize a priority queue to facilitate the execution of Dijkstra&rsquo;s algorithm. We start by pushing the source node <code>n</code> with a distance of <code>0</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="p">[</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> [d, u] <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
 </span></span></code></pre></div><ul>
 <li>We process the nodes in the priority queue until it is empty, always extracting the node with the shortest distance.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">u</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">,</span> <span class="n">nxt</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span> x: gph[u]) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> nxt <span style="color:#f92672">=</span> x.second, t <span style="color:#f92672">=</span> x.first;
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(dst[nxt] <span style="color:#f92672">&gt;</span> t <span style="color:#f92672">+</span> d) {
+</span></span><span style="display:flex;"><span>                    dst[nxt] <span style="color:#f92672">=</span> t <span style="color:#f92672">+</span> d;
+</span></span><span style="display:flex;"><span>                    pq.push({t <span style="color:#f92672">+</span> d, nxt});
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>For each neighboring node <code>nxt</code> of the current node <code>u</code>, we check if we can find a shorter path to <code>nxt</code>. If we can, we update its distance and push it onto the priority queue.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">gph</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">dp</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dfs</span>(gph, dst, n, dp);
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li>After computing the shortest paths, we initialize a memoization array <code>dp</code> to store results of subproblems and call the <code>dfs</code> function to count the restricted paths from node <code>n</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">gph</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dp</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pii<span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>gph, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>dst, <span style="color:#66d9ef">int</span> s, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>dp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (dp[s] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> dp[s];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, w <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span></code></pre></div><ul>
 <li>The <code>dfs</code> function checks if the current node <code>s</code> is node <code>1</code>, in which case we return <code>1</code> since we&rsquo;ve found a valid path. If we have already computed the number of paths from <code>s</code>, we return that value.</li>
 <li>We initialize the modulo value to handle large results, as the answer can exceed the typical integer range.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">v</span> <span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">w</span> <span class="o">=</span> <span class="n">dst</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="n">val</span> <span class="o">=</span> <span class="n">dst</span><span class="p">[</span><span class="n">v</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">gph</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">dp</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>v : gph[s]) {
+</span></span><span style="display:flex;"><span>            w <span style="color:#f92672">=</span> dst[s];
+</span></span><span style="display:flex;"><span>            val <span style="color:#f92672">=</span> dst[v.second];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (val <span style="color:#f92672">&gt;</span> w) {
+</span></span><span style="display:flex;"><span>                sum <span style="color:#f92672">=</span> (sum <span style="color:#f92672">%</span> mod <span style="color:#f92672">+</span> dfs(gph, dst, v.second, dp) <span style="color:#f92672">%</span> mod) <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>We iterate through the neighbors of the current node <code>s</code>. For each neighbor, we compare its distance to ensure we only consider paths where the next node is further away. We recursively call <code>dfs</code> for valid neighbors to count paths.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp[s] <span style="color:#f92672">=</span> sum <span style="color:#f92672">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li>Finally, we store the computed number of restricted paths from node <code>s</code> in the memoization array and return it.</li>
 </ul>
@@ -414,6 +400,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/YmufKoAmthE?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
 <table>
   <thead>
       <tr>

@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-04-10T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-04-10T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-04-10T00:00:00Z">
-                April 10, 2021
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,38 +179,38 @@
         <p><a href="https://leetcode.com/problems/deepest-leaves-sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">deepestLeavesSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">q</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">+=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">TreeNode</span><span class="o">*</span> <span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> deepestLeavesSum(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(root);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>                sum <span style="color:#f92672">+=</span> q.front()<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#f92672">*</span> x <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(x<span style="color:#f92672">-&gt;</span>left) q.push(x<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(x<span style="color:#f92672">-&gt;</span>right) q.push(x<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode351s1hbhb">
   
 
@@ -265,32 +251,32 @@
 <ul>
 <li>We define a class <code>Solution</code> and a public method <code>deepestLeavesSum</code> that takes a <code>TreeNode</code> pointer <code>root</code> as input.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">deepestLeavesSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> deepestLeavesSum(TreeNode<span style="color:#f92672">*</span> root) {
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Handle Edge Case</strong>:</p>
 <ul>
 <li>If the root is <code>NULL</code>, the function returns <code>0</code>, which represents an empty tree.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Initialize BFS</strong>:</p>
 <ul>
 <li>A queue <code>q</code> is created to perform the BFS. Push the root node into this queue. Initialize <code>sum</code> to store the sum of the deepest leaves.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">q</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(root);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Level Order Traversal</strong>:</p>
 <ul>
 <li>Use a <code>while</code> loop to iterate through each level of the tree until the queue is empty.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Process Each Level</strong>:</p>
@@ -303,31 +289,31 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">+=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">TreeNode</span><span class="o">*</span> <span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>                sum <span style="color:#f92672">+=</span> q.front()<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#f92672">*</span> x <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Add Child Nodes</strong>:</p>
 <ul>
 <li>For each node, if it has a left child, push it into the queue. If it has a right child, push that as well.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(x<span style="color:#f92672">-&gt;</span>left) q.push(x<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(x<span style="color:#f92672">-&gt;</span>right) q.push(x<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Return the Result</strong>:</p>
 <ul>
 <li>After processing all levels, the <code>sum</code> variable contains the sum of the values of nodes at the deepest level. Return this sum.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div></li>
 </ol>
 <h3 id="complexity-analysis">

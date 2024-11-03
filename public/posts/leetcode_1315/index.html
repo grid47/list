@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2021-03-28T00:00:00+00:00">
-    <meta property="article:modified_time" content="2021-03-28T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2021-03-28T00:00:00Z">
-                March 28, 2021
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,29 +179,29 @@
         <p><a href="https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
-</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sumEvenGrandparent</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">helper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">helper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">gp</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">node</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">helper</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">helper</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">gp</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">node</span><span class="o">-&gt;</span><span class="nl">val</span><span class="p">:</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode364s1hbhb">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sumEvenGrandparent(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">helper</span>(root, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">helper</span>(TreeNode<span style="color:#f92672">*</span> node, <span style="color:#66d9ef">int</span> p, <span style="color:#66d9ef">int</span> gp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>node) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> helper(node<span style="color:#f92672">-&gt;</span>left, node<span style="color:#f92672">-&gt;</span>val, p) <span style="color:#f92672">+</span> helper(node<span style="color:#f92672">-&gt;</span>right, node<span style="color:#f92672">-&gt;</span>val, p) <span style="color:#f92672">+</span> (gp <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> node<span style="color:#f92672">-&gt;</span>val: <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<h2 id="hahahugoshortcode365s1hbhb">
   
 
   
@@ -264,14 +250,14 @@
 <ol>
 <li>
 <p><strong>Initialize the Function</strong>: Start with the main function <code>sumEvenGrandparent</code>, which calls the <code>helper</code> function on the root node. Initialize parent (<code>p</code>) and grandparent (<code>gp</code>) values to 1 to represent an odd value (since only even values are relevant).</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">sumEvenGrandparent</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sumEvenGrandparent</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> helper(root, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Define the Helper Function</strong>: The helper function takes in <code>node</code>, <code>p</code>, and <code>gp</code>. If the <code>node</code> is <code>NULL</code>, return 0 because there’s nothing to add.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">helper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">,</span> <span class="kt">int</span> <span class="n">gp</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">node</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">helper</span>(TreeNode<span style="color:#f92672">*</span> node, <span style="color:#66d9ef">int</span> p, <span style="color:#66d9ef">int</span> gp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>node) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Recursive Accumulation</strong>:</p>
@@ -279,7 +265,7 @@
 <li>Recursively calculate the sum of values for the left and right subtrees, passing the current node’s value as the new parent and the old parent’s value as the new grandparent.</li>
 <li>If the grandparent (<code>gp</code>) is even, add the current node’s value to the result.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">helper</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">helper</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">gp</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">node</span><span class="o">-&gt;</span><span class="nl">val</span> <span class="p">:</span> <span class="mi">0</span><span class="p">);</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">helper</span>(node<span style="color:#f92672">-&gt;</span>left, node<span style="color:#f92672">-&gt;</span>val, p) <span style="color:#f92672">+</span> helper(node<span style="color:#f92672">-&gt;</span>right, node<span style="color:#f92672">-&gt;</span>val, p) <span style="color:#f92672">+</span> (gp <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> node<span style="color:#f92672">-&gt;</span>val : <span style="color:#ae81ff">0</span>);
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Return the Result</strong>:</p>
@@ -311,7 +297,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode364s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode365s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

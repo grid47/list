@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-09-10T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-09-10T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-09-10T00:00:00Z">
-                September 10, 2020
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,43 +179,43 @@
         <p><a href="https://leetcode.com/problems/path-with-maximum-probability/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;&gt;&gt;</span> <span class="n">grid</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="nf">maxProbability</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">edges</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span> <span class="n">prob</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">grid</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">grid</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]].</span><span class="n">push_back</span><span class="p">({</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">prob</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>            
-</span></span><span class="line"><span class="cl">            <span class="n">grid</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]].</span><span class="n">push_back</span><span class="p">({</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">prob</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">mx</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">mx</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vis</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// vis[start] = true;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">x</span><span class="p">:</span> <span class="n">grid</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">mx</span><span class="p">[</span><span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">*</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">mx</span><span class="p">[</span><span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">*</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">*</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">[</span><span class="n">end</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode583s1hbhb">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;&gt;</span> grid;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> vis;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">maxProbability</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> prob, <span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> end) {
+</span></span><span style="display:flex;"><span>        grid.resize(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> edges.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            grid[edges[i][<span style="color:#ae81ff">1</span>]].push_back({edges[i][<span style="color:#ae81ff">0</span>], prob[i]});            
+</span></span><span style="display:flex;"><span>            grid[edges[i][<span style="color:#ae81ff">0</span>]].push_back({edges[i][<span style="color:#ae81ff">1</span>], prob[i]});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> mx(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        mx[start] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        vis.resize(n, false);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// vis[start] = true;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        pq.push({<span style="color:#ae81ff">1.0</span>, start});
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>vis[it.second]) {
+</span></span><span style="display:flex;"><span>                vis[it.second] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> x: grid[it.second]) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(mx[x.first] <span style="color:#f92672">&lt;</span> it.first <span style="color:#f92672">*</span> x.second) {
+</span></span><span style="display:flex;"><span>                        mx[x.first] <span style="color:#f92672">=</span> it.first <span style="color:#f92672">*</span> x.second;
+</span></span><span style="display:flex;"><span>                        pq.push({it.first <span style="color:#f92672">*</span> x.second, x.first});
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx[end];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<h2 id="hahahugoshortcode586s1hbhb">
   
 
   
@@ -282,65 +268,65 @@
   </a>
 </h3>
 <p>Here&rsquo;s a detailed explanation of the provided code:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;&gt;&gt;</span> <span class="n">grid</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;&gt;</span> grid;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> vis;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 </span></span></code></pre></div><ul>
 <li>We define a class <code>Solution</code> with public members. The <code>grid</code> variable will hold the adjacency list representation of the graph, where each entry contains pairs of neighboring nodes and their associated probabilities. The <code>vis</code> vector is used to track visited nodes during the traversal.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">double</span> <span class="nf">maxProbability</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">edges</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span> <span class="n">prob</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">grid</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">maxProbability</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&amp;</span> prob, <span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> end) {
+</span></span><span style="display:flex;"><span>        grid.resize(n);
 </span></span></code></pre></div><ul>
 <li>The method <code>maxProbability</code> initializes the <code>grid</code> to accommodate <code>n</code> nodes.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">edges</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">grid</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]].</span><span class="n">push_back</span><span class="p">({</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">prob</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>            
-</span></span><span class="line"><span class="cl">            <span class="n">grid</span><span class="p">[</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]].</span><span class="n">push_back</span><span class="p">({</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">prob</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> edges.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            grid[edges[i][<span style="color:#ae81ff">1</span>]].push_back({edges[i][<span style="color:#ae81ff">0</span>], prob[i]});            
+</span></span><span style="display:flex;"><span>            grid[edges[i][<span style="color:#ae81ff">0</span>]].push_back({edges[i][<span style="color:#ae81ff">1</span>], prob[i]});
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>This loop populates the adjacency list. For each edge, it adds both directions (since the graph is undirected), connecting the nodes with their corresponding probabilities.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq;
 </span></span></code></pre></div><ul>
 <li>We declare a priority queue <code>pq</code> to facilitate the exploration of nodes based on their maximum probability.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">mx</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">mx</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vis</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> mx(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        mx[start] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        vis.resize(n, false);
 </span></span></code></pre></div><ul>
 <li>We initialize a vector <code>mx</code> to keep track of the maximum probabilities of reaching each node. The starting node&rsquo;s probability is set to 1, indicating that we start from there. The <code>vis</code> vector is resized to manage the visited status of nodes.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">start</span><span class="p">});</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({<span style="color:#ae81ff">1.0</span>, start});
 </span></span></code></pre></div><ul>
 <li>We push the starting node into the priority queue with an initial probability of 1.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
 </span></span></code></pre></div><ul>
 <li>The main loop runs as long as there are nodes in the priority queue. We retrieve the node with the highest probability (<code>it</code>).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>vis[it.second]) {
+</span></span><span style="display:flex;"><span>                vis[it.second] <span style="color:#f92672">=</span> true;
 </span></span></code></pre></div><ul>
 <li>If the current node has not been visited yet, we mark it as visited.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">x</span><span class="p">:</span> <span class="n">grid</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">mx</span><span class="p">[</span><span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">*</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">mx</span><span class="p">[</span><span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">*</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">*</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> x: grid[it.second]) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(mx[x.first] <span style="color:#f92672">&lt;</span> it.first <span style="color:#f92672">*</span> x.second) {
+</span></span><span style="display:flex;"><span>                        mx[x.first] <span style="color:#f92672">=</span> it.first <span style="color:#f92672">*</span> x.second;
+</span></span><span style="display:flex;"><span>                        pq.push({it.first <span style="color:#f92672">*</span> x.second, x.first});
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>We then iterate through each neighbor of the current node. If traversing to the neighbor provides a higher probability than previously recorded, we update that neighbor&rsquo;s probability and push it onto the priority queue for further exploration.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">[</span><span class="n">end</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx[end];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li>Finally, once the queue is empty, we return the maximum probability to reach the end node, which is stored in <code>mx[end]</code>.</li>
 </ul>
@@ -389,11 +375,19 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode583s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode586s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/kPsDTGcrzGM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
 <table>
   <thead>
       <tr>

@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2020-08-24T00:00:00+00:00">
-    <meta property="article:modified_time" content="2020-08-24T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-08-24T00:00:00Z">
-                August 24, 2020
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,42 +179,42 @@
         <p><a href="https://leetcode.com/problems/string-compression-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">len</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="o">?</span> <span class="mi">0</span><span class="o">:</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">?</span> <span class="mi">1</span><span class="o">:</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="o">?</span> <span class="mi">2</span><span class="o">:</span> <span class="mi">3</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">256</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">||</span> <span class="n">n</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">frq</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span> <span class="n">most</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">most</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">most</span><span class="p">,</span> <span class="o">++</span><span class="n">frq</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">len</span><span class="p">(</span><span class="n">most</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="o">-</span><span class="n">most</span><span class="p">)));</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getLengthOfOptimalCompression</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode603s1hbhb">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mem;
+</span></span><span style="display:flex;"><span>    string s;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">len</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> num <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">100</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">256</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> n <span style="color:#f92672">-</span> idx <span style="color:#f92672">&lt;=</span> k) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mem[idx][k] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[idx][k];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">256</span>, most <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            most <span style="color:#f92672">=</span> max(most, <span style="color:#f92672">++</span>frq[s[i]<span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]);
+</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> len(most) <span style="color:#f92672">+</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k <span style="color:#f92672">-</span> (i <span style="color:#f92672">-</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>most)));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[idx][k] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getLengthOfOptimalCompression</span>(string s, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> s.length();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s <span style="color:#f92672">=</span> s;
+</span></span><span style="display:flex;"><span>        mem.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, k);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+<h2 id="hahahugoshortcode605s1hbhb">
   
 
   
@@ -282,58 +268,58 @@
   </a>
 </h3>
 <p>Here&rsquo;s a detailed breakdown of the code provided:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span> <span class="c1">// Memoization table
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">string</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// Input string
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Length of the string
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Function to determine the length of the string representation of a number
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="nf">len</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="o">?</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">3</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mem; <span style="color:#75715e">// Memoization table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    string s; <span style="color:#75715e">// Input string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> n; <span style="color:#75715e">// Length of the string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Function to determine the length of the string representation of a number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">len</span>(<span style="color:#66d9ef">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> num <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li>We initialize a memoization table <code>mem</code> to store the results of previously computed states.</li>
 <li>The method <code>len(int num)</code> calculates the number of digits required to represent a number in its compressed form.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="c1">// Recursive function to compute the minimum compressed length
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">256</span><span class="p">;</span> <span class="c1">// If we exceed deletions, return a large value
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">||</span> <span class="n">n</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// If we&#39;ve processed all characters or can delete all remaining characters, return 0
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#75715e">// Recursive function to compute the minimum compressed length
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">256</span>; <span style="color:#75715e">// If we exceed deletions, return a large value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (idx <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> n <span style="color:#f92672">-</span> idx <span style="color:#f92672">&lt;=</span> k) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// If we&#39;ve processed all characters or can delete all remaining characters, return 0
 </span></span></span></code></pre></div><ul>
 <li>The <code>dp</code> function checks the base cases for recursion.</li>
 <li>If <code>k</code> is negative, it returns a high penalty value.</li>
 <li>If we have processed all characters or can delete all remaining characters, it returns 0.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">];</span> <span class="c1">// Return cached result if already computed
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">frq</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Frequency array for characters
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span> <span class="c1">// Initialize answer to a large value
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">most</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Variable to track the maximum frequency of any character
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (mem[idx][k] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[idx][k]; <span style="color:#75715e">// Return cached result if already computed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// Frequency array for characters
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">256</span>; <span style="color:#75715e">// Initialize answer to a large value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> most <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Variable to track the maximum frequency of any character
 </span></span></span></code></pre></div><ul>
 <li>If the state has already been computed, we return the stored value.</li>
 <li>We initialize an array <code>frq</code> to keep track of character frequencies, set the answer <code>ans</code> to a large value, and initialize <code>most</code> to track the highest frequency of characters.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="c1">// Iterate over the substring starting from the current index
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">most</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">most</span><span class="p">,</span> <span class="o">++</span><span class="n">frq</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]);</span> <span class="c1">// Update the frequency of the current character
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">len</span><span class="p">(</span><span class="n">most</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">most</span><span class="p">)));</span> <span class="c1">// Calculate compressed length
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Cache the result and return it
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#75715e">// Iterate over the substring starting from the current index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            most <span style="color:#f92672">=</span> max(most, <span style="color:#f92672">++</span>frq[s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]); <span style="color:#75715e">// Update the frequency of the current character
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ans <span style="color:#f92672">=</span> min(ans, <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> len(most) <span style="color:#f92672">+</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k <span style="color:#f92672">-</span> (i <span style="color:#f92672">-</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> most))); <span style="color:#75715e">// Calculate compressed length
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[idx][k] <span style="color:#f92672">=</span> ans; <span style="color:#75715e">// Cache the result and return it
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
 </span></span></code></pre></div><ul>
 <li>We iterate through the string starting from the current index to determine how to best compress the substring.</li>
 <li>The maximum frequency of any character is updated as we process each character.</li>
 <li>We calculate the compressed length for the substring and the remaining string after considering deletions, updating the answer accordingly.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getLengthOfOptimalCompression</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="c1">// Get the length of the string
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// Store the string in the class member
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span> <span class="c1">// Initialize memoization table
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span> <span class="c1">// Start the recursive computation
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getLengthOfOptimalCompression</span>(string s, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> s.length(); <span style="color:#75715e">// Get the length of the string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s <span style="color:#f92672">=</span> s; <span style="color:#75715e">// Store the string in the class member
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        mem.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)); <span style="color:#75715e">// Initialize memoization table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, k); <span style="color:#75715e">// Start the recursive computation
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li>The function <code>getLengthOfOptimalCompression</code> initializes the necessary variables and starts the recursive DP computation by calling <code>dp(0, k)</code>, indicating that we are starting from the first character with <code>k</code> deletions allowed.</li>
 </ul>
@@ -383,11 +369,19 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode603s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode605s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ISIG3o-Xofg?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
 <table>
   <thead>
       <tr>

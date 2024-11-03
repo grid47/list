@@ -29,15 +29,15 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2019-07-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2019-07-26T00:00:00+00:00">
+    <meta property="article:published_time" content="2024-11-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-01T00:00:00+00:00">
       <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_2/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_3/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_4/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_5/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_6/">
-      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_7/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_10/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_100/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1000/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1001/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1002/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/leetcode_1003/">
 
 
 
@@ -58,12 +58,6 @@
 
 
 
-
-  
-    
-    
-    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
-  
 
 
 
@@ -95,16 +89,8 @@
 
 
 
-
-
-<body class="preload-transitions colorscheme-auto">
+<body class="preload-transitions colorscheme-light">
   
-<div class="float-container">
-    <a id="dark-mode-toggle" class="colorscheme-toggle">
-        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
-    </a>
-</div>
-
 
   <main class="wrapper">
     <nav class="navigation">
@@ -175,8 +161,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-07-26T00:00:00Z">
-                July 26, 2019
+              <time datetime="2024-11-01T00:00:00Z">
+                November 1, 2024
               </time>
             </span>
             <span class="reading-time">
@@ -193,39 +179,39 @@
         <p><a href="https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">nearestExit</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">maze</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">entrance</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">entrance</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entrance</span><span class="p">[</span><span class="mi">1</span><span class="p">]});</span>
-</span></span><span class="line"><span class="cl">        <span class="n">maze</span><span class="p">[</span><span class="n">entrance</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">entrance</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="sc">&#39;+&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dir</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// vector&lt;vector&lt;int&gt;&gt; vis(m, vector&lt;int&gt;(n, 0));
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                
-</span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">m</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="n">n</span> <span class="o">||</span> <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;+&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">continue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>                    
-</span></span><span class="line"><span class="cl">                    <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;+&#39;</span><span class="p">;</span>                    
-</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> nearestExit(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;&amp;</span> maze, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> entrance) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push({entrance[<span style="color:#ae81ff">0</span>], entrance[<span style="color:#ae81ff">1</span>]});
+</span></span><span style="display:flex;"><span>        maze[entrance[<span style="color:#ae81ff">0</span>]][entrance[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+&#39;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, m <span style="color:#f92672">=</span> maze.size(), n <span style="color:#f92672">=</span> maze[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// vector&lt;vector&lt;int&gt;&gt; vis(m, vector&lt;int&gt;(n, 0));
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> it.first <span style="color:#f92672">+</span> dir[i], y <span style="color:#f92672">=</span> it.second <span style="color:#f92672">+</span> dir[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n <span style="color:#f92672">||</span> maze[x][y] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span>) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">return</span> ans;                    
+</span></span><span style="display:flex;"><span>                    maze[x][y] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+&#39;</span>;                    
+</span></span><span style="display:flex;"><span>                    q.push({x, y});
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            ans<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode1043s1hbhb">
   
 
@@ -278,42 +264,42 @@
   </a>
 </h3>
 <p>Let&rsquo;s break down the code provided step by step to understand how it implements the approach described:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">nearestExit</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">maze</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">entrance</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> nearestExit(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&gt;&amp;</span> maze, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> entrance) {
 </span></span></code></pre></div><p>Here, we define the <code>Solution</code> class and the <code>nearestExit</code> method, which takes a reference to a 2D character vector representing the maze and a vector representing the entrance&rsquo;s coordinates.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">entrance</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entrance</span><span class="p">[</span><span class="mi">1</span><span class="p">]});</span>
-</span></span><span class="line"><span class="cl">        <span class="n">maze</span><span class="p">[</span><span class="n">entrance</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">entrance</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="sc">&#39;+&#39;</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push({entrance[<span style="color:#ae81ff">0</span>], entrance[<span style="color:#ae81ff">1</span>]});
+</span></span><span style="display:flex;"><span>        maze[entrance[<span style="color:#ae81ff">0</span>]][entrance[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+&#39;</span>;
 </span></span></code></pre></div><p>We initialize a queue to facilitate the BFS and push the entrance coordinates onto the queue. We also mark the entrance cell as visited by changing its value to &lsquo;+&rsquo;.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dir</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, m <span style="color:#f92672">=</span> maze.size(), n <span style="color:#f92672">=</span> maze[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
 </span></span></code></pre></div><p>We initialize the distance counter <code>ans</code> to 1 (to count the first move), determine the dimensions of the maze (m) (rows) and (n) (columns), and define an array <code>dir</code> to simplify movement in the four cardinal directions.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
 </span></span></code></pre></div><p>We enter a loop that continues until the queue is empty. Inside, we store the current size of the queue, indicating how many cells we will explore at this level of BFS.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> it.first <span style="color:#f92672">+</span> dir[i], y <span style="color:#f92672">=</span> it.second <span style="color:#f92672">+</span> dir[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
 </span></span></code></pre></div><p>We iterate through each direction to calculate the potential neighboring cell’s coordinates <code>x</code> and <code>y</code>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">m</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="n">n</span> <span class="o">||</span> <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;+&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">continue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n <span style="color:#f92672">||</span> maze[x][y] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span>) {
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                    }
 </span></span></code></pre></div><p>We check if the neighbor is out of bounds or has already been visited (marked with &lsquo;+&rsquo;). If so, we skip it.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>                    
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">return</span> ans;                    
 </span></span></code></pre></div><p>If the current neighbor is an exit (located on the boundary of the maze), we return the current distance <code>ans</code>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;+&#39;</span><span class="p">;</span>                    
-</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">});</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    maze[x][y] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;+&#39;</span>;                    
+</span></span><span style="display:flex;"><span>                    q.push({x, y});
 </span></span></code></pre></div><p>If the neighbor is valid and not an exit, we mark it as visited and push its coordinates onto the queue for further exploration.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            ans<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>After exploring all neighbors at the current level, we increment the distance counter <code>ans</code> to reflect the next step, and the outer loop continues. If the queue is exhausted without finding an exit, we return -1.</p>
 <h3 id="complexity">
   Complexity
