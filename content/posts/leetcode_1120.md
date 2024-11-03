@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 {{< youtube opfPHMQJ4i8 >}}
 
-"| 1121: Divide Array Into Increasing Sequences |"
-
+| Next : [LeetCode #1121: Divide Array Into Increasing Sequences](grid47.xyz/leetcode_1121) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

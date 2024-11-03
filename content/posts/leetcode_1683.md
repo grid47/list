@@ -30,8 +30,8 @@ SELECT tweet_id FROM Tweets WHERE LENGTH(content) > 15;
 ---
 
 
-"| 1684: Count the Number of Consistent Strings |"
-
+| Next : [LeetCode #1684: Count the Number of Consistent Strings](grid47.xyz/leetcode_1684) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

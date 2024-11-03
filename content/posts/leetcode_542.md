@@ -64,8 +64,8 @@ public:
 ---
 {{< youtube 1xuLfxgT7yo >}}
 
-"| 543: Diameter of Binary Tree |"
-
+| Next : [LeetCode #543: Diameter of Binary Tree](grid47.xyz/leetcode_543) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

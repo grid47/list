@@ -52,8 +52,8 @@ public:
 ---
 
 
-"| 2048: Next Greater Numerically Balanced Number |"
-
+| Next : [LeetCode #2048: Next Greater Numerically Balanced Number](grid47.xyz/leetcode_2048) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

@@ -40,8 +40,8 @@ public:
 ---
 {{< youtube yTpRd3yvyz0 >}}
 
-"| 2516: Take K of Each Character From Left and Right |"
-
+| Next : [LeetCode #2516: Take K of Each Character From Left and Right](grid47.xyz/leetcode_2516) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

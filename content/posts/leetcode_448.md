@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 {{< youtube TrQ47XPM6Qg >}}
 
-"| 449: Serialize and Deserialize BST |"
-
+| Next : [LeetCode #449: Serialize and Deserialize BST](grid47.xyz/leetcode_449) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

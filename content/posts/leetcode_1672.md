@@ -38,8 +38,8 @@ public:
 ---
 
 
-"| 1673: Find the Most Competitive Subsequence |"
-
+| Next : [LeetCode #1673: Find the Most Competitive Subsequence](grid47.xyz/leetcode_1673) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

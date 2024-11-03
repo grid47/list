@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 1566: Detect Pattern of Length M Repeated K or More Times |"
-
+| Next : [LeetCode #1566: Detect Pattern of Length M Repeated K or More Times](grid47.xyz/leetcode_1566) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

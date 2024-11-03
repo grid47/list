@@ -61,8 +61,8 @@ public:
 ---
 {{< youtube 8u-H6O_XQKE >}}
 
-"| 1406: Stone Game III |"
-
+| Next : [LeetCode #1406: Stone Game III](grid47.xyz/leetcode_1406) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

@@ -73,8 +73,8 @@ public:
 ---
 
 
-"| 855: Exam Room |"
-
+| Next : [LeetCode #855: Exam Room](grid47.xyz/leetcode_855) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

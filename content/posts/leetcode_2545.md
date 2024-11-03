@@ -72,8 +72,8 @@ public:
 ---
 
 
-"| 2546: Apply Bitwise Operations to Make Strings Equal |"
-
+| Next : [LeetCode #2546: Apply Bitwise Operations to Make Strings Equal](grid47.xyz/leetcode_2546) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

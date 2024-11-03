@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 {{< youtube 68a1Dc_qVq4 >}}
 
-"| 497: Random Point in Non-overlapping Rectangles |"
-
+| Next : [LeetCode #497: Random Point in Non-overlapping Rectangles](grid47.xyz/leetcode_497) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

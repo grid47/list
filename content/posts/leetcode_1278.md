@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 1279: Traffic Light Controlled Intersection |"
-
+| Next : [LeetCode #1279: Traffic Light Controlled Intersection](grid47.xyz/leetcode_1279) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

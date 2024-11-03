@@ -51,8 +51,8 @@ flipEquiv(root1->left, root2->right) && flipEquiv(root1->right, root2->left));
 ---
 {{< youtube izRDc1il9Pk >}}
 
-"| 952: Largest Component Size by Common Factor |"
-
+| Next : [LeetCode #952: Largest Component Size by Common Factor](grid47.xyz/leetcode_952) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

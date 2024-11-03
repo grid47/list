@@ -51,8 +51,8 @@ public:
 ---
 
 
-"| 2010: The Number of Seniors and Juniors to Join the Company II |"
-
+| Next : [LeetCode #2010: The Number of Seniors and Juniors to Join the Company II](grid47.xyz/leetcode_2010) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

@@ -55,8 +55,8 @@ public:
 ---
 {{< youtube slYh0ZNEqSw >}}
 
-"| 902: Numbers At Most N Given Digit Set |"
-
+| Next : [LeetCode #902: Numbers At Most N Given Digit Set](grid47.xyz/leetcode_902) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

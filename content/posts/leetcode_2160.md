@@ -37,8 +37,8 @@ public:
 ---
 
 
-"| 2161: Partition Array According to Given Pivot |"
-
+| Next : [LeetCode #2161: Partition Array According to Given Pivot](grid47.xyz/leetcode_2161) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

@@ -47,8 +47,8 @@ public:
 ---
 {{< youtube 37s1_xBiqH0 >}}
 
-"| 124: Binary Tree Maximum Path Sum |"
-
+| Next : [LeetCode #124: Binary Tree Maximum Path Sum](grid47.xyz/leetcode_124) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

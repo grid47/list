@@ -58,8 +58,8 @@ public:
 ---
 {{< youtube 86yKkaNi3sU >}}
 
-"| 2029: Stone Game IX |"
-
+| Next : [LeetCode #2029: Stone Game IX](grid47.xyz/leetcode_2029) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

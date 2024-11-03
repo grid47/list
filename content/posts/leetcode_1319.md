@@ -65,8 +65,8 @@ public:
 ---
 {{< youtube vyXBp3S6-y4 >}}
 
-"| 1320: Minimum Distance to Type a Word Using Two Fingers |"
-
+| Next : [LeetCode #1320: Minimum Distance to Type a Word Using Two Fingers](grid47.xyz/leetcode_1320) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

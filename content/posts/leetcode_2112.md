@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 2113: Elements in Array After Removing and Replacing Elements |"
-
+| Next : [LeetCode #2113: Elements in Array After Removing and Replacing Elements](grid47.xyz/leetcode_2113) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

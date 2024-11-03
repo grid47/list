@@ -53,8 +53,8 @@ public:
 ---
 {{< youtube 30WqiTVp8Kc >}}
 
-"| 1009: Complement of Base 10 Integer |"
-
+| Next : [LeetCode #1009: Complement of Base 10 Integer](grid47.xyz/leetcode_1009) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

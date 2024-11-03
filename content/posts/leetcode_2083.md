@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 2084: Drop Type 1 Orders for Customers With Type 0 Orders |"
-
+| Next : [LeetCode #2084: Drop Type 1 Orders for Customers With Type 0 Orders](grid47.xyz/leetcode_2084) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

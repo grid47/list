@@ -54,8 +54,8 @@ public:
 ---
 {{< youtube HaoudL9xEHA >}}
 
-"| 329: Longest Increasing Path in a Matrix |"
-
+| Next : [LeetCode #329: Longest Increasing Path in a Matrix](grid47.xyz/leetcode_329) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

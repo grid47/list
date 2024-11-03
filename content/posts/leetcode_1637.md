@@ -40,8 +40,8 @@ public:
 ---
 
 
-"| 1638: Count Substrings That Differ by One Character |"
-
+| Next : [LeetCode #1638: Count Substrings That Differ by One Character](grid47.xyz/leetcode_1638) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

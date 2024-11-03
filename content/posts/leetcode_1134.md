@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 {{< youtube HTL7fd4HPf4 >}}
 
-"| 1135: Connecting Cities With Minimum Cost |"
-
+| Next : [LeetCode #1135: Connecting Cities With Minimum Cost](grid47.xyz/leetcode_1135) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

@@ -53,8 +53,8 @@ public:
 ---
 {{< youtube akXV67u1pTg >}}
 
-"| 984: String Without AAA or BBB |"
-
+| Next : [LeetCode #984: String Without AAA or BBB](grid47.xyz/leetcode_984) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

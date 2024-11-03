@@ -61,8 +61,8 @@ public:
 ---
 {{< youtube T41rL0L3Pnw >}}
 
-"| 74: Search a 2D Matrix |"
-
+| Next : [LeetCode #74: Search a 2D Matrix](grid47.xyz/leetcode_74) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

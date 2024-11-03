@@ -48,8 +48,8 @@ vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
 ---
 
 
-"| 2962: Count Subarrays Where Max Element Appears at Least K Times |"
-
+| Next : [LeetCode #2962: Count Subarrays Where Max Element Appears at Least K Times](grid47.xyz/leetcode_2962) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

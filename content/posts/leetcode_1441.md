@@ -45,8 +45,8 @@ public:
 ---
 
 
-"| 1442: Count Triplets That Can Form Two Arrays of Equal XOR |"
-
+| Next : [LeetCode #1442: Count Triplets That Can Form Two Arrays of Equal XOR](grid47.xyz/leetcode_1442) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

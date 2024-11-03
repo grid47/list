@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 {{< youtube TBufPom-KS8 >}}
 
-"| 1385: Find the Distance Value Between Two Arrays |"
-
+| Next : [LeetCode #1385: Find the Distance Value Between Two Arrays](grid47.xyz/leetcode_1385) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

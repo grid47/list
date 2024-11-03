@@ -42,8 +42,8 @@ public:
 ---
 {{< youtube B5v5rDR7c9A >}}
 
-"| 1329: Sort the Matrix Diagonally |"
-
+| Next : [LeetCode #1329: Sort the Matrix Diagonally](grid47.xyz/leetcode_1329) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

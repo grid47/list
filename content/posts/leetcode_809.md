@@ -49,8 +49,8 @@ public:
 ---
 
 
-"| 810: Chalkboard XOR Game |"
-
+| Next : [LeetCode #810: Chalkboard XOR Game](grid47.xyz/leetcode_810) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

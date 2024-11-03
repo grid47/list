@@ -61,8 +61,8 @@ public:
 ---
 
 
-"| 1188: Design Bounded Blocking Queue |"
-
+| Next : [LeetCode #1188: Design Bounded Blocking Queue](grid47.xyz/leetcode_1188) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

@@ -36,8 +36,8 @@ public:
 ---
 
 
-"| 1481: Least Number of Unique Integers after K Removals |"
-
+| Next : [LeetCode #1481: Least Number of Unique Integers after K Removals](grid47.xyz/leetcode_1481) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

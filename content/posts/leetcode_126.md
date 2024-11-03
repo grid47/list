@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 {{< youtube rWd4wScVYxc >}}
 
-"| 127: Word Ladder |"
-
+| Next : [LeetCode #127: Word Ladder](grid47.xyz/leetcode_127) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

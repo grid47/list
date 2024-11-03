@@ -77,8 +77,8 @@ public:
 ---
 
 
-"| 1117: Building H2O |"
-
+| Next : [LeetCode #1117: Building H2O](grid47.xyz/leetcode_1117) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

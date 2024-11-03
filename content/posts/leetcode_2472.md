@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 2473: Minimum Cost to Buy Apples |"
-
+| Next : [LeetCode #2473: Minimum Cost to Buy Apples](grid47.xyz/leetcode_2473) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

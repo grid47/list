@@ -44,8 +44,8 @@ public:
 ---
 
 
-"| 1703: Minimum Adjacent Swaps for K Consecutive Ones |"
-
+| Next : [LeetCode #1703: Minimum Adjacent Swaps for K Consecutive Ones](grid47.xyz/leetcode_1703) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

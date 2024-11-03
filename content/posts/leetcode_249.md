@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 {{< youtube vUd-7qS6BPQ >}}
 
-"| 250: Count Univalue Subtrees |"
-
+| Next : [LeetCode #250: Count Univalue Subtrees](grid47.xyz/leetcode_250) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

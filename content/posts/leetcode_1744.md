@@ -52,8 +52,8 @@ if (mn <= day && day <= mx) {
 ---
 
 
-"| 1745: Palindrome Partitioning IV |"
-
+| Next : [LeetCode #1745: Palindrome Partitioning IV](grid47.xyz/leetcode_1745) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

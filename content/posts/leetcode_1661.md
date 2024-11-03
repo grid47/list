@@ -34,8 +34,8 @@ GROUP BY machine_id;
 ---
 
 
-"| 1662: Check If Two String Arrays are Equivalent |"
-
+| Next : [LeetCode #1662: Check If Two String Arrays are Equivalent](grid47.xyz/leetcode_1662) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

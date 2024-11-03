@@ -49,8 +49,8 @@ public:
 ---
 {{< youtube mHsj83NoZDA >}}
 
-"| 436: Find Right Interval |"
-
+| Next : [LeetCode #436: Find Right Interval](grid47.xyz/leetcode_436) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

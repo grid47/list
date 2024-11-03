@@ -51,8 +51,8 @@ public:
 ---
 {{< youtube t0QkjXhE02g >}}
 
-"| 2467: Most Profitable Path in a Tree |"
-
+| Next : [LeetCode #2467: Most Profitable Path in a Tree](grid47.xyz/leetcode_2467) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

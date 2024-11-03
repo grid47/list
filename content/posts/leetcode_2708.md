@@ -72,8 +72,8 @@ public:
 ---
 
 
-"| 2709: Greatest Common Divisor Traversal |"
-
+| Next : [LeetCode #2709: Greatest Common Divisor Traversal](grid47.xyz/leetcode_2709) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

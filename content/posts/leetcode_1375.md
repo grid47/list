@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 1376: Time Needed to Inform All Employees |"
-
+| Next : [LeetCode #1376: Time Needed to Inform All Employees](grid47.xyz/leetcode_1376) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

@@ -40,8 +40,8 @@ public:
 ---
 
 
-"| 2958: Length of Longest Subarray With at Most K Frequency |"
-
+| Next : [LeetCode #2958: Length of Longest Subarray With at Most K Frequency](grid47.xyz/leetcode_2958) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

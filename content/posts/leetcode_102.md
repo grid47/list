@@ -50,8 +50,8 @@ public:
 ---
 {{< youtube 6ZnyEApgFYg >}}
 
-"| 103: Binary Tree Zigzag Level Order Traversal |"
-
+| Next : [LeetCode #103: Binary Tree Zigzag Level Order Traversal](grid47.xyz/leetcode_103) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

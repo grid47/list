@@ -51,8 +51,8 @@ public:
 ---
 {{< youtube bFer5PdsgpY >}}
 
-"| 1568: Minimum Number of Days to Disconnect Island |"
-
+| Next : [LeetCode #1568: Minimum Number of Days to Disconnect Island](grid47.xyz/leetcode_1568) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

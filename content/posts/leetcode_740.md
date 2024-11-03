@@ -46,8 +46,8 @@ public:
 ---
 {{< youtube MnbTKT4-KLc >}}
 
-"| 741: Cherry Pickup |"
-
+| Next : [LeetCode #741: Cherry Pickup](grid47.xyz/leetcode_741) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

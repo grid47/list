@@ -55,8 +55,8 @@ public:
 ---
 {{< youtube 6lJZ_xj1mEo >}}
 
-"| 544: Output Contest Matches |"
-
+| Next : [LeetCode #544: Output Contest Matches](grid47.xyz/leetcode_544) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

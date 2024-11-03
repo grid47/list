@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 3168: Minimum Number of Chairs in a Waiting Room |"
-
+| Next : [LeetCode #3168: Minimum Number of Chairs in a Waiting Room](grid47.xyz/leetcode_3168) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

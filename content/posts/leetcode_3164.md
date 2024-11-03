@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 3165: Maximum Sum of Subsequence With Non-adjacent Elements |"
-
+| Next : [LeetCode #3165: Maximum Sum of Subsequence With Non-adjacent Elements](grid47.xyz/leetcode_3165) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

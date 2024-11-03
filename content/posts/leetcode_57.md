@@ -52,8 +52,8 @@ public:
 ---
 {{< youtube A8NUOmlwOlM >}}
 
-"| 58: Length of Last Word |"
-
+| Next : [LeetCode #58: Length of Last Word](grid47.xyz/leetcode_58) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

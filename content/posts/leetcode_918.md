@@ -44,8 +44,8 @@ public:
 ---
 {{< youtube aLMZIfhhdMg >}}
 
-"| 919: Complete Binary Tree Inserter |"
-
+| Next : [LeetCode #919: Complete Binary Tree Inserter](grid47.xyz/leetcode_919) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

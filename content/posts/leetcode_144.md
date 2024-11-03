@@ -53,8 +53,8 @@ public:
 ---
 {{< youtube WIfjmUTXnlE >}}
 
-"| 145: Binary Tree Postorder Traversal |"
-
+| Next : [LeetCode #145: Binary Tree Postorder Traversal](grid47.xyz/leetcode_145) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

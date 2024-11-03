@@ -56,8 +56,8 @@ public:
 ---
 {{< youtube Kw6_4htJ9Sw >}}
 
-"| 1417: Reformat The String |"
-
+| Next : [LeetCode #1417: Reformat The String](grid47.xyz/leetcode_1417) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

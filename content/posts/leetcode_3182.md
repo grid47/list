@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 3183: The Number of Ways to Make the Sum |"
-
+| Next : [LeetCode #3183: The Number of Ways to Make the Sum](grid47.xyz/leetcode_3183) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

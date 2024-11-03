@@ -29,8 +29,8 @@ series = ["Leetcode"]
 ---
 
 
-"| 1475: Final Prices With a Special Discount in a Shop |"
-
+| Next : [LeetCode #1475: Final Prices With a Special Discount in a Shop](grid47.xyz/leetcode_1475) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

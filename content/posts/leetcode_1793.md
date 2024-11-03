@@ -50,8 +50,8 @@ public:
 ---
 
 
-"| 1794: Count Pairs of Equal Substrings With Minimum Difference |"
-
+| Next : [LeetCode #1794: Count Pairs of Equal Substrings With Minimum Difference](grid47.xyz/leetcode_1794) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

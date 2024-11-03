@@ -36,8 +36,8 @@ ORDER BY s.student_id, sub.subject_name;
 ---
 {{< youtube ThbkV4Fs7iE >}}
 
-"| 1281: Subtract the Product and Sum of Digits of an Integer |"
-
+| Next : [LeetCode #1281: Subtract the Product and Sum of Digits of an Integer](grid47.xyz/leetcode_1281) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}

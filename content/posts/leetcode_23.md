@@ -72,8 +72,8 @@ public:
 ---
 {{< youtube q5a5OiGbT6Q >}}
 
-"| 24: Swap Nodes in Pairs |"
-
+| Next : [LeetCode #24: Swap Nodes in Pairs](grid47.xyz/leetcode_24) |
+| --- |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}
