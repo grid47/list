@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -208,11 +208,125 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode909s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to find the number of different integers present in a given string <code>w</code>. The string may contain letters, digits, and possibly some special characters. The integers should be extracted from the string, ignoring leading zeros, and the uniqueness of the integers should be maintained in the counting process.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will employ the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We will use an unordered set to store unique integers extracted from the string. This set allows us to efficiently handle duplicate values.</p>
+</li>
+<li>
+<p><strong>Iterate Through the String</strong>: We will traverse the string character by character. When we encounter digits, we will determine the complete integer that can be formed.</p>
+</li>
+<li>
+<p><strong>Extracting Integers</strong>: We will extract the integers by slicing the string whenever we reach a non-digit character. Additionally, we will ensure that leading zeros are not counted, meaning we will skip any leading zeros when forming the integer.</p>
+</li>
+<li>
+<p><strong>Store Unique Integers</strong>: Each unique integer will be stored in the set.</p>
+</li>
+<li>
+<p><strong>Count and Return</strong>: Finally, we will return the size of the set minus one to account for the empty string, which is the default initialization of the set.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numDifferentIntegers</span><span class="p">(</span><span class="n">string</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">{</span><span class="s">&#34;&#34;</span><span class="p">};</span>    
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>numDifferentIntegers</code> that takes a string <code>w</code> as input.</li>
+<li>We initialize an unordered set <code>s</code> that will hold unique strings representing integers. The set is initialized with an empty string to handle cases where no integers are found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">w</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">w</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">isdigit</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+</span></span></code></pre></div><ul>
+<li>We set up a loop where <code>i</code> and <code>j</code> are indices to traverse the string <code>w</code>.</li>
+<li>The loop runs until <code>j</code> reaches the end of the string (<code>w.size()</code>).</li>
+<li>The condition checks if the current character <code>w[j]</code> is a digit using the <code>isdigit</code> function.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">i</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This line adjusts the index <code>i</code> if the current character is a digit.</li>
+<li>Specifically, if <code>i</code> is less than <code>j</code> (meaning we are in a number) and the character at <code>i</code> is &lsquo;0&rsquo;, we increment <code>i</code> to skip leading zeros.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">w</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If we reach a non-digit character (or the end of the string), we extract the substring from index <code>i</code> to <code>j</code>, representing the number we have formed.</li>
+<li>This substring is then inserted into the unordered set <code>s</code>.</li>
+<li>We also reset <code>i</code> to <code>j + 1</code> to prepare for the next segment of the string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After processing the entire string, we return the size of the set <code>s</code> minus one to exclude the empty string we initially added.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n)), where (n) is the length of the string <code>w</code>. This is because we traverse the string exactly once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(n)) in the worst case, where all characters are digits and we could potentially store all integers as separate entries in the set.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently extracts unique integers from a string containing various characters using an unordered set to ensure that each integer is counted only once. By carefully managing the indices and handling leading zeros, the implementation correctly identifies and counts all distinct integers present in the input string.</p>
+<p>The algorithm demonstrates the utility of string manipulation and set data structures in solving problems related to counting and uniqueness, which is a common theme in competitive programming and algorithm design.</p>
+<p>Overall, this approach is not only optimal but also clear and concise, making it a solid solution for the problem of counting different integers in a mixed-character string.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode909s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1806"  class="external-link" target="_blank" rel="noopener">LeetCode #1806: Minimum Number of Operations to Reinitialize a Permutation</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1806"  class="external-link" target="_blank" rel="noopener">LeetCode #1806: Minimum Number of Operations to Reinitialize a Permutation</a></th>
       </tr>
   </thead>
   <tbody>
@@ -233,66 +347,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

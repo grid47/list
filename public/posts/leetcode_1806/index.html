@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,11 +221,149 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode910s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the number of operations needed to reinitialize a permutation of integers from <code>0</code> to <code>n-1</code> back to its original order after repeatedly applying a specific rearrangement operation. This operation consists of rearranging the elements based on their indices, effectively reshuffling the permutation in a defined manner.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Initialize the Original Permutation</strong>: Create an array that holds the initial permutation of integers from <code>0</code> to <code>n-1</code>.</p>
+</li>
+<li>
+<p><strong>Perform the Rearrangement Operation</strong>: Implement the rearrangement operation, which involves rearranging the elements based on their indices according to specific rules. The rules state that:</p>
+<ul>
+<li>For even indices, take the element from the front half of the original array.</li>
+<li>For odd indices, take the element from the back half of the original array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check for Completion</strong>: After performing the rearrangement, check if the array has been restored to the original permutation.</p>
+</li>
+<li>
+<p><strong>Count the Operations</strong>: Repeat the rearrangement operation until the original permutation is restored, counting the number of operations performed.</p>
+</li>
+<li>
+<p><strong>Return the Count</strong>: Finally, return the count of operations needed to return to the original permutation.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">reinitializePermutation</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>reinitializePermutation</code> that accepts an integer <code>n</code>, representing the size of the permutation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">prem</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">arr</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prem</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Two vectors, <code>prem</code> and <code>arr</code>, are initialized to hold the current permutation and the rearranged version, respectively.</li>
+<li>The original permutation <code>prem</code> is filled with integers from <code>0</code> to <code>n-1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A counter variable <code>cnt</code> is initialized to <code>1</code> to account for the first state of the permutation (the original permutation).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A <code>while</code> loop is started that will run indefinitely until a break condition is met.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">?</span> <span class="n">prem</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span> <span class="o">:</span> <span class="n">prem</span><span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Inside the loop, the rearrangement is applied:
+<ul>
+<li>For each index <code>i</code>, if <code>i</code> is odd, we take the element from the second half of the original array; if <code>i</code> is even, we take the element from the first half.</li>
+</ul>
+</li>
+<li>This effectively reshuffles the <code>prem</code> array into the <code>arr</code> array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">bool</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">i</span><span class="p">)</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A boolean variable <code>x</code> is used to track whether the rearranged array matches the original permutation.</li>
+<li>We loop through <code>arr</code> to check if each element is in its correct position (matching the original indices).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">x</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If <code>x</code> remains <code>false</code>, it indicates that the rearranged array matches the original permutation, and we exit the loop.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">prem</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>If the arrays do not match, we set <code>prem</code> to <code>arr</code> for the next iteration and increment the counter <code>cnt</code>.</li>
+<li>Once the loop exits, the method returns the total count of operations performed.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm can be approximated as (O(n \cdot k)), where (n) is the size of the permutation and (k) is the number of operations until the permutation is reinitialized. The exact value of (k) depends on (n) and can vary based on the rearrangement rules.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the usage of the two vectors <code>prem</code> and <code>arr</code>, each of size (n).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively demonstrates the use of array manipulation to solve a problem related to permutations and their reinitialization. By utilizing a systematic approach to rearranging the array and checking for completion, we can efficiently determine how many operations are needed to return to the original permutation state.</p>
+<p>The clarity and straightforwardness of this approach make it an excellent example of how to handle permutation-related problems in algorithm design. The code is optimized for readability while maintaining a clear structure, making it easier for future modifications or adaptations to similar problems.</p>
+<p>In summary, the <code>reinitializePermutation</code> method provides a robust solution to count the number of operations required to restore a permutation to its original order, showcasing effective algorithmic thinking in handling index-based manipulations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode910s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1807"  class="external-link" target="_blank" rel="noopener">LeetCode #1807: Evaluate the Bracket Pairs of a String</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1807"  class="external-link" target="_blank" rel="noopener">LeetCode #1807: Evaluate the Bracket Pairs of a String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +384,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

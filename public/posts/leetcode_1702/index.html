@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -209,11 +209,106 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">binary</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode795s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal is to transform a given binary string into its maximum possible value by performing a specific operation: we can flip any &lsquo;0&rsquo; to &lsquo;1&rsquo;, but if we do this, we must ensure that all leading &lsquo;1&rsquo;s are maintained in the string. The objective is to find the lexicographically largest binary string possible by strategically changing bits while following these rules.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the maximum binary string, we need to count the number of &lsquo;1&rsquo;s and &lsquo;0&rsquo;s in the string. The strategy is straightforward: we will convert every bit to &lsquo;1&rsquo;, maintaining the condition that we may only change a &lsquo;0&rsquo; to a &lsquo;1&rsquo; if there is at least one &lsquo;0&rsquo; left to keep. The plan can be summarized as follows:</p>
+<ol>
+<li>Traverse the binary string and count the number of &lsquo;1&rsquo;s and &lsquo;0&rsquo;s.</li>
+<li>Change every character in the string to &lsquo;1&rsquo;.</li>
+<li>If there are any &lsquo;0&rsquo;s present in the original string, replace the last &lsquo;1&rsquo; (which was originally &lsquo;0&rsquo;) to &lsquo;0&rsquo;. This ensures we are keeping at least one &lsquo;0&rsquo; while maximizing the leading &lsquo;1&rsquo;s.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code to understand how this approach is implemented:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We define a class named <code>Solution</code>, which contains our method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The method <code>maximumBinaryString</code> takes a binary string as input and returns the modified string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="nf">maximumBinaryString</span><span class="p">(</span><span class="n">string</span> <span class="n">binary</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: We initialize three variables: <code>ones</code> to count the &lsquo;1&rsquo;s, <code>zeros</code> to count the &lsquo;0&rsquo;s, and <code>n</code> to hold the size of the binary string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ones</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">zeros</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">binary</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through the Binary String</strong>: We loop through each character of the binary string using a range-based for loop.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">c</span><span class="p">:</span> <span class="n">binary</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Counting &lsquo;1&rsquo;s and &lsquo;0&rsquo;s</strong>: Inside the loop, we check if the current character is &lsquo;0&rsquo;. If it is, we increment the <code>zeros</code> counter. If it is a &lsquo;1&rsquo; and there are no &lsquo;0&rsquo;s counted yet, we increment the <code>ones</code> counter. Regardless of the character, we set the current character to &lsquo;1&rsquo; as our goal is to maximize the string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zeros</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">zeros</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ones</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> <span class="c1">// Set current character to &#39;1&#39;
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Replacing the Last &lsquo;1&rsquo; with &lsquo;0&rsquo;</strong>: After the loop, we check if the number of counted &lsquo;1&rsquo;s is less than the length of the string. If true, it implies there were some &lsquo;0&rsquo;s present in the original string. We then replace the last &lsquo;1&rsquo; in our modified string (which corresponds to the last counted &lsquo;0&rsquo;) with a &lsquo;0&rsquo;.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">ones</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binary</span><span class="p">[</span><span class="n">zeros</span> <span class="o">+</span> <span class="n">ones</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span> <span class="c1">// Replace the last &#39;1&#39; with &#39;0&#39;
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: Finally, we return the modified binary string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">binary</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is O(n), where n is the length of the input binary string. This is due to the single traversal of the string to count the bits and modify them. The space complexity is O(1) because we only use a few integer variables to keep track of counts and do not require any additional data structures that grow with input size.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided code effectively transforms a given binary string into its maximum lexicographical form while adhering to the constraints of only flipping &lsquo;0&rsquo;s to &lsquo;1&rsquo;s. By strategically counting the bits and replacing the appropriate character at the end, we ensure that the result is not only maximized but also meets the required conditions. This approach is efficient and straightforward, making it a suitable solution for problems involving binary strings and manipulations. By leveraging a simple counting mechanism and a direct string modification, the code achieves its goals with optimal performance, making it an excellent example of algorithmic efficiency.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode795s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1703"  class="external-link" target="_blank" rel="noopener">LeetCode #1703: Minimum Adjacent Swaps for K Consecutive Ones</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1703"  class="external-link" target="_blank" rel="noopener">LeetCode #1703: Minimum Adjacent Swaps for K Consecutive Ones</a></th>
       </tr>
   </thead>
   <tbody>
@@ -234,66 +329,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

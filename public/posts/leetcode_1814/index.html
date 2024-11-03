@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,11 +215,150 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">revNum</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode919s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to count the number of &ldquo;nice pairs&rdquo; in an array of integers. A nice pair consists of two indices (i) and (j) (where (i &lt; j)) such that the condition (nums[i] + rev(nums[j]) = nums[j] + rev(nums[i])) holds true. Here, <code>rev(x)</code> represents the reverse of the integer (x). The goal is to return the total count of such nice pairs modulo (10^9 + 7).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the following steps are taken:</p>
+<ol>
+<li>
+<p><strong>Understanding the Condition</strong>: The condition (nums[i] + rev(nums[j]) = nums[j] + rev(nums[i])) can be rearranged to (nums[i] - rev(nums[i]) = nums[j] - rev(nums[j])). This means that for every pair of indices to be considered &ldquo;nice,&rdquo; the difference between the number and its reversed form must be the same for both numbers.</p>
+</li>
+<li>
+<p><strong>Using a HashMap</strong>: Utilize a hash map (or unordered map) to count occurrences of each unique value of (nums[i] - rev(nums[i])). By counting how many times each value appears, we can derive the number of combinations of indices that can be formed.</p>
+</li>
+<li>
+<p><strong>Counting Combinations</strong>: For each unique difference stored in the hash map, if it appears (k) times, the number of ways to choose pairs from these (k) occurrences is given by the combination formula (C(k, 2) = \frac{k(k - 1)}{2}). This counts the number of nice pairs that can be formed from these indices.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The final count is accumulated and returned after applying the modulo operation to prevent overflow.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the step-by-step breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>A class <code>Solution</code> is defined, which contains methods for solving the problem.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">countNicePairs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>countNicePairs</code> takes a vector of integers <code>nums</code> as input and returns an integer representing the count of nice pairs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>An unordered map <code>mp</code> is declared to store the count of occurrences for each unique value of (nums[i] - rev(nums[i])).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">n</span><span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="n">mp</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">rev</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This loop iterates through each number <code>n</code> in the <code>nums</code> vector:
+<ul>
+<li>The difference (n - rev(n)) is calculated, and the count of this difference is incremented in the map <code>mp</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">1000000007</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A variable <code>mod</code> is defined with the value (10^9 + 7) to use for modulo operations.</li>
+<li>A variable <code>count</code> is initialized to zero, which will be used to accumulate the total number of nice pairs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">it</span><span class="p">:</span> <span class="n">mp</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">count</span> <span class="o">=</span> <span class="p">(</span><span class="n">count</span> <span class="o">+</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span> <span class="o">*</span> <span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This loop iterates through each entry in the map <code>mp</code>:
+<ul>
+<li>For each unique difference, it calculates the number of pairs that can be formed using the combination formula (\frac{it.second \cdot (it.second - 1)}{2}), where <code>it.second</code> is the count of occurrences of that difference.</li>
+<li>The result is added to <code>count</code>, and modulo operation is applied to keep the value within bounds.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the accumulated <code>count</code> is returned as the output.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">rev</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>This function <code>rev</code> takes an integer (x) as input and returns its reverse.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">revNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A variable <code>revNum</code> is initialized to zero, which will hold the reversed number.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">revNum</span> <span class="o">=</span> <span class="n">revNum</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span><span class="o">%</span><span class="mi">10</span><span class="p">),</span> <span class="n">x</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A loop is used to reverse the number:
+<ul>
+<li>The last digit of (x) is added to <code>revNum</code> (multiplied by 10 to shift left), and (x) is divided by 10 to remove the last digit.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">revNum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The reversed number <code>revNum</code> is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(n \cdot k)), where (n) is the number of elements in the <code>nums</code> vector and (k) is the number of digits in the largest number. This is due to the need to reverse each number in the input array.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m)), where (m) is the number of unique values of (nums[i] - rev(nums[i])). This space is used by the unordered map to store counts.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countNicePairs</code> method efficiently calculates the number of nice pairs in an array of integers by leveraging mathematical properties of numbers and their reversals. By transforming the problem into counting occurrences of differences and using combinatorial math, the solution achieves a clean and efficient approach to the problem.</p>
+<p>This solution exemplifies the effective use of data structures such as hash maps to store and quickly access counts, as well as the implementation of modular arithmetic to handle large numbers, making it robust for competitive programming and algorithm design challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode919s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1815"  class="external-link" target="_blank" rel="noopener">LeetCode #1815: Maximum Number of Groups Getting Fresh Donuts</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1815"  class="external-link" target="_blank" rel="noopener">LeetCode #1815: Maximum Number of Groups Getting Fresh Donuts</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +379,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

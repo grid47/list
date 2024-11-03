@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -213,11 +213,126 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode900s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the maximum amount of consecutive integers that can be formed using a given list of coin denominations. This problem is common in algorithmic challenges where understanding how to sum combinations of integers to reach specific targets is required. Given a collection of coins, our goal is to find the largest integer value such that all integers from 1 to that value can be created using these coins.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution approach utilizes a greedy algorithm combined with sorting. The idea is to incrementally build the maximum consecutive sum starting from 1. By sorting the coin denominations, we ensure that we can process smaller denominations first, allowing us to maximize our consecutive integer reach.</p>
+<ol>
+<li>
+<p><strong>Sort the Coins</strong>: By sorting the array of coins, we can ensure that we start with the smallest denomination, allowing us to construct the smallest sums first.</p>
+</li>
+<li>
+<p><strong>Initialize a Result Variable</strong>: We start with a result variable initialized to 1, indicating that we aim to create the integer value 1.</p>
+</li>
+<li>
+<p><strong>Iterate Through the Coins</strong>:</p>
+<ul>
+<li>For each coin, we check if it is greater than the current value of <code>res</code>. If it is, we can no longer create the integer value <code>res</code>, so we break out of the loop.</li>
+<li>If the coin is less than or equal to <code>res</code>, we can update <code>res</code> by adding the value of the coin. This represents the new target that can be formed with the addition of the current coin.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return the value of <code>res</code>, which will be the maximum consecutive integer that can be formed.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the complete code for the <code>Solution</code> class:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">getMaximumConsecutive</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">coins</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">coins</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">coins</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>getMaximumConsecutive</code> begins by taking a vector of integers <code>coins</code> as an input, which represents the different coin denominations available.</li>
+<li>We sort the coins in ascending order using <code>sort(coins.begin(), coins.end());</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A variable <code>res</code> is initialized to 1. This variable will track the maximum consecutive integer that can be created starting from 1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">a</span><span class="p">:</span> <span class="n">coins</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">res</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through each coin in the sorted list. The variable <code>a</code> represents the current coin denomination.</li>
+<li>If the current coin <code>a</code> is greater than <code>res</code>, it means we cannot create the integer value <code>res</code> with the available coins, and we exit the loop.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="c1">// with all the coins I have I can 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// create upto res - 1,
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// with this a, I can make upto res + a - 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// so next target is res += a
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res</span> <span class="o">+=</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the coin is less than or equal to <code>res</code>, we can add this coin to our collection of coins used to reach consecutive sums.</li>
+<li>The comment explains that with the current set of coins, we can form all sums up to <code>res - 1</code>. By adding coin <code>a</code>, we can now form sums up to <code>res + a - 1</code>. Thus, we update <code>res</code> to reflect this new maximum consecutive value by adding <code>a</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the method returns <code>res</code>, which represents the maximum integer value that can be formed using the provided coin denominations.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n \log n)), where (n) is the number of coins. The sorting step dominates the time complexity. The subsequent iteration through the sorted coins is (O(n)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(1)) if we ignore the input space, as we are using only a constant amount of additional space for the variables.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>getMaximumConsecutive</code> method effectively solves the problem of determining the maximum consecutive integers that can be formed from a given list of coin denominations through a greedy approach. The algorithm first sorts the list of coins to ensure that smaller denominations are processed first, maximizing the number of consecutive sums that can be formed.</p>
+<p>By incrementally building up the maximum consecutive integer starting from 1 and updating the target as each coin is processed, the algorithm efficiently calculates the desired result. This approach not only highlights the importance of sorting in greedy algorithms but also illustrates how small optimizations can lead to significant improvements in the problem-solving process.</p>
+<p>This solution is not only efficient but also elegant, showcasing how fundamental concepts in algorithms can be applied to solve real-world problems in finance, resource allocation, and combinatorial mathematics. The ability to understand and implement such algorithms is essential for software developers, particularly those working in fields related to finance, game development, and operations research.</p>
+<p>The effectiveness of this algorithm makes it a valuable addition to the toolkit of any developer facing similar challenges, reinforcing the significance of both theoretical knowledge and practical implementation in the field of computer science.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode900s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1799"  class="external-link" target="_blank" rel="noopener">LeetCode #1799: Maximize Score After N Operations</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1799"  class="external-link" target="_blank" rel="noopener">LeetCode #1799: Maximize Score After N Operations</a></th>
       </tr>
   </thead>
   <tbody>
@@ -238,66 +353,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

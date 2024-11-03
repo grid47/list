@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -218,11 +218,142 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">answ</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1118s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the number of quadruplets in a given list of integers, <code>nums</code>, such that the sum of the first three integers in the quadruplet equals the fourth integer. A quadruplet is defined as a collection of four integers ((a, b, c, d)) from the list, with the condition that the indices satisfy (i &lt; j &lt; k &lt; l). The challenge is to compute the count of such valid quadruplets efficiently, especially when the input size can be large.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we utilize a combination of hash maps and nested loops to efficiently count potential quadruplets:</p>
+<ol>
+<li>
+<p><strong>Use of Hash Map</strong>: We maintain a frequency map that keeps track of how many times each number appears in the portion of the array we are currently considering. This allows us to quickly look up how many valid pairs of numbers can sum to a specific target.</p>
+</li>
+<li>
+<p><strong>Iterate from Right to Left</strong>: We iterate through the array in reverse order, considering each number as a potential fourth element of the quadruplet. For each potential fourth element, we calculate all possible sums of the two preceding elements, checking if that sum exists in our frequency map.</p>
+</li>
+<li>
+<p><strong>Triple Nested Loops</strong>: The approach involves three nested loops to consider every combination of the first three numbers in the quadruplet. For each combination, we check if their sum matches the value stored in the frequency map.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the provided code step by step:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countQuadruplets</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Store the size of the input vector
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">freq</span><span class="p">;</span> <span class="c1">// Initialize a hash map to count occurrences
+</span></span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a method <code>countQuadruplets</code> that takes a vector of integers, <code>nums</code>.</li>
+<li>The size of <code>nums</code> is stored in <code>n</code>, and we create an unordered map <code>freq</code> to keep track of the frequencies of numbers.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">freq</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Initialize the frequency map with the last element
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">size_t</span> <span class="n">answ</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Variable to store the count of valid quadruplets
+</span></span></span></code></pre></div><ul>
+<li>We start by initializing the frequency map with the last element of <code>nums</code> since it will be considered as the fourth element of our quadruplets.</li>
+<li>The variable <code>answ</code> is used to accumulate the total number of valid quadruplets found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="c1">// Iterate from the second last element to the third element
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span> <span class="c1">// Iterate through the elements to the left of `i`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">k</span><span class="p">)</span> <span class="c1">// Iterate through the elements to the left of `j`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">freq</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span> <span class="c1">// Check if the sum exists in the map
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">answ</span> <span class="o">+=</span> <span class="n">freq</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">]];</span> <span class="c1">// Update the count of valid quadruplets
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">freq</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Update the frequency map with the current element
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">answ</span><span class="p">;</span> <span class="c1">// Return the total count of quadruplets
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The outermost loop iterates over each potential fourth element of the quadruplet, starting from the second last element and moving left.</li>
+<li>The second nested loop iterates through the elements to the left of <code>i</code>, treating each as a potential second element.</li>
+<li>The innermost loop iterates through elements to the left of <code>j</code>, treating them as potential first elements.</li>
+<li>For each combination of <code>nums[i]</code>, <code>nums[j]</code>, and <code>nums[k]</code>, we check if their sum exists in our frequency map. If it does, we add the corresponding frequency to our answer.</li>
+<li>After processing the combinations for a given <code>i</code>, we update the frequency map to include the current number <code>nums[i]</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n^3)), where (n) is the length of the input array. This is due to the three nested loops iterating through the array, leading to a cubic number of combinations being checked. Although this seems high, the constraints of the problem (size of the input) may allow for this approach in many competitive programming scenarios.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the hash map storing the frequencies of numbers in the array. This space will be used to store potentially all unique numbers in the array.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently counts the number of quadruplets in an integer array where the sum of the first three numbers equals the fourth number. By leveraging a frequency map and iterating through the array in reverse, we can quickly determine valid combinations without needing to check all possible quadruplets explicitly. This method, while having a cubic time complexity, is straightforward and works within the constraints typically given in competitive programming challenges.</p>
+<p>The code effectively demonstrates how to utilize hash maps for counting occurrences and efficiently compute the required sums, showcasing an effective application of nested loops and combinatorial logic.</p>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s an example of how to use the <code>Solution</code> class to count quadruplets in a given list of integers:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">};</span> <span class="c1">// Example input
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">countQuadruplets</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Number of valid quadruplets: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Should print the count of valid quadruplets
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>This simple example initializes the <code>Solution</code> object and passes an array of integers to count the valid quadruplets, demonstrating practical usage of the method.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1118s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1996"  class="external-link" target="_blank" rel="noopener">LeetCode #1996: The Number of Weak Characters in the Game</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1996"  class="external-link" target="_blank" rel="noopener">LeetCode #1996: The Number of Weak Characters in the Game</a></th>
       </tr>
   </thead>
   <tbody>
@@ -243,66 +374,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -225,11 +225,138 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode840s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array of adjacent pairs, where each element represents a connection between two integers, the task is to restore the original array from which the adjacent pairs were derived. Each pair in the input represents two neighboring elements in the original array, and the array has no duplicates. The goal is to reconstruct and return the original array in the correct order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem can be approached using a hash map and by identifying the endpoints of the array based on the adjacency properties of the elements. Here’s the plan:</p>
+<ol>
+<li>
+<p><strong>Map Construction</strong>: Build a hash map to store each integer’s adjacent elements based on the given pairs.</p>
+</li>
+<li>
+<p><strong>Endpoint Identification</strong>: Find the array’s starting point by identifying an integer that appears only once in the adjacency map (endpoints only have one neighbor).</p>
+</li>
+<li>
+<p><strong>Array Restoration</strong>: Starting from one endpoint, construct the array by traversing through neighbors in sequence, ensuring each element appears in the correct order.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s dive into the code line by line to understand the solution.</p>
+<ol>
+<li>
+<p><strong>Initialize Variables and Build the Adjacency Map</strong>:</p>
+<ul>
+<li>Use <code>map&lt;int, vector&lt;int&gt;&gt; mp</code> to store each integer and its neighbors.</li>
+<li>For each pair in <code>ap</code>, add each element to the other’s adjacency list.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">ap</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">ap</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mp</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mp</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Here, <code>n</code> is the expected length of the restored array, and <code>mp</code> is used to record neighboring relationships from the input pairs.</p>
+</li>
+<li>
+<p><strong>Find the Starting Endpoint</strong>:</p>
+<ul>
+<li>Identify an element with only one neighbor (an endpoint of the array).</li>
+<li>Add this element and its single neighbor to <code>ans</code>, marking the start of the array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>In this loop, the <code>it.first</code> with only one neighbor <code>it.second[0]</code> is the starting point for the traversal.</p>
+</li>
+<li>
+<p><strong>Traverse and Reconstruct the Array</strong>:</p>
+<ul>
+<li>Use a <code>while</code> loop to continue expanding the array until it reaches length <code>n</code>.</li>
+<li>At each step, find the next element connected to the current last element that has not been visited (tracked by the previous element).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">ans</span><span class="p">.</span><span class="n">back</span><span class="p">(),</span> <span class="n">prv</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="o">&amp;</span><span class="n">next</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[</span><span class="n">tail</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">next</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The loop continues appending elements until the array is fully constructed. It ensures each next element is a new connection not yet added to <code>ans</code>.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After the loop, <code>ans</code> contains the original array in the correct order, which is then returned.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(n)), where (n) is the number of pairs in <code>ap</code>. Building the map and traversing the array both take linear time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(n)) due to the adjacency map and the result vector <code>ans</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently reconstructs the array from the given adjacent pairs by leveraging adjacency information and endpoint detection. Using a map to store neighbors allows efficient access to connections, and by identifying an endpoint, the array can be restored in linear order. This approach ensures accuracy and optimal performance, making it suitable for large input sizes within given constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode840s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1744"  class="external-link" target="_blank" rel="noopener">LeetCode #1744: Can You Eat Your Favorite Candy on Your Favorite Day?</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1744"  class="external-link" target="_blank" rel="noopener">LeetCode #1744: Can You Eat Your Favorite Candy on Your Favorite Day?</a></th>
       </tr>
   </thead>
   <tbody>
@@ -250,66 +377,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

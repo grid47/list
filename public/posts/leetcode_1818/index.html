@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -214,11 +214,137 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="n">res</span> <span class="o">-</span> <span class="n">gain</span><span class="p">)</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode923s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the minimum possible sum of absolute differences between two arrays, <code>nums1</code> and <code>nums2</code>, after making at most one replacement in <code>nums1</code>. Specifically, for each pair of elements at the same index <code>i</code>, we want to compute <code>|nums1[i] - nums2[i]|</code> and minimize the total sum. We can replace an element in <code>nums1</code> with any other element from <code>nums1</code> to achieve this.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to follow these steps:</p>
+<ol>
+<li>
+<p><strong>Calculate Initial Differences</strong>: First, we will calculate the absolute differences between corresponding elements of <code>nums1</code> and <code>nums2</code>.</p>
+</li>
+<li>
+<p><strong>Determine Total Sum</strong>: Next, we will compute the total sum of these absolute differences.</p>
+</li>
+<li>
+<p><strong>Evaluate Potential Gains</strong>: For each element in <code>nums2</code>, we will find the closest element in <code>nums1</code> (either less than or equal to or greater than the current element) to see if we can reduce the absolute difference by making a replacement.</p>
+</li>
+<li>
+<p><strong>Calculate Maximum Gain</strong>: By checking the potential replacements, we can determine the maximum possible reduction in the total sum of absolute differences.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, subtract the maximum gain from the initial total sum to get the minimized sum, taking care to return the result modulo (10^9 + 7).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minAbsoluteSumDiff</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define the <code>Solution</code> class and declare the method <code>minAbsoluteSumDiff</code>, which takes two integer vectors as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sel</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">nums1</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">nums1</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>We store the size of <code>nums1</code> in <code>n</code>. We also create a set <code>sel</code> that contains all the elements of <code>nums1</code>. Using a set allows us to efficiently find the closest elements later.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">gain</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize two variables: <code>gain</code>, which will track the maximum gain from making a replacement, and <code>res</code>, which will store the total sum of absolute differences.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="n">og</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums2</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="n">og</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through the elements of the arrays. For each index <code>i</code>, we calculate the original absolute difference <code>og</code> and add it to <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">gain</span> <span class="o">&lt;</span> <span class="n">og</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We check if the current original difference <code>og</code> is greater than the current <code>gain</code>. If so, we proceed to check for possible replacements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">num</span> <span class="o">=</span> <span class="n">sel</span><span class="p">.</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">nums2</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li>We use <code>lower_bound</code> to find the smallest element in <code>sel</code> that is greater than or equal to <code>nums2[i]</code>. This helps us identify potential candidates for replacement.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">!=</span>   <span class="n">end</span><span class="p">(</span><span class="n">sel</span><span class="p">))</span> <span class="n">gain</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">og</span> <span class="o">-</span> <span class="n">abs</span><span class="p">(</span><span class="o">*</span><span class="n">num</span>       <span class="o">-</span> <span class="n">nums2</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</span></span></code></pre></div><ul>
+<li>If <code>num</code> is valid (not at the end of the set), we calculate the potential gain from replacing <code>nums1[i]</code> with <code>*num</code> and update <code>gain</code> accordingly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">!=</span> <span class="n">begin</span><span class="p">(</span><span class="n">sel</span><span class="p">))</span> <span class="n">gain</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">og</span> <span class="o">-</span> <span class="n">abs</span><span class="p">(</span><span class="o">*</span><span class="n">prev</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="n">nums2</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</span></span></code></pre></div><ul>
+<li>We also check if there is a valid predecessor to <code>num</code> (the largest element less than <code>nums2[i]</code>). If so, we calculate the gain from this replacement as well.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We continue the loop until all elements are processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="n">res</span> <span class="o">-</span> <span class="n">gain</span><span class="p">)</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the minimized total sum after applying the maximum gain, ensuring that we take the result modulo (10^9 + 7).</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n \log n)) due to the need to process each element in <code>nums1</code> and the logarithmic time complexity associated with the operations on the set.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) for storing the elements of <code>nums1</code> in the set.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minAbsoluteSumDiff</code> function effectively minimizes the total sum of absolute differences between two arrays by strategically replacing one element from <code>nums1</code> with another. By using a sorted data structure (set), the algorithm efficiently finds the closest values for potential replacements, maximizing the reduction in the total difference.</p>
+<p>This solution is a prime example of how to leverage data structures for efficient lookups and optimizations in computational problems. By breaking down the problem into manageable parts—calculating initial differences, evaluating potential replacements, and computing the maximum possible gain—we ensure that the solution is both clear and effective.</p>
+<p>In summary, this implementation is not only a solution to the problem but also an illustration of best practices in algorithm design, particularly in optimizing problems involving arrays and numerical calculations. It showcases the importance of selecting appropriate data structures and techniques to achieve efficiency and clarity in code.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode923s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1819"  class="external-link" target="_blank" rel="noopener">LeetCode #1819: Number of Different Subsequences GCDs</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1819"  class="external-link" target="_blank" rel="noopener">LeetCode #1819: Number of Different Subsequences GCDs</a></th>
       </tr>
   </thead>
   <tbody>
@@ -239,66 +365,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

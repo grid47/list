@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -230,11 +230,134 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;add(index,val);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_2 = obj-&gt;count(tot);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode975s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task involves designing a class called <code>FindSumPairs</code> that allows us to efficiently manage two arrays (<code>nums1</code> and <code>nums2</code>) and to count how many pairs of elements from these two arrays sum up to a given target value. The class should support two primary operations:</p>
+<ol>
+<li><strong>Adding a value</strong> to an element in <code>nums2</code> at a specified index.</li>
+<li><strong>Counting the pairs</strong> from <code>nums1</code> and <code>nums2</code> that sum to a given target value.</li>
+</ol>
+<p>This requires a structure that can dynamically update and query pairs efficiently.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will take advantage of a hashmap (or dictionary) to store counts of elements in <code>nums2</code>. This allows for quick lookups when counting pairs. Here’s a step-by-step breakdown of our approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Store the provided <code>nums1</code> and <code>nums2</code> in the class. Use a hashmap to count occurrences of each value in <code>nums2</code>. This will help us quickly determine how many times a particular value needed to reach the target exists in <code>nums2</code>.</p>
+</li>
+<li>
+<p><strong>Adding Values</strong>: When a value is added to an element in <code>nums2</code>, update both the original value’s count (decrement) and the new value’s count (increment) in the hashmap.</p>
+</li>
+<li>
+<p><strong>Counting Pairs</strong>: To count pairs that sum up to a target value, iterate through <code>nums1</code> and for each element, compute the value needed from <code>nums2</code> to reach the target. Look up this needed value in the hashmap to get its count, which represents how many valid pairs can be formed with that particular element from <code>nums1</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The implementation starts with defining the <code>FindSumPairs</code> class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FindSumPairs</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Member Variables</strong>: The class has member variables to store the two arrays, the size of these arrays, a hashmap for counting occurrences in <code>nums2</code>, and a matrix placeholder that is not used in the current implementation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mtx</span><span class="p">;</span> <span class="c1">// Not used in the current implementation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span> <span class="c1">// Map to count occurrences in nums2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Sizes of nums1 and nums2
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Constructor</strong>: The constructor takes two integer vectors (<code>nums1</code> and <code>nums2</code>) as input. It initializes the class variables and populates the hashmap with the counts of each number in <code>nums2</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">FindSumPairs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums1</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums2</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">m</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">nums2</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Count occurrences of each number in nums2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Adding Values</strong>: The <code>add</code> method allows modification of the <code>nums2</code> array. It updates the element at the specified index by adding a value to it, while also updating the hashmap to reflect the changes in counts.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">key</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">[</span><span class="n">index</span><span class="p">];</span> <span class="c1">// Original value at the index
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">nums2</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span> <span class="c1">// Update nums2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">--</span><span class="p">;</span> <span class="c1">// Decrement the count of the old value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">mp</span><span class="p">[</span><span class="n">nums2</span><span class="p">[</span><span class="n">index</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment the count of the new value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Counting Pairs</strong>: The <code>count</code> method counts how many pairs from <code>nums1</code> and <code>nums2</code> sum to the specified total. For each element in <code>nums1</code>, it calculates the required counterpart from <code>nums2</code> and adds up the counts of how many times that counterpart exists.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">count</span><span class="p">(</span><span class="kt">int</span> <span class="n">tot</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">+=</span> <span class="n">mp</span><span class="p">[</span><span class="n">tot</span> <span class="o">-</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span> <span class="c1">// Add counts of the required counterpart
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Class Usage Example</strong>: The class can be instantiated and used as shown in the provided comment.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your FindSumPairs object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * FindSumPairs* obj = new FindSumPairs(nums1, nums2);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;add(index, val);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_2 = obj-&gt;count(tot);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity for the constructor is (O(m)), where (m) is the size of <code>nums2</code>, as we are populating the hashmap. The <code>add</code> method operates in (O(1)) time for the update operation, given that hashmap operations (insertions and deletions) are average (O(1)). The <code>count</code> method has a time complexity of (O(n)), where (n) is the size of <code>nums1</code>, since we iterate through all elements of <code>nums1</code> to compute the count.</p>
+<p>In terms of space complexity, the storage for the hashmap is (O(m)) in the worst case (when all elements in <code>nums2</code> are unique).</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>FindSumPairs</code> class provides an efficient way to manage two integer arrays and perform operations to count valid pairs that sum to a specific target. By leveraging a hashmap to store counts of elements in <code>nums2</code>, the implementation ensures quick updates and lookups, which is essential for maintaining performance. The approach is straightforward yet effective, demonstrating the usefulness of data structures in solving combinatorial problems efficiently. This solution is suitable for applications where dynamic updates and quick queries are required, making it a robust choice for similar problems in algorithm design and competitive programming. The clarity and organization of the code enhance its readability and maintainability, solidifying its value as a reference for similar implementations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode975s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1866"  class="external-link" target="_blank" rel="noopener">LeetCode #1866: Number of Ways to Rearrange Sticks With K Sticks Visible</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1866"  class="external-link" target="_blank" rel="noopener">LeetCode #1866: Number of Ways to Rearrange Sticks With K Sticks Visible</a></th>
       </tr>
   </thead>
   <tbody>
@@ -255,66 +378,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

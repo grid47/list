@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -232,11 +232,156 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode736s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective is to determine the maximum number of points that can be seen from a specific location within a given angular range. The points are represented in a 2D coordinate system, and the angle is measured from a line drawn from the location to the points. The main constraints are:</p>
+<ol>
+<li>The angle is given in degrees.</li>
+<li>Points that are located directly at the location count as visible.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem can be summarized in the following steps:</p>
+<ol>
+<li><strong>Calculate Angles</strong>: For each point, calculate the angle it makes with respect to the given location using the <code>atan2</code> function. This will yield the angle in degrees.</li>
+<li><strong>Sort Angles</strong>: Once all angles are computed, sort them in ascending order.</li>
+<li><strong>Handle Wrap Around</strong>: Since angles are cyclical (0° and 360° represent the same direction), duplicate the angle list by adding 360° to each angle. This allows us to use a sliding window approach without worrying about the wrap-around when considering the angle range.</li>
+<li><strong>Sliding Window Technique</strong>: Use two pointers to find the maximum number of points that can be viewed within the specified angle. For each angle in the sorted list, check how many points can be seen by extending a window defined by the current angle plus the allowed viewing angle.</li>
+<li><strong>Count Points</strong>: Keep track of the count of points visible for each position, considering those that overlap with the location.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">visiblePoints</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">pts</span><span class="p">,</span> <span class="kt">int</span> <span class="n">angle</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">loc</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains a public method <code>visiblePoints</code>, which takes a vector of points <code>pts</code>, an integer <code>angle</code>, and the <code>loc</code> of the observer as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">;</span> <span class="c1">// Vector to store angles
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Counter for points at the same location
+</span></span></span></code></pre></div><ul>
+<li>We initialize a vector <code>arr</code> to hold the angles of the points relative to the location and a counter <code>cnt</code> to count how many points are located directly at <code>loc</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">pts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="kt">double</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We iterate over each point in <code>pts</code>. For each point, we determine the difference in x and y coordinates (<code>dx</code> and <code>dy</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">dy</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">dx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment count if the point is at the observer&#39;s location
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the point coincides with the observer&rsquo;s location (i.e., <code>dx</code> and <code>dy</code> are both zero), we increment the counter and continue to the next point.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">double</span> <span class="n">ang</span> <span class="o">=</span> <span class="n">atan2</span><span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span> <span class="o">*</span> <span class="mi">180</span><span class="o">/</span><span class="n">M_PI</span><span class="p">;</span> <span class="c1">// Calculate angle in degrees
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">ang</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We calculate the angle using <code>atan2</code>, converting it to degrees. This angle is then pushed into the <code>arr</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">arr</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// Sort the angles
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">arr</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// Create a temporary vector for wrap-around
+</span></span></span></code></pre></div><ul>
+<li>We sort the angles to facilitate the sliding window approach. We also create a temporary vector <code>tmp</code> to hold the original angles for later processing.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">360</span><span class="p">);</span> <span class="c1">// Duplicate angles by adding 360 degrees
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">arr</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// Update arr to include the duplicated angles
+</span></span></span></code></pre></div><ul>
+<li>We add 360° to each angle and store it back in <code>arr</code>. This allows us to handle angles that exceed 360° without special cases.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span> <span class="c1">// Initialize max visible points
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize second pointer for sliding window
+</span></span></span></code></pre></div><ul>
+<li>We initialize <code>mx</code> with the count of points directly at <code>loc</code>. The second pointer <code>j</code> is initialized to zero to start checking the visibility range.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">angle</span><span class="p">)</span> <span class="n">j</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Move j to maintain the angle constraint
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// Update max visible points
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We loop through the angles in <code>arr</code>. The inner <code>while</code> loop ensures that the difference between the current angle (<code>arr[i]</code>) and the angle at the second pointer (<code>arr[j]</code>) does not exceed the allowed viewing angle. We update <code>mx</code> with the maximum number of points visible in the current window.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">;</span> <span class="c1">// Return the maximum visible points
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>mx</code>, which contains the maximum number of points that can be seen from the given location within the specified angle.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is (O(N \log N)), where (N) is the number of points. This complexity arises from sorting the angles.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(N)) due to the additional storage used for the angle list.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively computes the maximum number of visible points from a given location within a specified angular range using a combination of geometric calculations and a sliding window technique. The use of the <code>atan2</code> function allows for accurate angle determination in all quadrants of the Cartesian plane.</p>
+<p><strong>Key Aspects of the Solution</strong>:</p>
+<ol>
+<li><strong>Angle Calculation</strong>: Utilizing <code>atan2</code> for accurate angle measurement based on the x and y differences.</li>
+<li><strong>Sorting and Duplicating Angles</strong>: Ensuring the angles are sorted and duplicated to handle wrap-around scenarios easily.</li>
+<li><strong>Sliding Window Technique</strong>: Efficiently counting the maximum number of visible points within the given angle constraint.</li>
+</ol>
+<p>This implementation is robust and leverages fundamental concepts in geometry and computational efficiency, making it suitable for practical applications in scenarios involving angular visibility and geometric positioning.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode736s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1611"  class="external-link" target="_blank" rel="noopener">LeetCode #1611: Minimum One Bit Operations to Make Integers Zero</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1611"  class="external-link" target="_blank" rel="noopener">LeetCode #1611: Minimum One Bit Operations to Make Integers Zero</a></th>
       </tr>
   </thead>
   <tbody>
@@ -257,66 +402,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

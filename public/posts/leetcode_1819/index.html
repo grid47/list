@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -219,11 +219,138 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode927s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal is to determine the count of different greatest common divisors (GCDs) that can be formed by any subsequence of a given array of integers, <code>nums</code>. Specifically, we want to find how many integers from 1 to 200,000 (inclusive) can be represented as the GCD of at least one subsequence formed from the elements of <code>nums</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we need to follow a systematic approach:</p>
+<ol>
+<li>
+<p><strong>Calculate Factors</strong>: For each number in the <code>nums</code> array, we will identify all its factors. Each factor is a potential GCD of some subsequence.</p>
+</li>
+<li>
+<p><strong>Track GCDs</strong>: We will maintain an array, <code>fact</code>, where the index represents the factor, and the value at each index represents the GCD of the numbers that have that factor.</p>
+</li>
+<li>
+<p><strong>Update GCD Values</strong>: As we find the factors for each number in <code>nums</code>, we will update the GCD value for each factor in the <code>fact</code> array.</p>
+</li>
+<li>
+<p><strong>Count Valid GCDs</strong>: After processing all numbers, we will count how many values in the <code>fact</code> array equal their index (i.e., <code>fact[i] == i</code>), indicating that <code>i</code> is a GCD of some subsequence.</p>
+</li>
+<li>
+<p><strong>Return the Count</strong>: Finally, we return the count of valid GCDs found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countDifferentSubsequenceGCDs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define the <code>Solution</code> class and declare the method <code>countDifferentSubsequenceGCDs</code>, which takes a vector of integers as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">fact</span><span class="p">(</span><span class="mi">200001</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We store the size of <code>nums</code> in <code>n</code>. We also initialize a vector <code>fact</code> of size 200,001 with all elements set to zero. This vector will hold the GCD values corresponding to each integer up to 200,000.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We start iterating over each number in the <code>nums</code> array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">*</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>For each number, we find its factors by checking all integers <code>j</code> starting from 1 up to the square root of <code>nums[i]</code>. If <code>j</code> is a divisor of <code>nums[i]</code>, we proceed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">j</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define two factors: <code>f1</code> (which is <code>j</code>) and <code>f2</code> (which is the result of dividing <code>nums[i]</code> by <code>j</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="n">fact</span><span class="p">[</span><span class="n">f1</span><span class="p">]</span> <span class="o">=</span> <span class="n">__gcd</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">f1</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">fact</span><span class="p">[</span><span class="n">f2</span><span class="p">]</span> <span class="o">=</span> <span class="n">__gcd</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">f2</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>                    
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We update the <code>fact</code> array at indices <code>f1</code> and <code>f2</code>. We set each position to the GCD of the current value in <code>fact</code> and <code>nums[i]</code>. This way, we ensure that each factor holds the GCD of all numbers in <code>nums</code> that have this factor.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a counter <code>res</code> to keep track of the number of valid GCDs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">200000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">fact</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="n">res</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We iterate over all integers from 1 to 200,000. For each integer <code>i</code>, we check if the GCD stored in <code>fact[i]</code> is equal to <code>i</code>. If they are equal, we increment the counter <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the count of valid GCDs found.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n \sqrt{m})), where (n) is the size of the input array <code>nums</code> and (m) is the maximum number in <code>nums</code>. This is because, for each number, we are iterating up to its square root to find the factors.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m)) for storing the <code>fact</code> array, where (m) is 200,000.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countDifferentSubsequenceGCDs</code> function efficiently counts the different GCDs that can be formed by any subsequence of the input array <code>nums</code>. By systematically calculating the factors for each number and updating their GCDs, we ensure that we account for all potential GCDs that can arise from subsequences.</p>
+<p>This solution showcases a practical application of mathematical concepts such as factors and GCDs, combined with efficient data structures to track and count valid outcomes. The approach is optimal for the problem constraints and provides clear insights into the underlying relationships between numbers.</p>
+<p>In summary, this implementation serves as an effective method for counting different GCDs, illustrating the importance of understanding factorization and the efficient use of arrays to store cumulative GCD information. It is a valuable example of how to blend mathematical reasoning with algorithmic efficiency in solving combinatorial problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode927s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1820"  class="external-link" target="_blank" rel="noopener">LeetCode #1820: Maximum Number of Accepted Invitations</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1820"  class="external-link" target="_blank" rel="noopener">LeetCode #1820: Maximum Number of Accepted Invitations</a></th>
       </tr>
   </thead>
   <tbody>
@@ -244,66 +371,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

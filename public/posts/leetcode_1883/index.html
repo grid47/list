@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -225,11 +225,145 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode994s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the minimum number of skips required while traversing an array of distances, ensuring that the total distance traveled does not exceed a certain target when considering the constraints of skipping distances. Each skip allows you to reduce the accumulated distance by a specified amount, and the goal is to determine how many skips are needed to stay within the target distance.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes a dynamic programming approach to efficiently compute the minimum number of skips required. Here’s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming Table</strong>: A memoization table is created to store intermediate results for subproblems, which helps avoid redundant calculations.</p>
+</li>
+<li>
+<p><strong>Recursive Function</strong>: A recursive function <code>dp(idx, k)</code> computes the minimum distance needed to reach the end of the array starting from index <code>idx</code> while allowing <code>k</code> skips. The function makes use of two cases:</p>
+<ul>
+<li>The first case calculates the total distance considering the current distance without a skip.</li>
+<li>The second case evaluates the situation where a skip is used.</li>
+</ul>
+</li>
+<li>
+<p><strong>Target Checking</strong>: The minimum skips are found by iterating through possible skip counts and checking if the total distance is within the target limit.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The <code>Solution</code> class encapsulates the solution.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Member Variables</strong>: Several member variables are defined:</p>
+<ul>
+<li><code>s</code> to store the maximum skip distance.</li>
+<li><code>dist</code> to hold the distance values.</li>
+<li><code>memo</code> for memoization of computed results.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dist</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">memo</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Dynamic Programming Function</strong>: The <code>dp</code> function computes the minimum distance considering skips.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Distance Calculation</strong>: The first case calculates the accumulated distance if no skip is used, ensuring it rounds up to the nearest skip increment.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span> <span class="o">*</span> <span class="n">s</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Skip Case</strong>: The second case checks if using a skip results in a smaller distance.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dist</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Memoization</strong>: Store the computed result in the memoization table before returning it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Function</strong>: The <code>minSkips</code> function initializes variables and sets up the memoization table.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minSkips</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">A</span><span class="p">,</span> <span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">dist</span> <span class="o">=</span> <span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memo</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop for Skips</strong>: A loop iterates through possible skip values to check if the computed distance is less than or equal to the target.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">s</span> <span class="o">*</span> <span class="n">target</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: If no valid number of skips is found, return -1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is ( O(n^2) ) due to the nested calls in the <code>dp</code> function, where ( n ) is the number of distances. Each subproblem is solved once and stored for future reference, leading to ( n ) states with up to ( n ) skips.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also ( O(n^2) ) for the memoization table, which stores results for each combination of indices and skips.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minSkips</code> function provides a systematic way to determine the minimum number of skips needed while traversing an array of distances, adhering to the target distance constraint. By leveraging dynamic programming and memoization, this solution efficiently tackles the problem without the need for exhaustive searching.</p>
+<p>The algorithm is particularly efficient due to the use of memoization, allowing it to avoid recalculating results for previously encountered subproblems. This highlights the significance of dynamic programming in solving optimization problems, where the challenge often lies in managing overlapping subproblems and making optimal decisions based on previously computed results.</p>
+<p>In practical applications, such a method can be vital for optimizing routes in logistics and transportation scenarios, where minimizing costs while adhering to constraints is crucial. This solution serves as a strong example of how to apply dynamic programming principles effectively to tackle complex real-world problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode994s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1884"  class="external-link" target="_blank" rel="noopener">LeetCode #1884: Egg Drop With 2 Eggs and N Floors</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1884"  class="external-link" target="_blank" rel="noopener">LeetCode #1884: Egg Drop With 2 Eggs and N Floors</a></th>
       </tr>
   </thead>
   <tbody>
@@ -250,66 +384,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

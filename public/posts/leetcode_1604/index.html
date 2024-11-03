@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -225,11 +225,168 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode683s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to identify names of individuals who are &ldquo;alerted&rdquo; based on their recorded login times. An individual is considered alerted if they have logged in at least three times within a one-hour period. The function should take two lists as input: one containing names of individuals and another containing corresponding times of their logins. The output should be a sorted list of names who meet the alert criteria.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a hashmap to store each individual&rsquo;s login times, convert these times into a single unit (minutes), and then check for consecutive logins within an hour. The following steps outline the approach:</p>
+<ol>
+<li>
+<p><strong>Data Structure</strong>: Use an unordered map where the key is the individual&rsquo;s name and the value is a vector of integers representing login times in minutes.</p>
+</li>
+<li>
+<p><strong>Time Conversion</strong>: For each login time, convert the string format (HH:MM) into total minutes since the start of the day (e.g., 01:30 becomes 90).</p>
+</li>
+<li>
+<p><strong>Sorting Login Times</strong>: After storing the times for each name, sort the vector of times for easy comparison.</p>
+</li>
+<li>
+<p><strong>Alert Condition</strong>: For each individual&rsquo;s sorted login times, check for sequences where three or more logins occur within any one-hour window.</p>
+</li>
+<li>
+<p><strong>Result Compilation</strong>: Collect the names that meet the alert criteria and return them in sorted order.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed explanation of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">alertNames</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">time</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The class <code>Solution</code> contains a public method <code>alertNames</code>, which accepts two vectors: <code>name</code> (individual names) and <code>time</code> (corresponding login times).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">name</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>We declare an unordered map <code>mp</code> to associate names with their login times. The variable <code>n</code> stores the number of entries.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">stoi</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">stoi</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">substr</span><span class="p">(</span><span class="mi">3</span><span class="p">)));</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through the names and times. For each name, we convert the login time from the string format (HH:MM) to minutes:
+<ul>
+<li><code>stoi(time[i].substr(0, 2))</code> gets the hour part.</li>
+<li><code>stoi(time[i].substr(3))</code> gets the minute part.</li>
+<li>The total minutes for each time is calculated and pushed into the vector corresponding to that name in the map.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">it</span><span class="p">:</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sort</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>We declare a vector <code>ans</code> to store the names of individuals who are alerted. We then iterate over each entry in the map and sort the login times for each name.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>For each sorted list of times, we use two pointers (<code>i</code> and <code>j</code>) to check if there are three or more logins within a 60-minute window:
+<ul>
+<li><code>i</code> is the current time being considered.</li>
+<li><code>j</code> is adjusted forward to find the start of the one-hour window.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the difference between <code>i</code> and <code>j</code> indicates at least three logins in the last hour (i.e., <code>i - j &gt;= 2</code>), the name associated with this list is added to <code>ans</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">ans</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">ans</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After checking all individuals, we sort the <code>ans</code> vector to ensure the names are returned in alphabetical order before returning it.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The overall time complexity is (O(n \log n + m \cdot k)), where:
+<ul>
+<li>(n) is the number of names (or login times).</li>
+<li>(m) is the number of unique names.</li>
+<li>(k) is the average number of login times per name. Sorting the times contributes to the (O(k \log k)) complexity for each unique name.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n)) due to the storage of login times in the map.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided implementation of the <code>alertNames</code> function efficiently identifies individuals who have logged in three or more times within any one-hour period. This is achieved through the use of a hashmap to organize login times, sorting those times for each individual, and then applying a two-pointer technique to detect the alert condition.</p>
+<p>Key aspects of this solution include:</p>
+<ol>
+<li>
+<p><strong>Scalability</strong>: The use of efficient data structures allows the algorithm to handle larger datasets effectively.</p>
+</li>
+<li>
+<p><strong>Clarity</strong>: The code structure clearly separates concerns, making it easier to read and maintain.</p>
+</li>
+<li>
+<p><strong>Performance</strong>: By limiting the number of comparisons through sorted times and using a two-pointer approach, the solution optimizes the checks required for the alert condition.</p>
+</li>
+</ol>
+<p>In summary, this implementation is a solid example of leveraging data structures and algorithms to solve a problem with clear and efficient code.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode683s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1605"  class="external-link" target="_blank" rel="noopener">LeetCode #1605: Find Valid Matrix Given Row and Column Sums</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1605"  class="external-link" target="_blank" rel="noopener">LeetCode #1605: Find Valid Matrix Given Row and Column Sums</a></th>
       </tr>
   </thead>
   <tbody>
@@ -250,66 +407,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -202,11 +202,147 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">all_of</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">cnt</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">cnt</span><span class="p">),</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">m_cnt</span><span class="p">](</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span> <span class="k">return</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">t</span> <span class="o">==</span> <span class="n">m_cnt</span><span class="p">;</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1083s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to determine whether all characters in a given string occur the same number of times. For example, in the string <code>&quot;aabbcc&quot;</code>, each character appears exactly twice, so the output would be <code>true</code>. However, in the string <code>&quot;aaabb&quot;</code>, the character <code>'a'</code> appears three times while <code>'b'</code> appears twice, resulting in a <code>false</code> output.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to follow these steps:</p>
+<ol>
+<li>
+<p><strong>Count Character Frequencies</strong>: We will create an array to count the occurrences of each character in the string. Since the string consists of lowercase English letters only, we can use a fixed-size array of length 26 to represent the counts for each letter.</p>
+</li>
+<li>
+<p><strong>Identify Maximum Count</strong>: As we count the characters, we will keep track of the maximum occurrence of any character found.</p>
+</li>
+<li>
+<p><strong>Check for Consistency</strong>: Finally, we will verify if all non-zero counts are equal to this maximum count. If all characters that occur in the string appear the same number of times, we return <code>true</code>; otherwise, we return <code>false</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the provided code step-by-step:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">areOccurrencesEqual</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>Here, we define a class named <code>Solution</code> and declare a public member function called <code>areOccurrencesEqual</code>, which takes a string <code>s</code> as its parameter.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">m_cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize an array <code>cnt</code> of size 26 to store the count of each character, where the index corresponds to the letters <code>a</code> through <code>z</code> (with <code>a</code> at index 0, <code>b</code> at index 1, and so on). The variable <code>m_cnt</code> is initialized to zero and will keep track of the maximum count of any character.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span> <span class="p">:</span> <span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m_cnt</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">m_cnt</span><span class="p">,</span> <span class="o">++</span><span class="n">cnt</span><span class="p">[</span><span class="n">ch</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]);</span>
+</span></span></code></pre></div><p>This loop iterates over each character <code>ch</code> in the string <code>s</code>. For each character, we increment its count in the <code>cnt</code> array. The expression <code>ch - 'a'</code> computes the index for the character (for example, <code>'a'</code> becomes 0, <code>'b'</code> becomes 1, etc.). We update <code>m_cnt</code> to be the maximum of its current value and the newly updated count of the character.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">all_of</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">cnt</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">cnt</span><span class="p">),</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">m_cnt</span><span class="p">](</span><span class="kt">int</span> <span class="n">t</span><span class="p">){</span> <span class="k">return</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">t</span> <span class="o">==</span> <span class="n">m_cnt</span><span class="p">;</span> <span class="p">});</span>
+</span></span></code></pre></div><p>Finally, we use the <code>all_of</code> function to check whether all the counts in the <code>cnt</code> array either equal zero (for characters not present in the string) or match the maximum count <code>m_cnt</code>. The lambda function takes each count <code>t</code> as an argument and checks if <code>t</code> is either zero or equal to <code>m_cnt</code>. If this condition holds for all elements in <code>cnt</code>, <code>all_of</code> returns <code>true</code>; otherwise, it returns <code>false</code>.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the length of the string <code>s</code>. This is because we traverse the string once to count the occurrences and then check the counts in a fixed-size array.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a fixed-size array of length 26 regardless of the input size. This means our space usage does not scale with the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently determines if all characters in a string occur the same number of times by counting their occurrences and verifying consistency. The algorithm is both time-efficient and space-efficient, making it suitable for processing strings of varying lengths.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Direct Character Counting</strong>: The use of a simple array for counting character frequencies simplifies the logic and reduces the overhead compared to using a map or dictionary.</p>
+</li>
+<li>
+<p><strong>Single Pass Calculation</strong>: The solution counts character frequencies and identifies the maximum in a single pass over the string, followed by a quick check for uniformity.</p>
+</li>
+<li>
+<p><strong>Lambda Functions</strong>: Utilization of modern C++ features such as lambda functions enhances readability and conciseness.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This function can be applied in various scenarios, such as:</p>
+<ul>
+<li>
+<p><strong>Data Validation</strong>: Checking if input data has uniform distributions, which may be useful in scenarios like cryptographic analysis or game design where balanced character usage is crucial.</p>
+</li>
+<li>
+<p><strong>Statistical Analysis</strong>: Validating datasets to ensure certain properties hold true, such as balanced occurrences in experimental results.</p>
+</li>
+</ul>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing this function, consider:</p>
+<ul>
+<li>
+<p><strong>Input Validation</strong>: Ensure that the input string is not null or empty before processing.</p>
+</li>
+<li>
+<p><strong>Case Sensitivity</strong>: The current implementation assumes that the input string only contains lowercase letters. If input can include uppercase letters or other characters, additional handling might be required.</p>
+</li>
+<li>
+<p><strong>Performance Testing</strong>: Test the performance with long strings, especially those with repeated characters to ensure the function handles large inputs gracefully.</p>
+</li>
+</ul>
+<p>This breakdown not only explains how the code functions but also discusses its potential applications and considerations for real-world usage, making it an excellent resource for anyone looking to understand or implement this algorithm.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1083s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1942"  class="external-link" target="_blank" rel="noopener">LeetCode #1942: The Number of the Smallest Unoccupied Chair</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1942"  class="external-link" target="_blank" rel="noopener">LeetCode #1942: The Number of the Smallest Unoccupied Chair</a></th>
       </tr>
   </thead>
   <tbody>
@@ -227,66 +363,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

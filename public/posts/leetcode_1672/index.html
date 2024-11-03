@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -203,11 +203,115 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">richest</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode761s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the maximum wealth among a group of customers, where each customer has a specific amount of money distributed across different bank accounts. The wealth of a customer is defined as the sum of the money in all of their accounts. Given a 2D array, <code>accounts</code>, where each row represents a customer and each column represents the amount of money in a specific bank account, the goal is to determine which customer has the highest wealth.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we iterate through each customer&rsquo;s accounts, calculating the total wealth for each customer by summing the values in their corresponding row of the 2D array. We then compare each customer&rsquo;s total wealth to find the maximum value. The algorithm efficiently utilizes the <code>accumulate</code> function from the C++ Standard Library, which simplifies the summation of elements in each customer&rsquo;s account vector.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The following is a breakdown of the code, explaining its functionality line by line:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maximumWealth</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">accounts</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class named <code>Solution</code> that contains the method <code>maximumWealth</code>.</li>
+<li><strong>Method Signature</strong>: The method takes a reference to a 2D vector of integers called <code>accounts</code>, which represents the wealth distribution among customers.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">richest</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Variable Initialization</strong>: We declare and initialize a variable <code>richest</code> to zero. This variable will keep track of the maximum wealth found during the iterations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">customer</span> <span class="p">:</span> <span class="n">accounts</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li><strong>Range-based for Loop</strong>: We utilize a range-based for loop to iterate through each <code>customer</code> in the <code>accounts</code> vector. The <code>auto &amp;</code> syntax ensures that we access each row of the accounts by reference, avoiding unnecessary copies.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">richest</span> <span class="o">=</span> <span class="n">max</span> <span class="p">(</span><span class="n">richest</span><span class="p">,</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">customer</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">customer</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li><strong>Calculate Wealth</strong>: For each <code>customer</code>, we use the <code>accumulate</code> function from the <code>&lt;numeric&gt;</code> header to compute the total wealth.
+<ul>
+<li><strong><code>customer.begin()</code> and <code>customer.end()</code></strong>: These represent the beginning and end of the current customer&rsquo;s account vector.</li>
+<li><strong>Sum Calculation</strong>: The <code>accumulate</code> function computes the sum of all elements in the <code>customer</code> vector, starting from an initial value of <code>0</code>.</li>
+<li><strong>Update Maximum Wealth</strong>: We then compare this total wealth with the current maximum wealth stored in <code>richest</code>. If the current wealth is greater, we update <code>richest</code> with this new value.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">richest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return Statement</strong>: After iterating through all customers, we return the value of <code>richest</code>, which represents the maximum wealth found among all customers.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is (O(m \times n)), where (m) is the number of customers (rows in <code>accounts</code>) and (n) is the average number of accounts per customer (columns in <code>accounts</code>). This is due to iterating through each customer and summing their account values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) for this implementation, as we are using a constant amount of extra space to store the <code>richest</code> variable, regardless of the input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively computes the maximum wealth among customers using a straightforward approach. By leveraging the <code>accumulate</code> function, the code is concise and clear, demonstrating the efficiency of C++ STL functions in handling common tasks such as summation.</p>
+<p><strong>Key Insights</strong>:</p>
+<ol>
+<li><strong>Efficiency</strong>: The use of <code>accumulate</code> allows for clean and efficient summation of account values, reducing the need for manual loops.</li>
+<li><strong>Clarity</strong>: The range-based for loop improves readability by clearly indicating the traversal of the <code>accounts</code> data structure.</li>
+<li><strong>Simplicity</strong>: The problem is approached with simplicity, focusing on clear steps to achieve the desired outcome.</li>
+</ol>
+<p>Overall, this solution highlights the importance of utilizing standard library functions to simplify code and enhance performance, making it an effective method for solving the maximum wealth problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode761s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1673"  class="external-link" target="_blank" rel="noopener">LeetCode #1673: Find the Most Competitive Subsequence</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1673"  class="external-link" target="_blank" rel="noopener">LeetCode #1673: Find the Most Competitive Subsequence</a></th>
       </tr>
   </thead>
   <tbody>
@@ -228,66 +332,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

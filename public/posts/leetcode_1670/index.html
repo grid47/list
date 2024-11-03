@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
           
@@ -272,11 +272,96 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_5 = obj-&gt;popMiddle();
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_6 = obj-&gt;popBack();
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode758s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <p>The <code>FrontMiddleBackQueue</code> class is a data structure that supports efficient insertion and removal of elements from both ends and the middle. This class is particularly useful in scenarios where operations on both ends of the queue and the middle are frequent.</p>
+<h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The challenge is to implement a queue that allows for insertion and removal of elements at the front, middle, and back. Traditional queues support insertion and removal only at the front and back, but this problem requires additional functionality to manage the middle efficiently.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the desired functionality, the <code>FrontMiddleBackQueue</code> uses two deques, <code>a</code> and <code>b</code>. The idea is to maintain an invariant where <code>a</code> holds the first half of the elements and <code>b</code> holds the second half. This design allows for efficient operations as follows:</p>
+<ol>
+<li>
+<p><strong>Push Operations</strong>:</p>
+<ul>
+<li><strong><code>pushFront(int val)</code></strong>: This method adds an element to the front of the queue. The element is first added to deque <code>a</code>. If deque <code>a</code> becomes larger than deque <code>b</code>, we move the last element of <code>a</code> to the front of <code>b</code> to maintain balance.</li>
+<li><strong><code>pushMiddle(int val)</code></strong>: To insert an element in the middle, we add the element to deque <code>a</code> and then ensure the sizes of <code>a</code> and <code>b</code> are balanced using the <code>a2b()</code> method.</li>
+<li><strong><code>pushBack(int val)</code></strong>: This method adds an element to the back of the queue by simply inserting it into deque <code>b</code>. After the insertion, the method checks if <code>b</code> has more than one element compared to <code>a</code>, and if so, it moves the front of <code>b</code> to the back of <code>a</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pop Operations</strong>:</p>
+<ul>
+<li><strong><code>popFront()</code></strong>: This method removes and returns the element from the front of the queue. If deque <code>a</code> is empty, it retrieves the front element from <code>b</code>. If <code>a</code> has elements, it pops from <code>a</code> and ensures that the sizes of the deques are balanced afterward.</li>
+<li><strong><code>popMiddle()</code></strong>: To remove the middle element, the method checks the sizes of both deques. If they are equal, it removes the last element from <code>a</code>. If <code>b</code> has more elements, it removes the front element from <code>b</code>.</li>
+<li><strong><code>popBack()</code></strong>: This method removes the last element from the queue. It pops from <code>b</code> and ensures the sizes are balanced by potentially moving an element from <code>a</code> to <code>b</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li><strong>Data Structures</strong>: The use of two deques (<code>a</code> and <code>b</code>) allows for efficient operations by keeping track of elements in a way that facilitates quick access and modification.</li>
+<li><strong>Push Operations</strong>:
+<ul>
+<li>Each push operation adjusts the deques&rsquo; sizes to keep them balanced, ensuring that no more than one extra element is held in one deque compared to the other.</li>
+</ul>
+</li>
+<li><strong>Pop Operations</strong>:
+<ul>
+<li>The pop methods also maintain the invariant by checking the sizes of the deques and making necessary adjustments after removing elements. This ensures that both deques remain balanced.</li>
+</ul>
+</li>
+</ol>
+<p>The implementation effectively combines the efficiency of deques with careful management of their sizes to allow for the required operations in constant time on average.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The average time complexity for all operations (<code>pushFront</code>, <code>pushMiddle</code>, <code>pushBack</code>, <code>popFront</code>, <code>popMiddle</code>, <code>popBack</code>) is O(1), thanks to the use of deques which provide efficient operations at both ends. The balancing operations (<code>a2b</code> and <code>b2a</code>) involve at most one element transfer, keeping the overall operations efficient.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>FrontMiddleBackQueue</code> is a well-designed data structure that effectively addresses the need for efficient insertions and deletions at the front, middle, and back of a queue. By leveraging two deques and ensuring their sizes remain balanced, this class provides a versatile and powerful solution for managing a collection of elements with varied access requirements. The careful consideration of operation efficiency makes it an excellent choice for applications that require dynamic and flexible queue management.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode758s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1671"  class="external-link" target="_blank" rel="noopener">LeetCode #1671: Minimum Number of Removals to Make Mountain Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1671"  class="external-link" target="_blank" rel="noopener">LeetCode #1671: Minimum Number of Removals to Make Mountain Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -297,66 +382,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

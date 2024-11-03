@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -222,7 +222,153 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode953s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires determining whether a given string representing a number can be split into a sequence of integers such that each subsequent integer is exactly one less than the previous one. For instance, if the input is <code>&quot;54321&quot;</code>, the string can be split into <code>5</code>, <code>4</code>, <code>3</code>, <code>2</code>, <code>1</code>. However, if the input is <code>&quot;5432&quot;</code>, it cannot be split into a valid sequence because there is no <code>1</code> to follow <code>2</code>. The task is to implement a method to check for such a valid split.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we will employ a backtracking technique:</p>
+<ol>
+<li>
+<p><strong>Initial Loop</strong>: Iterate through the string and consider each possible prefix of the number. This prefix will serve as the starting number of our sequence.</p>
+</li>
+<li>
+<p><strong>Backtracking Function</strong>: For each prefix, we call a backtracking function that will attempt to find the next number in the sequence. The backtracking function will keep track of the current index in the string and the previous number found.</p>
+</li>
+<li>
+<p><strong>Checking Subsequent Numbers</strong>: In the backtracking function, we will form subsequent numbers from the current index onward and check if they are exactly one less than the previous number. If they are, we recursively continue the search.</p>
+</li>
+<li>
+<p><strong>Base Case</strong>: If we reach the end of the string, we will return true, indicating that we successfully found a valid sequence.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public member variable <code>s</code> to hold the input string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">splitString</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>splitString</code> is defined, taking a string <code>s</code> as an argument and storing it in the member variable <code>this-&gt;s</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a temporary variable <code>tmp</code> to 0. We iterate through the string from the beginning up to the second-to-last character.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>In each iteration, we build the current number (<code>tmp</code>) by multiplying the previous value by 10 and adding the next digit. This effectively converts the character digits into a numeric value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">bt</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp</span><span class="p">))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We call the backtracking function <code>bt</code>, passing the next index and the current number <code>tmp</code>. If this call returns true, it indicates that a valid sequence has been found, so we return true immediately.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If no valid split is found after checking all prefixes, we return false.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">bt</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">double</span> <span class="n">prv</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The backtracking function <code>bt</code> is defined, taking the current index and the previous number as parameters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the current index equals the size of the string, we have successfully traversed the entire string, so we return true.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We initialize another temporary variable <code>tmp</code> to build subsequent numbers. We iterate from the current index to the end of the string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>Similar to before, we build <code>tmp</code> from the digits starting at the current index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">tmp</span> <span class="o">-</span> <span class="n">prv</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the difference between <code>tmp</code> and <code>prv</code> is greater than -1, we break out of the loop because we can only form valid sequences if the next number is less than or equal to the previous number.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">tmp</span> <span class="o">-</span> <span class="n">prv</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>If the difference between <code>tmp</code> and <code>prv</code> equals -1, we have found a valid next number in the sequence.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">bt</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tmp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We recursively call <code>bt</code> with the updated index and the current number as the previous number. If this call returns true, we propagate that result back up.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If we exhaust all possibilities without finding a valid split, we return false.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution can be considered as ( O(n^2) ) in the worst case, where ( n ) is the length of the string. This arises from the nested loop structure, where each possible starting number can potentially explore every subsequent number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) due to the recursion stack in the backtracking approach.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively determines whether a string can be split into a sequence of integers that decrement by one at each step. By leveraging a backtracking approach, the code systematically explores potential splits, ensuring that each subsequent number adheres to the specified condition.</p>
+<p>This method is both clear and efficient, making it suitable for competitive programming and algorithmic challenges. It highlights the power of backtracking in solving problems that involve searching through combinations or sequences. Moreover, the implementation demonstrates how to handle strings and numerical conversions in C++, showcasing an important technique in algorithm design.</p>
+<p>Overall, the <code>splitString</code> method encapsulates a logical flow for solving the problem while maintaining readability and efficiency, proving it to be an effective solution for this type of challenge.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode953s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -234,7 +380,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1850"  class="external-link" target="_blank" rel="noopener">LeetCode #1850: Minimum Adjacent Swaps to Reach the Kth Smallest Number</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1850"  class="external-link" target="_blank" rel="noopener">LeetCode #1850: Minimum Adjacent Swaps to Reach the Kth Smallest Number</a></th>
       </tr>
   </thead>
   <tbody>
@@ -255,66 +401,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

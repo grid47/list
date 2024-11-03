@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,11 +218,146 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode934s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to compute the maximum XOR value of the cumulative XOR of a list of integers, progressively removing one integer at a time from the end of the list. The results need to be computed based on a given number of bits, <code>bit</code>, which defines the maximum number of bits used for representing numbers in the XOR operation.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can break it down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Understanding XOR Properties</strong>:</p>
+<ul>
+<li>The XOR operation has some unique properties that can be leveraged. Notably, XORing a number with itself results in zero, and XORing a number with zero yields the number itself.</li>
+<li>Given this, we can derive the maximum possible XOR for any number by using the bitmask of size defined by <code>bit</code>. For example, for <code>bit = 3</code>, the maximum number that can be represented is <code>111</code> in binary, which is <code>7</code> in decimal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Initial XOR</strong>:</p>
+<ul>
+<li>First, we calculate the cumulative XOR of all numbers in the input array <code>nums</code>. This value (<code>ui</code>) will be the basis for computing the results.</li>
+</ul>
+</li>
+<li>
+<p><strong>Generate Bitmask</strong>:</p>
+<ul>
+<li>Create a bitmask that consists of <code>bit</code> number of bits set to <code>1</code>. This is done by shifting <code>1</code> left by <code>bit</code> positions and subtracting <code>1</code> from it (i.e., <code>msk = (1 &lt;&lt; bit) - 1</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Compute Maximum XOR Value</strong>:</p>
+<ul>
+<li>The maximum XOR value we can achieve with the given numbers is obtained by XORing <code>ui</code> with the <code>msk</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iteratively Update Results</strong>:</p>
+<ul>
+<li>Store the computed maximum XOR value in a results vector and iteratively remove numbers from the end of the array. After each removal, update the cumulative XOR value and compute the new maximum XOR value. Append this value to the results vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Results</strong>:</p>
+<ul>
+<li>Finally, return the results vector containing the maximum XOR values for all stages of removal.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">getMaximumXor</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bit</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> that contains the method <code>getMaximumXor</code>, which takes a vector of integers <code>nums</code> and an integer <code>bit</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ui</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ui</span> <span class="o">^=</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// Compute the cumulative XOR of all numbers
+</span></span></span></code></pre></div><ul>
+<li>We initialize a variable <code>ui</code> to zero and compute the cumulative XOR of all elements in <code>nums</code>. This is achieved using a range-based for loop that iterates over each integer <code>x</code> in <code>nums</code> and applies the XOR operation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">msk</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bit</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Create the bitmask
+</span></span></span></code></pre></div><ul>
+<li>We calculate the bitmask <code>msk</code> by left-shifting <code>1</code> by <code>bit</code> positions and subtracting <code>1</code>. This effectively creates a binary number with <code>bit</code> bits set to <code>1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">ui</span> <span class="o">^</span> <span class="n">msk</span><span class="p">;</span> <span class="c1">// Calculate the maximum XOR value initially
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Initialize the result vector
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">res</span><span class="p">);</span> <span class="c1">// Store the initial result
+</span></span></span></code></pre></div><ul>
+<li>We calculate the initial maximum XOR value <code>res</code> by XORing <code>ui</code> with <code>msk</code>. We then create an empty vector <code>ans</code> to store the results and push the initial maximum XOR value into it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Iteratively remove numbers from the end
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res</span> <span class="o">^=</span> <span class="n">nums</span><span class="p">.</span><span class="n">back</span><span class="p">();</span> <span class="c1">// Update the result by XORing the last element
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">nums</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span> <span class="c1">// Remove the last element from nums
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">res</span><span class="p">);</span> <span class="c1">// Store the updated result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We use a while loop to continue as long as there are more than one elements in <code>nums</code>. In each iteration, we XOR the last element of <code>nums</code> with <code>res</code>, remove the last element, and store the updated <code>res</code> in the results vector <code>ans</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Return the final results vector
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the method returns the <code>ans</code> vector containing the maximum XOR values computed at each stage.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(n)), where (n) is the number of elements in the input vector <code>nums</code>. This is because we iterate through the vector twice: once for calculating the cumulative XOR and once for iteratively updating results.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) as well, due to the additional space required to store the results vector <code>ans</code>, which can potentially store up to (n) elements.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently computes the maximum XOR values by utilizing properties of the XOR operation and bit manipulation. It systematically removes elements from the input array while maintaining the cumulative XOR, allowing for an efficient computation of results. This approach is particularly effective for scenarios where we need to compute properties related to binary representations and their interactions, making it suitable for a variety of problems in competitive programming and algorithm design.</p>
+<p>The final output vector <code>ans</code> provides a comprehensive view of the maximum XOR values achievable at each stage of element removal, thereby encapsulating the solution&rsquo;s core functionality.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode934s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1830"  class="external-link" target="_blank" rel="noopener">LeetCode #1830: Minimum Number of Operations to Make String Sorted</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1830"  class="external-link" target="_blank" rel="noopener">LeetCode #1830: Minimum Number of Operations to Make String Sorted</a></th>
       </tr>
   </thead>
   <tbody>
@@ -243,66 +378,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

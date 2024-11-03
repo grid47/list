@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -227,11 +227,154 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode739s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to decrypt a given circular array of integers, <code>code</code>, based on a specified integer <code>k</code>. The decryption process depends on the value of <code>k</code> as follows:</p>
+<ul>
+<li>If <code>k</code> is greater than 0, each element of the resulting decrypted array at index <code>i</code> should be the sum of the next <code>k</code> elements in the circular array.</li>
+<li>If <code>k</code> is less than 0, each element at index <code>i</code> should be the sum of the previous <code>k</code> elements (where <code>k</code> is treated as a positive number).</li>
+<li>If <code>k</code> is zero, the decrypted array should contain all zeros.</li>
+</ul>
+<p>The goal is to return the decrypted array after performing the appropriate calculations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm follows these key steps:</p>
+<ol>
+<li><strong>Initialize Variables</strong>: Start by determining the size of the input array <code>code</code> and initialize a result array <code>ans</code> to store the decrypted values.</li>
+<li><strong>Handle the Zero Case</strong>: If <code>k</code> is 0, return an array of zeros immediately since no calculation is needed.</li>
+<li><strong>Calculate the Sum Based on k</strong>:
+<ul>
+<li>If <code>k</code> is positive, calculate the sum of the next <code>k</code> elements for each index.</li>
+<li>If <code>k</code> is negative, calculate the sum of the previous <code>|k|</code> elements instead.</li>
+</ul>
+</li>
+<li><strong>Circular Array Handling</strong>: Since the input array is circular, use modulo operations to wrap around the indices as necessary.</li>
+<li><strong>Return the Result</strong>: Finally, return the decrypted array.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">code</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and a public method <code>decrypt</code> that takes a vector of integers <code>code</code> and an integer <code>k</code> as inputs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">code</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We calculate the size of the input array <code>code</code> and initialize a result vector <code>ans</code> of the same size, filled with zeros.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If <code>k</code> is zero, the function immediately returns the result vector <code>ans</code> since no calculations are necessary.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">+=</span> <span class="n">code</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If <code>k</code> is greater than 0, we initialize a variable <code>sum</code> to accumulate values. The first loop calculates the sum of the next <code>k</code> elements starting from index 1. This sum is stored in <code>ans[0]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">+=</span> <span class="n">code</span><span class="p">[(</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">-=</span> <span class="n">code</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A second loop is used to compute the sum for the rest of the indices. For each index <code>i</code>, we add the element at index <code>(i + k) % n</code> (the next <code>k</code>-th element) and subtract the current element <code>code[i]</code>. The updated sum is stored in <code>ans[i]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">abs</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">code</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If <code>k</code> is negative, we calculate the initial sum by adding the last <code>|k|</code> elements of the <code>code</code> array. This is done by looping through the last <code>|k|</code> indices and summing those values, storing the result in <code>ans[0]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">code</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">-=</span> <span class="n">code</span><span class="p">[(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">abs</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We then calculate the rest of the decrypted values in the array for negative <code>k</code>. For each index <code>i</code>, we add the previous element <code>code[i - 1]</code> to the sum and subtract the element that is <code>|k|</code> positions back from the current index. The updated sum is stored in <code>ans[i]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the decrypted array <code>ans</code> is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm consists of two main loops, each running in ( O(n) ). Therefore, the overall time complexity is ( O(n) ), where ( n ) is the size of the input array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is also ( O(n) ) due to the additional array <code>ans</code> used to store the results.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>decrypt</code> method effectively calculates the decrypted values based on the specified conditions for the variable <code>k</code>. By employing a structured approach with loops and careful index management, the algorithm efficiently handles both positive and negative values of <code>k</code> while maintaining the circular nature of the array.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Circular Array Handling</strong>: The algorithm demonstrates how to efficiently work with circular arrays using modulo operations to manage index wraparounds.</li>
+<li><strong>Efficiency</strong>: The time complexity of ( O(n) ) makes this algorithm suitable for large input sizes, as it processes the data linearly without nested loops.</li>
+<li><strong>Conditional Logic</strong>: The use of conditional logic to distinguish between positive and negative values of <code>k</code> illustrates how to adapt algorithms to various scenarios effectively.</li>
+</ol>
+<p>This method can be particularly useful in scenarios involving circular buffers or rotating data structures, making it applicable in a variety of computational problems in both competitive programming and practical applications.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode739s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1653"  class="external-link" target="_blank" rel="noopener">LeetCode #1653: Minimum Deletions to Make String Balanced</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1653"  class="external-link" target="_blank" rel="noopener">LeetCode #1653: Minimum Deletions to Make String Balanced</a></th>
       </tr>
   </thead>
   <tbody>
@@ -252,66 +395,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

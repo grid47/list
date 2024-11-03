@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -213,11 +213,149 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode798s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to simulate the movement of balls dropped through a grid of &ldquo;pipes.&rdquo; The grid is represented as a 2D array where each element can be either 1 or -1. A value of 1 means the ball can move to the right, while -1 means it can move to the left. The ball starts from the top of the grid at a specific column and falls down through the pipes. The goal is to determine the final position of each ball after it has fallen through the grid.</p>
+<p>For instance, if a ball is dropped into a column with a sequence of pipes represented as follows:</p>
+<pre tabindex="0"><code>[
+ [1, 1, 1, -1, -1],
+ [1, 1, 1, -1, -1],
+ [-1, -1, 1, 1, 1],
+ [1, -1, -1, -1, 1],
+ [1, 1, 1, 1, -1]
+]
+</code></pre><p>The expected output would indicate where each ball that starts at the top of each column will exit the grid or if it gets stuck.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we can follow a straightforward simulation approach:</p>
+<ol>
+<li>
+<p><strong>Initialize Result Vector</strong>: Create a result vector to store the final positions of the balls.</p>
+</li>
+<li>
+<p><strong>Simulate Each Ball Drop</strong>: For each column in the first row:</p>
+<ul>
+<li>Start with the current column index.</li>
+<li>Move down the grid, checking the current cell to determine the ball&rsquo;s movement:
+<ul>
+<li>If the ball is at a pipe that directs it to the right (1), check if it can move to the right (the next column is within bounds and has a pipe that directs right).</li>
+<li>If the ball is at a pipe that directs it to the left (-1), check if it can move to the left (the previous column is within bounds and has a pipe that directs left).</li>
+</ul>
+</li>
+<li>If the ball gets stuck, mark its position as -1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Record Final Position</strong>: Once a ball reaches the bottom row or gets stuck, record its position in the result vector.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the vector containing the final positions of all the balls.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s analyze the provided code for better clarity:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: We define a class named <code>Solution</code>, which encapsulates our method for solving the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: We declare a public method called <code>findBall</code>, which takes a reference to a 2D vector of integers (<code>grid</code>) as input and returns a vector of integers representing the final positions of the balls.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findBall</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: We initialize a result vector <code>res</code>, and two integer variables <code>m</code> and <code>n</code> to store the number of rows and columns in the grid, respectively.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop Through Each Column</strong>: We iterate through each column of the first row (from 0 to n-1) using a for loop.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Ball&rsquo;s Position</strong>: For each column, we initialize <code>i1</code> to represent the current column index and <code>i2</code> to hold the next column index.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i1</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">i2</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Simulate Ball Movement</strong>: We then loop through each row of the grid, simulating the ball&rsquo;s descent.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Determine Next Position</strong>: Inside this loop, we calculate <code>i2</code>, which is the next column index where the ball would move based on the current pipe&rsquo;s direction.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">i2</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">grid</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i1</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check for Valid Movement</strong>: We check if the next column index is valid (within bounds) and if the current and next cells direct the ball in the same direction. If either condition fails, the ball gets stuck, and we set <code>i1</code> to -1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">i2</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">i2</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">||</span> <span class="n">grid</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">grid</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i2</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">break</span><span class="p">;</span> <span class="c1">// Ball is stuck
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update Current Position</strong>: If the ball can move, we update <code>i1</code> to the new position <code>i2</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">i1</span> <span class="o">=</span> <span class="n">i2</span><span class="p">;</span> <span class="c1">// Move the ball to the next position
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Record Final Position</strong>: After the inner loop completes (the ball has reached the last row), we add the final position of the ball to the result vector. If <code>i1</code> is -1 (indicating the ball got stuck), we add -1; otherwise, we add <code>i1</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i1</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return the result vector containing the positions of all balls after they have fallen through the grid.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is O(m * n), where m is the number of rows and n is the number of columns in the grid. This is because we potentially visit each cell in the grid once per ball drop. The space complexity is O(n) for storing the result vector.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided code effectively simulates the process of dropping balls through a grid of pipes, determining their final positions based on the directional constraints of the pipes. By using a nested loop structure to traverse the grid, the algorithm ensures that each ball&rsquo;s movement is accurately accounted for until it either exits or becomes stuck. This method is both intuitive and efficient, making it suitable for similar problems involving pathfinding through constrained environments. Overall, the solution is well-structured and showcases effective use of basic programming constructs to solve a challenging problem in a clear and efficient manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode798s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1707"  class="external-link" target="_blank" rel="noopener">LeetCode #1707: Maximum XOR With an Element From Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1707"  class="external-link" target="_blank" rel="noopener">LeetCode #1707: Maximum XOR With an Element From Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -238,66 +376,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

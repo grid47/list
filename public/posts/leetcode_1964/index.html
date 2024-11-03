@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -211,11 +211,158 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1082s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the length of the longest obstacle course that can be formed at each position in an array representing obstacles. Given an array <code>obs</code> of integers where <code>obs[i]</code> represents the height of an obstacle at position <code>i</code>, the goal is to find the length of the longest non-decreasing subsequence that can end at each position. A non-decreasing subsequence means that each obstacle in the subsequence is less than or equal to the next obstacle.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we utilize a dynamic programming approach combined with binary search. The idea is to maintain a list (<code>tmp</code>) that represents the smallest possible ending heights of non-decreasing subsequences found so far as we iterate through the obstacles. For each obstacle, we either extend the current subsequence or replace an element in our list to keep it as optimized as possible.</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We start by initializing an answer array <code>ans</code> of the same size as the input array to store the lengths of the longest obstacle courses at each position. We also initialize an empty vector <code>tmp</code> to help track the smallest heights for the subsequences.</p>
+</li>
+<li>
+<p><strong>Iteration</strong>: We iterate through the array of obstacles:</p>
+<ul>
+<li>If the current obstacle is greater than or equal to the last obstacle in <code>tmp</code>, it means we can extend the longest obstacle course by adding the current obstacle. We push the obstacle onto <code>tmp</code> and update <code>ans[i]</code> with the size of <code>tmp</code>.</li>
+<li>If the current obstacle is less than the last obstacle in <code>tmp</code>, we need to find the position where this obstacle can replace an existing obstacle in <code>tmp</code> to maintain the non-decreasing property. We use <code>upper_bound</code> to find the first element in <code>tmp</code> that is greater than the current obstacle, and replace it with the current obstacle&rsquo;s height. We then update <code>ans[i]</code> with the new length of the subsequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>: After iterating through all obstacles, we return the <code>ans</code> array containing the lengths of the longest obstacle course at each position.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><p>This begins the definition of the <code>Solution</code> class that will contain our method for solving the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">longestObstacleCourseAtEachPosition</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">obs</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The method <code>longestObstacleCourseAtEachPosition</code> takes a single parameter:</p>
+<ul>
+<li><code>obs</code>: a vector of integers representing the heights of obstacles.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">obs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span></code></pre></div><p>We declare <code>n</code> to hold the size of the <code>obs</code> vector, initialize the <code>ans</code> vector to store the results (with each position initialized to 1 since the minimum length of an obstacle course is 1), and declare an empty vector <code>tmp</code> to hold the heights of the non-decreasing subsequences.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We initiate a loop to iterate through each obstacle in the <code>obs</code> vector.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">tmp</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">tmp</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">obs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span></code></pre></div><p>If <code>tmp</code> is empty or the last element in <code>tmp</code> is less than or equal to the current obstacle, we can extend the course:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">obs</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><p>We add the current obstacle to <code>tmp</code> and set <code>ans[i]</code> to the size of <code>tmp</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">upper_bound</span><span class="p">(</span><span class="n">tmp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">obs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">tmp</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+</span></span></code></pre></div><p>If the current obstacle is less than the last element in <code>tmp</code>, we find the position to replace:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">tmp</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">obs</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><p>We replace the element in <code>tmp</code> with the current obstacle and update <code>ans[i]</code> to reflect the new length of the subsequence.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>This concludes the loop through all obstacles.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we return the <code>ans</code> vector containing the lengths of the longest obstacle course at each position.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n \log n)) due to the binary search operation (<code>upper_bound</code>) performed within the loop. Each element of the array is processed once, and the binary search operates in logarithmic time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) for the <code>ans</code> and <code>tmp</code> vectors, which can both grow to the size of the input array in the worst case.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>longestObstacleCourseAtEachPosition</code> function efficiently computes the length of the longest obstacle course that can be formed at each position in the input array using a combination of dynamic programming and binary search. By maintaining an optimized list of potential endings for non-decreasing subsequences, the algorithm achieves a solution that is both time-efficient and straightforward.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Programming</strong>: The use of dynamic programming ensures that we build upon previous results, making the solution efficient.</p>
+</li>
+<li>
+<p><strong>Binary Search</strong>: The integration of binary search allows for optimal updates to our potential subsequence endings, ensuring the solution remains efficient even for larger input sizes.</p>
+</li>
+<li>
+<p><strong>Clear Logic Flow</strong>: The separation of concerns between extending the sequence and replacing elements maintains clarity in the logic and enhances code maintainability.</p>
+</li>
+</ol>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s how you can use the <code>longestObstacleCourseAtEachPosition</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">obstacles</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">longestObstacleCourseAtEachPosition</span><span class="p">(</span><span class="n">obstacles</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">length</span> <span class="p">:</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">length</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span> <span class="c1">// Output: 1 2 3 3 4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>In this example, we create an instance of the <code>Solution</code> class, define a vector of obstacles, and call the <code>longestObstacleCourseAtEachPosition</code> method. The result is printed, showing the lengths of the longest obstacle courses that can be formed at each position.</p>
+<h3 id="potential-improvements-and-variations">
+  Potential Improvements and Variations
+  <a class="heading-link" href="#potential-improvements-and-variations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>While the current solution effectively addresses the problem, future iterations could explore different methods of tracking subsequences or improving space usage. Additionally, this algorithm could be adapted to handle variations of the problem, such as changing the condition for the subsequence to allow for strictly increasing or decreasing orders.</p>
+<p>This approach is particularly useful in competitive programming and coding interviews, where clear and efficient solutions to problems involving sequences and subsequences are often required.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1082s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1965"  class="external-link" target="_blank" rel="noopener">LeetCode #1965: Employees With Missing Information</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1965"  class="external-link" target="_blank" rel="noopener">LeetCode #1965: Employees With Missing Information</a></th>
       </tr>
   </thead>
   <tbody>
@@ -236,66 +383,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

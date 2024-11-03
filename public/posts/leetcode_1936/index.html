@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -235,11 +235,159 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1053s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the minimum number of rungs needed to be added to a ladder, given the current positions of the existing rungs and the maximum distance one can jump between rungs. The goal is to ensure that one can reach the top of the ladder, which is defined by the position of the last rung.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will take the following approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start from the ground level (position 0) and track the last rung position (previous rung) as we iterate through the given list of rungs.</p>
+</li>
+<li>
+<p><strong>Iterate Through Rungs</strong>: For each rung in the list, calculate the distance from the previous rung (or the ground) to the current rung. If this distance exceeds the maximum allowed jump distance, we will calculate how many additional rungs need to be added.</p>
+</li>
+<li>
+<p><strong>Calculate Additional Rungs</strong>: If the distance to the next rung is greater than the maximum distance allowed, compute the number of additional rungs needed to ensure that the jump to the next rung does not exceed the maximum distance.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the total number of additional rungs required.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><p>Here we declare a class named <code>Solution</code> that contains the methods necessary to compute the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">rec</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span><span class="p">,</span> <span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dist</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">+</span> <span class="n">dist</span> <span class="o">&gt;=</span> <span class="n">node</span><span class="p">[</span><span class="n">node</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>This function <code>rec</code> is defined to recursively determine the additional rungs needed based on the current position (<code>cur</code>), the index of the current rung (<code>idx</code>), the maximum distance that can be jumped (<code>dist</code>), and the list of rungs (<code>node</code>). The first line checks if the current position plus the jump distance is greater than or equal to the last rung position; if so, no more rungs need to be added, and it returns 0.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">+</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">+=</span> <span class="n">dist</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">rec</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nf">rec</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>In this part, we check if the current position plus the distance is less than the position of the current rung. If true, we simulate a jump to the new position and make a recursive call while incrementing the count of additional rungs needed. If the jump would land on or beyond the current rung, we update <code>cur</code> to the position of the current rung and move to the next rung by incrementing <code>idx</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">addRungs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dist</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">prv</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>In this method <code>addRungs</code>, we initialize several variables: <code>cur</code> is set to 0 (ground level), <code>idx</code> to 0 (index of the current rung), and <code>res</code> to 0 (total additional rungs needed). We also declare <code>prv</code> to track the position of the last rung visited.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">node</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">prv</span> <span class="o">&gt;</span> <span class="n">dist</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">prv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">dist</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prv</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>Here, we iterate through each rung in the <code>node</code> vector. If the distance between the current rung and the last visited rung (<code>prv</code>) exceeds the maximum jump distance (<code>dist</code>), we calculate the number of additional rungs required by the formula <code>(node[i] - prv - 1) / dist</code> and add it to <code>res</code>. We then update <code>prv</code> to the current rung&rsquo;s position.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// rec(cur, idx, dist, node);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we return the total number of additional rungs needed (<code>res</code>). The commented-out line shows a recursive approach, but we will not use it in this iteration.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the number of existing rungs, since we are iterating through the list of rungs once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) as we are using a fixed amount of space for our variables and not utilizing any additional data structures proportional to the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>addRungs</code> function efficiently calculates the minimum number of rungs needed to make the ladder accessible according to the specified jump distance. By iterating through the list of rungs and checking the distances, we can determine how many rungs to add without resorting to complex recursive logic, thus maintaining both clarity and efficiency.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Efficiency</strong>: The solution is efficient with a linear time complexity, making it suitable for large inputs.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: The implementation is straightforward, focusing on the essential logic without unnecessary complexity.</p>
+</li>
+<li>
+<p><strong>Iterative Approach</strong>: The use of an iterative approach rather than recursion simplifies the logic and enhances performance by avoiding potential stack overflow issues with deep recursion.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This function can be applied in various real-world scenarios, such as:</p>
+<ul>
+<li><strong>Construction Planning</strong>: Determining the number of additional steps needed for staircases or ladders.</li>
+<li><strong>Game Development</strong>: Calculating jump distances in platform games to ensure player accessibility.</li>
+<li><strong>Robotics</strong>: Planning paths for robots that need to traverse uneven terrain or structures.</li>
+</ul>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing the function, consider the following:</p>
+<ul>
+<li><strong>Input Validation</strong>: Ensure the input arrays and parameters are valid and within expected ranges.</li>
+<li><strong>Handling Edge Cases</strong>: Test with edge cases, such as when no rungs exist or when all rungs are within jumping distance.</li>
+<li><strong>Performance Testing</strong>: Verify performance under large inputs to ensure the algorithm remains efficient.</li>
+</ul>
+<p>By understanding and applying the concepts in this solution, developers can effectively handle similar problems across various domains, enhancing their programming and algorithmic skills.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1053s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1937"  class="external-link" target="_blank" rel="noopener">LeetCode #1937: Maximum Number of Points with Cost</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1937"  class="external-link" target="_blank" rel="noopener">LeetCode #1937: Maximum Number of Points with Cost</a></th>
       </tr>
   </thead>
   <tbody>
@@ -260,66 +408,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

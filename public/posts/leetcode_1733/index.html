@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -235,7 +235,141 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode829s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is about determining the minimum number of languages that need to be taught to ensure that all pairs of friends can communicate with each other. Given a number of languages, an array of languages known by each person, and an array of friendships, the goal is to identify how many languages need to be taught to eliminate any communication barriers among friends.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can break it down into several key steps:</p>
+<ol>
+<li>
+<p><strong>Data Structure Initialization</strong>: We will use a vector of sets to store the languages known by each individual. This will allow us to efficiently check for common languages between friends.</p>
+</li>
+<li>
+<p><strong>Identify Friend Pairs Without Common Languages</strong>: For each pair of friends, we will check if they share any languages. If they do not share a language, we will keep track of those individuals who need to learn new languages.</p>
+</li>
+<li>
+<p><strong>Count Language Requirements</strong>: For the individuals who need to learn languages, we will count how many people know each language and identify the language that the maximum number of those individuals already know. This helps us minimize the total number of teachings required.</p>
+</li>
+<li>
+<p><strong>Calculate Minimum Teachings</strong>: Finally, we will compute the minimum number of new languages that need to be taught by subtracting the maximum count of a known language from the number of individuals who need to learn languages.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The method <code>minimumTeachings</code> takes in the number of languages <code>k</code>, a vector of vectors representing the languages known by individuals <code>lang</code>, and a vector of friend pairs <code>frnd</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minimumTeachings</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">lang</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">frnd</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization</strong>: We determine the number of individuals and create a vector of sets to hold the languages each person knows.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">lang</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">langs</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Populate Language Sets</strong>: We iterate through each individual and convert their language array into a set for easier intersection operations later.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">lang</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">end</span><span class="p">(</span><span class="n">lang</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">langs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Identify Non-Communicating Friend Pairs</strong>: We create a set to track individuals who need to learn new languages. For each friendship pair, we check if they share any languages using set intersection. If they don’t share a language, we add them to the <code>ntk</code> (need to know) set.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ntk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="nl">frd</span><span class="p">:</span> <span class="n">frnd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">frd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Friend index adjustment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">frd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Friend index adjustment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">langs</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">langs</span><span class="p">[</span><span class="n">v</span><span class="p">];</span>                
+</span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set_intersection</span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">s2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s2</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">inserter</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span> <span class="c1">// They can communicate
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ntk</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span> <span class="c1">// They need to learn languages
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ntk</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Early Exit</strong>: If no individuals need to learn new languages (<code>ntk</code> is empty), return 0, indicating no teachings are necessary.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">ntk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Language Knowledge</strong>: We create a vector to count how many people know each language among those who need to learn. We then iterate through each individual in <code>ntk</code>, updating our counts based on the languages they know.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">lg</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Language count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">f</span> <span class="p">:</span> <span class="n">ntk</span><span class="p">)</span> <span class="c1">// Count languages known by those in ntk
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">l</span> <span class="p">:</span> <span class="n">langs</span><span class="p">[</span><span class="n">f</span><span class="p">])</span> <span class="n">lg</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Determine Maximum Known Language</strong>: We find the language that is known by the maximum number of individuals in <code>ntk</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">lg</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">lg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Minimum Teachings</strong>: Finally, the minimum teachings required will be the number of individuals in <code>ntk</code> minus the maximum number of individuals that already know a language.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ntk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">mx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n + m \cdot k)), where (n) is the number of individuals, (m) is the number of friendships, and (k) is the maximum number of languages. This accounts for iterating through the friends and the languages known by individuals.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n + k)), where (n) is the number of individuals for the sets of languages and (k) for the language count vector.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the minimum number of new languages that need to be taught to ensure all pairs of friends can communicate. By employing sets for language representation and counting known languages among those who need to learn, we minimize the teachings required. The approach effectively handles the problem with clear logic and efficient data structures, making it well-suited for situations involving language learning and communication barriers. The implementation is robust and can be extended or modified to adapt to variations of the problem, such as varying friendship structures or additional constraints on language learning.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode829s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -247,7 +381,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1734"  class="external-link" target="_blank" rel="noopener">LeetCode #1734: Decode XORed Permutation</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1734"  class="external-link" target="_blank" rel="noopener">LeetCode #1734: Decode XORed Permutation</a></th>
       </tr>
   </thead>
   <tbody>
@@ -268,66 +402,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -228,11 +228,152 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">abs</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">abs</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">?</span> <span class="nl">a</span><span class="p">:</span> <span class="n">b</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode874s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to find the closest cost to a specified target value based on a set of base costs and optional topping costs. The user has a list of base costs and can choose to add any combination of topping costs to any of the base costs. Each topping can be added in increments of one or two, or not at all. The goal is to find the closest cost to the target by adding these optional toppings, while prioritizing lower costs when two costs are equally close to the target.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs a depth-first search (DFS) strategy to explore all possible combinations of costs that can be formed using the base costs and toppings. The approach can be summarized in the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: The solution starts by initializing variables to store the target cost and the topping costs.</p>
+</li>
+<li>
+<p><strong>Iterate Over Base Costs</strong>: For each base cost, a recursive DFS function is called to explore all combinations of toppings that can be added to that base.</p>
+</li>
+<li>
+<p><strong>Recursive DFS Function</strong>: This function explores the three possibilities for each topping:</p>
+<ul>
+<li>Add the topping once.</li>
+<li>Add the topping twice.</li>
+<li>Skip the topping.
+It calculates the total cost for each combination.</li>
+</ul>
+</li>
+<li>
+<p><strong>Comparing Costs</strong>: After calculating potential costs from the DFS, the closest cost to the target is updated using a helper function that compares the current best cost against the newly calculated costs.</p>
+</li>
+<li>
+<p><strong>Return the Closest Cost</strong>: Finally, the function returns the closest cost to the target.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a breakdown of the provided C++ code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">target</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">top</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class is defined with two public member variables: <code>target</code>, an integer that stores the target cost, and <code>top</code>, a vector that holds the topping costs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">closestCost</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">base</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">top</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">target</span> <span class="o">=</span> <span class="n">target</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">top</span> <span class="o">=</span> <span class="n">top</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">base</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">close</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">base</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>closestCost</code> function takes three parameters: <code>base</code>, a vector of base costs; <code>top</code>, a vector of topping costs; and <code>target</code>, the desired cost.</li>
+<li>It initializes the <code>target</code> and <code>top</code> member variables, and sets <code>ans</code> to zero.</li>
+<li>A loop iterates through each base cost, calling the <code>dfs</code> function to explore topping combinations and update <code>ans</code> with the closest cost found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">top</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">top</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sum</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">top</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">close</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">close</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function is defined to explore topping combinations recursively.</li>
+<li>The base case checks if all topping options have been considered (<code>idx &gt;= top.size()</code>), in which case it returns the accumulated <code>sum</code>.</li>
+<li>The function makes three recursive calls to calculate potential costs:
+<ul>
+<li><code>a</code> represents the cost when adding the topping once.</li>
+<li><code>b</code> represents the cost when adding the topping twice.</li>
+<li><code>c</code> represents the cost when skipping the topping.</li>
+</ul>
+</li>
+<li>It then returns the closest cost to the target from the three calculated values using the <code>close</code> function.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">close</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">abs</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">?</span> <span class="nl">a</span><span class="p">:</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">abs</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">abs</span><span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">?</span> <span class="nl">a</span><span class="p">:</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>close</code> function is defined to compare two costs, <code>a</code> and <code>b</code>, to determine which is closer to the target.</li>
+<li>If one cost is zero, it returns the other cost.</li>
+<li>If both costs are non-zero, it checks their distances from the target and returns the cost that is closer. If both distances are equal, it prefers the smaller cost.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is exponential, specifically (O(3^m)), where (m) is the number of toppings. This is because each topping has three possibilities (add once, add twice, skip) leading to a branching factor of three.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m)) due to the recursive stack space used during the DFS. Additionally, the memory used to store the topping costs is also considered, but it does not scale with the input size as <code>top</code> is a fixed size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code efficiently solves the problem of finding the closest cost to a target by exploring all possible combinations of base and topping costs using a recursive DFS approach. This technique allows for comprehensive exploration of combinations while leveraging a helper function to maintain optimal costs during comparisons.</p>
+<p>By implementing this solution, developers can easily adapt it for similar problems involving combinations and optimizations, particularly in scenarios where there are constraints on the values being combined. The code exemplifies a structured approach to problem-solving, balancing clarity with the complexities inherent in recursive algorithms.</p>
+<p>In practice, understanding the nuances of such algorithms is crucial for tackling a wide range of computational problems, making this implementation a valuable reference for both educational and practical applications in algorithm design and software development.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode874s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1775"  class="external-link" target="_blank" rel="noopener">LeetCode #1775: Equal Sum Arrays With Minimum Number of Operations</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1775"  class="external-link" target="_blank" rel="noopener">LeetCode #1775: Equal Sum Arrays With Minimum Number of Operations</a></th>
       </tr>
   </thead>
   <tbody>
@@ -253,66 +394,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

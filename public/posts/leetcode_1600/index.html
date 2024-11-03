@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -225,11 +225,161 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode678s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires implementing a system to manage a royal family tree, where each member can have children and can also &ldquo;die.&rdquo; The system should allow tracking the inheritance order based on who is alive at any given time. The primary functionalities include:</p>
+<ol>
+<li>Adding a child to a parent.</li>
+<li>Marking a family member as dead.</li>
+<li>Retrieving the order of inheritance based on living family members.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the functionalities described in the problem statement, we will implement a <code>ThroneInheritance</code> class with the following key components:</p>
+<ol>
+<li>
+<p><strong>Data Structures</strong>:</p>
+<ul>
+<li>A <code>unordered_map</code> to track whether a family member is alive or dead.</li>
+<li>A second <code>unordered_map</code> to represent the family tree structure, where each member maps to a list of their children.</li>
+<li>A string to denote the root of the family tree, which represents the king.</li>
+</ul>
+</li>
+<li>
+<p><strong>Member Functions</strong>:</p>
+<ul>
+<li><strong>Constructor</strong>: Initializes the root member (king) of the family.</li>
+<li><strong>Birth Function</strong>: Adds a child to the specified parent.</li>
+<li><strong>Death Function</strong>: Marks a member as deceased.</li>
+<li><strong>DFS (Depth First Search)</strong>: A helper function to traverse the family tree and construct the inheritance order based on living members.</li>
+<li><strong>Get Inheritance Order</strong>: Returns the list of living members in the correct inheritance order.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ThroneInheritance</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;</span> <span class="n">dead</span><span class="p">;</span>   <span class="c1">// Just to keep track of alive people
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">family</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">root</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define the <code>ThroneInheritance</code> class. Inside this class, we declare two <code>unordered_map</code>s: <code>dead</code> for tracking if a member is dead, and <code>family</code> for storing the family structure as a tree. We also have a string variable <code>root</code> that stores the king&rsquo;s name.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">ThroneInheritance</span><span class="p">(</span><span class="n">string</span> <span class="n">kingName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">root</span> <span class="o">=</span> <span class="n">kingName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Constructor</strong>: This constructor initializes the <code>root</code> with the name of the king when an instance of <code>ThroneInheritance</code> is created.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">birth</span><span class="p">(</span><span class="n">string</span> <span class="n">parentName</span><span class="p">,</span> <span class="n">string</span> <span class="n">childName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">family</span><span class="p">[</span><span class="n">parentName</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">childName</span><span class="p">);</span>    <span class="c1">// Appending at the end takes care of oldest to youngest 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Birth Function</strong>: The <code>birth</code> method takes a <code>parentName</code> and a <code>childName</code>, adding the child to the parent&rsquo;s list of children in the <code>family</code> map. This ensures that the oldest child is always listed before the younger ones.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">death</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dead</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Death Function</strong>: The <code>death</code> method marks a family member as dead by setting their entry in the <code>dead</code> map to <code>true</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">ans</span><span class="p">,</span> <span class="n">string</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dead</span><span class="p">[</span><span class="n">root</span><span class="p">])</span> <span class="p">{</span>           <span class="c1">// Just check if dead before inserting into the order.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">string</span> <span class="nl">child</span><span class="p">:</span> <span class="n">family</span><span class="p">[</span><span class="n">root</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dfs</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">child</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>DFS Function</strong>: This recursive function performs a depth-first search starting from the given <code>root</code> member. It checks if the member is alive (not dead) before adding them to the result list <code>ans</code>. It then recursively visits all children of the current member.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">getInheritanceOrder</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Get Inheritance Order Function</strong>: The <code>getInheritanceOrder</code> method initializes a vector to hold the result and calls the <code>dfs</code> function starting from the <code>root</code> (the king). It then returns the ordered list of living members.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity for the <code>birth</code> and <code>death</code> methods is (O(1)) since they involve simple map operations.</li>
+<li>The <code>getInheritanceOrder</code> method involves a depth-first traversal of the family tree, which takes (O(n)), where (n) is the total number of family members.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is also (O(n)) for storing the family tree and tracking dead members, as well as for the recursion stack in the DFS function.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>ThroneInheritance</code> class effectively models the family tree structure required for tracking inheritance. The key features of this implementation include:</p>
+<ol>
+<li>
+<p><strong>Dynamic Family Structure</strong>: Members can be added or marked as dead dynamically, reflecting changes in the family tree as they occur.</p>
+</li>
+<li>
+<p><strong>Efficient Retrieval</strong>: The inheritance order can be quickly retrieved using a depth-first search, ensuring that only living members are listed in the correct order.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: The use of <code>unordered_map</code>s provides average-case constant time complexity for insertions and lookups, allowing the system to efficiently handle large family trees.</p>
+</li>
+</ol>
+<p>In summary, the <code>ThroneInheritance</code> implementation is a robust solution for simulating a royal family’s inheritance order based on the given requirements. It is both efficient and straightforward, ensuring easy maintenance and usability for future extensions or modifications.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode678s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1601"  class="external-link" target="_blank" rel="noopener">LeetCode #1601: Maximum Number of Achievable Transfer Requests</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1601"  class="external-link" target="_blank" rel="noopener">LeetCode #1601: Maximum Number of Achievable Transfer Requests</a></th>
       </tr>
   </thead>
   <tbody>
@@ -250,66 +400,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -220,11 +220,155 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode652s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves calculating the minimum cost to make a string of colors uniform. Each character in the string represents a color, and we are given an associated cost for changing each color. The goal is to identify the minimum cost required to change the string such that all characters become the same.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Understanding Consecutive Colors</strong>: The string can have consecutive characters that are the same, and our task is to change these characters with minimal cost. For any sequence of identical characters, we need to keep the most expensive character and change the others.</p>
+</li>
+<li>
+<p><strong>Iterating Through the String</strong>: We will iterate through the string, identifying segments of consecutive characters. For each segment:</p>
+<ul>
+<li>Calculate the total cost of changing all characters to the cost of the most expensive character in that segment.</li>
+<li>The cost to change all but the most expensive character will be added to the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cost Calculation</strong>: For each segment of consecutive characters:</p>
+<ul>
+<li>Maintain a running sum of the costs.</li>
+<li>Track the maximum cost in that segment.</li>
+<li>The contribution to the total cost for that segment will be the sum of the costs minus the maximum cost.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>: Finally, we will return the accumulated cost as the answer.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the code provided to understand how it implements this approach.</p>
+<ul>
+<li><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>: The <code>minCost</code> function initializes the necessary variables and starts iterating through the color string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">minCost</span><span class="p">(</span><span class="n">string</span> <span class="n">colors</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">cost</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sum</span><span class="p">,</span> <span class="n">mx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cost</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>res</code> will hold the total minimum cost.</li>
+<li><code>sum</code> will store the cumulative cost of changing characters in a segment.</li>
+<li><code>mx</code> will keep track of the maximum cost of a character in the current segment.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the String</strong>: The loop starts from the second character and continues until the end of the string.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span> <span class="o">=</span> <span class="n">cost</span><span class="p">[</span><span class="n">e</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mx</span> <span class="o">=</span> <span class="n">cost</span><span class="p">[</span><span class="n">e</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Processing Each Segment</strong>:
+<ul>
+<li>A nested loop checks for consecutive characters that are the same. For each matching character, the cost is added to <code>sum</code>, and <code>mx</code> is updated to the maximum cost found in the segment.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">e</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">colors</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">==</span> <span class="n">colors</span><span class="p">[</span><span class="n">e</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span> <span class="o">+=</span> <span class="n">cost</span><span class="p">[</span><span class="n">e</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">cost</span><span class="p">[</span><span class="n">e</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Calculating the Cost Contribution</strong>: After exiting the inner loop, we compute the cost contribution from the segment, which is the total sum minus the maximum cost.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">res</span> <span class="o">+=</span> <span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">mx</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Updating the Index</strong>: The outer loop index is updated to continue searching for the next segment of characters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">i</span> <span class="o">=</span> <span class="n">e</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Returning the Result</strong>: Finally, the accumulated cost is returned as the output.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity for this solution is ( O(n) ), where ( n ) is the length of the <code>cost</code> array (and the <code>colors</code> string). This is because we iterate through the string once, processing each character efficiently.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(1) ) since we only use a few additional variables for calculations, and no additional data structures are required that grow with input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minCost</code> function efficiently calculates the minimum cost required to make all characters in a string the same color by leveraging a single pass through the string and applying a greedy strategy to minimize costs. The approach of maintaining a running sum of costs and tracking the maximum cost in segments of consecutive identical characters ensures that the solution is both optimal and straightforward.</p>
+<p>This implementation serves as a valuable reference for solving similar problems in competitive programming and interviews, demonstrating effective techniques for handling string manipulation, cost optimization, and greedy algorithms. The clear structure and logical flow of the algorithm enhance its readability and maintainability, making it a robust solution to the problem of minimizing character change costs in a color string.</p>
+<p>By understanding this solution, developers can apply similar strategies to a variety of problems involving costs, segments, and optimization, expanding their toolkit for tackling complex algorithmic challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode652s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1579"  class="external-link" target="_blank" rel="noopener">LeetCode #1579: Remove Max Number of Edges to Keep Graph Fully Traversable</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1579"  class="external-link" target="_blank" rel="noopener">LeetCode #1579: Remove Max Number of Edges to Keep Graph Fully Traversable</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +389,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

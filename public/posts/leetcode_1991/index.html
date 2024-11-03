@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -209,11 +209,155 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1112s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the <strong>middle index</strong> of an integer array <code>nums</code>. The middle index is defined as an index <code>i</code> such that the sum of the elements on the left of <code>i</code> is equal to the sum of the elements on the right of <code>i</code>. If no such index exists, we should return -1. For example, given the array <code>[2, 3, -1, 8, 4]</code>, the middle index is <code>3</code> because <code>2 + 3 + -1</code> equals <code>4</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To efficiently find the middle index, we can utilize a <strong>prefix sum</strong> approach. Here are the main steps of the approach:</p>
+<ol>
+<li>
+<p><strong>Calculate Total Sum</strong>: First, compute the total sum of the array. This will help us determine the right sum when we check for the middle index.</p>
+</li>
+<li>
+<p><strong>Prefix Sum Array</strong>: Create a prefix sum array where each element at index <code>i</code> represents the sum of all elements in the input array from the beginning up to index <code>i</code>. This allows us to easily access the left sum of any index.</p>
+</li>
+<li>
+<p><strong>Check Middle Index Condition</strong>: For each index, check if the sum of the elements on the left (using the prefix sum array) is equal to the sum of the elements on the right (which can be derived from the total sum).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a breakdown of the code and its functionality:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">findMiddleIndex</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We define a class <code>Solution</code> with a public method <code>findMiddleIndex</code> that takes a vector of integers <code>nums</code> as input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sum</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><p>We get the size of the input array <code>n</code> and create a prefix sum array <code>sum</code> of size <code>n + 1</code>. This extra space at the beginning (index 0) helps simplify our calculations for the left sums.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div><p>We populate the prefix sum array. For each element in <code>nums</code>, we add it to the cumulative sum from the previous index. This means <code>sum[i + 1]</code> will hold the sum of all elements from <code>nums[0]</code> to <code>nums[i]</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">net</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+</span></span></code></pre></div><p>The variable <code>net</code> holds the total sum of the array, which is found at <code>sum[n]</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">net</span> <span class="o">-</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>We iterate through each index <code>i</code>. The left sum for index <code>i</code> can be accessed as <code>sum[i]</code>, while the right sum can be calculated as <code>net - sum[i + 1]</code>. If these two sums are equal, we have found our middle index and return <code>i</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>If no such index is found after checking all possible indices, we return -1, indicating that no middle index exists.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this solution is (O(n)), where (n) is the number of elements in the input array <code>nums</code>. This is due to the single pass required to calculate the prefix sums and another pass to check for the middle index condition.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) because of the prefix sum array we created to store cumulative sums.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively finds the middle index of an array by utilizing the prefix sum technique. This approach is efficient and straightforward, allowing us to determine if an index satisfies the condition of equal sums on both sides. The use of a prefix sum array simplifies the logic required to compare sums, leading to an optimal solution.</p>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s an example of how to use the <code>findMiddleIndex</code> method:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">findMiddleIndex</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;The middle index is: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">index</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Output: The middle index is: 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="edge-cases-to-consider">
+  Edge Cases to Consider
+  <a class="heading-link" href="#edge-cases-to-consider">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Empty Array</strong>: If the input array is empty, the output should be -1, as there are no elements to balance.</p>
+</li>
+<li>
+<p><strong>Single Element</strong>: If the input contains only one element, it should also return -1 since there are no elements on either side.</p>
+</li>
+<li>
+<p><strong>Multiple Equal Elements</strong>: Cases where all elements are the same could lead to confusion but will be handled correctly by the logic.</p>
+</li>
+</ol>
+<h3 id="potential-improvements">
+  Potential Improvements
+  <a class="heading-link" href="#potential-improvements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Memory Optimization</strong>: If we wanted to reduce space complexity, we could keep track of the left sum directly without using an entire prefix sum array.</p>
+</li>
+<li>
+<p><strong>Additional Information</strong>: The method could be enhanced to return both the index and the sums on either side for debugging or analysis.</p>
+</li>
+</ol>
+<p>This approach and implementation are robust and can handle a variety of input scenarios effectively.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1112s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1992"  class="external-link" target="_blank" rel="noopener">LeetCode #1992: Find All Groups of Farmland</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1992"  class="external-link" target="_blank" rel="noopener">LeetCode #1992: Find All Groups of Farmland</a></th>
       </tr>
   </thead>
   <tbody>
@@ -234,66 +378,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

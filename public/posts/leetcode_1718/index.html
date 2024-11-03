@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -240,11 +240,167 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode809s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires constructing a sequence of integers from 1 to ( n ) such that each integer ( i ) appears exactly twice in the sequence, and the two instances of ( i ) are separated by exactly ( i ) positions. For example, if ( n = 3 ), a valid sequence could be <code>[3, 0, 3, 1, 2, 1, 0, 2]</code>. The goal is to find such a sequence and return it.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a backtracking approach. Here’s the step-by-step outline of the approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start by creating a result array <code>ans</code> of size ( 2n - 1 ) initialized with zeros. This array will hold the final sequence.</p>
+</li>
+<li>
+<p><strong>Visited Array</strong>: Maintain a visited array <code>vis</code> to keep track of which integers from 1 to ( n ) have already been placed in the sequence.</p>
+</li>
+<li>
+<p><strong>Backtracking Function</strong>: Implement a recursive backtracking function <code>bt</code> that attempts to fill the <code>ans</code> array. The function should:</p>
+<ul>
+<li>Check if the current index is at the end of the array, in which case the sequence has been successfully constructed.</li>
+<li>If the current position is already filled, move to the next index.</li>
+<li>Otherwise, iterate through the numbers from ( n ) down to 1:
+<ul>
+<li>If the number has not been used yet, mark it as used and place it in the current index.</li>
+<li>Check if it can be placed at its required distance; if so, place it at that position and recurse further.</li>
+<li>If placing the number leads to a solution, return true.</li>
+<li>If not, backtrack by resetting the position and marking the number as unused.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Once a valid sequence is found, return the constructed sequence.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the provided code in detail to understand how it implements the above approach:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Member Variable</strong>: A member variable <code>n</code> is declared to hold the value of ( n ).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Method</strong>: The public method <code>constructDistancedSequence</code> takes an integer ( n ) and initializes the result array and the visited array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">constructDistancedSequence</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vis</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Backtracking Call</strong>: The backtracking function <code>bt</code> is called to start filling the <code>ans</code> array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">bt</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">vis</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Backtracking Function</strong>: The <code>bt</code> function is defined to perform the actual backtracking.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">bt</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">ans</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">vis</span><span class="p">,</span> <span class="kt">int</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">bt</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">vis</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>The function first checks if the current index <code>idx</code> has reached the end of the array, in which case it returns true.</li>
+<li>If the current index is already filled (not zero), it recursively calls itself for the next index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iteration through Possible Values</strong>: If the current index is empty, the function iterates through the integers from ( n ) down to 1.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>For each integer ( i ), it checks if it has already been used by looking up the <code>vis</code> array. If it has, it continues to the next integer.</li>
+</ul>
+</li>
+<li>
+<p><strong>Marking as Used</strong>: If ( i ) is unused, it marks it as used, and sets it at the current index <code>idx</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ans</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Checking Distance Condition</strong>: If ( i ) is greater than 1, it checks whether it can also be placed at the required distance ( idx + i ).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">bt</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">vis</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">ans</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">bt</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">vis</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the distance condition is satisfied, it places ( i ) at the required position and recursively calls itself to fill the next index.</li>
+<li>If the recursion returns true, it indicates a valid sequence has been found.</li>
+<li>If not, it backtracks by resetting the position and marking the number as unused.</li>
+</ul>
+</li>
+<li>
+<p><strong>Resetting State for Backtracking</strong>: After trying both placements (current and required), the function resets the state to allow further exploration of other possible configurations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ans</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return False if No Valid Configuration Found</strong>: If all possibilities have been tried and none lead to a solution, the function returns false.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is ( O(n!) ) in the worst case, since the algorithm explores all possible placements of numbers. However, in practice, it is much more efficient due to pruning with backtracking.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n) ) because of the storage used for the result array <code>ans</code> and the visited array <code>vis</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this code efficiently constructs a sequence of integers from 1 to ( n ) such that each integer appears twice at a specific distance. The use of backtracking allows the algorithm to explore various configurations of placements systematically, ensuring all valid arrangements are considered while minimizing unnecessary computations. This approach provides an optimal solution to the problem of constructing a distanced sequence while clearly demonstrating the utility of backtracking in combinatorial problems. The clarity and structure of the code make it a solid example of algorithm design in competitive programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode809s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1719"  class="external-link" target="_blank" rel="noopener">LeetCode #1719: Number Of Ways To Reconstruct A Tree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1719"  class="external-link" target="_blank" rel="noopener">LeetCode #1719: Number Of Ways To Reconstruct A Tree</a></th>
       </tr>
   </thead>
   <tbody>
@@ -265,66 +421,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

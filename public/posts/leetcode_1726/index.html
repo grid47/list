@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -209,7 +209,126 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">*</span> <span class="mi">8</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode821s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal is to count how many unique tuples ((a, b, c, d)) exist such that the product of (a) and (b) is equal to the product of (c) and (d), where each tuple is formed from the elements of a given list of integers <code>nums</code>. The tuples must consist of distinct elements, and the order of elements within each tuple does not matter, meaning ((a, b, c, d)) is considered the same as ((c, d, a, b)). Each tuple can be derived from pairs of indices within the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve this, the algorithm can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Create a Map</strong>: Utilize a map to keep track of the products of pairs of numbers from the list. The keys in the map will be the products, and the values will be the count of how many times each product can be formed using pairs of indices.</p>
+</li>
+<li>
+<p><strong>Nested Loops for Pair Generation</strong>: Use two nested loops to generate all possible pairs of indices ( (i, j) ) where ( i &lt; j ). Calculate the product for each pair.</p>
+</li>
+<li>
+<p><strong>Count Products</strong>: For each product calculated, check if it already exists in the map. If it does, it means that there are previously counted pairs that form the same product. Add this count to the result.</p>
+</li>
+<li>
+<p><strong>Store Product Count</strong>: Increment the count of the product in the map after checking for existing pairs.</p>
+</li>
+<li>
+<p><strong>Calculate the Result</strong>: Since each product can form tuples in different combinations, multiply the final count by 8 (since each valid product contributes to 8 different tuples: ((a, b, c, d)), ((a, c, b, d)), ((a, d, b, c)), etc.).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a breakdown of the code provided:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is defined within the <code>Solution</code> class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The <code>tupleSameProduct</code> method is defined, which takes a vector of integers as input and returns an integer.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">tupleSameProduct</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Map Initialization</strong>: A map <code>mp</code> is initialized to keep track of the products and their corresponding counts.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: The size of the input vector <code>n</code> is stored, and <code>res</code> is initialized to hold the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Nested Loop Structure</strong>: Two nested loops are used to iterate through the vector to form pairs of indices ( (i, j) ).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Product Calculation</strong>: Inside the inner loop, the product of the current pair is calculated.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check and Count Existing Products</strong>: If the product already exists in the map, it indicates that there are previously counted pairs that form the same product. Add the count of these pairs to the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="n">res</span> <span class="o">+=</span> <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update the Product Count</strong>: Regardless of whether the product was previously found, increment the count for this product in the map.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: Finally, return the result multiplied by 8 to account for all unique combinations of the pairs.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span> <span class="o">*</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(n^2) ) because we are using two nested loops to generate all pairs of indices. For each pair, we perform constant-time operations (checking the map and incrementing counts).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(k) ), where ( k ) is the number of unique products generated from the pairs. In the worst case, this could also be ( O(n^2) ), but generally, it will be much smaller as not all products will be unique.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, this solution effectively counts the number of tuples that can be formed based on the given conditions by leveraging a map to store products of pairs of integers from the input list. The use of nested loops allows for generating all possible pairs efficiently, while the map helps in quickly determining if a product has been seen before, thus counting the valid tuples appropriately.</p>
+<p>This algorithm is optimal for the problem, running in quadratic time with respect to the size of the input array, making it suitable for moderate input sizes typically encountered in competitive programming. By multiplying the final count by 8, the solution correctly accounts for all unique arrangements of the indices forming the valid tuples. This method is clear and efficient, demonstrating an effective use of combinatorial counting and data structures in C++.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode821s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -221,7 +340,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1727"  class="external-link" target="_blank" rel="noopener">LeetCode #1727: Largest Submatrix With Rearrangements</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1727"  class="external-link" target="_blank" rel="noopener">LeetCode #1727: Largest Submatrix With Rearrangements</a></th>
       </tr>
   </thead>
   <tbody>
@@ -242,66 +361,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

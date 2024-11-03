@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -209,11 +209,126 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">oz</span> <span class="o">&gt;</span> <span class="n">gz</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode978s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective of this problem is to analyze a binary string composed of &lsquo;0&rsquo;s and &lsquo;1&rsquo;s and determine whether the maximum consecutive occurrences of &lsquo;1&rsquo;s are greater than the maximum consecutive occurrences of &lsquo;0&rsquo;s. Essentially, we need to identify the longest sequence of &lsquo;1&rsquo;s and &lsquo;0&rsquo;s in the string and compare their lengths. If the length of the longest sequence of &lsquo;1&rsquo;s exceeds that of &lsquo;0&rsquo;s, the function should return <code>true</code>; otherwise, it should return <code>false</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To efficiently solve this problem, we will employ a single-pass algorithm that traverses the binary string only once. During this traversal, we will maintain counters for the current streak of &lsquo;1&rsquo;s and &lsquo;0&rsquo;s. We will also keep track of the maximum streaks found for both characters. Here are the main steps involved in our approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start by initializing counters for the current counts of &lsquo;0&rsquo;s and &lsquo;1&rsquo;s as well as the maximum counts found during the traversal.</p>
+</li>
+<li>
+<p><strong>Single Pass through the String</strong>: Iterate through each character in the string:</p>
+<ul>
+<li>If the character is &lsquo;0&rsquo;, increment the zero counter and reset the one counter.</li>
+<li>If the character is &lsquo;1&rsquo;, increment the one counter and reset the zero counter.</li>
+<li>After updating the counters, compare the current counts with the maximum counts found so far and update them accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Comparison</strong>: After traversing the entire string, compare the maximum counts of &lsquo;1&rsquo;s and &lsquo;0&rsquo;s. Return <code>true</code> if the maximum count of &lsquo;1&rsquo;s is greater than that of &lsquo;0&rsquo;s; otherwise, return <code>false</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The implementation begins by defining the class <code>Solution</code>, which contains the method to solve the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: We declare the public method <code>checkZeroOnes</code>, which takes a string as input and returns a boolean value.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">checkZeroOnes</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: We initialize several integer variables:</p>
+<ul>
+<li><code>z</code> to keep track of the current count of &lsquo;0&rsquo;s.</li>
+<li><code>o</code> to keep track of the current count of &lsquo;1&rsquo;s.</li>
+<li><code>gz</code> to store the maximum count of &lsquo;0&rsquo;s found during the traversal.</li>
+<li><code>oz</code> to store the maximum count of &lsquo;1&rsquo;s found during the traversal.</li>
+<li><code>res</code> is initialized to 1 but is unused in the final implementation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">o</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">gz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">oz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating through the String</strong>: A <code>for</code> loop iterates through each character of the string <code>s</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Counting &lsquo;0&rsquo;s and &lsquo;1&rsquo;s</strong>: Inside the loop, we check the character at the current position:</p>
+<ul>
+<li>If it is &lsquo;0&rsquo;, we increment the zero counter (<code>z</code>) and reset the one counter (<code>o</code>).</li>
+<li>If it is &lsquo;1&rsquo;, we increment the one counter (<code>o</code>) and reset the zero counter (<code>z</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="n">z</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="n">o</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="n">o</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating Maximum Counts</strong>: After updating the counts, we compare the current counts with the maximum counts found so far and update them if the current counts exceed the maximums.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">gz</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">gz</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">oz</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">oz</span><span class="p">,</span> <span class="n">o</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: After exiting the loop, we compare the maximum counts of &lsquo;1&rsquo;s and &lsquo;0&rsquo;s. If the maximum count of &lsquo;1&rsquo;s (<code>oz</code>) is greater than that of &lsquo;0&rsquo;s (<code>gz</code>), we return <code>true</code>; otherwise, we return <code>false</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">oz</span> <span class="o">&gt;</span> <span class="n">gz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is (O(n)), where (n) is the length of the input string. This is because we perform a single traversal of the string, making constant-time operations at each step. The space complexity is (O(1)) since we are using a fixed amount of extra space for the counters and do not depend on the size of the input.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided implementation of the <code>checkZeroOnes</code> method effectively determines if the longest sequence of &lsquo;1&rsquo;s in a binary string exceeds the longest sequence of &lsquo;0&rsquo;s. The algorithm is optimized for performance, operating in linear time with constant space usage, making it suitable for large input strings. By leveraging simple counting mechanisms and a single traversal approach, this solution is both straightforward and efficient. This implementation can serve as a reference for similar problems involving counting or comparing sequences in strings, showcasing the utility of linear traversal techniques in solving combinatorial challenges effectively. Overall, this code exemplifies clarity and efficiency, making it a solid contribution to algorithm design discussions.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode978s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1870"  class="external-link" target="_blank" rel="noopener">LeetCode #1870: Minimum Speed to Arrive on Time</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1870"  class="external-link" target="_blank" rel="noopener">LeetCode #1870: Minimum Speed to Arrive on Time</a></th>
       </tr>
   </thead>
   <tbody>
@@ -234,66 +349,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

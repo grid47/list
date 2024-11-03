@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -214,7 +214,151 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1037s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining how many monsters can be eliminated before they reach the city. Each monster has a certain distance to travel (<code>dist[i]</code>) and a speed (<code>speed[i]</code>). The goal is to calculate how many monsters can be eliminated before any of them arrive, based on the time it takes each monster to reach the city.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Calculate Arrival Times</strong>: For each monster, we need to compute the time it takes to reach the city, which can be calculated using the formula:
+[
+\text{time} = \frac{\text{distance}}{\text{speed}}
+]</p>
+</li>
+<li>
+<p><strong>Store and Sort Arrival Times</strong>: Store these arrival times in a vector and then sort them. This allows us to handle the monsters in the order they will arrive.</p>
+</li>
+<li>
+<p><strong>Eliminate Monsters</strong>: Using a loop, we check if we can eliminate the monster at the current index before its arrival time. We maintain a counter to track how many monsters can be eliminated.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, we return the count of monsters that can be eliminated.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s take a closer look at the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">eliminateMaximum</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">dist</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">speed</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>This line defines a class <code>Solution</code> with a public method <code>eliminateMaximum</code>, which takes two vectors, <code>dist</code> and <code>speed</code>, as input parameters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">dist</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><p>Here, we determine the size of the input arrays (both should be the same) and initialize a vector <code>res</code> of size <code>n</code> to hold the calculated arrival times.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">speed</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></div><p>In this loop, we compute the arrival time for each monster using the formula discussed earlier and store it in the <code>res</code> vector. We use <code>double</code> to ensure we have precise floating-point division.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><p>After calculating all arrival times, we sort the <code>res</code> vector in ascending order. This sorting will help us process the monsters in the order they will arrive.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize two counters: <code>j</code> to keep track of the number of monsters we have eliminated, and <code>ans</code> to count how many monsters can be eliminated.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><p>In this loop, we iterate through the sorted arrival times. If <code>j</code> (the number of monsters we have eliminated) is less than the current monster&rsquo;s arrival time (<code>res[i]</code>), it means we can eliminate this monster. We increment both <code>ans</code> and <code>j</code>. If we encounter a monster that cannot be eliminated (i.e., <code>j</code> is not less than <code>res[i]</code>), we break out of the loop.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we return the count of monsters that can be eliminated, casting <code>ans</code> to an integer.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is O(n log n) due to the sorting step, where <code>n</code> is the number of monsters. The loop that counts how many monsters can be eliminated runs in O(n) time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(n) because we are using an additional vector <code>res</code> to store the arrival times.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>eliminateMaximum</code> function efficiently determines how many monsters can be eliminated before they reach the city based on their distances and speeds. The approach leverages sorting and a simple counting mechanism to provide an optimal solution.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Precise Time Calculation</strong>: The use of floating-point arithmetic ensures that the arrival times are calculated accurately, which is crucial for determining whether a monster can be eliminated.</p>
+</li>
+<li>
+<p><strong>Efficient Sorting</strong>: Sorting the arrival times allows for a straightforward comparison to see if monsters can be eliminated in the order of their arrival.</p>
+</li>
+<li>
+<p><strong>Simple Logic</strong>: The logic used to determine how many monsters can be eliminated is clear and easy to follow, making the implementation straightforward.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Simulation Games</strong>: This algorithm can be applied in game development, particularly in scenarios where players need to eliminate threats before they reach a target.</p>
+</li>
+<li>
+<p><strong>Resource Management</strong>: In resource management applications, similar logic can be used to manage incoming threats or resources based on their arrival times.</p>
+</li>
+<li>
+<p><strong>Event Processing</strong>: The approach can be adapted for processing events in real-time systems where events have different processing times.</p>
+</li>
+<li>
+<p><strong>Competitive Programming</strong>: Understanding this type of problem can help in competitive programming contexts where efficient data handling and sorting are required.</p>
+</li>
+<li>
+<p><strong>Networking</strong>: In network management, similar principles can be applied to handle data packets based on their transmission times, ensuring timely processing and preventing bottlenecks.</p>
+</li>
+</ol>
+<p>By grasping this solution, developers can enhance their skills in problem-solving and optimization, enabling them to tackle a variety of challenges involving timing and order in programming tasks.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1037s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -226,7 +370,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1922"  class="external-link" target="_blank" rel="noopener">LeetCode #1922: Count Good Numbers</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1922"  class="external-link" target="_blank" rel="noopener">LeetCode #1922: Count Good Numbers</a></th>
       </tr>
   </thead>
   <tbody>
@@ -247,66 +391,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

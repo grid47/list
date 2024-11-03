@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -230,7 +230,137 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_1 = obj-&gt;reserve();
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;unreserve(seatNumber);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode954s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to manage seat reservations in a theater or an event venue. We need to implement a <code>SeatManager</code> class that supports two primary operations: reserving a seat and unreserving a seat. The goal is to efficiently manage available seats, ensuring that when a seat is reserved, it&rsquo;s marked as unavailable, and when it is unreserved, it becomes available for future reservations. The reservation system should allow for a maximum number of seats, and the operations should be efficient in terms of time complexity.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a combination of a priority queue and a simple counter. The priority queue will help manage the available seats efficiently, while the counter will track the next available seat number. The operations can be outlined as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: When the <code>SeatManager</code> is instantiated, we initialize the total number of seats and set up a priority queue to manage unreserved seats.</p>
+</li>
+<li>
+<p><strong>Reserve Seat</strong>:</p>
+<ul>
+<li>If there are no available seats in the priority queue, we check if there are still seats left to reserve using the counter. If so, we increment the counter and return the next seat number.</li>
+<li>If there are available seats in the priority queue, we pop the top element (the smallest available seat number) and return it as the reserved seat.</li>
+</ul>
+</li>
+<li>
+<p><strong>Unreserve Seat</strong>:</p>
+<ul>
+<li>When a seat is unreserved, we need to add it back to the pool of available seats. If the seat being unreserved is the last reserved seat (tracked by the counter), we simply decrement the counter.</li>
+<li>If it&rsquo;s not the last reserved seat, we push the seat number back into the priority queue to make it available for future reservations.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SeatManager</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define the <code>SeatManager</code> class. It has two member variables: <code>i</code>, which tracks the next available seat number, and <code>n</code>, which stores the total number of seats. A priority queue <code>pq</code> is used to keep track of unreserved seats.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">SeatManager</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Start seat numbering from 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Set the total number of seats
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The constructor initializes the number of seats (<code>n</code>) and sets the counter <code>i</code> to 1, indicating that the first seat is available for reservation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">reserve</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// No available seats
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment the counter for the next seat
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Return the last reserved seat
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>reserve</code> method first checks if there are no available seats. If the priority queue is empty and the counter has exceeded the number of seats, it returns -1 indicating no seats are available.</li>
+<li>If there are no seats in the priority queue, we increment the counter and return the last reserved seat number.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// Pop the top available seat from the priority queue
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// Return the reserved seat number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If there are available seats in the priority queue, we retrieve and remove the smallest seat number, which indicates an available seat, and return it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">unreserve</span><span class="p">(</span><span class="kt">int</span> <span class="n">no</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">no</span> <span class="o">==</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">--</span><span class="p">;</span> <span class="c1">// If unreserving the last reserved seat, decrement the counter
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">no</span><span class="p">);</span> <span class="c1">// Otherwise, push the seat number back into the priority queue
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>unreserve</code> method checks if the seat number being unreserved is the last one reserved (tracked by <code>i</code>). If so, it simply decrements the counter. Otherwise, it adds the seat back into the priority queue to mark it as available.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity for both <code>reserve</code> and <code>unreserve</code> operations is ( O(\log m) ), where ( m ) is the number of unreserved seats. This is due to the priority queue operations of inserting and removing elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(m) ) for storing the unreserved seats in the priority queue.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>SeatManager</code> class efficiently manages seat reservations using a priority queue, allowing for quick allocation and deallocation of seats. By employing a simple counter to track the next available seat and a priority queue for managing unreserved seats, the implementation provides optimal performance for both reservation and unreservation operations.</p>
+<p>This design is particularly beneficial in scenarios such as theaters, concert halls, or any event where seat management is crucial. The logic is easy to understand, and the code is concise, making it suitable for real-world applications. The flexibility of the priority queue allows for a dynamic approach to managing available seats, ensuring that the operations remain efficient even as the number of reservations fluctuates.</p>
+<p>In conclusion, the <code>SeatManager</code> implementation exemplifies an effective combination of data structures to solve a practical problem in seat management, showcasing good coding practices and a robust approach to handling dynamic state changes in a system.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode954s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -242,7 +372,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1846"  class="external-link" target="_blank" rel="noopener">LeetCode #1846: Maximum Element After Decreasing and Rearranging</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1846"  class="external-link" target="_blank" rel="noopener">LeetCode #1846: Maximum Element After Decreasing and Rearranging</a></th>
       </tr>
   </thead>
   <tbody>
@@ -263,66 +393,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

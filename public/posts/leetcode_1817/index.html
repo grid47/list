@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -205,11 +205,120 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode921s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the number of users who have a specific number of active minutes in a given set of logs. Each log entry contains two pieces of information: a user ID and a timestamp representing the minute the user was active. The goal is to compute how many users had exactly <code>i</code> active minutes for each minute from 1 to <code>k</code>, where <code>k</code> is the maximum number of active minutes we are interested in.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use the following approach:</p>
+<ol>
+<li>
+<p><strong>Data Structure</strong>: We will utilize a hash map to store user activity. Each user ID will map to a set of unique minutes they were active in. This will allow us to easily count the unique active minutes for each user.</p>
+</li>
+<li>
+<p><strong>Process Logs</strong>: For each log entry, we will insert the timestamp (minute) into the user&rsquo;s corresponding set in the hash map. This ensures that we only count unique active minutes.</p>
+</li>
+<li>
+<p><strong>Count Active Minutes</strong>: Once we have processed all logs, we will iterate over the hash map to count how many users have <code>i</code> active minutes, for all <code>i</code> from 1 to <code>k</code>.</p>
+</li>
+<li>
+<p><strong>Prepare the Result</strong>: Finally, we will create a result vector to store the count of users for each number of active minutes.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> to encapsulate the function that will solve our problem.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findingUsersActiveMinutes</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">logs</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>findingUsersActiveMinutes</code> takes two parameters: a vector of log entries (<code>logs</code>), where each entry is itself a vector containing a user ID and a timestamp, and an integer <code>k</code>, which indicates the maximum number of active minutes we are interested in.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">unordered_set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We declare a hash map <code>m</code>, where each key is an integer representing a user ID, and each value is an unordered set of integers representing the unique minutes that user was active. The unordered set is used to automatically handle duplicates.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a result vector <code>res</code> of size <code>k</code> to zero. This vector will hold the count of users who have exactly <code>i</code> active minutes, with <code>i</code> ranging from 1 to <code>k</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">l</span> <span class="p">:</span> <span class="n">logs</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">m</span><span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="n">insert</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li>We iterate over each log entry <code>l</code> in <code>logs</code>. For each log, we extract the user ID <code>l[0]</code> and the active minute <code>l[1]</code>, and we insert the minute into the unordered set corresponding to that user ID in our hash map <code>m</code>. This way, we ensure that each user ID only keeps track of unique active minutes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">p</span><span class="p">:</span> <span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">++</span><span class="n">res</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>We iterate over each entry <code>p</code> in the hash map <code>m</code>. For each user, we check the size of their set of active minutes (<code>p.second.size()</code>), which gives us the count of unique active minutes for that user. We increment the corresponding index in the result vector <code>res</code> by one. Since <code>res</code> is zero-indexed and counts from 1 to <code>k</code>, we subtract 1 from the size to place the count in the correct position.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the result vector <code>res</code>, which contains the counts of users with exactly <code>i</code> active minutes.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the number of log entries. This is because we process each log entry once to populate the hash map.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m)), where (m) is the number of unique users times the average number of unique active minutes per user. This is due to storing active minutes in the unordered set for each user.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>findingUsersActiveMinutes</code> function effectively counts the number of users based on their unique active minutes in a structured and efficient manner. By utilizing a hash map and unordered sets, we ensure that our solution remains efficient and straightforward, allowing for easy handling of duplicates and quick lookups.</p>
+<p>This implementation demonstrates the power of hash maps and sets in managing and counting unique data in programming. It provides a solid foundation for tackling similar problems involving user activity tracking, logging systems, and statistical analyses of user engagement.</p>
+<p>In conclusion, this solution not only meets the problem&rsquo;s requirements but also showcases good practices in algorithm design, such as using appropriate data structures and maintaining clarity in the code. This makes it an excellent reference for anyone looking to understand how to manage user activity data efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode921s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1818"  class="external-link" target="_blank" rel="noopener">LeetCode #1818: Minimum Absolute Sum Difference</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1818"  class="external-link" target="_blank" rel="noopener">LeetCode #1818: Minimum Absolute Sum Difference</a></th>
       </tr>
   </thead>
   <tbody>
@@ -230,66 +339,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

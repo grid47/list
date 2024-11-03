@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -209,11 +209,120 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">len</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode848s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the minimum length of a string <code>s</code> after performing a specific type of reduction. The reduction involves removing matching characters from the beginning and end of the string as long as they are identical. When there are no more such pairs left, we stop the reduction and return the length of the modified string.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach used here is a two-pointer technique, where we start with pointers at the beginning and end of the string. While the characters at these pointers are equal, we continue removing all occurrences of that character from the start and end. This effectively &ldquo;shrinks&rdquo; the string inward until there are no more equal characters at both ends.</p>
+<p><strong>Steps</strong>:</p>
+<ol>
+<li>Initialize two pointers: <code>i</code> at the start (0) and <code>j</code> at the end (size of <code>s</code> - 1).</li>
+<li>While the characters at positions <code>i</code> and <code>j</code> are the same:
+<ul>
+<li>Save this character (to identify repeated matches at the ends).</li>
+<li>Move the <code>i</code> pointer to the right and <code>j</code> pointer to the left as long as the characters are equal to the saved character.</li>
+</ul>
+</li>
+<li>After the loop, the length of the remaining string between <code>i</code> and <code>j</code> gives the answer.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">minimumLength</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pre</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">suf</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">len</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>    <span class="c1">// Continue only if chars at i and j are equal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>                <span class="c1">// Save the character to compare in the loop
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Move the left pointer forward as long as it matches the saved char
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Move the right pointer backward as long as it matches the saved char
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// Calculate the length of the remaining string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">len</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">len</span><span class="p">,</span> <span class="n">j</span> <span class="o">==</span> <span class="n">i</span> <span class="o">?</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">:</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">len</span><span class="p">;</span>   <span class="c1">// Return the final minimized length
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialize Pointers</strong>:</p>
+<ul>
+<li><code>i</code> is initialized to 0 (start of the string).</li>
+<li><code>j</code> is initialized to the end index of the string (<code>s.size() - 1</code>).</li>
+<li><code>len</code> stores the size of the string, which will be updated based on reductions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reduction Process</strong>:</p>
+<ul>
+<li>A <code>while</code> loop checks if characters at positions <code>i</code> and <code>j</code> are equal.</li>
+<li>Inside this loop, <code>c</code> stores the matching character.</li>
+<li>Two inner <code>while</code> loops move <code>i</code> and <code>j</code> toward the center, skipping over occurrences of <code>c</code>.</li>
+<li>Once both pointers reach characters that do not match <code>c</code>, <code>len</code> is updated based on the new length of the string (<code>j - i + 1</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>The value of <code>len</code> at the end represents the minimized length.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the length of the string <code>s</code>. Each character is checked at most twice.</li>
+<li><strong>Space Complexity</strong>: (O(1)), as it uses only fixed extra space for variables and does not rely on auxiliary data structures.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively minimizes the length of <code>s</code> by removing equal characters from both ends until the end characters no longer match. The use of two pointers allows efficient processing of the string, making it ideal for cases where large strings are involved. This technique leverages in-place operations, ensuring optimal time complexity with minimal space usage.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode848s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1751"  class="external-link" target="_blank" rel="noopener">LeetCode #1751: Maximum Number of Events That Can Be Attended II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1751"  class="external-link" target="_blank" rel="noopener">LeetCode #1751: Maximum Number of Events That Can Be Attended II</a></th>
       </tr>
   </thead>
   <tbody>
@@ -234,66 +343,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

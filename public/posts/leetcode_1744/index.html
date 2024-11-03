@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -217,11 +217,130 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode841s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an array <code>nums</code> where <code>nums[i]</code> represents the number of candies of type <code>i</code>, and a list of queries <code>q</code>. Each query <code>q[i]</code> has three values <code>[type, day, cap]</code>, which asks if it is possible to eat a candy of type <code>type</code> on day <code>day</code> while consuming at most <code>cap</code> candies each day. The goal is to determine whether each query is feasible based on the candy consumption limits.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this, a prefix sum array <code>cnt</code> is used to store cumulative counts of candies available up to each type. This allows for quickly determining the minimum and maximum range of days when a candy of a specific type can be eaten.</p>
+<p>For each query, given <code>type</code>, <code>day</code>, and <code>cap</code>, we:</p>
+<ol>
+<li>Calculate the minimum possible day (<code>mn</code>) and maximum possible day (<code>mx</code>) when a candy of the given type can be consumed.</li>
+<li>Check if the specified <code>day</code> falls within this range (<code>mn &lt;= day &lt;= mx</code>).</li>
+<li>If so, return <code>true</code> for that query; otherwise, return <code>false</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the code in detail.</p>
+<ol>
+<li>
+<p><strong>Prefix Sum Calculation</strong>:</p>
+<ul>
+<li>Initialize a prefix sum array <code>cnt</code> of size <code>nums.size() + 1</code>.</li>
+<li>Populate <code>cnt</code> such that <code>cnt[i]</code> represents the cumulative number of candies from type <code>0</code> to <code>i-1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">ll</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">ll</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><p>This ensures that <code>cnt[type]</code> gives the total number of candies available before type <code>type</code>, and <code>cnt[type + 1]</code> gives the cumulative count up to the next type.</p>
+</li>
+<li>
+<p><strong>Processing Each Query</strong>:</p>
+<ul>
+<li>For each query <code>v</code>, calculate:
+<ul>
+<li><code>type</code>: the type of candy in question.</li>
+<li><code>day</code>: the specific day on which we wish to eat the candy.</li>
+<li><code>cap</code>: the maximum number of candies that can be eaten per day.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">v</span> <span class="p">:</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">type</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">day</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cap</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">mn</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">type</span><span class="p">]</span> <span class="o">/</span> <span class="n">cap</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ll</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">type</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Calculate <code>mn</code>, the minimum possible day by dividing the cumulative candies up to <code>type</code> by the daily limit <code>cap</code>.</li>
+<li>Calculate <code>mx</code>, the maximum possible day by finding the last day before reaching the next type&rsquo;s candies.</li>
+</ul>
+</li>
+<li>
+<p><strong>Checking Feasibility</strong>:</p>
+<ul>
+<li>If <code>mn &lt;= day &lt;= mx</code>, it’s possible to eat a candy of the given type on <code>day</code> under the constraints, so <code>true</code> is added to <code>res</code>. Otherwise, <code>false</code> is added.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">mn</span> <span class="o">&lt;=</span> <span class="n">day</span> <span class="o">&amp;&amp;</span> <span class="n">day</span> <span class="o">&lt;=</span> <span class="n">mx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>The vector <code>res</code>, which holds the boolean results for each query, is returned.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: (O(N + Q)), where (N) is the length of <code>nums</code> and (Q) is the number of queries. The prefix sum takes (O(N)), and each query check takes (O(1)), resulting in (O(N + Q)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(N + Q)) for storing the prefix sums and results of each query.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks the feasibility of each query by leveraging prefix sums for quick cumulative candy counts. This approach provides optimal performance with minimal computation per query, making it well-suited for large inputs.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode841s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1745"  class="external-link" target="_blank" rel="noopener">LeetCode #1745: Palindrome Partitioning IV</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1745"  class="external-link" target="_blank" rel="noopener">LeetCode #1745: Palindrome Partitioning IV</a></th>
       </tr>
   </thead>
   <tbody>
@@ -242,66 +361,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

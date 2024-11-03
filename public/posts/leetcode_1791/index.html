@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -199,11 +199,98 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode893s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to identify the &ldquo;center&rdquo; of a star graph. A star graph is defined as a tree with one internal node (the center) connected to all other nodes (the leaves). In the context of this problem, we are given edges of a star graph in the form of a 2D vector where each element represents an edge connecting two nodes. The task is to find the center node efficiently.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can leverage the properties of a star graph:</p>
+<ol>
+<li>
+<p><strong>Understanding the Structure</strong>: In a star graph, the center node is connected directly to all other nodes. This means that if we look at the first two edges of the graph, the center node will appear in both edges.</p>
+</li>
+<li>
+<p><strong>Direct Comparison</strong>: We can simply check which of the two nodes in the first edge appears in the second edge. If one of them does, it is the center. If neither appears in both, then the other node in the first edge must be the center.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">findCenter</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> and declare a public method <code>findCenter</code> that takes a 2D vector <code>e</code> representing the edges of the star graph.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>This single line of code contains the core logic to determine the center node.</li>
+<li>We use a conditional (ternary) operator to perform our checks:
+<ul>
+<li>First, we check if the first node of the first edge (<code>e[0][0]</code>) is equal to the first node of the second edge (<code>e[1][0]</code>). If they are equal, <code>e[0][0]</code> is the center, and we return it.</li>
+<li>If that condition is not satisfied, we then check if <code>e[0][0]</code> is equal to the second node of the second edge (<code>e[1][1]</code>). If they are equal, <code>e[0][0]</code> is again the center, and we return it.</li>
+<li>If neither condition is satisfied, we return the second node of the first edge (<code>e[0][1]</code>), which must be the center because it is connected to the first node in both edges.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(1)). This is because we are performing a constant number of operations regardless of the size of the input.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(1)) since we are not using any additional data structures that scale with the size of the input.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>findCenter</code> function provides a highly efficient way to identify the center of a star graph using simple comparisons. This solution is optimal because it achieves the desired result in constant time and space, making it suitable for even large datasets.</p>
+<p>Understanding how to efficiently determine the center of a star graph is essential for solving similar problems in graph theory and algorithm design. This knowledge can be applied in various areas, including networking, tree data structures, and other scenarios where hierarchical relationships are analyzed.</p>
+<p>In practical applications, such as in social networks or communication networks, the concept of a central node can help in understanding key influencers or central servers, enhancing overall performance and connectivity analysis. As such, the ability to quickly identify such nodes is a valuable skill in both academic and professional settings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode893s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1792"  class="external-link" target="_blank" rel="noopener">LeetCode #1792: Maximum Average Pass Ratio</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1792"  class="external-link" target="_blank" rel="noopener">LeetCode #1792: Maximum Average Pass Ratio</a></th>
       </tr>
   </thead>
   <tbody>
@@ -224,66 +311,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

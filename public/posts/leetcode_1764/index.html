@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -220,11 +220,142 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode864s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand requires us to determine whether we can sequentially choose groups of integers from a given list (<code>nums</code>) based on specified subarrays (groups). Each group must appear in the same order as they are defined in the <code>group</code> list, and all elements of a group must be contiguous within <code>nums</code>. The challenge is to implement an efficient solution that traverses both the <code>nums</code> and <code>group</code> arrays and verifies this condition.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm employs a two-pointer technique to iterate through both the <code>nums</code> array and the <code>group</code> array. The main idea is to use one pointer (<code>numsIdx</code>) to traverse the <code>nums</code> array and another pointer (<code>grpIdx</code>) to traverse the <code>group</code> array. Here&rsquo;s how the algorithm is structured:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start with both pointers at the beginning of their respective arrays.</p>
+</li>
+<li>
+<p><strong>Outer Loop</strong>: The outer loop continues until all groups are checked or all elements in <code>nums</code> have been processed.</p>
+</li>
+<li>
+<p><strong>Matching Elements</strong>: For each group, an inner loop checks if the elements in <code>group[grpIdx]</code> match the current segment of <code>nums</code>, starting from <code>numsIdx</code>. Count the number of consecutive matching elements.</p>
+</li>
+<li>
+<p><strong>Advancing Pointers</strong>:</p>
+<ul>
+<li>If all elements in the current group are found in sequence in <code>nums</code>, advance both pointers to process the next group and the next part of <code>nums</code>.</li>
+<li>If a match is not found, increment <code>numsIdx</code> to check the next potential starting point in <code>nums</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check</strong>: After processing, check if all groups were successfully matched. If so, return <code>true</code>; otherwise, return <code>false</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code is implemented in the <code>Solution</code> class and consists of a single public method, <code>canChoose</code>, which takes two parameters: <code>group</code> (a vector of integer vectors) and <code>nums</code> (a vector of integers).</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated within the <code>Solution</code> class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Signature</strong>: The <code>canChoose</code> method takes two parameters: a reference to a vector of vectors (<code>group</code>) and a reference to a vector of integers (<code>nums</code>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">canChoose</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">group</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Pointer Initialization</strong>: Two integer variables are initialized to track the current index in <code>nums</code> (<code>numsIdx</code>) and the current index in <code>group</code> (<code>grpIdx</code>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">numsIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">grpIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Outer While Loop</strong>: This loop continues as long as there are remaining elements in <code>nums</code> and groups in <code>group</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">numsIdx</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">grpIdx</span> <span class="o">&lt;</span> <span class="n">group</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Matching Count</strong>: A variable <code>matchCnt</code> is initialized to zero. This will count how many elements from the current group match the corresponding elements in <code>nums</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">matchCnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Inner While Loop</strong>: This nested loop checks for consecutive matches between <code>group[grpIdx]</code> and the corresponding elements in <code>nums</code>, starting from <code>numsIdx</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">numsIdx</span> <span class="o">+</span> <span class="n">matchCnt</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">matchCnt</span> <span class="o">&lt;</span> <span class="n">group</span><span class="p">[</span><span class="n">grpIdx</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">nums</span><span class="p">[</span><span class="n">numsIdx</span> <span class="o">+</span> <span class="n">matchCnt</span><span class="p">]</span> <span class="o">==</span> <span class="n">group</span><span class="p">[</span><span class="n">grpIdx</span><span class="p">][</span><span class="n">matchCnt</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">matchCnt</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check for Full Match</strong>: After the inner loop, the algorithm checks if the entire current group was matched.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">matchCnt</span> <span class="o">==</span> <span class="n">group</span><span class="p">[</span><span class="n">grpIdx</span><span class="p">].</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>If matched, both pointers are advanced: <code>grpIdx</code> is incremented to check the next group, and <code>numsIdx</code> is updated to skip the matched elements in <code>nums</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">grpIdx</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">numsIdx</span> <span class="o">+=</span> <span class="n">matchCnt</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If not matched, simply increment <code>numsIdx</code> to try the next potential starting point in <code>nums</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="n">numsIdx</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Final Result</strong>: After completing the traversal, the function checks if all groups were matched and returns the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">grpIdx</span> <span class="o">==</span> <span class="n">group</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the algorithm is (O(n + m)), where (n) is the length of <code>nums</code> and (m) is the total number of elements across all groups in <code>group</code>. This is efficient as we only make a single pass through both arrays.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since no additional data structures are used that grow with the input size; only a few integer variables are utilized.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>canChoose</code> method is an effective solution to determine if a series of groups can be sequentially chosen from an integer array while preserving order and contiguity. Utilizing a two-pointer technique allows the algorithm to efficiently traverse the input data without requiring nested loops, leading to an optimal solution.</p>
+<p>This method demonstrates the power of iteration and matching algorithms in competitive programming. By structuring the algorithm to check for contiguous sequences, it achieves both clarity and performance.</p>
+<p>In practical applications, this approach could be adapted for tasks such as substring matching, pattern recognition, or validating sequences in larger datasets, making it a versatile tool in the software developer&rsquo;s toolkit.</p>
+<p>Overall, the <code>canChoose</code> function showcases essential algorithmic principles that can be applied to a wide array of programming challenges, encouraging best practices in code efficiency and readability.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode864s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1765"  class="external-link" target="_blank" rel="noopener">LeetCode #1765: Map of Highest Peak</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1765"  class="external-link" target="_blank" rel="noopener">LeetCode #1765: Map of Highest Peak</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +376,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

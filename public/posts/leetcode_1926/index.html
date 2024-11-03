@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -226,7 +226,170 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1043s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the shortest distance from an entrance point to the nearest exit in a maze. The maze is represented as a 2D grid consisting of open paths (denoted by &lsquo;.&rsquo;) and walls (denoted by &lsquo;+&rsquo;). An exit is defined as any open path located on the border of the maze (the first or last row, or the first or last column). The entrance is provided as a coordinate, and the objective is to return the number of steps to the nearest exit. If no exit is reachable, the function should return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize the <strong>Breadth-First Search (BFS)</strong> algorithm, which is ideal for exploring the shortest path in unweighted grids such as this maze. The steps of our approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Initialize a Queue</strong>: We will use a queue to keep track of the cells to explore, starting with the entrance point.</p>
+</li>
+<li>
+<p><strong>Mark the Entrance</strong>: We mark the entrance as visited to prevent revisiting it.</p>
+</li>
+<li>
+<p><strong>Define Directions</strong>: We define the possible movements (up, down, left, right) within the maze.</p>
+</li>
+<li>
+<p><strong>BFS Traversal</strong>: We perform BFS until we either find an exit or exhaust all possible paths:</p>
+<ul>
+<li>For each cell, check its neighbors in all four directions.</li>
+<li>If a neighbor is valid (within bounds and not a wall), we check if it’s an exit.</li>
+<li>If it is an exit, we return the distance.</li>
+<li>If not, we mark it as visited and add it to the queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return -1</strong>: If we finish BFS without finding an exit, we return -1.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code provided step by step to understand how it implements the approach described:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">nearestExit</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">maze</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">entrance</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>Here, we define the <code>Solution</code> class and the <code>nearestExit</code> method, which takes a reference to a 2D character vector representing the maze and a vector representing the entrance&rsquo;s coordinates.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">entrance</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entrance</span><span class="p">[</span><span class="mi">1</span><span class="p">]});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">maze</span><span class="p">[</span><span class="n">entrance</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">entrance</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="sc">&#39;+&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize a queue to facilitate the BFS and push the entrance coordinates onto the queue. We also mark the entrance cell as visited by changing its value to &lsquo;+&rsquo;.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dir</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+</span></span></code></pre></div><p>We initialize the distance counter <code>ans</code> to 1 (to count the first move), determine the dimensions of the maze (m) (rows) and (n) (columns), and define an array <code>dir</code> to simplify movement in the four cardinal directions.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div><p>We enter a loop that continues until the queue is empty. Inside, we store the current size of the queue, indicating how many cells we will explore at this level of BFS.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><p>We iterate through each direction to calculate the potential neighboring cell’s coordinates <code>x</code> and <code>y</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">m</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="n">n</span> <span class="o">||</span> <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;+&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span></code></pre></div><p>We check if the neighbor is out of bounds or has already been visited (marked with &lsquo;+&rsquo;). If so, we skip it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>                    
+</span></span></code></pre></div><p>If the current neighbor is an exit (located on the boundary of the maze), we return the current distance <code>ans</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;+&#39;</span><span class="p">;</span>                    
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">});</span>
+</span></span></code></pre></div><p>If the neighbor is valid and not an exit, we mark it as visited and push its coordinates onto the queue for further exploration.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>After exploring all neighbors at the current level, we increment the distance counter <code>ans</code> to reflect the next step, and the outer loop continues. If the queue is exhausted without finding an exit, we return -1.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(m \times n)), where (m) is the number of rows and (n) is the number of columns in the maze. In the worst case, we might need to visit each cell once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(m \times n)) due to the queue used for BFS, which could store all cells in the maze in the worst case.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>nearestExit</code> function efficiently finds the shortest path from a given entrance in the maze to the nearest exit using the BFS algorithm. This approach ensures that we explore all possible paths while keeping track of visited cells to prevent cycles and redundant checks.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Efficient Pathfinding</strong>: The use of BFS allows for efficient exploration of the shortest path in a grid-like structure.</p>
+</li>
+<li>
+<p><strong>Dynamic Distance Tracking</strong>: The algorithm dynamically tracks the number of steps taken to reach the exit, ensuring accuracy in distance measurement.</p>
+</li>
+<li>
+<p><strong>Robust Input Handling</strong>: The function handles various maze configurations, including those with no exits or surrounded entrances.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Game Development</strong>: This algorithm can be used in maze-solving games where players must find exits or complete levels.</p>
+</li>
+<li>
+<p><strong>Robotics</strong>: In robotic navigation, similar algorithms are utilized for pathfinding and obstacle avoidance.</p>
+</li>
+<li>
+<p><strong>Route Planning</strong>: The method can be adapted for routing applications, such as finding the quickest path in navigation systems.</p>
+</li>
+<li>
+<p><strong>Educational Tools</strong>: The BFS approach can serve as an educational example in algorithm courses, demonstrating practical applications of graph traversal.</p>
+</li>
+<li>
+<p><strong>Simulation</strong>: In simulations that model movement in environments, this logic helps evaluate pathways and optimize routes.</p>
+</li>
+</ol>
+<p>By understanding this implementation, developers can improve their skills in handling grid-based problems and explore more advanced algorithms for pathfinding and navigation tasks.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1043s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -238,7 +401,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1927"  class="external-link" target="_blank" rel="noopener">LeetCode #1927: Sum Game</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1927"  class="external-link" target="_blank" rel="noopener">LeetCode #1927: Sum Game</a></th>
       </tr>
   </thead>
   <tbody>
@@ -259,66 +422,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

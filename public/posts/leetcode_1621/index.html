@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -220,11 +220,170 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode702s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the number of ways to partition a sequence of ( n ) elements into exactly ( k ) non-empty contiguous segments. Each segment must contain at least one element, and the segments must be formed by splitting the sequence without altering the order of the elements.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a dynamic programming approach with memoization to efficiently compute the number of valid ways to create these segments. Here are the key components of the approach:</p>
+<ol>
+<li>
+<p><strong>State Representation</strong>: We define a recursive function ( dp(idx, seg, startHere) ) where:</p>
+<ul>
+<li><code>idx</code>: The current index in the sequence.</li>
+<li><code>seg</code>: The remaining number of segments that need to be formed.</li>
+<li><code>startHere</code>: A boolean that indicates whether we are starting a new segment at the current index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If ( seg = 0 ): This means we have successfully formed all required segments, and we return 1 as a valid configuration.</li>
+<li>If ( idx = n ): This means we have reached the end of the sequence without forming enough segments, so we return 0.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>: To optimize performance, we use a memoization table <code>memo[idx][seg][startHere]</code> to cache results of subproblems. If a state has been computed before, we can return the cached result instead of recalculating it.</p>
+</li>
+<li>
+<p><strong>Recurrence Relation</strong>:</p>
+<ul>
+<li>We can choose to either continue the current segment or start a new segment:
+<ul>
+<li><strong>Continue the segment</strong>: We move to the next index with the same number of segments.</li>
+<li><strong>Start a new segment</strong>: If we are allowed to start a new segment (i.e., if <code>startHere</code> is true), we can choose to start a new segment at the next index.</li>
+<li><strong>End the current segment</strong>: If we are not starting a new segment (i.e., if <code>startHere</code> is false), we can finish the current segment and decrease the segment count.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>: Since the number of ways can be very large, we take results modulo ( 10^9 + 7 ).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">1001</span><span class="p">][</span><span class="mi">1001</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> which contains the member variables:
+<ul>
+<li><code>n</code>: the total number of elements.</li>
+<li><code>mod</code>: the modulo value.</li>
+<li><code>memo</code>: a 3D array for memoization, initialized to size [1001][1001][2] to cover all potential states.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">seg</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">startHere</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">seg</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function is defined to take the current index, remaining segments, and a boolean indicating whether we can start a new segment.</li>
+<li>The base cases are checked:
+<ul>
+<li>If <code>seg</code> is zero, return 1 (successful partitioning).</li>
+<li>If <code>idx</code> equals <code>n</code>, return 0 (not enough segments formed).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">seg</span><span class="p">][</span><span class="n">startHere</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">seg</span><span class="p">][</span><span class="n">startHere</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>Check if the result for the current state has already been computed and stored in <code>memo</code>. If so, return that value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">seg</span><span class="p">,</span> <span class="n">startHere</span><span class="p">);</span> <span class="c1">// will start on next or continue the seg
+</span></span></span></code></pre></div><ul>
+<li>Recursively call <code>dp</code> to continue the current segment by moving to the next index without changing the segment count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">startHere</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">seg</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// stared new line            
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">seg</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// end the line here            
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If we are allowed to start a new segment (<code>startHere</code> is true), we also explore the possibility of starting a new segment at the next index.</li>
+<li>If we are not starting a new segment (<code>startHere</code> is false), we explore the option of ending the current segment and decreasing the segment count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">seg</span><span class="p">][</span><span class="n">startHere</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Store the computed value in the memoization table and return it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numberOfSets</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>numberOfSets</code> function initializes the total number of elements, resets the memoization table to -1, and calls the <code>dp</code> function starting from index 0 with <code>k</code> segments and the ability to start a new segment.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is ( O(n \times k) ), where ( n ) is the number of elements and ( k ) is the number of segments. This is due to the recursive exploration of states combined with memoization.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n \times k) ) for the memoization table. The function also uses a constant amount of additional space for other variables.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively utilizes dynamic programming to solve the problem of counting the number of ways to partition a sequence into segments. By breaking the problem down into smaller subproblems and leveraging memoization, we achieve an efficient and scalable solution.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Dynamic Programming</strong>: This technique is crucial for optimizing problems that involve overlapping subproblems, allowing us to avoid redundant calculations.</li>
+<li><strong>Memoization</strong>: Storing previously computed results significantly enhances performance, particularly in recursive algorithms.</li>
+<li><strong>Modular Arithmetic</strong>: When dealing with potentially large numbers, applying modular arithmetic ensures results remain manageable and within required bounds.</li>
+</ol>
+<p>This approach can be applied to various combinatorial problems involving partitioning and grouping, and understanding the mechanics of state representation and recursive function calls can aid in tackling similar challenges in competitive programming and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode702s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1622"  class="external-link" target="_blank" rel="noopener">LeetCode #1622: Fancy Sequence</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1622"  class="external-link" target="_blank" rel="noopener">LeetCode #1622: Fancy Sequence</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +404,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

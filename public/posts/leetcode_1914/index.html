@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -232,11 +232,166 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">grid</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1042s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to rotate a given 2D grid (matrix) by <code>k</code> positions in a circular manner. This rotation must be performed layer by layer, starting from the outermost layer of the grid and moving inward. Each layer of the grid can be thought of as a ring, and the goal is to shift the elements in these rings to the right by <code>k</code> positions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the desired rotation, the algorithm follows these steps:</p>
+<ol>
+<li>
+<p><strong>Layer Identification</strong>: The grid is processed layer by layer, where each layer can be defined by its boundaries (left, right, top, and bottom). The number of layers is determined by the smaller dimension of the grid divided by two.</p>
+</li>
+<li>
+<p><strong>Layer Length Calculation</strong>: For each layer, calculate the number of elements in the layer (total perimeter length) using the formula:
+[
+\text{total} = 2 \times (r - l) + 2 \times (b - t)
+]
+where <code>l</code>, <code>r</code>, <code>t</code>, and <code>b</code> are the left, right, top, and bottom indices of the current layer.</p>
+</li>
+<li>
+<p><strong>Effective Rotations</strong>: The effective number of rotations needed is determined by taking <code>k</code> modulo the perimeter length (<code>total</code>). This accounts for cases where <code>k</code> is larger than the number of elements in the layer.</p>
+</li>
+<li>
+<p><strong>Performing Rotations</strong>: The elements of the layer are rotated in a circular manner. This involves:</p>
+<ul>
+<li>Saving the top left element temporarily.</li>
+<li>Shifting elements in a clockwise direction, i.e., moving elements from the top row to the right column, from the right column to the bottom row, from the bottom row to the left column, and from the left column back to the top row.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Rotated Grid</strong>: After processing all layers, the modified grid is returned.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">rotateGrid</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>This line defines the <code>rotateGrid</code> function, which takes a 2D vector <code>grid</code> and an integer <code>k</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><p>Here, we retrieve the dimensions of the grid, with <code>m</code> representing the number of rows and <code>n</code> representing the number of columns.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">min</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The loop iterates over each layer of the grid. The number of layers is determined by half the minimum dimension of the grid.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div><p>We define the boundaries of the current layer:</p>
+<ul>
+<li><code>l</code>: left boundary</li>
+<li><code>r</code>: right boundary</li>
+<li><code>t</code>: top boundary</li>
+<li><code>b</code>: bottom boundary</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">rot</span> <span class="o">=</span> <span class="n">k</span> <span class="o">%</span> <span class="n">total</span><span class="p">;</span>
+</span></span></code></pre></div><p>Calculate the total number of elements in the layer and determine the effective number of rotations needed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="o">&amp;&amp;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>Check if the current layer contains more than one element to ensure that we only rotate valid layers.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">rot</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>This loop performs the rotation <code>rot</code> times.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">l</span><span class="p">];</span>
+</span></span></code></pre></div><p>Store the top left element of the layer temporarily.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">;</span> <span class="n">p</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">grid</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><p>Shift elements from the top row to the right by one position.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span> <span class="n">p</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">grid</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">r</span><span class="p">];</span>
+</span></span></code></pre></div><p>Shift elements from the right column down by one position.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">r</span><span class="p">;</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">l</span><span class="p">;</span> <span class="n">p</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">grid</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><p>Shift elements from the bottom row to the left by one position.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">;</span> <span class="n">p</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">grid</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">l</span><span class="p">];</span>
+</span></span></code></pre></div><p>Shift elements from the left column up by one position.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="n">grid</span><span class="p">[</span><span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span></code></pre></div><p>Place the temporarily stored element back into the grid.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">grid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>After all layers have been processed, the modified grid is returned.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is O(m * n), where m is the number of rows and n is the number of columns. Each element in the grid is processed once during the rotations.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(1), as we are only using a fixed number of variables for computations without any additional data structures that grow with input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>rotateGrid</code> function efficiently rotates the layers of a grid based on the specified number of positions <code>k</code>. By treating each layer as a separate entity and performing rotations layer by layer, the solution is both straightforward and efficient. This method ensures that the algorithm runs in linear time relative to the number of elements in the grid, making it suitable for large matrices.</p>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Image Processing</strong>: This algorithm can be applied in image manipulation tasks, such as rotating borders of an image represented as a matrix of pixels.</p>
+</li>
+<li>
+<p><strong>Game Development</strong>: In grid-based games, layer rotations can be used to create interesting visual effects or transformations of the game board.</p>
+</li>
+<li>
+<p><strong>Data Representation</strong>: The concept of rotating layers can also be applied in scenarios where data needs to be rearranged in a structured format, such as matrices used in simulations.</p>
+</li>
+<li>
+<p><strong>Competitive Programming</strong>: The algorithm serves as an example of how to manipulate 2D arrays effectively, making it a great addition to competitive programming skills.</p>
+</li>
+<li>
+<p><strong>Mathematical Puzzles</strong>: Rotating grid layers can be part of larger mathematical puzzles or challenges that involve spatial reasoning and manipulation.</p>
+</li>
+</ol>
+<p>By following this structured approach, developers can efficiently handle tasks related to grid manipulation and optimize their algorithms for performance and clarity. The use of clear variable naming and logical structuring makes the code easy to read and maintain, ensuring long-term usability.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1042s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1915"  class="external-link" target="_blank" rel="noopener">LeetCode #1915: Number of Wonderful Substrings</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1915"  class="external-link" target="_blank" rel="noopener">LeetCode #1915: Number of Wonderful Substrings</a></th>
       </tr>
   </thead>
   <tbody>
@@ -257,66 +412,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

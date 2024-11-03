@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -217,11 +217,143 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1029s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the number of complete 15-minute rounds that a user is active based on their login and logout times. The login and logout times are provided in a <code>HH:MM</code> format (24-hour clock), and the solution must account for scenarios where the logout time could be on the following day if the login occurs late in the day.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will:</p>
+<ol>
+<li>
+<p><strong>Convert Time to Minutes</strong>: Convert the login and logout times from <code>HH:MM</code> format into total minutes since the start of the day. This makes it easier to perform arithmetic calculations.</p>
+</li>
+<li>
+<p><strong>Calculate Active Rounds</strong>: Count how many complete 15-minute rounds fall within the active time from login to logout. A complete round is defined as a time interval that starts and ends within the active period.</p>
+</li>
+<li>
+<p><strong>Handle Overnight Scenarios</strong>: If the login time is greater than the logout time, it indicates that the user logged in before midnight and logged out after. We need to account for the full 24-hour cycle.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the count of the complete 15-minute rounds.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code to understand how these steps are implemented:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Signature</strong>: The function <code>numberOfRounds</code> is defined, which takes two strings, <code>login</code> and <code>logout</code>, as input and returns an integer.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numberOfRounds</span><span class="p">(</span><span class="n">string</span> <span class="n">login</span><span class="p">,</span> <span class="n">string</span> <span class="n">logout</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Time Conversion</strong>: The login and logout times are converted into total minutes. This is done by multiplying the hour part by 60 and adding the minute part.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">in</span> <span class="o">=</span> <span class="p">(((</span><span class="n">login</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">login</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="p">((</span><span class="n">login</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">login</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">out</span> <span class="o">=</span> <span class="p">(((</span><span class="n">logout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">logout</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">+</span> <span class="p">((</span><span class="n">logout</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">logout</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">));</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Counter Initialization</strong>: A counter <code>cnt</code> is initialized to zero to keep track of the number of complete rounds.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Overnight Handling</strong>: The first <code>if</code> condition checks if the login time is greater than the logout time, indicating an overnight scenario. If so, it counts rounds for the time between the login time and the end of the day, and then from the start of the day to the logout time.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">in</span> <span class="o">&gt;</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">15</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">15</span> <span class="o">&lt;=</span> <span class="n">out</span> <span class="o">||</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">in</span><span class="p">)</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Regular Case</strong>: If the login time is less than or equal to the logout time, it counts the complete rounds that fall strictly within the active time.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">15</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">in</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">15</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">out</span><span class="p">)</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is O(1) since the loop will iterate a fixed number of times (96 times for the 15-minute intervals in a day). The overall complexity does not depend on the input size.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also O(1) because we are using a fixed amount of space for the variables, regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>numberOfRounds</code> function effectively calculates the number of complete 15-minute rounds that fall within a user&rsquo;s active time, taking into account both day transitions and the specifics of time calculation. The approach is efficient and straightforward, utilizing basic arithmetic and conditional checks.</p>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>numberOfRounds</code> function can be applied in various domains, such as:</p>
+<ul>
+<li>
+<p><strong>Workforce Management</strong>: In applications that track employee work hours, it can be used to calculate active working time blocks, which can help in payroll calculations or productivity assessments.</p>
+</li>
+<li>
+<p><strong>Time Tracking Applications</strong>: For applications that require time logging and reporting, this function can help in generating reports based on active time spent.</p>
+</li>
+<li>
+<p><strong>Game Development</strong>: In online gaming, where player activity is logged, this function could be used to calculate active playtime in specific intervals, helping in reward systems or player engagement metrics.</p>
+</li>
+</ul>
+<p>By implementing this function, developers can ensure their applications effectively handle time tracking, while maintaining clarity and performance in their code. The simple yet effective approach makes it an ideal candidate for integration into larger systems that require time-based calculations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1029s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1905"  class="external-link" target="_blank" rel="noopener">LeetCode #1905: Count Sub Islands</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1905"  class="external-link" target="_blank" rel="noopener">LeetCode #1905: Count Sub Islands</a></th>
       </tr>
   </thead>
   <tbody>
@@ -242,66 +374,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

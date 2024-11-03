@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -216,11 +216,132 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode862s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to find the longest nice substring within a given string <code>s</code>. A substring is defined as &ldquo;nice&rdquo; if it contains both the uppercase and lowercase versions of each letter that appears in it. For example, the substring &ldquo;aA&rdquo; is nice, while &ldquo;a&rdquo; or &ldquo;A&rdquo; is not. The challenge is to determine the longest such substring efficiently.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes a recursive approach to explore all potential substrings of the input string and checks for their &ldquo;niceness.&rdquo; Here&rsquo;s how the algorithm operates:</p>
+<ol>
+<li>
+<p><strong>Character Count</strong>: Maintain a count of each character in the substring being analyzed to determine if both the uppercase and lowercase versions are present.</p>
+</li>
+<li>
+<p><strong>Recursive Exploration</strong>: Iterate through the string, checking character pairs. When encountering a character that breaks the nice condition (either by not having its counterpart or hitting the end of the substring), it triggers a recursive search on the segments created by the split.</p>
+</li>
+<li>
+<p><strong>Maximize Length</strong>: During the recursive calls, the algorithm compares the lengths of the nice substrings found and retains the longest one.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code is structured within the <code>Solution</code> class and features a single public method, <code>longestNiceSubstring</code>, with optional parameters for specifying the start and end indices of the substring being analyzed.</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated within the <code>Solution</code> class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Signature</strong>: The <code>longestNiceSubstring</code> method accepts a string <code>s</code> and two integer parameters, <code>start</code> and <code>end</code>. The <code>end</code> parameter defaults to -1, which signals that the full length of the string should be analyzed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">longestNiceSubstring</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization</strong>: If <code>end</code> is not provided, it is set to the length of the string. An array <code>cnt</code> is initialized to track character counts, and <code>j</code> is initialized to <code>start - 1</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">end</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">end</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">26</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">j</span> <span class="o">=</span> <span class="n">start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Counting Characters</strong>: The loop iterates from <code>start</code> to <code>end</code>, counting the occurrence of both lowercase and uppercase versions of each character.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cnt</span><span class="p">[</span><span class="n">tolower</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">][(</span><span class="kt">bool</span><span class="p">)</span><span class="n">islower</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating through Characters</strong>: A second loop runs from <code>start</code> to <code>end + 1</code> to check the characters, keeping track of the current character being analyzed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">i</span> <span class="o">==</span> <span class="n">end</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">tolower</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Checking Nice Condition</strong>: If the character is the end marker or the count of both cases for the current character is less than 2, it signifies a break in the nice substring condition.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">cnt</span><span class="p">[</span><span class="n">ch</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">cnt</span><span class="p">[</span><span class="n">ch</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive Call</strong>: When a break occurs, the function makes a recursive call to find the longest nice substring in the segment formed between <code>j + 1</code> and <code>i</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">res1</span> <span class="o">=</span> <span class="n">longestNiceSubstring</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating Result</strong>: If the newly found substring is longer than the current result, update the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">res1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">res</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span> <span class="o">=</span> <span class="n">res1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>: Finally, the longest nice substring found during the iterations is returned.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The worst-case time complexity is (O(n^2)), where (n) is the length of the string. This is due to the nested nature of the recursion and substring operations that are performed on each recursive call.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) as well, mainly due to the stack space used by the recursive calls and the storage of the substring in each call.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>longestNiceSubstring</code> function provides an elegant solution to finding the longest nice substring in a given string. It efficiently counts the occurrences of characters and utilizes recursion to explore potential substrings, ensuring that both cases of characters are present.</p>
+<p>This method highlights important concepts in string manipulation and recursion, showcasing how to break down a problem into manageable subproblems. By maintaining character counts and systematically exploring substrings, the algorithm effectively identifies the longest nice substring.</p>
+<p>The solution is not only functional but also illustrative of the divide-and-conquer approach in problem-solving, where larger problems are solved by tackling smaller instances, ultimately leading to an optimal solution for the original problem.</p>
+<p>In summary, the <code>longestNiceSubstring</code> method is a robust example of handling string problems in C++, demonstrating the power of recursion and careful character tracking. It sets a foundation for tackling similar challenges in competitive programming and algorithmic design, ensuring that students and developers can apply these techniques in their work.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode862s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1764"  class="external-link" target="_blank" rel="noopener">LeetCode #1764: Form Array by Concatenating Subarrays of Another Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1764"  class="external-link" target="_blank" rel="noopener">LeetCode #1764: Form Array by Concatenating Subarrays of Another Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -241,66 +362,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -226,7 +226,145 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode700s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining the best coordinate in a 2D grid (with dimensions ranging from (0) to (50) in both x and y directions) to maximize the sum of signals received from a set of towers located at given coordinates. Each tower has a specified signal strength, and the signal received from each tower decreases with distance, influenced by a given radius. Specifically, if a point is within the radius of a tower, the signal received is calculated based on the distance from the tower to the point. The goal is to find the coordinate that yields the highest total signal strength from all towers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, the algorithm follows these steps:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>: We keep track of the maximum signal strength and the coordinates that produce this strength.</p>
+</li>
+<li>
+<p><strong>Iterate Over Possible Coordinates</strong>: We loop through all possible coordinates in the grid from ((0, 0)) to ((50, 50)).</p>
+</li>
+<li>
+<p><strong>Calculate Signal Strength for Each Coordinate</strong>:</p>
+<ul>
+<li>For each tower, calculate the distance to the current coordinate.</li>
+<li>If the distance is within the specified radius, compute the signal strength using the formula: [ \text{signal} = \frac{\text{strength}}{1 + \text{distance}} ]</li>
+<li>Sum the signals from all towers for the current coordinate.</li>
+</ul>
+</li>
+<li>
+<p><strong>Track Maximum Signal Strength</strong>: If the computed signal strength is greater than the previously recorded maximum, update the maximum and reset the list of best coordinates. If it equals the maximum, add the current coordinate to the list.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After checking all coordinates, return the first coordinate from the list of best coordinates.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s the detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bestCoordinate</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">tow</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rad</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">tow</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>bestCoordinate</code> function takes a list of towers and the radius as input.</li>
+<li>We initialize <code>n</code> to hold the number of towers, <code>mx</code> to track the maximum signal strength, and <code>res</code> to hold the best coordinates.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">50</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="mi">50</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We loop through all possible coordinates ( (i, j) ) from ( (0, 0) ) to ( (50, 50) ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">tow</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">tow</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">j</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">ss</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>For each coordinate ( (i, j) ), we initialize <code>sum</code> to accumulate the signal strength.</li>
+<li>We iterate through each tower, extracting its coordinates ( (x, y) ) and calculating the Euclidean distance ( r ) to the current coordinate.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">r</span> <span class="o">&lt;=</span> <span class="n">rad</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ss</span> <span class="o">=</span> <span class="n">tow</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">+=</span> <span class="n">ss</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the distance ( r ) is within the specified radius, we compute the signal strength ( ss ) using the formula provided and add it to <code>sum</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mx</span> <span class="o">&lt;</span> <span class="n">sum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mx</span> <span class="o">=</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">=</span> <span class="p">{{</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">mx</span> <span class="o">==</span> <span class="n">sum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After calculating the total signal strength for the coordinate, we compare it to the current maximum. If it is greater, we update <code>mx</code> and reset <code>res</code> to only contain the current coordinate. If it matches the maximum, we append the current coordinate to <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we sort the list of best coordinates and return the first one.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(n \cdot (51^2)) ), where ( n ) is the number of towers. This is because we iterate over each tower for every coordinate in a ( 51 \times 51 ) grid, resulting in a significant number of calculations as the number of towers increases.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) as we only use a fixed amount of additional space for variables and do not require data structures that grow with the input size. The output is stored in a fixed-size vector that will hold a maximum of two coordinates in the worst case.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the best coordinate in a specified grid to maximize the signal received from a set of towers. The algorithm&rsquo;s nested loop structure allows it to compute signal strengths for all possible coordinates, ensuring that the optimal solution is found.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Signal Decay with Distance</strong>: The approach demonstrates how to factor in the decay of signal strength with increasing distance, a common problem in fields like telecommunications.</li>
+<li><strong>Brute Force Feasibility</strong>: Given the constraints (with a maximum grid size of (51 \times 51)), a brute force solution is feasible and effective for finding the optimal coordinate.</li>
+<li><strong>Sorting for Consistency</strong>: Sorting the resulting coordinates ensures that in cases of ties, the smallest coordinate (in terms of x and y) is returned, which is a common requirement in programming challenges.</li>
+</ol>
+<p>This algorithm can be applied in scenarios where optimizing reception or signal strength is crucial, such as in wireless networks, IoT device placement, and more. By systematically evaluating potential locations, it provides a clear path to identifying the best configuration.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode700s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -238,7 +376,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1621"  class="external-link" target="_blank" rel="noopener">LeetCode #1621: Number of Sets of K Non-Overlapping Line Segments</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1621"  class="external-link" target="_blank" rel="noopener">LeetCode #1621: Number of Sets of K Non-Overlapping Line Segments</a></th>
       </tr>
   </thead>
   <tbody>
@@ -259,66 +397,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

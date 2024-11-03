@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -220,11 +220,155 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode651s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires calculating the number of triplets that can be formed from two arrays, <code>nums1</code> and <code>nums2</code>, such that for each triplet ( (a, b, c) ), the condition ( a \times b = c^2 ) is satisfied. The triplets can be formed from elements in both arrays, where each triplet consists of two elements from one array and one from the other.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will take the following approach:</p>
+<ol>
+<li>
+<p><strong>Understanding Triplet Formation</strong>:</p>
+<ul>
+<li>We need to find pairs of numbers from one array whose product equals the square of a number from the other array.</li>
+<li>For each number in <code>nums1</code>, we will consider its square and find pairs in <code>nums2</code> whose product equals that square. Similarly, we will do this for each number in <code>nums2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using a Helper Function</strong>:</p>
+<ul>
+<li>A helper function <code>twoProd</code> will be defined to count how many pairs can be formed in an array whose product equals a given value.</li>
+<li>The helper function will maintain a frequency map to store occurrences of numbers, enabling efficient pair counting.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through Arrays</strong>:</p>
+<ul>
+<li>We will iterate through each number in <code>nums1</code>, calculate its square, and call the helper function with <code>nums2</code> to count valid pairs.</li>
+<li>We will perform the same operation for each number in <code>nums2</code> with <code>nums1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Combining Results</strong>:</p>
+<ul>
+<li>The results from both iterations will be summed to get the final count of valid triplets.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the code provided to understand how it implements this approach.</p>
+<ul>
+<li><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>: The <code>numTriplets</code> function initializes the result variable <code>res</code> to zero and iterates over each element of <code>nums1</code> and <code>nums2</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">numTriplets</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">v</span><span class="p">:</span> <span class="n">nums1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">+=</span> <span class="n">twoProd</span><span class="p">((</span><span class="kt">long</span><span class="p">)</span><span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="p">,</span> <span class="n">nums2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">v</span><span class="p">:</span> <span class="n">nums2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">+=</span> <span class="n">twoProd</span><span class="p">((</span><span class="kt">long</span><span class="p">)</span><span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="p">,</span> <span class="n">nums1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Calculating Squares</strong>: For each value ( v ) in <code>nums1</code>, it computes ( v^2 ) and calls <code>twoProd</code> with this square and <code>nums2</code>. The same is done for values in <code>nums2</code>.</p>
+</li>
+<li>
+<p><strong>Helper Function</strong>: The <code>twoProd</code> function counts pairs that multiply to a given product.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="nf">twoProd</span><span class="p">(</span><span class="kt">long</span> <span class="n">i</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="kt">long</span><span class="p">,</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span> <span class="o">+=</span> <span class="n">mp</span><span class="p">[</span><span class="n">i</span> <span class="o">/</span> <span class="n">n</span><span class="p">];</span> <span class="c1">// Count valid pairs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">mp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Using a Frequency Map</strong>:
+<ul>
+<li>A frequency map <code>mp</code> is created to keep track of how many times each number has appeared as we iterate through <code>nums</code>.</li>
+<li>For each number <code>n</code> in <code>nums</code>, it checks if ( i ) (the square value) is divisible by <code>n</code>. If it is, the code calculates the complementary value ( \frac{i}{n} ) and adds the count of that value from the map to <code>cnt</code>.</li>
+<li>Finally, it increments the count of the current number <code>n</code> in the map.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity for this solution is ( O(n \times m) ), where ( n ) is the length of <code>nums1</code> and ( m ) is the length of <code>nums2</code>. This is because for each element in one array, we potentially check all elements in the other array using the <code>twoProd</code> helper function.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(m) ) due to the storage used for the frequency map in the <code>twoProd</code> function. In the worst case, the map can grow to contain all distinct elements in <code>nums2</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>numTriplets</code> function efficiently counts the number of valid triplets that can be formed under the given condition by leveraging a nested iteration approach combined with a hash map for counting pairs. This results in a clear and concise implementation that balances readability with performance.</p>
+<p>This solution demonstrates important techniques in algorithm design, particularly in counting problems where combinations of elements from multiple arrays need to be considered. The use of a hash map for efficient lookups and pair counting showcases an effective method to handle potential duplicates and large input sizes.</p>
+<p>In summary, the <code>numTriplets</code> function serves not only as a solution to the triplet counting problem but also as a valuable reference for algorithmic techniques involving counting pairs, hash maps, and iterative algorithms. Its clear structure and efficient methodology make it an exemplary solution for similar problems in competitive programming and technical interviews. Understanding this solution will equip developers with the skills necessary to approach a variety of combinatorial problems effectively.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode651s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1578"  class="external-link" target="_blank" rel="noopener">LeetCode #1578: Minimum Time to Make Rope Colorful</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1578"  class="external-link" target="_blank" rel="noopener">LeetCode #1578: Minimum Time to Make Rope Colorful</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +389,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -226,11 +226,155 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="o">?</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode980s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to determine the minimum speed required to travel through a series of distances within a given time limit. Given an array of distances and a maximum time in hours, the task is to find the minimum speed (in units of distance per hour) that allows the traveler to reach the destination without exceeding the specified time limit. If it is impossible to reach the destination within the given time, the function should return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a binary search strategy combined with a helper function that checks if a given speed allows reaching the destination within the specified time. The approach involves the following key steps:</p>
+<ol>
+<li>
+<p><strong>Binary Search Setup</strong>: Define a search space for the speed, starting from 1 (the minimum speed) to a very large value (e.g., <code>INT_MAX</code>), as we are looking for the minimum speed that allows us to reach the destination.</p>
+</li>
+<li>
+<p><strong>Helper Function</strong>: Create a helper function <code>canReach</code> that takes a speed, distances, and time as parameters. This function will calculate the estimated time required to complete the journey with the given speed and return whether this time is within the specified limit.</p>
+</li>
+<li>
+<p><strong>Estimate Time Calculation</strong>:</p>
+<ul>
+<li>Iterate through each distance.</li>
+<li>For each distance, calculate the time taken to cover it at the current speed.</li>
+<li>Use the <code>ceil</code> function to ensure that any partial distance incurs a full hour of travel time, except for the last distance, which can be a fraction.</li>
+<li>Accumulate the total estimated time and compare it with the given hour.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search Execution</strong>:</p>
+<ul>
+<li>Perform binary search by repeatedly adjusting the speed based on whether the current speed can successfully complete the journey within the allowed time.</li>
+<li>If the speed works, try to find a lower speed (move left); otherwise, increase the speed (move right).</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>: If the minimum speed is found, return it; if not, return -1 to indicate that it&rsquo;s impossible to complete the journey within the given time.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: Start by defining the <code>Solution</code> class, which will contain the method to solve the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Helper Function Declaration</strong>: The <code>canReach</code> function is declared, which checks if the destination can be reached within the specified hour at a given speed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">canReach</span><span class="p">(</span><span class="kt">int</span> <span class="n">speed</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">dist</span><span class="p">,</span> <span class="kt">double</span> <span class="n">hour</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Estimate Time Calculation</strong>: Inside the <code>canReach</code> function, initialize a variable to accumulate the estimated time.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">est</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through Distances</strong>: Use a loop to iterate through each distance in the <code>dist</code> array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating Time for Each Distance</strong>: For each distance, calculate the time required to travel that distance at the given speed:</p>
+<ul>
+<li>If it&rsquo;s the last distance, directly add the time to the estimate.</li>
+<li>For other distances, add the time and apply the <code>ceil</code> function to account for any partial time.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="n">dist</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="n">est</span> <span class="o">+=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">speed</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="n">est</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">est</span> <span class="o">+</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">speed</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result from Helper Function</strong>: After iterating through all distances, check if the estimated time is within the allowed hour and return the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">est</span> <span class="o">&lt;=</span> <span class="n">hour</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Function Declaration</strong>: Now, define the main function <code>minSpeedOnTime</code>, which implements the binary search logic.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">minSpeedOnTime</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">dist</span><span class="p">,</span> <span class="kt">double</span> <span class="n">hour</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Binary Search Initialization</strong>: Set the initial bounds for the binary search.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">INT_MAX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Binary Search Loop</strong>: Implement the binary search loop, calculating the midpoint speed and checking if it is sufficient.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">speed</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">canReach</span><span class="p">(</span><span class="n">speed</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">hour</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">speed</span><span class="p">;</span> <span class="c1">// If it works, update the answer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">r</span> <span class="o">=</span> <span class="n">speed</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Try for a lower speed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l</span> <span class="o">=</span> <span class="n">speed</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Increase speed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Final Result Check</strong>: After completing the search, check if a valid speed was found and return the appropriate result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span> <span class="o">==</span> <span class="n">INT_MAX</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution can be broken down into two parts:</p>
+<ul>
+<li>The binary search operates in (O(\log(\text{MAX_SPEED}))), where <code>MAX_SPEED</code> is <code>INT_MAX</code>, which is a constant.</li>
+<li>For each speed checked, the <code>canReach</code> function processes the distances in (O(n)), where (n) is the length of the <code>dist</code> array.</li>
+</ul>
+<p>Thus, the overall time complexity is (O(n \log(\text{MAX_SPEED}))). The space complexity is (O(1)) as we are using a fixed amount of extra space for variables.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, the <code>minSpeedOnTime</code> function provides an efficient means to calculate the minimum speed required to reach a destination within a specified time, utilizing binary search and careful time estimation. The algorithm effectively balances speed and accuracy, ensuring that it can handle large input sizes due to its logarithmic nature in searching for the minimum speed. By leveraging the <code>canReach</code> helper function, we maintain clarity in the code while addressing the complexity of calculating time across multiple distances. This implementation serves as a robust solution for problems involving optimization and timing constraints in journey planning and can be adapted for various related challenges in algorithm design and competitive programming. Overall, this code exemplifies an efficient approach to solving a practical problem with clear logic and structure.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode980s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1871"  class="external-link" target="_blank" rel="noopener">LeetCode #1871: Jump Game VII</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1871"  class="external-link" target="_blank" rel="noopener">LeetCode #1871: Jump Game VII</a></th>
       </tr>
   </thead>
   <tbody>
@@ -251,66 +395,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

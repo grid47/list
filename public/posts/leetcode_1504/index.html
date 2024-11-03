@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -216,11 +216,147 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode572s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires counting the number of submatrices that consist entirely of 1s in a given binary matrix (a matrix consisting of only 0s and 1s). A submatrix is defined by a rectangular area within the matrix that has its upper left corner and lower right corner defined.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can adopt the following approach:</p>
+<ol>
+<li>
+<p><strong>Iterate through each element of the matrix</strong>: For each cell in the matrix, we need to determine how many valid submatrices can be formed starting from that cell.</p>
+</li>
+<li>
+<p><strong>Use a Helper Function</strong>: We create a helper function that will calculate the number of valid submatrices that can be formed from a given starting cell (the top-left corner of the submatrix).</p>
+</li>
+<li>
+<p><strong>Count Submatrices</strong>: The helper function checks for valid submatrices extending downwards and to the right, incrementing the count whenever it encounters a cell that is a 1. If it encounters a cell that is a 0, it will terminate that particular expansion since a submatrix can only consist of 1s.</p>
+</li>
+<li>
+<p><strong>Return the Total Count</strong>: The main function will sum up the counts obtained from each starting position to give the total number of submatrices.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numSubmat</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We start by defining a class <code>Solution</code> and the method <code>numSubmat</code> which takes a 2D vector <code>mat</code> as input.</li>
+<li>We initialize <code>m</code> and <code>n</code> to hold the number of rows and columns of the matrix, respectively, and initialize <code>cnt</code> to zero, which will keep track of the total count of submatrices.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span> <span class="o">+=</span> <span class="n">helper</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>        
+</span></span></code></pre></div><ul>
+<li>We use two nested loops to iterate through each element of the matrix. For each element, we call the <code>helper</code> function, passing the current coordinates <code>(i, j)</code> of the matrix. The result from the helper function is added to <code>cnt</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After traversing all elements and accumulating the counts, we return the total count of submatrices.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">helper</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">bnd</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>helper</code> function is defined to calculate the number of submatrices that can be formed starting from the position <code>(a, b)</code>.</li>
+<li>We again obtain the size of the matrix and initialize <code>cnt</code> to zero for counting submatrices and <code>bnd</code> to <code>n</code>, which serves as the right boundary for our exploration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">bnd</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="n">cnt</span> <span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="n">bnd</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The helper function contains nested loops that iterate downwards (from <code>a</code> to <code>m</code>) and rightwards (from <code>b</code> to <code>bnd</code>).</li>
+<li>If we encounter a cell with a value of 1, we increment <code>cnt</code>, indicating that we can include this in our count of valid submatrices.</li>
+<li>If we encounter a 0, we update the boundary <code>bnd</code> to the current column index <code>j</code>, effectively stopping the expansion to the right for any submatrix beginning at <code>(a, b)</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the helper function returns the count of valid submatrices found starting from the position <code>(a, b)</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this approach is (O(m \times n \times (m+n))). This is due to the fact that for each cell in the matrix (total of (m \times n)), the helper function can iterate through all possible rows and columns starting from that cell.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) since we are using a constant amount of extra space (the variables <code>cnt</code> and <code>bnd</code>).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively counts all submatrices filled with 1s in a given binary matrix using a systematic approach that leverages nested loops and a helper function.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Matrix Traversal</strong>: Understanding how to traverse a matrix systematically is crucial for solving problems related to submatrices.</li>
+<li><strong>Dynamic Counting</strong>: The approach dynamically counts valid submatrices based on the current position, which ensures that we account for all potential submatrices originating from each cell.</li>
+<li><strong>Efficiency Considerations</strong>: Although the time complexity may seem high, this approach is straightforward and easy to understand, making it a good candidate for educational purposes or for understanding basic matrix manipulation.</li>
+</ul>
+<p>This method highlights how effective counting techniques can be applied to matrix-related problems, which is a common theme in algorithmic challenges. The ability to recognize patterns and efficiently calculate results is a valuable skill in competitive programming and software development.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode572s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1505"  class="external-link" target="_blank" rel="noopener">LeetCode #1505: Minimum Possible Integer After at Most K Adjacent Swaps On Digits</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1505"  class="external-link" target="_blank" rel="noopener">LeetCode #1505: Minimum Possible Integer After at Most K Adjacent Swaps On Digits</a></th>
       </tr>
   </thead>
   <tbody>
@@ -241,66 +377,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

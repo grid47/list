@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -212,11 +212,142 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">0</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode792s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is from a game theory context where two players, Alice and Bob, play a game with stones arranged in a line. Each player can remove either the leftmost or the rightmost stone in their turn, and their goal is to maximize their total score. The score is calculated based on the values of the stones removed. The objective is to determine the maximum score difference that Alice can achieve over Bob by strategically removing stones.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a dynamic programming approach, specifically memoization to optimize our recursive solution. The key ideas behind our approach are:</p>
+<ol>
+<li>
+<p><strong>Recursive Function</strong>: We define a recursive function <code>dp(i, j)</code> that calculates the maximum score difference between Alice and Bob if Alice is playing optimally with the remaining stones from index <code>i</code> to index <code>j</code>.</p>
+</li>
+<li>
+<p><strong>Base Case</strong>: When there is only one stone left (i.e., <code>i == j</code>), the player cannot make a move, resulting in a score difference of <code>0</code>.</p>
+</li>
+<li>
+<p><strong>State Transition</strong>: For each state defined by the indices <code>i</code> and <code>j</code>, we calculate the maximum score difference by considering the two options available to Alice:</p>
+<ul>
+<li>If Alice removes the leftmost stone (s[i]), then Bob will have the remaining stones from <code>i + 1</code> to <code>j</code>.</li>
+<li>If Alice removes the rightmost stone (s[j]), then Bob will have the remaining stones from <code>i</code> to <code>j - 1</code>.</li>
+</ul>
+<p>We calculate the scores accordingly, keeping in mind the total sum of the stones left after each move.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: We store the results of subproblems in a 2D array <code>memo</code> to avoid redundant calculations.</p>
+</li>
+<li>
+<p><strong>Final Calculation</strong>: The final score difference is obtained by calling the <code>dp</code> function with the initial indices and the total sum of stones.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is the complete breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">1001</span><span class="p">][</span><span class="mi">1001</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class <code>Solution</code> containing a member array <code>memo</code> for memoization.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">,</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Recursive Function</strong>: We define the <code>dp</code> function that takes a vector of stones <code>s</code>, the current indices <code>i</code> and <code>j</code>, and the <code>sum</code> of the values of remaining stones.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If there is only one stone left (when <code>i</code> equals <code>j</code>), the function returns <code>0</code>, as no score can be obtained.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">?</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">:</span> <span class="n">memo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">dp</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">                                            <span class="n">sum</span> <span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">dp</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]));</span>
+</span></span></code></pre></div><ul>
+<li><strong>Memoization Check</strong>: We check if the result for this state <code>memo[i][j]</code> has already been computed. If it has, we return that value.</li>
+<li><strong>Score Calculation</strong>:
+<ul>
+<li>If Alice removes the leftmost stone (<code>s[i]</code>), Bob will play optimally with the remaining stones, so we subtract <code>s[i]</code> from the total <code>sum</code> and call <code>dp</code> with the new indices <code>(i + 1, j)</code>.</li>
+<li>If Alice removes the rightmost stone (<code>s[j]</code>), we similarly update the sum and call <code>dp</code> with <code>(i, j - 1)</code>.</li>
+</ul>
+</li>
+<li><strong>Maximum Calculation</strong>: We take the maximum of the two scenarios to ensure Alice is playing optimally.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">stoneGameVII</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>: The <code>stoneGameVII</code> function initializes the game by calculating the total sum of the stones and calling the <code>dp</code> function with the full range of indices (from <code>0</code> to <code>n-1</code>).</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(n^2)) due to the nested recursive calls for each state defined by indices <code>i</code> and <code>j</code>. Each subproblem is computed once thanks to memoization.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n^2)) for the memoization table, in addition to the space used for the input vector.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively utilizes dynamic programming with memoization to solve the stone game problem, allowing Alice to maximize her score against Bob.</p>
+<p>Key insights from the solution include:</p>
+<ol>
+<li>
+<p><strong>Optimal Play Strategy</strong>: The recursive structure captures the optimal choices made by Alice at each step, ensuring that she minimizes Bob&rsquo;s potential score while maximizing her own.</p>
+</li>
+<li>
+<p><strong>Efficiency Through Memoization</strong>: By storing the results of previously computed states, we significantly reduce the computational overhead, allowing the solution to handle larger input sizes effectively.</p>
+</li>
+<li>
+<p><strong>Understanding Game Theory</strong>: The problem illustrates fundamental concepts in game theory, including optimal strategies, decision making, and the impact of choices on future outcomes.</p>
+</li>
+</ol>
+<p>In summary, this code serves as a robust example of applying recursive strategies and dynamic programming to solve competitive scenarios, providing valuable insights into optimizing player strategies in game-theoretic contexts.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode792s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1691"  class="external-link" target="_blank" rel="noopener">LeetCode #1691: Maximum Height by Stacking Cuboids </a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1691"  class="external-link" target="_blank" rel="noopener">LeetCode #1691: Maximum Height by Stacking Cuboids </a></th>
       </tr>
   </thead>
   <tbody>
@@ -237,66 +368,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,11 +218,169 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1102s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to maximize the sum of the absolute values of a square matrix of integers after performing a series of operations. The matrix can have both positive and negative integers, and the operations allow us to flip the sign of a single element at a time. The objective is to find the maximum possible sum of the elements in the matrix after an optimal sequence of sign flips.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the maximum sum, we can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Calculate the Absolute Sum</strong>: First, compute the sum of the absolute values of all elements in the matrix. This serves as our base since flipping an element&rsquo;s sign will change the total sum by twice the absolute value of that element.</p>
+</li>
+<li>
+<p><strong>Count Negative Elements</strong>: Track how many negative numbers are present in the matrix. This information is essential because flipping the sign of a negative number will increase the sum by a value that could help us achieve a maximum sum.</p>
+</li>
+<li>
+<p><strong>Find the Minimum Absolute Value</strong>: Determine the smallest absolute value in the matrix. If there is an odd number of negative values, we will have to flip one of the elements to make the total number of negative numbers even, which affects the sum.</p>
+</li>
+<li>
+<p><strong>Adjust the Total Based on Parity</strong>: If the count of negative numbers is odd, we will need to reduce the total sum by twice the smallest absolute value (to account for the mandatory flip) to ensure all remaining negative values are flipped to positive.</p>
+</li>
+<li>
+<p><strong>Return the Maximum Sum</strong>: Finally, return the computed sum as the result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">maxMatrixSum</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><p>The function <code>maxMatrixSum</code> begins by determining the size of the matrix, <code>n</code>, which is the number of rows (or columns, since it&rsquo;s square).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">isodd</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mn</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+</span></span></code></pre></div><p>We initialize several variables:</p>
+<ul>
+<li><code>sum</code> to store the total sum of absolute values.</li>
+<li><code>isodd</code> to determine if the size of the matrix is odd.</li>
+<li><code>cnt</code> to count the number of negative values in the matrix.</li>
+<li><code>mn</code> to track the minimum absolute value found in the matrix, starting with the absolute value of the first element.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We iterate through each element in the matrix using nested loops.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><p>For each element, we check if it is negative. If it is, we increment the <code>cnt</code> variable.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">mn</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">abs</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">abs</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+</span></span></code></pre></div><p>Next, we update the <code>mn</code> variable with the minimum absolute value found so far, and we add the absolute value of the current element to the <code>sum</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cnt</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">-=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span><span class="n">mn</span><span class="p">);</span>
+</span></span></code></pre></div><p>After processing all elements, we check if the count of negative numbers is odd. If it is, we subtract twice the minimum absolute value from the sum. This accounts for the necessary flip of one element to maintain an even number of negatives.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, the function returns the computed maximum sum.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n^2)), where (n) is the dimension of the matrix. We iterate through every element in the matrix once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a constant amount of extra space for our variables.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively calculates the maximum possible sum of a matrix after sign flips by leveraging properties of absolute values and simple counting. The approach is efficient, clear, and directly addresses the problem requirements without unnecessary complexity.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Efficiency</strong>: The algorithm runs in quadratic time relative to the size of the matrix, making it practical for reasonably sized matrices.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: The solution is straightforward and easy to follow, relying on basic arithmetic operations and logical checks.</p>
+</li>
+<li>
+<p><strong>Optimal Flipping Strategy</strong>: By ensuring we only flip the necessary element when the count of negatives is odd, we maximize the resultant sum.</p>
+</li>
+</ol>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s how to use the <code>maxMatrixSum</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mat</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">maxMatrixSum</span><span class="p">(</span><span class="n">mat</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Maximum sum of absolute values: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Example output
+</span></span></span></code></pre></div><p>This example initializes a matrix and computes the maximum possible sum after optimal sign flips.</p>
+<h3 id="potential-improvements-and-variations">
+  Potential Improvements and Variations
+  <a class="heading-link" href="#potential-improvements-and-variations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Handling Larger Matrices</strong>: For very large matrices, consider parallel processing or optimized data structures if performance becomes an issue.</p>
+</li>
+<li>
+<p><strong>Dynamic Matrix Size</strong>: The function could be modified to accept non-square matrices, broadening its applicability.</p>
+</li>
+<li>
+<p><strong>Exploring Sign Flip Combinations</strong>: If required, the algorithm could be extended to return specific combinations of sign flips that yield the maximum sum, though this would introduce additional complexity.</p>
+</li>
+</ol>
+<p>This solution not only demonstrates an effective approach to solving the problem of maximizing matrix sums through sign flips but also serves as a template for similar problems in algorithm design and competitive programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1102s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1976"  class="external-link" target="_blank" rel="noopener">LeetCode #1976: Number of Ways to Arrive at Destination</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1976"  class="external-link" target="_blank" rel="noopener">LeetCode #1976: Number of Ways to Arrive at Destination</a></th>
       </tr>
   </thead>
   <tbody>
@@ -243,66 +401,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

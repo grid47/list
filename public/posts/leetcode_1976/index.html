@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -239,11 +239,182 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ways</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1096s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective of this problem is to count the number of distinct paths in a graph where each path has the minimum travel time. Given a number of nodes and a list of edges that represent roads between them along with their respective travel times, we need to determine how many different ways we can reach from the starting node (node 0) to the destination node (node n-1) while ensuring the travel time is minimized.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can utilize Dijkstra’s algorithm, which is commonly used for finding the shortest paths in a graph. The steps involved in our approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>: We will represent the graph using an adjacency list. Each node will have a list of pairs where each pair contains a neighboring node and the weight (travel time) of the edge leading to that neighbor.</p>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>A priority queue will be used to always expand the node with the currently known shortest distance.</li>
+<li>Two arrays will be maintained:
+<ul>
+<li><code>ways</code> to count the number of ways to reach each node.</li>
+<li><code>dst</code> to store the minimum distance to each node.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Dijkstra’s Algorithm</strong>:</p>
+<ul>
+<li>Start from the source node (node 0) and initialize its distance to 0 and the number of ways to reach it to 1.</li>
+<li>For each node, explore its neighbors. If a shorter path to a neighbor is found, update its distance and the number of ways to reach it.</li>
+<li>If an alternative path to a neighbor has the same distance as the previously known shortest distance, increment the number of ways to reach that neighbor by the number of ways to reach the current node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>: Finally, return the count of distinct paths to the destination node (node n-1).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define ll long long
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define pll pair&lt;ll, ll&gt;
+</span></span></span></code></pre></div><p>Here, we define <code>ll</code> as an alias for <code>long long</code> to handle large integer values and <code>pll</code> as a pair of long long integers for ease of use in the priority queue.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countPaths</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">rds</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The main class <code>Solution</code> contains the method <code>countPaths</code>, which takes the number of nodes <code>n</code> and a vector of roads <code>rds</code> as parameters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pll</span><span class="o">&gt;&gt;</span> <span class="n">gph</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="nl">e</span> <span class="p">:</span> <span class="n">rds</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">time</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">v</span><span class="p">,</span> <span class="n">time</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">u</span><span class="p">,</span> <span class="n">time</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>We initialize an adjacency list <code>gph</code> of size <code>n</code> and populate it with edges from the <code>rds</code> vector. Each edge connects two nodes and has a travel time.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">ll</span><span class="o">&gt;</span> <span class="n">ways</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">dst</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">LLONG_MAX</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ways</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>Two vectors are initialized:</p>
+<ul>
+<li><code>ways</code> to count the number of paths to each node, initialized to zero, except for the starting node which is set to 1.</li>
+<li><code>dst</code> to keep track of the shortest distance to each node, initialized to <code>LLONG_MAX</code> for all nodes except the starting node, which is set to 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pll</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pll</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>A priority queue <code>pq</code> is initialized to facilitate Dijkstra’s algorithm. The starting node (0) with a distance of 0 is pushed onto the queue.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="p">[</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div><p>The main loop continues as long as there are nodes in the priority queue. The node with the smallest distance is retrieved and removed from the queue.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="n">pll</span> <span class="nl">nb</span> <span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">u</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">nb</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">nb</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">d</span> <span class="o">+</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span> <span class="o">+</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ways</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">ways</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">d</span> <span class="o">+</span> <span class="n">t</span><span class="p">,</span> <span class="n">nxt</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">==</span> <span class="n">d</span> <span class="o">+</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ways</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ways</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">+</span> <span class="n">ways</span><span class="p">[</span><span class="n">u</span><span class="p">])</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>For each neighbor <code>nb</code> of the current node <code>u</code>, we check if a shorter path to <code>nxt</code> (the neighbor) can be established. If so:</p>
+<ul>
+<li>Update the shortest distance to <code>nxt</code>.</li>
+<li>Update the number of ways to reach <code>nxt</code> using the number of ways to reach <code>u</code>.</li>
+<li>Push the new distance and the neighbor onto the priority queue.
+If the shortest distance to <code>nxt</code> is equal to the newly computed distance, it means we&rsquo;ve found another way to reach <code>nxt</code>, and we add the number of ways to reach <code>u</code> to <code>ways[nxt]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ways</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, the method returns the number of distinct paths to reach the destination node (n-1).</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The algorithm runs in (O((V + E) \log V)), where (V) is the number of vertices (nodes) and (E) is the number of edges. This is because each edge is processed at most once, and each insertion and extraction from the priority queue takes logarithmic time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(V + E)) due to the adjacency list representation of the graph and the additional storage used for distances and paths.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively counts the number of distinct paths from the starting node to the destination node while ensuring the paths are the shortest possible. The use of Dijkstra’s algorithm combined with the maintenance of a count of distinct paths allows for an optimal and clear solution to the problem. The overall design is efficient and handles large inputs gracefully due to the use of appropriate data structures.</p>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s an example of how to use the <code>countPaths</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">roads</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// Number of nodes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">countPaths</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">roads</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Number of distinct paths from node 0 to node &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Example output
+</span></span></span></code></pre></div><p>This example initializes a graph with roads and computes the number of distinct paths from node 0 to node n-1, providing a practical demonstration of the algorithm&rsquo;s functionality.</p>
+<h3 id="potential-improvements-and-variations">
+  Potential Improvements and Variations
+  <a class="heading-link" href="#potential-improvements-and-variations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Handling Large Graphs</strong>: For extremely large graphs, consider using bidirectional Dijkstra’s algorithm to potentially speed up the search for shortest paths.</p>
+</li>
+<li>
+<p><strong>Path Reconstruction</strong>: This approach can be extended to not only count paths but also reconstruct the paths themselves if needed.</p>
+</li>
+<li>
+<p><strong>Adaptability</strong>: The core logic can be adapted for directed graphs or weighted graphs with different constraints.</p>
+</li>
+</ol>
+<p>This solution serves as an efficient and robust method for counting distinct shortest paths in a graph, showcasing effective algorithmic strategies and data structures in action.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1096s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1977"  class="external-link" target="_blank" rel="noopener">LeetCode #1977: Number of Ways to Separate Numbers</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1977"  class="external-link" target="_blank" rel="noopener">LeetCode #1977: Number of Ways to Separate Numbers</a></th>
       </tr>
   </thead>
   <tbody>
@@ -264,66 +435,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

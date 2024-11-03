@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -224,11 +224,182 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode620s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the minimum cost to cut a stick of length <code>n</code> at specified positions given by the array <code>cuts</code>. The cost of making a cut is equal to the length of the stick being cut. The objective is to determine the order of cuts that minimizes the total cost.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we will employ a dynamic programming approach. The core idea is to consider each segment of the stick defined by the cut positions and recursively calculate the minimum cost of cutting that segment.</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming Table</strong>: We create a 2D DP table <code>dp[i][j]</code>, where <code>dp[i][j]</code> represents the minimum cost to cut the stick between the positions <code>cuts[i]</code> and <code>cuts[j]</code>. If there are no cuts between these two positions, the cost is zero.</p>
+</li>
+<li>
+<p><strong>Recursive Function</strong>: The recursive function <code>func(i, j)</code> computes the minimum cost for the segment defined by cuts at indices <code>i</code> and <code>j</code>. If there are no cuts to be made in this segment (i.e., <code>j - i &lt;= 1</code>), it returns zero.</p>
+</li>
+<li>
+<p><strong>Cost Calculation</strong>: For each segment defined by indices <code>i</code> and <code>j</code>, we iterate through possible cut positions <code>k</code> between <code>i</code> and <code>j</code>. The cost of cutting at position <code>k</code> is calculated as the length of the segment <code>cuts[j] - cuts[i]</code> plus the costs of recursively cutting the left segment from <code>i</code> to <code>k</code> and the right segment from <code>k</code> to <code>j</code>.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: To avoid redundant calculations, the results of computed states are stored in the DP table. If the state <code>dp[i][j]</code> has already been calculated, it is returned directly.</p>
+</li>
+<li>
+<p><strong>Initialization</strong>: Before calling the recursive function, the <code>cuts</code> array is modified to include the starting point (0) and the end point (n), and is sorted to ensure the cut positions are in ascending order.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cut</span><span class="p">;</span> <span class="c1">// Step 1: Vector to hold the cut positions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="mi">102</span><span class="p">][</span><span class="mi">102</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// Step 2: DP table to store minimum costs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 3: Recursive function to calculate minimum cost
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Step 4: Base case, no cuts needed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span> <span class="c1">// Step 5: Check if the result is already calculated
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span> <span class="c1">// Step 6: Initialize to maximum value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 7: Try every possible cut
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">cut</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">cut</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">func</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">func</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">));</span> <span class="c1">// Step 8: Update minimum cost
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span> <span class="c1">// Step 9: Return the minimum cost for segment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minCost</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">cuts</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 10: Main function to find minimum cost
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">cuts</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// Step 11: Add the starting point
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">cuts</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c1">// Step 12: Add the ending point
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">cuts</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">cuts</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// Step 13: Sort the cuts
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">cut</span> <span class="o">=</span> <span class="n">cuts</span><span class="p">;</span> <span class="c1">// Step 14: Store the cuts
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cuts</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// Step 15: Call the recursive function for the whole stick
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h3 id="step-by-step-breakdown">
+  Step-by-Step Breakdown
+  <a class="heading-link" href="#step-by-step-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Data Structures</strong>:</p>
+<ul>
+<li><code>vector&lt;int&gt; cut</code>: This vector will store the adjusted cut positions including the start and end of the stick.</li>
+<li><code>int dp[102][102]</code>: A 2D array to store the minimum cost of making cuts between any two indices.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:</p>
+<ul>
+<li>The function <code>func(int i, int j)</code> computes the minimum cost of cutting the stick between the indices <code>i</code> and <code>j</code>. If <code>j - i &lt;= 1</code>, meaning there are no cuts between the two indices, it returns <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Logic</strong>:</p>
+<ul>
+<li>If <code>dp[i][j]</code> is not already calculated (i.e., it is <code>0</code>), it is initialized to <code>INT_MAX</code> to ensure any found minimum will replace this initial value.</li>
+<li>A loop iterates through possible cut positions <code>k</code> from <code>i + 1</code> to <code>j - 1</code>. For each <code>k</code>, the cost of making that cut is calculated as:
+<ul>
+<li>The length of the current segment: <code>cuts[j] - cuts[i]</code></li>
+<li>Plus the cost of recursively cutting the left segment (<code>func(i, k)</code>)</li>
+<li>Plus the cost of recursively cutting the right segment (<code>func(k, j)</code>).</li>
+</ul>
+</li>
+<li>The minimum of all these possible cuts is stored in <code>dp[i][j]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization of the Cuts</strong>:</p>
+<ul>
+<li>Before invoking the <code>func</code>, the starting point <code>0</code> and the ending point <code>n</code> are added to the <code>cuts</code> vector.</li>
+<li>The vector is sorted to ensure that cuts are in ascending order.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Call</strong>:</p>
+<ul>
+<li>The function <code>func(0, cuts.size() - 1)</code> is called, which calculates the minimum cost for cutting the entire stick from position <code>0</code> to <code>n</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this approach is (O(m^3)), where (m) is the number of cuts. This is due to the nested loops iterating through cuts and the recursive calls to calculate costs.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(m^2)) because of the DP table used to store minimum costs.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently computes the minimum cost of making cuts on a stick of length <code>n</code> by employing dynamic programming.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Dynamic Programming</strong>: The use of DP allows for a structured approach to solving optimization problems involving cuts or segments.</li>
+<li><strong>Recursive Cost Calculation</strong>: By breaking the problem down into smaller subproblems, the solution leverages recursion effectively.</li>
+<li><strong>Memoization</strong>: Storing results in a DP table reduces redundant calculations and speeds up the overall process.</li>
+</ul>
+<p>This implementation is a clear example of how to approach optimization problems with constraints using dynamic programming and recursion, making it a valuable strategy for similar algorithmic challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode620s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1548"  class="external-link" target="_blank" rel="noopener">LeetCode #1548: The Most Similar Path in a Graph</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1548"  class="external-link" target="_blank" rel="noopener">LeetCode #1548: The Most Similar Path in a Graph</a></th>
       </tr>
   </thead>
   <tbody>
@@ -249,66 +420,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -220,11 +220,148 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode616s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine whether it is possible to convert one string <code>s</code> into another string <code>t</code> using a specified number of operations, <code>k</code>. Each operation consists of incrementing the character at any index in <code>s</code> by one (where &lsquo;z&rsquo; wraps around to &lsquo;a&rsquo;). The main constraints are that both strings must be of the same length, and the number of character increments needed should not exceed <code>k</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution involves calculating how many operations are needed to convert each character of <code>s</code> to the corresponding character in <code>t</code>. For each character, we determine the number of increments required, taking into account the circular nature of the alphabet. After calculating the increments needed for all characters, we then check if the total required increments can be accomplished within the allowed operations <code>k</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code snippet into smaller parts for a better understanding:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">canConvertString</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">string</span> <span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">t</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Step 1: Check lengths
+</span></span></span></code></pre></div><ul>
+<li><strong>Length Check</strong>: The first step is to check if both strings <code>s</code> and <code>t</code> are of equal length. If not, conversion is impossible, so we immediately return <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Step 2: Get size of the strings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Step 3: Create a vector to hold operations needed for each character
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">frq</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Step 4: Frequency array for counting increments
+</span></span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: We initialize <code>n</code> to store the size of the strings and create two vectors:
+<ul>
+<li><code>cnt</code>: This will hold the number of increments needed for each character in <code>s</code> to match the corresponding character in <code>t</code>.</li>
+<li><code>frq</code>: This will count how many characters require the same number of increments.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// Step 5: Calculate direct increments needed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">26</span> <span class="o">-</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">// Step 6: Calculate wrap-around increments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">frq</span><span class="p">[</span><span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%</span> <span class="mi">26</span><span class="p">]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Step 7: Increment frequency of needed operations
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Calculate Increments</strong>: In this loop, we calculate the increments needed for each character:
+<ul>
+<li>If the character in <code>t</code> is greater than that in <code>s</code>, we take the difference directly.</li>
+<li>If the character in <code>t</code> is less than in <code>s</code>, we account for the circular nature of the alphabet by calculating how many increments wrap around from <code>z</code> to <code>a</code>.</li>
+<li>We then update the <code>frq</code> array to count how many characters require each specific increment.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 8: Check each increment frequency
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">frq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span> <span class="c1">// Skip if no character requires this increment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">long</span> <span class="n">net</span> <span class="o">=</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="n">frq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">*</span> <span class="mi">26</span><span class="p">);</span> <span class="c1">// Step 9: Calculate total operations needed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">(</span> <span class="n">net</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Step 10: Check against k
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Check Against <code>k</code></strong>: In this loop, we check if the total increments required for each frequency of increments can fit within <code>k</code>.
+<ul>
+<li>For each increment value <code>i</code>, if any characters require it (<code>frq[i] != 0</code>), we calculate the total operations needed:
+<ul>
+<li>The formula <code>i + (frq[i] - 1) * 26</code> computes the net operations required for all characters needing that increment.</li>
+<li>If this value exceeds <code>k</code>, we return <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// Step 11: If all checks pass, return true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Final Return</strong>: If all frequency checks pass without exceeding <code>k</code>, we conclude that conversion is possible and return <code>true</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is (O(n)), where (n) is the length of the input strings. This is because we iterate through each character of the strings to calculate the increments and frequencies.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) with respect to the input size since the vectors <code>cnt</code> and <code>frq</code> have fixed sizes (26 for <code>frq</code> and <code>n</code> for <code>cnt</code>), which is not dependent on the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code provides an efficient solution to determine if one string can be transformed into another using a limited number of operations. By carefully calculating the necessary increments for each character and counting how many characters require each increment, we can quickly ascertain whether the transformation can be accomplished within the specified constraints.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>String Manipulation</strong>: Understanding character manipulation, especially in circular sequences like alphabets, is essential for problems like this.</li>
+<li><strong>Efficient Counting</strong>: Using frequency counting allows us to reduce the number of checks required, leading to a more efficient solution.</li>
+<li><strong>Handling Edge Cases</strong>: The solution includes an initial check for string length equality, which is crucial for ensuring valid comparisons.</li>
+</ul>
+<p>Overall, this approach ensures that we have a comprehensive and efficient method for determining the feasibility of transforming string <code>s</code> into string <code>t</code> within the allowed operations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode616s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1541"  class="external-link" target="_blank" rel="noopener">LeetCode #1541: Minimum Insertions to Balance a Parentheses String</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1541"  class="external-link" target="_blank" rel="noopener">LeetCode #1541: Minimum Insertions to Balance a Parentheses String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +382,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

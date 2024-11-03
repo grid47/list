@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -207,11 +207,121 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">frq1</span> <span class="o">==</span> <span class="n">frq2</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">||</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode892s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine whether two strings, <code>s1</code> and <code>s2</code>, can be considered &ldquo;almost equal.&rdquo; Specifically, two strings are defined as almost equal if they can become identical by performing at most one swap of two characters in one of the strings. The goal is to implement a function that checks for this condition efficiently.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Character Frequency Count</strong>: We will first count the frequency of each character (a-z) in both strings. This helps in quickly determining if the two strings have the same set of characters.</p>
+</li>
+<li>
+<p><strong>Count Differences</strong>: As we iterate through both strings, we will also count the number of positions where the characters in the two strings differ.</p>
+</li>
+<li>
+<p><strong>Condition Check</strong>: For the strings to be almost equal:</p>
+<ul>
+<li>They must have the same frequency of characters.</li>
+<li>If there are no differences (<code>cnt == 0</code>), the strings are already equal.</li>
+<li>If there are exactly two differences (<code>cnt == 2</code>), we can potentially make them equal by swapping the two differing characters.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">areAlmostEqual</span><span class="p">(</span><span class="n">string</span> <span class="n">s1</span><span class="p">,</span> <span class="n">string</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We start by defining a class <code>Solution</code> with a public method <code>areAlmostEqual</code>, which takes two strings <code>s1</code> and <code>s2</code> as input parameters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">chg</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">frq1</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">frq2</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We initialize two integer counters: <code>chg</code> to count the number of changes (this variable is not used in the final logic) and <code>cnt</code> to count the number of positions where the characters of <code>s1</code> and <code>s2</code> differ.</li>
+<li>We create two frequency vectors <code>frq1</code> and <code>frq2</code> of size 26 (for each letter in the alphabet) initialized to 0 to keep track of the frequency of characters in both strings.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">frq1</span><span class="p">[</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">frq2</span><span class="p">[</span><span class="n">s2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s2</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We loop through each character of the strings <code>s1</code> and <code>s2</code> simultaneously.</li>
+<li>For each character, we increment the corresponding index in the frequency vectors based on the ASCII value of the character (subtracting <code>'a'</code> converts a character to its respective index in the alphabet).</li>
+<li>If the characters at the same position are different, we increment the <code>cnt</code> counter.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">frq1</span> <span class="o">==</span> <span class="n">frq2</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">||</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the result of two conditions:
+<ul>
+<li>The frequency vectors <code>frq1</code> and <code>frq2</code> must be equal, indicating that both strings contain the same characters in the same quantities.</li>
+<li>The count of differing positions must be either 0 (the strings are identical) or 2 (indicating that we can swap two characters to make them equal).</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the length of the strings. This is because we are iterating through each string once to compute character frequencies and count differences.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since the size of the frequency arrays is constant (26) and does not depend on the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>areAlmostEqual</code> function provides an efficient way to determine if two strings can be made identical with at most one swap. By leveraging character frequency counts and a simple condition check, this solution effectively reduces the problem to linear time complexity, making it suitable for larger input sizes.</p>
+<p>This algorithm is particularly useful in applications where string manipulations and comparisons are frequent, such as in text processing, data validation, and similarity detection tasks. Understanding this method can also enhance your skills in solving similar problems in coding interviews and competitive programming, where efficiency and correctness are key.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode892s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1791"  class="external-link" target="_blank" rel="noopener">LeetCode #1791: Find Center of Star Graph</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1791"  class="external-link" target="_blank" rel="noopener">LeetCode #1791: Find Center of Star Graph</a></th>
       </tr>
   </thead>
   <tbody>
@@ -232,66 +342,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

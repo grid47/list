@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -215,11 +215,128 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">total</span><span class="o">/</span> <span class="n">classes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode898s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to maximize the average ratio of students passing a class after distributing a given number of extra students across multiple classes. Each class has a certain number of students who have passed and the total number of students. The goal is to allocate the extra students in such a way that the average pass ratio across all classes is maximized.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the goal of maximizing the average pass ratio after distributing the extra students, we can utilize a greedy algorithm combined with a priority queue (max-heap). Here&rsquo;s how the approach works:</p>
+<ol>
+<li>
+<p><strong>Profit Calculation</strong>: First, we need to define a function that calculates the potential profit gained by adding one student to a class. This is done by comparing the pass ratio before and after adding a student.</p>
+</li>
+<li>
+<p><strong>Initialization</strong>: We initialize a total variable to keep track of the current average ratio of students passing across all classes and a priority queue to manage which classes would benefit the most from receiving additional students.</p>
+</li>
+<li>
+<p><strong>Heap Management</strong>: By utilizing a priority queue, we can efficiently select the class that will yield the highest increase in the average pass ratio with each additional student.</p>
+</li>
+<li>
+<p><strong>Distribution of Extra Students</strong>: We iteratively allocate the extra students to the class that currently provides the best potential increase in the average pass ratio, updating the total and re-evaluating the potential profits after each allocation.</p>
+</li>
+<li>
+<p><strong>Final Calculation</strong>: After distributing all extra students, we compute the final average pass ratio.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">maxAverageRatio</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">classes</span><span class="p">,</span> <span class="kt">int</span> <span class="n">extraStudents</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define the <code>Solution</code> class and the public method <code>maxAverageRatio</code>, which accepts a 2D vector <code>classes</code> (where each inner vector contains the number of passing students and the total number of students) and an integer <code>extraStudents</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">profit</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">double</span> <span class="n">pass</span><span class="p">,</span> <span class="kt">double</span> <span class="n">total</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">(</span><span class="n">pass</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">total</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span><span class="p">(</span><span class="n">pass</span><span class="o">/</span> <span class="n">total</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>We define a lambda function <code>profit</code> that calculates the increase in the pass ratio when one additional student is added. The formula computes the difference between the new ratio after adding a student and the current ratio.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">2</span><span class="o">&gt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a <code>total</code> variable to accumulate the current pass ratio across all classes and a priority queue <code>pq</code> to hold the potential profits from adding students to each class.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">c</span><span class="p">:</span> <span class="n">classes</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">total</span> <span class="o">+=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">profit</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">{</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]}});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We iterate over each class, compute the current pass ratio, and accumulate it into <code>total</code>. We also push the potential profit of adding one student to each class into the priority queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">extraStudents</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="p">[</span><span class="n">addedProfit</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">total</span> <span class="o">+=</span> <span class="n">addedProfit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">profit</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="p">{</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="mi">1</span><span class="p">}});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We allocate students to the class that offers the highest profit by popping from the priority queue. After adding a student, we recalculate the potential profit for that class and push the updated profit back into the queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">total</span><span class="o">/</span> <span class="n">classes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the average pass ratio, which is computed as the total accumulated pass ratio divided by the number of classes.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n \log n)), where (n) is the number of classes. This complexity arises from inserting and extracting elements from the priority queue (n) times.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the storage required for the priority queue.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxAverageRatio</code> function effectively maximizes the average pass ratio across multiple classes by strategically allocating extra students to those classes that would benefit the most from additional enrollment.</p>
+<p>This algorithm demonstrates the power of greedy methods in optimization problems, particularly when combined with data structures like priority queues to efficiently manage and evaluate potential choices. In practical applications, this technique can be useful in educational contexts where resource allocation is critical for enhancing student performance metrics.</p>
+<p>Understanding this algorithm enhances our problem-solving toolkit for similar optimization challenges, including scenarios in resource management, project planning, and performance improvement strategies in various fields.</p>
+<p>The approach highlights the importance of calculating and prioritizing potential gains, allowing us to make informed decisions that lead to the best possible outcomes in competitive environments.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode898s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1793"  class="external-link" target="_blank" rel="noopener">LeetCode #1793: Maximum Score of a Good Subarray</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1793"  class="external-link" target="_blank" rel="noopener">LeetCode #1793: Maximum Score of a Good Subarray</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +357,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

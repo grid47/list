@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,11 +212,138 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * OrderedStream* obj = new OrderedStream(n);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * vector&lt;string&gt; param_1 = obj-&gt;insert(idKey,value);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode743s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves implementing an ordered stream of strings where each string can be inserted with a unique identifier. The objective is to create a data structure that allows inserting strings at specific identifiers and retrieving the ordered stream of strings starting from the last retrieved identifier. This data structure should efficiently handle the retrieval of strings in the order they were inserted.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we utilize a class called <code>OrderedStream</code> that manages a vector to hold the strings and a pointer to track the next expected identifier. The main operations include:</p>
+<ol>
+<li><strong>Initialization</strong>: Create an internal storage for the strings using a vector.</li>
+<li><strong>Insertion</strong>: Insert strings at specific identifiers while maintaining the order.</li>
+<li><strong>Retrieval</strong>: Retrieve strings in order, starting from the last inserted position, until we reach an empty entry in the vector.</li>
+</ol>
+<p>This approach efficiently handles both insertions and retrievals, ensuring that strings can be accessed in the order they were expected.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">OrderedStream</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// Vector to hold strings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">ptr</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Pointer to track the next expected id
+</span></span></span></code></pre></div><ul>
+<li>We define a class <code>OrderedStream</code> with a public section that contains:
+<ul>
+<li>A vector <code>s</code> to store strings. It is initialized with a size of <code>n + 1</code> to accommodate identifiers starting from 1.</li>
+<li>An integer <code>ptr</code> initialized to 1 to keep track of the next expected identifier for retrieval.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">OrderedStream</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="o">:</span> <span class="n">s</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
+</span></span></code></pre></div><ul>
+<li>The constructor takes an integer <code>n</code>, which defines the number of unique identifiers (from 1 to n). It initializes the vector <code>s</code> with a size of <code>n + 1</code> to simplify index management.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">,</span> <span class="n">string</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span> <span class="c1">// Insert the value at the specified id
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Vector to hold results for retrieval
+</span></span></span></code></pre></div><ul>
+<li>The <code>insert</code> function is defined to take an integer <code>id</code> and a string <code>value</code>. It inserts the value into the vector <code>s</code> at the index corresponding to the identifier <code>id</code>.</li>
+<li>A new vector <code>res</code> is initialized to hold the results of the retrieval process.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">s</span><span class="p">[</span><span class="n">ptr</span><span class="p">].</span><span class="n">empty</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">ptr</span><span class="o">++</span><span class="p">]);</span> <span class="c1">// Retrieve strings in order
+</span></span></span></code></pre></div><ul>
+<li>A <code>while</code> loop is used to retrieve strings in order. It continues as long as:
+<ul>
+<li><code>ptr</code> is within the bounds of the vector.</li>
+<li>The string at the current <code>ptr</code> index is not empty.</li>
+</ul>
+</li>
+<li>For each non-empty string, it is pushed into the results vector <code>res</code>, and <code>ptr</code> is incremented to move to the next index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the retrieved strings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After retrieving all possible strings in order, the results vector <code>res</code> is returned.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your OrderedStream object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * OrderedStream* obj = new OrderedStream(n);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * vector&lt;string&gt; param_1 = obj-&gt;insert(idKey,value);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span></code></pre></div><ul>
+<li>This comment section illustrates how to instantiate the <code>OrderedStream</code> object and use its <code>insert</code> method.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The <code>insert</code> operation runs in ( O(1) ) time for inserting a string, and the retrieval portion may take up to ( O(n) ) in the worst case, where all subsequent strings are filled.</li>
+<li>Overall, the time complexity for an <code>insert</code> operation can be considered ( O(n) ) in the worst case when strings are continuously retrieved.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) as we store strings in a vector of size ( n + 1 ).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>OrderedStream</code> class effectively manages the ordered insertion and retrieval of strings based on unique identifiers. This implementation leverages a vector for storage and a pointer to track the next expected string, facilitating efficient operations.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Efficiency</strong>: The structure is efficient for both inserting and retrieving strings in the correct order, providing a straightforward interface for users.</li>
+<li><strong>Simplicity</strong>: By using a vector and a simple pointer mechanism, the implementation is easy to understand and maintain.</li>
+<li><strong>Dynamic Handling</strong>: The solution dynamically handles strings as they are inserted, allowing for a flexible and adaptive structure that can be used in various applications requiring ordered data handling.</li>
+</ol>
+<p>Overall, this implementation showcases a practical approach to managing ordered streams, emphasizing both efficiency and clarity in design. The use of standard data structures like vectors simplifies the code while ensuring that operations remain performant.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode743s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1657"  class="external-link" target="_blank" rel="noopener">LeetCode #1657: Determine if Two Strings Are Close</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1657"  class="external-link" target="_blank" rel="noopener">LeetCode #1657: Determine if Two Strings Are Close</a></th>
       </tr>
   </thead>
   <tbody>
@@ -237,66 +364,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

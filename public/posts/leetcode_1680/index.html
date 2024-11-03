@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -209,11 +209,143 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode770s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to compute the concatenated binary representation of the numbers from 1 to ( n ). Specifically, we need to concatenate the binary representations of these numbers, treating the entire sequence as a single binary number, and return its value modulo ( 10^9 + 7 ).</p>
+<p>For example, if ( n = 3 ), the binary representations are:</p>
+<ul>
+<li>1 → <code>1</code></li>
+<li>2 → <code>10</code></li>
+<li>3 → <code>11</code></li>
+</ul>
+<p>Concatenating these gives <code>11011</code>, which is equal to ( 27 ) in decimal.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, we use the following approach:</p>
+<ol>
+<li>
+<p><strong>Modulo Definition</strong>: We define a modulo value as ( 10^9 + 7 ) to ensure our calculations remain manageable and to meet the problem&rsquo;s constraints.</p>
+</li>
+<li>
+<p><strong>Initialization</strong>: We initialize a variable <code>ans</code> to hold our concatenated result, starting from 0, and a variable <code>len</code> to track the length of the binary representation of each number.</p>
+</li>
+<li>
+<p><strong>Iterate from 1 to ( n )</strong>:</p>
+<ul>
+<li>For each number ( i ), we check if it is a power of two using the <code>__builtin_popcount</code> function, which counts the number of set bits (1s) in the binary representation. If a number has only one set bit, it is a power of two, and thus its binary representation&rsquo;s length will increase.</li>
+<li>We then update <code>ans</code> by shifting it left by <code>len</code> bits (to make space for the new number) and adding the current number ( i ) to <code>ans</code>, ensuring all operations are performed under modulo ( 10^9 + 7 ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After processing all numbers up to ( n ), we return <code>ans</code>, which now contains the desired value.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">concatenatedBinary</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class named <code>Solution</code> and create a public method <code>concatenatedBinary</code>, which takes an integer ( n ) as its parameter.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Modulo Definition</strong>: We define a variable <code>mod</code> set to ( 10^9 + 7 ). This helps in preventing integer overflow and ensures that we return the result within the specified limits.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: We initialize <code>ans</code> as a long integer to accumulate our result without overflow. We also initialize <code>len</code> to keep track of the length of the binary representation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iteration</strong>: We start a loop that iterates from 1 to ( n ), processing each integer.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">__builtin_popcount</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Power of Two Check</strong>: For each integer ( i ), we check if it is a power of two by determining if it has exactly one set bit. If it does, we increment <code>len</code>, which reflects the increase in the length of binary representation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="p">((</span><span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">len</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span> <span class="n">i</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Updating the Result</strong>: We update <code>ans</code> by shifting it left by <code>len</code> bits to make space for the new number. We then add the current number ( i ) to this shifted value. All operations are performed under modulo ( 10^9 + 7 ) to ensure we don’t exceed the limits.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Completion</strong>: Once all numbers are processed, we return <code>ans</code>, which holds the concatenated binary value modulo ( 10^9 + 7 ).</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n) ) since we iterate through all numbers from 1 to ( n ), performing constant-time operations for each.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) since we only use a few integer variables and do not utilize any data structures that scale with input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the concatenated binary representation of the numbers from 1 to ( n ) using bit manipulation and modular arithmetic.</p>
+<p>Key highlights include:</p>
+<ol>
+<li>
+<p><strong>Efficiency</strong>: The approach runs in linear time, making it suitable even for large values of ( n ) within the constraints.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: By leveraging the <code>__builtin_popcount</code> function, we can easily determine when to increment the length of our binary representation.</p>
+</li>
+<li>
+<p><strong>Modular Arithmetic</strong>: Ensuring that all operations are performed modulo ( 10^9 + 7 ) helps manage large numbers and fits within the problem&rsquo;s requirements.</p>
+</li>
+</ol>
+<p>Overall, the code presents a clean and effective solution to the problem, showcasing the power of bit manipulation in achieving optimal performance.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode770s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1681"  class="external-link" target="_blank" rel="noopener">LeetCode #1681: Minimum Incompatibility</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1681"  class="external-link" target="_blank" rel="noopener">LeetCode #1681: Minimum Incompatibility</a></th>
       </tr>
   </thead>
   <tbody>
@@ -234,66 +366,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

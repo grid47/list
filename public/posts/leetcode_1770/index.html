@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -221,11 +221,156 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][(</span><span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">r</span><span class="p">)]</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode870s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves maximizing the score that can be achieved by performing operations on two arrays: <code>nums</code> and <code>mul</code>. The goal is to select elements from <code>nums</code> using the multipliers provided in <code>mul</code> in such a way that maximizes the total score. The operations allow for selecting elements from either end of the <code>nums</code> array and applying the corresponding multiplier from <code>mul</code>.</p>
+<p>Specifically, the problem can be described as follows:</p>
+<ul>
+<li>Given an array <code>nums</code> of size <code>n</code> and an array <code>mul</code> of size <code>m</code>, you need to compute the maximum score obtainable by performing <code>m</code> operations.</li>
+<li>In each operation, you can choose either the leftmost or the rightmost element of the <code>nums</code> array.</li>
+<li>The score for each operation is calculated by multiplying the selected element from <code>nums</code> with the corresponding multiplier from <code>mul</code>.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, a recursive approach with memoization (Dynamic Programming) is employed. The primary strategy is to maintain a state defined by the current operation index and the indices of the remaining elements in the <code>nums</code> array. The approach can be outlined as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Initialize member variables to store the size of the <code>nums</code> and <code>mul</code> arrays, and prepare a memoization table (<code>mem</code>) to cache results of subproblems.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function (dp)</strong>:</p>
+<ul>
+<li>The recursive function <code>dp</code> takes three parameters: the current index in <code>mul</code>, and the left and right indices in <code>nums</code>.</li>
+<li>Base Case: If all multipliers have been used or the left index exceeds the right index, return 0.</li>
+<li>Check the memoization table for previously computed results.</li>
+<li>Compute two possible scores:
+<ul>
+<li>Selecting the leftmost element from <code>nums</code> and moving the left index forward.</li>
+<li>Selecting the rightmost element from <code>nums</code> and moving the right index backward.</li>
+</ul>
+</li>
+<li>Store the maximum score in the memoization table and return it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Calculation</strong>:</p>
+<ul>
+<li>Start the recursion from the initial state and return the computed maximum score.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">,</span> <span class="n">mul</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains member variables to store the sizes of the <code>nums</code> and <code>mul</code> arrays, the arrays themselves, and a 2D vector <code>mem</code> for memoization.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maximumScore</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">mul</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">mul</span> <span class="o">=</span> <span class="n">mul</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">m</span> <span class="o">=</span> <span class="n">mul</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>The <code>maximumScore</code> method initializes the member variables with the provided input arrays and calculates their sizes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">((</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>The <code>mem</code> table is resized to hold results for each state. The dimensions are chosen to allow indexing based on the current index in <code>mul</code> and the transformed indices for <code>nums</code>. The offset of <code>1000 * (m + 1)</code> ensures that negative indices are avoided.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The initial call to the recursive function <code>dp</code> starts with the first index of <code>mul</code>, and the full range of <code>nums</code> (from index 0 to n - 1).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">m</span> <span class="o">||</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">r</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function checks the base cases: if all multipliers have been used or if the left index exceeds the right index, it returns 0, indicating no further score can be obtained.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][(</span><span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">r</span><span class="p">)]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][(</span><span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">r</span><span class="p">)];</span>
+</span></span></code></pre></div><ul>
+<li>The memoization table is checked for previously computed results. If a result exists for the current state, it is returned immediately to avoid redundant calculations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">mul</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>The score is calculated by selecting the leftmost element from <code>nums</code> and recursively calling <code>dp</code> for the next multiplier with the updated left index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">mul</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>The score is compared with the score obtained by selecting the rightmost element from <code>nums</code> and calling <code>dp</code> with the updated right index. The maximum score is stored in <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][(</span><span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">r</span><span class="p">)]</span> <span class="o">=</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The computed maximum score for the current state is stored in the memoization table and returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the algorithm is (O(m \times n)), where (m) is the length of the <code>mul</code> array and (n) is the length of the <code>nums</code> array. This is due to the fact that each state of the recursive function is computed only once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(m \times n)) for the memoization table, plus (O(n)) for the input arrays and additional space for storing member variables.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently calculates the maximum score achievable by selecting elements from two arrays through a recursive approach combined with memoization. By breaking down the problem into subproblems, the dynamic programming technique allows for optimal computation while avoiding redundant calculations.</p>
+<p>This solution showcases important algorithmic concepts such as dynamic programming and recursion, which are widely applicable in competitive programming and algorithm design. Understanding and implementing such techniques is crucial for solving complex optimization problems effectively.</p>
+<p>In summary, the algorithm effectively balances between selecting elements from either end of the <code>nums</code> array and applying multipliers from <code>mul</code>, ensuring that the maximum possible score is achieved. This approach can serve as a foundation for solving similar problems where choices and constraints are present, reinforcing the importance of recursive problem-solving strategies in programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode870s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1771"  class="external-link" target="_blank" rel="noopener">LeetCode #1771: Maximize Palindrome Length From Subsequences</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1771"  class="external-link" target="_blank" rel="noopener">LeetCode #1771: Maximize Palindrome Length From Subsequences</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +391,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

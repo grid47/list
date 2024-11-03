@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -228,11 +228,186 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1087s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the smallest numbered chair available for a person arriving at a given time <code>t</code> in a sequence of events defined by their arrival and departure times. Each person has a designated arrival time and a departure time, and once they leave, their chair becomes available for someone else. The goal is to ensure that each arriving person sits in the smallest numbered chair that is available when they arrive.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a priority queue (min-heap) to efficiently manage the availability of chairs. The approach consists of the following steps:</p>
+<ol>
+<li>
+<p><strong>Sorting Events</strong>: First, we sort the events based on their arrival times. This allows us to process each arrival in the order they occur.</p>
+</li>
+<li>
+<p><strong>Using Priority Queues</strong>: We will maintain two priority queues:</p>
+<ul>
+<li>One for reserving chairs (<code>reserve</code>), which stores the departure time along with the chair number.</li>
+<li>Another for available chairs (<code>avail</code>), which keeps track of the chair numbers that have become available.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Each Event</strong>: For each person:</p>
+<ul>
+<li>We check if any chairs have become available by comparing their departure times with the current arrival time. If so, we add those chairs to the available queue.</li>
+<li>If the current person is the one we are interested in (based on their arrival time), we stop processing further since we want to find the chair for this specific person.</li>
+<li>We assign a chair to the current person, either from the available chairs or a new chair if none are available.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>: Finally, we return the chair number assigned to the person arriving at time <code>t</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s analyze the provided code in detail:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">smallestChair</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We define a class named <code>Solution</code> and a public method called <code>smallestChair</code> that takes a 2D vector <code>a</code> representing the arrival and departure times of people and an integer <code>t</code>, which is the index of the person we are interested in.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">tt</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">reserve</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">avail</span><span class="p">;</span>
+</span></span></code></pre></div><p>We extract the arrival time <code>tt</code> of the target person (the one indexed by <code>t</code>). We then initialize two priority queues:</p>
+<ul>
+<li><code>reserve</code>: This will store pairs of departure times and chair numbers.</li>
+<li><code>avail</code>: This will keep track of the chair numbers that are available for use.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><p>Next, we sort the vector <code>a</code> based on the arrival times. This ensures that we process each person in the correct order.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">t</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We start iterating over each person&rsquo;s arrival and departure times.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">reserve</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">reserve</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">first</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">avail</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">reserve</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reserve</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>In this loop, we check if there are any chairs that have become available due to people leaving. If the earliest departure time (the top of the <code>reserve</code> queue) is less than or equal to the current person&rsquo;s arrival time <code>t[0]</code>, we add that chair number to the <code>avail</code> queue and remove it from the <code>reserve</code> queue.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">tt</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><p>We check if the current person&rsquo;s arrival time is the same as our target person&rsquo;s arrival time. If it is, we break out of the loop since we only need the chair number for this specific person.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">avail</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reserve</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">avail</span><span class="p">.</span><span class="n">top</span><span class="p">()});</span>
+</span></span><span class="line"><span class="cl">                <span class="n">avail</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">reserve</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reserve</span><span class="p">.</span><span class="n">size</span><span class="p">()});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>Here, we determine which chair to assign to the current person:</p>
+<ul>
+<li>If there are available chairs, we assign the smallest available chair (top of the <code>avail</code> queue) to the current person and push their departure time along with the chair number into the <code>reserve</code> queue.</li>
+<li>If no chairs are available, we allocate a new chair (which is simply the current size of the <code>reserve</code> queue) and push its departure time into the <code>reserve</code> queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">avail</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">?</span> <span class="n">reserve</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">:</span> <span class="n">avail</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, after processing all people, we check if there are any chairs available. If not, we return the total number of chairs (which is the same as the size of the <code>reserve</code> queue). Otherwise, we return the smallest available chair from the <code>avail</code> queue.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n \log n)) due to the sorting of the array <code>a</code> and the use of priority queues, where (n) is the number of people.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) to store the chairs and the events in the priority queues.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently determines the smallest numbered chair for a specified person arriving at a given time using priority queues to manage the availability of chairs. By leveraging sorting and heap operations, this approach ensures that the assignment of chairs is optimal and meets the problem&rsquo;s requirements.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Chair Management</strong>: The use of priority queues allows for dynamic management of chair availability based on real-time events (arrival and departure).</p>
+</li>
+<li>
+<p><strong>Efficient Sorting</strong>: Sorting the input array simplifies the logic for managing arrivals and departures, allowing for a straightforward implementation of the chair assignment logic.</p>
+</li>
+<li>
+<p><strong>Optimal Chair Assignment</strong>: By always selecting the smallest available chair, the solution adheres to the problem&rsquo;s requirements and maintains fairness in chair allocation.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This algorithm can be applied in various scenarios, including:</p>
+<ul>
+<li>
+<p><strong>Event Management Systems</strong>: Where chairs or seats need to be allocated dynamically based on arrival and departure times (e.g., for concerts, theaters, or conferences).</p>
+</li>
+<li>
+<p><strong>Resource Allocation</strong>: In systems where limited resources (like meeting rooms, equipment, etc.) need to be assigned to users based on their schedules.</p>
+</li>
+</ul>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing this solution, consider the following:</p>
+<ul>
+<li>
+<p><strong>Input Validations</strong>: Ensure that the input is well-formed, with valid arrival and departure times.</p>
+</li>
+<li>
+<p><strong>Concurrency</strong>: If this system is to be used in a multi-threaded environment, ensure that the access to shared data structures is properly synchronized to avoid race conditions.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: Test the implementation with a large number of events to ensure that the performance remains acceptable under heavy load.</p>
+</li>
+</ul>
+<p>This detailed explanation provides a comprehensive understanding of the code, its functioning, and its potential applications, making it an excellent resource for anyone interested in implementing similar functionality.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1087s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1943"  class="external-link" target="_blank" rel="noopener">LeetCode #1943: Describe the Painting</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1943"  class="external-link" target="_blank" rel="noopener">LeetCode #1943: Describe the Painting</a></th>
       </tr>
   </thead>
   <tbody>
@@ -253,66 +428,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

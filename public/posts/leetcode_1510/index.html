@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -208,11 +208,159 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode579s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine whether the first player has a winning strategy in a game involving squares. The game is played as follows:</p>
+<ol>
+<li>There is a pile of <code>n</code> stones.</li>
+<li>Players take turns removing a perfect square number of stones from the pile (1, 4, 9, 16, etc.).</li>
+<li>The player who cannot make a move (i.e., when there are no stones left) loses.</li>
+</ol>
+<p>The objective is to determine if the first player can always win with optimal play from both players.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to this problem can be approached using dynamic programming. Here’s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming Array</strong>: Create an array <code>dp</code> where <code>dp[i]</code> is <code>true</code> if the first player can win with <code>i</code> stones left, and <code>false</code> otherwise.</p>
+</li>
+<li>
+<p><strong>Initialization</strong>: The array is initialized with all values as <code>false</code>, representing the scenario where the first player cannot win with that number of stones.</p>
+</li>
+<li>
+<p><strong>Iterate Through Possible Stone Counts</strong>: For each stone count from 1 to <code>n</code>, check all possible square numbers (<code>k * k</code>) that can be removed.</p>
+</li>
+<li>
+<p><strong>Winning Condition</strong>: If there exists a move that leads to a state where the opponent cannot win (<code>dp[i - k * k]</code> is <code>false</code>), then the current state is winning for the first player (<code>dp[i] = true</code>).</p>
+</li>
+<li>
+<p><strong>Final Result</strong>: After filling the <code>dp</code> array, the answer for <code>n</code> stones will be in <code>dp[n]</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed explanation of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>winnerSquareGame</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">winnerSquareGame</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>winnerSquareGame</code> takes an integer <code>n</code> as input, representing the number of stones.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We declare a dynamic programming array <code>dp</code> of size <code>n + 1</code>, initialized to <code>false</code>. This array will keep track of whether the first player can win with <code>i</code> stones.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We iterate from <code>1</code> to <code>n</code> to fill in the <code>dp</code> array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>For each <code>i</code>, we check all perfect squares <code>k * k</code> such that <code>k * k</code> is less than or equal to <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span><span class="p">])</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We check if removing <code>k * k</code> stones leads to a state where the opponent cannot win (i.e., <code>dp[i - k * k]</code> is <code>false</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If we find such a move, we mark <code>dp[i]</code> as <code>true</code> (indicating a winning state for the first player) and break out of the inner loop since we don&rsquo;t need to check further.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The loops continue until we have processed all possible stone counts.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>dp[n]</code>, which indicates whether the first player can win with <code>n</code> stones.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this algorithm is (O(n \sqrt{n})) because:
+<ul>
+<li>The outer loop runs (n) times.</li>
+<li>The inner loop runs up to (\sqrt{n}) times for each <code>i</code>, as it iterates through the perfect squares.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(n)) due to the <code>dp</code> array used to store the winning states for each count of stones.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively determines the winner in the square game using dynamic programming principles.</p>
+<p><strong>Key Insights</strong>:</p>
+<ul>
+<li><strong>Dynamic Programming</strong>: This technique is applied to break down the problem into smaller subproblems, leveraging previously computed results to build up the final answer.</li>
+<li><strong>Game Theory</strong>: The solution illustrates how to evaluate winning strategies in turn-based games, particularly those involving optimal moves and state transitions.</li>
+</ul>
+<p>This algorithm can be very useful in competitive programming scenarios where similar game-based problems arise, providing a framework to analyze and solve problems involving states and transitions efficiently. The code is structured in a way that is easy to follow, and the logic can be applied to a variety of problems that require determining the outcome of competitive games.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode579s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1511"  class="external-link" target="_blank" rel="noopener">LeetCode #1511: Customer Order Frequency</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1511"  class="external-link" target="_blank" rel="noopener">LeetCode #1511: Customer Order Frequency</a></th>
       </tr>
   </thead>
   <tbody>
@@ -233,66 +381,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

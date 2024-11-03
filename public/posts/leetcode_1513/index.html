@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -213,11 +213,155 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode582s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to count the number of substrings in a binary string <code>s</code> that consist solely of the character &lsquo;1&rsquo;. Each substring contributes to the total count based on its length. Specifically, if a substring has length <code>L</code>, it contributes ( \frac{L \cdot (L + 1)}{2} ) to the total count, as there are ( L ) substrings of length 1, ( L-1 ) of length 2, and so forth down to 1 substring of length ( L ). The result should be returned modulo ( 10^9 + 7 ).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To efficiently count the number of valid substrings, we can use a single pass through the string while maintaining a count of consecutive &lsquo;1&rsquo;s. When we encounter a &lsquo;0&rsquo; or reach the end of the string, we can calculate the contribution of the accumulated &lsquo;1&rsquo;s to the total count.</p>
+<p>Here’s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start with a counter for the total substrings (<code>cnt</code>), a temporary counter for consecutive &lsquo;1&rsquo;s (<code>tmp</code>), and a modulo value to handle large numbers.</p>
+</li>
+<li>
+<p><strong>Iterate Through the String</strong>: Loop through each character in the string:</p>
+<ul>
+<li>If the character is &lsquo;1&rsquo;, increment the temporary counter (<code>tmp</code>).</li>
+<li>If the character is &lsquo;0&rsquo; or if we reach the end of the string, compute the contribution of the accumulated &lsquo;1&rsquo;s to <code>cnt</code>, and reset <code>tmp</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Calculation</strong>: After processing all characters, return the total count of substrings modulo ( 10^9 + 7 ).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is the detailed explanation of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class named <code>Solution</code> with a public method <code>numSub</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numSub</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>numSub</code> takes a string <code>s</code> as input, which represents a binary string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize <code>cnt</code> to 0 to store the total number of valid substrings. The variable <code>mod</code> is set to ( 10^9 + 7 ) to handle large numbers through modular arithmetic.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><code>tmp</code> will keep track of the number of consecutive &lsquo;1&rsquo;s, and <code>n</code> is the length of the string <code>s</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We start a loop that iterates over each character in the string from index 0 to ( n - 1 ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tmp</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the current character is &lsquo;1&rsquo;, we increment the <code>tmp</code> counter, indicating we have found another &lsquo;1&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span> <span class="o">||</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>If we encounter a &lsquo;0&rsquo; or reach the last character in the string, we process the count of &lsquo;1&rsquo;s stored in <code>tmp</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">+</span> <span class="n">tmp</span> <span class="o">*</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We calculate the contribution of the current sequence of &lsquo;1&rsquo;s to the total count using the formula ( \frac{L \cdot (L + 1)}{2} ) and update <code>cnt</code>. The modulo operation ensures we do not exceed the limits of typical integer types.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After adding the contribution of the current sequence, we reset <code>tmp</code> to 0 in preparation for the next sequence of &lsquo;1&rsquo;s.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The loop continues until all characters have been processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the total count of substrings stored in <code>cnt</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is (O(n)), where (n) is the length of the input string. We iterate through the string only once.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) because we use a constant amount of space for the counters and do not use any additional data structures that grow with input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of valid substrings of &lsquo;1&rsquo;s in a binary string by maintaining a running total of consecutive &lsquo;1&rsquo;s.</p>
+<p><strong>Key Insights</strong>:</p>
+<ul>
+<li><strong>Mathematical Insight</strong>: Understanding how to count the contributions of sequences of &lsquo;1&rsquo;s is crucial to solving this problem efficiently.</li>
+<li><strong>Modular Arithmetic</strong>: Using modulo ( 10^9 + 7 ) ensures that we can handle very large counts without encountering overflow errors.</li>
+</ul>
+<p>The code is concise and leverages mathematical properties effectively, making it an optimal solution for the problem at hand. The approach can be applied to similar problems involving counting specific substrings or patterns within strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode582s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1514"  class="external-link" target="_blank" rel="noopener">LeetCode #1514: Path with Maximum Probability</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1514"  class="external-link" target="_blank" rel="noopener">LeetCode #1514: Path with Maximum Probability</a></th>
       </tr>
   </thead>
   <tbody>
@@ -238,66 +382,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

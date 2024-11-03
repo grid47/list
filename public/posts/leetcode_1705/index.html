@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -220,11 +220,140 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode796s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves managing the consumption of apples over a specified number of days. Each apple has a certain expiration time, after which it cannot be eaten. Given two vectors, <code>apples</code> and <code>days</code>, where <code>apples[i]</code> represents the number of apples available on day <code>i</code>, and <code>days[i]</code> indicates how many days those apples can be eaten, the task is to calculate the maximum number of apples that can be consumed within the given constraints.</p>
+<p>The goal is to consume apples efficiently, considering their availability and expiration times, to maximize the total number of apples eaten.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a min-heap (priority queue) to keep track of the apples that are available to eat along with their expiration dates. The approach can be summarized in the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>: We start by determining the total number of days (length of the <code>days</code> array) and initializing a priority queue to manage the apples based on their expiration date.</p>
+</li>
+<li>
+<p><strong>Simulate Each Day</strong>: For each day, we will:</p>
+<ul>
+<li>Add the apples available that day to the priority queue, along with their expiration date (which is the current day plus the number of days they can be eaten).</li>
+<li>Remove any apples from the priority queue that have already expired.</li>
+<li>If there are still apples available, consume one apple, decrease its count, and if there are any remaining, reinsert it back into the queue with the same expiration date.</li>
+</ul>
+</li>
+<li>
+<p><strong>Continue Until All Days Are Processed</strong>: This process continues until we either exhaust the number of days or the priority queue becomes empty.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return the total count of apples eaten.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code to better understand how it implements this approach:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: We define a class named <code>Solution</code> that contains our method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: We declare a public method called <code>eatenApples</code>, which takes two vectors of integers (<code>apples</code> and <code>days</code>) as input and returns an integer representing the total number of apples eaten.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">eatenApples</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">apples</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">days</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: We initialize several variables:</p>
+<ul>
+<li><code>n</code> to store the number of days.</li>
+<li><code>pq</code> as a priority queue to manage apples based on their expiration dates.</li>
+<li><code>res</code> to accumulate the total number of apples eaten.</li>
+<li><code>i</code> to represent the current day.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">days</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop Through Days</strong>: We enter a while loop that continues as long as there are days left (<code>i &lt; n</code>) or there are still apples in the priority queue (<code>!pq.empty()</code>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">||</span> <span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Add Available Apples</strong>: Inside the loop, we check if there are apples available for the current day (<code>i &lt; n</code> and <code>apples[i] &gt; 0</code>). If so, we push them into the priority queue, storing the expiration date (the current day plus the days they can last) and the count of apples.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">apples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">i</span> <span class="o">+</span> <span class="n">days</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">apples</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Remove Expired Apples</strong>: Next, we need to ensure we are only dealing with non-expired apples. We do this by removing any entries from the priority queue where the expiration date is less than the current day (<code>i</code>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// Remove expired apples
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Consume Apples</strong>: If there are still apples in the queue, we consume one. We increment the result count, pop the top of the priority queue to get the apple details, and if there are remaining apples, we push them back into the queue with an updated count.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">res</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="c1">// Get the apple info
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">});</span> <span class="c1">// Push back if more apples are left
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Increment Day</strong>: After processing for the current day, we increment <code>i</code> to move to the next day.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return the total number of apples eaten.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is O(n log n), where n is the number of days, due to the operations on the priority queue. Each insertion and deletion operation on the priority queue takes O(log k) time, where k is the number of apples in the queue. The space complexity is O(k), where k is the maximum number of apples stored in the priority queue at any given time.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided code efficiently calculates the maximum number of apples that can be eaten given the constraints of availability and expiration dates. By utilizing a priority queue to manage the apples, the algorithm ensures that we always consume the freshest apples available while keeping track of their expiration. This method is optimal and well-suited for scenarios where resource management is critical, demonstrating effective use of data structures to solve complex problems efficiently. Overall, the solution is clear, concise, and adheres to the principles of algorithmic design, making it a valuable approach to similar resource allocation challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode796s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1706"  class="external-link" target="_blank" rel="noopener">LeetCode #1706: Where Will the Ball Fall</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1706"  class="external-link" target="_blank" rel="noopener">LeetCode #1706: Where Will the Ball Fall</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +374,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

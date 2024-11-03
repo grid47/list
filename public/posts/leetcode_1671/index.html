@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -234,11 +234,133 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">mx</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode760s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the minimum number of elements to be removed from an array to make it a mountain array. A mountain array is defined as an array where:</p>
+<ol>
+<li>There exists an index <code>i</code> such that <code>0 &lt; i &lt; nums.length - 1</code>.</li>
+<li>The elements before <code>i</code> are strictly increasing.</li>
+<li>The elements after <code>i</code> are strictly decreasing.</li>
+</ol>
+<p>For instance, the array <code>[2, 1, 1, 5, 6, 2, 3, 1]</code> can be transformed into a mountain array by removing some elements. The goal is to find the optimal way to achieve this while removing the fewest elements possible.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages the concept of Longest Increasing Subsequence (LIS) combined with iterating through potential peak elements in the array. The main steps involved in the approach are:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Define the <code>lis</code> function to calculate the length of the longest increasing subsequence. This will help in determining the increasing and decreasing sequences around each potential peak.</p>
+</li>
+<li>
+<p><strong>Iterate through potential peaks</strong>: For each index <code>i</code> in the array (except the first and last), treat <code>nums[i]</code> as a peak and calculate how many elements are in the increasing sequence to the left and the decreasing sequence to the right.</p>
+</li>
+<li>
+<p><strong>Calculate subsequences</strong>: Use the <code>lis</code> function to determine the lengths of the increasing and decreasing subsequences, ensuring both are at least 2 to form a valid mountain.</p>
+</li>
+<li>
+<p><strong>Update maximum</strong>: Keep track of the maximum length of valid mountain sequences found during the iterations.</p>
+</li>
+<li>
+<p><strong>Compute removals</strong>: Finally, the minimum number of removals required will be the total size of the array minus the maximum valid mountain length.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code is structured in a C++ class named <code>Solution</code>, containing two primary functions: <code>lis</code> and <code>minimumMountainRemovals</code>.</p>
+<ol>
+<li>
+<p><strong>Function <code>lis</code></strong>:</p>
+<ul>
+<li><strong>Input</strong>: A vector of integers representing a sequence.</li>
+<li><strong>Output</strong>: An integer representing the length of the longest increasing subsequence.</li>
+<li><strong>Logic</strong>:
+<ul>
+<li>Use a vector <code>res</code> to store the smallest tail for increasing subsequences found.</li>
+<li>Iterate through each element in the input array. Use binary search (<code>lower_bound</code>) to find the position where the current element can replace or extend the sequence in <code>res</code>.</li>
+<li>Update <code>res</code> accordingly to maintain its size as the longest increasing subsequence.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Function <code>minimumMountainRemovals</code></strong>:</p>
+<ul>
+<li><strong>Input</strong>: A reference to a vector of integers <code>nums</code>.</li>
+<li><strong>Output</strong>: An integer representing the minimum number of elements to remove.</li>
+<li><strong>Logic</strong>:
+<ul>
+<li>Determine the length of <code>nums</code> and initialize a variable <code>mx</code> to keep track of the maximum valid mountain length.</li>
+<li>Iterate through potential peak positions from index <code>1</code> to <code>n-2</code>.</li>
+<li>For each peak index <code>i</code>:
+<ul>
+<li>Create a vector <code>left</code> to store the increasing subsequence ending at <code>i</code> and another vector <code>right</code> to store the decreasing subsequence starting from <code>i</code>.</li>
+<li>Fill <code>left</code> by including all elements less than <code>nums[i]</code> to its left.</li>
+<li>Fill <code>right</code> by including all elements less than <code>nums[i]</code> to its right and reverse it for correct order.</li>
+<li>Use the <code>lis</code> function to compute the lengths of both subsequences.</li>
+<li>If both lengths are greater than or equal to 2, calculate the total valid mountain length and update <code>mx</code>.</li>
+</ul>
+</li>
+<li>Finally, return the total length of the array minus <code>mx</code>, giving the minimum number of removals required.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of the algorithm can be broken down as follows:</p>
+<ul>
+<li>The <code>lis</code> function operates in <code>O(n log n)</code> due to the binary search utilized in the function.</li>
+<li>The outer loop iterates through potential peaks (<code>O(n)</code>), while constructing the <code>left</code> and <code>right</code> vectors also contributes to an additional <code>O(n)</code> complexity in the worst-case scenario.</li>
+<li>Therefore, the overall time complexity of the <code>minimumMountainRemovals</code> function is approximately <code>O(n^2 log n)</code>, which is efficient for a moderate-sized array.</li>
+</ul>
+<p>The space complexity is <code>O(n)</code> as we store various vectors that can grow up to the size of the input array.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This C++ solution efficiently determines the minimum number of removals required to transform an array into a mountain array by utilizing the principles of the Longest Increasing Subsequence and careful consideration of potential peak elements. By iterating through the array and calculating the longest valid mountain lengths, the code effectively balances between optimal performance and clarity.</p>
+<p>By understanding the nuances of this implementation, one can appreciate the elegant combination of algorithmic techniques that contribute to solving the mountain array problem efficiently. This solution serves as a great example of how dynamic programming concepts can be integrated with practical coding strategies in competitive programming and technical interviews.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode760s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1672"  class="external-link" target="_blank" rel="noopener">LeetCode #1672: Richest Customer Wealth</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1672"  class="external-link" target="_blank" rel="noopener">LeetCode #1672: Richest Customer Wealth</a></th>
       </tr>
   </thead>
   <tbody>
@@ -259,66 +381,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

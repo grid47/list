@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,7 +218,136 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode808s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves maximizing the gain from removing pairs of characters from a given string based on specified point values for the pairs. The character pairs that can be removed are specified by two characters, ( a ) and ( b ). Each time a pair ( (a, b) ) is removed, the gain is ( x ), and each time a pair ( (b, a) ) is removed, the gain is ( y ). The goal is to determine the maximum gain possible by optimally removing these character pairs from the string.</p>
+<p>For example, given the string <code>&quot;ababcb&quot;</code>, if ( x = 5 ) and ( y = 3 ), and the pairs to consider are ( a = &lsquo;a&rsquo; ) and ( b = &lsquo;b&rsquo; ), the solution will find how many pairs can be removed and calculate the total gain accordingly.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can adopt the following strategy:</p>
+<ol>
+<li>
+<p><strong>Identify the Character Gain Order</strong>: First, determine whether to prioritize removing pairs of ( (a, b) ) or ( (b, a) ) based on the gain values ( x ) and ( y ). If ( y ) is greater than ( x ), swap the characters and their respective gain values.</p>
+</li>
+<li>
+<p><strong>Greedily Remove Pairs</strong>: Use a greedy approach to remove pairs from the string. The greedy function will iterate through the string, maintaining a stack where it pushes characters unless it finds a removable pair. When it encounters the characters ( a ) followed by ( b ), it pops ( a ) from the stack, effectively removing the pair.</p>
+</li>
+<li>
+<p><strong>Calculate Total Gain</strong>: The total gain is calculated based on the number of pairs removed and their respective gain values. The process involves running the greedy function twice: first to remove ( (a, b) ) pairs, and then to remove ( (b, a) ) pairs from the resulting string.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, return the total calculated gain as the result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the provided code to understand its functionality in detail:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The public method <code>maximumGain</code> takes the input string <code>s</code>, the gain values <code>x</code> and <code>y</code>, and two optional characters ( a ) and ( b ) (defaulting to &lsquo;a&rsquo; and &lsquo;b&rsquo;).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">maximumGain</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="kt">char</span> <span class="n">b</span> <span class="o">=</span> <span class="sc">&#39;b&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Prioritize Gain Values</strong>: The first step inside the method is to compare ( x ) and ( y ). If ( y ) is greater than ( x ), swap the characters and their corresponding gains to ensure that we always start with the highest priority pair.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Greedy Removal of Pairs</strong>: The first call to the <code>greedy</code> function attempts to remove pairs ( (a, b) ). The resulting string <code>s1</code> will contain the characters that remain after all possible ( (a, b) ) pairs have been removed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">s1</span> <span class="o">=</span> <span class="n">greedy</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">greedy</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span>  <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Second Pass for Remaining Pairs</strong>: A second call to the <code>greedy</code> function is made to remove any remaining pairs ( (b, a) ) from the intermediate string <code>s1</code>, resulting in <code>s2</code>.</p>
+</li>
+<li>
+<p><strong>Calculate Total Gain</strong>: The total gain is calculated based on how many pairs were removed. The formula for calculating the gain is as follows:</p>
+<ul>
+<li>For pairs ( (a, b) ): The number of pairs removed is ( \frac{s.size() - s1.size()}{2} ), which is multiplied by ( x ).</li>
+<li>For pairs ( (b, a) ): The number of pairs removed is ( \frac{s1.size() - s2.size()}{2} ), which is multiplied by ( y ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="p">((</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="p">((</span><span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">s2</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">y</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Greedy Function Implementation</strong>: The <code>greedy</code> function processes the string to remove pairs as described.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="nf">greedy</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">char</span> <span class="n">a</span><span class="p">,</span> <span class="kt">char</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">st</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">st</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">st</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">==</span> <span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="n">c</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">st</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="n">st</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">st</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The function uses a string <code>st</code> as a stack to hold characters.</li>
+<li>For each character in the string <code>s</code>, it checks if the last character in the stack is ( a ) and the current character is ( b ). If so, it pops ( a ) from the stack, effectively removing the pair.</li>
+<li>If not, the current character is pushed onto the stack.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return to Class Scope</strong>: After the greedy method completes its execution, the control returns to the main method, leading to the final result.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(n)), where (n) is the length of the string (s). The greedy algorithm processes each character in the string once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(n)) due to the use of a stack to store characters during the greedy process.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution efficiently maximizes the gain from removing character pairs from a string by strategically prioritizing the removal based on given gain values. The use of a greedy algorithm ensures that the solution is optimal while maintaining clarity and efficiency. The implementation is straightforward and can handle a variety of cases effectively. Overall, the code demonstrates a solid understanding of string manipulation and algorithm design, providing a robust solution to the problem of maximizing gains from character removals.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode808s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -230,7 +359,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1718"  class="external-link" target="_blank" rel="noopener">LeetCode #1718: Construct the Lexicographically Largest Valid Sequence</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1718"  class="external-link" target="_blank" rel="noopener">LeetCode #1718: Construct the Lexicographically Largest Valid Sequence</a></th>
       </tr>
   </thead>
   <tbody>
@@ -251,66 +380,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

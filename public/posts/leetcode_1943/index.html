@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -225,11 +225,186 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1060s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves painting segments on a number line where each segment has a specific color value associated with it. The goal is to determine the resulting painted segments after combining overlapping segments, accounting for their color values. Each segment is defined by its start point, end point, and the color value, and the output should provide the distinct painted segments with their respective color values.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we utilize a <strong>sweep line algorithm</strong> combined with a <strong>map</strong> to efficiently track color contributions at each point on the number line. Here’s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Event Point Representation</strong>: For each segment, we represent the start and end points as events in a map where:</p>
+<ul>
+<li>The start point adds the color value.</li>
+<li>The end point subtracts the color value.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting and Processing Events</strong>: We then iterate over the sorted event points to determine how the total color value changes across the number line:</p>
+<ul>
+<li>If the current total color value is non-zero, we create a new segment from the last event to the current event with the accumulated color.</li>
+<li>We update the total color value as we process each event.</li>
+</ul>
+</li>
+<li>
+<p><strong>Output Result</strong>: Finally, the result is built as a list of segments representing the painted areas with their color values.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code in detail:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">typedef</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">ll</span><span class="p">;</span> <span class="c1">// Define &#39;ll&#39; as a shorthand for &#39;long long&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">splitPainting</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">segs</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We define a class <code>Solution</code> and a public method <code>splitPainting</code>, which takes a 2D vector <code>segs</code> representing the segments to be painted.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">       <span class="c1">// sort(seg.begin(), seg.end());
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="n">ll</span><span class="p">,</span> <span class="n">ll</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span> <span class="c1">// Initialize a map to hold the color contributions at different points
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ll</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Initialize the result vector to store the final painted segments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">segs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Get the number of segments
+</span></span></span></code></pre></div><p>Although the sorting line is commented out, we initialize a <code>map</code> named <code>mp</code> to track the color changes, where the keys are the positions on the number line and the values are the cumulative color contributions. We also initialize a result vector <code>res</code> to store the final segments.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="nl">seg</span> <span class="p">:</span> <span class="n">segs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">seg</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+=</span> <span class="n">seg</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// Add the color value at the start of the segment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">mp</span><span class="p">[</span><span class="n">seg</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">-=</span> <span class="n">seg</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// Subtract the color value at the end of the segment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><p>We iterate over each segment in <code>segs</code>:</p>
+<ul>
+<li>For each segment, we increment the color contribution at the start of the segment by its color value (<code>seg[2]</code>).</li>
+<li>We decrement the color contribution at the end of the segment (<code>seg[1]</code>) by the same color value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">ll</span> <span class="n">prv</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">clr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize previous position and current color sum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">itr</span> <span class="p">:</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We initialize <code>prv</code> to <code>-1</code> (to signify no previous position) and <code>clr</code> to <code>0</code> (to keep track of the current color value). We then start iterating over the entries in the map.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">clr</span><span class="p">)</span> <span class="c1">// Check if there is a current color contribution
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">prv</span><span class="p">,</span> <span class="n">itr</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">clr</span><span class="p">});</span> <span class="c1">// If yes, add the segment to the result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">clr</span> <span class="o">+=</span> <span class="n">itr</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="c1">// Update the current color with the change at the current event point
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">prv</span> <span class="o">=</span> <span class="n">itr</span><span class="p">.</span><span class="n">first</span><span class="p">;</span> <span class="c1">// Update the previous position to the current event point
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><p>Within the loop:</p>
+<ul>
+<li>If <code>clr</code> is non-zero, it means we have a segment that has been painted with color, and we push a new segment into <code>res</code> defined by the previous position <code>prv</code>, the current position <code>itr.first</code>, and the current color <code>clr</code>.</li>
+<li>We then update the current color value by adding the contribution from the current point <code>itr.second</code>.</li>
+<li>Finally, we set <code>prv</code> to the current event point.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the final list of painted segments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>After processing all event points, we return the result vector <code>res</code>, which contains the distinct painted segments with their respective color values.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n \log n)) due to the insertion into the map, where (n) is the number of segments. Each segment results in two operations on the map (one for the start and one for the end), and sorting the keys will dominate the time complexity.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) as well, since we store each segment&rsquo;s contribution in the map and potentially have up to (2n) distinct event points.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This code efficiently solves the problem of determining the painted segments on a number line based on overlapping segments with color values. By leveraging a map to keep track of color contributions and a sweep line approach, the solution combines simplicity and efficiency. The output provides a clear representation of how the number line is segmented and colored after processing all input segments.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Event Point Tracking</strong>: The use of a map allows for efficient tracking of color contributions at specific points on the number line, enabling quick updates and lookups.</p>
+</li>
+<li>
+<p><strong>Handling Overlaps</strong>: By subtracting color values at end points, the solution effectively handles overlapping segments, ensuring that the final output accurately represents the resultant painted segments.</p>
+</li>
+<li>
+<p><strong>Dynamic Segment Creation</strong>: The algorithm dynamically creates segments based on changing color values, making it adaptable to a wide range of input scenarios.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach can be useful in various applications, including:</p>
+<ul>
+<li>
+<p><strong>Graphics and Visualizations</strong>: In computer graphics, where multiple overlapping shapes need to be painted with different colors, understanding the resultant overlap can be crucial.</p>
+</li>
+<li>
+<p><strong>Geographical Mapping</strong>: For applications in geographic information systems (GIS), where different regions may be colored based on various data attributes, such as population density or land use.</p>
+</li>
+<li>
+<p><strong>Data Visualization</strong>: In data analysis tools that visualize trends over time, this approach can effectively represent how overlapping data points affect the visual outcome.</p>
+</li>
+</ul>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing this solution, consider the following:</p>
+<ul>
+<li>
+<p><strong>Input Validation</strong>: Ensure that the segments are well-defined, with valid start and end points.</p>
+</li>
+<li>
+<p><strong>Performance Testing</strong>: Given the potential for large inputs, it’s advisable to test the performance of the implementation under various scenarios to ensure that it operates within acceptable time limits.</p>
+</li>
+<li>
+<p><strong>Edge Cases</strong>: Handle special cases, such as segments that do not overlap or segments that completely overlap with others.</p>
+</li>
+</ul>
+<p>By understanding and applying these concepts, one can effectively tackle similar problems involving overlapping intervals and color contributions.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1060s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1944"  class="external-link" target="_blank" rel="noopener">LeetCode #1944: Number of Visible People in a Queue</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1944"  class="external-link" target="_blank" rel="noopener">LeetCode #1944: Number of Visible People in a Queue</a></th>
       </tr>
   </thead>
   <tbody>
@@ -250,66 +425,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

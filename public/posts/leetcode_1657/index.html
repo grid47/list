@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -225,7 +225,143 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nums</span> <span class="o">==</span> <span class="n">arr</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode744s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining whether two strings, <code>w1</code> and <code>w2</code>, are &ldquo;close.&rdquo; According to the problem&rsquo;s criteria, two strings are considered close if:</p>
+<ol>
+<li>They have the same length.</li>
+<li>They contain the same unique characters (regardless of order).</li>
+<li>The frequency of characters in both strings can be rearranged to match each other. This means that the frequency of each character in one string can be transformed into the frequency of characters in the other string through reordering.</li>
+</ol>
+<p>The goal is to implement a function that checks if the two given strings meet these criteria.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To check if the two strings are close, the algorithm follows these steps:</p>
+<ol>
+<li><strong>Length Check</strong>: Verify if both strings have the same length.</li>
+<li><strong>Frequency Count</strong>: Count the frequency of each character in both strings.</li>
+<li><strong>Unique Character Check</strong>: Use bitwise operations to create a mask representing which characters are present in each string.</li>
+<li><strong>Frequency Comparison</strong>: Compare the frequency distributions of both strings to ensure they can be rearranged to match each other.</li>
+<li><strong>Final Check</strong>: Return true if all conditions are satisfied, otherwise return false.</li>
+</ol>
+<p>This approach efficiently handles the requirements of the problem using character counting and sorting techniques.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">closeStrings</span><span class="p">(</span><span class="n">string</span> <span class="n">w1</span><span class="p">,</span> <span class="n">string</span> <span class="n">w2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">w1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">w2</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Step 1: Length check
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">w1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">;</span> <span class="c1">// Step 2: Frequency maps
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">mask1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mask2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Step 3: Character presence masks
+</span></span></span></code></pre></div><ul>
+<li>We begin by defining a class <code>Solution</code> and a public method <code>closeStrings</code>.</li>
+<li>The first step checks if the lengths of <code>w1</code> and <code>w2</code> are equal. If not, the function immediately returns false.</li>
+<li>Two frequency maps, <code>m1</code> and <code>m2</code>, are created to store the character counts for each string.</li>
+<li>Two integer variables <code>mask1</code> and <code>mask2</code> are initialized to zero. These will be used to track the presence of characters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m1</span><span class="p">[</span><span class="n">w1</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Count frequency in w1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">m2</span><span class="p">[</span><span class="n">w2</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Count frequency in w2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">mask1</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">w1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">));</span> <span class="c1">// Update mask1 for w1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">mask2</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">w2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">));</span> <span class="c1">// Update mask2 for w2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>A loop iterates through each character in the strings <code>w1</code> and <code>w2</code>.</li>
+<li>The character counts for each string are updated in their respective frequency maps.</li>
+<li>The bitwise operation updates the masks to reflect which characters are present in each string (using the positions of letters from &lsquo;a&rsquo; to &lsquo;z&rsquo;).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mask1</span> <span class="o">!=</span> <span class="n">mask2</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Step 4: Check if both strings have the same unique characters
+</span></span></span></code></pre></div><ul>
+<li>After populating the masks, we check if <code>mask1</code> and <code>mask2</code> are equal. If they are not, the strings do not have the same unique characters, and the function returns false.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">,</span> <span class="n">nums</span><span class="p">;</span> <span class="c1">// Step 5: Prepare to compare frequency distributions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">m1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">);</span> <span class="c1">// Collect frequencies from w1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">arr</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// Sort frequencies for w1
+</span></span></span></code></pre></div><ul>
+<li>We create two vectors, <code>arr</code> and <code>nums</code>, to hold the sorted frequency counts.</li>
+<li>The frequency values from <code>m1</code> are collected into <code>arr</code>, which is then sorted.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">m2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">nums</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">);</span> <span class="c1">// Collect frequencies from w2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// Sort frequencies for w2
+</span></span></span></code></pre></div><ul>
+<li>Similarly, we collect frequency values from <code>m2</code> into <code>nums</code>, which is then sorted.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nums</span> <span class="o">==</span> <span class="n">arr</span><span class="p">;</span> <span class="c1">// Step 6: Compare sorted frequency distributions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we compare the two sorted frequency vectors. If they are equal, it indicates that the frequencies can be rearranged to match each other, and the function returns true. If they are not equal, the function returns false.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The function runs in ( O(n + k \log k) ), where ( n ) is the length of the strings and ( k ) is the number of unique characters (maximum of 26 for lowercase letters). The linear scans for counting characters and the sorting of frequencies dominate the complexity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(k) ) due to the storage of frequency maps and sorted frequency vectors, where ( k ) is the number of unique characters.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>closeStrings</code> method effectively checks whether two strings are close based on the defined criteria. It utilizes character counting and bit manipulation to ensure an efficient comparison of the strings.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Efficiency</strong>: The approach is efficient, with linear complexity regarding the size of the input strings.</li>
+<li><strong>Bit Manipulation</strong>: Using bit masks is an effective way to track the presence of characters without using additional data structures.</li>
+<li><strong>Sorting for Comparison</strong>: Sorting the frequency counts allows for a straightforward comparison to ensure the rearrangement condition is met.</li>
+</ol>
+<p>Overall, this solution is a clear demonstration of how to approach string comparison problems using fundamental programming concepts such as hashing, sorting, and bitwise operations. The algorithm is robust, handling edge cases such as differing lengths gracefully, and efficiently verifies the closeness of two strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode744s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -237,7 +373,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1658"  class="external-link" target="_blank" rel="noopener">LeetCode #1658: Minimum Operations to Reduce X to Zero</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1658"  class="external-link" target="_blank" rel="noopener">LeetCode #1658: Minimum Operations to Reduce X to Zero</a></th>
       </tr>
   </thead>
   <tbody>
@@ -258,66 +394,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

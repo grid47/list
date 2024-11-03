@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,11 +215,134 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode663s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand requires us to calculate the maximum sum of values from a given array based on specified range queries. Each query indicates a range of indices within the array, and our goal is to find an optimal arrangement of contributions from these values in a way that maximizes the total sum.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve this, we will take the following steps:</p>
+<ol>
+<li>
+<p><strong>Count Contributions</strong>: For each query, we will determine how many times each index in the <code>nums</code> array is included in the specified ranges.</p>
+</li>
+<li>
+<p><strong>Cumulative Count</strong>: Using a technique similar to a prefix sum array, we will derive the total contributions for each index from the range queries.</p>
+</li>
+<li>
+<p><strong>Sorting</strong>: To maximize the sum, we will sort both the <code>nums</code> array and the cumulative contribution counts in descending order.</p>
+</li>
+<li>
+<p><strong>Calculate Maximum Sum</strong>: By multiplying the values from the sorted <code>nums</code> array with the sorted contribution counts, we can find the maximum possible sum from the ranges.</p>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>: Since the result could be large, we will return it modulo (10^9 + 7).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s go through the code and explain its functionality in detail:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxSumRangeQuery</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">req</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Get the size of the nums array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">long</span> <span class="kt">long</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize the result variable to store the maximum sum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Create a count array initialized to zero
+</span></span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: We begin by initializing the result variable <code>res</code> to store the cumulative sum. The <code>cnt</code> array will track how many times each index of <code>nums</code> contributes to the total sum as determined by the queries.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">r</span><span class="p">:</span> <span class="n">req</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Loop through each range query
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cnt</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment the start of the range
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="c1">// Check if the end of the range exceeds the array bounds
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">cnt</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">--</span><span class="p">;</span> <span class="c1">// Decrement the position after the end of the range
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Counting Contributions</strong>: For each query, we increment the start index and decrement the index just after the end of the range. This marks the beginning and end of the contributions for that query.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="c1">// Convert the count array to cumulative counts
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">// Accumulate counts to get total contributions for each index
+</span></span></span></code></pre></div><ul>
+<li><strong>Cumulative Count Calculation</strong>: Here, we transform the <code>cnt</code> array into a cumulative count. This means that each index now holds the total number of times it was included across all range queries.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// Sort the nums array in ascending order
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">sort</span><span class="p">(</span><span class="n">cnt</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">cnt</span><span class="p">.</span><span class="n">end</span><span class="p">());</span> <span class="c1">// Sort the count array in ascending order
+</span></span></span></code></pre></div><ul>
+<li><strong>Sorting Arrays</strong>: We sort both the <code>nums</code> array and the cumulative count array. Sorting ensures that we can maximize the sum when we multiply the largest contributions with the largest numbers.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="c1">// Calculate the maximum sum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res</span> <span class="o">+=</span> <span class="p">((</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">cnt</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">// Multiply corresponding elements from nums and cnt
+</span></span></span></code></pre></div><ul>
+<li><strong>Calculating the Maximum Sum</strong>: In this loop, we multiply the corresponding elements of the sorted <code>nums</code> and <code>cnt</code> arrays. The result is accumulated into the <code>res</code> variable.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">;</span> <span class="c1">// Return the result modulo 10^9 + 7
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Final Return</strong>: Finally, we return the result modulo (10^9 + 7) to ensure that we handle large sums correctly.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n + k \log k)), where (n) is the size of the <code>nums</code> array and (k) is the number of queries. The most time-consuming steps are the sorting operations which each take (O(k \log k)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the additional count array used for tracking contributions.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently calculates the maximum sum of contributions from the <code>nums</code> array based on the specified range queries. By leveraging cumulative counts and sorting, we ensure that we maximize the sum effectively.</p>
+<p>This approach showcases a clever use of array manipulation and sorting techniques to derive an optimal solution for a problem that could otherwise involve more complex and computationally expensive operations.</p>
+<p>In summary, this algorithm effectively addresses the problem by:</p>
+<ul>
+<li>Utilizing a counting technique to handle overlapping ranges.</li>
+<li>Transforming the count into a cumulative format to easily manage contributions.</li>
+<li>Employing sorting to ensure maximum contributions align with the largest values.</li>
+</ul>
+<p>This method is robust and can handle various input sizes, making it suitable for competitive programming and applications where performance is crucial.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode663s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1590"  class="external-link" target="_blank" rel="noopener">LeetCode #1590: Make Sum Divisible by P</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1590"  class="external-link" target="_blank" rel="noopener">LeetCode #1590: Make Sum Divisible by P</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +363,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

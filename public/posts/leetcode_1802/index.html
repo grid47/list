@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -220,11 +220,150 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode906s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the maximum value that can be assigned to a specific index in an array while adhering to certain constraints. Given an array of length <code>n</code>, the value at a specified index <code>index</code> must not exceed <code>mx</code>, and the values in the array must be adjusted such that the total sum does not exceed the maximum permissible value. The goal is to maximize the value at the <code>index</code> position while ensuring that the total of the array meets the required conditions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we employ a binary search technique. The core idea is to find the maximum value that can be assigned to the <code>index</code> while checking if the conditions imposed by the problem are satisfied.</p>
+<ol>
+<li>
+<p><strong>Binary Search Initialization</strong>: We set up a binary search between a lower bound (<code>l = 0</code>) and an upper bound (<code>r = mx</code>), where <code>mx</code> is the maximum value allowed at the specified index.</p>
+</li>
+<li>
+<p><strong>Feasibility Check</strong>: For each midpoint value in the binary search (<code>mid</code>), we check if assigning this value to the index is feasible without violating the constraints. This check is performed by a helper function named <code>can</code>.</p>
+</li>
+<li>
+<p><strong>Helper Function - <code>can</code></strong>: The <code>can</code> function determines whether it is possible to assign the value <code>pk</code> (the candidate value for the index) to the specified <code>index</code> under the following conditions:</p>
+<ul>
+<li>It calculates how much value is needed to fill the array while ensuring that the values on either side of the <code>index</code> do not exceed the constraints.</li>
+<li>The function evaluates the total remaining sum and checks if the required value to maintain the constraints can be accommodated within that sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search Execution</strong>: If assigning the current <code>mid</code> value is feasible, it is recorded as a potential answer, and the search continues in the upper half of the range. If not, the search continues in the lower half.</p>
+</li>
+<li>
+<p><strong>Final Result</strong>: After the binary search completes, the maximum feasible value is returned, adjusted by adding 1 since we want to find the maximum possible value that can be set at the index.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">can</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">pk</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">i</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">sum</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>can</code> function checks whether it is feasible to assign a value <code>pk</code> to the <code>index</code>. It takes four parameters:
+<ul>
+<li><code>pk</code>: the proposed value for the index.</li>
+<li><code>n</code>: the size of the array.</li>
+<li><code>i</code>: the specific index in question.</li>
+<li><code>sum</code>: the total allowable sum for the array.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sum</span> <span class="o">-=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We adjust the <code>sum</code> by subtracting <code>n</code> since the proposed value will occupy the <code>index</code>. The variable <code>j</code> represents the number of elements to the right of the <code>index</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">need</span> <span class="o">=</span> <span class="n">pk</span> <span class="o">*</span> <span class="n">pk</span> <span class="o">-</span> <span class="p">((</span><span class="n">pk</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">?</span> <span class="p">(</span><span class="n">pk</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">pk</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">:</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">pk</span> <span class="o">&gt;</span> <span class="n">j</span><span class="o">?</span> <span class="p">(</span><span class="n">pk</span> <span class="o">-</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">pk</span> <span class="o">-</span> <span class="n">j</span><span class="p">)</span><span class="o">:</span> <span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This line computes the total value needed to satisfy the constraints imposed by the assignment of <code>pk</code> to the <code>index</code>. It considers how much value can be added to the left and right of the <code>index</code> while adhering to the maximum limit of values.</li>
+<li>The formula calculates the amount required for the left and right segments of the array, factoring in the diminishing returns as the distance from the index increases.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">need</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The function checks if the remaining sum after assigning <code>pk</code> is non-negative after accounting for the <code>need</code>. If so, it returns <code>true</code>; otherwise, it returns <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxValue</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mx</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The main function <code>maxValue</code> begins here, which sets up the binary search for the maximum value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">mx</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Initialize <code>ans</code> to store the best answer found, and set <code>l</code> and <code>r</code> to the bounds for binary search.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The binary search loop continues while the left bound is less than or equal to the right bound.</li>
+<li>We calculate the midpoint <code>mid</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">can</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">mx</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We use the <code>can</code> function to check if <code>mid</code> can be assigned to the index. If feasible, we update <code>ans</code> and adjust the left bound; otherwise, we adjust the right bound.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns the maximum value found, incremented by 1 to reflect the maximum feasible assignment.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(\log(mx) \cdot k)), where (k) is the complexity of the <code>can</code> function in terms of calculating the required values. Given the constraints and the logarithmic nature of the binary search, the overall complexity remains efficient.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since the algorithm uses a constant amount of space for variables, independent of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm provides an efficient method for determining the maximum value that can be assigned to a specified index within an array while adhering to the problem&rsquo;s constraints. By leveraging binary search and a carefully designed feasibility check, the solution balances efficiency with clarity.</p>
+<p>Understanding the interplay between binary search and condition checking is crucial for tackling similar problems in algorithm design. This approach not only optimizes the search for the maximum feasible value but also ensures that the constraints are respected throughout the process.</p>
+<p>In summary, this solution exemplifies effective problem-solving in competitive programming contexts and highlights the importance of selecting appropriate data structures and algorithms for efficient computation. The use of binary search in conjunction with a helper function for feasibility checks serves as a robust technique for managing constraints in optimization problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode906s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1803"  class="external-link" target="_blank" rel="noopener">LeetCode #1803: Count Pairs With XOR in a Range</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1803"  class="external-link" target="_blank" rel="noopener">LeetCode #1803: Count Pairs With XOR in a Range</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +384,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

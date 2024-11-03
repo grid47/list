@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -203,11 +203,111 @@
 </span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">return</span> <span class="n">w1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">largestMerge</span><span class="p">(</span><span class="n">w1</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">w2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode852s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to merge two strings, <code>w1</code> and <code>w2</code>, in such a way that the resulting string is the lexicographically largest possible. This means that when both strings are compared, we want to form a new string that is greater than or equal to any possible combination of these two strings when arranged.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve this, the solution uses a recursive approach. The key idea is to compare the two strings at each step and append the larger of the two prefixes to the result string. If one string is exhausted, the remaining characters of the other string will be appended directly to the result. The steps can be outlined as follows:</p>
+<ol>
+<li>
+<p><strong>Base Case</strong>: If either string is empty, return the other string. This serves as the termination condition for the recursion.</p>
+</li>
+<li>
+<p><strong>Comparison</strong>: Compare the two strings:</p>
+<ul>
+<li>If <code>w1</code> is less than <code>w2</code> lexicographically, append the first character of <code>w2</code> to the result and recursively call the function with <code>w1</code> and the remaining characters of <code>w2</code>.</li>
+<li>Otherwise, append the first character of <code>w1</code> to the result and recursively call the function with the remaining characters of both strings.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursion</strong>: This process continues recursively until both strings are completely merged into the final result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a step-by-step breakdown of the implementation in the <code>largestMerge</code> function:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The function is defined within a class called <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The <code>largestMerge</code> method takes two strings as input and returns a single string as output.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">largestMerge</span><span class="p">(</span><span class="n">string</span> <span class="n">w1</span><span class="p">,</span> <span class="n">string</span> <span class="n">w2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Base Case</strong>: The first conditional checks if either <code>w1</code> or <code>w2</code> is empty. If so, it returns the concatenation of the two strings, effectively returning the non-empty string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">w1</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="o">||</span> <span class="n">w2</span> <span class="o">==</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">w1</span> <span class="o">+</span> <span class="n">w2</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Lexicographical Comparison</strong>: The next conditional compares <code>w1</code> and <code>w2</code>. If <code>w1</code> is lexicographically smaller than <code>w2</code>, it means that <code>w2</code> should contribute more to the final merged string. Thus, the function appends the first character of <code>w2</code> and makes a recursive call with the remaining characters of <code>w1</code> and the substring of <code>w2</code> starting from the second character.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">w1</span> <span class="o">&lt;</span> <span class="n">w2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">w2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">largestMerge</span><span class="p">(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Default Case</strong>: If <code>w1</code> is not less than <code>w2</code>, the first character of <code>w1</code> is appended to the result. The function then makes a recursive call with the substring of <code>w1</code> starting from the second character and the entire <code>w2</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">else</span> <span class="k">return</span> <span class="n">w1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">largestMerge</span><span class="p">(</span><span class="n">w1</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">w2</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution can be approximated to (O(n + m)), where (n) and (m) are the lengths of the input strings <code>w1</code> and <code>w2</code>, respectively. This is because each character of both strings will be processed once in the recursion.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n + m)) as well, due to the recursion stack space used for the function calls and the substring creations in each recursive call.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>largestMerge</code> function effectively demonstrates a straightforward recursive strategy to merge two strings into the lexicographically largest possible string. By leveraging string comparison at each recursive step, the solution ensures that the characters are selected optimally to create the desired result. This method is not only efficient but also easy to understand, showcasing how recursion can simplify complex problems involving string manipulations. The approach can be useful in various scenarios where order and combination of elements are crucial, particularly in algorithm design and competitive programming contexts.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode852s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1755"  class="external-link" target="_blank" rel="noopener">LeetCode #1755: Closest Subsequence Sum</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1755"  class="external-link" target="_blank" rel="noopener">LeetCode #1755: Closest Subsequence Sum</a></th>
       </tr>
   </thead>
   <tbody>
@@ -228,66 +328,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

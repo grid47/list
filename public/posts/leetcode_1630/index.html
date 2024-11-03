@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -208,11 +208,135 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode711s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to check whether specified subarrays of a given array <code>nums</code> form arithmetic sequences. An arithmetic sequence is defined as a sequence of numbers in which the difference between any two consecutive terms is constant. For this problem, we are given multiple queries, each defined by two indices <code>l</code> and <code>r</code>, which specify the start and end indices of the subarrays. The objective is to return a boolean vector indicating whether each subarray is an arithmetic sequence.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will:</p>
+<ol>
+<li>Extract the specified subarrays from <code>nums</code> using the indices provided in <code>l</code> and <code>r</code>.</li>
+<li>Sort the extracted subarrays.</li>
+<li>Check if the sorted subarray forms an arithmetic sequence by verifying if the difference between consecutive elements is constant.</li>
+<li>Store the result (true or false) for each query in a result vector and return it.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed explanation of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">checkArithmeticSubarrays</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">l</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains the method <code>checkArithmeticSubarrays</code>, which takes three parameters: <code>nums</code>, <code>l</code>, and <code>r</code>.</li>
+<li><code>nums</code> is the array to be checked, while <code>l</code> and <code>r</code> are vectors containing the start and end indices for the subarrays.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We declare a vector <code>res</code> that will hold the results for each query.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A loop iterates over the indices of the <code>l</code> vector, which indicates the number of queries we need to process.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">n</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">+</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">begin</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">+</span> <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>For each query defined by the indices <code>l[i]</code> and <code>r[i]</code>, we create a subarray <code>n</code> from <code>nums</code> that contains elements from <code>l[i]</code> to <code>r[i]</code>. The use of <code>begin(nums) + l[i]</code> and <code>begin(nums) + r[i] + 1</code> allows us to extract the correct range of elements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">sort</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>The extracted subarray <code>n</code> is sorted. Sorting is essential because it allows us to easily check for the common difference of an arithmetic sequence.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">n</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This loop starts from the third element (index 2) of the sorted subarray <code>n</code> and checks if the difference between consecutive elements is consistent.</li>
+<li>The difference between the first two elements (<code>n[1] - n[0]</code>) is stored as the reference difference.</li>
+<li>If any consecutive pair of elements has a difference that does not match the reference difference, the loop breaks.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">n</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>After the inner loop, we check if <code>j</code> has reached the size of <code>n</code>. If it has, it means all consecutive differences matched, indicating that <code>n</code> is an arithmetic sequence. We append <code>true</code> to <code>res</code>; otherwise, we append <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the result vector <code>res</code>, which contains boolean values for each query indicating whether the corresponding subarray is an arithmetic sequence.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>For each query, extracting the subarray takes (O(k)), where (k) is the size of the subarray (from <code>l[i]</code> to <code>r[i]</code>).</li>
+<li>Sorting the subarray takes (O(k \log k)).</li>
+<li>The subsequent loop that checks for constant differences runs in (O(k)).</li>
+<li>Therefore, the total complexity for each query is (O(k \log k)).</li>
+<li>If there are (q) queries and assuming the average size of subarrays is (k), the total time complexity is approximately (O(q \cdot k \log k)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(k)) for storing the extracted subarray for each query. Thus, the overall space complexity can also be considered (O(k)) for each query separately.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether specified subarrays of an array form arithmetic sequences by leveraging sorting and a straightforward difference-checking mechanism. By encapsulating the logic within a loop that iterates through the specified ranges, we maintain clarity and organization in the code.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Sorting for Sequence Checking</strong>: Sorting the subarrays simplifies the checking process for arithmetic properties.</li>
+<li><strong>Use of Vectors</strong>: Vectors are utilized effectively to manage dynamic arrays and store results.</li>
+<li><strong>Time Complexity Awareness</strong>: Understanding the implications of sorting on time complexity is critical, especially for larger datasets.</li>
+</ol>
+<p>This approach can be adapted to similar problems involving sequence checks, making it a valuable technique in algorithm design and competitive programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode711s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1631"  class="external-link" target="_blank" rel="noopener">LeetCode #1631: Path With Minimum Effort</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1631"  class="external-link" target="_blank" rel="noopener">LeetCode #1631: Path With Minimum Effort</a></th>
       </tr>
   </thead>
   <tbody>
@@ -233,66 +357,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

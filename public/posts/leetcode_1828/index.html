@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -209,7 +209,126 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode933s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine how many points from a given set fall within a specified number of circular queries. Each query consists of a center point and a radius, and we need to count how many of the given points lie inside or on the boundary of the circle defined by each query.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a brute-force approach. The method involves the following key steps:</p>
+<ol>
+<li>
+<p><strong>Understanding the Circle Equation</strong>: For a given circle with center ((x_c, y_c)) and radius (r), a point ((x_p, y_p)) is considered inside or on the circle if the distance from the point to the center is less than or equal to the radius. This can be mathematically represented as:
+[
+(x_p - x_c)^2 + (y_p - y_c)^2 \leq r^2
+]
+This formula helps in determining whether a point is inside the circle or not.</p>
+</li>
+<li>
+<p><strong>Iterate Through Queries</strong>: For each query, we will iterate through all the points and apply the circle equation to count how many points satisfy the condition.</p>
+</li>
+<li>
+<p><strong>Count Points for Each Query</strong>: For each query, maintain a counter that increments whenever a point lies inside the circle. Store the result for each query in a results vector.</p>
+</li>
+<li>
+<p><strong>Return Results</strong>: After processing all queries, return the results vector containing the counts for each query.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s the detailed breakdown of the provided implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">typedef</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mo</span><span class="p">;</span> <span class="c1">// Define a shorthand for vector of vectors of integers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">countPoints</span><span class="p">(</span><span class="n">mo</span><span class="o">&amp;</span> <span class="n">pts</span><span class="p">,</span> <span class="n">mo</span><span class="o">&amp;</span> <span class="n">qrs</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a <code>class Solution</code> that contains the method <code>countPoints</code>. The method takes two parameters: a reference to a 2D vector <code>pts</code> representing the points and a 2D vector <code>qrs</code> representing the queries.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Vector to store the results for each query
+</span></span></span></code></pre></div><ul>
+<li>An empty vector <code>res</code> is initialized to store the count of points within each query circle.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">q</span><span class="p">:</span> <span class="n">qrs</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Iterate over each query
+</span></span></span></code></pre></div><ul>
+<li>We start a loop that iterates through each query in <code>qrs</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rr</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span> <span class="c1">// Initialize the count and calculate the radius squared
+</span></span></span></code></pre></div><ul>
+<li>Inside the loop, we initialize a counter <code>cnt</code> to <code>0</code> and calculate <code>rr</code>, which is the radius squared (to avoid computing the square root).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">p</span><span class="p">:</span> <span class="n">pts</span><span class="p">)</span> <span class="c1">// Iterate over each point
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">cnt</span> <span class="o">+=</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">rr</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We start another loop to iterate over each point in <code>pts</code>. For each point, we apply the circle equation:
+<ul>
+<li>We calculate the squared distance from the point to the circle&rsquo;s center.</li>
+<li>If this squared distance is less than or equal to <code>rr</code>, it means the point is within or on the boundary of the circle. If true, <code>cnt</code> is incremented.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">cnt</span><span class="p">);</span> <span class="c1">// Store the count of points for the current query
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After processing all points for a particular query, we store the count <code>cnt</code> in the <code>res</code> vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the results vector
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the method returns the <code>res</code> vector containing the count of points for each query.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this approach is (O(n \cdot m)), where (n) is the number of points in <code>pts</code>, and (m) is the number of queries in <code>qrs</code>. This is because we iterate through all points for each query.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) in terms of auxiliary space since we are using only a fixed amount of extra space (the <code>res</code> vector and a few integer variables).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This implementation efficiently counts the number of points that lie within a series of circular queries by leveraging the mathematical properties of circles and a straightforward brute-force approach. While the method may not be the most optimized for extremely large datasets due to its (O(n \cdot m)) complexity, it is clear and effective for moderate input sizes.</p>
+<p>By iterating over both the points and the queries, we can ensure accurate counting for each query. This approach is particularly useful in scenarios where the number of points and queries is not excessively large, making it suitable for a wide range of applications in computational geometry and related fields.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode933s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -221,7 +340,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1829"  class="external-link" target="_blank" rel="noopener">LeetCode #1829: Maximum XOR for Each Query</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1829"  class="external-link" target="_blank" rel="noopener">LeetCode #1829: Maximum XOR for Each Query</a></th>
       </tr>
   </thead>
   <tbody>
@@ -242,66 +361,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

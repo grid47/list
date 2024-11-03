@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -207,7 +207,123 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode945s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective of this problem is to find the maximum frequency of an element in an array after performing a limited number of operations. Given an array of integers ( A ) and a non-negative integer ( t ), we can increase any element in the array by ( 1 ) any number of times, but the total amount of increase across all operations cannot exceed ( t ). The task is to determine the maximum frequency of any element in the modified array after utilizing the allowed total increase.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can employ a sliding window approach after sorting the array. By following these steps:</p>
+<ol>
+<li>
+<p><strong>Sort the Array</strong>: Start by sorting the array to enable easy calculation of the frequency of elements by focusing on contiguous segments.</p>
+</li>
+<li>
+<p><strong>Sliding Window Technique</strong>: Use two pointers (i.e., a window defined by indices ( i ) and ( j )) to keep track of the elements we are currently considering for frequency calculation.</p>
+</li>
+<li>
+<p><strong>Calculate the Total Cost</strong>: As we move the end of the window (index ( j )), we calculate the cost of making all elements in the window equal to the element at index ( j ). This cost is derived from the difference between the value at ( A[j] ) and each preceding element in the window.</p>
+</li>
+<li>
+<p><strong>Adjust the Window</strong>: If the total cost exceeds ( t ), we increment the start of the window (index ( i )) to reduce the total cost until it is within the allowable limit.</p>
+</li>
+<li>
+<p><strong>Track the Maximum Frequency</strong>: Throughout the process, keep track of the maximum frequency, which can be derived from the size of the window ( j - i + 1 ).</p>
+</li>
+</ol>
+<p>This approach efficiently finds the maximum frequency of any element after allowed modifications, ensuring that we always work within the constraint of total increases.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxFrequency</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">A</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A class named <code>Solution</code> is defined, containing a public method <code>maxFrequency</code> that takes a vector of integers ( A ) and an integer ( t ) as inputs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">k</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Two pointers are initialized: ( i ) (the start of the sliding window) is set to ( 0 ) and ( j ) is declared but not initialized yet. A variable ( k ) is initialized with the value of ( t ) to keep track of the remaining increases allowed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">A</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>The array ( A ) is sorted in non-decreasing order. This step is crucial as it allows us to consider contiguous elements and simplify the calculation of the total cost to increase the elements in the current window.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A for loop is initiated with ( j ) iterating from ( 0 ) to the size of ( A ). This loop represents the end of the sliding window.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">k</span> <span class="o">+=</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>The current element ( A[j] ) is added to ( k ). This operation reflects that we are hypothetically considering making all elements in the window equal to ( A[j] ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</span></span></code></pre></div><ul>
+<li>A condition checks if the current total cost ( k ) is less than the cost required to make all elements in the window equal to ( A[j] ). The expression ( (long)A[j] * (j - i + 1) ) calculates the total cost needed to make ( j - i + 1 ) elements equal to ( A[j] ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">k</span> <span class="o">-=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>If the condition is true (meaning the cost exceeds ( t )), the value of ( A[i] ) is subtracted from ( k ) and ( i ) is incremented to effectively shrink the window from the left side.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>After the loop completes, the maximum frequency is calculated by returning the size of the window ( j - i ). This size represents the maximum number of elements that can be made equal to ( A[j] ) within the given budget of increases.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is ( O(n \log n) ), where ( n ) is the size of the input array ( A ). This complexity arises primarily from the sorting step. The subsequent sliding window operation runs in ( O(n) ).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) since we are using a fixed amount of extra space for variables and do not utilize additional data structures that scale with the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively computes the maximum frequency of any element that can be achieved by performing a limited number of increases on the array ( A ). By combining sorting with a sliding window technique, the algorithm maintains efficiency and clarity.</p>
+<p>This method is particularly useful in situations where one needs to optimize operations over a set of values while adhering to specific constraints. It showcases a fundamental technique in algorithm design that balances efficiency with clarity, making it a valuable addition to any programmer&rsquo;s toolkit. The sliding window approach allows for quick adjustments and evaluations, making the overall implementation straightforward and effective in addressing the problem.</p>
+<p>In conclusion, the <code>maxFrequency</code> function illustrates a practical application of algorithmic strategies to solve a common problem in data processing and manipulation, showcasing both theoretical and practical programming skills.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode945s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -219,7 +335,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1839"  class="external-link" target="_blank" rel="noopener">LeetCode #1839: Longest Substring Of All Vowels in Order</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1839"  class="external-link" target="_blank" rel="noopener">LeetCode #1839: Longest Substring Of All Vowels in Order</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +356,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

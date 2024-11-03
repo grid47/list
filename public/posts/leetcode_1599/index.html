@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -230,11 +230,144 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">?</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">rot</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode675s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the minimum number of operations (or rounds) needed to maximize profit from a gondola boarding system based on a series of customer arrival rates, the cost of boarding per customer, and the running cost per round. Each gondola can take up to four customers per round, and any remaining customers must wait for the next round. The task is to compute the round at which the maximum profit is achieved and return that round number. If the maximum profit is non-positive, we should return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will simulate each round of customer boarding while keeping track of the profits and the waiting customers. The following steps outline the approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We will start by initializing necessary variables such as the number of customers, the waiting customers, the current profit, the maximum profit observed, the round index, and the rotation count (number of rounds).</p>
+</li>
+<li>
+<p><strong>Simulate Boarding</strong>: We will iterate through each round until all customers have boarded and there are no waiting customers left. In each round:</p>
+<ul>
+<li>Add the number of customers arriving in the current round to the waiting count.</li>
+<li>Calculate the number of customers that can board in this round (up to 4).</li>
+<li>Compute the profit based on the boarding and running costs.</li>
+<li>Update the maximum profit and the corresponding round if the current profit exceeds the maximum observed profit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle Waiting Customers</strong>: If there are still waiting customers after processing the input list, we will continue processing rounds until no customers remain.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: After all rounds, if the maximum profit is positive, return the round number associated with it; otherwise, return -1 to indicate no profitable operation was possible.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s the provided code with an explanation of each section:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minOperationsMaxProfit</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">cust</span><span class="p">,</span> <span class="kt">int</span> <span class="n">boardingCost</span><span class="p">,</span> <span class="kt">int</span> <span class="n">runningCost</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class <code>Solution</code> that contains a public method <code>minOperationsMaxProfit</code>. This method takes in a vector of integers representing customer arrivals (<code>cust</code>), the cost of boarding each customer (<code>boardingCost</code>), and the fixed cost for running the gondola for each round (<code>runningCost</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cust</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Get the total number of customer entries
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">wait</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize the waiting customer count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">profit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize profit and rotation count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span> <span class="c1">// Initialize maximum profit to the smallest integer value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize the index for customer processing
+</span></span></span></code></pre></div><ul>
+<li><strong>Variable Initialization</strong>: Here, we initialize the total number of customers, waiting customer count, current profit, rotation count, maximum profit tracker, and the index for iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">||</span> <span class="n">wait</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Continue until all customers are processed or waiting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">wait</span> <span class="o">+=</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">?</span> <span class="n">cust</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span> <span class="c1">// Add new customers to the waiting count
+</span></span></span></code></pre></div><ul>
+<li><strong>Main Loop</strong>: This loop continues until all customers have been processed and there are no waiting customers left. It first adds any new customers from the input list to the waiting count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">wait</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">profit</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">boardingCost</span> <span class="o">-</span> <span class="n">runningCost</span><span class="p">;</span> <span class="c1">// Calculate profit for full boarding
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">wait</span> <span class="o">-=</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// Decrease waiting count by 4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">wait</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">profit</span> <span class="o">+=</span> <span class="n">wait</span> <span class="o">*</span> <span class="n">boardingCost</span> <span class="o">-</span> <span class="n">runningCost</span><span class="p">;</span> <span class="c1">// Calculate profit for remaining customers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">wait</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Reset wait to 0 after boarding all waiting customers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Profit Calculation</strong>: The first <code>if</code> condition checks if there are more than 4 customers waiting. If so, the profit is calculated based on 4 customers boarding, and the waiting count is decreased accordingly. If there are fewer than 4 but more than 0, we calculate profit based on all remaining waiting customers and reset the waiting count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mx</span> <span class="o">&lt;</span> <span class="n">profit</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">mx</span> <span class="o">=</span> <span class="n">profit</span><span class="p">;</span> <span class="c1">// Update maximum profit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">rot</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Update the round number associated with max profit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Max Profit Tracking</strong>: After calculating the profit for the current round, we check if this profit is greater than the previously recorded maximum. If so, we update the maximum profit and store the current round number.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">idx</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Move to the next customer entry
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iteration Control</strong>: Increment the index to process the next customer in the subsequent round.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">?</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">rot</span><span class="p">;</span> <span class="c1">// Return the result based on the maximum profit observed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Result Return</strong>: After completing the loop, we return the round number associated with the maximum profit unless the maximum profit is less than or equal to zero, in which case we return -1.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the number of customer entries in the <code>cust</code> vector. This is because we iterate through the customer list and process them in a single pass.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a constant amount of extra space for variables that do not depend on the size of the input.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively simulates the gondola boarding process while keeping track of profits and waiting customers. The main advantages of this approach include:</p>
+<ol>
+<li><strong>Efficient Simulation</strong>: The direct simulation of each round allows for straightforward profit calculations based on current waiting customers and costs.</li>
+<li><strong>Dynamic Tracking</strong>: The use of a simple loop to manage boarding and profit updates enables efficient tracking of the best possible outcome.</li>
+<li><strong>Clarity and Readability</strong>: The code is easy to understand, making it accessible for modification or extension if additional features are required.</li>
+</ol>
+<p>Overall, this method is optimal for the problem and efficiently determines the best operation strategy for maximizing profits in the gondola boarding system.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode675s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1600"  class="external-link" target="_blank" rel="noopener">LeetCode #1600: Throne Inheritance</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1600"  class="external-link" target="_blank" rel="noopener">LeetCode #1600: Throne Inheritance</a></th>
       </tr>
   </thead>
   <tbody>
@@ -255,66 +388,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

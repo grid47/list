@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -232,11 +232,180 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode638s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves a strategic game known as &ldquo;Stone Game V,&rdquo; where two players alternately take stones from a pile to maximize their total collected value. The game operates under the following rules:</p>
+<ol>
+<li>Players can divide the stones into two contiguous piles.</li>
+<li>Each player will choose a pile of stones based on maximizing their score relative to the other player&rsquo;s remaining stones.</li>
+<li>The goal is to find the maximum score that the first player can achieve when both players play optimally.</li>
+</ol>
+<p>Given an array <code>sv</code> that represents the values of stones, the challenge is to compute the maximum score for the first player using dynamic programming.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem employs dynamic programming (DP) to explore different ways of dividing the piles of stones and calculating the potential scores. Here’s a high-level overview of the approach:</p>
+<ol>
+<li>
+<p><strong>Prefix Sum Array</strong>: Create a prefix sum array <code>sum</code> to efficiently calculate the total value of stones in any contiguous segment.</p>
+</li>
+<li>
+<p><strong>Memoization Table</strong>: Use a 2D vector <code>memo</code> to store the results of previously computed states to avoid redundant calculations.</p>
+</li>
+<li>
+<p><strong>Recursive Function</strong>: Define a recursive function <code>dp(l, r)</code> that calculates the maximum score achievable from the subarray of stones ranging from index <code>l</code> to <code>r</code>.</p>
+</li>
+<li>
+<p><strong>Division Logic</strong>: Iterate through possible divisions of the pile at each step and calculate the potential scores based on the left and right segments formed. The maximum score is updated based on the comparative values of the two segments.</p>
+</li>
+<li>
+<p><strong>Base Case</strong>: If the left and right indices are equal, return zero, indicating no stones left to collect.</p>
+</li>
+<li>
+<p><strong>Final Result</strong>: Call the recursive function starting from the full range of stones and return the result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s delve into the code, explaining each section in detail:</p>
+<ul>
+<li><strong>Class Declaration</strong>:
+The solution is defined within a class named <code>Solution</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Member Variables</strong>:
+The class contains member variables for the number of stones <code>n</code>, the vector <code>sv</code> to store stone values, a vector <code>sum</code> for prefix sums, and a 2D vector <code>memo</code> for memoization.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sv</span><span class="p">,</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">memo</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Dynamic Programming Function</strong>:
+The <code>dp</code> function is defined, taking two indices <code>l</code> and <code>r</code> as parameters, representing the current range of the stone array being considered.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>:
+If the left index equals the right index, it means only one stone is left, and thus no points can be scored, returning zero.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="n">r</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Memoization Check</strong>:
+If the result for the current indices <code>l</code> and <code>r</code> has already been computed, return the stored result to avoid recalculating.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">r</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Initialization of Result Variable</strong>:
+Initialize a variable <code>ans</code> to keep track of the maximum score that can be achieved from the current range.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iterate Through Possible Divisions</strong>:
+A loop iterates through each index <code>i</code> from <code>l</code> to <code>r-1</code>, considering it as a potential division point.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Calculate Left and Right Segment Sums</strong>:
+Using the prefix sum array, calculate the sum of stones on the left and right segments created by the division at index <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sum</span><span class="p">[</span><span class="n">l</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Update the Result Based on Conditions</strong>:
+Depending on whether the left sum is greater than, less than, or equal to the right sum, update the maximum score accordingly. This involves calling the <code>dp</code> function recursively on the resulting segments.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">left</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">right</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">left</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">right</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">left</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Store the Result in Memoization Table</strong>:
+Store the computed result in the memoization table for the indices <code>l</code> and <code>r</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>:
+The <code>stoneGameV</code> function initializes the variables and sets up the prefix sum array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">stoneGameV</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">sv</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n</span> <span class="o">=</span> <span class="n">sv</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">sv</span> <span class="o">=</span> <span class="n">sv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">sv</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">sv</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Memoization Table Initialization</strong>:
+Initialize the memoization table with a size of <code>n</code> by <code>n</code>, filled with <code>-1</code> to indicate uncomputed states.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">memo</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return Result</strong>:
+Finally, invoke the <code>dp</code> function starting from the full range of stones and return the result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="nf">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n^2)) in the worst case due to the double recursion over the indices of the stone array, where (n) is the number of stones.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(n^2)) due to the memoization table used to store intermediate results, in addition to the space used by the prefix sum array.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>stoneGameV</code> function effectively utilizes dynamic programming to tackle the problem of maximizing the score in the Stone Game V. By employing a combination of prefix sums and memoization, the solution efficiently computes the optimal score for the first player while ensuring that both players make optimal moves.</p>
+<p>This implementation demonstrates key algorithmic concepts, including recursion, dynamic programming, and efficient state management through memoization. Understanding this solution equips developers with strategies to handle similar optimization problems in competitive programming or algorithmic challenges. The approach’s clarity and structured logic highlight the power of dynamic programming in solving complex game-theory-based problems, making it a valuable reference for future algorithmic explorations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode638s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1564"  class="external-link" target="_blank" rel="noopener">LeetCode #1564: Put Boxes Into the Warehouse I</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1564"  class="external-link" target="_blank" rel="noopener">LeetCode #1564: Put Boxes Into the Warehouse I</a></th>
       </tr>
   </thead>
   <tbody>
@@ -257,66 +426,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -230,11 +230,193 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode863s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the heights of a grid based on the location of water cells. Given a 2D grid <code>isWater</code>, where cells containing <code>1</code> represent water and cells containing <code>0</code> represent land, the goal is to compute the height of each cell such that:</p>
+<ol>
+<li>Water cells are at height <code>0</code>.</li>
+<li>Each land cell&rsquo;s height is defined as the minimum distance to any water cell.</li>
+<li>The height increases by <code>1</code> for each step away from a water cell.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a breadth-first search (BFS) algorithm. BFS is suitable for this scenario because it explores all cells at the current height before moving on to the next height level. This guarantees that each land cell will receive its correct height based on the shortest distance to the nearest water cell.</p>
+<p>The steps of the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a result matrix <code>ans</code> initialized to zero for all cells, which will eventually hold the heights.</li>
+<li>Create a visitation matrix <code>vis</code> to track whether a cell has been processed.</li>
+<li>Initialize a queue to hold the coordinates of the water cells.</li>
+</ul>
+</li>
+<li>
+<p><strong>Enqueue Water Cells</strong>:</p>
+<ul>
+<li>Traverse the grid and enqueue the coordinates of all water cells into the queue. These will serve as the starting points for BFS.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Exploration</strong>:</p>
+<ul>
+<li>While the queue is not empty, perform the following:
+<ul>
+<li>For each cell in the queue, retrieve its coordinates and mark it as visited.</li>
+<li>Set the height of this cell in the <code>ans</code> matrix to the current BFS level.</li>
+<li>For each of the four possible directions (up, down, left, right), check if the neighboring cell is within bounds and not yet visited. If valid, enqueue the neighboring cell for further exploration.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Height Increment</strong>:</p>
+<ul>
+<li>After processing all cells at the current level, increment the height level for the next iteration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>Finally, return the populated <code>ans</code> matrix, which now contains the heights of all cells.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code is implemented in the <code>Solution</code> class with a public method <code>highestPeak</code>. Below is a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">highestPeak</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">isWater</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The class <code>Solution</code> is defined, and the method <code>highestPeak</code> is declared, taking the <code>isWater</code> grid as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">isWater</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">isWater</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">vis</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>The dimensions of the grid are stored in <code>m</code> and <code>n</code>.</li>
+<li>Two matrices are created:
+<ul>
+<li><code>ans</code> to store the heights, initialized to zero.</li>
+<li><code>vis</code> to keep track of visited cells, also initialized to zero.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">isWater</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">});</span>
+</span></span></code></pre></div><ul>
+<li>A queue <code>q</code> is declared to facilitate BFS.</li>
+<li>A nested loop is used to identify all water cells, which are then enqueued with their coordinates.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">rot</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>An array <code>rot</code> is defined to assist with the movement in the four possible directions (down, right, up, left).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">vis</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A variable <code>cur</code> is initialized to zero, representing the current height level.</li>
+<li>The outer while loop continues until the queue is empty.</li>
+<li>The size of the queue is stored in <code>sz</code>, and an inner loop processes each cell in the queue:
+<ul>
+<li>The current cell&rsquo;s coordinates are retrieved from the front of the queue, and the cell is popped from the queue.</li>
+<li>If the cell has already been visited, it is skipped.</li>
+<li>Mark the cell as visited and set its height in the <code>ans</code> matrix to <code>cur</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">rot</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">rot</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">m</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="n">n</span> <span class="o">||</span> <span class="n">vis</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After processing the current cell, the algorithm checks each of the four possible neighboring cells:
+<ul>
+<li>If a neighboring cell is valid (within bounds and not visited), it is enqueued for further processing.</li>
+</ul>
+</li>
+<li>Once all cells at the current height have been processed, the height <code>cur</code> is incremented for the next iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The method returns the populated <code>ans</code> matrix containing the heights of all cells.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(m \times n)), where (m) is the number of rows and (n) is the number of columns in the grid. Each cell is processed once in the BFS.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(m \times n)) due to the <code>ans</code>, <code>vis</code>, and queue structures used during the BFS process.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>highestPeak</code> method effectively computes the height of each cell in a grid based on the proximity to water cells using a breadth-first search approach. By leveraging BFS, the algorithm guarantees that each land cell is assigned the correct height corresponding to its distance from the nearest water cell, ensuring that the heights increase appropriately.</p>
+<p>This solution is efficient and straightforward, making it suitable for similar problems involving grid traversal and distance calculations. Understanding and implementing BFS in this context not only solves the problem at hand but also reinforces valuable concepts applicable to a wide range of graph-based problems in computer science.</p>
+<p>Overall, this implementation illustrates the power of breadth-first search as a method for exploring grid-based problems and provides an optimal solution for calculating cell heights in a structured manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode863s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1766"  class="external-link" target="_blank" rel="noopener">LeetCode #1766: Tree of Coprimes</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1766"  class="external-link" target="_blank" rel="noopener">LeetCode #1766: Tree of Coprimes</a></th>
       </tr>
   </thead>
   <tbody>
@@ -255,66 +437,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -237,11 +237,182 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode742s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires determining whether it is possible to distribute a certain quantity of items (represented by <code>quantity</code>) among distinct types of items (represented by <code>nums</code>). Each type of item can be collected in various quantities, and the goal is to ensure that all quantities are fully satisfied with the items available.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we use a backtracking approach with memoization, effectively exploring all possible distributions of items. The approach is based on the following steps:</p>
+<ol>
+<li>
+<p><strong>Count Frequencies</strong>: Count the frequency of each distinct item in <code>nums</code> to determine how many of each type we have available for distribution.</p>
+</li>
+<li>
+<p><strong>Calculate Costs</strong>: Generate a cost array that represents the number of items required for each combination of quantities in <code>quantity</code>.</p>
+</li>
+<li>
+<p><strong>Dynamic Programming with Bitmasking</strong>: Use a dynamic programming (DP) approach, combined with bitmasking, to explore all combinations of quantities and check if they can be satisfied with the available frequencies.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: Cache the results of previously computed states to avoid redundant calculations, thereby optimizing the performance.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code to understand its workings:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">,</span> <span class="n">frq</span><span class="p">,</span> <span class="n">cost</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">memo</span><span class="p">;</span>    
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and declare necessary member variables:
+<ul>
+<li><code>m</code>: Number of distinct quantities.</li>
+<li><code>q</code>: Vector to hold the quantities.</li>
+<li><code>frq</code>: Vector to hold the frequency of items available for distribution.</li>
+<li><code>cost</code>: Vector to compute the cost associated with each possible subset of quantities.</li>
+<li><code>memo</code>: A 2D vector for memoization to store results of previous computations.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">msk</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">msk</span> <span class="o">==</span> <span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">frq</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function is defined to check if a valid distribution exists starting from index <code>idx</code> and bitmask <code>msk</code> representing the quantities already satisfied.</li>
+<li>The base case checks:
+<ul>
+<li>If <code>msk</code> equals <code>((1 &lt;&lt; m) - 1)</code>, it means all quantities have been satisfied, and we return <code>true</code>.</li>
+<li>If we have exhausted the frequency list (<code>idx</code> equals the size of <code>frq</code>), we return <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>We check if the current state has been computed before (memoized). If yes, we return the stored result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">msk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">((</span><span class="n">msk</span> <span class="o">!=</span> <span class="p">(</span><span class="n">msk</span> <span class="o">&amp;</span> <span class="n">i</span><span class="p">)))</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">frq</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">cost</span><span class="p">[</span><span class="n">msk</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span><span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We iterate over all possible masks from <code>msk + 1</code> to <code>2^m - 1</code>. For each mask:
+<ul>
+<li>We ensure that the current mask does not overlap with the previous one (<code>msk</code>).</li>
+<li>We check if the available frequency <code>frq[idx]</code> can satisfy the difference in costs between the current mask <code>i</code> and the previous mask <code>msk</code>.</li>
+<li>If it can, we recursively call <code>dp</code> for the next index and the new mask. If this call returns <code>true</code>, we store the result in <code>memo</code> and return <code>true</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">msk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If none of the conditions are satisfied, we proceed by checking the next index with the same mask and store the result in <code>memo</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">canDistribute</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">quantity</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="n">quantity</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span><span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>canDistribute</code> function begins by initializing <code>q</code> with the quantities and counting the frequency of each distinct item in <code>nums</code> using a hash map <code>mp</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="p">[</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">]</span> <span class="o">:</span> <span class="n">mp</span><span class="p">)</span> <span class="n">frq</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>        
+</span></span></code></pre></div><ul>
+<li>We populate the <code>frq</code> vector with the counted frequencies.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">m</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cost</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">msk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">msk</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">m</span><span class="p">);</span> <span class="n">msk</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">net</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">msk</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">))</span> <span class="n">net</span> <span class="o">+=</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cost</span><span class="p">[</span><span class="n">msk</span><span class="p">]</span> <span class="o">=</span> <span class="n">net</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We determine the number of distinct quantities <code>m</code> and initialize the <code>cost</code> array.</li>
+<li>For each possible mask, we calculate the total quantity required for that combination of quantities.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">memo</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">frq</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1025</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>We initialize the memoization table with size based on the frequency and set initial values to -1.</li>
+<li>Finally, we call the <code>dp</code> function starting from index 0 and an empty mask to check if a valid distribution is possible.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is ( O(n \cdot 2^m) ), where ( n ) is the number of distinct item frequencies and ( m ) is the number of distinct quantities. This is because we explore each subset of quantities and for each frequency, we may need to compute multiple states.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n + 2^m) ) for storing the frequencies, costs, and the memoization table. This space is primarily occupied by the frequency list and the memoization structure.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>canDistribute</code> function efficiently checks if the quantities can be distributed among the available items using a combination of dynamic programming and bitmasking techniques. By leveraging memoization, the solution avoids redundant computations and optimizes performance, making it suitable for larger input sizes.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Dynamic Programming with Bitmasking</strong>: This approach is particularly effective in problems involving combinations and subsets, allowing for efficient state management and exploration.</li>
+<li><strong>Use of Memoization</strong>: Caching intermediate results significantly reduces computation time by preventing redundant calculations.</li>
+<li><strong>Versatility</strong>: The principles demonstrated in this problem can be applied to similar distribution problems, showcasing the flexibility of the dynamic programming approach.</li>
+</ol>
+<p>This solution highlights the power of dynamic programming in solving combinatorial problems and the importance of optimizing state transitions to achieve efficient solutions.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode742s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1656"  class="external-link" target="_blank" rel="noopener">LeetCode #1656: Design an Ordered Stream</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1656"  class="external-link" target="_blank" rel="noopener">LeetCode #1656: Design an Ordered Stream</a></th>
       </tr>
   </thead>
   <tbody>
@@ -262,66 +433,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,11 +221,140 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode822s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the area of the largest rectangle containing only 1&rsquo;s in a binary matrix. Each cell in the matrix is either 0 or 1, where 1 represents part of a rectangle. The goal is to identify the dimensions of the largest contiguous rectangle made entirely of 1&rsquo;s and return its area.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can utilize a method that transforms the problem into a histogram problem. Here&rsquo;s the step-by-step approach:</p>
+<ol>
+<li>
+<p><strong>Convert to Histogram Heights</strong>: For each column in the matrix, maintain a count of consecutive 1&rsquo;s above each cell. This transforms each row into a representation of histogram heights.</p>
+</li>
+<li>
+<p><strong>Sort Rows</strong>: For each row, sort the histogram heights in descending order. This allows us to easily calculate the maximum rectangle area that can be formed using those heights.</p>
+</li>
+<li>
+<p><strong>Calculate Area</strong>: For each height in the sorted histogram, calculate the area of rectangles that can be formed using that height and update the maximum area found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The implementation follows these steps in a structured manner:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The method <code>largestSubmatrix</code> takes a 2D vector <code>mtx</code> as input and returns an integer representing the area of the largest rectangle.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">largestSubmatrix</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mtx</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Matrix Dimensions</strong>: Extract the dimensions of the matrix, <code>n</code> for columns and <code>m</code> for rows.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mtx</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">(),</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mtx</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Histogram Initialization</strong>: Create a 2D vector <code>one</code> to store the heights of the histogram for each column, initialized to zero.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">one</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Consecutive 1&rsquo;s</strong>: Iterate over each column to populate the <code>one</code> matrix with the counts of consecutive 1&rsquo;s.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">mtx</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">one</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>In this nested loop, for each column <code>i</code>, we maintain a counter <code>cnt</code>. If the current cell is 1, we increment <code>cnt</code>, and if it&rsquo;s 0, we reset <code>cnt</code> to 0. This way, <code>one[j][i]</code> keeps track of the height of consecutive 1&rsquo;s up to row <code>j</code> in column <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sort Rows of Heights</strong>: After populating the heights, sort each row of the <code>one</code> matrix in descending order.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sort</span><span class="p">(</span><span class="n">one</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">rbegin</span><span class="p">(),</span> <span class="n">one</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">rend</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>Sorting helps us to easily determine how many rectangles can be formed with the heights available in the histogram.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Maximum Area</strong>: Iterate through the sorted heights and calculate the maximum area for each height.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">one</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>For each height <code>one[i][j]</code>, the maximum rectangle that can be formed is <code>one[i][j] * (j + 1)</code>, where <code>(j + 1)</code> represents the width. The outer loop iterates through the rows, while the inner loop iterates through the sorted heights in that row.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, return the result, which contains the area of the largest rectangle found.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this algorithm is (O(m \cdot n \cdot \log n)). This comes from iterating through all elements to compute the histogram heights ((O(m \cdot n))), and sorting each row of heights ((O(n \cdot \log n))).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m \cdot n)) due to the additional storage required for the <code>one</code> matrix that maintains the histogram heights.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided solution efficiently calculates the area of the largest rectangle of 1&rsquo;s in a binary matrix by transforming the problem into a histogram representation. By keeping track of the heights of 1&rsquo;s in each column and sorting these heights, we can quickly calculate the potential maximum areas for rectangles.</p>
+<p>This method ensures that we consider all possible rectangles while optimizing the search using sorting, leading to a clear and efficient solution. The implementation is straightforward and follows a logical flow that leverages fundamental data structures, making it an excellent example of applying combinatorial techniques to solve a geometric problem in a matrix. Overall, this solution is effective for a variety of matrix sizes typically encountered in algorithm challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode822s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1728"  class="external-link" target="_blank" rel="noopener">LeetCode #1728: Cat and Mouse II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1728"  class="external-link" target="_blank" rel="noopener">LeetCode #1728: Cat and Mouse II</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +375,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

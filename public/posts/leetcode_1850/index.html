@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -221,11 +221,133 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode958s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of the problem is to determine the minimum number of adjacent swaps required to transform a given number represented as a string into its k-th lexicographical permutation. For example, if the input number is &ldquo;273&rdquo; and ( k = 1 ), the next permutation of &ldquo;273&rdquo; is &ldquo;327&rdquo;. The task is to find out how many adjacent swaps are needed to turn &ldquo;273&rdquo; into &ldquo;327&rdquo;.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can break the solution into two primary components:</p>
+<ol>
+<li>
+<p><strong>Finding the k-th Permutation</strong>: We will use the <code>next_permutation</code> function to generate the k-th lexicographical permutation of the number.</p>
+</li>
+<li>
+<p><strong>Calculating the Minimum Swaps</strong>: We will then calculate the minimum number of adjacent swaps required to convert the original number into the k-th permutation. This involves finding the positions of the characters and counting how many swaps are needed to bring them into their correct order.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the implementation of the solution:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">getMinSwaps</span><span class="p">(</span><span class="n">string</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">og</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">k</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">next_permutation</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">num</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">steps</span><span class="p">(</span><span class="n">og</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class <code>Solution</code> that contains the method <code>getMinSwaps</code>.</li>
+<li><strong>Input Parameters</strong>: The method takes a string <code>num</code> representing the number and an integer <code>k</code> that indicates how many permutations to generate.</li>
+<li><strong>Original Number Storage</strong>: We store the original number in a variable <code>og</code> to compare later.</li>
+<li><strong>Next Permutation Loop</strong>: We call <code>next_permutation</code> ( k ) times on <code>num</code> to get the k-th permutation of the string.</li>
+<li><strong>Return Swap Steps</strong>: After obtaining the k-th permutation, we call the <code>steps</code> function to calculate the minimum swaps required and return the result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">steps</span><span class="p">(</span><span class="n">string</span> <span class="n">s1</span><span class="p">,</span> <span class="n">string</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Steps Function</strong>: We define a helper function <code>steps</code> that takes two strings: <code>s1</code> (original number) and <code>s2</code> (k-th permutation).</li>
+<li><strong>Initialization</strong>: We initialize variables <code>sz</code> to store the size of the strings, and <code>res</code> to keep track of the total number of swaps.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">sz</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s2</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Outer While Loop</strong>: We iterate through each character in <code>s1</code> with index <code>i</code>.</li>
+<li><strong>Find Matching Character</strong>: For each character in <code>s1</code>, we search for its matching character in <code>s2</code> starting from index <code>j</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">swap</span><span class="p">(</span><span class="n">s2</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">s2</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Inner While Loop</strong>: If the character in <code>s1</code> at index <code>i</code> is not at the same position in <code>s2</code>, we perform adjacent swaps to bring it into position. Each swap increases the <code>res</code> counter.</li>
+<li><strong>Return Swaps Count</strong>: After processing all characters, we return the total count of swaps.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity for finding the k-th permutation using <code>next_permutation</code> is ( O(n \cdot k) ), where ( n ) is the length of the string and ( k ) is the number of permutations we are generating.</li>
+<li>The swap calculation in the <code>steps</code> function is ( O(n^2) ) in the worst case since each character might need to be swapped multiple times until it reaches its correct position.</li>
+<li>Thus, the overall complexity can be approximated as ( O(n^2 + n \cdot k) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) for storing the original number and any additional space required for swap operations.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently computes the minimum number of adjacent swaps needed to achieve the k-th lexicographical permutation of a given number represented as a string. The use of <code>next_permutation</code> simplifies the task of generating permutations, while the <code>steps</code> function systematically counts the necessary swaps.</p>
+<p>This method illustrates an effective blend of combinatorial generation (via permutations) and localized sorting (via adjacent swaps). The approach is both straightforward and efficient for the problem constraints typically found in competitive programming and algorithmic challenges.</p>
+<p>Overall, the solution showcases essential programming techniques, such as string manipulation, the use of standard library functions like <code>next_permutation</code>, and efficient counting of operations, making it a robust method for solving the problem of transforming one string into another through minimum adjacent swaps.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode958s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1851"  class="external-link" target="_blank" rel="noopener">LeetCode #1851: Minimum Interval to Include Each Query</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1851"  class="external-link" target="_blank" rel="noopener">LeetCode #1851: Minimum Interval to Include Each Query</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +368,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

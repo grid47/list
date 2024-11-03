@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,11 +218,154 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1080s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to minimize the total number of stones in a collection of piles after performing a specific operation a given number of times. Each pile can be represented by an integer value indicating the number of stones in it. The operation allows you to reduce the number of stones in the pile with the maximum stones by half (rounded down) a certain number of times, ( k ). The goal is to find the minimum possible sum of stones remaining in all piles after performing the operation ( k ) times.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a max-heap (or priority queue) data structure to efficiently access and modify the largest pile of stones. The approach can be summarized as follows:</p>
+<ol>
+<li>
+<p><strong>Initialize a Max-Heap</strong>: Create a max-heap to store the piles of stones. This allows us to always access the pile with the maximum stones quickly.</p>
+</li>
+<li>
+<p><strong>Perform the Operations</strong>: For each of the ( k ) operations, extract the largest pile from the heap, reduce its size by half (using integer division), and push it back into the heap if it&rsquo;s still greater than zero.</p>
+</li>
+<li>
+<p><strong>Calculate the Final Sum</strong>: After all operations are performed, calculate the sum of all remaining piles in the max-heap.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><p>This begins the definition of the <code>Solution</code> class, which will contain our method to solve the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minStoneSum</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">piles</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The function <code>minStoneSum</code> takes two parameters:</p>
+<ul>
+<li><code>piles</code>: a vector of integers representing the number of stones in each pile.</li>
+<li><code>k</code>: an integer indicating the number of operations to perform.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span></code></pre></div><p>We declare a max-heap using the <code>priority_queue</code> class. This will store the piles of stones.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">piles</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">piles</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></div><p>We iterate through the <code>piles</code> vector and push each pile into the max-heap. This allows us to easily access the largest pile.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">k</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We start a loop that will run ( k ) times to perform the operations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span></code></pre></div><p>We retrieve the largest pile from the max-heap.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">top</span> <span class="o">=</span> <span class="n">top</span> <span class="o">-</span> <span class="n">floor</span><span class="p">(</span><span class="n">top</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+</span></span></code></pre></div><p>We reduce the size of this pile by half (rounded down). The <code>floor</code> function is implicitly handled by integer division in C++, so this is effectively the same as <code>top / 2</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div><p>We remove the largest pile from the max-heap.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">top</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">top</span><span class="p">);</span>
+</span></span></code></pre></div><p>If the new size of the pile is greater than zero, we push it back into the heap.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize a variable <code>sum</code> to store the total number of stones remaining.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>We enter a loop that continues until the heap is empty. In each iteration, we add the number of stones in the largest pile (the top of the heap) to <code>sum</code> and remove that pile from the heap.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we return the computed sum, which represents the minimum possible total number of stones remaining in all piles after ( k ) operations.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(k \log n + n \log n)), where (n) is the number of piles. This is because:</p>
+<ul>
+<li>Constructing the heap from the piles takes (O(n \log n)).</li>
+<li>Each of the (k) operations takes (O(\log n)) for both extracting the maximum and inserting the modified pile back.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the storage of the piles in the priority queue.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minStoneSum</code> function efficiently reduces the total number of stones in the piles by strategically using a max-heap to ensure that the largest pile is always processed. By performing (k) operations of reducing the maximum pile by half, we achieve the desired minimization of the total stone count. This solution is optimal for scenarios where quick access to the largest element is crucial.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Max-Heap Utilization</strong>: The algorithm effectively utilizes a max-heap to always target the largest pile, ensuring that operations are directed towards the most impactful changes.</p>
+</li>
+<li>
+<p><strong>Efficient Operations</strong>: The use of a priority queue allows for efficient extraction and insertion operations, keeping the overall complexity manageable even for larger inputs.</p>
+</li>
+<li>
+<p><strong>Versatile Application</strong>: This approach can be applied in various scenarios, including game design where resource management is needed, or in simulation models where iterative reductions are common.</p>
+</li>
+</ol>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s an example of how to use the <code>minStoneSum</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">piles</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">minStoneSum</span><span class="p">(</span><span class="n">piles</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Minimum stones remaining: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Output: Minimum stones remaining: 12
+</span></span></span></code></pre></div><p>In this example, we create an instance of the <code>Solution</code> class, define a vector of piles and a number of operations ( k ), and then call the <code>minStoneSum</code> method. The result is printed, showing the minimum number of stones remaining after performing the operations.</p>
+<p>This approach is efficient and easily understandable, making it suitable for competitive programming or coding interviews where problem-solving skills are evaluated.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1080s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1963"  class="external-link" target="_blank" rel="noopener">LeetCode #1963: Minimum Number of Swaps to Make the String Balanced</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1963"  class="external-link" target="_blank" rel="noopener">LeetCode #1963: Minimum Number of Swaps to Make the String Balanced</a></th>
       </tr>
   </thead>
   <tbody>
@@ -243,66 +386,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

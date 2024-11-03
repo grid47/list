@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -210,11 +210,153 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode740s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining the minimum number of deletions required to ensure that all characters in a given string <code>s</code> are of the same type, specifically the character &lsquo;a&rsquo;. In the string, each character is either &lsquo;a&rsquo; or &lsquo;b&rsquo;. The goal is to compute the minimum deletions necessary to convert the string into one consisting entirely of &lsquo;a&rsquo;s.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a dynamic programming approach. The idea is to maintain a dynamic programming array <code>dp</code>, where <code>dp[i]</code> represents the minimum number of deletions required to make the substring <code>s[0:i]</code> consist only of &lsquo;a&rsquo;s. Additionally, we track the count of &lsquo;b&rsquo;s encountered so far with a variable <code>bcnt</code>.</p>
+<p>The main steps of the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li><code>n</code> to store the length of the string.</li>
+<li><code>bcnt</code> to keep track of the number of &lsquo;b&rsquo;s encountered so far.</li>
+<li>A dynamic programming array <code>dp</code> initialized with zeros to store intermediate results.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through the String</strong>:</p>
+<ul>
+<li>For each character in the string, update the <code>dp</code> array based on whether the character is &lsquo;a&rsquo; or &lsquo;b&rsquo;:
+<ul>
+<li>If the character is &lsquo;a&rsquo;, it can either be counted as a deletion (incrementing <code>dp[i]</code>) or we can keep the current count of &lsquo;b&rsquo;s.</li>
+<li>If the character is &lsquo;b&rsquo;, we increment the <code>bcnt</code> and carry forward the previous deletion count.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>The value at <code>dp[n]</code> will provide the minimum number of deletions needed to convert the entire string into &lsquo;a&rsquo;s.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minimumDeletions</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and a public method <code>minimumDeletions</code> that takes a string <code>s</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">bcnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We compute the length of the string <code>s</code> and initialize <code>bcnt</code> to zero. The dynamic programming array <code>dp</code> is created with a size of <code>n + 1</code>, initialized to zeros.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">char</span> <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>We start a loop to iterate over each character of the string <code>s</code>. The variable <code>a</code> holds the current character.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="sc">&#39;a&#39;</span><span class="p">)</span> <span class="p">{</span>                
+</span></span><span class="line"><span class="cl">                <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bcnt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">bcnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Condition for &lsquo;a&rsquo;</strong>: If the current character <code>a</code> is &lsquo;a&rsquo;, we update <code>dp[i + 1]</code> to the minimum of either:</p>
+<ul>
+<li><code>dp[i] + 1</code>: Incrementing the deletion count by 1 (deleting the current &lsquo;a&rsquo;).</li>
+<li><code>bcnt</code>: The count of &lsquo;b&rsquo;s encountered so far, representing the deletions required to remove all &lsquo;b&rsquo;s before this point.</li>
+</ul>
+</li>
+<li>
+<p><strong>Condition for &lsquo;b&rsquo;</strong>: If <code>a</code> is &lsquo;b&rsquo;, we increment <code>bcnt</code> and set <code>dp[i + 1]</code> to <code>dp[i]</code>, effectively carrying forward the previous deletion count without adding any new deletions.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After iterating through the string, we return <code>dp[n]</code>, which holds the minimum deletions required to make the entire string consist of &lsquo;a&rsquo;s.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm runs in ( O(n) ), where ( n ) is the length of the input string <code>s</code>. This is due to the single loop that iterates through the string once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) because we use a dynamic programming array of size ( n + 1 ) to store intermediate results.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minimumDeletions</code> method provides an efficient way to determine the minimum number of deletions needed to transform a string composed of &lsquo;a&rsquo;s and &lsquo;b&rsquo;s into a string of only &lsquo;a&rsquo;s. By using dynamic programming, the solution effectively tracks the count of &lsquo;b&rsquo;s and evaluates the necessary deletions in a single pass through the string.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Dynamic Programming</strong>: This solution demonstrates the use of dynamic programming to solve optimization problems by breaking them down into subproblems and reusing results.</li>
+<li><strong>Efficiency</strong>: With a linear time complexity, this algorithm is efficient for long strings, making it suitable for competitive programming and other applications.</li>
+<li><strong>Space Utilization</strong>: The use of a single array to track the minimum deletions reduces the need for complex data structures, making the implementation straightforward.</li>
+</ol>
+<p>This approach can be extended to similar problems involving character transformations and constraints, showcasing the versatility of dynamic programming in solving string manipulation tasks.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode740s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1654"  class="external-link" target="_blank" rel="noopener">LeetCode #1654: Minimum Jumps to Reach Home</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1654"  class="external-link" target="_blank" rel="noopener">LeetCode #1654: Minimum Jumps to Reach Home</a></th>
       </tr>
   </thead>
   <tbody>
@@ -235,66 +377,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

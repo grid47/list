@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -208,11 +208,123 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode820s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to count how many rectangles can form a &ldquo;good rectangle&rdquo; of maximum area. A rectangle is defined by its width and height, and the area of a rectangle is given by multiplying its width and height. A &ldquo;good rectangle&rdquo; is defined as a rectangle that can form a square with the maximum side length among all rectangles given. Specifically, given a list of rectangles defined by their width and height, the goal is to determine how many rectangles have the maximum possible square side length.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Initialize a Data Structure</strong>: Use an unordered map (or dictionary) to count the occurrences of rectangles with different side lengths.</p>
+</li>
+<li>
+<p><strong>Iterate Through Each Rectangle</strong>: For each rectangle, determine its potential maximum square side length, which is the minimum of its width and height.</p>
+</li>
+<li>
+<p><strong>Update Maximum Side Length</strong>: Keep track of the largest square side length found so far.</p>
+</li>
+<li>
+<p><strong>Count Rectangles with Maximum Side Length</strong>: After determining the maximum side length, count how many rectangles can form squares with that side length.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the code implementation:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated in the <code>Solution</code> class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The <code>countGoodRectangles</code> method is defined, which takes a 2D vector of integers representing the dimensions of the rectangles.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countGoodRectangles</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">rectangles</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Data Structures</strong>: An unordered map <code>mp</code> is created to keep track of the counts of different maximum square side lengths. An integer <code>ans</code> is initialized to zero to hold the maximum side length found.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterate Through Each Rectangle</strong>: A loop is used to iterate through each rectangle in the <code>rectangles</code> vector.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">rectangles</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Minimum Side Length</strong>: For each rectangle, calculate the minimum side length, which represents the largest possible square that can be formed with this rectangle. This is done using the <code>min</code> function.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update Maximum Side Length</strong>: Update the maximum side length (<code>ans</code>) found so far by comparing it with the current rectangle&rsquo;s minimum side length.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Rectangles</strong>: Increment the count in the unordered map for the current minimum side length. This tracks how many rectangles can form squares with this side length.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">mp</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Count</strong>: After iterating through all rectangles, return the count of rectangles that can form squares with the maximum side length found. This is accessed directly from the unordered map using <code>mp[ans]</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">mp</span><span class="p">[</span><span class="n">ans</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is ( O(n) ), where ( n ) is the number of rectangles. This is because we are iterating through each rectangle exactly once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(k) ), where ( k ) is the number of unique minimum side lengths encountered. In the worst case, this could be up to ( n ), but generally, it is much smaller since many rectangles can have the same dimensions.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, the code effectively counts the number of &ldquo;good rectangles&rdquo; that can form the maximum square side length from a given list of rectangles. The implementation utilizes a straightforward approach, leveraging an unordered map to keep track of counts, while also maintaining a maximum side length.</p>
+<p>This solution is both efficient and easy to understand, making it suitable for use in similar problems involving geometric shapes and their properties. The algorithm runs in linear time relative to the number of rectangles, and the use of a hash map allows for efficient counting of rectangles based on their dimensions. By carefully managing the maximum square side length and its corresponding count, the solution provides a clear and optimal path to finding the desired result.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode820s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1726"  class="external-link" target="_blank" rel="noopener">LeetCode #1726: Tuple with Same Product</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1726"  class="external-link" target="_blank" rel="noopener">LeetCode #1726: Tuple with Same Product</a></th>
       </tr>
   </thead>
   <tbody>
@@ -233,66 +345,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

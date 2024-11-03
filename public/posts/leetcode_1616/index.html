@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,11 +212,125 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">j</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode695s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine whether it is possible to form a palindrome by concatenating two given strings (a) and (b). The process allows for removing zero or more characters from either string as necessary. In simpler terms, we want to check if there exists any combination of characters from both strings that can create a palindrome.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes the following approach:</p>
+<ol>
+<li>
+<p><strong>Character Matching</strong>: We will compare characters from both strings starting from their respective ends and moving towards the center. This helps in identifying how many characters from each string can be matched while still maintaining their palindrome properties.</p>
+</li>
+<li>
+<p><strong>Palindrome Checking</strong>: If mismatches are found during the matching process, we will check whether either of the substrings (from both strings) can form a palindrome when ignoring the characters that mismatched.</p>
+</li>
+<li>
+<p><strong>Function Decomposition</strong>: The logic is divided into several helper functions for clarity:</p>
+<ul>
+<li>A main function <code>checkPalindromeFormation</code> that initiates the process for both strings.</li>
+<li>A function <code>check</code> that compares characters and manages mismatches.</li>
+<li>A function <code>isPalindrome</code> that checks if a given substring can form a palindrome.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s examine the provided code closely:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">checkPalindromeFormation</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">check</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">||</span> <span class="n">check</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The class <code>Solution</code> contains the method <code>checkPalindromeFormation</code>, which takes two strings ( a ) and ( b ) as input.</li>
+<li>It invokes the <code>check</code> function in both possible orders of the strings. This is necessary because we want to explore if concatenating one string in front of the other can yield a palindrome.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">check</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Inside the <code>check</code> function, we initialize two pointers, <code>i</code> (starting from the beginning of string ( a )) and <code>j</code> (starting from the end of string ( b )).</li>
+<li>The <code>while</code> loop continues as long as the characters at the current positions of both strings match. It increments <code>i</code> and decrements <code>j</code> to move towards the center of the strings.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">isPalindrom</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">||</span> <span class="n">isPalindrom</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Once a mismatch is found (or if the pointers cross each other), the function checks if either of the substrings (from the current positions ( i ) and ( j )) can form a palindrome using the <code>isPalindrom</code> function.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isPalindrom</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>isPalindrom</code> function checks if the substring of ( a ) between the indices ( i ) and ( j ) can form a palindrome.</li>
+<li>It iterates through the substring, moving inward until the pointers cross. If they do, it indicates that the substring is a palindrome.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity for this solution is ( O(n) ), where ( n ) is the length of the longer of the two strings ( a ) or ( b ). This is because we may have to traverse the strings linearly a couple of times (once for each string pairing).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) since we only use a constant amount of space for the pointers and do not require any additional data structures that grow with the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently checks whether two strings can be combined in such a way to form a palindrome. By breaking down the problem into manageable parts and utilizing a character matching approach, the algorithm maintains clarity and simplicity while remaining performant.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Palindrome Properties</strong>: Understanding the nature of palindromes (character symmetry) is crucial for solving this problem.</li>
+<li><strong>Efficiency</strong>: The approach is linear in complexity, making it suitable for handling large strings.</li>
+<li><strong>Function Decomposition</strong>: Splitting the problem into smaller functions enhances readability and maintainability, allowing for easier debugging and testing.</li>
+</ol>
+<p>This algorithm is applicable in scenarios where palindromic structures are significant, such as in text processing, DNA sequencing, and various computational linguistics problems. By examining character sequences and their relationships, we can uncover deeper insights into the patterns within strings.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode695s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1617"  class="external-link" target="_blank" rel="noopener">LeetCode #1617: Count Subtrees With Max Distance Between Cities</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1617"  class="external-link" target="_blank" rel="noopener">LeetCode #1617: Count Subtrees With Max Distance Between Cities</a></th>
       </tr>
   </thead>
   <tbody>
@@ -237,66 +351,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

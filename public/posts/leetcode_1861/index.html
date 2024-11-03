@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -222,7 +222,125 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span> 
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode971s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves rotating a 2D grid (or box) of characters representing a game board, which contains three types of elements: <code>'#'</code> representing rocks, <code>'.'</code> representing empty spaces, and <code>'*'</code> representing obstacles. The goal is to rotate the box 90 degrees clockwise and adjust the positions of the rocks and empty spaces according to gravity. When rotated, rocks should fall down to the lowest available position, stopping when they hit either the bottom of the box or an obstacle.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can break the task into several systematic steps:</p>
+<ol>
+<li>
+<p><strong>Reverse the Rows</strong>: Since we are rotating the box clockwise, the first step is to reverse the order of the rows. This step is crucial because it simulates the effect of the box being rotated.</p>
+</li>
+<li>
+<p><strong>Transpose the Box</strong>: Next, we need to transpose the rows and columns of the box. In essence, we convert each row into a column and each column into a row. This step represents the rotation of the box.</p>
+</li>
+<li>
+<p><strong>Gravity Simulation</strong>: After transposing, we need to simulate the effect of gravity on the rocks. For each column in the transposed box, we move the rocks down, filling empty spaces above them and stopping when we encounter an obstacle.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return the modified box that reflects the correct positions of the rocks after rotation and gravity adjustment.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The implementation begins by defining a class named <code>Solution</code>, which will contain our main method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: We declare a public method <code>rotateTheBox</code> that takes a 2D vector of characters (the box) as input and returns the rotated box.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">rotateTheBox</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">box</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Reverse the Rows</strong>: We reverse the rows of the box using the <code>reverse</code> function from the STL. This step simulates the first part of the rotation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">reverse</span><span class="p">(</span><span class="n">box</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">box</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization of Dimensions</strong>: We determine the dimensions of the box, storing the number of rows in <code>m</code> and the number of columns in <code>n</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">box</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">box</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Transposing the Box</strong>: We create a new 2D vector <code>tmp</code> to hold the transposed version of the box. We then use nested loops to transpose the box.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">tmp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">));</span> <span class="c1">// New box for transposed data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tmp</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">box</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span> <span class="c1">// Transposing the box
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Gravity Simulation</strong>: We iterate over each column in the transposed box. For each column, we initialize a variable <code>k</code> to keep track of the position where the next rock should fall.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Start placing rocks from the bottom
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling Rocks and Obstacles</strong>: Inside the inner loop, we check the content of each cell in the column:</p>
+<ul>
+<li>If the cell contains a rock (<code>'#'</code>), we move it down to the position indicated by <code>k</code>, replace the original position with an empty space (<code>'.'</code>), and decrement <code>k</code>.</li>
+<li>If the cell contains an obstacle (<code>'*'</code>), we reset <code>k</code> to stop the falling rocks above the obstacle.</li>
+<li>If the cell is empty (<code>'.'</code>), we do nothing.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;#&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tmp</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;.&#39;</span><span class="p">;</span> <span class="c1">// Rock falls
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">tmp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;#&#39;</span><span class="p">;</span> <span class="c1">// Place rock at new position
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">k</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;*&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">k</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Reset position above the obstacle
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span> <span class="c1">// Else do nothing if it&#39;s an empty space
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: After processing all columns and adjusting for gravity, we return the modified box.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">tmp</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is (O(m \times n)), where (m) is the number of rows and (n) is the number of columns in the box. This is due to the need to process each element in the box multiple times during the reversing, transposing, and gravity simulation steps. The space complexity is also (O(m \times n)) because we are using an additional 2D vector to store the transposed box.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided code effectively rotates a box of characters representing rocks and obstacles while simulating gravity. By using a methodical approach that involves reversing the rows, transposing the box, and then applying gravity, the solution ensures that rocks settle into their correct positions after the rotation. This implementation is a clear example of applying fundamental algorithms and data structures to solve a problem in a straightforward and efficient manner. It demonstrates the utility of nested loops and conditionals in manipulating 2D arrays, making it a practical solution for similar grid-based problems involving rotation and gravity effects. Overall, the code is well-structured and concise, successfully achieving the desired outcome while maintaining clarity in logic and flow.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode971s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -234,7 +352,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1862"  class="external-link" target="_blank" rel="noopener">LeetCode #1862: Sum of Floored Pairs</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1862"  class="external-link" target="_blank" rel="noopener">LeetCode #1862: Sum of Floored Pairs</a></th>
       </tr>
   </thead>
   <tbody>
@@ -255,66 +373,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

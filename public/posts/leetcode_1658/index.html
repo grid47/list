@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -216,7 +216,132 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">?</span> <span class="nl">res</span> <span class="p">:</span><span class="n">n</span> <span class="o">-</span> <span class="n">res</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode745s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the minimum number of operations to reduce the value of a given array <code>nums</code> to a specific integer <code>x</code> by performing operations that remove elements from either the beginning or the end of the array. Each operation allows you to remove an element from either end, and the goal is to determine how many elements need to be removed to achieve this result.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can utilize a two-pointer technique combined with prefix sums. The main idea is to compute the total sum of the array and then determine if there is a contiguous subarray that can be removed to result in the desired sum of <code>x</code>. The solution can be broken down into the following steps:</p>
+<ol>
+<li><strong>Calculate the Total Sum</strong>: Compute the total sum of the array and determine the difference that needs to be removed to achieve the desired target.</li>
+<li><strong>Use a Hash Map</strong>: Create a hash map to track the prefix sums as we iterate through the array.</li>
+<li><strong>Find the Contiguous Subarray</strong>: Check if there exists a contiguous subarray that, when removed, results in the required sum by checking the prefix sums in the hash map.</li>
+<li><strong>Calculate the Result</strong>: The final result is calculated based on the length of the contiguous subarray found.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minOperations</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// Initialize result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="p">;</span> <span class="c1">// Initialize sum with -x to find target sum
+</span></span></span></code></pre></div><ul>
+<li>The class <code>Solution</code> contains a public method <code>minOperations</code> which takes in a vector of integers <code>nums</code> and an integer <code>x</code>.</li>
+<li>The variable <code>res</code> is initialized to -1, which will store the maximum length of the contiguous subarray found that meets the criteria.</li>
+<li>The total <code>sum</code> is computed by subtracting <code>x</code> from zero. This sum will be used to find the target contiguous subarray sum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">y</span><span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="n">sum</span> <span class="o">+=</span> <span class="n">y</span><span class="p">;</span> <span class="c1">// Calculate the total sum of the array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Store the size of the array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// If the total sum equals 0, all elements must be removed
+</span></span></span></code></pre></div><ul>
+<li>A loop iterates through each element of <code>nums</code> to compute the total sum.</li>
+<li>The size of the array <code>n</code> is stored.</li>
+<li>If the computed <code>sum</code> equals 0, it indicates that removing all elements achieves the target, and we can return <code>n</code> as the result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span> <span class="c1">// Create a map to store prefix sums
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">mp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// Initialize the map with a prefix sum of 0 at index -1
+</span></span></span></code></pre></div><ul>
+<li>A map <code>mp</code> is declared to store prefix sums and their corresponding indices.</li>
+<li>The prefix sum of 0 is added to the map with an index of -1 to handle edge cases.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize prefix sum variable
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// Incrementally compute the prefix sum
+</span></span></span></code></pre></div><ul>
+<li>The variable <code>s</code> is initialized to zero. It will be used to track the prefix sum as we iterate through <code>nums</code>.</li>
+<li>A loop iterates through the indices of the array, updating the prefix sum <code>s</code> with each element.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">sum</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">mp</span><span class="p">[</span><span class="n">s</span> <span class="o">-</span> <span class="n">sum</span><span class="p">]);</span> <span class="c1">// Check if the required prefix exists
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Update the map with the current prefix sum and index
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Inside the loop, we check if there exists a prefix sum in the map that, when subtracted from the current prefix sum <code>s</code>, equals the <code>sum</code>.</li>
+<li>If such a prefix sum exists, it indicates that removing the subarray between the two prefix sums can yield the desired result, and <code>res</code> is updated with the maximum length found.</li>
+<li>The current prefix sum <code>s</code> and its index <code>i</code> are then added to the map.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">?</span> <span class="nl">res</span> <span class="p">:</span><span class="n">n</span> <span class="o">-</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Calculate the final result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The final result is calculated. If <code>res</code> remains -1, it means no valid subarray was found, and we return -1. Otherwise, we return <code>n - res</code>, which indicates the number of operations needed to achieve the target.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm runs in ( O(n) ) time, where ( n ) is the length of the input array <code>nums</code>. This is because we make a single pass through the array to compute prefix sums and update the hash map.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) in the worst case, due to the storage of prefix sums in the hash map.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minOperations</code> method effectively finds the minimum number of operations required to reduce the array to the specified integer <code>x</code>. By employing a hash map to store prefix sums and a single pass through the array, the solution is efficient and straightforward.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Optimality</strong>: The approach achieves the desired result in linear time, making it suitable for larger inputs.</li>
+<li><strong>Hash Map Usage</strong>: Utilizing a hash map to store prefix sums allows for quick lookups and efficient subarray detection.</li>
+<li><strong>Prefix Sum Technique</strong>: The use of prefix sums is a common strategy in problems involving sums of contiguous subarrays and can often simplify complex iterations.</li>
+</ol>
+<p>Overall, this solution demonstrates a powerful method to address the problem of minimizing operations through efficient data structures and algorithms. The implementation is clear and concise, making it easy to understand and maintain.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode745s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -228,7 +353,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1659"  class="external-link" target="_blank" rel="noopener">LeetCode #1659: Maximize Grid Happiness</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1659"  class="external-link" target="_blank" rel="noopener">LeetCode #1659: Maximize Grid Happiness</a></th>
       </tr>
   </thead>
   <tbody>
@@ -249,66 +374,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

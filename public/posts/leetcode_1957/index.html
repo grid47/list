@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -204,11 +204,147 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1074s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to transform a given string by removing consecutive duplicate characters such that no character appears more than twice in a row. For example, given the input string <code>&quot;leeetcode&quot;</code>, the output should be <code>&quot;leetcode&quot;</code> because the letter &ldquo;e&rdquo; appears consecutively more than twice. The goal is to implement a function that processes the string efficiently while maintaining its original order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a two-pointer technique to build the modified string in-place. The idea is to use one pointer (<code>i</code>) to iterate through the input string and another pointer (<code>j</code>) to track the position in the modified string. The algorithm will check the last two characters added to the modified string to ensure that the next character to be added does not create a sequence of three consecutive identical characters.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><p>The class <code>Solution</code> is defined, and the public member function <code>makeFancyString</code> is declared.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">string</span> <span class="nf">makeFancyString</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The <code>makeFancyString</code> function takes a string <code>s</code> as input and will return a new string that meets the specified conditions.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize an integer variable <code>j</code> to <code>2</code>. This variable is used as an index to track the position in the modified string. The first two characters can always be added to the new string since they cannot form a triplet.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span></code></pre></div><p>A <code>for</code> loop starts with <code>i</code> initialized to <code>2</code>. This loop will iterate through the characters of the string <code>s</code> starting from the third character.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span>
+</span></span></code></pre></div><p>Inside the loop, we check if the current character <code>s[i]</code> is different from the last two characters added to the modified string (<code>s[j - 1]</code> and <code>s[j - 2]</code>). If <code>s[i]</code> is not equal to either of the last two characters, it means adding <code>s[i]</code> will not create a triplet.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div><p>If the condition is true, we assign <code>s[i]</code> to the <code>j</code>-th position in the string and increment <code>j</code>. This effectively adds the character to the modified string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">s</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+</span></span></code></pre></div><p>After the loop, we resize the string <code>s</code> to keep only the first <code>j</code> characters, which contain the modified content. The <code>min</code> function is used to ensure we do not exceed the original string&rsquo;s size.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>Finally, we return the modified string.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n) ), where ( n ) is the length of the input string. This is because we only traverse the string once with the two-pointer technique.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) since we are modifying the string in-place without using any additional data structures that depend on the size of the input.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>makeFancyString</code> function efficiently transforms the input string by ensuring no character appears more than twice consecutively. The use of the two-pointer technique allows us to achieve this in a single pass, making the solution optimal in terms of both time and space complexity.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>In-Place Modification</strong>: The algorithm modifies the input string directly, which saves memory and improves efficiency.</p>
+</li>
+<li>
+<p><strong>Two-Pointer Technique</strong>: This technique allows us to track the valid position for inserting characters while checking the last two added characters to prevent triplets.</p>
+</li>
+<li>
+<p><strong>Simple Logic</strong>: The condition to check for duplicates is straightforward, making the code easy to understand and maintain.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This function can be beneficial in various scenarios, including:</p>
+<ul>
+<li><strong>Text Processing</strong>: When formatting strings for display or storage where limits on consecutive characters are required.</li>
+<li><strong>Data Cleaning</strong>: Useful in preprocessing textual data to ensure consistency in formats.</li>
+</ul>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing this solution, consider the following:</p>
+<ul>
+<li>
+<p><strong>Edge Cases</strong>: Handle edge cases where the input string may be empty or have fewer than three characters. The current implementation already accommodates these situations gracefully.</p>
+</li>
+<li>
+<p><strong>Character Set</strong>: The function is designed to work with ASCII characters but can be adjusted if needed to handle wider character sets, such as Unicode.</p>
+</li>
+</ul>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To demonstrate how the function can be used, consider the following example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">makeFancyString</span><span class="p">(</span><span class="s">&#34;aaaabaaaa&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">;</span>  <span class="c1">// Output: &#34;aababaa&#34;
+</span></span></span></code></pre></div><p>This example shows how the function effectively removes the excessive consecutive characters while preserving the order of the remaining characters. By understanding this approach, one can easily adapt the logic for other string manipulation problems that involve constraints on character occurrences.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1074s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1958"  class="external-link" target="_blank" rel="noopener">LeetCode #1958: Check if Move is Legal</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1958"  class="external-link" target="_blank" rel="noopener">LeetCode #1958: Check if Move is Legal</a></th>
       </tr>
   </thead>
   <tbody>
@@ -229,66 +365,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -204,11 +204,160 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1101s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves calculating the minimum time required to type a given string <code>word</code> using a circular keyboard. The keyboard consists of the 26 lowercase English letters arranged in a circular fashion from &lsquo;a&rsquo; to &lsquo;z&rsquo;. The typing process starts from the letter &lsquo;a&rsquo;, and the time taken to move from one letter to another is based on the shortest distance between them, either moving forward or backward around the keyboard.</p>
+<p>The goal is to determine the total time needed to type out the entire string, taking into consideration the time it takes to move from one character to the next and the time it takes to press each character.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will follow these steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start at the letter &lsquo;a&rsquo; and initialize the total time to the length of the word (since each character takes one unit of time to press).</p>
+</li>
+<li>
+<p><strong>Iterate Through Characters</strong>: For each character in the string, calculate the time taken to move from the current character (starting from &lsquo;a&rsquo;) to the next character in the string.</p>
+</li>
+<li>
+<p><strong>Distance Calculation</strong>: The distance between two characters can be determined in two ways:</p>
+<ul>
+<li>Direct distance: The absolute difference between the ASCII values of the two characters.</li>
+<li>Circular distance: The distance when considering the circular arrangement of the keyboard, which can be calculated as <code>26 - direct_distance</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Current Position</strong>: After calculating the movement time to the current character, update the position to this character and continue to the next character.</p>
+</li>
+<li>
+<p><strong>Return Total Time</strong>: After iterating through all characters, return the total time calculated.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the code with detailed explanations:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minTimeToType</span><span class="p">(</span><span class="n">string</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>This line begins the definition of the <code>minTimeToType</code> function, which takes a string <code>word</code> as input and returns the minimum time to type it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">word</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">point</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize <code>res</code> to the length of the word, as each character takes one unit of time to type. The variable <code>point</code> keeps track of the current position on the keyboard, starting at &lsquo;a&rsquo;.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span> <span class="p">:</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We loop through each character <code>ch</code> in the input <code>word</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="n">min</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">ch</span> <span class="o">-</span> <span class="n">point</span><span class="p">),</span> <span class="mi">26</span> <span class="o">-</span> <span class="n">abs</span><span class="p">(</span><span class="n">point</span> <span class="o">-</span> <span class="n">ch</span><span class="p">));</span>
+</span></span></code></pre></div><p>Here, we calculate the minimum time required to move from the current <code>point</code> to the character <code>ch</code>. We use the <code>abs</code> function to get the direct distance between the two characters and determine the circular distance using <code>26 - abs(point - ch)</code>. We add the smaller of the two distances to <code>res</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">point</span> <span class="o">=</span> <span class="n">ch</span><span class="p">;</span>
+</span></span></code></pre></div><p>After calculating the distance, we update <code>point</code> to the current character <code>ch</code>, so that we can calculate the distance to the next character correctly.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we return the total time stored in <code>res</code> after processing all characters.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n)), where (n) is the length of the input string. We loop through each character exactly once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we only use a fixed number of variables for calculations regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum time required to type a word on a circular keyboard by utilizing the properties of distance calculation in a circular arrangement. By carefully considering both direct and circular distances between characters, we ensure that we account for the fastest possible movement between characters.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Efficiency</strong>: The algorithm runs in linear time relative to the length of the input string, making it suitable for longer strings.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: The approach leverages basic arithmetic operations and is easy to understand, making it accessible for those new to algorithm design.</p>
+</li>
+<li>
+<p><strong>Circular Logic</strong>: The method effectively handles the circular nature of the keyboard without any complex data structures, keeping the solution clean and straightforward.</p>
+</li>
+</ol>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s how to use the <code>minTimeToType</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="n">word</span> <span class="o">=</span> <span class="s">&#34;abc&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">minTimeToType</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Minimum time to type: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Output: Minimum time to type: 5
+</span></span></span></code></pre></div><p>In this example, the output will indicate the minimum time needed to type the word &ldquo;abc&rdquo;.</p>
+<h3 id="potential-improvements-and-variations">
+  Potential Improvements and Variations
+  <a class="heading-link" href="#potential-improvements-and-variations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Keyboard Layout Customization</strong>: The function could be extended to accept different keyboard layouts or more characters if needed.</p>
+</li>
+<li>
+<p><strong>Optimization for Large Inputs</strong>: If the input size is known to be very large, additional optimizations or pre-computation strategies could be employed to improve performance.</p>
+</li>
+<li>
+<p><strong>Dynamic Programming Approach</strong>: For more complex variations of the problem, such as typing multiple words or handling different typing speeds, a dynamic programming approach could be considered.</p>
+</li>
+</ol>
+<p>This solution not only provides an effective way to calculate typing time on a circular keyboard but also serves as a foundation for exploring related problems in computer science and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1101s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1975"  class="external-link" target="_blank" rel="noopener">LeetCode #1975: Maximum Matrix Sum</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1975"  class="external-link" target="_blank" rel="noopener">LeetCode #1975: Maximum Matrix Sum</a></th>
       </tr>
   </thead>
   <tbody>
@@ -229,66 +378,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

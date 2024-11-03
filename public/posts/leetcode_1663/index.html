@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -205,7 +205,114 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode750s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to generate the lexicographically smallest string of length <code>n</code> with a given integer value <code>k</code>. The string can be composed of lowercase letters from &lsquo;a&rsquo; to &lsquo;z&rsquo;. The challenge is to ensure that the sum of the values of the characters in the string equals <code>k</code>, where the value of &lsquo;a&rsquo; is 1, &lsquo;b&rsquo; is 2, &hellip;, and &lsquo;z&rsquo; is 26. Therefore, for a string with only &lsquo;a&rsquo;s, the total value is equal to its length (since each &lsquo;a&rsquo; contributes 1 to the total). The goal is to modify the string to meet the value requirement while keeping it as small as possible in lexicographical order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution can be approached with the following steps:</p>
+<ol>
+<li><strong>Initialization</strong>: Start with a string filled with &lsquo;a&rsquo;s, since this will be the smallest lexicographical starting point.</li>
+<li><strong>Adjust Value</strong>: Calculate the difference needed to reach the required value <code>k</code> by subtracting the initial sum of &lsquo;a&rsquo;s from <code>k</code>.</li>
+<li><strong>Distributing Value</strong>: Traverse the string from the end and increase characters from &lsquo;a&rsquo; to the maximum possible character value (&lsquo;z&rsquo;) without exceeding the required sum.</li>
+<li><strong>Return Result</strong>: Finally, return the constructed string which meets the conditions.</li>
+</ol>
+<p>This approach ensures that we start with the smallest possible string and then incrementally adjust the characters to achieve the desired total value.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the code with an explanation of each part:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">getSmallestString</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains the public method <code>getSmallestString</code>, which accepts two parameters: <code>n</code> (the length of the string) and <code>k</code> (the target sum of the string&rsquo;s values).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">string</span> <span class="nf">ans</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span><span class="p">);</span> <span class="c1">// Step 1: Initialize the string with &#39;a&#39;s
+</span></span></span></code></pre></div><ul>
+<li>We create a string <code>ans</code> of length <code>n</code>, initialized with &lsquo;a&rsquo; characters. This is the lexicographically smallest string we can start with.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">k</span> <span class="o">-=</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Step 2: Adjust k by subtracting the initial sum of &#39;a&#39;s
+</span></span></span></code></pre></div><ul>
+<li>Since each &lsquo;a&rsquo; contributes 1 to the total value, we subtract <code>n</code> from <code>k</code> to determine how much more we need to add to the string&rsquo;s value to meet the target.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 3: Distribute the remaining value
+</span></span></span></code></pre></div><ul>
+<li>We enter a loop that continues until <code>k</code> becomes 0, indicating that we&rsquo;ve met our target.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">[</span><span class="o">--</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="n">min</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span> <span class="c1">// Increment the character at position n-1
+</span></span></span></code></pre></div><ul>
+<li>We decrement <code>n</code> to work from the end of the string backwards. We increase the character at the current position by the minimum of 25 or <code>k</code>. This is because the maximum increment from &lsquo;a&rsquo; to &lsquo;z&rsquo; is 25 (from 1 to 26), and we can&rsquo;t increase beyond this value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">k</span> <span class="o">-=</span> <span class="n">min</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span> <span class="c1">// Reduce k by the increment we just made
+</span></span></span></code></pre></div><ul>
+<li>We update <code>k</code> by subtracting the value we just added to the character, effectively keeping track of how much more we need to reach our target.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Step 4: Return the final string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After exiting the loop (when <code>k</code> reaches 0), we return the constructed string <code>ans</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the length of the string. This is because we potentially modify each character in the string exactly once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) for storing the resulting string. This is necessary since we must construct a new string of length <code>n</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>getSmallestString</code> method efficiently constructs the lexicographically smallest string given the constraints of the problem. The approach leverages a greedy strategy by filling the string with the smallest character initially and then making necessary adjustments.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Greedy Algorithm</strong>: The solution exemplifies a greedy algorithm, where the locally optimal choice (starting with &lsquo;a&rsquo;s) leads to a globally optimal solution (the smallest string).</li>
+<li><strong>String Manipulation</strong>: This implementation highlights effective string manipulation techniques in C++, ensuring both clarity and performance.</li>
+<li><strong>Problem Constraints</strong>: Understanding character values and their contribution to the total sum is crucial in designing algorithms for similar problems in competitive programming.</li>
+</ol>
+<p>Overall, the approach is straightforward and can be applied to other problems requiring the construction of strings under specific constraints, making it a valuable technique in algorithm design and implementation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode750s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -217,7 +324,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1664"  class="external-link" target="_blank" rel="noopener">LeetCode #1664: Ways to Make a Fair Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1664"  class="external-link" target="_blank" rel="noopener">LeetCode #1664: Ways to Make a Fair Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -238,66 +345,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

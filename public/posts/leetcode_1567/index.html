@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -216,7 +216,152 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode689s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the maximum length of a contiguous subarray in a given integer array <code>nums</code> such that the product of the elements in that subarray is positive. A positive product can be achieved in two cases:</p>
+<ol>
+<li>The subarray contains an even number of negative numbers.</li>
+<li>The subarray contains only positive numbers.</li>
+</ol>
+<p>Additionally, the presence of a zero in the array will break the subarray, requiring the calculation to reset whenever a zero is encountered.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To efficiently determine the maximum length of a contiguous subarray with a positive product, we can utilize a linear scan through the array while maintaining two counters:</p>
+<ul>
+<li><code>positive</code>: This counter tracks the length of the current positive product subarray.</li>
+<li><code>negative</code>: This counter tracks the length of the current negative product subarray.</li>
+</ul>
+<p>The key observations in this approach are:</p>
+<ul>
+<li>When we encounter a positive number, we increase the <code>positive</code> counter and, if there&rsquo;s an ongoing negative subarray, we also increment the <code>negative</code> counter by 1.</li>
+<li>When we encounter a negative number, the roles of the counters are reversed:
+<ul>
+<li>The <code>positive</code> length becomes the previous <code>negative</code> length incremented by 1, and the <code>negative</code> length becomes the previous <code>positive</code> length incremented by 1.</li>
+</ul>
+</li>
+<li>Upon encountering a zero, both counters are reset since a zero product cannot contribute to a positive product subarray.</li>
+</ul>
+<p>By keeping track of the lengths in this manner, we can compute the maximum length of a contiguous subarray with a positive product in a single pass through the input array.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the provided code in detail:</p>
+<ul>
+<li><strong>Class Declaration</strong>:
+The solution is encapsulated within a class named <code>Solution</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Function Definition</strong>:
+The <code>getMaxLen</code> function is defined to take a vector of integers (<code>nums</code>) as input and returns an integer representing the maximum length of a contiguous subarray with a positive product.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">getMaxLen</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Variable Initialization</strong>:
+We initialize three integer variables:
+<ul>
+<li><code>ans</code>: To keep track of the maximum length found so far.</li>
+<li><code>positive</code>: To count the length of the current subarray with a positive product.</li>
+<li><code>negative</code>: To count the length of the current subarray with a negative product.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">positive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">negative</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iterate Through Each Element</strong>:
+A for-each loop iterates through each element <code>x</code> in the <code>nums</code> array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Handle Zero Case</strong>:
+If the current element is zero, we reset both the <code>positive</code> and <code>negative</code> counters to zero, as zeros terminate any ongoing subarray.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">positive</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">negative</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Handle Positive Number</strong>:
+If the current element is positive, we increment the <code>positive</code> counter by 1. The <code>negative</code> counter is only incremented if it is non-zero, indicating that there was an ongoing negative product subarray.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">positive</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">negative</span> <span class="o">=</span> <span class="n">negative</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">negative</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Handle Negative Number</strong>:
+If the current element is negative, we temporarily store the value of <code>positive</code> in <code>tmp</code>. The <code>positive</code> length now becomes the length of the <code>negative</code> subarray incremented by 1 (if it exists), and the <code>negative</code> length is updated to be <code>tmp + 1</code>, reflecting the addition of the current negative number.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">tmp</span>  <span class="o">=</span> <span class="n">positive</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">positive</span> <span class="o">=</span> <span class="n">negative</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">negative</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">negative</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Update Maximum Length</strong>:
+After processing each element, we update the <code>ans</code> variable to ensure it holds the maximum length found so far.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">positive</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return Statement</strong>:
+Finally, after iterating through all elements in the array, the function returns <code>ans</code>, representing the length of the longest contiguous subarray with a positive product.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n)), where (n) is the number of elements in the input array. The solution only requires a single pass through the array.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we only use a fixed number of additional integer variables regardless of the size of the input array.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>getMaxLen</code> function effectively computes the maximum length of a contiguous subarray with a positive product using a linear scan approach. By leveraging the properties of positive and negative numbers in the context of multiplication, the function maintains counters to track lengths dynamically and efficiently.</p>
+<p>This implementation serves as a clear example of how to utilize greedy strategies and simple arithmetic to solve problems related to subarray properties. Understanding this approach not only reinforces the concept of dynamic counting but also illustrates the importance of handling edge cases, such as zeros, in array manipulation tasks.</p>
+<p>In summary, the algorithm showcases a robust method for determining contiguous subarray lengths based on product properties, making it a valuable technique for developers facing similar challenges in competitive programming or technical interviews. This solution emphasizes clarity, efficiency, and elegance in algorithm design, establishing a solid foundation for future explorations into array-based problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode689s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -228,7 +373,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1568"  class="external-link" target="_blank" rel="noopener">LeetCode #1568: Minimum Number of Days to Disconnect Island</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1568"  class="external-link" target="_blank" rel="noopener">LeetCode #1568: Minimum Number of Days to Disconnect Island</a></th>
       </tr>
   </thead>
   <tbody>
@@ -249,66 +394,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

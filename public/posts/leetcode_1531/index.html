@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -228,11 +228,170 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode603s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the length of the optimal compressed representation of a given string <code>s</code> after deleting up to <code>k</code> characters. The compression of a substring consists of its characters followed by the count of consecutive occurrences, but the count should be represented in its minimal digit form (e.g., <code>2</code> for two occurrences, <code>10</code> for ten occurrences).</p>
+<p>The goal is to compute the shortest possible length of the compressed string after performing the specified deletions.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we employ a dynamic programming approach, using a recursive strategy combined with memoization to optimize performance. The idea is to recursively explore different ways to compress the string while keeping track of how many characters we can still delete. The key components of this approach include:</p>
+<ol>
+<li>
+<p><strong>Recursive Function</strong>: We define a recursive function <code>dp(idx, k)</code> that computes the minimum length of the compressed string starting from index <code>idx</code> and with <code>k</code> deletions remaining.</p>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If <code>k &lt; 0</code>, it indicates that we&rsquo;ve attempted to delete more characters than allowed, so we return a large value (256 in this case) as a penalty.</li>
+<li>If we have processed all characters (<code>idx &gt;= n</code>) or if the remaining characters can be fully deleted with the remaining <code>k</code>, we return 0, as there would be nothing left to compress.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>: To avoid redundant calculations, we store results of previously computed states in a memoization table <code>mem</code>.</p>
+</li>
+<li>
+<p><strong>Character Frequency Count</strong>: We maintain an array <code>frq</code> to count the frequency of each character in the substring being processed. This helps in determining how many characters can be compressed together.</p>
+</li>
+<li>
+<p><strong>Computing Compressed Length</strong>: For each position in the string, we iterate through potential end positions of substrings, updating the maximum frequency of characters and calculating the potential new compressed length.</p>
+</li>
+<li>
+<p><strong>Updating Minimum Length</strong>: We compute the minimum length of the compressed string based on the counts of characters in the substring, taking into account the allowed deletions.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the code provided:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span> <span class="c1">// Memoization table
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">string</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// Input string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Length of the string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Function to determine the length of the string representation of a number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="nf">len</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="o">?</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a memoization table <code>mem</code> to store the results of previously computed states.</li>
+<li>The method <code>len(int num)</code> calculates the number of digits required to represent a number in its compressed form.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="c1">// Recursive function to compute the minimum compressed length
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">256</span><span class="p">;</span> <span class="c1">// If we exceed deletions, return a large value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">||</span> <span class="n">n</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// If we&#39;ve processed all characters or can delete all remaining characters, return 0
+</span></span></span></code></pre></div><ul>
+<li>The <code>dp</code> function checks the base cases for recursion.</li>
+<li>If <code>k</code> is negative, it returns a high penalty value.</li>
+<li>If we have processed all characters or can delete all remaining characters, it returns 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">];</span> <span class="c1">// Return cached result if already computed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">frq</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Frequency array for characters
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span> <span class="c1">// Initialize answer to a large value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">most</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Variable to track the maximum frequency of any character
+</span></span></span></code></pre></div><ul>
+<li>If the state has already been computed, we return the stored value.</li>
+<li>We initialize an array <code>frq</code> to keep track of character frequencies, set the answer <code>ans</code> to a large value, and initialize <code>most</code> to track the highest frequency of characters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="c1">// Iterate over the substring starting from the current index
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">most</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">most</span><span class="p">,</span> <span class="o">++</span><span class="n">frq</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]);</span> <span class="c1">// Update the frequency of the current character
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">len</span><span class="p">(</span><span class="n">most</span><span class="p">)</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">most</span><span class="p">)));</span> <span class="c1">// Calculate compressed length
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Cache the result and return it
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through the string starting from the current index to determine how to best compress the substring.</li>
+<li>The maximum frequency of any character is updated as we process each character.</li>
+<li>We calculate the compressed length for the substring and the remaining string after considering deletions, updating the answer accordingly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getLengthOfOptimalCompression</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="c1">// Get the length of the string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// Store the string in the class member
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span> <span class="c1">// Initialize memoization table
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span> <span class="c1">// Start the recursive computation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The function <code>getLengthOfOptimalCompression</code> initializes the necessary variables and starts the recursive DP computation by calling <code>dp(0, k)</code>, indicating that we are starting from the first character with <code>k</code> deletions allowed.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is (O(n^2 \cdot k)), where (n) is the length of the string and (k) is the maximum number of deletions allowed. The nested loops allow us to process substrings efficiently while considering the character frequencies.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(n \cdot k)) due to the memoization table used to store results for different indices and counts of allowed deletions.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the length of the optimal compressed representation of a string after making up to <code>k</code> deletions. By using dynamic programming and memoization, the algorithm efficiently explores the possible combinations of characters to compress while keeping track of the allowed deletions.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Dynamic Programming</strong>: This approach leverages DP to minimize the computation by caching results and avoiding redundant calculations.</li>
+<li><strong>Character Frequency Tracking</strong>: By maintaining a frequency count, the algorithm effectively determines the best way to compress substrings.</li>
+<li><strong>Edge Case Handling</strong>: The implementation accounts for cases with maximum deletions or fully processed strings, ensuring robustness.</li>
+</ul>
+<p>This method serves as an excellent example of applying dynamic programming to string manipulation problems, showcasing how to optimize performance while tackling complex problems in a structured manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode603s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1532"  class="external-link" target="_blank" rel="noopener">LeetCode #1532: The Most Recent Three Orders</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1532"  class="external-link" target="_blank" rel="noopener">LeetCode #1532: The Most Recent Three Orders</a></th>
       </tr>
   </thead>
   <tbody>
@@ -253,66 +412,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

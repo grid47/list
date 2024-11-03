@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -215,11 +215,147 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode767s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand requires us to interpret a command string that consists of specific patterns representing characters. The input string can contain:</p>
+<ul>
+<li>The letter &lsquo;G&rsquo; which remains &lsquo;G&rsquo;.</li>
+<li>The sequence &ldquo;()&rdquo; which translates to &lsquo;o&rsquo;.</li>
+<li>The sequence &ldquo;(al)&rdquo; which translates to &lsquo;al&rsquo;.</li>
+</ul>
+<p>The goal is to parse the command string and construct the output string based on these rules.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can employ a straightforward character iteration technique. We will loop through each character of the input string, checking for specific sequences and building the result string accordingly. The process involves:</p>
+<ol>
+<li><strong>Initialization</strong>: Start with an empty result string to accumulate the interpreted characters.</li>
+<li><strong>Character Traversal</strong>: Iterate through the command string character by character.</li>
+<li><strong>Pattern Matching</strong>:
+<ul>
+<li>When encountering &lsquo;G&rsquo;, simply add &lsquo;G&rsquo; to the result.</li>
+<li>When encountering &lsquo;(&rsquo;, check the next characters:
+<ul>
+<li>If the next character is &lsquo;)&rsquo;, append &lsquo;o&rsquo; to the result and move the index forward.</li>
+<li>If the next characters are &lsquo;a&rsquo; followed by &rsquo;l&rsquo;, append &lsquo;al&rsquo; to the result and adjust the index accordingly.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Return the Result</strong>: After processing the entire string, return the constructed result.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">interpret</span><span class="p">(</span><span class="n">string</span> <span class="n">command</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">result</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class <code>Solution</code> and create a public method <code>interpret</code>, which accepts a string parameter <code>command</code>.</li>
+<li><strong>Initialization</strong>: A string <code>result</code> is initialized as an empty string to accumulate the interpreted output.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">command</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iteration</strong>: We start a loop that goes through each character of the <code>command</code> string using an integer index <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;(&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Check for Opening Parenthesis</strong>: Inside the loop, we check if the current character is an opening parenthesis &lsquo;(&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;)&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">result</span> <span class="o">+=</span> <span class="s">&#34;o&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Check for Closing Parenthesis</strong>: If the next character is a closing parenthesis &lsquo;)&rsquo;, we append &lsquo;o&rsquo; to the <code>result</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;a&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">command</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;l&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">result</span> <span class="o">+=</span> <span class="s">&#34;al&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Check for &ldquo;al&rdquo; Sequence</strong>: If the next character is &lsquo;a&rsquo; and the following one is &rsquo;l&rsquo;, we append &lsquo;al&rsquo; to the <code>result</code> and increment the index <code>i</code> by 2 to skip over the &lsquo;a&rsquo; and &rsquo;l&rsquo; characters, since they have been processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">command</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;G&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">result</span> <span class="o">+=</span> <span class="s">&#34;G&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Direct Addition of &lsquo;G&rsquo;</strong>: Outside the parentheses condition, we check if the current character is &lsquo;G&rsquo;. If it is, we add &lsquo;G&rsquo; directly to the <code>result</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Completion</strong>: After the loop has processed all characters in the <code>command</code>, we return the <code>result</code> string containing the fully interpreted command.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n) ), where ( n ) is the length of the <code>command</code> string. We traverse the string once, and for each character, we perform a constant amount of work.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also ( O(n) ) in the worst case, as the result string could potentially grow to the same size as the input string in scenarios where there are no parentheses.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively interprets the given command string based on defined patterns through a single pass iteration, making it both efficient and straightforward.</p>
+<p>The key points of this implementation include:</p>
+<ol>
+<li>
+<p><strong>Simplicity</strong>: The logic is clear and easy to follow. It leverages simple conditions to determine how to process different parts of the string.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: The use of a single loop ensures that we handle each character of the input string in linear time, which is optimal for this problem.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: The approach is robust enough to handle variations in the command string length, maintaining performance as the size increases.</p>
+</li>
+</ol>
+<p>Overall, the code provides a clear and effective solution to interpreting a formatted command string, ensuring that it adheres to the specified translation rules while maintaining clarity and efficiency in its execution.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode767s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1679"  class="external-link" target="_blank" rel="noopener">LeetCode #1679: Max Number of K-Sum Pairs</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1679"  class="external-link" target="_blank" rel="noopener">LeetCode #1679: Max Number of K-Sum Pairs</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +376,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

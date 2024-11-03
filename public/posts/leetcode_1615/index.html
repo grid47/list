@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -217,7 +217,133 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode694s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the maximum network rank among all pairs of cities in a given network of roads. Each city can be represented as a node, and each road connecting two cities can be represented as an undirected edge between two nodes. The network rank for a pair of cities ( A ) and ( B ) is defined as the total number of roads connected to either city, minus one if there is a direct road between them. The task is to find the maximum network rank among all possible pairs of distinct cities.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution involves the following steps:</p>
+<ol>
+<li><strong>Data Structures</strong>: We will use an array to count the number of roads connected to each city, and a map (or unordered set) to keep track of direct connections between cities.</li>
+<li><strong>Building Connections</strong>: We will iterate through the list of roads to populate our data structures, updating the counts and the direct connections.</li>
+<li><strong>Calculating Maximum Rank</strong>: Finally, we will compute the network rank for each pair of cities, applying the defined conditions to ensure we do not double count direct roads.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maximalNetworkRank</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">roads</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>This defines the <code>Solution</code> class and a public method <code>maximalNetworkRank</code> which takes the number of cities ( n ) and a vector of roads as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">inward</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We declare a vector <code>inward</code> of size ( n ) initialized to zero, which will keep track of the number of roads connected to each city.</li>
+<li>A map <code>mp</code> is used to store the connections, where each city points to a set of connected cities. Using a set helps ensure that each connection is unique.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">roads</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">inward</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">inward</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]].</span><span class="n">insert</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="n">insert</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>This loop processes each road in the <code>roads</code> vector:
+<ul>
+<li>For each road connecting cities <code>it[0]</code> and <code>it[1]</code>, we increment the count for both cities in the <code>inward</code> vector.</li>
+<li>We also add the connection to the map <code>mp</code> to keep track of direct connections.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A variable <code>mx</code> is initialized to zero, which will eventually hold the maximum network rank found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Two nested loops iterate over all pairs of cities ( (i, j) ). The condition <code>if(i == j)</code> ensures that we only consider distinct pairs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">inward</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">inward</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">mp</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">count</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">?</span> <span class="mi">1</span><span class="o">:</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>For each pair of cities ( (i, j) ), we calculate the network rank:
+<ul>
+<li>The sum of roads connected to both cities is <code>inward[i] + inward[j]</code>.</li>
+<li>If there is a direct road between them, we subtract 1 from this sum using the expression <code>(mp.count(i) &amp;&amp; mp[i].count(j) ? 1 : 0)</code>.</li>
+<li>We update <code>mx</code> to store the maximum value encountered.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the maximum network rank is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n^2) ) due to the nested loops that check every pair of cities. The preprocessing step where roads are counted is ( O(m) ), where ( m ) is the number of roads. Therefore, the overall time complexity can be approximated to ( O(n^2 + m) ).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n + m) ) due to the <code>inward</code> vector and the map <code>mp</code>, which stores connections for each city.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently calculates the maximum network rank among pairs of cities in a given network of roads by leveraging a combination of array and map data structures. By processing the roads to build counts and direct connections, the solution ensures accurate and quick computation of the required network ranks.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Data Structures</strong>: Using vectors and maps enables efficient counting and lookup of connections.</li>
+<li><strong>Efficiency</strong>: The nested loop approach is straightforward but can be costly for large ( n ). However, it simplifies the calculation of network ranks without unnecessary complexity.</li>
+<li><strong>Application</strong>: This problem exemplifies how graph theory concepts can be applied to real-world scenarios, such as urban planning or network design, where connections and accessibility are crucial.</li>
+</ol>
+<p>This algorithm can be particularly useful in scenarios involving urban networks, road connectivity, and other applications where understanding the relationships between entities is important.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode694s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -229,7 +355,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1616"  class="external-link" target="_blank" rel="noopener">LeetCode #1616: Split Two Strings to Make Palindrome</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1616"  class="external-link" target="_blank" rel="noopener">LeetCode #1616: Split Two Strings to Make Palindrome</a></th>
       </tr>
   </thead>
   <tbody>
@@ -250,66 +376,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

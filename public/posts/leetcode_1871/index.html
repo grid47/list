@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -213,7 +213,150 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode981s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining if a person can reach the end of a binary string by making jumps of varying lengths, specifically between a minimum and maximum number of jumps. Each character in the string can be either &lsquo;0&rsquo; or &lsquo;1&rsquo;, and the condition for jumping to the next position is that it can only land on &lsquo;0&rsquo;. The task is to decide if it&rsquo;s possible to start from the beginning of the string and reach the last character while adhering to the jump constraints.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we utilize a dynamic programming approach, where we maintain a boolean array <code>dp</code> to represent whether reaching each position in the string is possible under the defined jump conditions. The key steps involved in the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a boolean array <code>dp</code> of size equal to the length of the string <code>s</code>.</li>
+<li>Set <code>dp[0]</code> to <code>true</code>, indicating that the starting position is always reachable.</li>
+<li>Maintain a counter <code>pre</code> to track the number of valid positions from which a jump can be made to the current index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through the String</strong>:</p>
+<ul>
+<li>Loop through each index of the string. For each index <code>i</code>, check if it is reachable from previous positions.</li>
+<li>Adjust the <code>pre</code> counter based on the defined jump limits:
+<ul>
+<li>If <code>i</code> is at least as far as the minimum jump length (<code>mnj</code>), increment the <code>pre</code> counter if the position <code>i - mnj</code> is reachable.</li>
+<li>If <code>i</code> exceeds the maximum jump length (<code>mxj</code>), decrement the <code>pre</code> counter if the position <code>i - mxj - 1</code> is reachable.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Set the Current Position&rsquo;s Reachability</strong>:</p>
+<ul>
+<li>If <code>pre</code> is greater than 0, it indicates that there is at least one reachable position that can jump to the current index, and we can mark <code>dp[i]</code> as reachable if the current character <code>s[i]</code> is &lsquo;0&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After completing the iteration, the value of <code>dp[n - 1]</code> will indicate whether the last character can be reached.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Declaration</strong>: Define the function <code>canReach</code> that accepts a string <code>s</code> and two integers <code>mnj</code> and <code>mxj</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">canReach</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mnj</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mxj</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization</strong>: Inside the function, initialize variables:</p>
+<ul>
+<li><code>n</code> to hold the length of the string.</li>
+<li>A boolean vector <code>dp</code> to track reachable positions, initialized to <code>false</code>.</li>
+<li>The first element <code>dp[0]</code> is set to <code>true</code>, indicating that the starting position is reachable.</li>
+<li>An integer <code>pre</code> to keep track of valid positions.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterate Through the String</strong>: Loop through each character of the string using a for loop.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update Pre Counter</strong>:</p>
+<ul>
+<li>If the current index <code>i</code> is greater than or equal to <code>mnj</code>, check if the position <code>i - mnj</code> is reachable and increment <code>pre</code> accordingly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">mnj</span> <span class="o">&amp;&amp;</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">mnj</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pre</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Adjust Pre for Maximum Jump</strong>:</p>
+<ul>
+<li>If <code>i</code> exceeds <code>mxj</code>, decrement <code>pre</code> if the position <code>i - mxj - 1</code> is reachable.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">mxj</span> <span class="o">&amp;&amp;</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">mxj</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pre</span><span class="o">--</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Set Reachability for Current Position</strong>:</p>
+<ul>
+<li>If <code>pre</code> is greater than 0, it means there are reachable positions that can jump to <code>i</code>. Set <code>dp[i]</code> to <code>true</code> if <code>s[i]</code> is &lsquo;0&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">pre</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>       
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the value of <code>dp[n - 1]</code>, which indicates whether the last position is reachable.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is (O(n)), where (n) is the length of the string. This is because we make a single pass through the string to fill the <code>dp</code> array. The space complexity is also (O(n)) due to the additional storage required for the <code>dp</code> vector.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>canReach</code> function effectively determines whether it&rsquo;s possible to reach the last character of a binary string while adhering to specific jump constraints. By utilizing a dynamic programming approach, the solution efficiently tracks the reachability of each position in the string, taking into account both minimum and maximum jump lengths. This method not only ensures clarity and maintainability in the code but also allows for optimal performance, making it suitable for handling larger input sizes.</p>
+<p>This solution can be particularly useful in various competitive programming scenarios and algorithmic challenges involving pathfinding and constraints on movement, providing a robust foundation for tackling similar problems in the future. Overall, the approach exemplifies the application of dynamic programming principles in solving complex reachability problems efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode981s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -225,7 +368,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1872"  class="external-link" target="_blank" rel="noopener">LeetCode #1872: Stone Game VIII</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1872"  class="external-link" target="_blank" rel="noopener">LeetCode #1872: Stone Game VIII</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +389,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

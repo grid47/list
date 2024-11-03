@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -220,11 +220,175 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1015s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find a peak element in a given 2D matrix. A peak element is defined as an element that is greater than or equal to its neighbors. For elements on the edges or corners of the matrix, we consider only the available neighbors. The matrix will be represented as a 2D vector of integers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem utilizes a binary search technique across the columns of the matrix. Here are the key steps involved in the approach:</p>
+<ol>
+<li>
+<p><strong>Initialize Search Bounds</strong>: We set up the left and right bounds for binary search. The left bound <code>l</code> starts at 0 and the right bound <code>r</code> starts at the last column index.</p>
+</li>
+<li>
+<p><strong>Binary Search on Columns</strong>: The main idea is to perform binary search on the columns of the matrix. For each iteration, we calculate the middle column index <code>mid</code>.</p>
+</li>
+<li>
+<p><strong>Identify the Row with the Maximum Value</strong>: For the current middle column, we traverse each row to find the row index <code>row</code> that contains the maximum value in that column.</p>
+</li>
+<li>
+<p><strong>Check Neighboring Values</strong>: After identifying the maximum value in the middle column:</p>
+<ul>
+<li>Check if it is greater than its left and right neighbors (if they exist).</li>
+<li>If the maximum value is not smaller than both neighbors, it is a peak.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adjust Search Range</strong>: Depending on whether the left or right neighbor is larger than the current maximum value, we adjust our search range:</p>
+<ul>
+<li>If the right neighbor is larger, move the left bound to <code>mid + 1</code>.</li>
+<li>If the left neighbor is larger, move the right bound to <code>mid - 1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Peak Coordinates</strong>: Once a peak is found, return its coordinates as a vector.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code into its key components to understand how it works:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We start by defining a class called <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>findPeakGrid Function</strong>: This function is the main method that will return the coordinates of the peak element.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">findPeakGrid</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Matrix Dimensions</strong>: We determine the number of rows <code>m</code> and columns <code>n</code> in the matrix.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Search Bounds</strong>: Set the initial bounds for binary search on the columns.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Binary Search Loop</strong>: Start a while loop that continues until the left bound exceeds the right bound.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Calculate Mid Column</strong>: Calculate the middle column index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Find the Maximum Row</strong>: Initialize a variable <code>row</code> to store the index of the row with the maximum value in the current column.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">row</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">mat</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">mid</span><span class="p">]</span><span class="o">?</span> <span class="nl">i</span><span class="p">:</span> <span class="n">row</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check Neighboring Values</strong>: Determine if the neighboring values are larger.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">isRightLarger</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">r</span> <span class="o">?</span> <span class="n">mat</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mat</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">mid</span><span class="p">]</span><span class="o">:</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">isLeftLarger</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">l</span>  <span class="o">?</span> <span class="n">mat</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">mat</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">mid</span><span class="p">]</span><span class="o">:</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Determine If Peak Found</strong>: If neither neighbor is larger, return the current peak coordinates.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isRightLarger</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isLeftLarger</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="n">row</span><span class="p">,</span> <span class="n">mid</span><span class="p">};</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Adjust Search Range</strong>: Update the search bounds based on the comparisons.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">isRightLarger</span><span class="p">)</span> <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span>             <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Not Found</strong>: If no peak is found (which theoretically should not happen), return <code>{-1, -1}</code>.</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this approach is ( O(m \log n) ), where ( m ) is the number of rows and ( n ) is the number of columns in the matrix. This is because for each of the ( \log n ) iterations of binary search, we perform a linear scan through the rows ( m ).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) since we are using a constant amount of extra space for variables and do not require additional data structures that grow with input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>findPeakGrid</code> function efficiently finds a peak in a 2D matrix using a binary search strategy. The solution is both optimal and straightforward, leveraging the properties of peak elements and binary search to minimize the number of comparisons needed.</p>
+<p>This algorithm is particularly useful in scenarios involving large matrices where a peak element needs to be identified quickly without exhaustively searching all elements. The method is robust and can be applied in various contexts, such as computer graphics, terrain analysis, or any domain where peak detection in multi-dimensional data is required.</p>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be applied in various domains, such as:</p>
+<ul>
+<li>
+<p><strong>Image Processing</strong>: In computer vision, identifying peak points in images can help with edge detection and feature recognition.</p>
+</li>
+<li>
+<p><strong>Geographical Data Analysis</strong>: In analyzing elevation data from topographic maps, finding peaks is essential for understanding terrain.</p>
+</li>
+<li>
+<p><strong>Signal Processing</strong>: In signal analysis, detecting peaks in data streams can be crucial for identifying significant events or anomalies.</p>
+</li>
+</ul>
+<p>By efficiently using this method, developers and researchers can ensure their applications are both robust and efficient in handling multi-dimensional data analysis tasks.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1015s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1902"  class="external-link" target="_blank" rel="noopener">LeetCode #1902: Depth of BST Given Insertion Order</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1902"  class="external-link" target="_blank" rel="noopener">LeetCode #1902: Depth of BST Given Insertion Order</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +409,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

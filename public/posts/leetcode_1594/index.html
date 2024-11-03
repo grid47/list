@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -234,11 +234,153 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode670s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the maximum product of values along a path from the top-left corner to the bottom-right corner of a grid. The grid can contain positive, negative, or zero values. The goal is to traverse from the starting cell (0, 0) to the target cell (m-1, n-1) while maximizing the product of the cell values along the path. If the maximum product is negative, the function should return -1. The path can only move right or down.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we can use a depth-first search (DFS) strategy to explore all potential paths through the grid while keeping track of the cumulative product. The approach involves the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Set up necessary variables including the dimensions of the grid, a memoization table to store intermediate results, and a modulo constant to ensure results fit within limits.</p>
+</li>
+<li>
+<p><strong>DFS Function</strong>: Create a recursive function that:</p>
+<ul>
+<li>Takes the current position in the grid and the accumulated product as parameters.</li>
+<li>Checks if the current position is the bottom-right corner. If so, it returns the product multiplied by the value of the current cell.</li>
+<li>Handles the case where the cell value is zero, returning zero immediately since any product involving zero is zero.</li>
+<li>Recursively explores possible moves to the right and down, updating the maximum product found along those paths.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Results</strong>: After the DFS completes, check the final result. If the maximum product is negative, return -1; otherwise, return the maximum product modulo (10^9 + 7).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Dimensions of the grid
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">grid</span><span class="p">;</span> <span class="c1">// The input grid
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">memo</span><span class="p">;</span> <span class="c1">// Memoization table
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span> <span class="c1">// Modulo constant
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxProductPath</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: The <code>Solution</code> class defines the public members necessary for solving the problem. The members include the dimensions of the grid (<code>m</code>, <code>n</code>), the grid itself, a memoization table, and a modulo constant for returning results.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Set number of rows
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Set number of columns
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="p">;</span> <span class="c1">// Store the input grid
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">memo</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">LLONG_MIN</span><span class="p">));</span> <span class="c1">// Initialize memoization table with minimum values
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// Start DFS from the top-left corner with an initial product of 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">?</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Return -1 if product is negative, otherwise return the product
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: The <code>maxProductPath</code> function initializes the dimensions and stores the grid. It sets up the memoization table to store results for each cell and starts the DFS from the top-left corner of the grid. The initial product is set to 1 because multiplying by 1 does not change the value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>DFS Function</strong>: The <code>dfs</code> function is defined to take the current indices and the accumulated product value as parameters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span> <span class="c1">// Check if reached the bottom-right corner
+</span></span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If the current position is the bottom-right corner, it multiplies the current accumulated product (<code>val</code>) by the value of the current cell and returns this result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">LLONG_MIN</span><span class="p">;</span> <span class="c1">// Initialize the answer to a very low value
+</span></span></span></code></pre></div><ul>
+<li><strong>Answer Initialization</strong>: The variable <code>ans</code> is initialized to the minimum possible value to ensure that any product found will be greater.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// If current cell value is zero, return zero immediately
+</span></span></span></code></pre></div><ul>
+<li><strong>Zero Handling</strong>: If the current cell&rsquo;s value is zero, the function returns zero because any product including zero is zero.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">)</span> <span class="c1">// Check if moving down is within bounds
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">val</span> <span class="o">*</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]));</span> <span class="c1">// Move down
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="c1">// Check if moving right is within bounds
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">val</span> <span class="o">*</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]));</span> <span class="c1">// Move right
+</span></span></span></code></pre></div><ul>
+<li><strong>Recursive Exploration</strong>: The function checks if it can move down or right:
+<ul>
+<li>If moving down is valid, it recursively calls <code>dfs</code> for the cell below and updates <code>ans</code> with the maximum product found.</li>
+<li>If moving right is valid, it does the same for the cell to the right.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Return the maximum product found along this path
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Returning the Result</strong>: The function returns the maximum product found from the current cell.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this approach is (O(2^{m+n})) in the worst case, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid. This is because the algorithm explores all possible paths from the top-left to the bottom-right corner.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m \times n)) due to the memoization table storing results for each cell. Additionally, the call stack of the recursion may also consume space proportional to the depth of the recursion (which can be at most (m+n)).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach effectively uses a recursive DFS to explore all paths through the grid while keeping track of the product of cell values. The key steps involve:</p>
+<ol>
+<li><strong>Recursive Exploration</strong>: The use of recursion allows a comprehensive search of all potential paths while accumulating the product.</li>
+<li><strong>Edge Case Handling</strong>: Immediate handling of zero values ensures that the algorithm avoids unnecessary calculations that would yield zero products.</li>
+<li><strong>Final Result Processing</strong>: The modulo operation ensures that the results stay within manageable limits as required by the problem constraints.</li>
+</ol>
+<p>This method provides a clear and systematic way to tackle the problem of finding the maximum product path in a grid, balancing both clarity and efficiency. Further optimizations, such as memoization, could be explored to enhance performance in larger grids.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode670s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1595"  class="external-link" target="_blank" rel="noopener">LeetCode #1595: Minimum Cost to Connect Two Groups of Points</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1595"  class="external-link" target="_blank" rel="noopener">LeetCode #1595: Minimum Cost to Connect Two Groups of Points</a></th>
       </tr>
   </thead>
   <tbody>
@@ -259,66 +401,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

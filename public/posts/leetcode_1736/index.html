@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -237,11 +237,163 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">t</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode832s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine the maximum valid time that can be represented by a given string <code>t</code> that represents a time in the format &ldquo;HH:MM&rdquo;. The string may contain some characters as &lsquo;?&rsquo;, which act as placeholders that can be replaced with digits to create the largest possible time. The hour part (HH) must be in the range 00 to 23, and the minute part (MM) must be in the range 00 to 59.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the strategy involves systematically replacing the &lsquo;?&rsquo; characters in the input string with the maximum possible digits that form a valid time. The steps to achieve this are as follows:</p>
+<ol>
+<li>
+<p><strong>Identify the Positions of &lsquo;?&rsquo;</strong>: The first step is to check the positions of the &lsquo;?&rsquo; characters in the string. Depending on their positions, the replacement logic will differ to ensure the resulting time is valid.</p>
+</li>
+<li>
+<p><strong>Replace &lsquo;?&rsquo; in the Hour Portion (HH)</strong>:</p>
+<ul>
+<li>If both the hour digits are &lsquo;?&rsquo;, they should be replaced with &lsquo;23&rsquo; to get the maximum hour.</li>
+<li>If the first hour digit is &lsquo;?&rsquo;, its replacement depends on the second hour digit:
+<ul>
+<li>If the second digit is &lsquo;0&rsquo;, replace the first digit with &lsquo;2&rsquo;.</li>
+<li>If the second digit is between &lsquo;1&rsquo; and &lsquo;3&rsquo;, replace the first digit with &lsquo;2&rsquo;.</li>
+<li>Otherwise, replace the first digit with &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>If the second hour digit is &lsquo;?&rsquo;, it will be replaced based on the first hour digit:
+<ul>
+<li>If the first digit is &lsquo;2&rsquo;, replace the second digit with &lsquo;3&rsquo; (maximum valid for 20-23).</li>
+<li>If the first digit is &lsquo;0&rsquo; or &lsquo;1&rsquo;, replace the second digit with &lsquo;9&rsquo; (maximum valid for 00-19).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Replace &lsquo;?&rsquo; in the Minute Portion (MM)</strong>:</p>
+<ul>
+<li>If both minute digits are &lsquo;?&rsquo;, replace them with &lsquo;59&rsquo; to maximize the minutes.</li>
+<li>If the third digit is &lsquo;?&rsquo;, it should be replaced with &lsquo;5&rsquo; (the maximum possible for minutes).</li>
+<li>If the fourth digit is &lsquo;?&rsquo;, replace it with &lsquo;9&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After making all the replacements, the final string represents the maximum valid time and can be returned.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code provided step-by-step to understand its workings in detail.</p>
+<ol>
+<li>
+<p><strong>Class and Function Definition</strong>: The solution is encapsulated within a class named <code>Solution</code> and the function <code>maximumTime</code> takes a string <code>t</code> as input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">maximumTime</span><span class="p">(</span><span class="n">string</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling the Hour Portion</strong>:</p>
+<ul>
+<li>The first two conditional checks handle the cases where the hour digits are either both &lsquo;?&rsquo;, only the first is &lsquo;?&rsquo;, or only the second is &lsquo;?&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;?&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;?&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;2&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;3&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;?&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;=</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;2&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;=</span><span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;2&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;=</span><span class="sc">&#39;2&#39;</span><span class="p">)</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;2&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;=</span><span class="sc">&#39;3&#39;</span><span class="p">)</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;2&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;1&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;?&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;2&#39;</span><span class="p">)</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;3&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;9&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Here, the logic ensures that the replacements conform to the constraints of valid hours.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling the Minute Portion</strong>:</p>
+<ul>
+<li>The following conditional checks handle the minute digits in a similar manner, ensuring valid replacements are made.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;?&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;?&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;5&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;9&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;?&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;5&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;?&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;9&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The code here maximizes the minute values by checking the presence of &lsquo;?&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>: Finally, the modified time string is returned.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(1)) because the number of characters in the input string <code>t</code> is constant (always 5). The operations performed on the string do not depend on the size of the input, hence they execute in constant time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(1)) as we are not using any additional data structures that grow with the input size. The modifications are made directly on the input string.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively handles the problem of finding the maximum valid time by carefully considering the constraints of the hour and minute representations. By systematically replacing &lsquo;?&rsquo; characters with appropriate digits, it guarantees that the resultant time is the largest possible valid time that can be formed. The approach is efficient, utilizing constant time and space complexities, making it suitable for competitive programming and similar applications.</p>
+<p>In summary, the method outlined in this code showcases a blend of logic, attention to detail, and an understanding of time format constraints, providing a robust solution to the problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode832s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1737"  class="external-link" target="_blank" rel="noopener">LeetCode #1737: Change Minimum Characters to Satisfy One of Three Conditions</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1737"  class="external-link" target="_blank" rel="noopener">LeetCode #1737: Change Minimum Characters to Satisfy One of Three Conditions</a></th>
       </tr>
   </thead>
   <tbody>
@@ -262,66 +414,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

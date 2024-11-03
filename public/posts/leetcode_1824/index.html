@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -227,11 +227,153 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode924s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we have a road consisting of three lanes, and we need to navigate through obstacles that are represented in a given array. The objective is to determine the minimum number of side jumps required to get from the starting position to the end of the road while avoiding the obstacles. The player starts at lane 2, and they can move to an adjacent lane or stay in the same lane.</p>
+<p>Given an array <code>obs</code> where <code>obs[i]</code> represents the lane that has an obstacle at position <code>i</code>, the task is to find the minimum number of side jumps required to reach the end of the road (position <code>n</code>), which corresponds to the last index of the <code>obs</code> array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs dynamic programming with memoization to efficiently compute the minimum number of jumps required to navigate through the obstacles. The main ideas of the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Recursive Function</strong>: A recursive function <code>dp(cur, idx, obs)</code> is used to explore the possibilities of jumping to different lanes at the current index <code>idx</code> and tracks the current lane <code>cur</code>.</p>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If <code>idx</code> equals the size of <code>obs</code>, it indicates that we have successfully reached the end of the road, so we return <code>0</code>.</li>
+<li>If the current lane <code>cur</code> has an obstacle at <code>obs[idx]</code>, we cannot remain in that lane, so we return a large value (to signify an invalid state).</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursion</strong>: For each position:</p>
+<ul>
+<li>Calculate the minimum side jumps needed if we either stay in the same lane or jump to an adjacent lane (left or right).</li>
+<li>If jumping to the left or right lane does not lead to an obstacle, we consider that option and add <code>1</code> to the jump count.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>: We store the results of previously computed states to avoid redundant calculations, which enhances performance significantly.</p>
+</li>
+<li>
+<p><strong>Initialization</strong>: The algorithm starts from lane <code>2</code> at index <code>0</code>, and we call the recursive function to compute the result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the complete implementation with detailed explanations:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">memo</span><span class="p">;</span> <span class="c1">// Memoization table to store computed values
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="c1">// The recursive function for DP
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">cur</span><span class="p">,</span> <span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">obs</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The function <code>dp</code> takes the current lane <code>cur</code>, the current index <code>idx</code>, and the obstacle array <code>obs</code> as inputs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">obs</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Reached the end of the road
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">cur</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">cur</span><span class="p">][</span><span class="n">idx</span><span class="p">];</span> <span class="c1">// Return already computed value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">obs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">==</span> <span class="n">cur</span><span class="p">)</span> <span class="k">return</span> <span class="n">INT_MAX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Current lane is blocked
+</span></span></span></code></pre></div><ul>
+<li>The function checks for base cases:
+<ul>
+<li>If <code>idx</code> equals the length of <code>obs</code>, we return <code>0</code> as we have successfully traversed the road.</li>
+<li>If the current lane has an obstacle, we return a large number, indicating that this path is not feasible.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">obs</span><span class="p">);</span> <span class="c1">// Option to stay in the same lane
+</span></span></span></code></pre></div><ul>
+<li>Calculate the minimum jumps if we stay in the current lane.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">left</span>  <span class="o">=</span> <span class="p">(</span><span class="n">cur</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Compute the left lane
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Compute the right lane
+</span></span></span></code></pre></div><ul>
+<li>Determine the adjacent lanes: <code>left</code> and <code>right</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">obs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">!=</span> <span class="n">left</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dp</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">obs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">!=</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dp</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If moving to the <code>left</code> or <code>right</code> lanes is valid (not blocked), calculate the minimum jumps needed considering the jump and update <code>ans</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">cur</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Memoize the computed result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Store the result in the memoization table before returning.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minSideJumps</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">obs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">obs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Length of the obstacles array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Start in lane 2 at index 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">memo</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span> <span class="c1">// Resize memoization table
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">obs</span><span class="p">);</span> <span class="c1">// Start the DP recursion
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>In <code>minSideJumps</code>, we initialize the parameters, resize the memoization table, and call the <code>dp</code> function to get the result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(n)) because each state is computed at most once, where (n) is the length of the <code>obs</code> array.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the memoization table, which stores results for each combination of current lane and index.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively utilizes dynamic programming with memoization to find the minimum number of side jumps needed to traverse the road with obstacles. The approach is systematic and leverages the recursive nature of the problem to explore different possibilities of movement while efficiently storing intermediate results to optimize performance.</p>
+<p>This implementation showcases the power of dynamic programming to break down complex problems into manageable subproblems, thereby achieving an efficient solution. It ensures that the constraints of the problem are respected while providing a clear pathway to the solution, making it a robust approach to solving this particular challenge.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode924s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1825"  class="external-link" target="_blank" rel="noopener">LeetCode #1825: Finding MK Average</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1825"  class="external-link" target="_blank" rel="noopener">LeetCode #1825: Finding MK Average</a></th>
       </tr>
   </thead>
   <tbody>
@@ -252,66 +394,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -219,11 +219,172 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span> <span class="o">*</span> <span class="p">(</span><span class="n">val</span> <span class="o">%</span><span class="n">mod</span><span class="p">)</span><span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1089s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to compute the minimum non-zero product of all integers in a given range, specifically from <code>1</code> to <code>2^p - 1</code>, with the result taken modulo (10^9 + 7). The solution must efficiently calculate this value, even for larger powers of (p).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach consists of two primary steps:</p>
+<ol>
+<li>
+<p><strong>Understanding the Range</strong>: We need to calculate the product of numbers from <code>1</code> to <code>2^p - 1</code>. Notably, the maximum number in this range is (2^p - 1), and the product can be expressed as:
+[
+\text{product} = 1 \times 2 \times &hellip; \times (2^p - 1)
+]
+This can be computed modulo (10^9 + 7) to avoid overflow.</p>
+</li>
+<li>
+<p><strong>Efficient Exponentiation</strong>: Instead of computing the product directly, we can utilize properties of modular arithmetic and exponentiation to calculate the result efficiently. The formula derived from the product leads to using a modular exponentiation technique.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">1000000007</span><span class="p">;</span>
+</span></span></code></pre></div><p>This initializes the <code>Solution</code> class and defines a constant <code>mod</code> representing (10^9 + 7), which will be used throughout the calculations to prevent overflow.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="nf">expn</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="n">n</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div><p>Here, we define the recursive function <code>expn</code> which computes (n^p \mod \text{mod}) using the method of exponentiation by squaring. The base cases are handled first:</p>
+<ul>
+<li>If (p = 0), the result is (1) (since any number raised to the power of 0 is 1).</li>
+<li>If (p = 1), the function returns (n) modulo (mod).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">expn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">((</span><span class="n">ans</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ans</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">expn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="p">((</span><span class="n">ans</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">ans</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">(</span><span class="n">ans</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="n">mod</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>Next, we handle the main logic of the exponentiation:</p>
+<ul>
+<li>If (p) is even, we compute (n^{p/2}), square it, and take modulo (mod).</li>
+<li>If (p) is odd, we do the same but multiply the result by (n) before taking modulo. This effectively reduces the number of multiplications needed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minNonZeroProduct</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">val</span> <span class="o">=</span> <span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">val</span><span class="o">--</span><span class="p">;</span>
+</span></span></code></pre></div><p>In this method, <code>minNonZeroProduct</code>, we first compute (val) as (2^p - 1). This gives us the upper limit of our product range.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">expn</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">val</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span> <span class="o">*</span> <span class="p">(</span><span class="n">val</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we compute the answer:</p>
+<ul>
+<li>We use our previously defined <code>expn</code> function to calculate ((val - 1)^{val / 2} \mod \text{mod}).</li>
+<li>The result is then multiplied by (val \mod \text{mod}) to include the last factor in the product and returned as the final answer.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity for the <code>expn</code> function is (O(\log p)) due to the exponentiation by squaring. The <code>minNonZeroProduct</code> function itself primarily calls this exponentiation function, so the overall time complexity is (O(\log p)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we only use a fixed amount of additional space for variables and the recursion stack in the worst case of the exponentiation.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The implementation of the <code>minNonZeroProduct</code> function provides an efficient solution to the problem of finding the minimum non-zero product of integers in a specific range defined by powers of two. By leveraging the properties of modular arithmetic and efficient exponentiation, the algorithm is capable of handling large values of (p) while ensuring that computations remain manageable and performant.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Modular Arithmetic</strong>: The use of (10^9 + 7) helps avoid overflow and ensures results remain within valid integer limits.</p>
+</li>
+<li>
+<p><strong>Efficient Exponentiation</strong>: The exponentiation by squaring technique significantly reduces the number of multiplications, leading to faster computations.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: This approach can easily handle large values of (p), making it suitable for competitive programming and scenarios involving large integer computations.</p>
+</li>
+</ol>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is how you can use the <code>minNonZeroProduct</code> function in practice:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">minNonZeroProduct</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// For p = 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Output: some minimum non-zero product modulo 10^9 + 7
+</span></span></span></code></pre></div><p>In this example, we create an instance of the <code>Solution</code> class, call the <code>minNonZeroProduct</code> method with a specific power (p), and print the result, demonstrating the function&rsquo;s utility and correctness.</p>
+<h3 id="potential-improvements-and-variations">
+  Potential Improvements and Variations
+  <a class="heading-link" href="#potential-improvements-and-variations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>While the current implementation efficiently solves the problem, here are some potential areas for future exploration:</p>
+<ol>
+<li>
+<p><strong>Iterative Approach</strong>: An iterative method for exponentiation could be developed to avoid recursion and potential stack overflow for very high values of (p).</p>
+</li>
+<li>
+<p><strong>Optimization for Specific Inputs</strong>: The algorithm could be modified to handle specific ranges or properties of input values more efficiently.</p>
+</li>
+<li>
+<p><strong>Generalized Functionality</strong>: Extend the function to handle a wider range of inputs or different mathematical operations while still maintaining efficiency.</p>
+</li>
+</ol>
+<p>This solution demonstrates a solid understanding of modular arithmetic, efficient algorithms, and practical programming techniques, making it a valuable resource for anyone tackling similar problems in algorithm design and optimization.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1089s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1970"  class="external-link" target="_blank" rel="noopener">LeetCode #1970: Last Day Where You Can Still Cross</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1970"  class="external-link" target="_blank" rel="noopener">LeetCode #1970: Last Day Where You Can Still Cross</a></th>
       </tr>
   </thead>
   <tbody>
@@ -244,66 +405,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

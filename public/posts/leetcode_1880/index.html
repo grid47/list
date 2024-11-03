@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -210,11 +210,114 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">first</span><span class="o">+</span><span class="n">second</span> <span class="o">==</span> <span class="n">target</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1002s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires determining if the sum of two words represented by lowercase letters can equal a target word. Each letter from &lsquo;a&rsquo; to &lsquo;z&rsquo; corresponds to a digit from 0 to 25, respectively. Therefore, the goal is to convert the words into their numerical representations based on this mapping, then check if the sum of the first two words equals the third word (the target).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will follow these steps:</p>
+<ol>
+<li>
+<p><strong>Mapping Characters to Numbers</strong>: Each character in the given words will be converted to a corresponding numerical value based on its position in the alphabet. Specifically, &lsquo;a&rsquo; will be mapped to 0, &lsquo;b&rsquo; to 1, up to &lsquo;z&rsquo;, which will be mapped to 25.</p>
+</li>
+<li>
+<p><strong>Constructing the Numerical Values</strong>: We will iterate through each word, constructing its numerical value as we process each character. This is done by multiplying the current total by 10 (to shift the digits) and adding the numerical value of the current character.</p>
+</li>
+<li>
+<p><strong>Checking the Equality</strong>: After converting all three words into their numerical forms, we simply check if the sum of the first two equals the value of the third.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Definition</strong>: The main function <code>isSumEqual</code> is defined, taking three strings as parameters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isSumEqual</span><span class="p">(</span><span class="n">string</span> <span class="n">firstWord</span><span class="p">,</span> <span class="n">string</span> <span class="n">secondWord</span><span class="p">,</span> <span class="n">string</span> <span class="n">targetWord</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization of Variables</strong>: We initialize three integer variables <code>first</code>, <code>second</code>, and <code>target</code> to hold the numerical values of the first word, second word, and target word, respectively.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Converting the First Word</strong>: We loop through each character in <code>firstWord</code>, converting it to a number and building its total value.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">firstWord</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">first</span> <span class="o">=</span> <span class="n">first</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">firstWord</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Converting the Second Word</strong>: We repeat the process for <code>secondWord</code>, building its numerical representation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">secondWord</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">second</span> <span class="o">=</span> <span class="n">second</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">secondWord</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Converting the Target Word</strong>: The same conversion process is applied to <code>targetWord</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">targetWord</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">target</span> <span class="o">=</span> <span class="n">target</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">(</span><span class="n">targetWord</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we return whether the sum of the first two words equals the third word.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">first</span> <span class="o">+</span> <span class="n">second</span> <span class="o">==</span> <span class="n">target</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is ( O(n) ), where ( n ) is the length of the longest word among <code>firstWord</code>, <code>secondWord</code>, and <code>targetWord</code>. This is because we are processing each character of the strings once to build their numerical values.</p>
+<p>The space complexity is ( O(1) ) as we are using a fixed amount of space (three integers) regardless of the input size.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>isSumEqual</code> function provides an efficient solution to the problem of checking if two words sum up to a target word using a specific character-to-number mapping. The approach is straightforward, relying on basic arithmetic operations and character manipulations.</p>
+<p>By converting each word into its numerical equivalent based on its characters, we can directly perform the required addition and equality check. This solution illustrates how to handle string manipulation and numerical conversion in a concise manner.</p>
+<p>This method not only highlights the ability to represent complex problems using simple mathematical representations but also demonstrates how to efficiently process strings in competitive programming scenarios. By mastering such techniques, developers can tackle various problems that involve similar transformations, thereby enhancing their problem-solving capabilities in algorithm design.</p>
+<p>Overall, the <code>isSumEqual</code> function exemplifies a clear and efficient approach to a character mapping problem, reinforcing the importance of understanding both string handling and basic arithmetic in algorithm development.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1002s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1881"  class="external-link" target="_blank" rel="noopener">LeetCode #1881: Maximum Value after Insertion</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1881"  class="external-link" target="_blank" rel="noopener">LeetCode #1881: Maximum Value after Insertion</a></th>
       </tr>
   </thead>
   <tbody>
@@ -235,66 +338,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

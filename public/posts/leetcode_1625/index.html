@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -239,11 +239,170 @@
 </span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode705s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective is to find the lexicographically smallest string that can be generated from a given string ( s ) by performing a series of operations defined by two integers ( a ) and ( b ). The operations allowed are:</p>
+<ol>
+<li><strong>Rotate</strong> the string ( s ) to the right by ( b ) positions.</li>
+<li><strong>Add</strong> an integer ( a ) to the characters at odd indices (1-based) of the string. The addition wraps around if it exceeds the digit &lsquo;9&rsquo; (i.e., &lsquo;0&rsquo; + (c - &lsquo;0&rsquo; + a) % 10).</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a depth-first search (DFS) strategy combined with a set to keep track of seen strings to avoid cycles. The approach can be summarized as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start with the original string and initialize a variable to store the smallest string found.</p>
+</li>
+<li>
+<p><strong>DFS Traversal</strong>: Recursively explore the two operations (rotate and add) for each string:</p>
+<ul>
+<li>For the <strong>rotate</strong> operation, create a new string that is the result of rotating the current string by ( b ).</li>
+<li>For the <strong>add</strong> operation, create a new string by adding ( a ) to each character at the odd indices.</li>
+</ul>
+</li>
+<li>
+<p><strong>Lexicographical Comparison</strong>: After each operation, compare the generated string with the current smallest string and update it if the new string is smaller.</p>
+</li>
+<li>
+<p><strong>Cycle Prevention</strong>: Use a set to record strings that have already been processed, preventing redundant calculations.</p>
+</li>
+<li>
+<p><strong>Termination</strong>: The recursion terminates when all possible transformations of the string have been explored.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed explanation of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">seen</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> that contains member variables for storing the current smallest string (<code>ans</code>), the integers ( a ) and ( b ), the length of the string (<code>n</code>), and a set to track seen strings (<code>seen</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isVisited</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">seen</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">!=</span> <span class="n">seen</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>isVisited</code> method checks if the string ( s ) has already been processed by looking it up in the <code>seen</code> set.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">visit</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">seen</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>visit</code> method updates the smallest string if the current string ( s ) is smaller and marks it as seen by adding it to the <code>seen</code> set.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">string</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">reverse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>rotate</code> method performs the rotation of the string ( s ) by ( x ) positions using the reverse method, which is a common trick for string rotation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">string</span> <span class="nf">add</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">char</span> <span class="o">&amp;</span><span class="n">c</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">c</span> <span class="o">=</span> <span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>add</code> method iterates through the string ( s ), adding ( x ) to characters at odd indices (1-based) and wraps around to stay within the digit limits.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">findLexSmallestString</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>findLexSmallestString</code> method initializes the search process. It sets the initial value of <code>ans</code> to the input string ( s ), assigns ( a ) and ( b ), calculates the length of the string ( n ), and starts the DFS with the original string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">isVisited</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">visit</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">rotate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">b</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> method is the core of the depth-first search:
+<ul>
+<li>It checks if the current string ( s ) has been seen. If yes, it terminates further exploration from this string.</li>
+<li>If not, it marks the string as visited and explores both transformations: rotating the string and adding ( a ) to the odd-indexed characters.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution can be quite high in the worst case, depending on the number of unique strings generated. However, in practice, it can be approximated by ( O(m \cdot 2^m) ), where ( m ) is the length of the string. This accounts for the potential combinations of transformations.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(m) ) due to the storage of the strings in the <code>seen</code> set and the recursion stack.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively finds the lexicographically smallest string through systematic exploration of transformations. The use of depth-first search ensures that all possibilities are considered, while the memoization via a hash set prevents redundant computations.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>String Manipulation Techniques</strong>: The use of reversing techniques is efficient for implementing rotations.</li>
+<li><strong>Depth-First Search</strong>: DFS is a powerful method for exploring all possible states in a combinatorial problem.</li>
+<li><strong>Cycle Prevention</strong>: Utilizing a set to track visited states is crucial in problems where cycles may occur.</li>
+</ol>
+<p>This method can be adapted for similar problems involving string transformations and combinatorial searches, demonstrating the flexibility of DFS combined with efficient data structures.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode705s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1626"  class="external-link" target="_blank" rel="noopener">LeetCode #1626: Best Team With No Conflicts</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1626"  class="external-link" target="_blank" rel="noopener">LeetCode #1626: Best Team With No Conflicts</a></th>
       </tr>
   </thead>
   <tbody>
@@ -264,66 +423,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

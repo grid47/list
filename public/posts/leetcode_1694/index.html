@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -213,11 +213,140 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode785s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to reformat a given phone number string by removing non-digit characters and organizing the digits into groups of either three or two. The goal is to create a readable format while adhering to specific grouping rules: groups of three digits are preferred, but if the remaining digits at the end are two or four, they should be grouped into pairs with a hyphen separating the groups.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will follow these steps:</p>
+<ol>
+<li>
+<p><strong>Filter Digits</strong>: Iterate through the string and extract only the digit characters. This will help us eliminate any spaces, parentheses, or other non-digit symbols from the input.</p>
+</li>
+<li>
+<p><strong>Group Digits</strong>: Once we have a string composed only of digits, we will group them into sections. The groups will be formed in a way that prioritizes groups of three digits, but if we have exactly two or four digits left at the end of our processing, we will create groups of two.</p>
+</li>
+<li>
+<p><strong>Construct the Result</strong>: As we group the digits, we will append hyphens where necessary to format the number properly.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">reformatNumber</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class named <code>Solution</code> with a public method <code>reformatNumber</code> that takes a string <code>s</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Digit Filtering</strong>: We initialize an integer <code>j</code> to keep track of the position in the filtered string. We then iterate over each character in the input string <code>s</code>. If the character is a digit (checked using <code>isdigit</code>), we store it in the <code>j</code>-th position of <code>s</code> and increment <code>j</code>. This effectively filters out all non-digit characters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">s</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Resizing the String</strong>: After filtering, we resize the string <code>s</code> to contain only the digits collected. This means that the first <code>j</code> characters of <code>s</code> are valid digits, and any remaining characters can be discarded.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Preparing for Grouping</strong>: We initialize an empty string <code>ans</code> that will hold the reformatted number. We also create an integer <code>r</code> to represent the remaining number of digits. The loop iterates through the digits of <code>s</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">||</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">?</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">3</span><span class="p">;</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Grouping Logic</strong>: In this nested loop, we determine how many digits to take based on the value of <code>r</code>:</p>
+<ul>
+<li>If <code>r</code> is equal to <code>2</code> or <code>4</code>, we will take <code>2</code> digits. This handles the case where we have an even number of remaining digits.</li>
+<li>Otherwise, we will take <code>3</code> digits. This handles the case where we have more than four digits or an odd number remaining.</li>
+</ul>
+<p>We append these digits to <code>ans</code> and decrement both <code>d</code> and <code>r</code> accordingly.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="n">ans</span> <span class="o">+=</span> <span class="sc">&#39;-&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Adding Hyphens</strong>: After adding a group of digits, we check if there are any remaining digits (<code>r &gt; 0</code>). If there are, we append a hyphen to <code>ans</code> to separate the groups.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return Statement</strong>: Finally, we return the formatted string <code>ans</code> after all digits have been processed.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(N)), where (N) is the length of the input string. This is because we make a single pass to filter the digits and another pass to group them.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) for additional space, as we use the input string for filtering and only a few extra variables for counting and grouping. However, in the context of the output, we create a new string, which may be considered (O(N)) for the output space.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided code effectively reformats a phone number string by filtering out non-digit characters and grouping the digits into a structured format that is easy to read.</p>
+<p>Key takeaways from the solution include:</p>
+<ol>
+<li>
+<p><strong>Character Filtering</strong>: The importance of efficiently filtering input data to ensure we are only working with relevant information.</p>
+</li>
+<li>
+<p><strong>Dynamic Grouping Logic</strong>: The logic for grouping digits is flexible enough to handle various lengths of the remaining digits, ensuring that the output is formatted according to the specified rules.</p>
+</li>
+<li>
+<p><strong>String Manipulation</strong>: The solution showcases practical techniques for string manipulation in C++, making it a good example for understanding how to efficiently process and format strings.</p>
+</li>
+</ol>
+<p>Overall, this solution is a clear demonstration of how to approach string formatting tasks in a structured manner, applying principles of programming to achieve the desired outcome.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode785s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1695"  class="external-link" target="_blank" rel="noopener">LeetCode #1695: Maximum Erasure Value</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1695"  class="external-link" target="_blank" rel="noopener">LeetCode #1695: Maximum Erasure Value</a></th>
       </tr>
   </thead>
   <tbody>
@@ -238,66 +367,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

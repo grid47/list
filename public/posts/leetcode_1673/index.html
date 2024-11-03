@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -214,7 +214,128 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode759s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the most competitive subsequence of a given length ( k ) from an array of integers ( nums ). A subsequence is considered more competitive if it appears in the order of elements in the original array while being lexicographically smaller than any other subsequence of the same length. The goal is to return a subsequence of size ( k ) that meets these criteria.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use a greedy algorithm with a stack to maintain the most competitive subsequence. The core idea is to iteratively add elements from the array ( nums ) to the stack while ensuring that we maintain the required length ( k ) and the lexicographical order. Here’s a step-by-step outline of the approach:</p>
+<ol>
+<li>
+<p><strong>Stack Usage</strong>: We use a stack (<code>stk</code>) to build our subsequence. The stack helps us maintain the order and allow easy removal of elements that would lead to a less competitive subsequence.</p>
+</li>
+<li>
+<p><strong>Iterate through <code>nums</code></strong>: We go through each element of the <code>nums</code> array, deciding whether to include it in the stack or to discard some elements already in the stack.</p>
+</li>
+<li>
+<p><strong>Pop Conditions</strong>:</p>
+<ul>
+<li>We will pop elements from the stack while the current element (<code>nums[i]</code>) is smaller than the top of the stack (<code>stk.back()</code>). This ensures we keep smaller elements at the top.</li>
+<li>We also need to ensure that after popping, we can still achieve a subsequence of length ( k ) with the remaining elements. This is checked using the condition:
+[
+\text{(size of stk)} + \text{(remaining elements in nums)} - \text{(current index + 1)} \geq k
+]
+This condition ensures that even after popping elements, we have enough remaining elements to fill up to ( k ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Push Current Element</strong>: If the size of the stack is less than ( k ), we push the current element onto the stack.</p>
+</li>
+<li>
+<p><strong>Return the Stack</strong>: Finally, we return the stack as the most competitive subsequence of length ( k ).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">mostCompetitive</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class and Method Definition</strong>: We define a class <code>Solution</code> and declare the public method <code>mostCompetitive</code>, which takes a vector of integers <code>nums</code> and an integer <code>k</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Stack Initialization</strong>: We initialize a vector <code>stk</code> to use as our stack for building the subsequence.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iterate Through <code>nums</code></strong>: We start a loop to iterate through each element in <code>nums</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stk</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">stk</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><strong>Pop Condition</strong>: This while loop checks if the top element of the stack is greater than the current element (<code>nums[i]</code>). If it is, we pop the stack while also ensuring we can still form a valid subsequence of length ( k ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">stk</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Push Condition</strong>: If the size of the stack is less than ( k ), we push the current number onto the stack.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">stk</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return the Result</strong>: Finally, we return the stack containing the most competitive subsequence.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(n) ), where ( n ) is the number of elements in <code>nums</code>. Each element is pushed and popped from the stack at most once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(k) ) for the stack, which holds the result of length ( k ).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently finds the most competitive subsequence of length ( k ) from the given array using a greedy approach with a stack. This algorithm ensures that we maintain the desired order and competitiveness of the subsequence through careful element management.</p>
+<p><strong>Key Insights</strong>:</p>
+<ol>
+<li><strong>Greedy Approach</strong>: The greedy nature of the algorithm allows for quick decisions on which elements to keep in the stack.</li>
+<li><strong>Stack Utilization</strong>: The stack not only helps manage the current subsequence but also simplifies the logic of maintaining the lexicographical order.</li>
+<li><strong>Efficiency</strong>: The algorithm&rsquo;s linear time complexity makes it suitable for large inputs, ensuring performance is not compromised.</li>
+</ol>
+<p>Overall, this solution is a good example of applying a stack data structure to maintain order and achieve optimal results in competitive subsequence problems. The clarity and conciseness of the implementation contribute to its effectiveness.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode759s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -226,7 +347,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1674"  class="external-link" target="_blank" rel="noopener">LeetCode #1674: Minimum Moves to Make Array Complementary</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1674"  class="external-link" target="_blank" rel="noopener">LeetCode #1674: Minimum Moves to Make Array Complementary</a></th>
       </tr>
   </thead>
   <tbody>
@@ -247,66 +368,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

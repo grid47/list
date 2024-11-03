@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,11 +204,148 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode807s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to calculate the total amount of money a person saves over a given number of days, where the savings strategy is based on a weekly pattern. Specifically, the savings scheme is defined as follows:</p>
+<ul>
+<li>On the first day, the person saves $1.</li>
+<li>On the second day, they save $2.</li>
+<li>This pattern continues up to the seventh day, where they save $7.</li>
+<li>After the seventh day, the savings reset for the next week, increasing the base savings amount for each week by $1.</li>
+</ul>
+<p>For example, during the first week (days 1 to 7), the savings would be:</p>
+<ul>
+<li>Day 1: $1</li>
+<li>Day 2: $2</li>
+<li>Day 3: $3</li>
+<li>Day 4: $4</li>
+<li>Day 5: $5</li>
+<li>Day 6: $6</li>
+<li>Day 7: $7</li>
+</ul>
+<p>For the second week, the savings would start again from $2 for Day 1 of the week:</p>
+<ul>
+<li>Day 8: $2 (week 2, day 1)</li>
+<li>Day 9: $3 (week 2, day 2)</li>
+<li>Day 10: $4 (week 2, day 3)</li>
+<li>Day 11: $5 (week 2, day 4)</li>
+<li>Day 12: $6 (week 2, day 5)</li>
+<li>Day 13: $7 (week 2, day 6)</li>
+<li>Day 14: $8 (week 2, day 7)</li>
+</ul>
+<p>Given an integer ( n ), representing the number of days, the goal is to compute the total amount of money saved over those ( n ) days.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To calculate the total money saved over ( n ) days, we can utilize the following approach:</p>
+<ol>
+<li>
+<p><strong>Iterate Through Days</strong>: Use a loop to iterate through the days while keeping track of the current week&rsquo;s starting savings.</p>
+</li>
+<li>
+<p><strong>Savings Calculation</strong>: For each day within a week, add the respective savings to a total sum. If the day exceeds the 7-day week, reset the day counter and increment the base savings amount for the next week.</p>
+</li>
+<li>
+<p><strong>Handling Remaining Days</strong>: When the number of remaining days is less than 7, only add the savings for those days.</p>
+</li>
+<li>
+<p><strong>Return Total</strong>: After all iterations, return the total amount of money saved.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the provided code to understand its functionality in detail:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The public method <code>totalMoney</code> takes an integer <code>n</code> as input, representing the total number of days, and returns the total savings as an integer.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">totalMoney</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: Two integer variables are initialized: <code>s</code>, which represents the starting savings for the current week, initialized to 1, and <code>ans</code>, which accumulates the total savings, initialized to 0.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Outer While Loop</strong>: The loop runs while ( n ) is greater than 0, ensuring that savings are calculated for all specified days.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Inner For Loop</strong>: The inner loop runs for 7 iterations (representing each day of the week). It checks that there are still days remaining (<code>n-- &gt; 0</code>) before adding to the total savings.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">7</span> <span class="o">&amp;&amp;</span> <span class="n">n</span><span class="o">--</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="n">ans</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>For each day, the savings amount for that day is calculated as <code>s + i</code>, where <code>s</code> is the base savings for the current week and <code>i</code> is the day of the week (0 through 6).</li>
+<li>The calculated savings are added to <code>ans</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Increment Base Savings</strong>: After each complete iteration through the week, the base savings amount <code>s</code> is incremented to reflect the increase for the next week.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">s</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Total Savings</strong>: Once all days have been processed, the total savings accumulated in <code>ans</code> are returned.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)) because the outer loop iterates over the number of days ( n ). Each week can be processed in constant time, leading to a linear relationship with ( n ).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) as only a fixed amount of additional space is used for the variables.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution effectively calculates the total amount of money saved over a specified number of days based on a structured weekly savings pattern. The use of simple loops and arithmetic ensures both clarity and efficiency in the computation. The algorithm is designed to handle larger input sizes, making it suitable for competitive programming contexts. Overall, the code is well-structured and demonstrates a solid understanding of iterative processes and arithmetic operations in programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode807s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1717"  class="external-link" target="_blank" rel="noopener">LeetCode #1717: Maximum Score From Removing Substrings</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1717"  class="external-link" target="_blank" rel="noopener">LeetCode #1717: Maximum Score From Removing Substrings</a></th>
       </tr>
   </thead>
   <tbody>
@@ -229,66 +366,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

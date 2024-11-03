@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -223,7 +223,131 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode992s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves assigning tasks to a set of servers based on their availability and processing power. Each server can only handle one task at a time, and each task has a specific processing time. The goal is to determine which server is assigned to each task and in what order. When multiple servers are available, the server with the least processing power should be chosen. If a server is busy, tasks must wait until the server is available.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs two priority queues: one for available servers and another for busy servers. This allows efficient management of task assignments based on server availability and processing capacity. The approach can be summarized as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Create a priority queue for available servers and another for busy servers. Each server in the available queue is represented by an array containing the time it will be free, its processing power, and its index.</p>
+</li>
+<li>
+<p><strong>Processing Tasks</strong>: For each task:</p>
+<ul>
+<li>If any servers are busy and their processing time is up, move them back to the available queue.</li>
+<li>Assign the next task to the available server with the least processing power.</li>
+<li>Update the busy queue with the server that is now handling the task.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Collection</strong>: Maintain a list to keep track of which server is assigned to which task.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Definition</strong>: The function <code>assignTasks</code> takes two vectors as parameters: <code>servers</code> and <code>tasks</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">assignTasks</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">servers</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">tasks</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Priority Queue Initialization</strong>: Two priority queues are defined: <code>avail</code> for available servers and <code>busy</code> for busy servers. The available queue is populated with all servers initialized to be free at time 0.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">long</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">long</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">long</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;&gt;&gt;</span> <span class="n">avail</span><span class="p">,</span> <span class="n">busy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">servers</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">avail</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="n">servers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">});</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Task Processing</strong>: Loop through each task to assign it to a server.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">tasks</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling Busy Servers</strong>: While there are busy servers and the task time has exceeded their completion time, move these servers back to the available queue.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">busy</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">busy</span><span class="p">.</span><span class="n">top</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">||</span> <span class="n">avail</span><span class="p">.</span><span class="n">empty</span><span class="p">()))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">auto</span> <span class="p">[</span><span class="n">time</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">busy</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">busy</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">avail</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">time</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="o">?</span> <span class="mi">0</span><span class="o">:</span> <span class="n">time</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">idx</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Assigning Tasks</strong>: Extract the server with the least processing power from the available queue, and assign the task. Update the busy queue with the new busy status of the server.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">auto</span> <span class="p">[</span><span class="n">time</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">avail</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">avail</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">busy</span><span class="p">.</span><span class="n">push</span><span class="p">({</span> <span class="n">max</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">tasks</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">w</span><span class="p">,</span> <span class="n">idx</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: Finally, return the list of server indices corresponding to the assigned tasks.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is ( O((m + n) \log n) ), where ( m ) is the number of tasks and ( n ) is the number of servers. Each task and server operation involves log operations due to the priority queue manipulations.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n) ) for storing the servers in the priority queue.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>assignTasks</code> function provides an efficient solution to the problem of task assignment to servers based on their availability and processing power. By utilizing priority queues, the function ensures that servers are managed optimally, allowing for a quick assignment process.</p>
+<p>This approach not only effectively handles the task assignment but also accommodates the dynamic nature of server availability, enabling it to scale well with the input size. The structured method of handling available and busy servers illustrates a robust technique applicable to various scheduling problems in computer science.</p>
+<p>The implementation showcases the importance of understanding data structures like priority queues for efficiently managing dynamic sets of data, such as server workloads. Mastering such techniques is vital for solving complex problems related to task scheduling, resource allocation, and load balancing in computing systems.</p>
+<p>In summary, the <code>assignTasks</code> function exemplifies a clear and efficient algorithm for task assignment, reinforcing the significance of effective data management in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode992s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -235,7 +359,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1883"  class="external-link" target="_blank" rel="noopener">LeetCode #1883: Minimum Skips to Arrive at Meeting On Time</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1883"  class="external-link" target="_blank" rel="noopener">LeetCode #1883: Minimum Skips to Arrive at Meeting On Time</a></th>
       </tr>
   </thead>
   <tbody>
@@ -256,66 +380,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

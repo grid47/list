@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -214,11 +214,141 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode784s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves finding the maximum score obtainable from a sequence of numbers while following specific movement constraints. Given an integer array <code>nums</code> and an integer <code>k</code>, the task is to determine the maximum score one can achieve by starting from the first element and moving to the last element of the array. You can move from index <code>i</code> to any index <code>j</code> where (i &lt; j \leq i + k). Each score is the sum of values at these indices. The goal is to return the maximum score that can be achieved at the last index.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a dynamic programming approach combined with a deque (double-ended queue) to maintain the maximum scores efficiently as we iterate through the array. The approach can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start with the first element in the deque since the maximum score at the beginning is simply the value of the first element.</p>
+</li>
+<li>
+<p><strong>Iterate Through the Array</strong>: For each index starting from 1 to the end of the array, compute the score by adding the current element to the maximum score from the previous valid range (determined by <code>k</code>).</p>
+</li>
+<li>
+<p><strong>Maintain the Deque</strong>: While iterating, ensure that the deque maintains indices in a way that the score values at these indices are in decreasing order. This allows us to efficiently retrieve the maximum score from the previous valid range.</p>
+</li>
+<li>
+<p><strong>Pop Invalid Indices</strong>: If the index at the front of the deque is out of the allowable range defined by <code>k</code>, remove it from the front of the deque.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The last element in the modified <code>nums</code> array will hold the maximum score achievable at the last index, which we will return.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxResult</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: The <code>Solution</code> class contains the method <code>maxResult</code>, which takes a vector of integers <code>nums</code> and an integer <code>k</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">deque</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dq</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: We initialize <code>n</code> to represent the size of the input array and create a deque <code>dq</code> initialized with 0, which represents the index of the first element of <code>nums</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iterate Through the Array</strong>: We start a loop that iterates over the array from index 1 to <code>n - 1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">dq</span><span class="p">.</span><span class="n">front</span><span class="p">()]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Compute Score</strong>: At each index <code>i</code>, we calculate the maximum score to reach that index by adding the current element <code>nums[i]</code> to the maximum score obtainable from the previous valid indices stored in <code>dq</code>, which is represented by <code>nums[dq.front()]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">dq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">dq</span><span class="p">.</span><span class="n">back</span><span class="p">()]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dq</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><strong>Maintain Deque Order</strong>: We enter a while loop that removes elements from the back of the deque as long as the score at those indices is less than or equal to the current score. This ensures that the deque only contains indices of potential maximum scores.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">dq</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Add Current Index</strong>: After adjusting the deque, we add the current index <code>i</code> to the back of the deque.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">dq</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">)</span> <span class="n">dq</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><strong>Pop Invalid Indices</strong>: We check if the index at the front of the deque is no longer valid (i.e., it is out of the range defined by <code>k</code>). If it is, we remove it from the front of the deque.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return the Result</strong>: After iterating through the entire array, we return the maximum score at the last index, which is now stored in <code>nums[n - 1]</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(N)), where (N) is the number of elements in the input array. Each index is processed a constant number of times as we add and remove elements from the deque.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(K)) in the worst case, where (K) is the number of indices stored in the deque. Since <code>K</code> can be at most equal to the size of the input array, we can consider it as (O(N)) for the upper limit.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently calculates the maximum score obtainable from the given sequence of numbers while adhering to the movement constraints specified. Here are the key points to summarize:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming with Deque</strong>: The algorithm leverages dynamic programming principles along with a deque to maintain maximum scores dynamically, allowing for efficient lookups and updates.</p>
+</li>
+<li>
+<p><strong>Sliding Window Technique</strong>: The usage of a sliding window defined by <code>k</code> enables the algorithm to operate within the specified movement constraints without unnecessary recalculations.</p>
+</li>
+<li>
+<p><strong>Optimal Complexity</strong>: The linear time complexity ensures that the solution is efficient even for larger input sizes, making it suitable for competitive programming scenarios.</p>
+</li>
+</ol>
+<p>This code serves as an excellent example of using data structures like deques to enhance performance in dynamic programming problems, and it can be applied to various similar challenges in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode784s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1697"  class="external-link" target="_blank" rel="noopener">LeetCode #1697: Checking Existence of Edge Length Limited Paths</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1697"  class="external-link" target="_blank" rel="noopener">LeetCode #1697: Checking Existence of Edge Length Limited Paths</a></th>
       </tr>
   </thead>
   <tbody>
@@ -239,66 +369,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

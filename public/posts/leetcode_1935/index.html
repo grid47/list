@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -210,11 +210,165 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">+</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1052s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine how many words in a given string of text can be typed using a keyboard that has certain broken letters. Each word is separated by a space, and if a word contains any of the broken letters, it cannot be typed. The goal is to count the number of words that can be fully typed without using any broken letters.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we will follow these steps:</p>
+<ol>
+<li>
+<p><strong>Initialize a Boolean Array</strong>: Create a boolean array of size 26 to keep track of which letters are broken.</p>
+</li>
+<li>
+<p><strong>Mark Broken Letters</strong>: Iterate through the string of broken letters and mark the corresponding indices in the boolean array.</p>
+</li>
+<li>
+<p><strong>Count Typable Words</strong>: Iterate through the input text, counting words that do not contain any broken letters by checking the characters against the boolean array.</p>
+</li>
+<li>
+<p><strong>Handle Word Separation</strong>: Use spaces to identify the boundaries of words in the text.</p>
+</li>
+<li>
+<p><strong>Return the Count</strong>: Finally, return the count of words that can be typed.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">canBeTypedWords</span><span class="p">(</span><span class="n">string</span> <span class="n">text</span><span class="p">,</span> <span class="n">string</span> <span class="n">brokenLetters</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">broken</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span></code></pre></div><p>Here, we declare the class <code>Solution</code> and define the public function <code>canBeTypedWords</code>, which takes two parameters: <code>text</code> (the input string containing words) and <code>brokenLetters</code> (a string representing the broken keys on the keyboard). We initialize a boolean array <code>broken</code> of size 26 to keep track of broken letters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span> <span class="p">:</span> <span class="n">brokenLetters</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">broken</span><span class="p">[</span><span class="n">ch</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><p>In this loop, we iterate over each character in <code>brokenLetters</code>. By subtracting <code>'a'</code> from each character, we calculate its corresponding index (0 for &lsquo;a&rsquo;, 1 for &lsquo;b&rsquo;, etc.) in the <code>broken</code> array and mark it as <code>true</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize two integer variables: <code>res</code> (to count the number of words that can be typed) and <code>cnt</code> (to count the characters in the current word).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">ch</span> <span class="p">:</span> <span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>We iterate through each character in the <code>text</code>. When we encounter a space character, it indicates the end of a word:</p>
+<ul>
+<li>If <code>cnt</code> is zero, it means the previous word could be typed without any broken letters, so we increment <code>res</code>.</li>
+<li>We reset <code>cnt</code> to zero to start counting the next word.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">else</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span> <span class="o">+=</span> <span class="n">broken</span><span class="p">[</span><span class="n">ch</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">];</span>
+</span></span></code></pre></div><p>If the current character is not a space, we check if it is a broken letter using the <code>broken</code> array. If it is broken, we increment <code>cnt</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">+</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>After finishing the iteration through <code>text</code>, we return <code>res</code> plus one additional count if <code>cnt</code> is zero. This accounts for the last word if it was not followed by a space.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n + m)), where (n) is the length of the <code>text</code> string and (m) is the length of the <code>brokenLetters</code> string. This is because we need to iterate through both strings once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a fixed-size array of size 26 to store the status of the broken letters, regardless of the size of the input.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>canBeTypedWords</code> function effectively counts the number of words in the given text that can be typed using a keyboard with certain broken letters. By utilizing a boolean array to track broken keys and iterating through the text to identify and count valid words, this solution is efficient and straightforward.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Efficiency</strong>: The approach ensures that the function runs in linear time relative to the size of the input strings, making it suitable for large inputs.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: The code is simple and easy to understand, leveraging basic programming constructs like loops and conditionals.</p>
+</li>
+<li>
+<p><strong>Use of Boolean Array</strong>: The boolean array efficiently tracks the status of broken keys, allowing for quick lookups.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution can be applied in various scenarios where input validation against a set of restricted characters is required, such as:</p>
+<ul>
+<li><strong>Text Editing Applications</strong>: Validating user input against a list of disabled keys.</li>
+<li><strong>Game Development</strong>: Checking player inputs for allowed actions based on available controls.</li>
+<li><strong>Data Processing</strong>: Filtering strings based on character availability.</li>
+</ul>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing the function, keep the following points in mind:</p>
+<ul>
+<li>
+<p><strong>Input Constraints</strong>: Ensure that the function handles edge cases such as empty strings for both <code>text</code> and <code>brokenLetters</code>.</p>
+</li>
+<li>
+<p><strong>Character Set</strong>: The implementation assumes only lowercase English letters. If the input can contain uppercase letters or special characters, additional handling may be necessary.</p>
+</li>
+<li>
+<p><strong>Performance Testing</strong>: It’s essential to test the function with various cases, including extreme cases (e.g., a very long text or many broken letters) to ensure robustness.</p>
+</li>
+</ul>
+<p>By mastering the approach used in this solution, developers can efficiently tackle similar problems in various domains, enhancing their coding capabilities and algorithmic thinking.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1052s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1936"  class="external-link" target="_blank" rel="noopener">LeetCode #1936: Add Minimum Number of Rungs</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1936"  class="external-link" target="_blank" rel="noopener">LeetCode #1936: Add Minimum Number of Rungs</a></th>
       </tr>
   </thead>
   <tbody>
@@ -235,66 +389,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

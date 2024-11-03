@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -231,11 +231,156 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode712s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the path in a grid that minimizes the maximum effort required to traverse from the top-left corner to the bottom-right corner. The effort to move from one cell to another is defined as the absolute difference in heights between the two cells. Given a 2D grid representing the heights of cells, our task is to find the path that minimizes the maximum effort among all the cells along the path.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a graph traversal algorithm, specifically a priority queue (min-heap), to explore the grid efficiently. The algorithm follows these key steps:</p>
+<ol>
+<li><strong>Data Structure</strong>: Use a priority queue to always expand the least effort path first.</li>
+<li><strong>Tracking Efforts</strong>: Maintain a 2D vector <code>sz</code> to track the minimum effort needed to reach each cell.</li>
+<li><strong>Exploration</strong>: Start from the top-left corner and explore neighboring cells, updating their effort as necessary.</li>
+<li><strong>Termination Condition</strong>: The search continues until we reach the bottom-right corner, at which point we return the minimum maximum effort required.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">cmp</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="k">operator</span><span class="p">()</span> <span class="p">(</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>This class defines a custom comparator for the priority queue, allowing it to order elements based on the third element (the current maximum effort) in ascending order. This ensures that the path with the least effort is always expanded first.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minimumEffortPath</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">h</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains the method <code>minimumEffortPath</code>, which takes a 2D vector <code>h</code> representing the heights of cells as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dir</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>We define an array <code>dir</code> to facilitate movement in four directions (right, down, left, up).</li>
+<li><code>m</code> and <code>n</code> represent the dimensions of the grid (number of rows and columns).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">sz</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">cmp</span><span class="o">&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">});</span>
+</span></span></code></pre></div><ul>
+<li>A 2D vector <code>sz</code> is initialized to store the minimum efforts to reach each cell, starting with <code>INT_MAX</code> (infinity).</li>
+<li>A priority queue <code>pq</code> is created to manage our exploration of cells based on the current maximum effort.</li>
+<li>We start by pushing the starting cell <code>(0, 0)</code> with an effort of <code>0</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">j</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">d</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>The main loop continues as long as there are cells to explore in the priority queue.</li>
+<li>We extract the top element, which contains the current cell&rsquo;s coordinates and its associated effort.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">d</span> <span class="o">&gt;</span> <span class="n">sz</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">((</span><span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span> <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the current effort <code>d</code> is greater than the recorded effort for cell <code>(i, j)</code>, we skip further processing.</li>
+<li>If we reach the bottom-right corner <code>(m - 1, n - 1)</code>, we return the current maximum effort, which is our desired result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">ni</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">nj</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">ni</span> <span class="o">&gt;=</span> <span class="n">m</span> <span class="o">||</span> <span class="n">nj</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This nested loop iterates over the four possible directions to explore neighboring cells.</li>
+<li>We calculate the new coordinates <code>(ni, nj)</code> and check for boundary conditions to ensure they are valid indices.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">sz</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">nj</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nd</span>  <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">nj</span><span class="p">]),</span> <span class="n">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">nxt</span> <span class="o">&gt;</span> <span class="n">nd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">sz</span><span class="p">[</span><span class="n">ni</span><span class="p">][</span><span class="n">nj</span><span class="p">]</span> <span class="o">=</span> <span class="n">nd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">,</span> <span class="n">nd</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We calculate the next effort <code>nd</code> as the maximum of the current effort and the difference in heights between the current cell and the neighbor.</li>
+<li>If the calculated effort <code>nd</code> is less than the previously recorded effort for <code>(ni, nj)</code>, we update it and push the neighbor into the priority queue for further exploration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>If the loop completes without finding a path (which theoretically should not happen with the given constraints), we return <code>0</code>. This line serves as a safety net.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm runs in (O(m \cdot n \log(m \cdot n))), where (m) is the number of rows and (n) is the number of columns in the grid. The logarithmic factor comes from the operations performed on the priority queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(m \cdot n)) due to the storage of the <code>sz</code> vector and the priority queue which can potentially store all cells in the grid.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively utilizes a priority queue to ensure that we always explore paths with the least effort first. This greedy approach allows for optimal pathfinding in a weighted grid where the weights are defined by the absolute height differences between adjacent cells.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Graph Traversal Techniques</strong>: Understanding how to use priority queues can significantly improve the efficiency of pathfinding algorithms.</li>
+<li><strong>Handling Weights</strong>: This problem demonstrates how to deal with weights that vary between nodes, leading to non-uniform costs in pathfinding.</li>
+<li><strong>Optimization Strategies</strong>: By prioritizing paths with the least effort, we ensure that we find the optimal solution without unnecessary computations.</li>
+</ol>
+<p>Overall, this approach provides a solid foundation for tackling similar pathfinding problems in weighted grids, making it a valuable technique in competitive programming and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode712s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1632"  class="external-link" target="_blank" rel="noopener">LeetCode #1632: Rank Transform of a Matrix</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1632"  class="external-link" target="_blank" rel="noopener">LeetCode #1632: Rank Transform of a Matrix</a></th>
       </tr>
   </thead>
   <tbody>
@@ -256,66 +401,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

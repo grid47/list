@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -201,11 +201,106 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">bit</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">26</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode939s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine if a given string contains every letter of the English alphabet at least once. Such a string is known as a &ldquo;pangram.&rdquo; For example, the sentence &ldquo;The quick brown fox jumps over the lazy dog&rdquo; is a well-known pangram because it includes all 26 letters from &lsquo;a&rsquo; to &lsquo;z&rsquo;. The goal is to implement a function that checks if the provided string meets this criteria.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem of checking if a string is a pangram, we can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Character Representation</strong>: Since the English alphabet consists of 26 letters, we can represent the presence of each letter using a bitset, which allows us to efficiently track the presence of each character.</p>
+</li>
+<li>
+<p><strong>Iterate Through the String</strong>: Loop through each character in the input string and update the bitset to indicate which characters are present.</p>
+</li>
+<li>
+<p><strong>Count the Set Bits</strong>: After processing the string, check if all 26 bits in the bitset are set. If they are, the string is a pangram; otherwise, it is not.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Based on the count of set bits, return <code>true</code> if the string is a pangram and <code>false</code> otherwise.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">checkIfPangram</span><span class="p">(</span><span class="n">string</span> <span class="n">set</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> that contains the method <code>checkIfPangram</code>, which takes a string <code>set</code> as input. This string represents the characters we want to analyze.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">bitset</span><span class="o">&lt;</span><span class="mi">26</span><span class="o">&gt;</span> <span class="n">bit</span><span class="p">;</span> <span class="c1">// Create a bitset of size 26 to track letters
+</span></span></span></code></pre></div><ul>
+<li>We initialize a <code>bitset</code> of size 26. Each bit in this bitset will correspond to one letter of the English alphabet, with bit position 0 representing &lsquo;a&rsquo;, bit position 1 representing &lsquo;b&rsquo;, and so on, up to bit position 25 representing &lsquo;z&rsquo;.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="nl">x</span><span class="p">:</span> <span class="n">set</span><span class="p">)</span> <span class="n">bit</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">);</span> <span class="c1">// Set the bit for each character
+</span></span></span></code></pre></div><ul>
+<li>We loop through each character <code>x</code> in the input string <code>set</code>. For each character, we calculate its corresponding bit position by subtracting the ASCII value of &lsquo;a&rsquo; from the ASCII value of <code>x</code>. The <code>bit.set()</code> function is called to mark this position in the bitset as &ldquo;set,&rdquo; indicating that the corresponding letter is present in the string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">bit</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">26</span><span class="p">;</span> <span class="c1">// Check if all 26 letters are present
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we use the <code>bit.count()</code> function, which returns the number of bits that are set in the bitset. If this count equals 26, it means all letters from &lsquo;a&rsquo; to &lsquo;z&rsquo; are present, and we return <code>true</code>. If not, we return <code>false</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the length of the input string <code>set</code>. We traverse the string once, performing constant-time operations for each character.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) because the size of the bitset is fixed at 26, regardless of the input size. Thus, the space used by the bitset does not scale with the input.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently checks if a string is a pangram by leveraging a bitset to track the presence of each letter of the English alphabet. This approach is optimal in terms of both time and space complexity, making it suitable for scenarios where performance is a concern.</p>
+<p>In summary, the <code>checkIfPangram</code> function effectively determines if a string contains every letter from &lsquo;a&rsquo; to &lsquo;z&rsquo;, thus verifying if it is a pangram. Its simplicity and efficiency make it an excellent solution for this common problem in string processing and character recognition tasks.</p>
+<p>By using this method, we ensure that our solution remains concise and efficient, which is particularly beneficial in competitive programming and real-world applications where performance is critical.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode939s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1833"  class="external-link" target="_blank" rel="noopener">LeetCode #1833: Maximum Ice Cream Bars</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1833"  class="external-link" target="_blank" rel="noopener">LeetCode #1833: Maximum Ice Cream Bars</a></th>
       </tr>
   </thead>
   <tbody>
@@ -226,66 +321,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

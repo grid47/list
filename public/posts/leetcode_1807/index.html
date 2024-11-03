@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,11 +221,147 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode912s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves evaluating a string that may contain variables enclosed in parentheses, which should be replaced with their corresponding values from a given knowledge base. The knowledge base consists of pairs where each pair contains a string key and its associated value. If a key is not found in the knowledge base, it should be replaced with a question mark (<code>?</code>). The goal is to process the input string and return the fully evaluated string with all substitutions made.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Parse the Knowledge Base</strong>: Use a map to store the key-value pairs from the knowledge base for quick lookup.</p>
+</li>
+<li>
+<p><strong>Iterate Through the Input String</strong>: Loop through the input string character by character to identify sections that need to be replaced.</p>
+</li>
+<li>
+<p><strong>Handle Variable Replacement</strong>: When encountering an opening parenthesis <code>(</code>, extract the key until the closing parenthesis <code>)</code> is reached. Check if the key exists in the map. If it does, append the corresponding value to the result string; if not, append a question mark.</p>
+</li>
+<li>
+<p><strong>Construct the Result</strong>: Continue building the result string until the end of the input string is reached.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the constructed string.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;&amp;</span> <span class="n">knowledge</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>evaluate</code> that takes a string <code>s</code> and a vector of vector strings <code>knowledge</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">e</span><span class="p">:</span> <span class="n">knowledge</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a map <code>mp</code> to hold the key-value pairs from the knowledge base. The <code>for</code> loop iterates over each element <code>e</code> in <code>knowledge</code> and populates the map with the first element as the key and the second element as the value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">res</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We declare an empty string <code>res</code> to accumulate the result and an integer <code>i</code> to keep track of our position while iterating through the input string <code>s</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A <code>while</code> loop begins, running until <code>i</code> reaches the end of the string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;(&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">string</span> <span class="n">key</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;)&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">key</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Within the loop, we check if the current character is an opening parenthesis <code>(</code>. If it is, we increment <code>i</code> to move past it and initialize an empty string <code>key</code>. A nested <code>while</code> loop captures characters until a closing parenthesis <code>)</code> is found, building the <code>key</code> string.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">res</span> <span class="o">+=</span> <span class="n">mp</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="n">res</span> <span class="o">+=</span> <span class="sc">&#39;?&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>After constructing the <code>key</code>, we check if it exists in the map:
+<ul>
+<li>If it does, we append the corresponding value to <code>res</code>.</li>
+<li>If it does not, we append a question mark <code>?</code>.</li>
+</ul>
+</li>
+<li>We then increment <code>i</code> to move past the closing parenthesis.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="n">res</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the current character is not an opening parenthesis, we simply append it to <code>res</code> and increment <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Once the loop is complete, we return the final evaluated string <code>res</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(n + k)), where (n) is the length of the input string <code>s</code> and (k) is the number of key-value pairs in the knowledge base. We need to process each character in the string and look up each key in the map.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(k)) due to the storage of the key-value pairs in the map.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively evaluates a string with embedded variables by utilizing a map for fast lookups. The clarity of the approach, which involves simple string parsing and condition checking, makes it easy to understand and implement.</p>
+<p>The algorithm&rsquo;s design is efficient and straightforward, ensuring that all possible variables are correctly replaced or indicated as missing. The use of a map allows for quick access to the knowledge base, enhancing the overall performance of the solution.</p>
+<p>By breaking down the problem into manageable parts—parsing the knowledge base, iterating through the string, handling variable replacements, and constructing the result—the solution showcases good practices in algorithm design.</p>
+<p>In summary, the <code>evaluate</code> method provides a robust and effective means to process and evaluate strings with variable replacements, making it an excellent resource for handling similar tasks in string manipulation and evaluation.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode912s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1808"  class="external-link" target="_blank" rel="noopener">LeetCode #1808: Maximize Number of Nice Divisors</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1808"  class="external-link" target="_blank" rel="noopener">LeetCode #1808: Maximize Number of Nice Divisors</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +382,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

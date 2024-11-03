@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -212,7 +212,143 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode609s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining the winner in a game based on a series of comparisons between elements in an array. Given an array of integers, we need to find the winning number after a sequence of comparisons defined by the following rules:</p>
+<ol>
+<li>Start with the first element as the current winner.</li>
+<li>Compare the current winner with the next element in the array.</li>
+<li>If the next element is greater than the current winner, the next element becomes the new winner, and the comparison count resets.</li>
+<li>If the next element is less than or equal to the current winner, the current winner remains the same, and the count of consecutive wins for the current winner increases.</li>
+<li>If the current winner wins <code>k</code> consecutive comparisons, that winner is declared the overall winner.</li>
+<li>If the loop completes and no one has won <code>k</code> consecutive comparisons, the last standing winner is declared the overall winner.</li>
+</ol>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To efficiently solve this problem, we will iterate through the array while maintaining a counter for consecutive wins. The strategy involves:</p>
+<ul>
+<li>Initializing the first element of the array as the current winner.</li>
+<li>Using a counter to track how many times the current winner has won consecutively against subsequent elements.</li>
+<li>As we iterate through the array, we check each element against the current winner:
+<ul>
+<li>If the next element is greater, we update the winner and reset the counter.</li>
+<li>If the next element is less than or equal, we increment the counter.</li>
+</ul>
+</li>
+<li>If the counter reaches <code>k</code>, we return the current winner immediately.</li>
+<li>If we reach the end of the array without any winner achieving <code>k</code> consecutive wins, we return the last known winner.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">getWinner</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Get the size of the array
+</span></span></span></code></pre></div><ul>
+<li>We start by defining the class <code>Solution</code> and declaring the function <code>getWinner</code>, which takes in an array of integers <code>arr</code> and an integer <code>k</code>.</li>
+<li>We retrieve the size of the array and store it in <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Counter for consecutive wins
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Index of the current winner
+</span></span></span></code></pre></div><ul>
+<li>We initialize <code>cnt</code> to count how many times the current winner has won consecutively.</li>
+<li>We set <code>j</code> to the index of the current winner, initially starting with the first element at index <code>0</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment the win count for the current winner
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Reset count and update the winner index
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Update the winner to the current element
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through the array starting from the second element (index <code>1</code>).</li>
+<li>If the current element is less than the current winner (<code>arr[j]</code>), we increment the win count for the current winner.</li>
+<li>If the current element is greater than the current winner, we reset the count to <code>1</code> (indicating the new winner has won) and update the winner&rsquo;s index to the current element&rsquo;s index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="c1">// Return the winner if it wins k times
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After updating the counts, we check if the count of consecutive wins has reached <code>k</code>. If so, we return the current winner (<code>arr[j]</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="c1">// If no winner achieved k wins, return the last known winner
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>If we finish the loop and no element has reached <code>k</code> wins, we return the last known winner, which is the element at <code>arr[j]</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this algorithm is (O(n)), where (n) is the number of elements in the array. We traverse the array once, making a constant amount of work for each element.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) since we are using a fixed amount of additional space regardless of the input size (only a few integer variables are used).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to the problem efficiently determines the winner of the game based on the specified rules. By maintaining a simple count of consecutive wins and updating the current winner accordingly, we achieve an optimal solution.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Iterative Comparison</strong>: The algorithm leverages an iterative approach to handle comparisons and updates in a single pass through the array.</li>
+<li><strong>Early Exit</strong>: The early return mechanism allows for quick results as soon as a winner achieves the required number of consecutive wins.</li>
+<li><strong>Simplicity and Efficiency</strong>: The overall simplicity of the approach, combined with its efficiency, makes it a suitable solution for problems involving sequential comparisons in arrays.</li>
+</ul>
+<p>This method serves as an excellent example of applying straightforward logic to solve a competitive programming problem, showcasing the ability to track and compare values efficiently within a linear time frame.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode609s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -224,7 +360,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1536"  class="external-link" target="_blank" rel="noopener">LeetCode #1536: Minimum Swaps to Arrange a Binary Grid</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1536"  class="external-link" target="_blank" rel="noopener">LeetCode #1536: Minimum Swaps to Arrange a Binary Grid</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +381,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

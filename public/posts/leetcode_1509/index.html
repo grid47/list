@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -205,7 +205,142 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">min</span><span class="p">({</span><span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]});</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode577s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to minimize the difference between the maximum and minimum values of an array after performing a series of operations. Specifically, we are allowed to change any of the elements in the array up to three times, and our goal is to find the minimum possible difference between the maximum and minimum elements of the array after these changes.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we can break down the solution into the following steps:</p>
+<ol>
+<li>
+<p><strong>Early Return for Small Arrays</strong>: If the array contains fewer than 5 elements, it is impossible to create a significant difference between the maximum and minimum values through three operations, so we can directly return 0.</p>
+</li>
+<li>
+<p><strong>Sorting the Array</strong>: By sorting the array, we can easily access the smallest and largest elements. This will allow us to determine how the maximum and minimum values can be adjusted by changing elements.</p>
+</li>
+<li>
+<p><strong>Consider All Combinations</strong>: Since we can change up to three elements, we need to consider several configurations:</p>
+<ul>
+<li>Decreasing the three largest elements (and keeping the smallest unchanged).</li>
+<li>Decreasing the two largest and increasing the smallest.</li>
+<li>Decreasing the largest and the second-largest, while increasing the two smallest.</li>
+<li>Increasing the three smallest elements (and keeping the largest unchanged).</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Differences</strong>: For each configuration, calculate the difference between the new maximum and minimum values, and return the minimum of these differences.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minDifference</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and the method <code>minDifference</code>, which takes a vector of integers <code>nums</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>We determine the size of the input array <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="cm">/* change one element to any other value in one move */</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* get min diff between max and min value after performing atmost 3 moves */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We check if the size of the array is less than 5. If it is, we can directly return 0 because it is impossible to achieve a meaningful difference with so few elements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>We sort the array <code>nums</code> in non-decreasing order. This sorting step allows us to easily access the largest and smallest values in the array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">min</span><span class="p">({</span><span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>We calculate the minimum difference by evaluating four scenarios:</p>
+<ul>
+<li><code>nums[n - 1] - nums[3]</code>: This corresponds to reducing the three largest values.</li>
+<li><code>nums[n - 2] - nums[2]</code>: This represents reducing the two largest values while keeping the two smallest.</li>
+<li><code>nums[n - 3] - nums[1]</code>: Here we reduce the largest and second largest values while keeping the three smallest.</li>
+<li><code>nums[n - 4] - nums[0]</code>: This considers increasing the three smallest values.</li>
+</ul>
+</li>
+<li>
+<p>The <code>min</code> function takes the minimum of these four computed differences and returns it as the result.</p>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this algorithm is (O(n \log n)) due to the sorting step. The rest of the operations (calculating the differences) are constant time operations, (O(1)).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) as we are only using a fixed amount of extra space for calculations and not allocating additional structures that scale with input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum possible difference between the maximum and minimum elements of an array after performing a limited number of changes.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Sorting</strong>: The solution heavily relies on sorting to easily determine the potential maximum and minimum values after modifications.</li>
+<li><strong>Combinatorial Logic</strong>: By considering various combinations of which elements to modify, the algorithm ensures that it finds the optimal solution without unnecessary complexity.</li>
+<li><strong>Edge Cases</strong>: The early return for small arrays demonstrates good handling of edge cases, simplifying the problem and avoiding unnecessary computation.</li>
+</ul>
+<p>This algorithm showcases a clean and effective approach to minimizing differences in arrays, leveraging sorting and strategic analysis of possible outcomes based on allowed operations. Such techniques are valuable in competitive programming and algorithm design, where efficiency and clarity are paramount.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode577s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -217,7 +352,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1510"  class="external-link" target="_blank" rel="noopener">LeetCode #1510: Stone Game IV</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1510"  class="external-link" target="_blank" rel="noopener">LeetCode #1510: Stone Game IV</a></th>
       </tr>
   </thead>
   <tbody>
@@ -238,66 +373,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

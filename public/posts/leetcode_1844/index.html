@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -201,11 +201,111 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode966s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to manipulate a given string ( s ) consisting of lowercase letters and digits. The goal is to replace each digit in the string with a character that is determined by adding the digit&rsquo;s value to the preceding character (the letter immediately before it). This operation must be applied to all digits at odd indices in the string. For instance, in the string &ldquo;a1c1e1&rdquo;, the transformations would be:</p>
+<ul>
+<li>The digit &lsquo;1&rsquo; at index 1 (preceded by &lsquo;a&rsquo;) should be replaced by &lsquo;b&rsquo; (i.e., &lsquo;a&rsquo; + 1).</li>
+<li>The digit &lsquo;1&rsquo; at index 3 (preceded by &lsquo;c&rsquo;) should be replaced by &rsquo;d&rsquo; (i.e., &lsquo;c&rsquo; + 1).</li>
+<li>The digit &lsquo;1&rsquo; at index 5 (preceded by &rsquo;e&rsquo;) should be replaced by &lsquo;f&rsquo; (i.e., &rsquo;e&rsquo; + 1).</li>
+</ul>
+<p>After all transformations, the resultant string for &ldquo;a1c1e1&rdquo; would be &ldquo;abcde&rdquo;.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow a straightforward approach:</p>
+<ol>
+<li>
+<p><strong>Iterate Through the String</strong>: Start iterating from index 1 and step through the string in increments of 2 to target only the digits.</p>
+</li>
+<li>
+<p><strong>Replace Digits</strong>: For each digit encountered, convert it into its corresponding integer value and add it to the ASCII value of the preceding character. The result will be a new character that replaces the digit in the string.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After processing all relevant indices, return the modified string.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">replaceDigits</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A class named <code>Solution</code> is defined, containing a public method called <code>replaceDigits</code> that takes a string ( s ) as its parameter.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li>A <code>for</code> loop is initiated, starting from index 1 and iterating through the string while incrementing by 2. This ensures we are only examining odd indices, where digits are located.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Inside the loop, we replace the digit at index ( i ) with the sum of the character at index ( i-1 ) (the preceding letter) and the integer value of the digit. The expression <code>s[i - 1] - '0'</code> converts the character representing a digit into its integer form (for example, &lsquo;1&rsquo; becomes 1). The result of this addition is a new character which will replace the digit at index ( i ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After processing all relevant indices in the string, the modified string ( s ) is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this approach is ( O(n) ), where ( n ) is the length of the input string ( s ). This is because we traverse the string once, modifying characters in place.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) for the operations conducted, as the modifications are made directly on the original string without the need for additional data structures that grow with input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>replaceDigits</code> function provides a concise and efficient way to transform a string by replacing specific digits based on their preceding characters. This solution is optimal for the problem constraints and demonstrates an effective application of basic string manipulation techniques in C++.</p>
+<p>This code effectively showcases the use of character arithmetic and how ASCII values can be manipulated to achieve desired transformations. The approach is straightforward, making it easy to understand and implement, especially for those learning about string handling in programming.</p>
+<p>In practical applications, such a function could be beneficial in scenarios where encoding or decoding string data is necessary, or in any case where character transformation is required based on adjacent characters. The clarity and efficiency of the code also contribute to its usability in larger systems, emphasizing good coding practices.</p>
+<p>This solution not only solves the problem efficiently but also demonstrates the importance of understanding data types and character representations in programming, which is fundamental for effective software development.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode966s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1845"  class="external-link" target="_blank" rel="noopener">LeetCode #1845: Seat Reservation Manager</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1845"  class="external-link" target="_blank" rel="noopener">LeetCode #1845: Seat Reservation Manager</a></th>
       </tr>
   </thead>
   <tbody>
@@ -226,66 +326,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -237,11 +237,160 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode610s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand requires us to determine the minimum number of swaps needed to rearrange a given 2D grid such that every row of the grid ends with a certain number of zeroes. Specifically, for a grid of size (n \times n), each row (i) must have at least (n - i - 1) trailing zeroes. The objective is to transform the grid into this desired configuration using the least number of adjacent swaps within the rows.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve the desired configuration in the grid with minimal swaps, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Calculate Trailing Zeroes</strong>: For each row in the grid, count the number of trailing zeroes. This can be done by starting from the end of the row and counting how many consecutive zeroes are present.</p>
+</li>
+<li>
+<p><strong>Determine Required Positions</strong>: For each row, based on the count of trailing zeroes, determine the minimum number of zeroes required for that row to satisfy the configuration. This will be the position of the last non-zero element in that row.</p>
+</li>
+<li>
+<p><strong>Bubble Sort Logic</strong>: After establishing the required zero positions for each row, we need to arrange the current positions of non-zero elements in accordance with the required positions. This can be accomplished by using a bubble sort-like approach, where we count how many swaps are necessary to sort the array representing the positions of the non-zero elements.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: If any row does not have enough trailing zeroes, return -1 to indicate it&rsquo;s impossible to achieve the desired configuration. Otherwise, return the total number of swaps counted.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minSwaps</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Get the size of the grid
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">found</span><span class="p">;</span> <span class="c1">// To track which positions have been found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Array to hold the number of swaps required for each row
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Start from the end of the row
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            
+</span></span><span class="line"><span class="cl">            <span class="c1">// Count trailing zeroes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">while</span><span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1">// Determine the required position based on count of zeroes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">cnt</span> <span class="o">&gt;=</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">found</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">found</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">k</span><span class="p">);</span> <span class="c1">// Mark this position as found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// Store the position for sorting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">found</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// If not all positions are filled, return -1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">bubble</span><span class="p">(</span><span class="n">arr</span><span class="p">);</span> <span class="c1">// Call bubble function to count swaps
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Count Trailing Zeroes</strong>: We iterate through each row of the grid and count how many trailing zeroes exist. This is done with a nested loop that starts from the last element of the row and moves backward until it finds a non-zero element.</li>
+<li><strong>Store Positions</strong>: We use a set to ensure that we only consider valid positions and that we have unique entries in our array.</li>
+<li><strong>Check Completion</strong>: If not all rows can meet the required zeroes condition, we return <code>-1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">bubble</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Counter for swaps
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span> <span class="c1">// If the previous element is greater than the next
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">swap</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span> <span class="c1">// Swap them
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">cnt</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment the swap count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span> <span class="c1">// Return total swaps counted
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Bubble Sort Logic</strong>: This nested loop implements a simple bubble sort to count how many adjacent swaps are needed to sort the array of positions. Each time we perform a swap, we increment our swap count.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is (O(n^2)) in the worst case because:
+<ul>
+<li>We traverse each row to count trailing zeroes in (O(n)).</li>
+<li>We perform a nested loop for the bubble sort which takes (O(n^2)) time.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(n)) due to the additional storage used for the <code>arr</code> and <code>found</code> data structures.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively counts the number of swaps required to rearrange the grid to satisfy the condition of trailing zeroes for each row. By using a combination of counting and sorting, we can determine the minimal number of adjacent swaps necessary to achieve the desired configuration.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Greedy Counting</strong>: The method effectively utilizes greedy counting for trailing zeroes and finding positions.</li>
+<li><strong>Simple Swapping Mechanism</strong>: The bubble sort approach provides a straightforward way to count the number of swaps, although it&rsquo;s not the most efficient for larger datasets.</li>
+<li><strong>Edge Cases Handling</strong>: The solution properly handles edge cases where achieving the target configuration is impossible, making it robust for various input scenarios.</li>
+</ul>
+<p>Overall, this approach provides a clear and effective method for solving the problem while adhering to complexity constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode610s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1537"  class="external-link" target="_blank" rel="noopener">LeetCode #1537: Get the Maximum Score</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1537"  class="external-link" target="_blank" rel="noopener">LeetCode #1537: Get the Maximum Score</a></th>
       </tr>
   </thead>
   <tbody>
@@ -262,66 +411,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

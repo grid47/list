@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -213,11 +213,112 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">*</span><span class="nf">max_element</span><span class="p">(</span><span class="n">box</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">box</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode839s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the maximum number of balls that can be placed in a box based on specific rules. Given two integers, <code>lowLimit</code> and <code>highLimit</code>, each number between <code>lowLimit</code> and <code>highLimit</code> represents a ball. The ball is placed in a box determined by the sum of its digits. The task is to determine the maximum number of balls in any single box after placing all balls from <code>lowLimit</code> to <code>highLimit</code> based on their digit sums.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Counting Digit Sums</strong>: For each number from <code>lowLimit</code> to <code>highLimit</code>, calculate the sum of its digits. This sum will determine the index of the box where the ball is placed.</p>
+</li>
+<li>
+<p><strong>Tracking Ball Counts per Box</strong>: Using a vector <code>box</code> of size 46 (as the maximum possible sum of digits for this range will not exceed 45), increment the count for the box corresponding to each sum.</p>
+</li>
+<li>
+<p><strong>Finding the Maximum Count</strong>: After counting the balls in each box, find the box with the highest count. This maximum count is the result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution involves iterating over the range of numbers and performing simple arithmetic operations to calculate the sum of the digits. Let’s break down the code:</p>
+<ol>
+<li>
+<p><strong>Initializing the <code>box</code> Array</strong>: This array of size 46 (initialized to zero) tracks the count of balls in each box. Each index in <code>box</code> corresponds to a possible sum of digits, where <code>box[i]</code> represents the count for the box with digit sum <code>i</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">box</span><span class="p">(</span><span class="mi">46</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Looping through Each Number in Range</strong>: The outer loop iterates over each integer <code>i</code> from <code>lowLimit</code> to <code>highLimit</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">lowLimit</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">highLimit</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculating the Digit Sum</strong>: For each number <code>i</code>, calculate the sum of its digits by iterating through each digit.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum</span> <span class="o">+=</span> <span class="n">temp</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">temp</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We initialize <code>sum</code> to zero for each new ball.</li>
+<li>In the <code>while</code> loop, we add each last digit to <code>sum</code> using <code>temp % 10</code> and remove the last digit by integer division (<code>temp /= 10</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating the Box Count</strong>: After calculating the sum of digits for the current ball, increment the corresponding index in <code>box</code> by one.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">box</span><span class="p">[</span><span class="n">sum</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding the Maximum Ball Count</strong>: After processing all numbers, find the maximum value in <code>box</code> to get the highest number of balls in any single box.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="o">*</span><span class="nf">max_element</span><span class="p">(</span><span class="n">box</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">box</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The algorithm runs in (O(n \times d)), where (n) is the number of integers in the range (<code>highLimit - lowLimit + 1</code>) and (d) is the number of digits in each integer (at most, this is a constant factor of about 6 in this range). Thus, the complexity is linear with respect to <code>n</code>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) as we use a fixed-size vector <code>box</code> of size 46.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the maximum number of balls in any single box by leveraging the digit sum property. By using a fixed-size vector to store counts, it avoids unnecessary space allocation and allows for direct access to counts by digit sum, providing a highly optimized approach. This approach is effective for the given constraints and demonstrates how small mathematical insights, like summing digits to classify numbers, can simplify a problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode839s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1743"  class="external-link" target="_blank" rel="noopener">LeetCode #1743: Restore the Array From Adjacent Pairs</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1743"  class="external-link" target="_blank" rel="noopener">LeetCode #1743: Restore the Array From Adjacent Pairs</a></th>
       </tr>
   </thead>
   <tbody>
@@ -238,66 +339,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

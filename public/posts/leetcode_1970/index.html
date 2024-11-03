@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              7-minute read
             </span>
           </div>
           
@@ -255,11 +255,203 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1091s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine the latest day on which a person can cross a grid that represents a lake, where certain cells become flooded over time. Given the dimensions of the grid and a list of cells that flood each day, the goal is to find the last day when there exists a valid path from the top row to the bottom row of the grid.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be efficiently solved using the Union-Find (or Disjoint Set Union, DSU) data structure. The main idea is to use the union-find structure to keep track of which cells are connected and to dynamically update connections as the cells become flooded over days.</p>
+<ol>
+<li>
+<p><strong>Union-Find Structure</strong>: The Union-Find data structure helps in grouping cells into connected components. Each cell in the grid will be treated as a node, and we&rsquo;ll connect these nodes based on whether they are adjacent and not flooded.</p>
+</li>
+<li>
+<p><strong>Grid Representation</strong>: The grid is represented using a one-dimensional array for union-find operations. Each cell at position <code>(i, j)</code> can be converted to a single index using the formula <code>index = i * col + j</code>.</p>
+</li>
+<li>
+<p><strong>Flooding Simulation</strong>: Starting from the last day and moving backward, we simulate the flooding of cells. For each flooded cell, we check its four neighbors (up, down, left, right) and connect it to any of its neighbors that are not flooded.</p>
+</li>
+<li>
+<p><strong>Top and Bottom Virtual Nodes</strong>: We use two virtual nodes, <code>top</code> and <code>bottom</code>, to represent the connections from the top row of the grid to the bottom row. If a path exists between these two virtual nodes after processing some days of flooding, then a valid crossing is possible.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">UF</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">parent</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rank</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">UF</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">parent</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rank</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Initializing each node to point to itself
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>The <code>UF</code> class defines the Union-Find data structure. It initializes two vectors, <code>parent</code> and <code>rank</code>, to manage the components.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>  <span class="c1">// Path compression
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>The <code>find</code> function implements path compression, which optimizes the structure by making nodes point directly to their root. This significantly speeds up future queries.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">join</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">rootX</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">rootY</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">rootX</span> <span class="o">!=</span> <span class="n">rootY</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">rootX</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">rootY</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">parent</span><span class="p">[</span><span class="n">rootX</span><span class="p">]</span> <span class="o">=</span> <span class="n">rootY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rank</span><span class="p">[</span><span class="n">rootX</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rank</span><span class="p">[</span><span class="n">rootY</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">parent</span><span class="p">[</span><span class="n">rootY</span><span class="p">]</span> <span class="o">=</span> <span class="n">rootX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">parent</span><span class="p">[</span><span class="n">rootX</span><span class="p">]</span> <span class="o">=</span> <span class="n">rootY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">rank</span><span class="p">[</span><span class="n">rootY</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>The <code>join</code> function connects two components. It uses union by rank to attach the smaller tree under the larger tree, maintaining a balanced structure.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">latestDayToCross</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">cells</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UF</span><span class="o">*</span> <span class="n">uf</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UF</span><span class="p">(</span><span class="n">row</span> <span class="o">*</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="n">row</span> <span class="o">*</span> <span class="n">col</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="n">row</span> <span class="o">*</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><p>In the <code>Solution</code> class, the <code>latestDayToCross</code> method begins by creating a Union-Find instance that can accommodate all cells plus two virtual nodes (for the top and bottom rows).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">col</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">uf</span><span class="o">-&gt;</span><span class="n">join</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">uf</span><span class="o">-&gt;</span><span class="n">join</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="p">(</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">col</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>Here, we connect each cell in the first row to the <code>top</code> node and each cell in the last row to the <code>bottom</code> node.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">cells</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">dir</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+</span></span></code></pre></div><p>We create a <code>grid</code> initialized to -1 to indicate that all cells are initially not flooded. The <code>dir</code> array represents the four possible directions to check adjacent cells.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">uf</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="n">top</span><span class="p">)</span> <span class="o">!=</span> <span class="n">uf</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="n">bottom</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">len</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">cells</span><span class="p">[</span><span class="n">len</span><span class="o">--</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Mark the cell as flooded
+</span></span></span></code></pre></div><p>The loop continues as long as there is no connection between the <code>top</code> and <code>bottom</code> nodes and we still have cells to flood. The flooded cell is marked in the grid.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">dir</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="n">row</span> <span class="o">||</span> <span class="n">y</span> <span class="o">==</span> <span class="n">col</span> <span class="o">||</span> <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">uf</span><span class="o">-&gt;</span><span class="n">join</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">col</span> <span class="o">+</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">col</span> <span class="o">+</span> <span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>After flooding a cell, we check its neighbors. If a neighbor is within bounds and not flooded, we connect it to the current cell.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Return the latest day when crossing is still possible
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, when the loop ends, we return <code>len + 1</code> as the last day when crossing was possible.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(N \log^* N)), where (N) is the number of cells (rows × columns). This accounts for the union-find operations, which are nearly constant time due to path compression.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(N)) for storing the parent and rank arrays in the Union-Find structure, plus the space for the grid.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively combines the Union-Find data structure with a simulation of the flooding process to determine the last possible day to cross the grid. The use of path compression and union by rank ensures that the operations remain efficient, even as cells are progressively flooded.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Connectivity</strong>: The Union-Find structure allows for efficient updates to connectivity as the grid changes state with flooding.</p>
+</li>
+<li>
+<p><strong>Virtual Nodes</strong>: Utilizing virtual nodes simplifies the problem of checking connections between the top and bottom of the grid.</p>
+</li>
+<li>
+<p><strong>Robustness</strong>: The implementation can handle large grids and numerous flooding events efficiently, making it suitable for various scenarios.</p>
+</li>
+</ol>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s an example of how to use the <code>latestDayToCross</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">cells</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">latestDayToCross</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">cells</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Latest day to cross: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span></code></pre></div><p>In this example, the <code>latestDayToCross</code> function is called with a specified grid size and a list of flooding events. The output will indicate the last day a crossing is possible.</p>
+<h3 id="potential-improvements-and-variations">
+  Potential Improvements and Variations
+  <a class="heading-link" href="#potential-improvements-and-variations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Iterative Union-Find Implementation</strong>: The code can be improved by implementing an iterative version of the union-find methods to avoid recursion.</p>
+</li>
+<li>
+<p><strong>Advanced Data Structures</strong>: For very large grids or more complex conditions, alternative data structures like Segment Trees or Binary Indexed Trees could be explored.</p>
+</li>
+<li>
+<p><strong>Adaptive Flooding</strong>: The flooding process can be adapted to consider different patterns or rates of flooding based on more complex rules.</p>
+</li>
+</ol>
+<p>This solution demonstrates a well-rounded understanding of graph theory, data structures, and algorithmic problem-solving techniques, making it a valuable reference for anyone facing similar challenges in competitive programming or algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1091s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1971"  class="external-link" target="_blank" rel="noopener">LeetCode #1971: Find if Path Exists in Graph</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1971"  class="external-link" target="_blank" rel="noopener">LeetCode #1971: Find if Path Exists in Graph</a></th>
       </tr>
   </thead>
   <tbody>
@@ -280,66 +472,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

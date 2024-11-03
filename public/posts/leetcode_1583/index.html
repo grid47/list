@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -229,11 +229,174 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">items</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode657s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine how many friends are &ldquo;unhappy&rdquo; in a given set of pairs based on their preferences. Each friend has a list of preferences for who they would like to pair with, and they become unhappy if there exists someone they prefer more than their current partner who also prefers them back over their own partner. Our goal is to efficiently count the number of such unhappy friends.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle the problem, we can break down the solution into a series of clear steps:</p>
+<ol>
+<li>
+<p><strong>Preference Ranking</strong>: For each friend, create a ranking of their preferences. This ranking will help us quickly determine how much they prefer one friend over another.</p>
+</li>
+<li>
+<p><strong>Iterate Through Pairs</strong>: Check each pair of pairs to see if any friend in the pairs would prefer another friend over their current partner, thereby leading to unhappiness.</p>
+</li>
+<li>
+<p><strong>Count Unhappy Friends</strong>: Maintain a set to keep track of all unique friends who are unhappy to avoid double counting.</p>
+</li>
+<li>
+<p><strong>Return the Count</strong>: Finally, return the size of the set, which represents the number of unique unhappy friends.</p>
+</li>
+</ol>
+<p>This approach allows us to efficiently determine the number of unhappy friends by using a ranking system and systematic checking of pairs.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the code to understand how it implements the above approach:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">unhappyFriends</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">pref</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">pairs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">rnk</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class <code>Solution</code> with a public member function <code>unhappyFriends</code>.</li>
+<li><strong>Ranking Initialization</strong>: We create a 2D vector <code>rnk</code> that will hold the rank of preferences for each friend. <code>rnk[i][j]</code> will represent the ranking of friend <code>j</code> in the preferences of friend <code>i</code>, initialized to <code>INT_MAX</code> to represent that the friendship hasn&rsquo;t been established yet.</li>
+</ul>
+<h4 id="building-the-ranking-system">
+  Building the Ranking System
+  <a class="heading-link" href="#building-the-ranking-system">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pref</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pref</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">rnk</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">pref</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>                
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Preference Ranking</strong>: We iterate through each friend’s preferences. For each friend <code>i</code>, we set the rank of each of their preferred friends in the <code>rnk</code> array. The rank is the index of the friend in their preference list, which indicates how much they prefer that friend.</li>
+</ul>
+<h4 id="checking-for-unhappy-friends">
+  Checking for Unhappy Friends
+  <a class="heading-link" href="#checking-for-unhappy-friends">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">items</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pairs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pairs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span> <span class="o">=</span> <span class="n">pairs</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Loop through Pairs</strong>: We use two nested loops to go through each pair of pairs in the list <code>pairs</code>. <code>x</code> and <code>y</code> are the two friends in the first pair, while <code>u</code> and <code>v</code> are from the second pair.</li>
+</ul>
+<h4 id="checking-conditions-for-unhappiness">
+  Checking Conditions for Unhappiness
+  <a class="heading-link" href="#checking-conditions-for-unhappiness">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">rnk</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rnk</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">u</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">rnk</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rnk</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">items</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">items</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">rnk</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rnk</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">v</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">rnk</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rnk</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">u</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">items</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">items</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">rnk</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rnk</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">u</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">rnk</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rnk</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">v</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">items</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">items</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">rnk</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rnk</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">v</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">rnk</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rnk</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">u</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">items</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">items</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Conditions</strong>: For each pair, we check the following conditions:
+<ul>
+<li>If friend <code>x</code> prefers friend <code>u</code> over their partner <code>y</code>, and <code>u</code> prefers <code>x</code> over their partner <code>v</code>.</li>
+<li>Similar checks are made for other combinations of friends.</li>
+</ul>
+</li>
+<li><strong>Inserting Unhappy Friends</strong>: If any of the above conditions hold true, we add the unhappy friends into the set <code>items</code> to keep track of unique unhappy friends.</li>
+</ul>
+<h4 id="returning-the-result">
+  Returning the Result
+  <a class="heading-link" href="#returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">items</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Final Output</strong>: The size of the <code>items</code> set is returned, which indicates the total number of unique unhappy friends.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(p^2) ), where ( p ) is the number of pairs. In the worst case, we may have to check every pair against every other pair.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n^2) ) for the ranking matrix <code>rnk</code>, plus ( O(k) ) for the set of unhappy friends, where ( k ) is the number of unique unhappy friends.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively counts the number of unhappy friends by utilizing a ranking system to compare preferences. The systematic iteration through pairs of pairs allows for a thorough evaluation of potential unhappiness conditions. This method is efficient given the constraints typically present in competitive programming scenarios.</p>
+<p>The clear structure of the code, combined with the logical progression from preference ranking to unhappiness checking, makes it easy to understand and maintain. This solution can be adapted to other problems involving preferences and relationships, showcasing its versatility in algorithm design.</p>
+<p>In summary, the algorithm achieves its goal through careful management of preferences and efficient checking mechanisms, providing a robust solution to the problem of unhappy friends.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode657s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1584"  class="external-link" target="_blank" rel="noopener">LeetCode #1584: Min Cost to Connect All Points</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1584"  class="external-link" target="_blank" rel="noopener">LeetCode #1584: Min Cost to Connect All Points</a></th>
       </tr>
   </thead>
   <tbody>
@@ -254,66 +417,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

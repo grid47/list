@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -216,11 +216,101 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span> <span class="o">/</span> <span class="n">n</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode794s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to calculate the average waiting time for customers in a restaurant given their arrival and service times. Each customer arrives at a certain time and requires a specified duration for service. The challenge lies in handling the scheduling of customers in a way that minimizes their waiting time, particularly when some customers may arrive while others are still being served.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to simulate the service process based on customer arrival times and their corresponding service durations. We can maintain a variable that keeps track of the current time, which represents when the last customer finishes their service. As we iterate through the list of customers, we will:</p>
+<ol>
+<li>Check if the current time is greater than the arrival time of the next customer. If so, it means the previous customer has finished service and the next customer can start immediately.</li>
+<li>If the current time is less than or equal to the arrival time of the next customer, we set the current time to the arrival time of the next customer, indicating that we will wait for them.</li>
+<li>After determining when the next customer starts their service, we update the current time by adding the service duration.</li>
+<li>We keep a running total of waiting times for each customer, which is calculated as the difference between the current time and their arrival time.</li>
+</ol>
+<p>Finally, we compute the average waiting time by dividing the total waiting time by the number of customers.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s examine the code step-by-step:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We start by initializing <code>cur</code>, which will track the current time as we process each customer. It is initially set to the arrival time of the first customer. We also calculate the total number of customers <code>n</code> and initialize <code>sum</code>, which will accumulate the total waiting time.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">cust</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span> <span class="c1">// Start with the arrival time of the first customer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">double</span> <span class="n">n</span> <span class="o">=</span> <span class="n">cust</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Total number of customers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">double</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Total waiting time initialized to 0
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Loop through each customer</strong>: We loop through each customer using a for loop. For each iteration:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Determine current time based on arrival</strong>: Inside the loop, we check if the current time (<code>cur</code>) is greater than the arrival time of the current customer (<code>cust[i][0]</code>). If it is, we update the current time to include the service duration.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">cur</span> <span class="o">&gt;</span> <span class="n">cust</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cur</span> <span class="o">+=</span> <span class="n">cust</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span> <span class="c1">// Customer starts service immediately
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Handle waiting customers</strong>: If the current time is less than or equal to the customer&rsquo;s arrival time, we update <code>cur</code> to the arrival time plus the service duration.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cur</span> <span class="o">=</span> <span class="n">cust</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">cust</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span> <span class="c1">// Wait for the customer to arrive
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate waiting time</strong>: After determining when the service for the current customer ends, we calculate their waiting time and add it to <code>sum</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">sum</span> <span class="o">+=</span> <span class="n">cur</span> <span class="o">-</span> <span class="n">cust</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span> <span class="c1">// Update total waiting time
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate average waiting time</strong>: After processing all customers, we return the average waiting time by dividing the total waiting time by the number of customers.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">sum</span> <span class="o">/</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Average waiting time
+</span></span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is O(n), where n is the number of customers. This is because we iterate through the list of customers exactly once, performing constant-time operations for each customer. The space complexity is O(1), as we only use a few variables for calculations and do not utilize any additional data structures that grow with input size.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, this implementation efficiently calculates the average waiting time for customers at a restaurant based on their arrival and service durations. By simulating the service process and keeping track of the current time, we can accurately determine how long each customer has to wait. This approach not only provides the correct solution but does so in a manner that is optimal in terms of both time and space complexity, making it suitable for real-time applications where customer service efficiency is crucial.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode794s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1702"  class="external-link" target="_blank" rel="noopener">LeetCode #1702: Maximum Binary String After Change</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1702"  class="external-link" target="_blank" rel="noopener">LeetCode #1702: Maximum Binary String After Change</a></th>
       </tr>
   </thead>
   <tbody>
@@ -241,66 +331,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

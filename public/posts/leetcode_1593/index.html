@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -224,11 +224,142 @@
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode669s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves determining the maximum number of unique substrings that can be obtained from a given string <code>s</code> by splitting it into distinct parts. Each part must be a non-empty substring of <code>s</code>, and we want to maximize the count of these unique substrings.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can employ a backtracking approach, which allows us to explore all possible ways to split the string while keeping track of the unique substrings we have encountered. The steps are as follows:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>: Set up necessary variables including a maximum counter <code>mx</code> to keep track of the maximum number of unique substrings found so far, and a string <code>tmp</code> to build substrings during backtracking.</p>
+</li>
+<li>
+<p><strong>Backtracking Function</strong>: Create a backtracking function that takes the current index in the string, the temporary substring being built, and a set to keep track of the unique substrings.</p>
+</li>
+<li>
+<p><strong>Recursive Exploration</strong>: In the backtracking function:</p>
+<ul>
+<li>Check if we have reached the end of the string. If so, update the maximum counter with the size of the set.</li>
+<li>Loop through the string to build substrings and check if they are unique (i.e., not already present in the set).</li>
+<li>If a substring is unique, add it to the set and recursively call the function for the next index.</li>
+<li>After returning from the recursive call, remove the substring from the set (backtrack) to explore other possibilities.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After exploring all possible splits, return the maximum number of unique substrings found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class and Variable Initialization</strong>: The <code>Solution</code> class defines two public variables, <code>mx</code> to track the maximum number of unique substrings found, and <code>n</code> to store the length of the input string. The variable <code>s</code> holds the string itself.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxUniqueSplit</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">;</span> <span class="c1">// Set to store unique substrings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">string</span> <span class="n">tmp</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span> <span class="c1">// Temporary string to build substrings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Get the length of the string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// Store the input string for access in the backtracking function
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">bt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">cnt</span><span class="p">);</span> <span class="c1">// Start the backtracking process
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">mx</span><span class="p">;</span> <span class="c1">// Return the maximum count of unique substrings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>: The <code>maxUniqueSplit</code> function initializes a set <code>cnt</code> for storing unique substrings and a temporary string <code>tmp</code>. It sets the size of the string and invokes the backtracking function starting from index 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">bt</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="n">string</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">cnt</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="c1">// Update maximum count if at end of string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Backtracking Function</strong>: The <code>bt</code> function is responsible for exploring all possible substring splits. If the index <code>idx</code> reaches the length of the string <code>n</code>, it means we&rsquo;ve considered one possible splitting; thus, we update <code>mx</code> with the maximum size of unique substrings found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tmp</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// Build the substring
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">cnt</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// Check if the substring is unique
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">cnt</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span> <span class="c1">// Add to set if unique
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">bt</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">cnt</span><span class="p">);</span> <span class="c1">// Recur for the next index
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">cnt</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span> <span class="c1">// Backtrack: remove the substring
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Exploring Substrings</strong>: The loop iterates over the string, building substrings by appending characters. It checks if the substring is already in the set <code>cnt</code>:
+<ul>
+<li>If it is unique, the substring is added to the set, and we recursively call the function to continue checking for subsequent substrings starting from the next index.</li>
+<li>After returning from the recursive call, the substring is removed from the set to backtrack and explore other potential splits.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity for this approach is (O(2^n)), where (n) is the length of the string. This is due to the exponential number of possible substring splits that need to be explored. The complexity arises because for each character, we have the choice to either include it in a substring or not.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) for storing the current unique substrings in the set and the maximum substring length temporarily held during the recursion.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively utilizes backtracking to explore the space of possible substring splits while maintaining uniqueness through the use of a set. The approach is intuitive, allowing for a clear method to achieve the desired outcome.</p>
+<p>Key takeaways include:</p>
+<ul>
+<li><strong>Backtracking Strategy</strong>: The use of backtracking enables thorough exploration of all substring combinations, allowing us to find the maximum number of unique substrings efficiently.</li>
+<li><strong>Utilization of Sets</strong>: Using a set for tracking unique substrings ensures that operations for checking and inserting are handled in average constant time, making our solution more efficient than naive approaches.</li>
+<li><strong>Dynamic Programming Consideration</strong>: While this solution is straightforward, there are considerations for optimizing the process, such as memoization or pruning paths that do not lead to valid splits.</li>
+</ul>
+<p>This method serves as a good example of how recursive strategies can be applied to string manipulation problems, particularly those involving uniqueness constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode669s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1594"  class="external-link" target="_blank" rel="noopener">LeetCode #1594: Maximum Non Negative Product in a Matrix</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1594"  class="external-link" target="_blank" rel="noopener">LeetCode #1594: Maximum Non Negative Product in a Matrix</a></th>
       </tr>
   </thead>
   <tbody>
@@ -249,66 +380,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -219,11 +219,143 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">del</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode731s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal is to determine the minimum number of deletions needed from a string ( s ) such that the frequencies of all characters in the string become unique. This problem is particularly relevant in scenarios where unique frequency distributions are required, such as in cryptography or data compression.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the following steps are taken:</p>
+<ol>
+<li><strong>Count Character Frequencies</strong>: Use a map to count the frequency of each character in the string.</li>
+<li><strong>Create a Frequency List</strong>: Store the frequencies in a vector along with their corresponding characters for further processing.</li>
+<li><strong>Sort Frequencies</strong>: Sort the frequency list in ascending order to facilitate the identification of duplicates.</li>
+<li><strong>Track Unique Frequencies</strong>: Use a set to track the frequencies that have already been used. Iterate through the sorted frequency list and decrement the frequency as needed until a unique frequency is found or it reaches zero.</li>
+<li><strong>Count Deletions</strong>: Keep a count of how many deletions are made to achieve unique frequencies.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minDeletions</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and a public method <code>minDeletions</code> that accepts a string ( s ) as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="nl">x</span> <span class="p">:</span> <span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a map <code>mp</code> to store the frequency of each character. We iterate through the string ( s ), incrementing the count for each character encountered.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">char</span><span class="o">&gt;&gt;</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">arr</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We create a vector <code>arr</code> to hold pairs of frequencies and their corresponding characters. We iterate through the map <code>mp</code> and populate the vector with frequency-character pairs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">arr</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>We sort the vector <code>arr</code> based on frequencies in ascending order. This allows us to efficiently manage the deletion of duplicate frequencies.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">del</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We store the size of the sorted frequency list in ( n ), initialize an empty set <code>cnt</code> to keep track of used frequencies, and a variable <code>del</code> to count the total deletions needed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">cnt</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">tmp</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">del</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through the sorted frequency list. For each frequency, we temporarily store it in <code>tmp</code>. A <code>while</code> loop is employed to decrement <code>tmp</code> as long as it is greater than zero and exists in the set <code>cnt</code>. Each time we decrement <code>tmp</code>, we increment the deletion count <code>del</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">cnt</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If after the loop <code>tmp</code> is still greater than zero, it means we found a unique frequency. We insert this unique frequency into the set <code>cnt</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">del</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the total count of deletions required to make all character frequencies unique.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Counting character frequencies takes ( O(n) ) time, where ( n ) is the length of the string ( s ).</li>
+<li>Storing frequencies in a vector and sorting it takes ( O(k \log k) ), where ( k ) is the number of unique characters in the string (at most 26 for lowercase English letters).</li>
+<li>The overall complexity is ( O(n + k \log k) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(k) ) due to the storage of the frequency map and the vector that holds frequency-character pairs.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minDeletions</code> method efficiently calculates the minimum number of deletions required to ensure all character frequencies in a string are unique. By utilizing a combination of frequency counting, sorting, and unique frequency tracking, the solution effectively addresses the problem while maintaining optimal performance.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Utilization of Maps and Sets</strong>: This solution demonstrates effective use of maps for counting and sets for tracking unique elements, which is a common strategy in algorithmic challenges.</li>
+<li><strong>Sorting for Efficient Comparison</strong>: Sorting the frequencies simplifies the process of checking for duplicates and managing deletions, showcasing a typical approach in greedy algorithms.</li>
+<li><strong>Efficiency Considerations</strong>: The approach is efficient in both time and space, making it suitable for handling large input strings within reasonable limits.</li>
+</ol>
+<p>This method can be adapted for various applications where unique constraints are needed on collections of items, making it a versatile technique in the programmer&rsquo;s toolkit.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode731s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1648"  class="external-link" target="_blank" rel="noopener">LeetCode #1648: Sell Diminishing-Valued Colored Balls</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1648"  class="external-link" target="_blank" rel="noopener">LeetCode #1648: Sell Diminishing-Valued Colored Balls</a></th>
       </tr>
   </thead>
   <tbody>
@@ -244,66 +376,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

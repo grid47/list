@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -219,11 +219,130 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode667s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the minimum length of a subarray in an array <code>nums</code> such that when the sum of its elements is removed from the array, the remaining elements&rsquo; sum is divisible by a given integer <code>p</code>. If no such subarray exists, we should return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we will utilize the concept of prefix sums and hash maps. The steps are as follows:</p>
+<ol>
+<li>
+<p><strong>Calculate the Total Remainder</strong>: First, we compute the total sum of the array <code>nums</code> modulo <code>p</code>. This will give us the remainder that needs to be compensated by removing a subarray.</p>
+</li>
+<li>
+<p><strong>Use a Hash Map to Track Prefix Remainders</strong>: As we iterate through the array, we will maintain a running sum and track the indices of the remainders we encounter. This will allow us to find subarrays that can adjust the total sum to be divisible by <code>p</code>.</p>
+</li>
+<li>
+<p><strong>Calculate the Required Remainder</strong>: For each element in the array, we calculate what the required remainder would be if we were to remove the current subarray. If this required remainder has been seen before, we can determine the length of the subarray to remove.</p>
+</li>
+<li>
+<p><strong>Find the Minimum Length</strong>: Throughout the iteration, we will keep track of the minimum length of valid subarrays that can be removed.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: If we found valid subarrays, we return the minimum length; otherwise, we return -1.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s delve into the code to understand its workings in detail:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minSubarray</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class and Method Declaration</strong>: We define the <code>Solution</code> class and the method <code>minSubarray</code>, which takes a vector of integers <code>nums</code> and an integer <code>p</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span> <span class="c1">// Map to store the last occurrence of each prefix sum remainder
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">mp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// Initialize with the case where the prefix sum is zero
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">res</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">need</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">want</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: We initialize a hash map <code>mp</code> to track the indices of the last occurrences of each remainder. We set <code>mp[0]</code> to -1 to handle cases where removing a prefix subarray is possible. We also define variables for the size of the array <code>n</code>, the result <code>res</code> initialized to <code>n</code>, and variables for the current prefix sum <code>cur</code>, the total remainder needed <code>need</code>, and the desired remainder <code>want</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">need</span> <span class="o">=</span> <span class="p">(</span><span class="n">need</span> <span class="o">+</span> <span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// Calculate the total remainder needed from the full array
+</span></span></span></code></pre></div><ul>
+<li><strong>Calculating Total Remainder</strong>: We iterate through the <code>nums</code> array and accumulate the total sum modulo <code>p</code> to determine the remainder <code>need</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// Update the current prefix sum remainder
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">mp</span><span class="p">[</span><span class="n">cur</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Store the current index of this remainder
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">want</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span> <span class="o">-</span> <span class="n">need</span> <span class="o">+</span> <span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// Calculate the required remainder to adjust the sum
+</span></span></span></code></pre></div><ul>
+<li><strong>Iterating Through the Array</strong>: We loop through the <code>nums</code> array. In each iteration, we update the current prefix sum <code>cur</code>, store its last occurrence in the map, and compute the required remainder <code>want</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">want</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">mp</span><span class="p">[</span><span class="n">want</span><span class="p">]);</span> <span class="c1">// If the required remainder exists, calculate the minimum length
+</span></span></span></code></pre></div><ul>
+<li><strong>Checking for Valid Subarrays</strong>: We check if the <code>want</code> remainder exists in our map. If it does, we calculate the length of the subarray from the last occurrence of <code>want</code> to the current index <code>i</code>, and we update <code>res</code> if this length is smaller than the previous minimum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">?</span> <span class="nl">res</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// Return the minimum length found, or -1 if no valid subarray exists
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Final Return Statement</strong>: After iterating through the array, we check if a valid subarray length was found. If <code>res</code> is less than <code>n</code>, it indicates that we found a valid subarray, so we return its length; otherwise, we return -1.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n)), where (n) is the number of elements in the <code>nums</code> array. This is due to the single pass through the array and the average constant time complexity of operations on the hash map.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(p)), where (p) is the modulus value. This space is required to store the remainder indices in the hash map.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the minimum length of a subarray whose removal allows the sum of the remaining elements to be divisible by a specified integer <code>p</code>.</p>
+<p>Key takeaways from this solution include:</p>
+<ul>
+<li><strong>Utilization of Prefix Sums</strong>: By maintaining a running total and its remainder, we can dynamically adjust our search for valid subarrays.</li>
+<li><strong>Hash Map for Quick Lookups</strong>: The use of a hash map allows for quick access to previously encountered remainders, making it easy to compute the necessary lengths of potential subarrays to remove.</li>
+<li><strong>Modular Arithmetic</strong>: The problem leverages modular arithmetic to handle the condition of divisibility efficiently.</li>
+</ul>
+<p>This algorithm is both efficient and elegant, making it well-suited for scenarios requiring quick calculations involving subarrays and conditions on their sums. The clear structure and logic provide a robust framework for tackling similar problems in array manipulation and mathematical constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode667s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1591"  class="external-link" target="_blank" rel="noopener">LeetCode #1591: Strange Printer II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1591"  class="external-link" target="_blank" rel="noopener">LeetCode #1591: Strange Printer II</a></th>
       </tr>
   </thead>
   <tbody>
@@ -244,66 +363,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

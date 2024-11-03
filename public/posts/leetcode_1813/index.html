@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,7 +218,144 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode918s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine whether two sentences are similar. Two sentences are considered similar if they can be made identical by removing some words from the beginning and/or the end of each sentence.</p>
+<p>For example:</p>
+<ul>
+<li>&ldquo;My name is John&rdquo; and &ldquo;John&rdquo; are similar.</li>
+<li>&ldquo;I love coding&rdquo; and &ldquo;I coding&rdquo; are not similar.</li>
+</ul>
+<p>The input will consist of two strings representing the sentences, and the goal is to evaluate their similarity based on the aforementioned criteria.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the following approach can be employed:</p>
+<ol>
+<li>
+<p><strong>Tokenization</strong>: Split both sentences into individual words. This can be accomplished by iterating over each character of the strings and identifying spaces to determine where words start and end.</p>
+</li>
+<li>
+<p><strong>Comparison</strong>: Utilize two pointers (or deques in this case) to compare the words from both sentences. Start from both the front and the back of the word lists and compare the words:</p>
+<ul>
+<li>Remove matching words from the front of both lists until a mismatch is found.</li>
+<li>Remove matching words from the back of both lists similarly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Evaluation</strong>: After trimming matching words from both ends, if either of the lists is empty, then the sentences are considered similar. If both lists still contain words, they are not similar.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class is defined, which will contain the method for solving the problem.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">areSentencesSimilar</span><span class="p">(</span><span class="n">string</span> <span class="n">s1</span><span class="p">,</span> <span class="n">string</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>This method, <code>areSentencesSimilar</code>, takes two string parameters <code>s1</code> and <code>s2</code>, representing the sentences to be compared. The method returns a boolean value indicating whether the sentences are similar.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">deque</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">tmp</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Two deques <code>a</code> and <code>b</code> are declared to store the words of each sentence.</li>
+<li>A temporary string <code>tmp</code> is initialized to build words as we parse through the sentences.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="nl">c</span><span class="p">:</span> <span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="n">a</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp</span><span class="p">),</span> <span class="n">tmp</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="n">tmp</span> <span class="o">+=</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp</span><span class="p">),</span> <span class="n">tmp</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This loop iterates over each character <code>c</code> in the first sentence <code>s1</code>:
+<ul>
+<li>If the character is a space, the current word stored in <code>tmp</code> is added to the deque <code>a</code>, and <code>tmp</code> is reset for the next word.</li>
+<li>If the character is not a space, it is appended to <code>tmp</code>.</li>
+</ul>
+</li>
+<li>After the loop, the last word is pushed into the deque to ensure no words are missed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">char</span> <span class="nl">c</span><span class="p">:</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="n">b</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp</span><span class="p">),</span> <span class="n">tmp</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="n">tmp</span> <span class="o">+=</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>        
+</span></span><span class="line"><span class="cl">        <span class="n">b</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp</span><span class="p">),</span> <span class="n">tmp</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A similar process is repeated for the second sentence <code>s2</code>, where words are added to the deque <code>b</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">front</span><span class="p">()))</span> <span class="n">a</span><span class="p">.</span><span class="n">pop_front</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>This loop checks and removes matching words from the front of both deques until a mismatch is found or one of the deques is empty.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">back</span><span class="p">()))</span> <span class="n">a</span><span class="p">.</span><span class="n">pop_back</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>A second loop does the same for the back of the deques, removing matching words until a mismatch is found or one of the deques is empty.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>After trimming, if either deque is empty, it indicates that one sentence can be made identical to the other by removing words, so the method returns <code>true</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>If neither deque is empty after the trimming process, it means there are remaining words that prevent the sentences from being similar, and the method returns <code>false</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n + m)), where (n) is the number of characters in <code>s1</code> and (m) is the number of characters in <code>s2</code>. This is because we need to iterate through both strings to split them into words and then potentially iterate through the words again to compare them.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n + m)) as well, since we are storing the words from both sentences in deques.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>areSentencesSimilar</code> method effectively determines whether two sentences are similar by employing a straightforward approach based on word tokenization and comparison from both ends of the sentences. The algorithm&rsquo;s efficiency, combined with its clarity, makes it suitable for evaluating sentence similarity in various applications.</p>
+<p>In summary, this solution illustrates how to manipulate strings and data structures like deques to solve problems involving word comparisons. It also highlights the importance of understanding string parsing and basic data structures in algorithm design. By leveraging these concepts, the solution achieves a clear and efficient method for solving the problem at hand.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode918s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -230,7 +367,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1814"  class="external-link" target="_blank" rel="noopener">LeetCode #1814: Count Nice Pairs in an Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1814"  class="external-link" target="_blank" rel="noopener">LeetCode #1814: Count Nice Pairs in an Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -251,66 +388,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

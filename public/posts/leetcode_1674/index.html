@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -219,11 +219,149 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode762s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the minimum number of moves to make all elements of a given array equal, with the added constraint that any element can be increased or decreased to any integer within a specified limit ( lmt ). The goal is to return the least number of moves required to achieve this uniformity across the array elements.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can use a technique based on a frequency array (or a difference array) to keep track of the number of moves needed to achieve the target values. The general strategy is to calculate how many moves are needed to make the elements equal to each potential target value, then find the minimum among these calculations. Here&rsquo;s a detailed breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Understanding Moves</strong>: Each number can be adjusted to any number within the bounds dictated by the limit ( lmt ). Thus, if we know the sum of two numbers, we can infer the number of moves to adjust them towards that sum.</p>
+</li>
+<li>
+<p><strong>Use of a Difference Array</strong>: The idea is to maintain a difference array <code>dp</code> that helps in calculating how many numbers need to be changed to achieve specific target values. This array will help us efficiently compute the necessary moves without having to loop through the numbers multiple times.</p>
+</li>
+<li>
+<p><strong>Calculating Required Moves</strong>:</p>
+<ul>
+<li>For each pair of numbers ( a ) and ( b ) in the array, calculate how many moves it would take to make them equal to various target values.</li>
+<li>Update the difference array based on the computed ranges.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cumulative Sum</strong>: After processing all pairs, a cumulative sum of the difference array will provide the number of moves required for each potential target value.</p>
+</li>
+<li>
+<p><strong>Finding Minimum Moves</strong>: Finally, iterate through the computed moves to find the minimum number of moves required to make all elements equal.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minMoves</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lmt</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class and Method Definition</strong>: We define the class <code>Solution</code> and the public method <code>minMoves</code>, which takes a vector of integers <code>num</code> and an integer <code>lmt</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">num</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">lmt</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: We store the size of the input array ( n ) and initialize a difference array <code>dp</code> of size ( 2 \times lmt + 2 ) with all elements set to zero. This size ensures we can accommodate all potential values.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iterate Through Pairs</strong>: We loop through half of the array (since we will be looking at pairs) to work with ( a ) and ( b ), which represent the ( i^{th} ) element from the start and the corresponding element from the end of the array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">dp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dp</span><span class="p">[</span><span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dp</span><span class="p">[</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dp</span><span class="p">[</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dp</span><span class="p">[</span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">lmt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Updating the Difference Array</strong>:
+<ul>
+<li><code>dp[2] += 2;</code> increments the move count for making two numbers equal.</li>
+<li><code>dp[min(a, b) + 1] -= 1;</code> adjusts for the lower bound of moves needed for values below the minimum of ( a ) and ( b ).</li>
+<li><code>dp[a + b] -= 1;</code> signifies that moving towards ( a + b ) requires one less move.</li>
+<li><code>dp[a + b + 1] += 1;</code> adjusts the count for values just above ( a + b ).</li>
+<li><code>dp[max(a, b) + lmt + 1] += 1;</code> accounts for the upper limit of moves needed for values above the maximum of ( a ) and ( b ).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lmt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">+=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Cumulative Count and Result Calculation</strong>:
+<ul>
+<li>We initialize <code>cur</code> to zero and <code>res</code> to ( 2n ) (a large number).</li>
+<li>We iterate through the <code>dp</code> array, maintaining a cumulative sum in <code>cur</code> and updating <code>res</code> to track the minimum moves required across all potential target values.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return Result</strong>: Finally, we return the minimum number of moves found.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(n) ), where ( n ) is the number of elements in <code>num</code>. We make a single pass through half of the array and then through a fixed-size array ( dp ), leading to linear performance.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(lmt) ), where ( lmt ) defines the range of possible target values. The difference array <code>dp</code> is sized based on this limit.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm efficiently calculates the minimum number of moves required to make all elements of an array equal while adhering to a specified limit through the use of a difference array and cumulative sums. The main advantages of this approach include:</p>
+<ul>
+<li><strong>Efficiency</strong>: The algorithm operates in linear time, making it suitable for large datasets.</li>
+<li><strong>Clarity</strong>: Using a difference array simplifies the logic behind how moves are computed and accumulated.</li>
+<li><strong>Versatility</strong>: This method can be easily adapted for other similar problems that require computing minimal transformations across an array.</li>
+</ul>
+<p>This approach highlights the power of combining data structures with a mathematical understanding of ranges and sums to solve optimization problems effectively. The algorithm strikes a balance between performance and readability, making it an excellent solution for the given problem.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode762s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1675"  class="external-link" target="_blank" rel="noopener">LeetCode #1675: Minimize Deviation in Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1675"  class="external-link" target="_blank" rel="noopener">LeetCode #1675: Minimize Deviation in Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -244,66 +382,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

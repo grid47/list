@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -239,11 +239,167 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode602s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to count the number of good leaf node pairs in a binary tree. A pair of leaf nodes is considered &ldquo;good&rdquo; if their distance (the number of edges between them) is less than or equal to a given distance <code>dist</code>. The function should return the total count of such good leaf pairs.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a depth-first search (DFS) approach. The key idea is to traverse the binary tree and, at each node, collect the distances of its leaf nodes. We will maintain a count of how many leaf nodes are at each distance from the current node. For every pair of distances from the left and right subtrees, we will check if their sum is less than or equal to <code>dist</code>. If it is, we add to our total count of good leaf pairs.</p>
+<p>Here&rsquo;s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>DFS Traversal</strong>: We perform a DFS starting from the root of the tree. At each node, we will compute the counts of leaf nodes at different distances.</p>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If the current node is <code>NULL</code>, we return a vector initialized to zero counts for each distance.</li>
+<li>If the current node is a leaf (both left and right children are <code>NULL</code>), we return a vector with the count of leaf nodes at distance 1 (the current leaf).</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Pairs</strong>:</p>
+<ul>
+<li>For every node, we combine the results from its left and right subtrees to count good leaf pairs. We do this by iterating through all possible distances from the left and right subtrees and checking if their sum is within the allowed distance <code>dist</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Compilation</strong>: We compile the results into a vector that holds the counts of leaf nodes at each distance and return this vector to the parent call.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s the provided code explained step by step:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// To store the total count of good leaf pairs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">countPairs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dist</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">dist</span><span class="p">);</span>  <span class="c1">// Start DFS from the root
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>  <span class="c1">// Return the total count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>countPairs</code> that initializes the DFS traversal.</li>
+<li>We maintain a variable <code>ans</code> to count the number of good leaf pairs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dist</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// Return a zeroed vector for a null node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function takes the current node and the maximum distance as arguments.</li>
+<li>If the current node is <code>NULL</code>, we return a zeroed vector of size <code>dist + 1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">==</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// For a leaf node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>  <span class="c1">// There is one leaf at distance 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If we encounter a leaf node, we create a vector <code>res</code> initialized to zero and increment the count of leaf nodes at distance 1 before returning it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">left</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">dist</span><span class="p">);</span>  <span class="c1">// Recur for left subtree
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">dist</span><span class="p">);</span>  <span class="c1">// Recur for right subtree
+</span></span></span></code></pre></div><ul>
+<li>We recursively call <code>dfs</code> on the left and right children of the current node, storing the results in vectors <code>left</code> and <code>right</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">dist</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">dist</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">dist</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ans</span> <span class="o">+=</span> <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">right</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>  <span class="c1">// Count good pairs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Here, we iterate through the counts of leaf nodes from both subtrees.</li>
+<li>For every combination of distances from the left (<code>i</code>) and right (<code>j</code>), we check if their sum is less than or equal to <code>dist</code>. If it is, we update <code>ans</code> by multiplying the counts from both sides.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>  <span class="c1">// Prepare result vector for current node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">dist</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>  <span class="c1">// Combine counts of leaf nodes at distances
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>  <span class="c1">// Return the counts to parent call
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>We prepare a result vector <code>res</code> to store counts of leaf nodes at each distance from the current node.</li>
+<li>We populate this vector based on the counts from the left and right subtrees and return it to the parent call.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this algorithm is (O(N \cdot D)), where (N) is the number of nodes in the tree, and (D) is the maximum distance (or depth) we are considering. Each node may contribute to pair counts based on its distance from the leaf nodes in its subtrees.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(D)) due to the recursive stack and the vectors used to store counts of leaf nodes at different distances. In the worst case, this could be proportional to the depth of the tree.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts good leaf node pairs in a binary tree using a recursive depth-first search approach. By collecting leaf node counts at various distances from each node and then combining these counts appropriately, we can achieve the desired result. This method is particularly effective due to its straightforward recursive structure, making it easy to implement and understand.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Recursive DFS Traversal</strong>: Utilizing recursion allows for an elegant and clear traversal of the binary tree.</li>
+<li><strong>Dynamic Counting</strong>: The solution dynamically counts distances, enabling the efficient counting of good leaf pairs.</li>
+<li><strong>Handling Edge Cases</strong>: The implementation correctly handles cases of leaf nodes and null nodes, ensuring robustness.</li>
+</ul>
+<p>This approach is not only efficient but also serves as a good example of applying DFS in tree problems, which is a common technique in data structure and algorithm challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode602s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1531"  class="external-link" target="_blank" rel="noopener">LeetCode #1531: String Compression II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1531"  class="external-link" target="_blank" rel="noopener">LeetCode #1531: String Compression II</a></th>
       </tr>
   </thead>
   <tbody>
@@ -264,66 +420,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

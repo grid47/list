@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -222,11 +222,142 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1019s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the minimum absolute difference between any two distinct elements within specified subarrays of a given array. Each query provides two indices, and the goal is to compute the minimum difference between unique elements in the specified range.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution employs a prefix sum technique to preprocess the input data and efficiently answer multiple queries. The following steps outline the approach:</p>
+<ol>
+<li>
+<p><strong>Preprocessing the Input</strong>: We maintain a frequency count of numbers in the input array using a 2D prefix sum array. The prefix array allows us to quickly determine the counts of numbers in any subarray defined by the queries.</p>
+</li>
+<li>
+<p><strong>Processing Queries</strong>: For each query, we compute the frequency of each number in the specified subarray range. Then, we iterate through the frequency counts to find the minimum absolute difference between any two distinct numbers.</p>
+</li>
+<li>
+<p><strong>Returning Results</strong>: Finally, we collect and return the results for each query.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the provided code in detail to understand how the solution is implemented:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Signature</strong>: The primary function <code>minDifference</code> takes two parameters: a vector of integers <code>nums</code> and a 2D vector of queries <code>q</code>. The function returns a vector of integers representing the results for each query.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">minDifference</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: We initialize a 2D prefix array <code>prefix</code> to hold the frequency counts for numbers ranging from 1 to 100. We also initialize a <code>cnt</code> array to keep track of counts of each number.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">prefix</span><span class="p">[</span><span class="mi">100001</span><span class="p">][</span><span class="mi">101</span><span class="p">]</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">101</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Input Size</strong>: We store the sizes of <code>nums</code> (n) and <code>q</code> (m) for later use.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">m</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Building the Prefix Array</strong>: We iterate through the <code>nums</code> array, updating the <code>cnt</code> array with the count of each number. For each number encountered, we update the prefix array to reflect the counts up to the current index.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">101</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="n">prefix</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Result Vector</strong>: We initialize a vector <code>ans</code> to store the results of each query.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Processing Each Query</strong>: For each query, we extract the left (<code>l</code>) and right (<code>r</code>) indices and compute the frequency of each number in the range specified by the query using the prefix array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">r</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">frq</span><span class="p">[</span><span class="mi">101</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">101</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="n">frq</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span><span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">prefix</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding Minimum Difference</strong>: We use a loop to check the frequency counts. If the frequency of a number is greater than zero, we check if it forms a pair with the previous distinct number to find the minimum difference.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">prv</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">mn</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">101</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">frq</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">prv</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">-</span> <span class="n">prv</span> <span class="o">&lt;</span> <span class="n">mn</span><span class="p">)</span> <span class="n">mn</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">prv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">prv</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling No Valid Pair</strong>: If no valid pair is found (mn remains INT_MAX), we push -1 to indicate the absence of such a pair.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">mn</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="o">?</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="n">mn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning Results</strong>: Finally, we return the result vector containing the minimum differences for each query.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">       <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<pre tabindex="0"><code>
+### Complexity
+
+- **Time Complexity**: 
+- **Preprocessing**: O(n) where n is the size of `nums`, as we traverse through the array once to fill the prefix sum array.
+- **Query Processing**: O(m * 100) where m is the number of queries. We iterate over each query and check the frequency of each number (up to 100).
+- Overall, the time complexity is O(n + m * 100).
+
+- **Space Complexity**: O(n) for the prefix array, which has dimensions (n+1) x 101. Additionally, we have the `cnt` and `frq` arrays that are constant in size (101), so the total space complexity is O(n).
+
+### Conclusion
+
+The `minDifference` function efficiently computes the minimum absolute difference between any two distinct elements in specified subarrays of the input array `nums`. By leveraging a prefix sum approach, the solution optimizes the query response time, allowing for quick lookups of frequency counts for each range. This makes it well-suited for scenarios involving multiple queries on the same dataset.
+
+### Use Cases
+
+This algorithm can be useful in various scenarios, including:
+
+1. **Data Analysis**: Analyzing frequency distributions within subsets of data to derive meaningful insights.
+  
+2. **Statistical Queries**: Applications that require efficient computation of statistics (like minimum difference) across multiple ranges.
+
+3. **Game Development**: In games where players can select items or numbers, finding the closest pair can enhance gameplay mechanics.
+
+4. **Financial Analysis**: Analyzing price fluctuations within defined time frames can assist in making informed investment decisions.
+
+By integrating such functionality, applications can efficiently handle large datasets and respond promptly to user queries while providing accurate results.
+</code></pre> 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1019s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1907"  class="external-link" target="_blank" rel="noopener">LeetCode #1907: Count Salary Categories</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1907"  class="external-link" target="_blank" rel="noopener">LeetCode #1907: Count Salary Categories</a></th>
       </tr>
   </thead>
   <tbody>
@@ -247,66 +378,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

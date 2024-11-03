@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -233,11 +233,163 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1117s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to find the number of &ldquo;good&rdquo; subsets from a given array of integers, where a &ldquo;good&rdquo; subset is defined as one that does not contain any elements that are &ldquo;bad.&rdquo; The &ldquo;bad&rdquo; numbers are predefined and include integers that have specific characteristics, such as being divisible by certain prime numbers. Furthermore, the solution should account for the fact that each subset can be formed in various combinations, leading to an exponential number of potential subsets.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, the approach can be broken down into several key components:</p>
+<ol>
+<li>
+<p><strong>Identify Bad Numbers</strong>: We define a set of bad numbers that cannot be part of any good subset.</p>
+</li>
+<li>
+<p><strong>Mask Representation</strong>: Each number is represented by a bitmask that encodes its prime factorization. This allows us to efficiently determine if a subset is valid based on the presence of bad numbers.</p>
+</li>
+<li>
+<p><strong>Dynamic Programming</strong>: We use a recursive dynamic programming approach to count the number of valid subsets, utilizing memoization to store results for previously computed states.</p>
+</li>
+<li>
+<p><strong>Combining Results</strong>: Finally, we combine the results of valid subsets with the counts of the occurrences of the number 1 in the input array, as it can be included in multiple configurations.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the provided code step by step:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bad</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">msk</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> that contains several member variables.</li>
+<li><code>mod</code> is set to (10^9 + 7) for modular arithmetic to prevent overflow.</li>
+<li><code>bad</code> is a set that contains the bad numbers which cannot be included in good subsets.</li>
+<li><code>msk</code> is a vector that will store the bitmask representation of numbers from 0 to 30.</li>
+<li><code>cnt</code> is a vector that will count occurrences of each number in the input array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">two</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">((</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="mi">2</span> <span class="o">*</span> <span class="n">two</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>two</code> function calculates (2^x) modulo <code>mod</code>. It employs recursion to compute powers of two.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">mask</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Base case: there&#39;s one way to choose a subset with only number 1.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// Recursively compute the count without including current `num`.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bad</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">mask</span> <span class="o">|</span> <span class="n">msk</span><span class="p">[</span><span class="n">num</span><span class="p">])</span> <span class="o">==</span> <span class="n">mask</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span> <span class="n">dp</span><span class="p">(</span><span class="n">mask</span> <span class="o">^</span> <span class="n">msk</span><span class="p">[</span><span class="n">num</span><span class="p">],</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">cnt</span><span class="p">[</span><span class="n">num</span><span class="p">])</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// Include the current `num` if valid.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// Return the total count of good subsets.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function uses a bitmask and a number to count valid subsets.</li>
+<li>The base case checks if only number 1 is left to consider, in which case there&rsquo;s exactly one valid subset (the empty subset).</li>
+<li>The recursive case computes the number of valid subsets without including <code>num</code> and checks if <code>num</code> can be included. If it can, the count of valid subsets including <code>num</code> is added to the answer.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numberOfGoodSubsets</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">};</span> <span class="c1">// List of primes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">31</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">((</span><span class="n">i</span> <span class="o">%</span> <span class="n">p</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">m</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span> <span class="c1">// Create a bitmask for prime factors of `i`.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">msk</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="c1">// Store the bitmask.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cnt</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Resize the count vector to handle numbers from 0 to 30.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span><span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="n">cnt</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Count occurrences of each number in the input.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">((</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span> <span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="mi">1023</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">mod</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">two</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// Final calculation to get the result.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>numberOfGoodSubsets</code> function initializes the list of primes and calculates the bitmasks for numbers 0 through 30 based on their prime factors.</li>
+<li>It then counts occurrences of each number in the input array, storing these counts in <code>cnt</code>.</li>
+<li>Finally, it invokes the <code>dp</code> function to compute the total number of good subsets and adjusts the result based on the number of occurrences of <code>1</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(2^p + n)), where (p) is the number of distinct primes used in factorization (in this case, 10). The (O(2^p)) comes from the exponential growth of subsets based on prime factors, and (n) comes from counting occurrences of numbers in the input array.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) for storing the counts of numbers and (O(p)) for storing the bitmasks.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The implemented solution effectively counts the number of good subsets from a given list of integers by leveraging bit manipulation and dynamic programming. By avoiding &ldquo;bad&rdquo; numbers and efficiently calculating the number of valid subsets, this method demonstrates an optimal approach to subset enumeration with constraints. The use of modular arithmetic ensures that the results remain within bounds, even for large numbers. This algorithm is efficient for the given constraints and can handle the input sizes typically encountered in competitive programming scenarios.</p>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a quick example of how to use the <code>Solution</code> class:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span> <span class="c1">// Example input
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">numberOfGoodSubsets</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Number of good subsets: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>This example initializes the solution and provides an example input to count the number of good subsets, demonstrating how to use the class in a practical scenario.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1117s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1995"  class="external-link" target="_blank" rel="noopener">LeetCode #1995: Count Special Quadruplets</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1995"  class="external-link" target="_blank" rel="noopener">LeetCode #1995: Count Special Quadruplets</a></th>
       </tr>
   </thead>
   <tbody>
@@ -258,66 +410,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -230,11 +230,176 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(((</span><span class="n">table</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">left</span><span class="p">.</span><span class="n">size</span><span class="p">()]</span> <span class="o">*</span> <span class="n">lc</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span> <span class="o">*</span> <span class="n">rc</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode677s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves determining the number of distinct binary search trees (BSTs) that can be formed using a given array of integers, <code>nums</code>. Each integer in the array is unique, and the elements can be arranged in various ways to create different binary search trees. The challenge is to count these unique arrangements under the constraint that the result must be returned modulo (10^9 + 7).</p>
+<p>A binary search tree is defined such that for any node:</p>
+<ol>
+<li>The left subtree contains nodes with values less than the node’s value.</li>
+<li>The right subtree contains nodes with values greater than the node’s value.</li>
+</ol>
+<p>Given these properties, the goal is to explore how many unique BSTs can be constructed using all elements in the input array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem consists of two main components:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming (DP) with Combinatorial Counting</strong>:
+We utilize a combinatorial counting technique to determine the number of unique BSTs. The number of unique BSTs that can be formed with <code>n</code> nodes can be calculated using the Catalan number formula, which relates the number of nodes in the tree to the ways to arrange them.</p>
+</li>
+<li>
+<p><strong>Depth-First Search (DFS)</strong>:
+A DFS approach is employed to recursively explore all possible left and right subtrees for a given root. The root of the BST is chosen as the first element of the current array slice, and elements are categorized into left and right subtrees based on their values relative to the root. The results of the left and right subtree combinations are combined to compute the total number of unique BSTs.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the code step by step to understand its implementation.</p>
+<ul>
+<li><strong>Class Declaration</strong>:
+The solution is encapsulated within a class named <code>Solution</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Modulus Declaration</strong>:
+A constant <code>mod</code> is defined, representing (10^9 + 7), to ensure that results do not overflow.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="n">mod</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>DP Table Initialization</strong>:
+A 2D vector <code>table</code> is initialized to store binomial coefficients, which will be used to calculate the number of ways to choose left and right subtrees.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;&gt;</span> <span class="n">table</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>:
+The <code>numOfWays</code> function takes a vector of integers <code>nums</code> as input and returns the number of unique BSTs modulo (10^9 + 7).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">numOfWays</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Size Calculation</strong>:
+The size of the input array is stored in <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><strong>Table Initialization</strong>:
+The <code>table</code> is resized to accommodate combinations for all possible sizes of nodes. The first entry in each row is initialized to 1, as there is one way to choose 0 elements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">table</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">long</span> <span class="kt">long</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Calculate Binomial Coefficients</strong>:
+A nested loop populates the <code>table</code> with binomial coefficients using Pascal’s triangle approach. Each entry is calculated as the sum of the two entries above it, modulo <code>mod</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Call DFS Function</strong>:
+The DFS function is called to calculate the total number of unique BSTs based on the input array. The result is stored in <code>ans</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Final Result Calculation</strong>:
+The result is returned after subtracting 1 (to exclude the empty tree) and taking the modulo.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span>  <span class="n">ans</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>DFS Function Definition</strong>:
+The <code>dfs</code> function is defined to recursively compute the number of unique BSTs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>:
+If the size of <code>nums</code> is less than or equal to 2, we return 1 since there is only one way to arrange one or two nodes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Left and Right Subtree Initialization</strong>:
+Two vectors, <code>left</code> and <code>right</code>, are created to hold the nodes of the left and right subtrees, respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Categorizing Nodes</strong>:
+A loop categorizes nodes into left and right subtrees based on their values compared to the root node (the first element of <code>nums</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="n">left</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="n">right</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Recursive DFS Calls</strong>:
+Recursive calls are made to the <code>dfs</code> function for both left and right subtrees to calculate the number of unique BSTs for each subtree.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="n">lc</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="n">rc</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Calculate Total Unique BSTs</strong>:
+The total number of unique BSTs is computed by multiplying the number of ways to form the left and right subtrees, and multiplying that by the binomial coefficient that counts how the left subtree can be chosen from the nodes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="p">(((</span><span class="n">table</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">left</span><span class="p">.</span><span class="n">size</span><span class="p">()]</span> <span class="o">*</span> <span class="n">lc</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span> <span class="o">*</span> <span class="n">rc</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this approach is (O(n^2)) due to the recursive DFS calls combined with the construction of the <code>table</code> for binomial coefficients.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) for storing the binomial coefficients in the <code>table</code>, and an additional (O(n)) for the recursive call stack.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>numOfWays</code> function effectively counts the number of distinct binary search trees that can be formed using a given array of unique integers by leveraging a combination of combinatorial counting and recursive depth-first search. This approach demonstrates the application of dynamic programming concepts in solving combinatorial problems and showcases the elegance of recursive solutions to complex counting challenges.</p>
+<p>Understanding this solution provides insights into the construction of binary search trees, the importance of binomial coefficients in counting arrangements, and the application of modular arithmetic to manage large numbers in programming.</p>
+<p>In summary, this algorithm serves as an excellent reference for developers facing similar combinatorial problems in competitive programming or algorithm design, emphasizing efficiency and clarity in implementation. By mastering these techniques, one can tackle a wide range of problems involving tree structures and combinatorial arrangements, making this solution a valuable addition to any algorithmic toolkit.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode677s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1570"  class="external-link" target="_blank" rel="noopener">LeetCode #1570: Dot Product of Two Sparse Vectors</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1570"  class="external-link" target="_blank" rel="noopener">LeetCode #1570: Dot Product of Two Sparse Vectors</a></th>
       </tr>
   </thead>
   <tbody>
@@ -255,66 +420,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

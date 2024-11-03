@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -217,11 +217,176 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1048s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to determine the number of ways to color a grid of dimensions (m \times n) using three colors, such that no two adjacent cells (either horizontally or vertically) share the same color. Each column in the grid can have its colors independently assigned, provided that the adjacent cells meet the coloring constraint.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can use a recursive backtracking approach combined with memoization to avoid recalculating the results for subproblems. The core idea is to use bit manipulation to represent the colors assigned to the cells in the grid efficiently. Here’s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Recursive Function</strong>: We define a recursive function <code>colorTheGrid</code> that accepts parameters for the dimensions of the grid (<code>m</code> and <code>n</code>), current row index (<code>i</code>), current column index (<code>j</code>), the current state of colors in the current column (<code>cur</code>), and the previous column&rsquo;s colors (<code>prv</code>).</p>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If we&rsquo;ve processed all rows (<code>i == m</code>), we move to the next column (<code>j + 1</code>).</li>
+<li>If we&rsquo;ve processed all columns (<code>j == n</code>), it indicates a valid coloring configuration, and we return 1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>: We utilize a memoization table (<code>memo</code>) to store results of subproblems that have been computed, indexed by the current column and the previous colors.</p>
+</li>
+<li>
+<p><strong>Color Assignment</strong>: For each cell, we try to assign one of the three colors (1, 2, or 3) while ensuring that it does not match the color of the cell directly above it (<code>up</code>) or to the left of it (<code>lft</code>).</p>
+</li>
+<li>
+<p><strong>Bit Manipulation</strong>: We use bit manipulation to encode the colors of cells. The color of a cell is represented by shifting bits appropriately in an integer to track the colors used in a particular column and row configuration.</p>
+</li>
+<li>
+<p><strong>Recursion and Accumulation</strong>: The function recursively explores all valid colorings for the current cell, accumulating the count of valid configurations.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">1001</span><span class="p">][</span><span class="mi">1024</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span></code></pre></div><p>We define a class <code>Solution</code> and declare a memoization array <code>memo</code> to cache results, and a constant <code>mod</code> for handling large numbers.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">colorTheGrid</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">prv</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">m</span><span class="p">)</span> <span class="k">return</span> <span class="n">colorTheGrid</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><p>The recursive function <code>colorTheGrid</code> is defined with default parameters for the starting position. The base cases check if we have filled all rows (<code>i == m</code>) or columns (<code>j == n</code>), returning the appropriate values.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">memo</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">prv</span><span class="p">])</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">prv</span><span class="p">];</span>        
+</span></span></code></pre></div><p>If we are starting a new column and have already computed the result for the current column and previous colors, we return the memoized result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">up</span> <span class="o">=</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">?</span> <span class="mi">0</span><span class="o">:</span> <span class="p">(</span><span class="n">cur</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">lft</span> <span class="o">=</span> <span class="p">(</span><span class="n">prv</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">3</span><span class="p">;</span>
+</span></span></code></pre></div><p>We determine the color of the cell above (<code>up</code>) and the left (<code>lft</code>). If we&rsquo;re in the first row, <code>up</code> is set to 0 (no color).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">up</span> <span class="o">!=</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="n">lft</span> <span class="o">!=</span> <span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">colorTheGrid</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="n">prv</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>We iterate through the three colors. If the current color <code>k</code> does not match the colors of the adjacent cells, we recursively call the function for the next row, accumulating the result in <code>ans</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">memo</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">prv</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>If we&rsquo;re starting a new column, we store the result in the memoization table. Finally, we return the accumulated answer.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(m \cdot n \cdot 3^{m})), where (m) is the number of rows, (n) is the number of columns, and the factor of (3^{m}) arises from the fact that each cell can take on one of three colors, leading to many combinations.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1001 \times 1024)) for the memoization array, which is constant with respect to the input dimensions, making it feasible to store results for subproblems.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>colorTheGrid</code> function effectively counts the number of valid colorings for an (m \times n) grid, utilizing recursion and memoization to optimize the process. By leveraging bit manipulation to represent colors compactly, the solution balances clarity and efficiency, making it a powerful technique for grid coloring problems.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Recursive Backtracking</strong>: The implementation uses a depth-first search approach to explore all valid colorings systematically.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: By storing previously computed results, the algorithm avoids redundant calculations, significantly improving performance.</p>
+</li>
+<li>
+<p><strong>Bit Manipulation</strong>: This approach allows efficient encoding of the grid state, reducing the overhead of managing color states.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Grid-Based Games</strong>: The algorithm can be adapted to solve similar coloring challenges in board games or puzzles.</p>
+</li>
+<li>
+<p><strong>Graph Coloring</strong>: The underlying principles can be applied to graph coloring problems, where adjacent nodes must be assigned different colors.</p>
+</li>
+<li>
+<p><strong>Dynamic Programming Challenges</strong>: Understanding this technique aids in tackling other dynamic programming challenges that involve state representation and transitions.</p>
+</li>
+</ol>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing the algorithm, consider the following:</p>
+<ul>
+<li>
+<p><strong>Input Constraints</strong>: Ensure that the dimensions of the grid do not exceed the limits of the memoization array.</p>
+</li>
+<li>
+<p><strong>Color Representation</strong>: The solution assumes three colors; adaptations may be required for varying numbers of colors.</p>
+</li>
+<li>
+<p><strong>Performance Testing</strong>: It’s essential to test the function with edge cases (e.g., minimum and maximum grid sizes) to verify correctness and performance.</p>
+</li>
+</ul>
+<p>By mastering the techniques used in this solution, developers can effectively tackle similar dynamic programming and combinatorial problems, enhancing their problem-solving toolkit.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1048s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1932"  class="external-link" target="_blank" rel="noopener">LeetCode #1932: Merge BSTs to Create Single BST</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1932"  class="external-link" target="_blank" rel="noopener">LeetCode #1932: Merge BSTs to Create Single BST</a></th>
       </tr>
   </thead>
   <tbody>
@@ -242,66 +407,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

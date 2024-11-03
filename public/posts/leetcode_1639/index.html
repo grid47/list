@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -229,7 +229,170 @@
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode722s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves counting the number of ways to form a target string using characters from a list of words. Each word contributes its characters to the formation of the target string, and characters can only be used as many times as they appear in the respective word. This problem is essentially a combinatorial challenge, often framed in dynamic programming terms.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we utilize a dynamic programming approach that builds a solution based on previously computed subproblems. The essential steps of the approach include:</p>
+<ol>
+<li>
+<p><strong>Frequency Table Creation</strong>: We create a frequency table that tracks how many times each character appears at each position across all given words.</p>
+</li>
+<li>
+<p><strong>Dynamic Programming Setup</strong>: We define a recursive function that computes the number of ways to form the target string by considering characters from the words one position at a time.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: To optimize performance and avoid recalculating results for the same states, we use memoization to store already computed results.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the provided code for better understanding.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">hit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">frq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">1001</span><span class="p">][</span><span class="mi">1001</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>Here, we define a class <code>Solution</code> which contains the necessary member variables:
+<ul>
+<li><code>hit</code>: a string to store the target string.</li>
+<li><code>mod</code>: a constant for modulo operations to prevent overflow.</li>
+<li><code>frq</code>: a 2D vector to hold the frequency of each character at each index across the given words.</li>
+<li><code>memo</code>: a memoization array to store computed results for pairs of indices.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">fidx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">hidx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">hidx</span> <span class="o">==</span> <span class="n">hit</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">fidx</span> <span class="o">==</span> <span class="n">frq</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">fidx</span><span class="p">][</span><span class="n">hidx</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">fidx</span><span class="p">][</span><span class="n">hidx</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>The <code>dp</code> function is the core of our dynamic programming solution. It takes two parameters:</p>
+<ul>
+<li><code>fidx</code>: the current index in the frequency table.</li>
+<li><code>hidx</code>: the current index in the target string.</li>
+</ul>
+</li>
+<li>
+<p>We have base cases:</p>
+<ul>
+<li>If <code>hidx</code> equals the size of the target string, it means we&rsquo;ve successfully formed the target string, so we return 1.</li>
+<li>If <code>fidx</code> reaches the size of the frequency table, it means we&rsquo;ve exhausted our words and cannot form the target, so we return 0.</li>
+</ul>
+</li>
+<li>
+<p>The memoization check ensures that we do not recompute results for the same state.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">fidx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hidx</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>Here, we compute the number of ways to form the target without using the current frequency index <code>fidx</code>, which is a recursive call to the next frequency index while keeping the target index unchanged.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">hit</span><span class="p">[</span><span class="n">hidx</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">frq</span><span class="p">[</span><span class="n">fidx</span><span class="p">][</span><span class="n">ch</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="p">(</span><span class="kt">long</span><span class="p">)(</span><span class="n">frq</span><span class="p">[</span><span class="n">fidx</span><span class="p">][</span><span class="n">ch</span><span class="p">]</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">dp</span><span class="p">(</span><span class="n">fidx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hidx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Next, we check if the character from the target string at index <code>hidx</code> can be formed using the current frequency index <code>fidx</code>. If so, we update our answer <code>ans</code>:
+<ul>
+<li>We add the product of the frequency of that character (modulo <code>mod</code>) and the number of ways to form the remaining part of the target (by advancing both indices).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">fidx</span><span class="p">][</span><span class="n">hidx</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we store the computed result in the memoization array and return it.</li>
+</ul>
+<h4 id="main-function-to-count-ways">
+  Main Function to Count Ways
+  <a class="heading-link" href="#main-function-to-count-ways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numWays</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">,</span> <span class="n">string</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hit</span> <span class="o">=</span> <span class="n">target</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">frq</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">(),</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="n">string</span> <span class="nl">s</span><span class="p">:</span> <span class="n">words</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">frq</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>numWays</code> function initializes the <code>hit</code> variable and the frequency table <code>frq</code>. It iterates through each word and each character in the words to fill in the frequency table.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>We reset the memoization array to indicate that no states have been computed yet. Finally, we initiate the recursive dynamic programming function with starting indices of 0 for both the frequency and target strings.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n \cdot m)), where (n) is the number of words and (m) is the maximum length of the words or the target. This accounts for filling the frequency table and the recursive computation in the <code>dp</code> function.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m)) for the memoization array and (O(m \cdot 26)) for the frequency table, where 26 is the number of lowercase English letters.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code efficiently counts the number of ways to form the target string using characters from a set of words by utilizing a dynamic programming approach. By breaking down the problem into smaller subproblems and using memoization, the solution avoids unnecessary recomputation, making it both effective and efficient.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Dynamic Programming</strong>: The use of dynamic programming allows us to solve combinatorial problems by breaking them into manageable subproblems.</li>
+<li><strong>Memoization</strong>: Storing results of subproblems is crucial in optimizing recursive solutions, reducing the time complexity significantly.</li>
+<li><strong>Frequency Tables</strong>: Constructing frequency tables is an effective way to track character availability across multiple sources (words, in this case).</li>
+</ol>
+<p>This solution provides a comprehensive method to approach similar combinatorial string formation problems, showcasing the power of dynamic programming in solving complex challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode722s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -241,7 +404,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1640"  class="external-link" target="_blank" rel="noopener">LeetCode #1640: Check Array Formation Through Concatenation</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1640"  class="external-link" target="_blank" rel="noopener">LeetCode #1640: Check Array Formation Through Concatenation</a></th>
       </tr>
   </thead>
   <tbody>
@@ -262,66 +425,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

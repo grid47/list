@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -207,11 +207,115 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode973s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to calculate the sum of the XOR values of all possible subsets of a given integer array. In this context, the XOR operation is a bitwise operation that takes two bits and returns 1 if they are different and 0 if they are the same. Given an array of integers, we need to find all possible subsets, compute the XOR of the elements in each subset, and return the total sum of these XOR values.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will employ a systematic combinatorial approach:</p>
+<ol>
+<li>
+<p><strong>Understanding Subsets</strong>: Each integer in the array can either be included in a subset or not. For an array of size <code>n</code>, there are (2^n) possible subsets.</p>
+</li>
+<li>
+<p><strong>Using Bit Manipulation</strong>: We can utilize bit manipulation to generate all possible subsets. Each integer from 0 to (2^n - 1) can represent a unique subset, where the binary representation of the integer indicates whether to include each element in the subset.</p>
+</li>
+<li>
+<p><strong>Calculating XOR for Each Subset</strong>: For each subset represented by the integer, we will calculate the XOR of the elements that are included and accumulate the results.</p>
+</li>
+<li>
+<p><strong>Return the Total</strong>: Finally, we will return the sum of all calculated XOR values.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The implementation starts by defining a class named <code>Solution</code>, which encapsulates the main method for solving the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: We declare the public method <code>subsetXORSum</code>, which takes a vector of integers as input and returns an integer representing the total XOR sum.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">subsetXORSum</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Result Initialization</strong>: We initialize an integer variable <code>res</code> to 0, which will accumulate the total XOR sum of all subsets.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop through Possible Subsets</strong>: We use a loop that iterates from 1 to (2^{\text{size of nums}} - 1) (i.e., <code>1 &lt;&lt; nums.size()</code>). This loop effectively represents all possible non-empty subsets.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate XOR for Each Subset</strong>: Inside the loop, we initialize <code>total</code> to 0, which will store the XOR result for the current subset. We then use another loop to iterate through each number in the input array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize XOR total for the current subset
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Checking Element Inclusion</strong>: For each element, we check if it should be included in the current subset by using a bitwise AND operation between <code>i</code> and (2^j) (i.e., <code>i &amp; (1 &lt;&lt; j)</code>). If the result is non-zero, it means the j-th element is included.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">total</span> <span class="o">^=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="c1">// Update XOR total if the j-th element is included
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Accumulate the XOR Result</strong>: After calculating the XOR for the current subset, we add <code>total</code> to <code>res</code>, the accumulator for all subsets.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">res</span> <span class="o">+=</span> <span class="n">total</span><span class="p">;</span> <span class="c1">// Add the XOR result of the current subset to the total
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: Once all subsets have been processed and their XOR values accumulated, we return the final result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the total XOR sum of all subsets
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is (O(n \cdot 2^n)), where (n) is the number of elements in the input array. This complexity arises because we need to iterate through (2^n) subsets, and for each subset, we may need to check up to (n) elements. The space complexity is (O(1)) since we are using a constant amount of additional space for calculations, irrespective of the input size.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided code effectively calculates the sum of the XOR values of all possible subsets of an integer array. By leveraging bit manipulation, the solution efficiently generates and processes each subset, calculating the XOR and accumulating the results in a straightforward manner. This implementation serves as an excellent example of using combinatorial techniques and bitwise operations to solve problems involving subsets. The clear structure of the code and its adherence to systematic problem-solving practices make it a valuable reference for similar problems in algorithm design and competitive programming. Overall, this solution is optimal for the given task, balancing clarity, efficiency, and robustness in its execution.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode973s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1864"  class="external-link" target="_blank" rel="noopener">LeetCode #1864: Minimum Number of Swaps to Make the Binary String Alternating</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1864"  class="external-link" target="_blank" rel="noopener">LeetCode #1864: Minimum Number of Swaps to Make the Binary String Alternating</a></th>
       </tr>
   </thead>
   <tbody>
@@ -232,66 +336,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

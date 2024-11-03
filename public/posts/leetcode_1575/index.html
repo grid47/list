@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,11 +221,156 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode649s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining the number of distinct routes that can be taken between two locations on a one-dimensional line, represented as an array of integers. Each integer in the array represents the position of a location, and the routes can be made by moving from one location to another, using a certain amount of fuel. The goal is to find the total number of ways to travel from a given starting location to a destination location without exceeding the fuel limit.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we can use a recursive depth-first search (DFS) approach combined with dynamic programming (DP) to efficiently calculate the number of valid routes. Here are the steps involved in the approach:</p>
+<ol>
+<li>
+<p><strong>Recursive DFS Function</strong>:</p>
+<ul>
+<li>Create a recursive function <code>dfs(st, ed, rm)</code> that computes the number of ways to reach from the starting location <code>st</code> to the ending location <code>ed</code> with <code>rm</code> amount of remaining fuel.</li>
+<li>If the remaining fuel (<code>rm</code>) is negative, it indicates that the journey is not possible, so return 0.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>If the current starting location <code>st</code> is equal to the ending location <code>ed</code>, it means a valid route has been found, so increment the count of valid routes by one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>To avoid recalculating the number of routes for the same state (starting location and remaining fuel), use a 2D vector <code>mem</code> to store results of previously computed states.</li>
+</ul>
+</li>
+<li>
+<p><strong>Exploration of Routes</strong>:</p>
+<ul>
+<li>For each possible location <code>i</code> in the <code>loc</code> array, excluding the current starting location <code>st</code>, calculate the remaining fuel after moving to location <code>i</code> and recursively call <code>dfs</code> for the new starting location <code>i</code>.</li>
+<li>Sum the results to get the total number of routes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>Store the computed result in the <code>mem</code> array and return it to optimize future calculations.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s examine the provided code in detail.</p>
+<ul>
+<li><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Member Variables</strong>: We declare member variables:
+<ul>
+<li><code>n</code> to store the number of locations.</li>
+<li><code>mod</code> to handle large numbers and prevent overflow.</li>
+<li><code>mem</code>, a 2D vector for memoization to store results of previously computed states.</li>
+<li><code>loc</code>, a vector to hold the locations.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">mem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">loc</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Main Function</strong>: The <code>countRoutes</code> function initializes the member variables, sets up the memoization table, and starts the DFS process.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">countRoutes</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">loc</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">finish</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fuel</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n</span> <span class="o">=</span> <span class="n">loc</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">loc</span> <span class="o">=</span> <span class="n">loc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mem</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fuel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">fuel</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>DFS Function</strong>: The <code>dfs</code> function performs the recursive search for valid routes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">st</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ed</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rm</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">rm</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// If fuel runs out, return 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">mem</span><span class="p">[</span><span class="n">st</span><span class="p">][</span><span class="n">rm</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">st</span><span class="p">][</span><span class="n">rm</span><span class="p">];</span> <span class="c1">// Return cached result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">st</span> <span class="o">==</span> <span class="n">ed</span><span class="p">);</span> <span class="c1">// Initialize routes count (1 if at destination)
+</span></span></span></code></pre></div><ul>
+<li><strong>Iterate Through Locations</strong>: A loop iterates through all locations to explore possible routes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">st</span><span class="p">)</span> <span class="c1">// Exclude the starting location
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">ed</span><span class="p">,</span> <span class="n">rm</span> <span class="o">-</span> <span class="n">abs</span><span class="p">(</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">loc</span><span class="p">[</span><span class="n">st</span><span class="p">])))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span> <span class="c1">// Recursive call
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return Result</strong>: Store the computed result in the memoization table and return it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">mem</span><span class="p">[</span><span class="n">st</span><span class="p">][</span><span class="n">rm</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n \cdot fuel)), where (n) is the number of locations. This is due to the potential for each state (combination of starting location and remaining fuel) being calculated once and cached for future reference.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n \cdot fuel)) for the memoization table, which stores the results of subproblems.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countRoutes</code> function effectively counts the number of distinct routes from a starting location to a destination using a combination of recursive depth-first search and dynamic programming principles. By utilizing memoization, the algorithm avoids redundant calculations, thereby improving efficiency.</p>
+<p>This implementation highlights several important programming techniques, including recursion, memoization, and careful handling of fuel constraints. These techniques can be applied to various problems involving pathfinding and resource management.</p>
+<p>Understanding this solution equips developers with the skills necessary to approach similar problems, making it a practical reference for algorithmic challenges encountered in competitive programming or technical interviews.</p>
+<p>In summary, the <code>countRoutes</code> function serves not only as a solution to the problem at hand but also as a learning tool for mastering recursion and dynamic programming. Its clarity, efficiency, and robust handling of state through memoization make it an exemplary model of algorithm design, showcasing how to tackle complex counting problems effectively.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode649s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1576"  class="external-link" target="_blank" rel="noopener">LeetCode #1576: Replace All ?&rsquo;s to Avoid Consecutive Repeating Characters</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1576"  class="external-link" target="_blank" rel="noopener">LeetCode #1576: Replace All ?&rsquo;s to Avoid Consecutive Repeating Characters</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +391,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

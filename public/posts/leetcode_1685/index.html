@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -207,7 +207,141 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode775s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to calculate the sum of absolute differences for each element in an array <code>nums</code>. Specifically, for each element <code>nums[i]</code>, we need to compute the sum of the absolute differences between <code>nums[i]</code> and every other element in the array. The result should be stored in a vector where the <code>i-th</code> element represents the sum of absolute differences for the element <code>nums[i]</code>.</p>
+<p>For example, given an array <code>[2, 3, 5]</code>, the output should be <code>[4, 3, 4]</code> because:</p>
+<ul>
+<li>For <code>2</code>: <code>|2-2| + |2-3| + |2-5| = 0 + 1 + 3 = 4</code></li>
+<li>For <code>3</code>: <code>|3-2| + |3-3| + |3-5| = 1 + 0 + 2 = 3</code></li>
+<li>For <code>5</code>: <code>|5-2| + |5-3| + |5-5| = 3 + 2 + 0 = 5</code></li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To efficiently compute the sum of absolute differences for each element in the array, we can utilize a mathematical approach that avoids the need for nested loops, thus optimizing performance. Here&rsquo;s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Initial Calculation</strong>: Compute the initial sum of absolute differences for the first element <code>nums[0]</code> relative to all other elements in the array. This will serve as our starting point for calculations.</p>
+</li>
+<li>
+<p><strong>Dynamic Update</strong>: Use the result from the previous element to calculate the result for the next element. This is done by recognizing how the sum of differences changes when moving from <code>nums[i-1]</code> to <code>nums[i]</code>. Specifically, we will derive the formula to update our answer based on the current and previous values.</p>
+</li>
+<li>
+<p><strong>Vector Storage</strong>: Store the results in a vector, where each index corresponds to the respective element in <code>nums</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">getSumAbsoluteDifferences</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class named <code>Solution</code> and create a public method <code>getSumAbsoluteDifferences</code>, which takes a vector of integers <code>nums</code> as its parameter.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">z</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>:
+<ul>
+<li>We initialize <code>z</code> to store the total sum of absolute differences for the first element, and <code>n</code> to hold the size of the <code>nums</code> vector.</li>
+<li>The first <code>for</code> loop calculates the sum of differences between <code>nums[0]</code> and each element in <code>nums</code>. The result is stored in <code>z</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Result Storage</strong>:
+<ul>
+<li>We create a vector <code>ans</code> of size <code>n</code> initialized to zero, which will hold the final results.</li>
+<li>We store the calculated sum of absolute differences for <code>nums[0]</code> in <code>ans[0]</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span><span class="o">*</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li><strong>Dynamic Calculation</strong>:
+<ul>
+<li>We use a <code>for</code> loop to iterate from the second element to the last element in <code>nums</code>.</li>
+<li>For each element <code>nums[i]</code>, we calculate the sum of absolute differences using the previous result <code>ans[i-1]</code>.</li>
+<li>The formula used is derived from the relationship between the current and previous elements, factoring in how many times each value affects the overall sum based on its position.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return Result</strong>: After calculating the sum of absolute differences for all elements, we return the vector <code>ans</code>, which contains the results.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n) ), where ( n ) is the number of elements in the <code>nums</code> vector. We loop through the array a constant number of times.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n) ) due to the additional storage required for the result vector <code>ans</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the sum of absolute differences for each element in an array using a mathematical approach that avoids nested loops.</p>
+<p>Key highlights include:</p>
+<ol>
+<li>
+<p><strong>Efficiency</strong>: By avoiding nested loops, the algorithm runs in linear time, making it suitable for larger datasets.</p>
+</li>
+<li>
+<p><strong>Mathematical Insight</strong>: The use of a dynamic update formula allows for quick recalculation of the sum of absolute differences as we iterate through the array.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: The method can handle any size of input and provides a quick and efficient way to obtain the desired results.</p>
+</li>
+</ol>
+<p>Overall, the code showcases a clear and efficient algorithm for solving the problem, focusing on leveraging mathematical relationships to optimize performance and readability.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode775s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -219,7 +353,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1686"  class="external-link" target="_blank" rel="noopener">LeetCode #1686: Stone Game VI</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1686"  class="external-link" target="_blank" rel="noopener">LeetCode #1686: Stone Game VI</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +374,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

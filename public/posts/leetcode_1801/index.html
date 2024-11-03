@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -252,11 +252,197 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode905s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves managing a backlog of buy and sell orders in a trading system. Each order is represented by a list of three integers: the price of the order, the quantity of the order, and the type of order (buy or sell). The goal is to calculate the total number of outstanding orders left in the backlog after processing a series of orders. The rules for processing orders are based on the price at which they are placed and the quantity available in the backlog.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we utilize two priority queues (also known as heaps):</p>
+<ol>
+<li>
+<p><strong>Sell Orders</strong>: A min-heap that manages sell orders based on their price. The lowest priced sell orders are prioritized, allowing us to efficiently match them with incoming buy orders.</p>
+</li>
+<li>
+<p><strong>Buy Orders</strong>: A max-heap that manages buy orders based on their price. The highest priced buy orders are prioritized, enabling efficient matching with incoming sell orders.</p>
+</li>
+</ol>
+<p>The algorithm processes each order in the following manner:</p>
+<ol>
+<li>
+<p><strong>Processing Buy Orders</strong>:</p>
+<ul>
+<li>For each buy order (indicated by a type of <code>0</code>), we attempt to match it with sell orders.</li>
+<li>While there are still orders in the sell queue and the price of the lowest sell order is less than or equal to the price of the buy order, we perform the following:
+<ul>
+<li>Compare the quantity of the sell order with the remaining quantity of the buy order.</li>
+<li>If the buy order can fully match the sell order, reduce the quantity of the buy order accordingly and remove the sell order.</li>
+<li>If the sell order is larger, reduce its quantity and reinsert it into the sell queue.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Sell Orders</strong>:</p>
+<ul>
+<li>For each sell order (indicated by a type of <code>1</code>), we attempt to match it with buy orders using a similar approach:</li>
+<li>While there are still orders in the buy queue and the price of the highest buy order is greater than or equal to the price of the sell order, we compare the quantities and adjust them accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Count of Backlog Orders</strong>:</p>
+<ul>
+<li>After processing all orders, the remaining quantities in both priority queues represent the backlog. We sum the quantities of all remaining orders in both queues to get the total backlog.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">getNumberOfBacklogOrders</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">orders</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The class <code>Solution</code> defines a public method <code>getNumberOfBacklogOrders</code> which takes a vector of orders.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">sell</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">less</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">buy</span><span class="p">;</span>        
+</span></span></code></pre></div><ul>
+<li>We define a modulus value (<code>mod</code>) to ensure that results fit within the typical constraints of integer limits in competitive programming.</li>
+<li>Two priority queues are initialized: <code>sell</code> for managing sell orders and <code>buy</code> for managing buy orders.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span><span class="p">:</span> <span class="n">orders</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We loop through each order in the input list.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// For a buy order
+</span></span></span></code></pre></div><ul>
+<li>When a buy order is detected (type <code>0</code>), we attempt to match it with available sell orders.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">top</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">sell</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">sell</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">first</span> <span class="o">&lt;=</span> <span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We initiate a loop to check against the sell orders while the sell queue is not empty, and the price of the lowest sell order is less than or equal to the price of the current buy order.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="n">top</span> <span class="o">=</span> <span class="n">sell</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">sell</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>The top sell order is fetched and removed from the queue for processing.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">top</span><span class="p">.</span><span class="n">second</span> <span class="o">&gt;</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">top</span><span class="p">.</span><span class="n">second</span> <span class="o">-=</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">sell</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">top</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">top</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We compare the quantity of the sell order with the buy order:
+<ul>
+<li>If the sell order can satisfy the buy order, we reduce the sell order&rsquo;s quantity and set the buy order quantity to zero.</li>
+<li>If the sell order is larger, we decrease the buy order&rsquo;s quantity accordingly.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">buy</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]});</span>
+</span></span></code></pre></div><ul>
+<li>If there is any remaining quantity in the buy order after attempting matches, we push it into the buy queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>If the current order is a sell order (type <code>1</code>), we execute a similar matching logic against buy orders.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">top</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">buy</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">buy</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">first</span> <span class="o">&gt;=</span> <span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>Here, we check against the buy orders, ensuring that the highest priced buy orders are considered for matching.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">sell</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">it</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">it</span><span class="p">[</span><span class="mi">1</span><span class="p">]});</span>              
+</span></span></code></pre></div><ul>
+<li>If any quantity remains in the sell order after matching attempts, we add it to the sell queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">sell</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>After processing all orders, we initialize a counter <code>cnt</code> to accumulate the total backlog.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">top</span> <span class="o">=</span> <span class="n">sell</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">+</span> <span class="n">top</span><span class="p">.</span><span class="n">second</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sell</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">buy</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We loop through the remaining sell orders, summing their quantities to <code>cnt</code> and ensuring we apply the modulus to avoid overflow.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">top</span> <span class="o">=</span> <span class="n">buy</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span> <span class="o">=</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">+</span> <span class="n">top</span><span class="p">.</span><span class="n">second</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">buy</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The final loop does the same for the buy orders, and the function concludes by returning the total count of backlog orders.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n \log n)), where (n) is the number of orders. This is due to the fact that each insertion and deletion in the priority queues takes (O(\log n)) time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)), as we are potentially storing all orders in the two priority queues.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The implemented algorithm effectively manages the backlog of orders through the use of priority queues, allowing for efficient order matching based on pricing. The method adheres to principles of optimal data structure usage, providing a solution that can scale well with increasing order sizes.</p>
+<p>By utilizing priority queues, the code can efficiently handle incoming buy and sell orders, ensuring that matches are made promptly and accurately. The clear separation of logic for buy and sell orders simplifies the process and makes it easy to maintain and understand.</p>
+<p>In the context of algorithm design and implementation, this solution is a solid example of handling priority-based operations and illustrates how to manage complex data flows effectively within a trading system. Understanding these concepts is vital for software engineers working on financial platforms or any applications that require similar functionalities.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode905s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1802"  class="external-link" target="_blank" rel="noopener">LeetCode #1802: Maximum Value at a Given Index in a Bounded Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1802"  class="external-link" target="_blank" rel="noopener">LeetCode #1802: Maximum Value at a Given Index in a Bounded Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -277,66 +463,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

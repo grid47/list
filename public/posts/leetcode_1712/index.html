@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,11 +215,143 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>            
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode814s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the number of ways to split an array <code>nums</code> into three contiguous parts such that the sum of the first part is less than or equal to the sum of the second part, and the sum of the second part is less than or equal to the sum of the third part. This can be visualized as finding indices (i), (j), and (k) that satisfy the conditions:</p>
+<ul>
+<li>( \text{sum}(nums[0:i]) \leq \text{sum}(nums[i:j]) )</li>
+<li>( \text{sum}(nums[i:j]) \leq \text{sum}(nums[j:n]) )</li>
+</ul>
+<p>Where (n) is the size of the array, and we need to find all such valid splits.</p>
+<p>For example, given an array <code>[1, 2, 2, 3, 5]</code>, the valid splits could be identified, and the task is to count how many such splits exist.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can use the following approach:</p>
+<ol>
+<li>
+<p><strong>Prefix Sum Calculation</strong>: First, compute the prefix sums for the input array. This allows us to easily calculate the sum of any subarray in constant time.</p>
+</li>
+<li>
+<p><strong>Two-Pointer Technique</strong>: Use a two-pointer approach to efficiently find valid positions for the split:</p>
+<ul>
+<li>Iterate through potential starting indices for the first part (denoted by (i)).</li>
+<li>For each (i), find the appropriate indices for (j) and (k):
+<ul>
+<li>(j) should point to the first index where the sum of the first part exceeds half of the total sum, i.e., (2 \times \text{sum}(nums[0:i]) &gt; \text{sum}(nums)).</li>
+<li>(k) should point to the first index where the sum of the second part is less than or equal to the sum of the third part.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Valid Splits</strong>: For each valid (i), the valid positions for (j) and (k) give the range of possible splits, and we can count how many valid splits exist between these two pointers.</p>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>: Since the number of ways can be large, we will return the result modulo (10^9 + 7).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now, let’s delve into the provided code to understand its implementation:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mi">1000000007</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The public method <code>waysToSplit</code> takes a reference to a vector of integers and returns an integer representing the number of valid ways to split the array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">waysToSplit</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: We initialize variables for the size of the array (n), a result counter (res), and the modulo constant.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Prefix Sum Calculation</strong>: We calculate the prefix sum using the <code>partial_sum</code> function, which modifies the original <code>nums</code> array to contain cumulative sums.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">partial_sum</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Main Loop</strong>: The outer loop iterates through potential starting indices (i) for the first part, going up to (n - 2) since we need at least two more elements for parts two and three.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding j</strong>: We increment the pointer (j) to find the first index such that (2 \times \text{sum}(nums[0:i]) &gt; \text{sum}(nums[j:n])).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">j</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding k</strong>: We increment the pointer (k) to find the first index that maintains the condition for the sum of the second part being less than or equal to the sum of the third part.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">k</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">nums</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="n">k</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Valid Splits</strong>: The number of valid splits for the current (i) is given by the range between (j) and (k), and we add this count to (res).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">j</span><span class="p">))</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>: After processing all indices, we return the total count of valid splits.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)) because each pointer (j) and (k) is incremented at most (n) times during the entire iteration of the outer loop.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) beyond the input storage, as we are only using a fixed amount of extra space for variables.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution efficiently counts the number of ways to split an array into three contiguous parts with specific sum conditions using a combination of prefix sums and a two-pointer approach. The use of cumulative sums allows for rapid sum calculations, while the two-pointer technique optimally finds valid split points without unnecessary iterations. The algorithm is designed to handle larger inputs within the constraints typically expected in competitive programming, ensuring performance and correctness. Overall, the code is cleanly structured, demonstrating a solid understanding of array manipulation and efficient algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode814s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1713"  class="external-link" target="_blank" rel="noopener">LeetCode #1713: Minimum Operations to Make a Subsequence</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1713"  class="external-link" target="_blank" rel="noopener">LeetCode #1713: Minimum Operations to Make a Subsequence</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +372,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

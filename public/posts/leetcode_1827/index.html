@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -206,11 +206,121 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode932s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the minimum number of operations required to transform a given array of integers, <code>nums</code>, such that every element at index <code>i</code> is strictly greater than the element at index <code>i-1</code>. Specifically, for each <code>i</code> from <code>1</code> to <code>n-1</code> (where <code>n</code> is the length of the array), we want to ensure that <code>nums[i]</code> is greater than <code>nums[i-1]</code>.</p>
+<p>If <code>nums[i]</code> is not greater than <code>nums[i-1]</code>, we need to perform operations to increase its value. The goal is to find out how many such increment operations are required to achieve the desired state.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a simple greedy algorithm. The approach can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start with the first element of the array and initialize a counter to keep track of the total number of operations (<code>res</code>). We also maintain a variable (<code>need</code>) that tracks the value that the next number must exceed.</p>
+</li>
+<li>
+<p><strong>Iterate Through the Array</strong>: Loop through the array starting from the second element:</p>
+<ul>
+<li>For each element, check if it is less than or equal to <code>need</code>.</li>
+<li>If it is, calculate the difference needed to make it exceed <code>need</code> and add this difference to the operations counter.</li>
+<li>Update <code>need</code> to be the maximum of the current element and the current <code>need</code>, and increment <code>need</code> by 1 for the next iteration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: At the end of the loop, the counter will hold the total number of operations needed.</p>
+</li>
+</ol>
+<p>This approach ensures that we only traverse the array once, leading to an efficient solution.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is the complete implementation of the approach explained above:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minOperations</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The function <code>minOperations</code> takes a vector of integers <code>nums</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">need</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Initialize operations count and set need to first element + 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Get the size of the nums array
+</span></span></span></code></pre></div><ul>
+<li><code>res</code> is initialized to <code>0</code> to count the operations.</li>
+<li><code>need</code> is initialized to <code>nums[0] + 1</code> because the next number must be greater than the first number.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Iterate from the second element
+</span></span></span></code></pre></div><ul>
+<li>A loop is initiated starting from the second element (index <code>1</code>) to the last element.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">need</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">// Calculate operations needed for nums[i]
+</span></span></span></code></pre></div><ul>
+<li>For each element, we check if it meets the requirement of being greater than <code>need</code>. If not, we calculate how many increments are needed (<code>need - nums[i]</code>) and add it to <code>res</code>. The <code>max(0, ...)</code> ensures that we do not add negative values (i.e., if <code>nums[i]</code> is already greater than <code>need</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">need</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">need</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Update need for the next iteration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After considering the current element, <code>need</code> is updated to the maximum of the current <code>nums[i]</code> and the previous <code>need</code>, plus <code>1</code> for the next element.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the total operations needed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the count of operations needed.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(n)), where (n) is the length of the <code>nums</code> array. This is because we iterate through the array once, performing constant-time operations for each element.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a constant amount of extra space for our variables (<code>res</code>, <code>need</code>, and <code>n</code>).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The implemented solution efficiently computes the minimum number of operations required to ensure that every subsequent element in the array is strictly greater than the previous one. By iterating through the array and maintaining a running total of required increments, the solution achieves optimal performance while keeping the implementation straightforward and easy to understand.</p>
+<p>This method leverages the greedy strategy effectively, ensuring that the next element meets the necessary conditions without unnecessary operations. Thus, it provides a clear, efficient means to solve the problem of transforming the array to meet the given constraints.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode932s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1828"  class="external-link" target="_blank" rel="noopener">LeetCode #1828: Queries on Number of Points Inside a Circle</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1828"  class="external-link" target="_blank" rel="noopener">LeetCode #1828: Queries on Number of Points Inside a Circle</a></th>
       </tr>
   </thead>
   <tbody>
@@ -231,66 +341,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

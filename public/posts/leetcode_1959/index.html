@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              7-minute read
             </span>
           </div>
           
@@ -224,11 +224,194 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1076s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we need to partition an array into <code>k</code> or fewer segments while minimizing the &ldquo;space wasted&rdquo; during the resizing of those segments. The &ldquo;space wasted&rdquo; for a segment is defined as the difference between the maximum element in that segment multiplied by the number of elements in the segment and the sum of the elements in that segment. Our goal is to find the minimum total wasted space after partitioning the array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use dynamic programming. The approach involves creating a DP table where each entry <code>dp[k][idx]</code> represents the minimum wasted space possible when considering the first <code>idx</code> elements with <code>k</code> partitions remaining. The recursive function explores all possible partitions and calculates the wasted space, taking care to minimize it.</p>
+<p>Here&rsquo;s a step-by-step explanation of the algorithm:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We initialize a DP memoization table to store the results of subproblems. The dimensions of the table are <code>(k + 1)</code> by <code>n</code>, where <code>k + 1</code> accounts for the number of partitions (including the initial state) and <code>n</code> is the number of elements in the <code>nums</code> array.</p>
+</li>
+<li>
+<p><strong>Recursive Function</strong>: The function <code>dp(k, idx)</code> computes the minimum wasted space starting from index <code>idx</code> with <code>k</code> partitions remaining:</p>
+<ul>
+<li><strong>Base Cases</strong>:
+<ul>
+<li>If <code>idx</code> equals <code>n</code> (the end of the array), return 0 as there are no elements left to partition.</li>
+<li>If <code>k</code> equals 0, return <code>INT_MAX</code>, indicating that we cannot create any more partitions.</li>
+</ul>
+</li>
+<li><strong>Memoization Check</strong>: If the result for <code>dp(k, idx)</code> has already been computed (i.e., not <code>-1</code>), return the stored result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating through Possible Partitions</strong>:</p>
+<ul>
+<li>For each possible partition starting at <code>idx</code>, we maintain two variables: <code>sum</code>, which keeps track of the total of the current segment, and <code>mx</code>, which keeps track of the maximum element within that segment.</li>
+<li>For each endpoint <code>j</code> of the segment, we update <code>sum</code> and <code>mx</code>:
+<ul>
+<li>Calculate the wasted space for the segment defined by <code>idx</code> to <code>j</code>.</li>
+<li>Call the recursive function to compute the result for the next partition starting at <code>j + 1</code>.</li>
+<li>Update the minimum wasted space by combining the current segment&rsquo;s wasted space with the result from the next partition.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>: Store and return the computed result for <code>dp(k, idx)</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><p>The <code>Solution</code> class is defined.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">201</span><span class="p">][</span><span class="mi">200</span><span class="p">];</span>
+</span></span></code></pre></div><p>Here, we declare a few member variables:</p>
+<ul>
+<li><code>n</code>: the number of elements in <code>nums</code>.</li>
+<li><code>nums</code>: a vector to store the input numbers.</li>
+<li><code>memo</code>: a 2D array for memoization to avoid recomputation of subproblems.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The recursive function <code>dp</code> takes two parameters: <code>k</code> (remaining partitions) and <code>idx</code> (current starting index).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span></code></pre></div><p>We check the base cases:</p>
+<ul>
+<li>If <code>idx</code> equals <code>n</code>, return 0 as there are no elements left.</li>
+<li>If <code>k</code> equals 0, return <code>INT_MAX</code>, indicating that we cannot partition further.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">idx</span><span class="p">];</span>
+</span></span></code></pre></div><p>We check if we have already computed the result for this state. If yes, we return the memoized result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mx</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">];</span>
+</span></span></code></pre></div><p>We initialize <code>ans</code> to <code>INT_MAX</code> to keep track of the minimum wasted space, <code>sum</code> to accumulate the segment sum, and <code>mx</code> to hold the maximum element in the current segment, starting with <code>nums[idx]</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">idx</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We iterate through all possible endpoints for the current segment, starting from <code>idx</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span></code></pre></div><p>We update the maximum element <code>mx</code> and the sum <code>sum</code> for the current segment from <code>idx</code> to <code>j</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">wasted</span> <span class="o">=</span> <span class="n">mx</span> <span class="o">*</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">sum</span><span class="p">;</span>
+</span></span></code></pre></div><p>We calculate the wasted space for the current segment, which is the difference between the maximum multiplied by the segment size and the actual sum of the segment.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">dp</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><p>We recursively call <code>dp</code> to compute the wasted space for the remaining elements starting from the next index after the current segment.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">wasted</span> <span class="o">+</span> <span class="p">(</span><span class="n">res</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="o">?</span> <span class="n">INT_MAX</span> <span class="o">-</span> <span class="nl">wasted</span><span class="p">:</span> <span class="n">res</span><span class="p">));</span>
+</span></span></code></pre></div><p>We update <code>ans</code> to be the minimum of its current value and the total wasted space from the current segment plus the result of the next segment. If the result is <code>INT_MAX</code>, we handle it accordingly to avoid overflow.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span></code></pre></div><p>We store the computed result in the memoization table and return it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minSpaceWastedKResizing</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>In the main function <code>minSpaceWastedKResizing</code>, we initialize <code>n</code>, assign the input to <code>nums</code>, reset the <code>memo</code> table, and call the <code>dp</code> function starting with <code>k + 1</code> partitions (because we need to include the starting partition).</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(k \cdot n^2) ). For each partition and starting index, we potentially evaluate all segments, leading to a quadratic relationship for each partition.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(k \cdot n) ) due to the memoization table.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minSpaceWastedKResizing</code> function effectively partitions the input array to minimize wasted space by utilizing a dynamic programming approach. The algorithm is efficient in calculating the optimal partitioning by leveraging memoization, ensuring that previously computed results are reused to avoid unnecessary calculations. This technique not only provides an optimal solution but also enhances performance through reduced time complexity.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Dynamic Programming</strong>: The algorithm employs a dynamic programming approach with memoization to store results of subproblems, reducing redundant calculations.</p>
+</li>
+<li>
+<p><strong>Efficient Calculation</strong>: By carefully managing partitions and calculating wasted space dynamically, the solution ensures efficient and optimal results.</p>
+</li>
+<li>
+<p><strong>Flexible Handling of Inputs</strong>: The algorithm can handle various sizes of input arrays and different numbers of allowed partitions, making it versatile for different scenarios.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This function can be beneficial in scenarios involving:</p>
+<ul>
+<li><strong>Data Storage Optimization</strong>: When resizing data structures, minimizing wasted space is crucial in storage management.</li>
+<li><strong>Memory Management</strong>: In systems where memory allocation is a concern, this approach can help optimize memory usage.</li>
+</ul>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s an example demonstrating how to use the <code>minSpaceWastedKResizing</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">minSpaceWastedKResizing</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Minimum wasted space: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Output may vary based on the specific case
+</span></span></span></code></pre></div><p>In this example, we create a <code>Solution</code> object, define an array <code>nums</code>, specify the number of partitions <code>k</code>, and call the <code>minSpaceWastedKResizing</code> method. The result will provide the minimum wasted space based on the optimal partitioning of the array.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1076s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1960"  class="external-link" target="_blank" rel="noopener">LeetCode #1960: Maximum Product of the Length of Two Palindromic Substrings</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1960"  class="external-link" target="_blank" rel="noopener">LeetCode #1960: Maximum Product of the Length of Two Palindromic Substrings</a></th>
       </tr>
   </thead>
   <tbody>
@@ -249,66 +432,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

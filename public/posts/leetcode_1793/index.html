@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,11 +215,134 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode896s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the maximum score obtainable by selecting a contiguous subarray from an array of integers, given a specific starting point indexed by <code>k</code>. The score of the subarray is calculated as the minimum element in the subarray multiplied by the length of that subarray. The challenge is to efficiently determine the maximum score possible while considering all valid contiguous subarrays that include the element at index <code>k</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize a two-pointer technique that expands outwards from the index <code>k</code>. The idea is to explore both the left and right sides of the starting point <code>k</code> while keeping track of the minimum value within the current window of the subarray. Here’s a detailed breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We set two pointers, <code>i</code> and <code>j</code>, to the index <code>k</code>. We also initialize <code>mini</code> to the value of <code>nums[k]</code>, which represents the minimum value in the current window, and <code>res</code> to the same value since it&rsquo;s the score for the subarray containing just <code>k</code>.</p>
+</li>
+<li>
+<p><strong>Expand the Pointers</strong>: We expand the pointers <code>i</code> and <code>j</code> based on the conditions:</p>
+<ul>
+<li>If <code>i</code> is at the beginning of the array, we can only expand <code>j</code>.</li>
+<li>If <code>j</code> is at the end of the array, we can only contract <code>i</code>.</li>
+<li>Otherwise, we compare the values at <code>nums[i - 1]</code> and <code>nums[j + 1]</code> to determine which pointer to expand.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Minimum and Score</strong>: Each time we adjust the pointers, we calculate the new minimum value in the current subarray defined by <code>i</code> and <code>j</code>. The score is then updated as the product of this minimum value and the length of the current subarray.</p>
+</li>
+<li>
+<p><strong>Iterate Until Boundaries</strong>: This process continues until we have fully explored the possible subarrays by expanding in both directions.</p>
+</li>
+<li>
+<p><strong>Return Maximum Score</strong>: Finally, we return the maximum score found during the iterations.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maximumScore</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define the <code>Solution</code> class and the <code>maximumScore</code> method, which takes in a vector of integers <code>nums</code> and an integer <code>k</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">k</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">k</span><span class="p">,</span> <span class="n">mini</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">res</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>We initialize two pointers, <code>i</code> and <code>j</code>, both set to <code>k</code>. We also initialize <code>mini</code> and <code>res</code> to the value of <code>nums[k]</code>. The variable <code>n</code> holds the size of the array for boundary checks.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We enter a loop that continues as long as we can expand either <code>i</code> to the left or <code>j</code> to the right.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                 <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>                    <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>                <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span>                               <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Inside the loop, we determine which pointer to move based on the current positions:
+<ul>
+<li>If <code>i</code> is at the start, we can only expand <code>j</code>.</li>
+<li>If <code>j</code> is at the end, we can only contract <code>i</code>.</li>
+<li>If both pointers can move, we choose to move the pointer which points to the smaller adjacent element to potentially find a new minimum.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">mini</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">mini</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span>  <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">mini</span> <span class="o">*</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>After adjusting the pointers, we calculate the new minimum value (<code>mini</code>) in the current subarray and compute the score (<code>res</code>) as the product of <code>mini</code> and the length of the subarray defined by <code>i</code> and <code>j</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the maximum score found.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n)) in the worst case, where (n) is the size of the input array. This is because each element is considered at most twice (once by each pointer).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) as we are using a constant amount of extra space regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maximumScore</code> function effectively computes the maximum score obtainable from a contiguous subarray containing the index <code>k</code> by expanding the window from both sides and tracking the minimum value. This approach ensures that all possible subarrays are considered while maintaining efficient performance.</p>
+<p>By leveraging the two-pointer technique, the algorithm minimizes the need for nested loops or additional data structures, leading to a solution that is both time-efficient and space-efficient. The method is a good example of how simple techniques can be combined to solve seemingly complex problems, especially in the context of competitive programming and algorithmic challenges.</p>
+<p>This algorithm can be applied to various scenarios, including optimization problems where the goal is to maximize or minimize a certain criterion within a range of values. Understanding this approach enhances problem-solving skills in handling array manipulations and subarray evaluations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode896s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1794"  class="external-link" target="_blank" rel="noopener">LeetCode #1794: Count Pairs of Equal Substrings With Minimum Difference</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1794"  class="external-link" target="_blank" rel="noopener">LeetCode #1794: Count Pairs of Equal Substrings With Minimum Difference</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +363,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

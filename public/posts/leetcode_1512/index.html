@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,11 +204,136 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>   
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode581s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the number of good pairs in an array of integers. A pair of indices ( (i, j) ) is considered good if ( i &lt; j ) and ( A[i] = A[j] ). The goal is to count all such pairs in the given array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can leverage a hash map (or unordered map) to efficiently count the occurrences of each integer in the array. As we iterate through the array, we can calculate the number of good pairs that can be formed with the current number based on how many times it has appeared before.</p>
+<p>Here’s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Count Occurrences</strong>: Use an unordered map to count how many times each integer appears in the array as we iterate through it.</p>
+</li>
+<li>
+<p><strong>Calculate Good Pairs</strong>: For each integer, the number of good pairs that can be formed with the current integer is equal to the count of that integer already seen (since any previous occurrence can form a pair with the current index).</p>
+</li>
+<li>
+<p><strong>Update Count</strong>: After calculating the good pairs for the current integer, update its count in the unordered map.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: At the end of the iteration, return the total count of good pairs.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>numIdenticalPairs</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">numIdenticalPairs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">A</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The method <code>numIdenticalPairs</code> takes a vector of integers <code>A</code> as input, which represents the array of numbers.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">count</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>res</code> to store the result (the total number of good pairs) and an unordered map <code>count</code> to keep track of how many times each integer has appeared.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">a</span><span class="p">:</span> <span class="n">A</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We begin a loop that iterates over each integer <code>a</code> in the array <code>A</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">+=</span> <span class="n">count</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>For each integer <code>a</code>, we add the current count of <code>a</code> (which is the number of times it has appeared before this index) to <code>res</code>. The <code>++</code> operator increments the count of <code>a</code> in the map after accessing it, ensuring that the count reflects the total occurrences after this iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The loop continues until all integers in the array have been processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>   
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return the total number of good pairs stored in <code>res</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is (O(n)), where (n) is the number of elements in the array <code>A</code>. This is because we make a single pass through the array, and each map operation (insert or find) is average (O(1)).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(k)), where (k) is the number of unique integers in the array <code>A</code>. This is due to the storage requirements of the unordered map used to count the occurrences.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively counts the number of good pairs in an array by utilizing a hash map to keep track of occurrences of each integer.</p>
+<p><strong>Key Insights</strong>:</p>
+<ul>
+<li><strong>Efficiency</strong>: By using an unordered map, we achieve linear time complexity, making this solution efficient even for larger arrays.</li>
+<li><strong>Real-World Application</strong>: This type of counting problem can frequently arise in competitive programming and algorithm challenges, showcasing the importance of understanding hash maps and their applications in counting frequencies.</li>
+</ul>
+<p>Overall, the approach is straightforward yet powerful, demonstrating how a simple counting mechanism can solve problems efficiently. The code is concise, easy to understand, and leverages C++ STL features effectively, making it suitable for quick implementations in various programming contests.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode581s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1513"  class="external-link" target="_blank" rel="noopener">LeetCode #1513: Number of Substrings With Only 1s</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1513"  class="external-link" target="_blank" rel="noopener">LeetCode #1513: Number of Substrings With Only 1s</a></th>
       </tr>
   </thead>
   <tbody>
@@ -229,66 +354,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

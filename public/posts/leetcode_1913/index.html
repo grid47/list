@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -233,11 +233,164 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="n">max1</span><span class="o">*</span><span class="n">max2</span><span class="p">)</span><span class="o">-</span> <span class="p">(</span><span class="n">min1</span><span class="o">*</span><span class="n">min2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1028s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires calculating the maximum product difference between the two largest and two smallest numbers from a given list of integers. Specifically, we need to compute the expression:</p>
+<p>[
+\text{maxProductDifference} = (firstMax \times secondMax) - (firstMin \times secondMin)
+]</p>
+<p>where <code>firstMax</code> and <code>secondMax</code> are the two largest numbers in the list, and <code>firstMin</code> and <code>secondMin</code> are the two smallest numbers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can iterate through the list of integers once, maintaining track of the two largest and two smallest numbers. This allows us to compute the required product difference without needing to sort the list, which would be less efficient.</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We initialize four variables to track the two largest (<code>max1</code>, <code>max2</code>) and the two smallest (<code>min1</code>, <code>min2</code>) numbers.</p>
+<ul>
+<li><code>max1</code> and <code>max2</code> are initialized to <code>INT_MIN</code>, which is the smallest possible integer value, to ensure any number in the list will be larger.</li>
+<li><code>min1</code> and <code>min2</code> are initialized to <code>INT_MAX</code>, which is the largest possible integer value, to ensure any number in the list will be smaller.</li>
+</ul>
+</li>
+<li>
+<p><strong>Single Pass Calculation</strong>: We loop through each number in the input list and update our largest and smallest values:</p>
+<ul>
+<li>If the current number is greater than <code>max1</code>, it becomes the new <code>max1</code>, and the old <code>max1</code> becomes <code>max2</code>.</li>
+<li>If the current number is not greater than <code>max1</code> but greater than <code>max2</code>, it becomes the new <code>max2</code>.</li>
+<li>Similarly, for the smallest values, if the current number is less than <code>min1</code>, it becomes <code>min1</code>, and the old <code>min1</code> becomes <code>min2</code>.</li>
+<li>If the current number is not less than <code>min1</code> but less than <code>min2</code>, it becomes the new <code>min2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Product Difference</strong>: Once we have our two largest and two smallest numbers, we can easily compute the product difference.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s go through the code line by line for a clearer understanding:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxProductDifference</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>This defines the <code>Solution</code> class and the <code>maxProductDifference</code> method that takes a vector of integers.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="c1">//we have to return the result of
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// (firstMax*secondMax) - (firstMin*secondMin)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">max1</span><span class="o">=</span><span class="n">INT_MIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">max2</span><span class="o">=</span><span class="n">INT_MIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">min1</span><span class="o">=</span><span class="n">INT_MAX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">min2</span><span class="o">=</span><span class="n">INT_MAX</span><span class="p">;</span>
+</span></span></code></pre></div><p>Here, we initialize our tracking variables for the two largest (<code>max1</code>, <code>max2</code>) and two smallest (<code>min1</code>, <code>min2</code>) numbers.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span></code></pre></div><p>This loop iterates through each number in the <code>nums</code> array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">max1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//assign the second max to max2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">max2</span><span class="o">=</span><span class="n">max1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">max1</span><span class="o">=</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>If the current number is greater than <code>max1</code>, we update <code>max2</code> to be the old <code>max1</code>, and <code>max1</code> to the current number.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">max2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//it can become second max
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">max2</span><span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>If the current number is not greater than <code>max1</code> but greater than <code>max2</code>, we update <code>max2</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="c1">//check for the minimum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">min1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//it can become first minimum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">min2</span><span class="o">=</span><span class="n">min1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">min1</span><span class="o">=</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>We check for the smallest values in a similar fashion. If the current number is less than <code>min1</code>, we update <code>min2</code> to be the old <code>min1</code>, and <code>min1</code> to the current number.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;</span><span class="n">min2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//it can become second minimum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">min2</span><span class="o">=</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>If the current number is not less than <code>min1</code> but is less than <code>min2</code>, we update <code>min2</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="n">max1</span><span class="o">*</span><span class="n">max2</span><span class="p">)</span><span class="o">-</span> <span class="p">(</span><span class="n">min1</span><span class="o">*</span><span class="n">min2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we return the product difference calculated using the largest and smallest numbers we found.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is O(n), where n is the number of elements in the input vector <code>nums</code>. We only make a single pass through the list.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(1), as we are using a constant amount of extra space for our variables, regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxProductDifference</code> method efficiently computes the maximum product difference by tracking the two largest and two smallest numbers in a single pass through the input list. This approach minimizes the time complexity and ensures that the solution is both optimal and straightforward.</p>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Data Analysis</strong>: This algorithm can be applied in scenarios where you need to evaluate the extremes in a dataset, such as in financial analytics to determine risk versus return.</p>
+</li>
+<li>
+<p><strong>Game Theory</strong>: In games involving strategic number choices, understanding the maximum product difference can help in formulating better strategies.</p>
+</li>
+<li>
+<p><strong>Statistical Models</strong>: In statistical modeling, knowing the range of values and their relationships can provide insights into distributions.</p>
+</li>
+<li>
+<p><strong>Competitive Programming</strong>: This efficient algorithm can be used in various competitive programming contexts where performance is crucial.</p>
+</li>
+</ol>
+<p>By following this approach, developers can efficiently handle numerical datasets and perform operations that require knowledge of the largest and smallest values, enhancing the performance of their applications. The clear structure of the solution ensures that it can be easily understood and modified for related problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1028s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1914"  class="external-link" target="_blank" rel="noopener">LeetCode #1914: Cyclically Rotating a Grid</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1914"  class="external-link" target="_blank" rel="noopener">LeetCode #1914: Cyclically Rotating a Grid</a></th>
       </tr>
   </thead>
   <tbody>
@@ -258,66 +411,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

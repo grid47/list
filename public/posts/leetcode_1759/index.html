@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,11 +212,140 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode857s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires counting the number of homogenous substrings in a given string. A homogenous substring is defined as a substring where all characters are the same. For example, in the string <code>&quot;abb&quot;</code>:</p>
+<ul>
+<li>The homogenous substrings are: <code>&quot;a&quot;</code>, <code>&quot;b&quot;</code>, <code>&quot;b&quot;</code>, <code>&quot;bb&quot;</code>.</li>
+<li>The total count of homogenous substrings is 5.</li>
+</ul>
+<p>The task is to compute this count efficiently, especially for longer strings.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution involves a linear scan through the string, counting contiguous characters that are the same. When a character changes, we calculate how many homogenous substrings can be formed from the previous sequence of identical characters.</p>
+<p>The formula to calculate the number of homogenous substrings formed by <code>len</code> contiguous characters is given by:</p>
+<p>[
+\text{count} = \frac{len \times (len + 1)}{2}
+]</p>
+<p>This formula accounts for all possible substrings of different lengths that can be formed from the contiguous segment of identical characters.</p>
+<p>The algorithm is structured as follows:</p>
+<ol>
+<li>Traverse the string, maintaining a count of contiguous characters.</li>
+<li>When a character change is detected, calculate the number of homogenous substrings for the previous segment and reset the counter for the new character.</li>
+<li>At the end of the string, ensure to account for the last segment of contiguous characters.</li>
+<li>Return the total count modulo (10^9 + 7) to prevent overflow.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is the detailed breakdown of the <code>countHomogenous</code> function:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The method is defined within the class <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The <code>countHomogenous</code> method takes a single string <code>s</code> as input and returns an integer.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countHomogenous</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: Several variables are initialized:</p>
+<ul>
+<li><code>j</code> is a pointer that tracks the start of a contiguous segment of characters.</li>
+<li><code>cnt</code> will hold the total count of homogenous substrings.</li>
+<li><code>n</code> stores the length of the string.</li>
+<li><code>mod</code> is used for the modulo operation to avoid overflow.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Loop Through the String</strong>: A <code>for</code> loop iterates through each character of the string using the index <code>i</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check for Homogenous Characters</strong>: Inside the loop, the first condition checks if the current character matches the character at index <code>j</code> (the start of the current segment). If they match, the loop continues.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Count for the Previous Segment</strong>: When a character change is detected:</p>
+<ul>
+<li>Calculate the length of the contiguous segment as <code>len = i - j</code>.</li>
+<li>Use the formula to calculate the number of homogenous substrings for this segment and add it to <code>cnt</code>.</li>
+<li>Update <code>j</code> to the current index <code>i</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">len</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cnt</span> <span class="o">+=</span> <span class="n">len</span> <span class="o">*</span> <span class="p">(</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>                
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Account for the Last Segment</strong>: After the loop, there may still be a contiguous segment to account for (the last characters). Calculate the length and add to the total count.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="n">len</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">j</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cnt</span> <span class="o">+=</span> <span class="n">len</span> <span class="o">*</span> <span class="p">(</span><span class="n">len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> 
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Total Count</strong>: Finally, return the total count modulo (10^9 + 7).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">cnt</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the length of the string. This is because each character is processed exactly once in the linear scan.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) as only a constant amount of additional space is used, regardless of the size of the input string.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, the <code>countHomogenous</code> function efficiently counts the number of homogenous substrings in a given string by leveraging a linear traversal and mathematical calculations to sum up possible substrings from segments of identical characters. This approach is optimal and concise, making it suitable for handling long strings while ensuring the solution remains within reasonable time and space constraints. By maintaining clarity in counting contiguous characters and using the mathematical formula for substring counting, the implementation successfully tackles the problem with elegance. This method showcases a valuable technique in substring-related problems that can be applied in various algorithmic challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode857s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1760"  class="external-link" target="_blank" rel="noopener">LeetCode #1760: Minimum Limit of Balls in a Bag</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1760"  class="external-link" target="_blank" rel="noopener">LeetCode #1760: Minimum Limit of Balls in a Bag</a></th>
       </tr>
   </thead>
   <tbody>
@@ -237,66 +366,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

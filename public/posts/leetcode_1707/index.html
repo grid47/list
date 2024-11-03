@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -255,11 +255,170 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode799s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to maximize the XOR of given integers with a set of queries. Each query consists of a pair <code>(x, m)</code>, where <code>x</code> is the integer for which we want to maximize the XOR value with any integer from a list of numbers (<code>nums</code>), but only with those integers that are less than or equal to <code>m</code>. The goal is to efficiently compute the maximum XOR for each query based on these constraints.</p>
+<p>For example, given a list of numbers and several queries, the task is to return an array where each element corresponds to the maximum XOR value obtained from the specified conditions for each query.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we employ the following steps:</p>
+<ol>
+<li>
+<p><strong>Data Structure</strong>: Use a Trie (prefix tree) to store binary representations of the integers in <code>nums</code>. This allows for efficient searching and retrieval of numbers that can provide the maximum XOR value.</p>
+</li>
+<li>
+<p><strong>Preparation</strong>:</p>
+<ul>
+<li>First, sort the input list of integers.</li>
+<li>Store the queries along with their indices in a format that allows sorting by the maximum value <code>m</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing Queries</strong>:</p>
+<ul>
+<li>For each query, add numbers from the sorted list to the Trie if they are less than or equal to <code>m</code>.</li>
+<li>For each query, use the Trie to find the maximum XOR value possible with <code>x</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Results</strong>: After processing all queries, return the results in the order corresponding to the original queries.</p>
+</li>
+</ol>
+<p>This method efficiently organizes the numbers and allows for quick lookups, making it suitable for larger datasets.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now let&rsquo;s go through the provided code to understand its implementation in detail:</p>
+<ol>
+<li>
+<p><strong>TrieNode Class</strong>: This class represents a node in the Trie. Each node contains two pointers (<code>bin[0]</code> and <code>bin[1]</code>) for the two possible binary values (0 and 1), and an integer <code>prefixVal</code> to store the value associated with the leaf node.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TrieNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TrieNode</span><span class="o">*</span> <span class="n">bin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">prefixVal</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Add Method</strong>: The <code>add</code> method inserts an integer into the Trie. It traverses from the most significant bit (31 for a 32-bit integer) to the least significant bit, creating new nodes as necessary.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TrieNode</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">31</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">bit</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">bin</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">bin</span><span class="p">[</span><span class="n">bit</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrieNode</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">bin</span><span class="p">[</span><span class="n">bit</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cur</span><span class="o">-&gt;</span><span class="n">prefixVal</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Max Method</strong>: The <code>max</code> method computes the maximum XOR value possible with a given number <code>num</code>. It navigates through the Trie by choosing the opposite bit (to maximize XOR) whenever possible.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">max</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TrieNode</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">31</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">bit</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">bin</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">bit</span><span class="p">]</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">bin</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">bit</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> 
+</span></span><span class="line"><span class="cl">             <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">bin</span><span class="p">[</span><span class="n">bit</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">prefixVal</span> <span class="o">^</span> <span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Solution Class</strong>: The <code>Solution</code> class contains the main method that processes the input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">maximizeXor</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: We define necessary variables, including the size of <code>nums</code> and <code>q</code>, and prepare a temporary array to store queries with their indices for later sorting.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;&gt;</span> <span class="n">tmp</span><span class="p">(</span><span class="n">sz</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sz</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span> <span class="p">};</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sorting</strong>: We sort the <code>nums</code> array and the temporary query array <code>tmp</code> based on the maximum value <code>m</code> of each query. This allows us to process the queries in the order of their constraints.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">sort</span><span class="p">(</span><span class="n">tmp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[](</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="p">});</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Result Initialization</strong>: Initialize a result vector to hold the final answers for each query.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">sz</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">TrieNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrieNode</span><span class="p">();</span>        
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Processing Queries</strong>: We loop through each query in the sorted list and insert appropriate numbers into the Trie.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="nl">qu</span> <span class="p">:</span> <span class="n">tmp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">qu</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">root</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Compute Maximum XOR</strong>: For each query, we determine the maximum XOR value using the <code>max</code> method of the Trie. If there are no valid numbers (i.e., if <code>idx</code> is 0), we record -1 as the answer for that query.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">max</span><span class="p">(</span><span class="n">qu</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">res</span><span class="p">[</span><span class="n">qu</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Results</strong>: Finally, we return the results vector.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is O(n log n + sz log sz), where n is the number of elements in <code>nums</code> and sz is the number of queries. Sorting the numbers and queries takes O(n log n) and O(sz log sz), respectively. The space complexity is O(n) due to the storage of the Trie nodes.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution effectively maximizes the XOR of given integers with specified constraints through the use of a Trie data structure. The Trie allows for efficient insertion and retrieval of integers based on their binary representation, facilitating quick calculations of maximum XOR values. By organizing and sorting the data properly, the algorithm can handle larger datasets efficiently, making it a robust solution for similar problems involving bit manipulation and maximization strategies. Overall, the code is well-structured, demonstrating a clear approach to a complex problem with optimal performance characteristics.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode799s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1708"  class="external-link" target="_blank" rel="noopener">LeetCode #1708: Largest Subarray Length K</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1708"  class="external-link" target="_blank" rel="noopener">LeetCode #1708: Largest Subarray Length K</a></th>
       </tr>
   </thead>
   <tbody>
@@ -280,66 +439,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

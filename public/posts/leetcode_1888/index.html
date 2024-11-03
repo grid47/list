@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,7 +218,127 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode998s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the minimum number of flips required to make a given binary string alternate between &lsquo;0&rsquo;s and &lsquo;1&rsquo;s. An alternating string is one that consists of characters that change with each position, such as &ldquo;010101&rdquo; or &ldquo;101010&rdquo;. The challenge is to find the fewest number of character flips (changing &lsquo;0&rsquo; to &lsquo;1&rsquo; or &lsquo;1&rsquo; to &lsquo;0&rsquo;) necessary to achieve this alternating pattern.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will take the following steps:</p>
+<ol>
+<li><strong>Duplicate the String</strong>: Concatenate the original string with itself. This allows us to easily check for alternating patterns over the length of the string without running into index issues.</li>
+<li><strong>Create Target Patterns</strong>: Generate two target patterns, <code>s1</code> and <code>s2</code>, which represent the two possible valid alternating strings. <code>s1</code> will start with &lsquo;0&rsquo; and <code>s2</code> will start with &lsquo;1&rsquo;.</li>
+<li><strong>Count Flips</strong>: As we iterate through the concatenated string, we will maintain counts of how many flips are needed to match either <code>s1</code> or <code>s2</code>.</li>
+<li><strong>Sliding Window Technique</strong>: Implement a sliding window of size <code>n</code> (the length of the original string) to determine the minimum flips needed as we move through the concatenated string.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We define the <code>Solution</code> class to contain our method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Declaration</strong>: The <code>minFlips</code> function is declared, taking a string <code>s</code> as an input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">minFlips</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: We initialize variables to store the length of the string <code>n</code>, and create two target strings <code>s1</code> and <code>s2</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">+=</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// Duplicate the string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">string</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Generate Target Patterns</strong>: We loop through the length of the duplicated string to fill <code>s1</code> and <code>s2</code> with the appropriate alternating characters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s1</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">?</span> <span class="sc">&#39;0&#39;</span> <span class="o">:</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> <span class="c1">// Alternating pattern starting with &#39;1&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">s2</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">?</span> <span class="sc">&#39;1&#39;</span> <span class="o">:</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span> <span class="c1">// Alternating pattern starting with &#39;0&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Flip Counters</strong>: Initialize counters for the number of flips needed for both patterns (<code>ans1</code> and <code>ans2</code>), as well as a variable to store the minimum flips found.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ans2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Flips</strong>: We iterate through the concatenated string, comparing each character to the corresponding character in <code>s1</code> and <code>s2</code>. We increment the respective flip counters when there is a mismatch.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">ans1</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">ans2</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Sliding Window Adjustment</strong>: If we have reached the length of the original string, we check if any characters that are sliding out of the window need to be decremented from our flip counts.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">n</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">n</span><span class="p">])</span> <span class="n">ans1</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">s2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">n</span><span class="p">]</span> <span class="o">!=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">n</span><span class="p">])</span> <span class="n">ans2</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update Minimum Flips</strong>: When the window size is sufficient (i.e., <code>i &gt;= n - 1</code>), we check the minimum flips needed across both patterns.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">({</span><span class="n">ans1</span><span class="p">,</span> <span class="n">ans2</span><span class="p">,</span> <span class="n">ans</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: Finally, return the minimum number of flips required to convert the original string into an alternating string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n) ), where ( n ) is the length of the original string. This is because we perform a constant amount of work (comparisons and arithmetic operations) for each character in the string during the iteration.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n) ) due to the creation of the duplicated string and the two target patterns.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively calculates the minimum number of flips required to convert a binary string into one of two alternating patterns. By leveraging string duplication, character comparison, and a sliding window technique, it optimally determines the fewest operations needed.</p>
+<p>This solution showcases the application of fundamental algorithmic concepts such as string manipulation, counting, and windowing, making it suitable for similar problems in competitive programming and software development.</p>
+<p>In conclusion, this approach is efficient, clear, and easily adaptable to variations of the problem, demonstrating a solid understanding of string handling and algorithm design principles. Such techniques can be valuable in a range of programming tasks, from basic challenges to complex applications in data processing and analysis.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode998s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -230,7 +350,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1889"  class="external-link" target="_blank" rel="noopener">LeetCode #1889: Minimum Space Wasted From Packaging</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1889"  class="external-link" target="_blank" rel="noopener">LeetCode #1889: Minimum Space Wasted From Packaging</a></th>
       </tr>
   </thead>
   <tbody>
@@ -251,66 +371,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

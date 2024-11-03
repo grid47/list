@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,11 +204,113 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bit</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">minimumOneBitOperations</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bit</span><span class="o">-</span><span class="mi">1</span><span class="p">)));</span>         
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode713s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the minimum number of operations required to transform a given integer ( n ) into zero by using specific operations. The only allowed operation is to flip the bits of the binary representation of ( n ). This means you can change a 1 to a 0 or a 0 to a 1, but the goal is to minimize the number of operations needed to reduce ( n ) to zero.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem efficiently, the solution employs a recursive approach based on the properties of binary numbers. The key observations are:</p>
+<ol>
+<li><strong>Binary Representation</strong>: Each number can be represented in binary, and the transformation to zero involves flipping bits.</li>
+<li><strong>Recursive Strategy</strong>: By examining the most significant bit (MSB) of the number, we can recursively determine the operations needed. The number can be broken down into operations based on its highest power of 2.</li>
+<li><strong>Base Case</strong>: For small values of ( n ), we can easily determine the required operations without recursion.</li>
+<li><strong>Exploiting Patterns</strong>: The pattern of operations can be derived from how binary numbers behave when reduced by the highest power of 2 less than or equal to ( n ).</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minimumOneBitOperations</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains a public method named <code>minimumOneBitOperations</code>, which takes an integer ( n ) as input and returns the minimum number of operations required to reduce it to zero.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>This is the base case for the recursion. If ( n ) is 0 or 1, the minimum operations required to reduce it to zero are equal to ( n ) itself (0 operations for 0, and 1 operation for 1).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">bit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bit</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bit</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>bit</code> to count the position of the most significant bit (MSB) of ( n ). The <code>while</code> loop continues shifting <code>1</code> to the left until it exceeds ( n ). This effectively counts how many bits are necessary to represent ( n ) in binary.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">bit</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">minimumOneBitOperations</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bit</span><span class="o">-</span><span class="mi">1</span><span class="p">)));</span>         
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The return statement employs a recursive call:
+<ul>
+<li>The expression <code>(1 &lt;&lt; bit) - 1</code> gives a number that consists of all bits set to 1 up to the MSB of ( n ). For example, if ( n ) is 5 (binary <code>101</code>), the MSB is at position 2, and <code>(1 &lt;&lt; 3) - 1</code> would yield <code>7</code> (binary <code>111</code>).</li>
+<li>The expression <code>n - (1 &lt;&lt; (bit-1))</code> reduces ( n ) by the value of the highest power of 2 less than or equal to ( n ). This effectively flips the MSB from 1 to 0.</li>
+<li>The recursion continues to compute the minimum operations for the reduced value of ( n ).</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this recursive approach is ( O(\log n) ). This is because each recursive call reduces the problem size based on the highest power of 2, and the depth of recursion is proportional to the number of bits in ( n ).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(\log n) ) as well due to the recursion stack. Each recursive call adds to the stack, but the number of calls is limited by the logarithmic depth corresponding to the bit length of ( n ).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently calculates the minimum number of operations required to reduce an integer ( n ) to zero by recursively flipping bits. The approach is based on understanding the binary representation of numbers and strategically choosing the highest power of 2 to minimize the number of operations.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Recursive Insight</strong>: The problem is simplified by focusing on the most significant bit, reducing complexity.</li>
+<li><strong>Base Cases</strong>: Simple conditions for small values (0 and 1) prevent unnecessary calculations.</li>
+<li><strong>Efficiency</strong>: The logarithmic nature of the solution ensures that it runs quickly even for larger values of ( n ).</li>
+</ol>
+<p>This algorithm can be particularly useful in scenarios where binary operations and bit manipulation are common, showcasing how recursion can lead to elegant solutions in computational problems involving binary representations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode713s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1612"  class="external-link" target="_blank" rel="noopener">LeetCode #1612: Check If Two Expression Trees are Equivalent</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1612"  class="external-link" target="_blank" rel="noopener">LeetCode #1612: Check If Two Expression Trees are Equivalent</a></th>
       </tr>
   </thead>
   <tbody>
@@ -229,66 +331,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

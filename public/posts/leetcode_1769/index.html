@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -210,11 +210,147 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode868s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves a string <code>boxes</code> consisting of &lsquo;0&rsquo;s and &lsquo;1&rsquo;s, where each character represents a box that may or may not contain a ball. The goal is to determine the minimum number of operations required to move all balls to each box. An operation consists of moving a ball from one box to another, and the cost of moving a ball is equal to the distance between the boxes. For each box, the output should be an integer indicating the total number of operations needed to move all balls to that specific box.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solve this problem uses a two-pass technique that calculates the total operations needed for each box in a single scan from left to right and then another from right to left. The algorithm can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a result vector <code>res</code> initialized to the same length as <code>boxes</code>, which will hold the minimum operations for each box.</li>
+<li>Use two counters: <code>ops</code> to track the total operations required and <code>cnt</code> to count the number of balls encountered.</li>
+</ul>
+</li>
+<li>
+<p><strong>First Pass (Left to Right)</strong>:</p>
+<ul>
+<li>Iterate over each box from left to right.</li>
+<li>For each box, add the current value of <code>ops</code> to the corresponding index in <code>res</code>.</li>
+<li>If the current box contains a ball (&lsquo;1&rsquo;), increment <code>cnt</code>.</li>
+<li>Update <code>ops</code> by adding the current count of balls to it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Pass (Right to Left)</strong>:</p>
+<ul>
+<li>Iterate over each box from right to left.</li>
+<li>Again, add the current value of <code>ops</code> to the corresponding index in <code>res</code>.</li>
+<li>Update <code>cnt</code> for balls similarly.</li>
+<li>Update <code>ops</code> using the count of balls encountered during this pass.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>Finally, return the result vector containing the minimum operations for each box.</li>
+</ul>
+</li>
+</ol>
+<p>This method is efficient as it ensures each box is processed only twice, yielding a linear time complexity relative to the length of the input string.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Below is a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">minOperations</span><span class="p">(</span><span class="n">string</span> <span class="n">boxes</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class is defined with a public method <code>minOperations</code>, which takes a string <code>boxes</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">boxes</span><span class="p">.</span><span class="n">length</span><span class="p">());</span> 
+</span></span></code></pre></div><ul>
+<li>A vector <code>res</code> is initialized with the same length as <code>boxes</code>. This vector will store the result, i.e., the minimum operations needed for each box.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">boxes</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A for loop begins to traverse <code>boxes</code> from the beginning to the end.</li>
+<li>Two variables are initialized: <code>ops</code> to track total operations and <code>cnt</code> to count the number of balls encountered.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">ops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span> <span class="o">+=</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;1&#39;</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ops</span> <span class="o">+=</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>For each box, the current value of <code>ops</code> is added to <code>res[i]</code>, which accounts for the operations needed to bring balls from all previous boxes to the current box.</li>
+<li>The count of balls (<code>cnt</code>) is updated; if the current box contains a ball (&lsquo;1&rsquo;), it increments by 1.</li>
+<li><code>ops</code> is then updated by adding the current count of balls, which reflects the cumulative cost of moving all encountered balls to the current box.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A second for loop begins to traverse <code>boxes</code> from the end to the beginning.</li>
+<li>The same approach is applied as in the first pass, but this time calculating the operations needed to move balls from boxes to the left.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">ops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span> <span class="o">+=</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;1&#39;</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ops</span> <span class="o">+=</span> <span class="n">cnt</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The operations from the second pass are also added to <code>res[i]</code>, further refining the total operations required to bring all balls to the current box from both sides.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the method returns the <code>res</code> vector, which contains the minimum operations needed for each box.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n)), where (n) is the length of the <code>boxes</code> string. This is because each box is processed in two separate passes over the string.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) due to the storage of the result vector <code>res</code>, which has the same length as the input string.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minOperations</code> method efficiently computes the minimum number of operations required to move all balls to each box in a string representation. By employing a two-pass approach, it successfully accumulates the operations from both directions, ensuring a linear time complexity that is optimal for this problem.</p>
+<p>This solution not only solves the problem efficiently but also demonstrates the power of using counters and cumulative sums in algorithm design. It can be applied in various scenarios where similar optimization problems exist, making it a valuable technique in algorithm development.</p>
+<p>In summary, the implementation provided offers a clear, concise, and efficient way to tackle the task at hand, making it suitable for competitive programming and practical software applications alike. Understanding this method enhances one&rsquo;s problem-solving toolkit, especially for string manipulation and optimization challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode868s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1770"  class="external-link" target="_blank" rel="noopener">LeetCode #1770: Maximum Score from Performing Multiplication Operations</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1770"  class="external-link" target="_blank" rel="noopener">LeetCode #1770: Maximum Score from Performing Multiplication Operations</a></th>
       </tr>
   </thead>
   <tbody>
@@ -235,66 +371,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

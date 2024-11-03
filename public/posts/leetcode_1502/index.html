@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,11 +218,149 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode569s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine if a given array can be rearranged to form an arithmetic progression (AP). An arithmetic progression is a sequence of numbers in which the difference between consecutive terms is constant. Given an array of integers, we need to ascertain whether it&rsquo;s possible to rearrange these integers to form such a sequence.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can break it down into several key steps:</p>
+<ol>
+<li><strong>Handle Edge Cases</strong>: If the array has two or fewer elements, it can always form an AP, so we return <code>true</code> immediately.</li>
+<li><strong>Find Minimum and Maximum</strong>: Determine the minimum and maximum values in the array to compute the required common difference <code>d</code> for the AP.</li>
+<li><strong>Check Difference Condition</strong>: Verify whether the difference between the maximum and minimum values is divisible by the number of terms minus one (i.e., <code>(max - min) % (n - 1) == 0</code>). If not, it&rsquo;s impossible to form an AP.</li>
+<li><strong>Determine Common Difference</strong>: Calculate the common difference <code>d</code> as <code>(max - min) / (n - 1)</code>.</li>
+<li><strong>Rearrangement Verification</strong>: Using a greedy approach, try to rearrange the elements such that they match the expected AP sequence derived from the minimum value and the common difference.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">canMakeArithmeticProgression</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We start by defining a class <code>Solution</code> and a method <code>canMakeArithmeticProgression</code>.</li>
+<li>If the size of the array <code>arr</code> is less than or equal to 2, we return <code>true</code>, as any two numbers can form an AP.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">,</span> <span class="n">max</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">min</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">min</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">max</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">max</span><span class="p">,</span> <span class="n">num</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We initialize two variables, <code>min</code> and <code>max</code>, to find the minimum and maximum values in the array.</li>
+<li>We iterate over each number in the array, updating <code>min</code> and <code>max</code> accordingly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">((</span><span class="n">max</span> <span class="o">-</span> <span class="n">min</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">max</span> <span class="o">-</span> <span class="n">min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We check if the difference between <code>max</code> and <code>min</code> is divisible by the number of elements minus one. If not, we return <code>false</code>, as it indicates that a uniform difference <code>d</code> cannot be established.</li>
+<li>If it is divisible, we calculate the common difference <code>d</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">min</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a pointer <code>i</code> to traverse the array.</li>
+<li>The while loop continues until all elements are processed. For each <code>i</code>, we check if the current element matches the expected value in the AP sequence (<code>min + i * d</code>). If it does, we move to the next index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span> <span class="p">((</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">min</span><span class="p">)</span> <span class="o">%</span> <span class="n">d</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the current element does not match the expected value, we check if the difference from <code>min</code> is not a multiple of <code>d</code>. If this condition is met, we return <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">min</span><span class="p">)</span> <span class="o">/</span> <span class="n">d</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">||</span> <span class="n">arr</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">==</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">pos</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the previous conditions are not met, we compute the expected position <code>pos</code> for the current element.</li>
+<li>We check whether <code>pos</code> is less than <code>i</code> or if the element at <code>pos</code> is already equal to <code>arr[i]</code>. If either condition is true, it means that the sequence cannot be rearranged into an AP, and we return <code>false</code>.</li>
+<li>If all checks are passed, we swap the current element with the element at its computed position to continue rearranging.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>If the loop completes without returning false, we return <code>true</code>, indicating that the array can be rearranged to form an AP.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm performs a single pass to find the minimum and maximum, which takes (O(n)).</li>
+<li>It processes the array again to verify the arrangement and potential swapping, which also takes (O(n)).</li>
+<li>Overall, the time complexity is (O(n)), where (n) is the number of elements in the array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) since we are using a constant amount of extra space regardless of the input size.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether a given array can be rearranged to form an arithmetic progression by utilizing properties of the sequence and performing necessary checks and rearrangements in linear time. The combination of finding the minimum and maximum values, calculating the common difference, and verifying the arrangement provides a robust approach to solving this problem.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Early Return</strong>: For small arrays, the solution can terminate early.</li>
+<li><strong>Modular Checks</strong>: Utilizing modular arithmetic helps determine the feasibility of creating an AP.</li>
+<li><strong>Greedy Approach</strong>: Swapping elements based on expected positions allows for in-place rearrangements without requiring additional data structures.</li>
+</ul>
+<p>This method is efficient and easy to understand, making it suitable for problems involving arithmetic properties in sequences.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode569s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1503"  class="external-link" target="_blank" rel="noopener">LeetCode #1503: Last Moment Before All Ants Fall Out of a Plank</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1503"  class="external-link" target="_blank" rel="noopener">LeetCode #1503: Last Moment Before All Ants Fall Out of a Plank</a></th>
       </tr>
   </thead>
   <tbody>
@@ -243,66 +381,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

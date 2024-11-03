@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,11 +204,127 @@
 </span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">return</span> <span class="n">diff</span><span class="o">/</span><span class="n">limit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode886s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining the minimum number of operations required to adjust the sum of a list of integers (<code>nums</code>) to reach a specified <code>goal</code>. Each operation allows the addition or subtraction of a fixed integer value (<code>limit</code>). The challenge is to compute how many such operations are needed to make the sum equal to the <code>goal</code>.</p>
+<p><strong>Key Details:</strong></p>
+<ul>
+<li>You are given an array of integers (<code>nums</code>).</li>
+<li>You have a limit on how much you can add or subtract in each operation.</li>
+<li>You need to find the minimum number of operations to adjust the current sum of <code>nums</code> to match the <code>goal</code>.</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li>If <code>nums = [1, 2, 3]</code>, <code>limit = 2</code>, and <code>goal = 10</code>, the sum of <code>nums</code> is <code>6</code>. The difference from the goal is <code>10 - 6 = 4</code>. To cover this difference using operations of size <code>2</code>, you would need <code>4 / 2 = 2</code> operations.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem is straightforward:</p>
+<ol>
+<li>Calculate the current sum of the elements in the <code>nums</code> array.</li>
+<li>Compute the absolute difference between this sum and the desired <code>goal</code>.</li>
+<li>Determine how many operations are needed by dividing this difference by the <code>limit</code>:
+<ul>
+<li>If the difference is exactly divisible by <code>limit</code>, the number of operations is simply the result of that division.</li>
+<li>If it is not divisible, you will need one additional operation to cover the remainder.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minElements</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">limit</span><span class="p">,</span> <span class="kt">int</span> <span class="n">goal</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> that contains the public method <code>minElements</code>.</li>
+<li>The method takes a vector of integers <code>nums</code>, an integer <code>limit</code>, and an integer <code>goal</code> as parameters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span><span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>sum</code> to store the total sum of the elements in <code>nums</code>.</li>
+<li>Using a range-based for loop, we iterate through each element <code>x</code> in <code>nums</code> and accumulate the sum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">goal</span> <span class="o">-</span> <span class="n">sum</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We calculate the absolute difference <code>diff</code> between the <code>goal</code> and the calculated <code>sum</code>. This step ensures that we are only dealing with positive values, making it easier to compute the number of operations needed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">diff</span> <span class="o">%</span> <span class="n">limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">diff</span><span class="o">/</span><span class="n">limit</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We check if the difference is divisible by the <code>limit</code> using the modulus operator.</li>
+<li>If it is divisible, we return the quotient <code>diff / limit</code> as the minimum number of operations required.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">return</span> <span class="n">diff</span><span class="o">/</span><span class="n">limit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>If the difference is not divisible by <code>limit</code>, we return <code>diff / limit + 1</code> to account for the extra operation needed to cover the remainder.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is (O(n)), where (n) is the number of elements in the <code>nums</code> array. This is due to the need to iterate through all elements once to calculate the sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) since we are using a fixed amount of space regardless of the input size. The only extra space used is for the variables <code>sum</code>, <code>diff</code>, and a few constants.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum number of operations needed to adjust the sum of a given list of integers to reach a specified goal. By utilizing basic arithmetic operations and properties of integers, the implementation remains clean and straightforward.</p>
+<p>The code illustrates effective problem-solving techniques, including the use of absolute values and modular arithmetic, making it a useful reference for similar algorithmic challenges. The simplicity of the approach highlights the importance of understanding basic mathematical principles in algorithm design.</p>
+<p>This implementation serves as an excellent example for those looking to enhance their skills in computational problem-solving and algorithmic design, especially in problems involving arrays and arithmetic operations. By dissecting the code and understanding its mechanics, programmers can learn to tackle similar problems with confidence and efficiency.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode886s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1786"  class="external-link" target="_blank" rel="noopener">LeetCode #1786: Number of Restricted Paths From First to Last Node</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1786"  class="external-link" target="_blank" rel="noopener">LeetCode #1786: Number of Restricted Paths From First to Last Node</a></th>
       </tr>
   </thead>
   <tbody>
@@ -229,66 +345,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

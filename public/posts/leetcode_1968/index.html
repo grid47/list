@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -216,7 +216,168 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1088s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The goal of this problem is to rearrange an array of integers such that elements at even indices are non-negative, and elements at odd indices are negative. The array must be rearranged in a way that maintains the relative order of the numbers while ensuring that the specified conditions are met.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To achieve this rearrangement, we can follow a three-step process:</p>
+<ol>
+<li>
+<p><strong>Partitioning the Array</strong>: First, we will find a median value that will help us divide the numbers into two groups: those less than the median and those greater than or equal to the median.</p>
+</li>
+<li>
+<p><strong>Rearranging Elements</strong>: We will use the median to rearrange the elements in a specific pattern where:</p>
+<ul>
+<li>Elements at even indices will be non-negative.</li>
+<li>Elements at odd indices will be negative.</li>
+</ul>
+</li>
+<li>
+<p><strong>Utilizing Indices Effectively</strong>: We can achieve this by carefully swapping elements based on their current value relative to the median, ensuring that we maintain the correct order as we rearrange the array.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><p>This line defines the <code>Solution</code> class, which will contain the method to rearrange the array.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rearrangeArray</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The <code>rearrangeArray</code> method takes a reference to a vector of integers <code>nums</code> as its parameter.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">midptr</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nth_element</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">midptr</span><span class="p">,</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="o">*</span><span class="n">midptr</span><span class="p">;</span>
+</span></span></code></pre></div><p>Here, we start by determining the size of the input array <code>n</code>. We then create a pointer <code>midptr</code> that points to the middle element of the array. The <code>nth_element</code> function is used to rearrange the array such that all elements before <code>midptr</code> are less than or equal to the element pointed to by <code>midptr</code>, effectively finding a median. The median value is stored in <code>mid</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="cp">#define A(i) nums[(1 + 2 * i) % (n|1)]
+</span></span></span></code></pre></div><p>We define a macro <code>A(i)</code> that allows us to access the elements of <code>nums</code> at the desired rearranged positions. This ensures that the elements are accessed in the order required to satisfy the even/odd index conditions.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize three index variables:</p>
+<ul>
+<li><code>i</code> will track the position of the next non-negative element (to be placed at even indices).</li>
+<li><code>j</code> will be used to iterate through the array.</li>
+<li><code>k</code> will track the position of the next negative element (to be placed at odd indices).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">j</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We begin a loop that continues until the <code>j</code> index exceeds the <code>k</code> index.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">mid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">swap</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="o">--</span><span class="p">));</span>
+</span></span></code></pre></div><p>If the current element at index <code>j</code> is less than the median, we swap it with the element at index <code>k</code> (which will be a negative element) and decrement <code>k</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">mid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">swap</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">i</span><span class="o">++</span><span class="p">),</span> <span class="n">A</span><span class="p">(</span><span class="n">j</span><span class="o">++</span><span class="p">));</span>
+</span></span></code></pre></div><p>If the current element at index <code>j</code> is greater than the median, we swap it with the element at index <code>i</code> (which will be a non-negative element) and increment both <code>i</code> and <code>j</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">else</span> <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><p>If the current element equals the median, we simply move the <code>j</code> index forward without making any swaps.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, once the loop is finished, we return the rearranged <code>nums</code> array.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this algorithm is (O(n)) due to the linear partitioning operation performed by <code>nth_element</code>, which rearranges the elements in linear time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a fixed amount of extra space for the indices and no additional data structures are required.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>rearrangeArray</code> function provides an efficient and effective way to rearrange an array such that all non-negative numbers are positioned at even indices and all negative numbers at odd indices. By utilizing the median as a pivot, we ensure that the rearrangement is done in a single pass through the array after partitioning, which makes this solution optimal for this problem.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Optimal Partitioning</strong>: The use of <code>nth_element</code> allows us to find the median efficiently, ensuring that the elements are divided properly.</p>
+</li>
+<li>
+<p><strong>Index Management</strong>: The macro <code>A(i)</code> simplifies the indexing logic, making the rearrangement of elements clear and straightforward.</p>
+</li>
+<li>
+<p><strong>Single Pass Rearrangement</strong>: The algorithm rearranges the elements in a single traversal of the array, ensuring efficiency in terms of time complexity.</p>
+</li>
+</ol>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s how you can utilize the <code>rearrangeArray</code> function in practice:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">rearrangeArray</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">num</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span> <span class="c1">// Output may vary based on input
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>In this example, we create an instance of the <code>Solution</code> class, define a vector of integers that includes both non-negative and negative numbers, and call the <code>rearrangeArray</code> method. The output will show the rearranged array with the required properties.</p>
+<h3 id="potential-improvements-and-variations">
+  Potential Improvements and Variations
+  <a class="heading-link" href="#potential-improvements-and-variations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>While the current implementation effectively solves the problem, there may be further optimizations or adjustments that could be explored based on specific constraints or additional requirements:</p>
+<ol>
+<li>
+<p><strong>Handling Edge Cases</strong>: The solution could be adjusted to handle arrays with an unequal number of negative and non-negative elements more explicitly, ensuring the output format remains consistent.</p>
+</li>
+<li>
+<p><strong>Alternative Algorithms</strong>: Exploring different partitioning algorithms or rearrangement strategies could lead to different performance characteristics or use cases.</p>
+</li>
+<li>
+<p><strong>Adaptability</strong>: The approach can be adapted to work with other similar problems that require rearrangement based on specific conditions, such as sorting or grouping elements by certain criteria.</p>
+</li>
+</ol>
+<p>This solution demonstrates the use of efficient algorithms and techniques to solve problems involving rearrangement and partitioning, making it a valuable method in competitive programming and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1088s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -228,7 +389,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1969"  class="external-link" target="_blank" rel="noopener">LeetCode #1969: Minimum Non-Zero Product of the Array Elements</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1969"  class="external-link" target="_blank" rel="noopener">LeetCode #1969: Minimum Non-Zero Product of the Array Elements</a></th>
       </tr>
   </thead>
   <tbody>
@@ -249,66 +410,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -230,11 +230,191 @@
 </span></span><span class="line"><span class="cl">            
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode618s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves finding the maximum number of non-overlapping subarrays in a given array of integers <code>nums</code>, such that the sum of elements in each subarray equals a specified value <code>hit</code>. The challenge is to efficiently count these subarrays while ensuring that no two counted subarrays overlap.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a hash map to keep track of cumulative sums and their indices as we iterate through the array. The core idea is to use the prefix sum technique, which allows us to compute the sum of any subarray in constant time. Here’s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Prefix Sum Calculation</strong>: As we iterate through the array, we maintain a cumulative sum (<code>sum</code>). This sum represents the total of all elements encountered so far.</p>
+</li>
+<li>
+<p><strong>Hash Map for Indices</strong>: We use a hash map (<code>mp</code>) to store the indices of previously seen cumulative sums. The key is the cumulative sum, and the value is the latest index where this sum occurs.</p>
+</li>
+<li>
+<p><strong>Finding Subarrays</strong>: For each cumulative sum at index <code>i</code>, we check if there exists a prior sum that would lead to a subarray summing to <code>hit</code>. This is done by checking if <code>sum - hit</code> exists in the map. If it does, we retrieve the index of this sum.</p>
+</li>
+<li>
+<p><strong>Non-Overlapping Condition</strong>: To ensure that the found subarrays are non-overlapping, we compare the index of the last counted subarray (<code>right</code>) with the index of the found subarray (<code>left</code>). If <code>right</code> is less than or equal to <code>left</code>, we can count this subarray, update <code>right</code>, and increment our count.</p>
+</li>
+<li>
+<p><strong>Update Hash Map</strong>: Regardless of whether we found a valid subarray, we update the hash map with the current cumulative sum and its index.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maxNonOverlapping</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">hit</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span> <span class="c1">// Step 1: Initialize a hash map to store cumulative sums and their latest indices
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Step 2: Initialize variables
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// Step 3: Initialize the map with the base case
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 4: Iterate through the array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">sum</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// Update the cumulative sum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">hit</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// Step 5: Check if a valid subarray sum exists
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[</span><span class="n">sum</span> <span class="o">-</span> <span class="n">hit</span><span class="p">];</span> <span class="c1">// Get the index of the previously found sum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">right</span> <span class="o">&lt;=</span> <span class="n">left</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 6: Ensure non-overlapping condition
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">cnt</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment count of valid subarrays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">right</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Update the right boundary
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">sum</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Step 7: Update the map with the current cumulative sum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cnt</span><span class="p">;</span> <span class="c1">// Step 8: Return the total count of non-overlapping subarrays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h4 id="step-by-step-breakdown">
+  Step-by-Step Breakdown
+  <a class="heading-link" href="#step-by-step-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialize Data Structures</strong>:</p>
+<ul>
+<li>A hash map <code>mp</code> is created to store cumulative sums and their last occurrence.</li>
+<li>Variables <code>n</code>, <code>sum</code>, <code>right</code>, and <code>cnt</code> are initialized to hold the size of the array, current cumulative sum, the rightmost index of the last counted subarray, and the count of valid subarrays, respectively.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>The hash map is initialized with the entry <code>{0: -1}</code> to handle the case where a valid subarray starts from index <code>0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through the Array</strong>:</p>
+<ul>
+<li>For each element in <code>nums</code>, we add it to <code>sum</code>, which keeps a running total of the array elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check for Subarray Sum</strong>:</p>
+<ul>
+<li>The code checks if the difference <code>sum - hit</code> exists in the hash map. This condition checks if the current cumulative sum minus the target sum <code>hit</code> has been seen before.</li>
+</ul>
+</li>
+<li>
+<p><strong>Non-Overlapping Check</strong>:</p>
+<ul>
+<li>If <code>sum - hit</code> is found in <code>mp</code>, we retrieve its index <code>left</code>. The non-overlapping condition is checked by comparing <code>right</code> and <code>left</code>. If the current subarray does not overlap with previously counted subarrays (i.e., <code>right</code> is less than or equal to <code>left</code>), we can count this subarray.</li>
+</ul>
+</li>
+<li>
+<p><strong>Increment Count and Update Right Index</strong>:</p>
+<ul>
+<li>If the conditions are satisfied, we increment <code>cnt</code> and update <code>right</code> to the current index <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update Hash Map</strong>:</p>
+<ul>
+<li>Regardless of whether a valid subarray was found, we update the map with the current cumulative sum <code>sum</code> and its corresponding index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After iterating through the array, the final count of non-overlapping subarrays is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm runs in ( O(n) ), where ( n ) is the size of the input array. This is because each element in <code>nums</code> is processed once, and operations on the hash map (insert and check for existence) are average ( O(1) ).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is ( O(n) ) in the worst case, due to the storage of cumulative sums in the hash map. However, in practice, it might be less depending on the number of unique cumulative sums.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively counts the maximum number of non-overlapping subarrays that sum to a specified value by utilizing the prefix sum technique and a hash map for quick lookups.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Prefix Sum Technique</strong>: This method allows for efficient subarray sum calculations.</li>
+<li><strong>Non-Overlapping Condition</strong>: Proper handling of indices ensures that counted subarrays do not overlap.</li>
+<li><strong>Hash Map Utilization</strong>: The use of a hash map provides an efficient way to keep track of previously encountered cumulative sums.</li>
+</ul>
+<p>This implementation demonstrates a clean and efficient way to tackle problems involving subarray sums and conditions on overlapping, making it a valuable approach for similar problems.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode618s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1547"  class="external-link" target="_blank" rel="noopener">LeetCode #1547: Minimum Cost to Cut a Stick</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1547"  class="external-link" target="_blank" rel="noopener">LeetCode #1547: Minimum Cost to Cut a Stick</a></th>
       </tr>
   </thead>
   <tbody>
@@ -255,66 +435,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

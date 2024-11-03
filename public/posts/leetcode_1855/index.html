@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -224,11 +224,121 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode963s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to find the maximum distance between two indices (i) and (j) such that (i) is from the first array <code>nums1</code> and (j) is from the second array <code>nums2</code>, given the condition that the element at <code>nums1[i]</code> must be less than or equal to the element at <code>nums2[j]</code>. The goal is to determine the largest possible value of (j - i).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem efficiently, we will leverage a binary search technique. The idea is to iterate through each element in <code>nums1</code>, and for each element, we will use binary search on <code>nums2</code> to find the largest index (j) such that <code>nums1[i] &lt;= nums2[j]</code>. By maintaining a record of the maximum distance (j - i), we can arrive at the solution without having to resort to a brute-force method that would be less efficient.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We start by defining a class named <code>Solution</code>, which contains our main method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The method <code>maxDistance</code> takes two vectors of integers as input and returns an integer representing the maximum distance found.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">maxDistance</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization</strong>: We initialize a variable <code>ans</code> to store the maximum distance found throughout the iterations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterate Through <code>nums1</code></strong>: We use a for loop to iterate through each index (i) of <code>nums1</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Binary Search Setup</strong>: For each index (i), we set up variables for a binary search. Here, <code>l</code> is initialized to the current index (i), <code>r</code> is set to the last index of <code>nums2</code>, and <code>j</code> is also initialized to (i).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Target Element</strong>: We define a variable <code>target</code> that holds the value of the current element in <code>nums1</code> that we want to compare against the elements in <code>nums2</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">target</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// Find the largest index which satisfies target &lt;= nums2[j]
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Binary Search Logic</strong>: We perform a binary search within the bounds of <code>l</code> and <code>r</code>. The goal is to find the largest index (j) where <code>nums2[j]</code> is greater than or equal to <code>target</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// Calculate mid index
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Comparison Conditions</strong>: Inside the binary search, we compare <code>target</code> with <code>nums2[mid]</code>:</p>
+<ul>
+<li>If <code>target &lt; nums2[mid]</code>, it means we might have a valid (j), so we update <code>j</code> to <code>mid</code> and move the left bound up.</li>
+<li>If <code>target &gt; nums2[mid]</code>, we move the right bound down, since we need a larger element.</li>
+<li>If they are equal, we still update <code>j</code> to <code>mid</code> and move the left bound up, searching for a potentially larger index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&lt;</span> <span class="n">nums2</span><span class="p">[</span><span class="n">mid</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> <span class="c1">// Update j to mid
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Move left bound up
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">target</span> <span class="o">&gt;</span> <span class="n">nums2</span><span class="p">[</span><span class="n">mid</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Move right bound down
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">target</span> <span class="o">==</span> <span class="n">nums2</span><span class="p">[</span><span class="n">mid</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span> <span class="c1">// Update j to mid
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Move left bound up
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update Maximum Distance</strong>: After exiting the binary search, we calculate the distance (j - i) and update <code>ans</code> if this new distance is greater than the current maximum.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: After iterating through all indices of <code>nums1</code>, we return the maximum distance found.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is (O(n \log m)), where (n) is the length of <code>nums1</code> and (m) is the length of <code>nums2</code>. This complexity arises from iterating through each element of <code>nums1</code> and performing a binary search on <code>nums2</code>. The space complexity is (O(1)) since we are using a fixed number of additional variables regardless of the input size.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this implementation efficiently finds the maximum distance between indices in two arrays under a specific condition using a combination of a for loop and binary search. By ensuring that we only check relevant elements in <code>nums2</code> for each element in <code>nums1</code>, we optimize the process and avoid unnecessary comparisons. This method demonstrates the effectiveness of binary search in solving problems involving sorted data, yielding a solution that is both optimal and elegant. As a result, this code is a practical example of algorithm design that leverages efficient searching techniques to achieve a desired outcome in a computationally feasible manner.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode963s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1856"  class="external-link" target="_blank" rel="noopener">LeetCode #1856: Maximum Subarray Min-Product</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1856"  class="external-link" target="_blank" rel="noopener">LeetCode #1856: Maximum Subarray Min-Product</a></th>
       </tr>
   </thead>
   <tbody>
@@ -249,66 +359,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

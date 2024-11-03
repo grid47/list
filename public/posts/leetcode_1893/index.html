@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -209,11 +209,111 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1017s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves checking whether a given range <code>[left, right]</code> is completely covered by a series of ranges defined in a 2D array called <code>ranges</code>. Each element in <code>ranges</code> consists of two integers representing the start and end of a range. The goal is to determine if every integer between <code>left</code> and <code>right</code> (inclusive) is contained within at least one of the ranges provided in the <code>ranges</code> array.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a technique known as the &ldquo;sweep line&rdquo; algorithm. This involves creating an array (or a line) that keeps track of how many ranges are active at each point. We can do this by iterating through the provided ranges and marking the start and end points of each range. By incrementing at the start and decrementing just after the end of each range, we can determine how many ranges cover each point as we iterate through.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: We define a class named <code>Solution</code> to encapsulate our method for solving the problem.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Declaration</strong>: The <code>isCovered</code> function is defined, which takes two parameters: a vector of vectors <code>ranges</code> and two integers <code>left</code> and <code>right</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isCovered</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">ranges</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Array Initialization</strong>: We declare an array <code>line</code> of size 52 (to cover the range from 1 to 51). This will help track how many ranges cover each point.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">line</span><span class="p">[</span><span class="mi">52</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Marking the Ranges</strong>: We loop through each range in <code>ranges</code> and mark the start and end points. For each range <code>[start, end]</code>, we increment the position <code>start</code> and decrement the position <code>end + 1</code> to indicate that the range ends after <code>end</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">r</span> <span class="p">:</span> <span class="n">ranges</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">line</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>        <span class="c1">// Start of a range
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">line</span><span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// End of a range (exclusive)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Checking Coverage</strong>: We then iterate through the positions from 1 to <code>right</code> to check if all integers in the range <code>[left, right]</code> are covered. We maintain a counter <code>overlaps</code> to track how many ranges are active at each point.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">overlaps</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">overlaps</span> <span class="o">+=</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// Update active ranges
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Validation of Coverage</strong>: For each integer in the range <code>[left, right]</code>, we check if it falls within the active coverage. If an integer in the specified range has zero overlaps, it means it is not covered by any range, and we return <code>false</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">overlaps</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Not covered
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: If all integers in the specified range are covered by the ranges, we return <code>true</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// All covered
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n + m) ), where ( n ) is the number of ranges in the <code>ranges</code> array and ( m ) is the maximum value of <code>right</code>. This is because we iterate through the <code>ranges</code> to mark the line array and then iterate through the line array to check for coverage.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) in terms of auxiliary space since the <code>line</code> array has a fixed size of 52 regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>isCovered</code> function provides an efficient and effective way to determine whether a specified range <code>[left, right]</code> is completely covered by a set of ranges. By employing the sweep line technique, we can track the coverage efficiently without needing to iterate over each integer in the range repeatedly.</p>
+<p>This approach is particularly useful for problems involving intervals and ranges, as it allows for quick and easy calculations regarding coverage and overlap. The design is also efficient, requiring only a linear pass through the data and minimal additional storage.</p>
+<p>This solution is not only efficient but also straightforward, making it an excellent choice for tackling similar problems in competitive programming and algorithm design. Understanding how to implement the sweep line technique opens doors to solving a variety of range-related challenges, enhancing one&rsquo;s problem-solving toolkit in the realm of algorithms.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1017s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1894"  class="external-link" target="_blank" rel="noopener">LeetCode #1894: Find the Student that Will Replace the Chalk</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1894"  class="external-link" target="_blank" rel="noopener">LeetCode #1894: Find the Student that Will Replace the Chalk</a></th>
       </tr>
   </thead>
   <tbody>
@@ -234,66 +334,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

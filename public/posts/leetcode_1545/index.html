@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -212,7 +212,160 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode621s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the k-th bit in a binary string constructed in a specific way. The binary string for a given integer ( n ) is constructed recursively as follows:</p>
+<ol>
+<li>The base string for ( n = 1 ) is &ldquo;0&rdquo;.</li>
+<li>For any ( n &gt; 1 ), the string for ( n ) is formed by concatenating three parts:
+<ul>
+<li>The previous string for ( n - 1 ).</li>
+<li>The character &lsquo;1&rsquo;.</li>
+<li>The reverse of the previous string for ( n - 1 ) with all bits flipped (i.e., &lsquo;0&rsquo; becomes &lsquo;1&rsquo; and &lsquo;1&rsquo; becomes &lsquo;0&rsquo;).</li>
+</ul>
+</li>
+</ol>
+<p>The goal is to return the k-th character in this binary string for a given ( n ).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach involves constructing the binary string iteratively, starting from the base case, and progressively building it up to the desired ( n ). The construction method takes advantage of string concatenation and bit manipulation to ensure that the string is built correctly. Here’s a step-by-step explanation of the code:</p>
+<ol>
+<li><strong>Initialization</strong>: Start with the base string &ldquo;0&rdquo;.</li>
+<li><strong>Iterative Construction</strong>:
+<ul>
+<li>For each level from 2 to ( n ), create a new string by taking the previous string, appending &lsquo;1&rsquo;, and then appending the flipped and reversed version of the previous string.</li>
+</ul>
+</li>
+<li><strong>Retrieval</strong>: Finally, access the k-th character in the constructed string.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">findKthBit</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;0&#34;</span><span class="p">;</span> <span class="c1">// Step 1: Initialize the base string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 2: Iterate to construct the string for n
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">string</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// Store the current string for modification
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">s</span> <span class="o">+=</span> <span class="sc">&#39;1&#39;</span><span class="p">;</span> <span class="c1">// Append &#39;1&#39; to the current string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 3: Reverse and flip the string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span> <span class="o">+=</span> <span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="sc">&#39;1&#39;</span><span class="o">:</span><span class="sc">&#39;0&#39;</span><span class="p">;</span> <span class="c1">// Append flipped characters
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span> <span class="c1">// Step 4: Return the k-th character (1-based index)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h4 id="step-by-step-breakdown">
+  Step-by-Step Breakdown
+  <a class="heading-link" href="#step-by-step-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>The string <code>s</code> is initialized to &ldquo;0&rdquo;, which represents the string for ( n = 1 ).</li>
+</ul>
+</li>
+<li>
+<p><strong>String Construction</strong>:</p>
+<ul>
+<li>A loop iterates from 2 to ( n ). For each iteration, the following occurs:
+<ul>
+<li>The variable <code>tmp</code> holds the current version of <code>s</code> before modifications.</li>
+<li>The character &lsquo;1&rsquo; is appended to <code>s</code>.</li>
+<li>A nested loop iterates through <code>tmp</code> in reverse order. For each character in <code>tmp</code>, it appends the flipped version to <code>s</code>:
+<ul>
+<li>If the character is &lsquo;0&rsquo;, append &lsquo;1&rsquo;.</li>
+<li>If the character is &lsquo;1&rsquo;, append &lsquo;0&rsquo;.</li>
+</ul>
+</li>
+<li>This effectively builds the new string for the next level.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Character Retrieval</strong>:</p>
+<ul>
+<li>After constructing the full string for the specified ( n ), the function returns the character at index ( k-1 ). This is because the problem specifies a 1-based index, while C++ uses a 0-based index.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of constructing the string is exponential in terms of its length. Specifically, the length of the string doubles and grows by an additional character for each increase in ( n ). The final length of the string is approximately ( 2^n - 1 ). Thus, the construction takes ( O(2^n) ) time, as each level ( i ) produces a string of length ( 2^i - 1 ).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is also ( O(2^n) ) due to storing the constructed string. Each string generated at each level takes up space proportional to its length, and thus, the space requirement grows significantly with increasing ( n ).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively constructs a binary string according to the specified recursive rules and retrieves the k-th character. While the approach is straightforward, it becomes inefficient for larger values of ( n ) due to the exponential growth of the string length.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Recursive String Construction</strong>: The method used to construct the string is a direct implementation of the problem&rsquo;s requirements.</li>
+<li><strong>Bit Flipping and Reversal</strong>: This showcases how bit manipulation can be applied in string construction to derive a new state from a previous one.</li>
+<li><strong>Complexity Awareness</strong>: It is essential to note that while the algorithm works for small ( n ), its efficiency decreases rapidly as ( n ) increases due to the exponential nature of the string&rsquo;s growth.</li>
+</ul>
+<p>In summary, this solution is an interesting example of string manipulation combined with bitwise operations, although its practical applicability is limited by its time and space complexity.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode621s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -224,7 +377,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1546"  class="external-link" target="_blank" rel="noopener">LeetCode #1546: Maximum Number of Non-Overlapping Subarrays With Sum Equals Target</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1546"  class="external-link" target="_blank" rel="noopener">LeetCode #1546: Maximum Number of Non-Overlapping Subarrays With Sum Equals Target</a></th>
       </tr>
   </thead>
   <tbody>
@@ -245,66 +398,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

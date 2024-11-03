@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              3-minute read
             </span>
           </div>
           
@@ -219,11 +219,122 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">global</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode845s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given an integer array <code>nums</code>, find the maximum absolute sum of any subarray within the array. The absolute sum of a subarray is the absolute value of the sum of its elements. The task is to determine the maximum value of this absolute sum across all possible subarrays of <code>nums</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a modified form of Kadane’s algorithm, a common algorithm for finding maximum subarray sums. Here, we need to consider both maximum positive sums and minimum (most negative) sums, because the absolute sum can be derived from either extreme.</p>
+<p>The approach involves iterating over the array while maintaining:</p>
+<ol>
+<li><code>lx</code> - the current maximum subarray sum.</li>
+<li><code>ln</code> - the current minimum subarray sum.</li>
+<li><code>global</code> - the maximum absolute sum seen so far.</li>
+</ol>
+<p>For each element, we update <code>lx</code> by either taking the element itself (if starting a new subarray is optimal) or adding the element to the previous maximum. Similarly, we update <code>ln</code> by taking either the element itself or adding it to the previous minimum. At each step, we update <code>global</code> with the highest absolute value between <code>lx</code> and <code>ln</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">maxAbsoluteSum</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">global</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ln</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lx</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lx</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="n">lx</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ln</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ln</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="n">ln</span> <span class="o">+=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">lx</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">global</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">global</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">lx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">ln</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">global</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">global</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">ln</span><span class="p">);</span>            
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">global</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li><code>global</code> keeps track of the maximum absolute subarray sum encountered.</li>
+<li><code>lx</code> (local max) and <code>ln</code> (local min) track the maximum and minimum subarray sums at each index.</li>
+<li><code>n</code> stores the size of <code>nums</code> for easy access.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through Array</strong>:</p>
+<ul>
+<li><strong>Update Maximum Subarray Sum (<code>lx</code>)</strong>: For each <code>nums[i]</code>, check if starting a new subarray with <code>nums[i]</code> alone is better than extending the previous maximum sum. Update <code>lx</code> with the result.</li>
+<li><strong>Update Minimum Subarray Sum (<code>ln</code>)</strong>: Similarly, decide if starting a new subarray with <code>nums[i]</code> alone results in a lower (more negative) sum than extending the previous minimum sum. Update <code>ln</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Track Global Absolute Maximum</strong>:</p>
+<ul>
+<li>Compare <code>global</code> with the absolute values of <code>lx</code> and <code>ln</code> to capture the highest absolute subarray sum so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After traversing the array, <code>global</code> will hold the maximum absolute subarray sum.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the size of <code>nums</code>. The algorithm iterates over <code>nums</code> once.</li>
+<li><strong>Space Complexity</strong>: (O(1)), as it uses a fixed number of extra variables for tracking values.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to find the maximum absolute sum of any subarray in <code>nums</code>. By managing two running sums for maximum and minimum subarrays, it ensures both positive and negative extremes are considered, yielding an optimal solution for maximum absolute sum in linear time. This approach leverages Kadane’s algorithm principles, extended to capture absolute values.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode845s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1750"  class="external-link" target="_blank" rel="noopener">LeetCode #1750: Minimum Length of String After Deleting Similar Ends</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1750"  class="external-link" target="_blank" rel="noopener">LeetCode #1750: Minimum Length of String After Deleting Similar Ends</a></th>
       </tr>
   </thead>
   <tbody>
@@ -244,66 +355,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

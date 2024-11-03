@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -227,11 +227,157 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode946s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the length of the longest beautiful substring in a given string ( s ). A substring is defined as beautiful if it contains all the vowels <code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, and <code>u</code> in that specific order, with each vowel appearing at least once, and they must not be interspersed with any consonants. For instance, the string &ldquo;aeiou&rdquo; is beautiful, while &ldquo;aeioub&rdquo; is not due to the inclusion of a consonant at the end.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will utilize a linear traversal of the string with the help of a mapping to track the vowels and their order. Here’s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Mapping Vowels</strong>: Create a mapping of the vowels to their respective indices to easily track their order. This mapping helps determine if the current character follows the previous vowel in the required sequence.</p>
+</li>
+<li>
+<p><strong>Iterate through the String</strong>: Use a single loop to iterate over each character in the string.</p>
+</li>
+<li>
+<p><strong>Track the Start of the Substring</strong>: Whenever we encounter an &lsquo;a&rsquo;, we may potentially start a new beautiful substring. We also update a variable to keep track of the start index of the current substring.</p>
+</li>
+<li>
+<p><strong>Validate Vowel Sequence</strong>: For other vowels, check if they are either the same as the last vowel, the next vowel in the sequence, or a reset condition (i.e., when a vowel does not follow the sequence). If it does not follow the sequence, we reset the state.</p>
+</li>
+<li>
+<p><strong>Update the Length of Beautiful Substring</strong>: If we encounter all vowels in order (i.e., we have seen <code>u</code> last), calculate the length of the current beautiful substring and update the maximum length if necessary.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After the loop, return the maximum length found.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">longestBeautifulSubstring</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A class named <code>Solution</code> is defined with a public method <code>longestBeautifulSubstring</code>, which takes a string ( s ) as input and returns an integer.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">idx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span><span class="p">[</span><span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span><span class="p">[</span><span class="sc">&#39;e&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span><span class="p">[</span><span class="sc">&#39;i&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span><span class="p">[</span><span class="sc">&#39;o&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">idx</span><span class="p">[</span><span class="sc">&#39;u&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>A <code>map</code> is created to associate each vowel with an integer index. This allows for easy comparison to check the order of vowels in the substring.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Several integer variables are initialized:
+<ul>
+<li><code>j</code> to track the starting index of the current beautiful substring,</li>
+<li><code>res</code> to store the maximum length of beautiful substrings found,</li>
+<li><code>n</code> to store the size of the input string ( s ),</li>
+<li><code>id</code> to represent the last encountered vowel’s index, initialized to -1 (indicating no vowel has been seen yet).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A for loop iterates over each character in the string ( s ).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;a&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">id</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>                 
+</span></span><span class="line"><span class="cl">                    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>If the current character is &lsquo;a&rsquo;, check if the last vowel seen (<code>id</code>) is not &lsquo;a&rsquo;. If so, it indicates the start of a new substring, and <code>j</code> is updated to the current index ( i ). The <code>id</code> is then updated to 0, indicating &lsquo;a&rsquo; has been encountered.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span><span class="k">else</span> <span class="nf">if</span><span class="p">((</span><span class="n">idx</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">id</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">-</span> <span class="n">id</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>For characters that are not &lsquo;a&rsquo;, check if the current character’s index (from the map) is either less than the last vowel’s index or is not the next expected vowel. If so, reset the state (<code>id</code> to -1) and set <code>j</code> to the current index, effectively starting a new potential substring.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">idx</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">-</span> <span class="n">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">id</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the current character follows the expected order (the index of the current character is exactly one more than <code>id</code>), update <code>id</code> to the current character’s index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">id</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Check if all vowels have been encountered in the required order (when <code>id</code> equals 4, meaning &lsquo;u&rsquo; was the last vowel seen). If so, calculate the length of the current beautiful substring and update <code>res</code> with the maximum length found so far.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, return the maximum length of any beautiful substring found, which is stored in <code>res</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is ( O(n) ), where ( n ) is the length of the input string ( s ). This is because we traverse the string once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) for the variables used, as the size of the map for vowels is constant (only five entries), and no additional data structures are used that scale with the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively computes the length of the longest beautiful substring in the input string by utilizing a linear scan and a mapping of vowels to track their sequence. The use of a sliding window concept allows for efficient identification of valid substrings without the need for nested loops, which could lead to higher time complexity.</p>
+<p>This approach highlights important algorithmic principles, such as maintaining state while iterating through data and leveraging data structures (like maps) for efficient lookup and management of relationships (in this case, the order of vowels).</p>
+<p>In conclusion, the <code>longestBeautifulSubstring</code> function demonstrates how to tackle substring problems in strings efficiently, making it an excellent example for those looking to strengthen their skills in string manipulation and algorithm design. The simplicity and efficiency of the code ensure that it performs well even for larger input sizes, which is a key consideration in competitive programming and real-world applications.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode946s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1840"  class="external-link" target="_blank" rel="noopener">LeetCode #1840: Maximum Building Height</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1840"  class="external-link" target="_blank" rel="noopener">LeetCode #1840: Maximum Building Height</a></th>
       </tr>
   </thead>
   <tbody>
@@ -252,66 +398,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

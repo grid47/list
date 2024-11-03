@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -224,7 +224,151 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1107s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the k-th largest number from a list of numbers represented as strings. Given the nature of string comparison, where numbers of different lengths do not directly compare in value when treated as strings, we need a method to compare and sort them accurately. The goal is to efficiently determine the k-th largest string representation of a number from the input list.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will use a <strong>priority queue</strong> (or a max-heap) that allows us to efficiently manage the top k largest elements. The main steps of the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Custom Comparator</strong>: Implement a custom comparator to ensure that strings are compared based on their numeric value rather than their lexicographic order. This is important since &lsquo;100&rsquo; is larger than &lsquo;99&rsquo; but would be incorrectly evaluated if compared purely as strings.</p>
+</li>
+<li>
+<p><strong>Priority Queue</strong>: Use a max-heap to store the k largest numbers found so far. As we iterate through the list of numbers, we will keep the size of the heap to k, ensuring that it only contains the k largest elements.</p>
+</li>
+<li>
+<p><strong>Iterate and Push</strong>: For each number in the input, we push it onto the heap. If the heap size exceeds k, we remove the smallest element (which would be at the top of the heap).</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Once all numbers are processed, the top of the heap will contain the k-th largest number.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">cmp</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="k">operator</span> <span class="p">()</span> <span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="n">string</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>Here we define a custom comparator class <code>cmp</code> that overloads the <code>operator()</code> to compare two strings, <code>a</code> and <code>b</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span>
+</span></span></code></pre></div><p>In the comparator, we first compare the lengths of the strings. If they are not of the same length, we consider the longer string to be greater. If they are of the same length, we perform a lexicographic comparison.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">kthLargestNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The <code>Solution</code> class defines a method <code>kthLargestNumber</code> which takes a vector of strings (<code>nums</code>) and an integer (<code>k</code>).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">cmp</span><span class="o">&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span></code></pre></div><p>We declare a max-heap priority queue <code>pq</code> using our custom comparator <code>cmp</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></div><p>We iterate through each number in <code>nums</code>, pushing each number onto the priority queue.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>If the size of the priority queue exceeds k, we pop the smallest element, ensuring that the queue maintains only the k largest numbers.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>After processing all numbers, we return the top element of the priority queue, which is the k-th largest number.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Pushing an element onto the priority queue takes (O(\log k)) time, and we do this for (n) elements, leading to a total time complexity of (O(n \log k)).</li>
+<li>The maximum size of the priority queue is (k), so the operations on the heap remain efficient.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(k)) due to the storage of up to k elements in the priority queue.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently finds the k-th largest number represented as a string by leveraging a custom comparator and a priority queue. This approach ensures that we accurately account for numeric values even when represented as strings, thus providing an effective solution to the problem.</p>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s an example of how you can utilize the <code>kthLargestNumber</code> method:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;3&#34;</span><span class="p">,</span> <span class="s">&#34;6&#34;</span><span class="p">,</span> <span class="s">&#34;7&#34;</span><span class="p">,</span> <span class="s">&#34;10&#34;</span><span class="p">,</span> <span class="s">&#34;2&#34;</span><span class="p">,</span> <span class="s">&#34;5&#34;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">kthLargestNumber</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;The &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">k</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;-th largest number is: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Example output
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="potential-improvements">
+  Potential Improvements
+  <a class="heading-link" href="#potential-improvements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Input Validation</strong>: Additional checks can be introduced to handle edge cases, such as when <code>k</code> is greater than the size of the input vector or when the input vector is empty.</p>
+</li>
+<li>
+<p><strong>Custom Data Structures</strong>: If the list of numbers is very large and k is small, other data structures like sorted lists or binary search trees could be explored for potentially better performance.</p>
+</li>
+<li>
+<p><strong>Memory Optimization</strong>: The implementation could be further optimized in terms of memory if required, especially if the maximum number of strings is known and fixed.</p>
+</li>
+</ol>
+<p>This solution effectively balances clarity, efficiency, and correctness, making it a good candidate for competitive programming challenges where performance is essential.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1107s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -236,7 +380,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1986"  class="external-link" target="_blank" rel="noopener">LeetCode #1986: Minimum Number of Work Sessions to Finish the Tasks</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1986"  class="external-link" target="_blank" rel="noopener">LeetCode #1986: Minimum Number of Work Sessions to Finish the Tasks</a></th>
       </tr>
   </thead>
   <tbody>
@@ -257,66 +401,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

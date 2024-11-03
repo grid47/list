@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -219,11 +219,132 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode617s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the length of the longest substring within a given string of digits (0-9) that contains at most one odd count of digits. This means that for any digit in the substring, it can appear an even number of times, except for one digit, which can appear an odd number of times. For example, in the string <code>&quot;123321&quot;</code>, the longest awesome substring is the entire string, as each digit appears an even number of times.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a combination of bit manipulation and a hash map (or dictionary) to track the occurrences of digits. The key idea is to represent the frequency of each digit in a bitmask, where each bit corresponds to a digit (0-9). The strategy involves:</p>
+<ol>
+<li>Using a bitmask to keep track of the count of digits in the current substring.</li>
+<li>Checking if the current bitmask has been seen before or if we can toggle one digit to check for odd counts.</li>
+<li>Maintaining a record of the first occurrence of each bitmask in a map to compute the length of valid substrings.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code and understand each part:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">longestAwesome</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span> <span class="c1">// Step 1: Initialize a map to store the first occurrence of each mask
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">msk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Step 2: Initialize the bitmask to 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Step 3: Get the size of the input string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Step 4: Initialize indices and answer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// Step 5: Set the initial state (mask 0 at index -1)
+</span></span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: We create a map <code>mp</code> to store the first occurrence of each bitmask and initialize the bitmask <code>msk</code> to zero. The answer <code>ans</code> is initialized to 1, as a single character is always a valid substring. The entry <code>mp[0] = -1</code> is added to handle cases where the substring starts from index 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 6: Loop through each character in the string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">));</span> <span class="c1">// Step 7: Toggle the bit corresponding to the current digit
+</span></span></span></code></pre></div><ul>
+<li><strong>Bitmask Update</strong>: For each character in the string, we convert the character to its integer value (by subtracting &lsquo;0&rsquo;) and toggle the corresponding bit in the bitmask <code>msk</code>. This operation keeps track of the counts of digits in the substring.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">msk</span><span class="p">))</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">mp</span><span class="p">[</span><span class="n">msk</span><span class="p">]);</span> <span class="c1">// Step 8: Check if the current mask has been seen before
+</span></span></span></code></pre></div><ul>
+<li><strong>Check for Previous Mask</strong>: We check if the current bitmask has been encountered before. If it has, we compute the length of the substring that can be formed and update <code>ans</code> if this length is greater than the previously recorded maximum.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Step 9: Check by toggling each bit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span> <span class="c1">// Step 10: Toggle the current digit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">msk</span><span class="p">))</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">mp</span><span class="p">[</span><span class="n">msk</span><span class="p">]);</span> <span class="c1">// Step 11: Check if the modified mask has been seen
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span> <span class="c1">// Step 12: Revert the toggle
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Toggling Digits</strong>: The inner loop iterates over all possible digits (0-9) and toggles each one to simulate allowing one odd-count digit. After toggling the digit, it checks if this modified bitmask has been encountered. If it has, we again compute the length of the substring and update <code>ans</code> accordingly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">msk</span><span class="p">))</span> <span class="n">mp</span><span class="p">[</span><span class="n">msk</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// Step 13: Store the first occurrence of the current mask
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Step 14: Return the maximum length found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Storing Masks</strong>: If the current bitmask hasn&rsquo;t been recorded in the map, we store the current index as the first occurrence of this mask. Finally, we return the maximum length of the substring found.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is (O(n \times 10)), where (n) is the length of the input string <code>s</code>. The factor of 10 arises from the inner loop that iterates over the digits (0-9).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) for the bitmask since it uses a fixed number of bits (10 for digits 0-9). However, the space used by the map can be considered (O(n)) in the worst case if every unique bitmask is stored.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively calculates the length of the longest &ldquo;awesome&rdquo; substring, leveraging bit manipulation and a hashmap to track previous states. By checking the state of digits efficiently through a bitmask, the algorithm efficiently determines valid substrings while maintaining a time complexity that scales linearly with the input size.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Bit Manipulation</strong>: Using bitwise operations to manage counts of digits in a compact form allows for efficient checks and updates.</li>
+<li><strong>HashMap for State Tracking</strong>: The use of a map to track the first occurrences of masks enables quick calculations of substring lengths.</li>
+<li><strong>Complexity Management</strong>: The approach maintains manageable complexity levels, making it suitable for larger strings.</li>
+</ul>
+<p>Overall, this solution highlights a clever application of bit manipulation and data structures, demonstrating an efficient way to solve problems involving counting and substring evaluations.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode617s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1543"  class="external-link" target="_blank" rel="noopener">LeetCode #1543: Fix Product Name Format</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1543"  class="external-link" target="_blank" rel="noopener">LeetCode #1543: Fix Product Name Format</a></th>
       </tr>
   </thead>
   <tbody>
@@ -244,66 +365,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

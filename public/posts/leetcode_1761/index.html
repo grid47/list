@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,11 +212,149 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span> <span class="o">==</span> <span class="n">INT_MAX</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode860s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to find the minimum degree of a trio in an undirected graph represented by a list of edges. A trio consists of three nodes that are all mutually connected. The degree of a trio is defined as the sum of the degrees of its nodes minus 6 (since each connection among the three nodes contributes 2 to the total degree count, the formula accounts for those redundant counts). If no trio exists, the function should return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can follow these key steps:</p>
+<ol>
+<li>
+<p><strong>Data Structure Initialization</strong>:</p>
+<ul>
+<li>We utilize an adjacency list (<code>al</code>) to keep track of which nodes are connected.</li>
+<li>An array (<code>cnt</code>) is used to store the degree count of each node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Graph</strong>:</p>
+<ul>
+<li>Iterate through each edge and populate the adjacency list and the degree counts for the nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding Trios</strong>:</p>
+<ul>
+<li>For each node, consider its neighbors. We check combinations of its neighbors to find trios.</li>
+<li>Specifically, for each pair of neighbors of a node, we check if they are also connected (forming a trio). If they are, we compute the degree of that trio.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Minimum Degree</strong>:</p>
+<ul>
+<li>Keep track of the minimum degree found while iterating through the potential trios.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>If no trio was found, return -1. Otherwise, return the minimum degree of the found trio.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a breakdown of the code in the <code>minTrioDegree</code> function:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The function is defined within the <code>Solution</code> class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The <code>minTrioDegree</code> method takes two parameters: an integer <code>n</code> representing the number of nodes and a vector of vectors <code>edges</code> representing the edges of the graph.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minTrioDegree</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">edges</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization of Data Structures</strong>:</p>
+<ul>
+<li><code>al</code>: An adjacency list to store neighbors for each node.</li>
+<li><code>cnt</code>: An array to keep track of the degree count of each node.</li>
+<li><code>res</code>: Initialized to <code>INT_MAX</code> to hold the minimum trio degree.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">al</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cnt</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Building the Graph</strong>: Iterate through each edge to populate the adjacency list and degree counts.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">e</span><span class="p">:</span> <span class="n">edges</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">al</span><span class="p">[</span><span class="n">min</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])].</span><span class="n">insert</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">    <span class="o">++</span><span class="n">cnt</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl">    <span class="o">++</span><span class="n">cnt</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding Trios</strong>: Use nested loops to find potential trios. The outer loop iterates over nodes, and the inner loops iterate over pairs of neighbors to check for connections.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">t1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">t1</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">t1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it2</span> <span class="o">=</span> <span class="n">begin</span><span class="p">(</span><span class="n">al</span><span class="p">[</span><span class="n">t1</span><span class="p">]);</span> <span class="n">it2</span> <span class="o">!=</span> <span class="n">end</span><span class="p">(</span><span class="n">al</span><span class="p">[</span><span class="n">t1</span><span class="p">]);</span> <span class="o">++</span><span class="n">it2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">it3</span> <span class="o">=</span> <span class="n">next</span><span class="p">(</span><span class="n">it2</span><span class="p">);</span> <span class="n">it3</span> <span class="o">!=</span> <span class="n">end</span><span class="p">(</span><span class="n">al</span><span class="p">[</span><span class="n">t1</span><span class="p">]);</span> <span class="o">++</span><span class="n">it3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">al</span><span class="p">[</span><span class="o">*</span><span class="n">it2</span><span class="p">].</span><span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="n">it3</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">cnt</span><span class="p">[</span><span class="n">t1</span><span class="p">]</span> <span class="o">+</span> <span class="n">cnt</span><span class="p">[</span><span class="o">*</span><span class="n">it2</span><span class="p">]</span> <span class="o">+</span> <span class="n">cnt</span><span class="p">[</span><span class="o">*</span><span class="n">it3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">6</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: Check if <code>res</code> was updated from its initial value. If not, return -1; otherwise, return the calculated minimum degree.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">res</span> <span class="o">==</span> <span class="n">INT_MAX</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">res</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of the algorithm is (O(n^2)) in the worst case, where (n) is the number of nodes. This complexity arises from the nested loops used to find trios, particularly if each node is connected to many others.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n + m)), where (m) is the number of edges, primarily due to the adjacency list used for storing connections.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minTrioDegree</code> function provides an efficient way to determine the minimum degree of any trio in a graph represented by its edges. By leveraging an adjacency list and degree counting, the algorithm effectively checks for all possible trios and computes their degrees while minimizing computational overhead through careful iterations.</p>
+<p>This method not only illustrates the effectiveness of adjacency lists in representing graphs but also demonstrates how combinations can be explored efficiently using nested loops. The approach ensures that we consider all possible trios, while the use of sets allows for quick membership testing to confirm connections between nodes.</p>
+<p>If no trio exists in the graph, the function correctly identifies this situation and returns -1, adhering to the problem&rsquo;s requirements. Overall, the solution is both comprehensive and adaptable for similar graph-related problems, showcasing foundational concepts in graph theory and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode860s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1762"  class="external-link" target="_blank" rel="noopener">LeetCode #1762: Buildings With an Ocean View</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1762"  class="external-link" target="_blank" rel="noopener">LeetCode #1762: Buildings With an Ocean View</a></th>
       </tr>
   </thead>
   <tbody>
@@ -237,66 +375,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

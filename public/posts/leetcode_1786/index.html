@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
           
@@ -251,11 +251,173 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode887s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to find the number of restricted paths from a starting node to an ending node in a weighted undirected graph. A path is considered restricted if each subsequent node along the path has a strictly greater distance from the starting node than the previous one. The goal is to compute the number of such paths from node <code>n</code> to node <code>1</code> in the graph defined by a list of edges.</p>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li>We have a graph with <code>n</code> nodes and a list of edges defined by their endpoints and weights.</li>
+<li>The task is to count the number of paths from node <code>n</code> to node <code>1</code> where each node in the path has a distance greater than the previous node.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we employ a combination of Dijkstra&rsquo;s algorithm and Depth First Search (DFS). The steps are as follows:</p>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>: We represent the graph using an adjacency list, where each edge is stored along with its weight.</p>
+</li>
+<li>
+<p><strong>Dijkstra&rsquo;s Algorithm</strong>: We use Dijkstra&rsquo;s algorithm to compute the shortest distance from node <code>n</code> to all other nodes. This will allow us to determine the distances needed to verify if a path is restricted.</p>
+</li>
+<li>
+<p><strong>DFS for Path Counting</strong>: We perform a DFS starting from node <code>n</code> and count the number of valid restricted paths to node <code>1</code>. In this DFS, we check the distances to ensure that we only traverse to nodes that are farther away from node <code>n</code>.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: To optimize the DFS, we utilize memoization to store the results of subproblems (i.e., the number of paths from any node to node <code>1</code>), preventing redundant calculations.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define pii pair&lt;int, int&gt;
+</span></span></span></code></pre></div><ul>
+<li>We define a shorthand <code>pii</code> for a pair of integers to improve code readability, particularly when dealing with edges represented as pairs of nodes and weights.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countRestrictedPaths</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">es</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>countRestrictedPaths</code> that takes the number of nodes <code>n</code> and a vector of edges <code>es</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;&gt;</span> <span class="n">gph</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">es</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">u</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">d</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">d</span><span class="p">,</span> <span class="n">v</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gph</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We create an adjacency list <code>gph</code> to represent the graph. For each edge, we store both directions (from <code>u</code> to <code>v</code> and from <code>v</code> to <code>u</code>), with their corresponding weights.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dst</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pii</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dst</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a distance array <code>dst</code> to track the shortest distances from node <code>n</code>, setting all distances to infinity initially.</li>
+<li>We utilize a priority queue to facilitate the execution of Dijkstra&rsquo;s algorithm. We start by pushing the source node <code>n</code> with a distance of <code>0</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="p">[</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>We process the nodes in the priority queue until it is empty, always extracting the node with the shortest distance.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">x</span><span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">u</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nxt</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dst</span><span class="p">[</span><span class="n">nxt</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">t</span> <span class="o">+</span> <span class="n">d</span><span class="p">,</span> <span class="n">nxt</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>For each neighboring node <code>nxt</code> of the current node <code>u</code>, we check if we can find a shorter path to <code>nxt</code>. If we can, we update its distance and push it onto the priority queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">gph</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">dp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After computing the shortest paths, we initialize a memoization array <code>dp</code> to store results of subproblems and call the <code>dfs</code> function to count the restricted paths from node <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pii</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">gph</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">dp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mod</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function checks if the current node <code>s</code> is node <code>1</code>, in which case we return <code>1</code> since we&rsquo;ve found a valid path. If we have already computed the number of paths from <code>s</code>, we return that value.</li>
+<li>We initialize the modulo value to handle large results, as the answer can exceed the typical integer range.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">v</span> <span class="p">:</span> <span class="n">gph</span><span class="p">[</span><span class="n">s</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">w</span> <span class="o">=</span> <span class="n">dst</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">val</span> <span class="o">=</span> <span class="n">dst</span><span class="p">[</span><span class="n">v</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span> <span class="o">%</span> <span class="n">mod</span> <span class="o">+</span> <span class="n">dfs</span><span class="p">(</span><span class="n">gph</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">v</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">dp</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">)</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through the neighbors of the current node <code>s</code>. For each neighbor, we compare its distance to ensure we only consider paths where the next node is further away. We recursively call <code>dfs</code> for valid neighbors to count paths.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">%</span> <span class="n">mod</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we store the computed number of restricted paths from node <code>s</code> in the memoization array and return it.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Dijkstra&rsquo;s algorithm runs in (O((n + e) \log n)), where (e) is the number of edges. The subsequent DFS runs in (O(n + e)), leading to a combined time complexity of (O((n + e) \log n)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(n + e)) for the graph representation, plus (O(n)) for the distance and memoization arrays, resulting in a total space complexity of (O(n + e)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively combines Dijkstra&rsquo;s algorithm and depth-first search to count the number of restricted paths in a graph, demonstrating the power of graph theory and dynamic programming. By utilizing memoization, the algorithm ensures efficient computation while preventing redundant calculations.</p>
+<p>This approach can be applied to similar problems in graph theory where pathfinding and distance constraints play a crucial role. The code not only serves as a solution to the specific problem but also provides a framework for understanding and tackling more complex graph-related challenges in competitive programming and algorithm design. By mastering these techniques, developers can enhance their problem-solving toolkit and improve their proficiency in algorithmic thinking.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode887s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1787"  class="external-link" target="_blank" rel="noopener">LeetCode #1787: Make the XOR of All Segments Equal to Zero</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1787"  class="external-link" target="_blank" rel="noopener">LeetCode #1787: Make the XOR of All Segments Equal to Zero</a></th>
       </tr>
   </thead>
   <tbody>
@@ -276,66 +438,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

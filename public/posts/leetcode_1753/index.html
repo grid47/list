@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -205,11 +205,110 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">maximumScore</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode851s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to calculate the maximum score obtainable by repeatedly performing a specific operation on three integers (a), (b), and (c). The operation consists of selecting two of the three integers (let&rsquo;s say (a) and (b)), reducing both of them by 1, and adding 1 to the score. This process continues until it is no longer possible to perform the operation, meaning at least one of the integers becomes zero.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, the solution relies on a recursive approach that ensures we always work with the integers in a specific order, specifically ensuring (a \geq b \geq c) throughout the calculations. The core idea is to recursively reduce the counts of the two largest integers until one of them reaches zero. The steps can be outlined as follows:</p>
+<ol>
+<li>
+<p><strong>Ordering the Integers</strong>: If the integers are not in the desired order ((a), (b), and (c)), we swap them to ensure the largest integer is always first.</p>
+</li>
+<li>
+<p><strong>Base Case</strong>: If the second largest integer (b) is zero, no further operations can be performed, and the score is zero.</p>
+</li>
+<li>
+<p><strong>Recursive Case</strong>: If both (a) and (b) are greater than zero, we can perform the operation, reducing both by one and incrementing the score by one, followed by a recursive call to continue the process.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a step-by-step breakdown of the implementation in the <code>maximumScore</code> function:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The function is defined within a class called <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The <code>maximumScore</code> method takes three integers as input and returns the maximum score achievable.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maximumScore</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Ordering the Integers</strong>: The first conditional checks if (a) is less than (b) and swaps their values if necessary. This ensures that (a) is always the largest.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">maximumScore</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Further Ordering</strong>: The second conditional checks if (b) is less than (c) and swaps their values accordingly to maintain the order (a \geq b \geq c).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">b</span> <span class="o">&lt;</span> <span class="n">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">maximumScore</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Base Case</strong>: If (b) is zero, this means no more operations can be performed, and the score is zero.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">maximumScore</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Recursive Call</strong>: If the base case is not reached, the function proceeds to reduce both (a) and (b) by one and adds one to the score, recursively calling <code>maximumScore</code> with the new values.</p>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(a + b + c)) in the worst case because each recursive call reduces at least one of the integers (a) or (b) by one, leading to a total of at most (a + b) recursive calls until one of them reaches zero.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(h)), where (h) is the height of the recursion stack. In the worst case, this could also be (O(a + b + c)) if the recursion goes deep without hitting a base case.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution provides an elegant way to compute the maximum score achievable by reducing the two largest integers among three given integers through a series of operations. The recursive approach ensures that the calculations remain straightforward and efficient by maintaining the order of the integers. Additionally, this method handles various input scenarios, including cases where one or more integers may initially be zero. Overall, the algorithm effectively demonstrates how recursion can be utilized to simplify problems involving iterative reductions, making it a valuable technique in both competitive programming and algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode851s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1754"  class="external-link" target="_blank" rel="noopener">LeetCode #1754: Largest Merge Of Two Strings</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1754"  class="external-link" target="_blank" rel="noopener">LeetCode #1754: Largest Merge Of Two Strings</a></th>
       </tr>
   </thead>
   <tbody>
@@ -230,66 +329,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

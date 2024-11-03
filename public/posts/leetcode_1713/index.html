@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -228,11 +228,142 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">target</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode811s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to determine the minimum number of operations required to transform an array <code>arr</code> into a target array <code>target</code>. Each operation involves removing an element from <code>arr</code> that does not exist in <code>target</code>, and the goal is to retain the longest possible subsequence from <code>target</code> that can be formed using elements from <code>arr</code>.</p>
+<p>In simpler terms, given two arrays, we want to find out how many elements we need to remove from <code>arr</code> in order to achieve a sequence that matches the order of elements in <code>target</code> as closely as possible.</p>
+<p>For example, if <code>target</code> is <code>[5, 1, 3]</code> and <code>arr</code> is <code>[9, 4, 2, 3, 4]</code>, the longest subsequence from <code>target</code> that can be formed from <code>arr</code> is <code>[3]</code>. Therefore, the minimum operations required would be <code>3</code> (removing <code>9</code>, <code>4</code>, and <code>2</code>).</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can utilize the following approach:</p>
+<ol>
+<li>
+<p><strong>Mapping Target Elements</strong>: Create a mapping (hash map) of the elements in the <code>target</code> array to their respective indices. This helps us quickly check the position of each element in <code>target</code>.</p>
+</li>
+<li>
+<p><strong>Finding Longest Increasing Subsequence (LIS)</strong>: Iterate through the <code>arr</code> and for each element, check if it exists in the <code>target</code> mapping. If it does, find its index in the <code>target</code> and maintain a list (or stack) that represents the longest increasing subsequence of indices.</p>
+</li>
+<li>
+<p><strong>Binary Search for Efficiency</strong>: When we find an index corresponding to an element in <code>target</code>, we can use binary search to efficiently determine where to insert this index in our list of indices. If it can extend the subsequence, we append it; if it can replace an existing index, we do so.</p>
+</li>
+<li>
+<p><strong>Calculate Result</strong>: The minimum operations required will be the size of <code>target</code> minus the size of the longest subsequence found in the previous step.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the provided code to understand its functionality in detail:</p>
+<ol>
+<li>
+<p><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The public method <code>minOperations</code> takes two vectors of integers as input and returns an integer representing the minimum operations required.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">minOperations</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">target</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Mapping Target Elements</strong>: A map is created to store the indices of elements in the <code>target</code> array. This allows for quick lookups.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">h</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">h</span><span class="p">[</span><span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization of Stack</strong>: We initialize a vector <code>stk</code> that will be used to keep track of the indices of the longest increasing subsequence found.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">stk</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through arr</strong>: We loop through each number in <code>arr</code> to check if it exists in the <code>target</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">num</span><span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Skip Non-target Numbers</strong>: If the current number does not exist in the <code>target</code> mapping, we skip it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">h</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Building the Longest Increasing Subsequence</strong>: If the stack is empty or the current number&rsquo;s index in <code>target</code> is greater than the last index in <code>stk</code>, we push this index onto <code>stk</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">h</span><span class="p">[</span><span class="n">num</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">stk</span><span class="p">.</span><span class="n">back</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stk</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">num</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Binary Search for Replacement</strong>: If the index is not greater, we perform a binary search to find the position in <code>stk</code> where the current index can replace an existing index to maintain an increasing order.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">stk</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">[</span><span class="n">num</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update the Stack</strong>: We replace the index at position <code>l</code> with the current index.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">stk</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">num</span><span class="p">];</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate and Return Result</strong>: Finally, we return the difference between the size of <code>target</code> and the size of <code>stk</code>, which represents the minimum operations required.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">target</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">stk</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n + m \log m)), where (n) is the size of <code>arr</code> and (m) is the size of <code>target</code>. The map construction takes (O(m)), and each lookup and insertion into <code>stk</code> involves a binary search operation, which is (O(\log m)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m)) for storing the mapping of target elements.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution efficiently computes the minimum operations required to transform one array into another by leveraging a combination of mapping and the longest increasing subsequence technique. The use of a hash map facilitates quick lookups for elements in the target array, while the binary search within the stack helps maintain the longest subsequence efficiently. The algorithm is designed to handle larger input sizes, making it a robust approach for similar problems involving subsequences and transformations. Overall, the code is well-structured, demonstrating a clear understanding of data structures and algorithmic principles.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode811s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1714"  class="external-link" target="_blank" rel="noopener">LeetCode #1714: Sum Of Special Evenly-Spaced Elements In Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1714"  class="external-link" target="_blank" rel="noopener">LeetCode #1714: Sum Of Special Evenly-Spaced Elements In Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -253,66 +384,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

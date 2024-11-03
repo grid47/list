@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -226,11 +226,123 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode968s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective of this problem is to sort the words in a sentence based on their order specified by a number at the end of each word. Each word in the input string ends with a digit that indicates its position in the sorted order. The goal is to rearrange the words into a correctly ordered sentence while omitting the trailing numbers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we will follow a structured approach:</p>
+<ol>
+<li><strong>Parsing the Input</strong>: We will use a string stream to break the input sentence into individual words.</li>
+<li><strong>Extracting Positions</strong>: For each word, we will extract the number at the end to determine its position and store the word without the number.</li>
+<li><strong>Sorting Words</strong>: We will sort the words based on their extracted positions.</li>
+<li><strong>Constructing the Result</strong>: Finally, we will concatenate the sorted words back into a single string to produce the final result.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The implementation starts by defining a class named <code>Solution</code>, which encapsulates our method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Method Declaration</strong>: The method <code>sortSentence</code> takes a string <code>s</code> as input and returns the rearranged string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="nf">sortSentence</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Using String Stream</strong>: We declare a string stream <code>words</code> initialized with the input string <code>s</code>. This allows us to read the words from the string conveniently.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">stringstream</span> <span class="nf">words</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="n">word</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Vector Initialization</strong>: We define a vector <code>sent</code> to store pairs of integers and strings. Each pair will consist of the position (from the number at the end of the word) and the word itself without that number.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">sent</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>SECTION 1: Parsing Words</strong>: We enter a while loop that continues as long as there are words to read from the string stream. For each word, we perform the following steps:</p>
+<ul>
+<li>Calculate the length of the word and determine the position by converting the last character (a digit) to an integer.</li>
+<li>Store the position and the word (without the last character) in the <code>sent</code> vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">words</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">word</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="kt">int</span><span class="p">(</span><span class="n">word</span><span class="p">[</span><span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">48</span><span class="p">;</span> <span class="c1">// Convert character to integer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">sent</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">word</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="o">-</span><span class="mi">1</span><span class="p">)));</span> <span class="c1">// Store the position and word
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>SECTION 2: Sorting the Words</strong>: After all words have been parsed and stored in the <code>sent</code> vector, we use the <code>sort</code> function to sort the vector based on the first element of the pairs (the positions).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">sort</span><span class="p">(</span><span class="n">sent</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">sent</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>SECTION 3: Constructing the Result</strong>: We initialize an empty string <code>ans</code> to build the final output. We then loop through the sorted vector to concatenate the words into the result string, ensuring to add a space between words but not at the end.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">string</span> <span class="n">ans</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">sent</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ans</span> <span class="o">+=</span> <span class="n">sent</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">;</span> <span class="c1">// Append the word
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">+=</span> <span class="s">&#34; &#34;</span><span class="p">;</span> <span class="c1">// Append space if not the last word
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: After constructing the ordered sentence, we return the result string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is (O(n \log n)), where (n) is the number of words in the sentence. This complexity arises from the sorting step. The space complexity is (O(n)) due to the additional storage used for the pairs in the vector.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided code effectively rearranges the words in a sentence based on the numerical suffixes attached to each word. By utilizing a combination of string parsing, data structures, and sorting algorithms, the solution efficiently constructs a new string that reflects the correct word order. This approach not only demonstrates effective problem-solving skills in handling string manipulations but also illustrates the utility of standard library features in C++. The implementation is concise, clear, and achieves the desired outcome with optimal performance, making it a robust solution for similar problems involving word ordering based on embedded numeric information.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode968s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1860"  class="external-link" target="_blank" rel="noopener">LeetCode #1860: Incremental Memory Leak</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1860"  class="external-link" target="_blank" rel="noopener">LeetCode #1860: Incremental Memory Leak</a></th>
       </tr>
   </thead>
   <tbody>
@@ -251,66 +363,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

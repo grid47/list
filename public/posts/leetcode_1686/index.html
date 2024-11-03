@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -227,11 +227,176 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">ap</span> <span class="o">&gt;</span> <span class="n">bp</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">ap</span> <span class="o">&lt;</span> <span class="n">bp</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span><span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode780s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is about simulating a game between two players, Alice and Bob, who take turns picking stones from a set of piles. Each pile <code>i</code> has two values: <code>alice[i]</code> and <code>bob[i]</code>, representing the points Alice and Bob would earn, respectively, if they pick stones from that pile. The objective is to determine the outcome of the game after all stones have been picked, where:</p>
+<ul>
+<li>If Alice has more points, the result should be <code>1</code>.</li>
+<li>If Bob has more points, the result should be <code>-1</code>.</li>
+<li>If both players have equal points, the result should be <code>0</code>.</li>
+</ul>
+<p>The players will always choose the pile that maximizes their potential score, considering both their own score and minimizing the opponent&rsquo;s score.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To determine the outcome, the approach is as follows:</p>
+<ol>
+<li>
+<p><strong>Aggregate Points</strong>: Calculate the total points for each pile by summing <code>alice[i]</code> and <code>bob[i]</code>. This helps in determining which pile has the highest combined score.</p>
+</li>
+<li>
+<p><strong>Use a Priority Queue</strong>: Utilize a max-heap (priority queue) to always access the pile with the highest combined score efficiently.</p>
+</li>
+<li>
+<p><strong>Simulate the Game</strong>:</p>
+<ul>
+<li>Alternate turns between Alice and Bob.</li>
+<li>On Alice&rsquo;s turn, she will pick the pile with the maximum points available for her.</li>
+<li>On Bob&rsquo;s turn, he will do the same.</li>
+<li>Update their scores accordingly after each turn.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine the Result</strong>: After all piles have been picked, compare their final scores and return the appropriate result.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a step-by-step breakdown of the implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">stoneGameVI</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">alice</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">bob</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class named <code>Solution</code> and create a public method <code>stoneGameVI</code>, which takes two vectors of integers, <code>alice</code> and <code>bob</code>, as parameters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">bp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">alice</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><strong>Variable Initialization</strong>:
+<ul>
+<li>We initialize <code>ap</code> and <code>bp</code> to store Alice&rsquo;s and Bob&rsquo;s scores, respectively.</li>
+<li><code>n</code> holds the number of piles, which is the size of the <code>alice</code> vector.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">less</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">alice</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">bob</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Priority Queue Setup</strong>:
+<ul>
+<li>We define a priority queue <code>pq</code> that stores pairs of integers. The first element of the pair is the sum of points from both players for each pile, and the second element is the index of the pile.</li>
+<li>We iterate through all piles and push the combined scores into the priority queue.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">isA</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">auto</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li><strong>Game Simulation</strong>:
+<ul>
+<li>A boolean <code>isA</code> is initialized to track whose turn it is, starting with Alice.</li>
+<li>We enter a loop that continues until the priority queue is empty.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">isA</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ap</span> <span class="o">+=</span> <span class="n">alice</span><span class="p">[</span><span class="n">tmp</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">bp</span> <span class="o">+=</span> <span class="n">bob</span><span class="p">[</span><span class="n">tmp</span><span class="p">.</span><span class="n">second</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">isA</span> <span class="o">=</span> <span class="o">!</span><span class="n">isA</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Score Updating</strong>:
+<ul>
+<li>Depending on whose turn it is, we add the corresponding points from the selected pile to either Alice&rsquo;s or Bob&rsquo;s score using the index <code>tmp.second</code>.</li>
+<li>After each selection, we toggle the <code>isA</code> flag to switch turns.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ap</span> <span class="o">&gt;</span> <span class="n">bp</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">ap</span> <span class="o">&lt;</span> <span class="n">bp</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Result Evaluation</strong>:
+<ul>
+<li>Once all piles are processed, we return <code>1</code> if Alice has a higher score, <code>-1</code> if Bob has a higher score, and <code>0</code> if their scores are equal.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n \log n)), where (n) is the number of piles. This is due to the (O(n)) time required to insert elements into the priority queue and the (O(\log n)) time for each extraction.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) because we are storing the combined scores of each pile in the priority queue.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently simulates the game between Alice and Bob using a priority queue to prioritize the selection of piles based on their total points. The algorithm ensures that both players play optimally, maximizing their scores while minimizing their opponent&rsquo;s score.</p>
+<p>Key highlights include:</p>
+<ol>
+<li>
+<p><strong>Optimal Play</strong>: The priority queue guarantees that both players will always pick the best possible option available to them at any turn.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: The use of the priority queue allows for efficient score calculations, making the algorithm scalable for larger inputs.</p>
+</li>
+<li>
+<p><strong>Game Simulation</strong>: The solution effectively models the game dynamics while maintaining simplicity and clarity in code.</p>
+</li>
+</ol>
+<p>In summary, the code provides a clear, efficient, and effective way to determine the outcome of the stone game between Alice and Bob by leveraging optimal strategies in score maximization.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode780s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1687"  class="external-link" target="_blank" rel="noopener">LeetCode #1687: Delivering Boxes from Storage to Ports</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1687"  class="external-link" target="_blank" rel="noopener">LeetCode #1687: Delivering Boxes from Storage to Ports</a></th>
       </tr>
   </thead>
   <tbody>
@@ -252,66 +417,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

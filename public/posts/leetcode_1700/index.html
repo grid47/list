@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -204,11 +204,155 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode805s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires counting the number of students who could not be matched with their preferred seats in a scenario where students have specific seating preferences. The input consists of two integer arrays:</p>
+<ul>
+<li><strong>A</strong>: An array representing the preferred seats for each student.</li>
+<li><strong>B</strong>: An array representing the actual seats available.</li>
+</ul>
+<p>The goal is to determine how many students end up without a matching seat based on their preferences.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we can adopt a straightforward approach:</p>
+<ol>
+<li><strong>Count the Preferences</strong>: First, we will count the number of students who prefer each seat in array A.</li>
+<li><strong>Match Students to Seats</strong>: Next, we will iterate through the available seats in array B and decrement the count for each seat that a student prefers.</li>
+<li><strong>Count Unmatched Students</strong>: Finally, we can compute how many students were not able to find a matching seat based on their preferences by comparing the total number of students to the count of students matched.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countStudents</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">A</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">B</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Initialize a count array to keep track of seat preferences.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">count</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span> <span class="c1">// We assume two types of seats (0 and 1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// Get the number of students
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// Variable to keep track of the number of students who found seats
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Count preferences for seats from array A
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">A</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">count</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment the count for each preferred seat
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Match students to their preferred seats from array B
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">count</span><span class="p">[</span><span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">count</span><span class="p">[</span><span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span><span class="o">--</span><span class="p">;</span> <span class="c1">// Decrease the count of preferred seats if matched
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Return the number of students who couldn&#39;t find a matching seat
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">;</span> <span class="c1">// Total students minus the number matched
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h4 id="step-by-step-explanation">
+  Step-by-Step Explanation
+  <a class="heading-link" href="#step-by-step-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li>We declare an integer array <code>count</code> to track how many students prefer each type of seat. Here, we assume there are two types of seats (0 and 1). The array size can be adjusted depending on the actual problem constraints.</li>
+<li>We also initialize <code>n</code> to hold the size of array A, which represents the total number of students.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Preferences</strong>:</p>
+<ul>
+<li>We iterate through each element in array A, and for every student’s preferred seat (<code>a</code>), we increment the corresponding index in the <code>count</code> array. This gives us the total number of students preferring each seat type.</li>
+</ul>
+</li>
+<li>
+<p><strong>Match Students to Seats</strong>:</p>
+<ul>
+<li>We initialize <code>k</code> to zero and start iterating through array B, which represents the actual seats available.</li>
+<li>For each available seat <code>B[k]</code>, we check if there are any students preferring that seat by looking at the <code>count</code> array. If <code>count[B[k]]</code> is greater than zero, it means a student can be matched to that seat. We then decrement the count for that seat to signify that one student has taken that seat.</li>
+<li>We continue this process until either we have checked all seats in B or run out of students that can be matched (i.e., when <code>count[B[k]]</code> becomes zero).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Unmatched Students</strong>:</p>
+<ul>
+<li>Finally, we return the number of students who could not be matched to a seat. This is calculated as <code>n - k</code>, where <code>k</code> is the count of students that found seats.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(n)), where (n) is the number of students. We traverse the preferences and the available seats in linear time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) as we only use a fixed-size array to count the preferences.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently counts how many students cannot be seated according to their preferences using a linear time approach. Here are the key takeaways from this code:</p>
+<ol>
+<li>
+<p><strong>Efficient Counting</strong>: The use of an integer array to count preferences allows for quick updates and checks, leading to an efficient solution.</p>
+</li>
+<li>
+<p><strong>Simple Logic</strong>: The implementation relies on straightforward iteration and counting, making it easy to understand and maintain.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: The solution can be adapted to accommodate different types of seats or more complex matching rules by modifying the count logic.</p>
+</li>
+</ol>
+<p>In summary, this solution demonstrates how to efficiently manage matching problems using basic data structures and algorithms, providing a clear and effective way to handle student seating preferences.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode805s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1701"  class="external-link" target="_blank" rel="noopener">LeetCode #1701: Average Waiting Time</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1701"  class="external-link" target="_blank" rel="noopener">LeetCode #1701: Average Waiting Time</a></th>
       </tr>
   </thead>
   <tbody>
@@ -229,66 +373,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

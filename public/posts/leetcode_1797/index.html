@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -241,11 +241,155 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * obj-&gt;renew(tokenId,currentTime);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * int param_3 = obj-&gt;countUnexpiredTokens(currentTime);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode899s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves designing an <code>AuthenticationManager</code> that handles token generation and renewal with a specified time-to-live (TTL). The primary tasks include generating tokens, renewing them, and counting unexpired tokens based on their lifetime. Tokens are considered expired if the current time exceeds their TTL. This is essential in applications requiring secure access control, such as APIs and user authentication systems.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To efficiently manage the tokens and their expiration, we can use a combination of a priority queue and a map:</p>
+<ol>
+<li>
+<p><strong>Priority Queue</strong>: This will store the tokens along with their expiration times in a way that allows for easy retrieval of the earliest expired token.</p>
+</li>
+<li>
+<p><strong>Map</strong>: This will keep track of the count of valid (unexpired) tokens associated with their IDs, allowing for quick updates when tokens are generated or renewed.</p>
+</li>
+<li>
+<p><strong>Methods</strong>:</p>
+<ul>
+<li><code>generate(tokenId, currentTime)</code>: This method creates a new token with an expiration time based on the current time and TTL.</li>
+<li><code>renew(tokenId, currentTime)</code>: This method renews an existing token, updating its expiration time if it has not expired yet.</li>
+<li><code>countUnexpiredTokens(currentTime)</code>: This method counts the total number of unexpired tokens by removing any expired tokens from the data structures.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the complete code for the <code>AuthenticationManager</code> class:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AuthenticationManager</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ttl</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define the <code>AuthenticationManager</code> class, which includes a priority queue <code>pq</code> to store token expiration times and their corresponding IDs.</li>
+<li>A map <code>mp</code> keeps track of the count of each token ID currently active.</li>
+<li>An integer <code>ttl</code> holds the time-to-live value for tokens.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">AuthenticationManager</span><span class="p">(</span><span class="kt">int</span> <span class="n">timeToLive</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ttl</span> <span class="o">=</span> <span class="n">timeToLive</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The constructor initializes the <code>ttl</code> variable with the provided time-to-live value for the tokens.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">generate</span><span class="p">(</span><span class="n">string</span> <span class="n">tokenId</span><span class="p">,</span> <span class="kt">int</span> <span class="n">currentTime</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">currentTime</span> <span class="o">&gt;=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">first</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>generate</code> method first checks for any expired tokens. If the current time exceeds the expiration time of the earliest token in the priority queue, it decrements the count of that token ID in the map. If the count drops to zero, the token ID is removed from the map.</li>
+<li>The expired tokens are then removed from the priority queue as well.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">currentTime</span> <span class="o">+</span> <span class="n">ttl</span><span class="p">,</span> <span class="n">tokenId</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="n">tokenId</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After cleaning up expired tokens, the method adds a new token to the priority queue with its expiration time and updates the map to reflect the new token.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">renew</span><span class="p">(</span><span class="n">string</span> <span class="n">tokenId</span><span class="p">,</span> <span class="kt">int</span> <span class="n">currentTime</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">currentTime</span> <span class="o">&gt;=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">first</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>renew</code> method similarly cleans up expired tokens before attempting to renew the specified token ID.</li>
+<li>If the token is valid (exists in the map), it updates the expiration time and increments its count in the map.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">tokenId</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">currentTime</span> <span class="o">+</span> <span class="n">ttl</span><span class="p">,</span> <span class="n">tokenId</span><span class="p">});</span>            
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">tokenId</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the token exists, a new expiration time is pushed to the priority queue, and its count is incremented.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">countUnexpiredTokens</span><span class="p">(</span><span class="kt">int</span> <span class="n">currentTime</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">currentTime</span> <span class="o">&gt;=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">first</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">[</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">mp</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">().</span><span class="n">second</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>countUnexpiredTokens</code> method cleans up expired tokens and returns the size of the map, which corresponds to the count of unexpired tokens.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><code>generate</code>: (O(\log m)), where (m) is the number of tokens currently stored in the priority queue.</li>
+<li><code>renew</code>: (O(\log m)), for the same reasons as above.</li>
+<li><code>countUnexpiredTokens</code>: (O(m \log m)) in the worst case if all tokens are expired.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(m)), where (m) is the number of tokens being managed, due to the storage in the priority queue and map.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>AuthenticationManager</code> class effectively manages tokens through a priority queue and a hash map, allowing for efficient generation, renewal, and counting of unexpired tokens. The design of the class demonstrates best practices in handling time-based events and managing dynamic collections in C++. This implementation can be highly beneficial in secure applications where token management is crucial for maintaining access control, such as in user authentication and session management systems.</p>
+<p>By leveraging a combination of data structures, the class ensures that it can handle various operations with optimal time complexity, making it suitable for high-performance applications where speed and efficiency are paramount. The use of STL containers simplifies the implementation, providing a clean and maintainable solution. This class serves as a foundational component in systems that require robust authentication mechanisms, highlighting the importance of effective token management in software development.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode899s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1798"  class="external-link" target="_blank" rel="noopener">LeetCode #1798: Maximum Number of Consecutive Values You Can Make</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1798"  class="external-link" target="_blank" rel="noopener">LeetCode #1798: Maximum Number of Consecutive Values You Can Make</a></th>
       </tr>
   </thead>
   <tbody>
@@ -266,66 +410,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

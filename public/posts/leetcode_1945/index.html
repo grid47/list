@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -211,11 +211,176 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1061s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to compute the &ldquo;lucky&rdquo; value of a given string <code>s</code> after performing a series of transformations. Each letter in the string corresponds to its position in the alphabet (with &lsquo;a&rsquo; being 1, &lsquo;b&rsquo; being 2, &hellip;, &lsquo;z&rsquo; being 26). The process involves converting the string into a number, summing its digits, and repeating this summation process a specified number of times, denoted by <code>k</code>.</p>
+<p>The goal is to implement a function <code>getLucky</code> that takes a string <code>s</code> and an integer <code>k</code>, and returns the final lucky number after performing the transformation and summation process <code>k</code> times.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem can be broken down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Convert Characters to Numbers</strong>: Convert each character in the string to its corresponding numerical value based on its position in the alphabet.</p>
+</li>
+<li>
+<p><strong>Sum Digits</strong>: After converting the characters, compute the sum of the digits of the resulting number.</p>
+</li>
+<li>
+<p><strong>Repeat the Summation</strong>: For <code>k-1</code> times, repeat the summation of the digits of the current result.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the resulting number after all transformations and summations.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s take a closer look at the implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">getLucky</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>Here, we define a class <code>Solution</code> with a public method <code>getLucky</code> that takes two parameters: a string <code>s</code> and an integer <code>k</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// Initialize an empty string to store the numeric representation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">s</span><span class="p">)</span> <span class="n">tmp</span> <span class="o">+=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></code></pre></div><p>We initialize a temporary string <code>tmp</code>. We then iterate over each character <code>c</code> in the string <code>s</code> and convert it to its corresponding numerical value using the expression <code>c - 'a' + 1</code>. This expression calculates the position of the character in the alphabet. The resulting numbers are concatenated into the <code>tmp</code> string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize n to hold the sum of digits
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">tmp</span><span class="p">)</span> <span class="n">n</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">;</span>
+</span></span></code></pre></div><p>Next, we initialize an integer <code>n</code> to store the sum of the digits represented in the string <code>tmp</code>. We iterate over each character <code>c</code> in <code>tmp</code> and convert it back to an integer by subtracting <code>'0'</code>. We then add this integer value to <code>n</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">next</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Initialize next to hold the sum of the digits for the next iteration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">next</span> <span class="o">+=</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// Add the last digit of n to next
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">n</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// Remove the last digit from n
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span> <span class="c1">// Update n for the next iteration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><p>After obtaining the initial sum of digits in <code>n</code>, we enter a loop that runs <code>k-1</code> times (since we have already performed one summation). Inside the loop:</p>
+<ul>
+<li>We initialize <code>next</code> to store the sum of digits for the current iteration.</li>
+<li>We then use a <code>while</code> loop to sum the digits of <code>n</code> by repeatedly taking the last digit (<code>n % 10</code>), adding it to <code>next</code>, and removing it from <code>n</code> (<code>n /= 10</code>).</li>
+<li>After the inner loop, we update <code>n</code> with the new digit sum stored in <code>next</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Return the final lucky number
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we return the computed value of <code>n</code>, which represents the lucky number after performing all required transformations.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution can be analyzed as follows:</p>
+<ul>
+<li>Converting characters to numbers takes (O(m)), where (m) is the length of the string <code>s</code>.</li>
+<li>Summing the digits of the number takes (O(d)), where (d) is the number of digits in the numeric representation. This could be at most (2m) in the worst case (when all characters are &lsquo;z&rsquo;).</li>
+<li>The loop runs (k-1) times, and summing the digits inside this loop also takes (O(d)). Therefore, the overall time complexity is approximately (O(m + (k-1) \cdot d)).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m)) due to the temporary string <code>tmp</code> that holds the numeric representation of the characters.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided implementation of the <code>getLucky</code> function efficiently computes the lucky number derived from the string <code>s</code> through a series of transformations and digit summations. By leveraging simple string manipulations and arithmetic operations, this approach remains both straightforward and effective.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Character-to-Number Conversion</strong>: The solution utilizes simple arithmetic to convert characters into their corresponding numerical values based on their positions in the alphabet.</p>
+</li>
+<li>
+<p><strong>Digit Summation</strong>: The algorithm effectively handles the digit summation process through a straightforward loop, ensuring that the final result adheres to the specified number of transformations.</p>
+</li>
+<li>
+<p><strong>Clarity and Efficiency</strong>: The code is structured in a clear and logical manner, making it easy to understand and maintain.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This function can be useful in various scenarios, such as:</p>
+<ul>
+<li>
+<p><strong>Numerological Analysis</strong>: In applications that involve converting text into numerical representations for analysis, such as in numerology or symbolic interpretations.</p>
+</li>
+<li>
+<p><strong>Game Mechanics</strong>: In game development, where certain character attributes may be derived from strings (like player names) and need to be transformed into numeric values for scoring or leveling.</p>
+</li>
+<li>
+<p><strong>Data Encoding</strong>: In encoding schemes where strings must be transformed into numbers for storage or transmission, ensuring consistency in representation.</p>
+</li>
+</ul>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing this solution, consider the following:</p>
+<ul>
+<li>
+<p><strong>Input Validation</strong>: Ensure that the input string <code>s</code> is not empty and that the integer <code>k</code> is positive to avoid unnecessary computations or errors.</p>
+</li>
+<li>
+<p><strong>Performance Testing</strong>: Given that the solution involves a potentially large number of iterations, testing the performance with various string lengths and values of <code>k</code> will help ensure robustness.</p>
+</li>
+<li>
+<p><strong>Handling Edge Cases</strong>: Consider special cases, such as strings consisting of the same character, which may affect the number of iterations and the resulting sum.</p>
+</li>
+</ul>
+<p>By following these principles, one can adapt this approach to similar problems involving character transformations and numeric computations effectively.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1061s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1946"  class="external-link" target="_blank" rel="noopener">LeetCode #1946: Largest Number After Mutating Substring</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1946"  class="external-link" target="_blank" rel="noopener">LeetCode #1946: Largest Number After Mutating Substring</a></th>
       </tr>
   </thead>
   <tbody>
@@ -236,66 +401,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

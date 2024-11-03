@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -208,7 +208,162 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1047s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to count the number of distinct palindromic subsequences in a given string of lowercase English letters. A palindromic subsequence is a sequence that reads the same backward as forward and can be derived from the original string by deleting some characters without changing the order of the remaining characters.</p>
+<p>For example, in the string &ldquo;abca&rdquo;, the palindromic subsequences include &ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;, &ldquo;aa&rdquo;, &ldquo;aca&rdquo;, and &ldquo;aba&rdquo;. The objective is to implement an efficient solution that can handle this counting in a way that optimally processes the string and identifies the required subsequences.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we can follow these steps:</p>
+<ol>
+<li>
+<p><strong>Identify First and Last Occurrences</strong>: Create two arrays, <code>fst</code> and <code>lst</code>, to store the first and last occurrences of each character in the input string. The <code>fst</code> array keeps track of the first index where each character appears, and the <code>lst</code> array keeps track of the last index for each character.</p>
+</li>
+<li>
+<p><strong>Iterate Through Characters</strong>: For each character in the alphabet, if the first occurrence index is less than the last occurrence index, we identify that the character appears at least twice. We then look for distinct characters that appear between these two indices.</p>
+</li>
+<li>
+<p><strong>Count Distinct Characters</strong>: Use an unordered set to gather distinct characters between the first and last indices of each character that can form palindromic subsequences. The size of this set will contribute to the count of distinct palindromic subsequences.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Sum up all distinct characters found in the sets and return the final count.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a step-by-step breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countPalindromicSubsequence</span><span class="p">(</span><span class="n">string</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>In this part of the code, we define a class named <code>Solution</code> and declare a public method <code>countPalindromicSubsequence</code>, which takes a string <code>num</code> as input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">num</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">fst</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">lst</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><p>We initialize an integer <code>n</code> to hold the size of the input string and an integer <code>res</code> to count the distinct palindromic subsequences. We also create two vectors <code>fst</code> and <code>lst</code>, both of size 26 (for each letter of the alphabet). <code>fst</code> is initialized to <code>n</code> (to represent that no character has been found yet), and <code>lst</code> is initialized to 0.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fst</span><span class="p">[</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">fst</span><span class="p">[</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">],</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lst</span><span class="p">[</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>We loop through the string <code>num</code> using a for loop, where <code>i</code> ranges from <code>0</code> to <code>n - 1</code>. During each iteration, we update the first occurrence of each character by taking the minimum index. Simultaneously, we set the last occurrence index to the current index.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">fst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">unordered_set</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">fst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">lst</span><span class="p">[</span><span class="n">i</span><span class="p">]).</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>Next, we iterate through the <code>fst</code> and <code>lst</code> arrays. If the first occurrence is less than the last occurrence (indicating the character appears at least twice), we create an unordered set of characters that appear between the first and last indices of this character. The size of this set, which represents distinct characters between these indices, is added to <code>res</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, the method returns the accumulated count of distinct palindromic subsequences stored in <code>res</code>.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n + 26 \cdot m)), where (n) is the length of the string and (m) is the average number of distinct characters between occurrences. The first loop runs in linear time, and the second loop iterates over 26 characters, with the unordered set operation being average (O(1)) for each insert.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(26)) for the two arrays used to track first and last occurrences, and (O(m)) for the unordered sets created during processing. In the worst case, the space used by the set could be up to the size of the alphabet (constant).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countPalindromicSubsequence</code> method provides an efficient way to count distinct palindromic subsequences in a given string. By utilizing the properties of character indices and unordered sets, the implementation is optimized for both time and space, making it suitable for larger inputs.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>First and Last Occurrences</strong>: The algorithm effectively uses the indices of characters to track their positions, minimizing redundant checks.</p>
+</li>
+<li>
+<p><strong>Distinct Character Tracking</strong>: Utilizing unordered sets allows the algorithm to quickly count distinct characters, which is crucial for identifying valid palindromic subsequences.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: The method is designed to handle larger strings efficiently, thanks to its linear complexity concerning the size of the input.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Text Analysis</strong>: This technique can be applied in natural language processing tasks where palindromic patterns may need to be identified within strings.</p>
+</li>
+<li>
+<p><strong>DNA Sequence Analysis</strong>: In bioinformatics, finding palindromic sequences in DNA strands can help identify important biological markers.</p>
+</li>
+<li>
+<p><strong>Data Compression</strong>: Algorithms that rely on recognizing patterns might use palindromic subsequences to enhance compression ratios.</p>
+</li>
+<li>
+<p><strong>Cryptography</strong>: Identifying palindromic patterns can play a role in analyzing certain cryptographic sequences for vulnerabilities.</p>
+</li>
+</ol>
+<h3 id="implementation-considerations">
+  Implementation Considerations
+  <a class="heading-link" href="#implementation-considerations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>When implementing this method, it is essential to consider:</p>
+<ul>
+<li>
+<p><strong>Input Constraints</strong>: Ensure the input string adheres to specified constraints to avoid excessive memory use or time delays.</p>
+</li>
+<li>
+<p><strong>Character Set</strong>: The algorithm currently assumes only lowercase English letters; adjustments may be necessary for broader character sets.</p>
+</li>
+<li>
+<p><strong>Performance Testing</strong>: It’s recommended to conduct performance tests with varying input sizes and character distributions to ensure optimal functionality.</p>
+</li>
+</ul>
+<p>By mastering the approach presented in this solution, developers can effectively address similar string processing challenges, harnessing the power of algorithmic design to efficiently manage and manipulate character data.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1047s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -220,7 +375,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1931"  class="external-link" target="_blank" rel="noopener">LeetCode #1931: Painting a Grid With Three Different Colors</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1931"  class="external-link" target="_blank" rel="noopener">LeetCode #1931: Painting a Grid With Three Different Colors</a></th>
       </tr>
   </thead>
   <tbody>
@@ -241,66 +396,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

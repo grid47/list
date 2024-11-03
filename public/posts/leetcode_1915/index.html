@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,11 +215,144 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1032s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to count the number of wonderful substrings in a given string <code>word</code>. A substring is considered wonderful if at most one character appears an odd number of times. This problem requires an efficient way to analyze substrings due to potentially large input sizes.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we utilize the following approach:</p>
+<ol>
+<li>
+<p><strong>Bitmask Representation</strong>: We can represent the count of characters in the string using a bitmask of size 10, where each bit corresponds to a character (&lsquo;a&rsquo; to &lsquo;j&rsquo;). A bit is set if the character at that position has appeared an odd number of times in the current substring.</p>
+</li>
+<li>
+<p><strong>Tracking Frequency</strong>: We use a map (or an array) to count how many times each bitmask configuration has been seen. This allows us to efficiently calculate how many substrings can be formed from the current character position that satisfy the wonderful substring condition.</p>
+</li>
+<li>
+<p><strong>Iterate Over the String</strong>: For each character in the string:</p>
+<ul>
+<li>Update the current bitmask by toggling the corresponding bit for the character.</li>
+<li>Count substrings that match the current mask.</li>
+<li>Check for all possible masks that differ from the current mask by just one bit (which would correspond to allowing one character to appear an odd number of times).</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Count</strong>: The total number of wonderful substrings is accumulated and returned.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s the detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">wonderfulSubstrings</span><span class="p">(</span><span class="n">string</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>This line defines the <code>wonderfulSubstrings</code> method, which takes a string <code>word</code> as input and returns the count of wonderful substrings as a <code>long long</code> integer.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><p>We declare a map <code>mp</code> to track the frequency of each bitmask. We initialize it with <code>mp[0] = 1</code>, representing the empty substring which has an even count for all characters.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">msk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>Here, <code>msk</code> is initialized to <code>0</code>, representing the current bitmask. <code>ans</code> is initialized to <code>0</code> to store the total count of wonderful substrings.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">word</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We start a loop to iterate over each character in the input string <code>word</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">idx</span><span class="p">);</span>
+</span></span></code></pre></div><p>For each character, we calculate its corresponding index (0 for &lsquo;a&rsquo;, 1 for &lsquo;b&rsquo;, etc.) and update the bitmask by toggling the bit at that index using XOR operation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">+=</span> <span class="n">mp</span><span class="p">[</span><span class="n">msk</span><span class="p">];</span>
+</span></span></code></pre></div><p>We add to the answer the number of times the current bitmask configuration has been seen before. This indicates that all substrings that end at the current index and have the same mask are wonderful.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">lf</span> <span class="o">=</span> <span class="n">msk</span> <span class="o">^</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">+=</span> <span class="n">mp</span><span class="p">[</span><span class="n">lf</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>This inner loop checks all possible masks that differ from the current mask by one bit. For each character position, if we toggle a bit in the current mask, it represents the case where one character appears an odd number of times. We then add the count of these configurations to the answer.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">mp</span><span class="p">[</span><span class="n">msk</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>Finally, we increment the count of the current bitmask in the map to indicate that we have seen this configuration once more.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>After processing all characters in the string, we return the accumulated count of wonderful substrings.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is O(n), where n is the length of the string <code>word</code>. Each character is processed exactly once, and checking or updating the map for the bitmask configurations takes O(1) time on average.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(1), considering the size of the map will be constant (up to 2^10 masks for characters &lsquo;a&rsquo; to &lsquo;j&rsquo;).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>wonderfulSubstrings</code> function efficiently counts the number of wonderful substrings in a given string using a combination of bitmasking and frequency tracking. The approach ensures that even with a potentially large string, the operations remain manageable within linear time complexity. This algorithm is a powerful example of how bit manipulation can simplify counting problems, especially when dealing with conditions related to even and odd occurrences.</p>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>String Analysis</strong>: This algorithm can be utilized in various applications where the analysis of substrings is required, such as text processing and data mining.</p>
+</li>
+<li>
+<p><strong>Game Development</strong>: In games that involve string manipulation or puzzles based on substring properties, this approach can help evaluate player moves or potential outcomes efficiently.</p>
+</li>
+<li>
+<p><strong>Competitive Programming</strong>: The method showcases an effective use of bitmasking and can be beneficial in solving other problems related to substring counting, combinatorial problems, and constraints based on character frequencies.</p>
+</li>
+<li>
+<p><strong>Data Compression</strong>: In scenarios where data compression is applied, identifying properties of substrings may play a crucial role in optimizing storage and retrieval.</p>
+</li>
+<li>
+<p><strong>Natural Language Processing</strong>: This technique can be integrated into algorithms designed for text analysis, language modeling, or sentiment analysis, where substring properties significantly impact results.</p>
+</li>
+</ol>
+<p>The code is well-structured, concise, and leverages efficient data structures to maintain performance while solving complex substring problems effectively. Understanding this solution provides valuable insight into advanced string manipulation techniques, making it a key addition to any programmer&rsquo;s toolkit.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1032s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1916"  class="external-link" target="_blank" rel="noopener">LeetCode #1916: Count Ways to Build Rooms in an Ant Colony</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1916"  class="external-link" target="_blank" rel="noopener">LeetCode #1916: Count Ways to Build Rooms in an Ant Colony</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +373,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

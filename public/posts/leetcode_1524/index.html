@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -212,11 +212,169 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode593s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to count the number of subarrays in a given array of integers that have an odd sum. A subarray is defined as a contiguous portion of the array. The challenge is to efficiently determine how many of these subarrays exist without explicitly generating all possible subarrays, which would be computationally expensive.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we will use a mathematical observation regarding the sum of numbers based on their parity (odd or even).</p>
+<h4 id="key-concepts">
+  Key Concepts
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Sum Parity</strong>:</p>
+<ul>
+<li>An odd number added to an even number results in an odd sum.</li>
+<li>An even number added to another even number or an odd number added to another odd number results in an even sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prefix Sums and Counting</strong>:</p>
+<ul>
+<li>As we traverse the array, we maintain counts of how many subarrays end at each index with odd and even sums.</li>
+<li>For each element, based on its parity, we update our counts and determine how many valid subarrays can be formed ending at that index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>: Since the result can be large, we will use the modulo operation to keep our sum within limits, specifically (10^9 + 7).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">numOfSubarrays</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">odd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">even</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define the class <code>Solution</code> with a public method <code>numOfSubarrays</code> that takes a vector of integers as input.</li>
+<li>We initialize three integer variables:
+<ul>
+<li><code>odd</code>: Counts the number of subarrays with an odd sum.</li>
+<li><code>even</code>: Counts the number of subarrays with an even sum.</li>
+<li><code>sum</code>: This will store the total number of subarrays with an odd sum.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">x</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through each element <code>x</code> in the input array <code>arr</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">swap</span><span class="p">(</span><span class="n">odd</span><span class="p">,</span> <span class="n">even</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">odd</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">even</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>For each element, we check its parity:
+<ul>
+<li>If <code>x</code> is odd (<code>x % 2</code> evaluates to true), we perform the following:
+<ul>
+<li>We swap the counts of <code>odd</code> and <code>even</code>. This is because adding an odd number flips the parity of all previous subarray sums:
+<ul>
+<li>All subarrays that had an even sum will now have an odd sum after adding this odd number.</li>
+<li>All subarrays that had an odd sum will now have an even sum after adding this odd number.</li>
+</ul>
+</li>
+<li>We then increment the <code>odd</code> count by one to account for the subarray that consists solely of the odd number <code>x</code>.</li>
+</ul>
+</li>
+<li>If <code>x</code> is even, we simply increment the <code>even</code> count since adding an even number does not change the parity of the sums.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">odd</span><span class="p">)</span> <span class="o">%</span> <span class="mi">1000000007</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>After processing each element, we update our <code>sum</code> variable by adding the current count of <code>odd</code> subarrays. The modulo operation ensures that <code>sum</code> does not exceed (10^9 + 7).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Once all elements have been processed, we return the total count of subarrays with odd sums stored in <code>sum</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is (O(n)), where (n) is the number of elements in the input array. We only make a single pass through the array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)), as we only use a fixed number of integer variables for counting.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of subarrays with an odd sum by leveraging the properties of number parity.</p>
+<p><strong>Key Insights</strong>:</p>
+<ul>
+<li><strong>Parity Logic</strong>: Understanding how the parity of sums works allows us to dynamically count subarrays without generating them explicitly.</li>
+<li><strong>Space Efficiency</strong>: The algorithm operates in constant space, making it highly efficient for large datasets.</li>
+<li><strong>Scalability</strong>: This approach is easily scalable to other similar problems involving sums and counts, showcasing the versatility of parity-based methods in competitive programming.</li>
+</ul>
+<p>In summary, by using an iterative counting approach combined with properties of odd and even sums, we can solve the problem effectively and efficiently, demonstrating a solid understanding of both algorithm design and numerical properties.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode593s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1525"  class="external-link" target="_blank" rel="noopener">LeetCode #1525: Number of Good Ways to Split a String</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1525"  class="external-link" target="_blank" rel="noopener">LeetCode #1525: Number of Good Ways to Split a String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -237,66 +395,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

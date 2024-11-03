@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -217,11 +217,129 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode706s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to find the maximum score of a team of players based on their individual scores and ages. Players can only be selected if they are of the same age or younger than the previously selected player. The goal is to maximize the total score while adhering to this selection rule.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can use a dynamic programming (DP) approach. The key steps in our approach include:</p>
+<ol>
+<li><strong>Data Structuring</strong>: Pair each player&rsquo;s age with their score and store them in a list.</li>
+<li><strong>Sorting</strong>: Sort the players primarily by age (descending) and secondarily by score (ascending) to ensure that when we evaluate scores, we are considering the appropriate relationships in terms of player eligibility.</li>
+<li><strong>Dynamic Programming Initialization</strong>: Use a DP array where <code>dp[i]</code> will hold the maximum score possible using the first <code>i</code> players, considering the constraints of the problem.</li>
+<li><strong>Score Calculation</strong>: Iterate through the players, and for each player, check all previously considered players to determine if the current player can be included in the team based on their score.</li>
+<li><strong>Maximization</strong>: Continuously track the maximum score throughout the iterations.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">bestTeamScore</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">scores</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">ages</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>bestTeamScore</code> that accepts two vectors: <code>scores</code> and <code>ages</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">ages</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">palyer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">palyer</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">ages</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
+</span></span></code></pre></div><ul>
+<li>We determine the number of players, ( n ), from the size of the <code>ages</code> vector. We then create a vector of pairs called <code>palyer</code> to store each player&rsquo;s age and score.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">palyer</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">palyer</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">greater</span><span class="o">&lt;&gt;</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>The players are sorted in descending order by age and, in the case of ties, by score in ascending order. This ensures that when we consider younger players, we are doing so after considering older players.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>ans</code> to track the maximum score. We also create a DP array <code>dp</code> of size ( n ) to store the maximum score achievable at each player index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">young</span> <span class="o">=</span> <span class="n">palyer</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">young</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through each player in the sorted list. For each player, we set <code>dp[i]</code> to the player&rsquo;s score since, at minimum, their individual score is part of the team score.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">elder</span> <span class="o">=</span> <span class="n">palyer</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">young</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;=</span> <span class="n">elder</span><span class="p">.</span><span class="n">second</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">young</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>For each player, we check all previously considered players (from <code>j = 0</code> to <code>i-1</code>). If the current player&rsquo;s score is less than or equal to the elder player&rsquo;s score, we can add this player&rsquo;s score to the elder&rsquo;s maximum score (<code>dp[j]</code>), updating <code>dp[i]</code> with the maximum possible value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After evaluating all possible previous players for the current player, we update the <code>ans</code> variable with the maximum value found in the <code>dp</code> array. Finally, we return the maximum score.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is ( O(n^2) ) due to the nested loops where we compare each player with all previous players. The sorting step takes ( O(n \log n) ), but it is dominated by the ( O(n^2) ) from the DP step.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n) ) for the DP array and the vector of pairs used to store the players.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively maximizes the score of a team of players while adhering to the selection constraints based on ages and scores. By employing a dynamic programming approach and careful data structuring, we ensure that all possible configurations of players are considered while maintaining optimal performance.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Dynamic Programming</strong>: This problem showcases the power of DP in optimizing selections based on constraints.</li>
+<li><strong>Data Structuring</strong>: Organizing the data into pairs for easier handling and sorting facilitates clearer logic in subsequent steps.</li>
+<li><strong>Sorting</strong>: Sorting players by age and score simplifies the process of determining valid team compositions.</li>
+</ol>
+<p>This method can be adapted for similar problems that involve maximizing values under specific constraints, demonstrating the effectiveness of dynamic programming in competitive programming and algorithmic challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode706s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1627"  class="external-link" target="_blank" rel="noopener">LeetCode #1627: Graph Connectivity With Threshold</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1627"  class="external-link" target="_blank" rel="noopener">LeetCode #1627: Graph Connectivity With Threshold</a></th>
       </tr>
   </thead>
   <tbody>
@@ -242,66 +360,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

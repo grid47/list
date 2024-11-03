@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -206,11 +206,125 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode756s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem we are addressing is to find the maximum number of times a given word can be consecutively repeated in a string sequence. In other words, given two strings, <code>sequence</code> and <code>word</code>, the goal is to determine how many times the <code>word</code> can be concatenated with itself such that it is a substring of <code>sequence</code>. For instance, if <code>sequence</code> is &ldquo;ababc&rdquo; and <code>word</code> is &ldquo;ab&rdquo;, the maximum number of times &ldquo;ab&rdquo; can be consecutively repeated within &ldquo;ababc&rdquo; is 2, because &ldquo;abab&rdquo; is present as a substring.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can adopt a straightforward approach that involves:</p>
+<ol>
+<li><strong>Initial Setup</strong>: We will initialize a counter to keep track of the number of repetitions of the word.</li>
+<li><strong>Concatenation and Search</strong>: We will repeatedly concatenate the word to itself and check if the resulting string is still found in the original sequence.</li>
+<li><strong>Counting Repetitions</strong>: Each time the concatenated word is found within the sequence, we increment our counter.</li>
+<li><strong>Return the Result</strong>: Finally, we will return the count of maximum repetitions.</li>
+</ol>
+<p>This method effectively utilizes string manipulation and searching capabilities to determine the answer.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s the code with detailed explanations:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> that encapsulates our approach and includes a public method <code>maxRepeating</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxRepeating</span><span class="p">(</span><span class="n">string</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">string</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>maxRepeating</code> function takes two parameters: <code>sequence</code> and <code>word</code>, both of which are strings. This function will return an integer representing the maximum number of times <code>word</code> can be consecutively repeated in <code>sequence</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>count</code> to zero. This variable will track the number of times we find the concatenated <code>word</code> in <code>sequence</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">string</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">word</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We create a new string variable <code>temp</code> and initialize it with the value of <code>word</code>. This string will be used to build the repeated versions of <code>word</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">sequence</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">!=</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We enter a while loop that continues as long as <code>temp</code> (the concatenated string) can be found in <code>sequence</code>. The <code>find</code> function returns the position of the first occurrence of <code>temp</code> in <code>sequence</code>, and <code>string::npos</code> indicates that the string was not found.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>Inside the loop, each time <code>temp</code> is found in <code>sequence</code>, we increment the <code>count</code> by 1 to reflect this successful repetition.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">+=</span> <span class="n">word</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We then concatenate <code>word</code> to <code>temp</code>, effectively increasing the number of consecutive repetitions of <code>word</code>. For example, if <code>word</code> was &ldquo;ab&rdquo;, then <code>temp</code> would change from &ldquo;ab&rdquo; to &ldquo;abab&rdquo;, and then to &ldquo;ababab&rdquo; in the subsequent iterations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The while loop continues to iterate, checking if the new <code>temp</code> can still be found in <code>sequence</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Once <code>temp</code> can no longer be found in <code>sequence</code>, we exit the loop and return the <code>count</code>, which now holds the maximum number of consecutive repetitions of <code>word</code> found within <code>sequence</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n \cdot m)), where (n) is the length of the <code>sequence</code> string and (m) is the length of the <code>word</code> string. This complexity arises because each call to <code>find</code> scans through the <code>sequence</code>, and in the worst case, the loop may run (n/m) times (if the <code>word</code> is found repeatedly at overlapping positions).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(m)), which is required to store the temporary string <code>temp</code> that accumulates the concatenated repetitions of <code>word</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maxRepeating</code> method provides a simple yet effective way to count how many times a word can be consecutively repeated as a substring in a given sequence.</p>
+<p><strong>Key Insights</strong>:</p>
+<ol>
+<li><strong>String Manipulation</strong>: This solution highlights the utility of string manipulation methods in C++, such as <code>find</code> and concatenation.</li>
+<li><strong>Iterative Approach</strong>: The iterative approach is straightforward and easy to implement, making it accessible for many string-related problems.</li>
+<li><strong>Optimal for Small Inputs</strong>: While the approach is not optimal for very large strings due to its linear time complexity relative to the lengths of the strings, it is efficient for reasonably sized inputs.</li>
+</ol>
+<p>Overall, the code demonstrates a clear understanding of string processing in C++ and showcases the effectiveness of basic algorithms in solving practical problems related to string patterns.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode756s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1669"  class="external-link" target="_blank" rel="noopener">LeetCode #1669: Merge In Between Linked Lists</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1669"  class="external-link" target="_blank" rel="noopener">LeetCode #1669: Merge In Between Linked Lists</a></th>
       </tr>
   </thead>
   <tbody>
@@ -231,66 +345,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

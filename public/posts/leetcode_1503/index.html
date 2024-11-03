@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -207,11 +207,137 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode570s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand requires us to determine the last moment a set of ants will remain on a stick of length <code>n</code>. The ants can either be moving to the left or to the right, and we need to find out when the last ant falls off the stick.</p>
+<p>Given two lists:</p>
+<ul>
+<li><code>left</code>: representing the positions of ants moving towards the left end of the stick.</li>
+<li><code>right</code>: representing the positions of ants moving towards the right end of the stick.</li>
+</ul>
+<p>The task is to calculate the time at which the last ant will fall off the stick.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can break it down into a few simple steps:</p>
+<ol>
+<li>
+<p><strong>Identify the Last Falling Ant from the Right</strong>: For ants moving towards the right, the time it takes for an ant at position <code>right[i]</code> to fall off the stick is determined by the distance from its position to the end of the stick. This time can be calculated as <code>n - right[i]</code>.</p>
+</li>
+<li>
+<p><strong>Identify the Last Falling Ant from the Left</strong>: For ants moving towards the left, the time for an ant at position <code>left[i]</code> to fall off the stick is equal to its position, <code>left[i]</code>.</p>
+</li>
+<li>
+<p><strong>Calculate the Maximum Time</strong>: The last moment an ant falls off the stick will be the maximum of the times calculated for all the ants from both the <code>left</code> and <code>right</code> lists.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The result will be the maximum time calculated.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">getLastMoment</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">left</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and a public method <code>getLastMoment</code> that takes the length of the stick <code>n</code> and two vectors <code>left</code> and <code>right</code> representing the positions of the ants.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>mx</code> to store the maximum time taken for an ant to fall off the stick.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li>We iterate through the <code>right</code> vector to find the maximum time taken by the ants moving to the right.</li>
+<li>For each ant at position <code>right[i]</code>, the time taken to fall off is calculated as <code>n - right[i]</code>, and we update <code>mx</code> with the maximum of the current <code>mx</code> and this time.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mx</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>        
+</span></span></code></pre></div><ul>
+<li>Next, we iterate through the <code>left</code> vector to find the maximum time for ants moving to the left.</li>
+<li>For each ant at position <code>left[i]</code>, the time to fall off is simply <code>left[i]</code>. We again update <code>mx</code> with the maximum of the current <code>mx</code> and this time.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">mx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>mx</code>, which contains the time of the last ant falling off the stick.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm consists of two linear scans through the <code>left</code> and <code>right</code> vectors. Therefore, the time complexity is (O(m + n)), where (m) is the size of the <code>right</code> vector and (n) is the size of the <code>left</code> vector.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is (O(1)) since we are only using a constant amount of extra space to store the variable <code>mx</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively calculates the last moment an ant will fall off a stick by utilizing simple arithmetic based on the position of each ant. It efficiently determines the maximum time required for both ants moving left and right to fall off the stick.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li><strong>Understanding Movement</strong>: Knowing how ants move towards the edges helps to formulate a simple mathematical approach to calculate the time.</li>
+<li><strong>Efficiency</strong>: The solution efficiently computes the last falling moment with a linear time complexity, making it suitable for large inputs.</li>
+<li><strong>Easy Implementation</strong>: The implementation is straightforward and leverages basic operations, which makes it easy to understand and maintain.</li>
+</ul>
+<p>This method serves as a clear illustration of how to approach problems involving movement and boundaries, making it applicable to a range of similar problems in algorithmic challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode570s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1504"  class="external-link" target="_blank" rel="noopener">LeetCode #1504: Count Submatrices With All Ones</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1504"  class="external-link" target="_blank" rel="noopener">LeetCode #1504: Count Submatrices With All Ones</a></th>
       </tr>
   </thead>
   <tbody>
@@ -232,66 +358,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

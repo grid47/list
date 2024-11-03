@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -207,11 +207,136 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode684s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to reconstruct a non-negative integer matrix given the sums of its rows and columns. Specifically, we are provided with two arrays: <code>rowSum</code> and <code>colSum</code>, where each element in <code>rowSum</code> represents the total of the corresponding row in the matrix, and each element in <code>colSum</code> represents the total of the corresponding column. Our goal is to create a matrix such that:</p>
+<ul>
+<li>The sum of each row matches the respective entry in <code>rowSum</code>.</li>
+<li>The sum of each column matches the respective entry in <code>colSum</code>.</li>
+</ul>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can employ a straightforward greedy algorithm. The idea is to iterate through each cell of the matrix and fill it with the minimum of the available sums from <code>rowSum</code> and <code>colSum</code>. After assigning a value to a cell, we update the corresponding row and column sums to reflect the remaining values.</p>
+<p>The approach can be summarized in the following steps:</p>
+<ol>
+<li>
+<p><strong>Initialize the Matrix</strong>: Create a matrix of size <code>m x n</code> (where <code>m</code> is the length of <code>rowSum</code> and <code>n</code> is the length of <code>colSum</code>) filled with zeros.</p>
+</li>
+<li>
+<p><strong>Iterate Over Each Cell</strong>: For each cell in the matrix:</p>
+<ul>
+<li>Assign it the minimum of the corresponding row and column sums.</li>
+<li>Update the row and column sums to reflect the remaining values after assigning the cell.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the constructed matrix.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the detailed explanation of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">restoreMatrix</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">rowSum</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">colSum</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains a public method <code>restoreMatrix</code>, which accepts two vectors, <code>rowSum</code> and <code>colSum</code>, representing the sums of the rows and columns, respectively. The function returns a 2D vector representing the reconstructed matrix.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">rowSum</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">colSum</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>We first determine the sizes of the row and column sums (<code>m</code> and <code>n</code>). Next, we initialize a 2D vector <code>ans</code> of size <code>m x n</code>, filled with zeros to hold the values of our matrix.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We use nested loops to iterate through each element of the matrix. The outer loop iterates over the rows, while the inner loop iterates over the columns.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">rowSum</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">colSum</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span></code></pre></div><ul>
+<li>For each cell at position <code>(i, j)</code>, we assign it the minimum value between <code>rowSum[i]</code> and <code>colSum[j]</code>. This ensures that we do not exceed the available sums when populating the matrix.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">rowSum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="n">colSum</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="n">ans</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>After assigning a value to <code>ans[i][j]</code>, we update the <code>rowSum</code> and <code>colSum</code> by subtracting the assigned value. This effectively reduces the remaining sum available for that particular row and column.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The loops continue until all cells in the matrix are filled. Finally, we return the completed matrix <code>ans</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The overall time complexity is (O(m \times n)), where (m) is the number of rows and (n) is the number of columns. This is because we need to visit each cell in the matrix once to fill it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(m \times n)) due to the space required to store the resulting matrix.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided implementation of the <code>restoreMatrix</code> function successfully reconstructs a non-negative integer matrix that satisfies the given row and column sums. The algorithm is efficient and straightforward, employing a greedy approach to ensure that the values assigned to the matrix do not exceed the available sums.</p>
+<p><strong>Key Aspects of the Solution</strong>:</p>
+<ol>
+<li><strong>Greedy Strategy</strong>: The method relies on a greedy approach to fill the matrix, ensuring that we always assign the minimum possible value while respecting the constraints of the row and column sums.</li>
+<li><strong>Efficiency</strong>: The solution is efficient with a time complexity of (O(m \times n)), making it suitable for reasonably sized inputs.</li>
+<li><strong>Clarity</strong>: The code is easy to read and understand, with clear variable names and a logical flow.</li>
+</ol>
+<p>In summary, this implementation effectively demonstrates how to reconstruct a matrix based on given constraints, providing an elegant solution to the problem. The approach is applicable in various scenarios where matrix construction based on constraints is required.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode684s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1606"  class="external-link" target="_blank" rel="noopener">LeetCode #1606: Find Servers That Handled Most Number of Requests</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1606"  class="external-link" target="_blank" rel="noopener">LeetCode #1606: Find Servers That Handled Most Number of Requests</a></th>
       </tr>
   </thead>
   <tbody>
@@ -232,66 +357,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

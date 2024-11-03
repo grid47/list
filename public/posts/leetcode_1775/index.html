@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,11 +221,169 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ops</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode875s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to find the minimum number of operations required to make the sum of two integer arrays equal, where each operation allows you to modify an element of either array. Specifically, you can:</p>
+<ul>
+<li>Increase an element in <code>nums1</code> by up to 5 (since it can be increased to a maximum of 6).</li>
+<li>Decrease an element in <code>nums2</code> by up to 5 (since it can be decreased to a minimum of 1).</li>
+</ul>
+<p>Given two integer arrays <code>nums1</code> and <code>nums2</code>, the task is to compute the minimum number of operations needed to equalize their sums, or return -1 if it&rsquo;s impossible to achieve the equality based on the constraints.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves several key steps:</p>
+<ol>
+<li>
+<p><strong>Input Validation</strong>: First, check if the sizes of the two arrays allow for possible adjustments. If either array is more than six times larger than the other, it’s impossible to equalize the sums through the allowed operations, and we return -1.</p>
+</li>
+<li>
+<p><strong>Sum Calculation</strong>: Calculate the total sums of both arrays, <code>sum1</code> for <code>nums1</code> and <code>sum2</code> for <code>nums2</code>.</p>
+</li>
+<li>
+<p><strong>Ensure Order</strong>: Ensure that <code>sum1</code> is less than or equal to <code>sum2</code> by swapping the arrays if necessary. This simplifies the logic since we only need to consider operations that increase <code>sum1</code> or decrease <code>sum2</code>.</p>
+</li>
+<li>
+<p><strong>Sorting</strong>: Sort both arrays. This helps in efficiently accessing the largest possible reductions from <code>nums2</code> and the smallest possible increases from <code>nums1</code>.</p>
+</li>
+<li>
+<p><strong>Greedy Operations</strong>: Utilize a greedy approach to perform operations:</p>
+<ul>
+<li>Use a pointer <code>i</code> to traverse <code>nums1</code> from the smallest to the largest and a pointer <code>j</code> to traverse <code>nums2</code> from the largest to the smallest.</li>
+<li>Determine whether to increase <code>sum1</code> or decrease <code>sum2</code> based on which operation yields the greater change towards achieving equality.</li>
+<li>Continue performing operations until <code>sum1</code> is equal to or exceeds <code>sum2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Count Operations</strong>: Keep track of the number of operations performed and return this count once the sums are equalized.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minOperations</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>A class <code>Solution</code> is defined with a public method <code>minOperations</code> that takes two vectors of integers, <code>nums1</code> and <code>nums2</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span> <span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="o">*</span><span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">||</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="o">*</span><span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The first condition checks if the size of <code>nums1</code> is more than six times the size of <code>nums2</code>, or vice versa. If either condition is true, it is impossible to equalize the sums through the allowed operations, so the method returns -1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum1</span> <span class="o">=</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">nums1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums1</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">sum2</span> <span class="o">=</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">nums2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums2</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>Here, the method calculates the total sums of both arrays using the <code>accumulate</code> function from the <code>&lt;numeric&gt;</code> library.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">sum1</span> <span class="o">&gt;</span> <span class="n">sum2</span><span class="p">)</span> <span class="k">return</span> <span class="n">minOperations</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="n">nums1</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>If <code>sum1</code> is greater than <code>sum2</code>, the arrays are swapped to ensure that <code>sum1</code> is always the smaller sum. This reduces complexity in further operations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">nums1</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums1</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">nums2</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums2</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div><ul>
+<li>Both arrays are sorted. <code>nums1</code> is sorted in ascending order and <code>nums2</code> in ascending order, allowing for efficient access to the smallest and largest elements respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ops</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The variables <code>i</code> and <code>j</code> are initialized as pointers for traversing <code>nums1</code> and <code>nums2</code>, respectively. <code>ops</code> is initialized to count the number of operations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">sum2</span> <span class="o">&gt;</span> <span class="n">sum1</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The loop continues as long as <code>sum2</code> is greater than <code>sum1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="mi">6</span> <span class="o">-</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sum1</span> <span class="o">+=</span> <span class="mi">6</span> <span class="o">-</span> <span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sum2</span> <span class="o">-=</span> <span class="n">nums2</span><span class="p">[</span><span class="n">j</span><span class="o">--</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>The condition checks if:</p>
+<ul>
+<li><code>j &lt; 0</code>: all elements in <code>nums2</code> have been considered for decreasing, or</li>
+<li>The maximum possible increase to <code>sum1</code> (i.e., <code>6 - nums1[i]</code>) is greater than the maximum possible decrease from <code>sum2</code> (i.e., <code>nums2[j] - 1</code>).</li>
+</ul>
+</li>
+<li>
+<p>If either condition is true, <code>sum1</code> is increased using the next smallest element from <code>nums1</code>. Otherwise, the largest element in <code>nums2</code> is decreased to maximize the reduction of <code>sum2</code>.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="o">++</span><span class="n">ops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>After each operation (increase or decrease), the operation count <code>ops</code> is incremented.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, the method returns the total number of operations performed to equalize the sums.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of the solution is (O(n \log n + m \log m)), where (n) is the size of <code>nums1</code> and (m) is the size of <code>nums2</code>. The logarithmic terms arise from sorting both arrays. The linear part comes from traversing the arrays to perform the necessary operations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(1)) for the in-place operations and array modifications, assuming the input arrays do not require additional space for storage.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively solves the problem of equalizing the sums of two integer arrays with minimal operations by leveraging a greedy approach and sorting. By focusing on the largest potential changes and systematically applying operations, it ensures that the target condition is met efficiently.</p>
+<p>This code serves as a good reference for similar problems involving optimization through operations on arrays and is illustrative of how to approach problems that have constraints based on the properties of the data involved. The balance between clarity and efficiency in the implementation makes it a valuable example in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode875s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1776"  class="external-link" target="_blank" rel="noopener">LeetCode #1776: Car Fleet II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1776"  class="external-link" target="_blank" rel="noopener">LeetCode #1776: Car Fleet II</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +404,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

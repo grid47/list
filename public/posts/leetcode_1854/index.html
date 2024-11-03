@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -218,11 +218,129 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">yr</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode962s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine the year with the maximum population based on birth and death logs provided for a range of years. Each log entry contains a birth year and a death year for a person. The objective is to find the year during which the population was at its peak, given that the logs span from 1950 to 2050.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we will use a counting array to track the population changes over the years. We will implement the following steps:</p>
+<ol>
+<li><strong>Initialize a Counting Array</strong>: Create an array that will represent population changes from 1950 to 2050.</li>
+<li><strong>Process Each Log Entry</strong>: For each log entry, increment the count at the birth year and decrement the count at the death year.</li>
+<li><strong>Calculate the Population Over the Years</strong>: Iterate through the counting array to calculate the cumulative population for each year.</li>
+<li><strong>Determine the Year with Maximum Population</strong>: Identify the year with the highest population, returning that year.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the complete implementation of the solution:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maximumPopulation</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">logs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sum</span><span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">v</span><span class="p">:</span> <span class="n">logs</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1950</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>   <span class="c1">// Decrease population count at death year
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">sum</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1950</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>   <span class="c1">// Increase population count at birth year
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Declaration</strong>: The solution is encapsulated in a class named <code>Solution</code>.</li>
+<li><strong>Function Definition</strong>: The function <code>maximumPopulation</code> takes a vector of vectors (<code>logs</code>) where each inner vector represents the birth and death years.</li>
+<li><strong>Counting Array Initialization</strong>: A vector <code>sum</code> of size 102 (to cover years from 1950 to 2050) is initialized to zero. This array will be used to track population changes over time.</li>
+<li><strong>Population Change Updates</strong>: For each log entry:
+<ul>
+<li>The death year (indicated by <code>v[1]</code>) results in a decrease in population, hence <code>sum[v[1] - 1950]--</code>.</li>
+<li>The birth year (indicated by <code>v[0]</code>) results in an increase in population, hence <code>sum[v[0] - 1950]++</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">102</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>  <span class="c1">// Cumulative population count
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span>  <span class="c1">// Debug output of the cumulative sums
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Cumulative Population Calculation</strong>: We iterate from index 1 to 101, updating the <code>sum</code> array to reflect the cumulative population. This means that each entry now represents the population at the end of that year.</li>
+<li><strong>Debugging Output</strong>: A debugging statement (<code>cout &lt;&lt; sum[i] &lt;&lt; &quot; &quot;;</code>) is included to print the population for each year. This can help in tracing the internal state of the program during execution.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">yr</span> <span class="o">=</span> <span class="mi">2050</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">101</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">mx</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// Track the maximum population
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">yr</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1950</span><span class="p">;</span>  <span class="c1">// Calculate the actual year
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">mx</span> <span class="o">=</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>    <span class="c1">// Update maximum population
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">yr</span><span class="p">;</span>  <span class="c1">// Return the year with maximum population
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Find Year with Maximum Population</strong>: We initialize <code>mx</code> to track the maximum population encountered and <code>yr</code> to store the year corresponding to that population.</li>
+<li><strong>Backward Looping</strong>: We loop backward through the <code>sum</code> array (from index 101 to 0) to find the maximum population year. This ensures that in case of ties, we prefer the latest year.</li>
+<li><strong>Return Statement</strong>: Finally, we return the year that has the maximum population.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity for processing the logs is ( O(n) ), where ( n ) is the number of log entries. Each log entry requires constant time operations to update the counting array.</li>
+<li>The time complexity for computing the cumulative population and finding the maximum is ( O(1) ) since it iterates through a fixed-size array of 102 elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(1) ) in terms of extra space used since we are only utilizing the counting array of size 102 and a few integer variables for computation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution efficiently determines the year with the maximum population based on the given birth and death logs. By utilizing a counting array and performing cumulative calculations, the implementation achieves optimal time and space complexity.</p>
+<p>This solution highlights effective programming techniques, including the use of arrays for counting, cumulative sums for population tracking, and efficient loop structures to find the desired result. It is well-suited for competitive programming and real-world applications where such demographic analysis might be necessary.</p>
+<p>In summary, the algorithm can handle a variety of scenarios involving demographic logs, making it versatile and efficient for population analysis over a specified time range.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode962s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1855"  class="external-link" target="_blank" rel="noopener">LeetCode #1855: Maximum Distance Between a Pair of Values</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1855"  class="external-link" target="_blank" rel="noopener">LeetCode #1855: Maximum Distance Between a Pair of Values</a></th>
       </tr>
   </thead>
   <tbody>
@@ -243,66 +361,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

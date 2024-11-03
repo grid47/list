@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -206,11 +206,149 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1041s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves counting the number of unique triples ((a, b, c)) where (a), (b), and (c) are integers ranging from (1) to (n) such that (a^2 + b^2 = c^2). In other words, we need to identify the Pythagorean triples formed by these integers within the given range.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize the following steps:</p>
+<ol>
+<li>
+<p><strong>Identify Perfect Squares</strong>: We will create a boolean array to track which values are perfect squares up to (n^2).</p>
+</li>
+<li>
+<p><strong>Iterate Over Possible Values</strong>: We will iterate through pairs of integers (a) and (b) to compute (a^2 + b^2).</p>
+</li>
+<li>
+<p><strong>Check for Valid Triples</strong>: For each sum (a^2 + b^2), we will check if it is a perfect square and whether the square root (c) falls within the specified range.</p>
+</li>
+<li>
+<p><strong>Count Unique Triples</strong>: To ensure we count unique triples, we will treat ((a, b, c)) and ((b, a, c)) as the same when (a \neq b).</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, we will return the total count of such unique triples.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s analyze the provided code step by step:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countTriples</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>This line begins the definition of the <code>Solution</code> class and the <code>countTriples</code> method, which takes an integer (n) as input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">squares</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">squares</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><p>Here, we initialize a boolean vector <code>squares</code> of size (n^2 + 1) to keep track of perfect squares. The loop populates this vector by setting <code>squares[i * i]</code> to true for all integers (i) from (1) to (n). This effectively marks all perfect squares up to (n^2).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>We declare an integer variable <code>res</code> to hold the count of valid triples.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">i</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">*</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span> <span class="o">+=</span> <span class="n">squares</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">*</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+</span></span></code></pre></div><p>In this nested loop, we iterate through all pairs of integers (a) and (b) (where (b) starts from (i) to avoid counting duplicates). We compute (a^2 + b^2) and check if this sum is a perfect square by referring to our <code>squares</code> array. If it is, we increment our count by (2) because ((a, b, c)) and ((b, a, c)) are considered the same valid triple (except for the case when (a = b), which is inherently handled as it counts only once).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, the method returns the result <code>res</code>, which contains the total count of unique Pythagorean triples.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this algorithm is (O(n^2)). This is due to the two nested loops where we iterate through all pairs of integers up to (n). The inner loop runs until (a^2 + b^2) exceeds (n^2).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n^2)) due to the boolean array <code>squares</code>, which holds information for all perfect squares up to (n^2).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>countTriples</code> function effectively counts the number of unique Pythagorean triples formed by integers in the range from (1) to (n). The approach of leveraging perfect squares allows us to efficiently check for valid combinations while ensuring we do not count duplicates.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Use of Boolean Array</strong>: The use of a boolean array to mark perfect squares simplifies the checking process, allowing for quick verification.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: The algorithm runs in polynomial time, making it efficient enough for relatively larger values of (n).</p>
+</li>
+<li>
+<p><strong>Unique Counting Logic</strong>: The method carefully avoids counting duplicate triples by controlling the range of the second integer in the pairs.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Mathematical Computations</strong>: This algorithm can be beneficial in mathematical software or libraries that deal with number theory, especially concerning Pythagorean triples.</p>
+</li>
+<li>
+<p><strong>Game Development</strong>: In games that involve puzzles or challenges based on geometric principles, this logic could be applied to create challenges based on triplet formations.</p>
+</li>
+<li>
+<p><strong>Educational Tools</strong>: The function can be part of educational software that helps students understand the properties of numbers and geometry.</p>
+</li>
+<li>
+<p><strong>Competitive Programming</strong>: Understanding this type of problem can enhance skills in solving complex algorithmic challenges efficiently.</p>
+</li>
+<li>
+<p><strong>Scientific Simulations</strong>: In simulations where spatial relationships are analyzed, counting such geometric relationships could be necessary.</p>
+</li>
+</ol>
+<p>By comprehending the inner workings of this solution, developers and programmers can enhance their knowledge of combinatorial problems and improve their proficiency in implementing similar algorithms in various programming challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1041s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1926"  class="external-link" target="_blank" rel="noopener">LeetCode #1926: Nearest Exit from Entrance in Maze</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1926"  class="external-link" target="_blank" rel="noopener">LeetCode #1926: Nearest Exit from Entrance in Maze</a></th>
       </tr>
   </thead>
   <tbody>
@@ -231,66 +369,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

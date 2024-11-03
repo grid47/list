@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -222,11 +222,150 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode833s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires determining the minimum number of character modifications needed to make two given strings, <code>a</code> and <code>b</code>, such that all characters in <code>a</code> are strictly less than those in <code>b</code> or vice versa. This can be achieved by changing characters in either string to any other character, and we aim to minimize the total number of such modifications.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can utilize the following approach:</p>
+<ol>
+<li>
+<p><strong>Count Character Frequencies</strong>: First, we will count the frequency of each character in both strings. This is done using arrays where the index corresponds to the character (&lsquo;a&rsquo; to &lsquo;z&rsquo;).</p>
+</li>
+<li>
+<p><strong>Calculate Modifications</strong>: We will evaluate the number of modifications required to achieve the following:</p>
+<ul>
+<li>Making all characters in <code>a</code> less than all characters in <code>b</code>.</li>
+<li>Making all characters in <code>b</code> less than all characters in <code>a</code>.</li>
+<li>Finding the scenario that requires the least number of modifications.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through Characters</strong>: By iterating through each character, we can compute:</p>
+<ul>
+<li>The number of modifications needed to make all characters in <code>a</code> and <code>b</code> conform to a particular character.</li>
+<li>The accumulated counts of characters from both strings up to the current character to assist in calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine the Minimum Modifications</strong>: Finally, we compare the number of modifications calculated for the different scenarios and return the minimum.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s dissect the code provided for better understanding:</p>
+<ol>
+<li>
+<p><strong>Class and Function Definition</strong>: The class <code>Solution</code> encapsulates the solution logic, and the method <code>minCharacters</code> takes two strings as input.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">typedef</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">ll</span><span class="p">;</span> <span class="c1">// Defining long long type for future use
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minCharacters</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Variable Initialization</strong>: The sizes of the strings <code>m</code> and <code>n</code> are stored, and two vectors are created to count the frequency of each character in the strings.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ca</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">cb</span><span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Frequency arrays for a and b
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Counting Character Frequencies</strong>: A loop iterates through each character in both strings to populate the frequency arrays <code>ca</code> and <code>cb</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ca</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment count for string a
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cb</span><span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span><span class="o">++</span><span class="p">;</span> <span class="c1">// Increment count for string b
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initializing Result Variable</strong>: The result variable <code>res</code> is initialized to the total length of both strings, assuming that in the worst case all characters may need to be changed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// Maximum possible modifications (change all characters)
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating through Each Character</strong>: The outer loop iterates through each possible character (from &lsquo;a&rsquo; to &lsquo;z&rsquo;) and calculates the required modifications.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">26</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">-</span> <span class="n">ca</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">cb</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">// Making all chars &lt; i
+</span></span></span></code></pre></div><ul>
+<li><strong>Calculating Modifications</strong>: The number of changes needed to ensure all characters in <code>a</code> are less than <code>i</code> and all characters in <code>b</code> are greater than or equal to <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Accumulating Counts</strong>: The counts of characters are accumulated to facilitate quick calculations for the next character.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ca</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">ca</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">// Accumulate counts for string a
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">cb</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">// Accumulate counts for string b
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating Results for Cases</strong>: The results are updated for scenarios where characters in one string are converted to characters in another string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="n">ca</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">cb</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">// Making all chars &gt; i for b
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">cb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">ca</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span> <span class="c1">// Making all chars &lt; i for a
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="c1">// Return the minimum modifications required
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Return Statement</strong>: The function returns the minimum number of modifications calculated.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(m + n + 26)), where (m) is the length of string <code>a</code>, (n) is the length of string <code>b</code>, and 26 accounts for iterating through each character in the alphabet. Since 26 is a constant, the effective time complexity is (O(m + n)).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) for storing character counts since the size of the frequency arrays is fixed at 26 (for each character of the English alphabet).</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively calculates the minimum number of character modifications needed to ensure that all characters in one string are less than those in another. By leveraging character frequency counts and systematically evaluating various scenarios, it provides an efficient and clear approach to solving the problem. This method is both time-efficient and space-efficient, making it suitable for competitive programming scenarios. The logic demonstrates an understanding of string manipulation and the combinatorial aspect of character arrangements, showcasing the versatility of algorithmic thinking in problem-solving.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode833s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1738"  class="external-link" target="_blank" rel="noopener">LeetCode #1738: Find Kth Largest XOR Coordinate Value</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1738"  class="external-link" target="_blank" rel="noopener">LeetCode #1738: Find Kth Largest XOR Coordinate Value</a></th>
       </tr>
   </thead>
   <tbody>
@@ -247,66 +386,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

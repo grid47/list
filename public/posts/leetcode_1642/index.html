@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -234,11 +234,150 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// else return where it had overflown
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode734s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves determining how far one can reach across a series of buildings, given a certain number of ladders and a supply of bricks. Each building has a height, and to move from one building to another, one must overcome the height difference. Ladders can be used to bypass any height difference, while bricks can only cover height increases. The goal is to find the furthest building that can be reached using the available resources.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we employ a greedy approach using a priority queue. The key steps in our approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Calculate Height Differences</strong>: First, we calculate the height differences between consecutive buildings. If the next building is shorter, no resources are required to move to it.</p>
+</li>
+<li>
+<p><strong>Use Priority Queue for Height Management</strong>: We utilize a min-heap (priority queue) to manage the height differences we encounter as we traverse the buildings. This allows us to efficiently keep track of the largest height differences we&rsquo;ve opted to cover with ladders.</p>
+</li>
+<li>
+<p><strong>Resource Allocation</strong>: For each building, we check if the height difference requires either bricks or ladders:</p>
+<ul>
+<li>If we have ladders available, we can choose to use one for the current height difference.</li>
+<li>If we run out of ladders, we check if the sum of the remaining height differences can be covered with the available bricks.</li>
+</ul>
+</li>
+<li>
+<p><strong>Determine Furthest Reach</strong>: If at any point the total resources (bricks and ladders) are insufficient to continue to the next building, we return the last successfully reached building index.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through the provided code to clarify the approach:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">furthestBuilding</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">h</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bri</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lad</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">bc</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>Here, we define a class <code>Solution</code> with a public method <code>furthestBuilding</code>. This method accepts:</p>
+<ul>
+<li><code>h</code>: a vector of integers representing the heights of the buildings.</li>
+<li><code>bri</code>: the number of bricks available.</li>
+<li><code>lad</code>: the number of ladders available.</li>
+</ul>
+</li>
+<li>
+<p>We first determine the number of buildings <code>n</code> and initialize a vector <code>bc</code> to hold the height differences between consecutive buildings.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">bc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>This loop populates the <code>bc</code> vector with the height differences. If moving to the next building requires no resources (i.e., the height difference is negative), we set it to 0.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We define a min-heap priority queue <code>pq</code> to keep track of the height differences we choose to cover with ladders. The smallest height differences will be at the top, allowing us to manage resources efficiently.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">bc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We initialize <code>i</code> to 0 to iterate through the buildings and <code>sum</code> to track the total height difference covered with bricks. If the height difference is 0, we skip to the next building.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">lad</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">bc</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">bc</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">bri</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">sum</span> <span class="o">+=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If we still have ladders available (<code>pq.size() &lt; lad</code>), we use a ladder for the current height difference and push it into the priority queue.</li>
+<li>If we have already used all available ladders, we push the current height difference onto the queue, check if the smallest difference (at the top of the priority queue) can be covered by bricks. If so, we add it to the <code>sum</code>. If not, we return the index of the last building that was successfully reached (<code>i</code>).</li>
+<li>Finally, if we use the ladder for a larger height difference, we remove the smallest difference from the queue.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>If we successfully navigate through all buildings without running out of resources, we return the last index (<code>n - 1</code>), indicating that we reached the final building.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity is (O(n \log k)), where (n) is the number of buildings and (k) is the number of ladders. This is because we may push height differences onto the priority queue (n-1) times, and each push/pop operation takes (O(\log k)) time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(k)) due to the storage of the priority queue which holds at most <code>lad</code> elements.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively determines the furthest building that can be reached by combining ladders and bricks through a greedy algorithm. By managing height differences with a priority queue, it optimizes the use of resources efficiently.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Greedy Strategy</strong>: The approach demonstrates how a greedy algorithm can be employed to make local optimal choices (using ladders for the smallest height differences first) leading to a globally optimal solution.</li>
+<li><strong>Data Structures</strong>: The use of a priority queue is essential for managing height differences efficiently, showcasing how choosing the right data structure can enhance performance.</li>
+<li><strong>Problem-Solving</strong>: This kind of problem is common in scenarios involving resource management, where constraints dictate how to proceed.</li>
+</ol>
+<p>The provided code is a clear example of how to approach and solve a combinatorial problem involving dynamic resources, making it an excellent study for similar challenges in algorithm design and competitive programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode734s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1643"  class="external-link" target="_blank" rel="noopener">LeetCode #1643: Kth Smallest Instructions</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1643"  class="external-link" target="_blank" rel="noopener">LeetCode #1643: Kth Smallest Instructions</a></th>
       </tr>
   </thead>
   <tbody>
@@ -259,66 +398,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

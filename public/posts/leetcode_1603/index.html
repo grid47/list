@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -236,11 +236,155 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * ParkingSystem* obj = new ParkingSystem(big, medium, small);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_1 = obj-&gt;addCar(carType);
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode682s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand involves managing a parking system that can accommodate three types of vehicles: big, medium, and small cars. The system needs to keep track of how many of each type of vehicle can be parked and whether a new vehicle can be added based on the available parking spaces. Each type of vehicle has a limited number of spaces, and the system should provide functionality to add cars of different types while checking for available spaces.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To implement this parking system, we can define a class called <code>ParkingSystem</code> that will manage the parking slots for each vehicle type. The core functionality involves:</p>
+<ol>
+<li>
+<p><strong>Initializing the Parking System</strong>: We will set up the total capacity for each type of vehicle when the <code>ParkingSystem</code> object is created.</p>
+</li>
+<li>
+<p><strong>Adding Cars</strong>: The system will provide a method to add a car of a specified type. This method will check if there is available space for the requested vehicle type and increment the count of parked vehicles accordingly.</p>
+</li>
+<li>
+<p><strong>Returning Results</strong>: The method will return a boolean value indicating whether the car was successfully added or not.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here&rsquo;s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ParkingSystem</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">bm</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">sm</span><span class="p">;</span>  <span class="c1">// Maximum capacity for big, medium, and small cars
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">bc</span><span class="p">,</span> <span class="n">mc</span><span class="p">,</span> <span class="n">sc</span><span class="p">;</span>  <span class="c1">// Current count of parked big, medium, and small cars
+</span></span></span></code></pre></div><ul>
+<li>The class <code>ParkingSystem</code> is defined with public member variables to store the maximum capacity (<code>bm</code>, <code>mm</code>, <code>sm</code>) for each type of car and the current count of parked cars (<code>bc</code>, <code>mc</code>, <code>sc</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">ParkingSystem</span><span class="p">(</span><span class="kt">int</span> <span class="n">big</span><span class="p">,</span> <span class="kt">int</span> <span class="n">medium</span><span class="p">,</span> <span class="kt">int</span> <span class="n">small</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bm</span> <span class="o">=</span> <span class="n">big</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mm</span> <span class="o">=</span> <span class="n">medium</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sm</span> <span class="o">=</span> <span class="n">small</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">bc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The constructor <code>ParkingSystem(int big, int medium, int small)</code> initializes the maximum capacity for each type of vehicle. The current counts for parked cars are initialized to zero.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">addCar</span><span class="p">(</span><span class="kt">int</span> <span class="n">ct</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">bc</span> <span class="o">&lt;</span> <span class="n">bm</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">bc</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">mc</span> <span class="o">&lt;</span> <span class="n">mm</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">mc</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>                
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">sc</span> <span class="o">&lt;</span> <span class="n">sm</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">sc</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The <code>addCar(int ct)</code> method is defined to handle the addition of a car based on its type (<code>ct</code>):
+<ul>
+<li>If <code>ct</code> is <code>1</code>, it checks if there is space for a big car (<code>bc &lt; bm</code>). If so, it increments the count of parked big cars and returns <code>true</code>.</li>
+<li>If <code>ct</code> is <code>2</code>, it checks for a medium car in the same manner (<code>mc &lt; mm</code>).</li>
+<li>If <code>ct</code> is <code>3</code>, it checks for a small car (<code>sc &lt; sm</code>).</li>
+</ul>
+</li>
+<li>If the respective parking slot is full for any type, the method does not increment the count and returns <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Your ParkingSystem object will be instantiated and called as such:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * ParkingSystem* obj = new ParkingSystem(big, medium, small);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * bool param_1 = obj-&gt;addCar(carType);
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span></code></pre></div><ul>
+<li>The class ends with a comment describing how to instantiate the <code>ParkingSystem</code> object and how to call the <code>addCar</code> method.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity for the <code>addCar</code> method is (O(1)) since the method consists of a constant number of comparisons and assignments, regardless of the number of cars.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(1)) since the class uses a fixed number of variables for storage, independent of the number of cars or the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>ParkingSystem</code> class effectively manages parking slots for different types of vehicles using a straightforward and efficient design. The key features of this implementation include:</p>
+<ol>
+<li>
+<p><strong>Clear Structure</strong>: The separation of vehicle types and their respective counts makes it easy to understand the current state of the parking system.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: The use of constant-time operations for adding cars ensures that the system remains responsive, even with frequent requests to park vehicles.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: The use of a switch statement for handling different car types keeps the code clean and easy to follow.</p>
+</li>
+</ol>
+<p>In summary, this solution provides a robust framework for managing a parking system with different vehicle types, ensuring that the constraints of parking capacity are respected while allowing for efficient vehicle management. This implementation is particularly useful in scenarios where space management is critical, such as urban parking systems or automated car parks.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode682s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1604"  class="external-link" target="_blank" rel="noopener">LeetCode #1604: Alert Using Same Key-Card Three or More Times in a One Hour Period</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1604"  class="external-link" target="_blank" rel="noopener">LeetCode #1604: Alert Using Same Key-Card Three or More Times in a One Hour Period</a></th>
       </tr>
   </thead>
   <tbody>
@@ -261,66 +405,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -203,7 +203,129 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode646s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem involves calculating the sum of the diagonal elements in a square matrix. A square matrix is defined as a matrix with an equal number of rows and columns. In this context, we are specifically interested in two diagonals:</p>
+<ol>
+<li><strong>Primary Diagonal</strong>: The diagonal that runs from the top left to the bottom right of the matrix.</li>
+<li><strong>Secondary Diagonal</strong>: The diagonal that runs from the top right to the bottom left.</li>
+</ol>
+<p>Given an <code>n x n</code> matrix, the objective is to compute the total sum of the elements located on both diagonals. However, when the matrix size is odd, the center element (which lies on both diagonals) should only be counted once.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can take the following steps:</p>
+<ol>
+<li>
+<p><strong>Iterate through the matrix</strong>: Loop through each row of the matrix. For each row <code>i</code>, we can identify the following elements:</p>
+<ul>
+<li>The element at the primary diagonal, which is located at the coordinates <code>(i, i)</code>.</li>
+<li>The element at the secondary diagonal, which is located at the coordinates <code>(i, n - 1 - i)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sum the diagonal elements</strong>: As we iterate through the rows, we add the values of both diagonal elements to a cumulative sum.</p>
+</li>
+<li>
+<p><strong>Handle the center element</strong>: If the size of the matrix <code>n</code> is odd, we need to subtract the center element from the sum to avoid double-counting. The center element is located at <code>(n/2, n/2)</code>.</p>
+</li>
+<li>
+<p><strong>Return the final sum</strong>: Finally, we return the calculated sum.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now, let’s break down the provided code to see how it implements the above approach.</p>
+<ul>
+<li><strong>Class Declaration</strong>: The solution is encapsulated within a class named <code>Solution</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><ul>
+<li><strong>Function Definition</strong>: The <code>diagonalSum</code> function is defined to take a 2D vector (matrix) as input and returns an integer representing the sum of the diagonal elements.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">diagonalSum</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">mat</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Matrix Size Calculation</strong>: We determine the size of the matrix <code>n</code> by using <code>mat.size()</code>, which gives the number of rows (and columns, since it’s square).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Iterate Through Each Row</strong>: A for loop is initiated to iterate through the range of <code>n</code>. For each iteration, the current index <code>i</code> corresponds to the current row being processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li><strong>Sum the Diagonal Elements</strong>:
+<ul>
+<li>The element at the primary diagonal is accessed with <code>mat[i][i]</code>.</li>
+<li>The element at the secondary diagonal is accessed with <code>mat[n - 1 - i][i]</code>.</li>
+<li>Both elements are added to the cumulative sum.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">sum</span> <span class="o">+=</span> <span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">mat</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Adjust for Odd Matrix Size</strong>: After summing the diagonal elements, we check if <code>n</code> is odd. If it is, we subtract the value of the center element from the sum. The center element can be accessed using the expression <code>mat[n/2][n/2]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="n">sum</span> <span class="o">-=</span> <span class="n">mat</span><span class="p">[</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">][</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return the Final Sum</strong>: Finally, the computed sum is returned as the result of the function.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n)), where (n) is the number of rows (or columns) in the square matrix. This is because we perform a single loop that iterates through each row exactly once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are only using a fixed number of variables (for the sum and indices) regardless of the size of the input matrix. We do not use any additional data structures that grow with input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>diagonalSum</code> function effectively calculates the sum of the diagonal elements in a square matrix by utilizing a straightforward iterative approach. By leveraging the properties of matrix indices, the function efficiently accesses the necessary elements and handles the case of odd-sized matrices by adjusting the sum accordingly.</p>
+<p>This implementation highlights the utility of direct access in 2D arrays, showcasing how mathematical properties can simplify programming tasks. Additionally, the solution is both efficient and elegant, adhering to best practices for algorithm design by minimizing complexity while maximizing clarity.</p>
+<p>Understanding this solution equips developers with the necessary tools to tackle similar problems involving matrices and array manipulations. The simplicity of the approach makes it a valuable reference for educational purposes, competitive programming, or technical interviews where such problems are commonly presented.</p>
+<p>In summary, this algorithm serves as an excellent example of how to approach problems involving matrix diagonal sums, emphasizing clarity, efficiency, and correctness. The <code>diagonalSum</code> function stands as a practical solution for real-world applications and serves as a reminder of the beauty of mathematical problem-solving through programming.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode646s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -215,7 +337,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1573"  class="external-link" target="_blank" rel="noopener">LeetCode #1573: Number of Ways to Split a String</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1573"  class="external-link" target="_blank" rel="noopener">LeetCode #1573: Number of Ways to Split a String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -236,66 +358,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

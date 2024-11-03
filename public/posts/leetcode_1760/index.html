@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -213,11 +213,143 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">l</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode859s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the minimum size of the largest bag that can be achieved by performing a limited number of operations on an array of integers. The array <code>nums</code> represents the sizes of bags, and <code>mxOps</code> is the maximum number of operations allowed. The goal is to minimize the maximum size of the bags after performing the operations.</p>
+<p>Each operation allows us to decrease the size of a bag by any integer amount. Thus, with a given number of operations, we want to find out what the smallest possible size of the largest bag can be, ensuring that we can achieve this size with the allowed operations.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a binary search algorithm to efficiently find the minimum size of the largest bag. The idea is to search for the smallest possible size <code>mid</code> for which we can achieve that size while performing no more than <code>mxOps</code> operations.</p>
+<ol>
+<li>
+<p><strong>Binary Search Setup</strong>:</p>
+<ul>
+<li>The search range is set between <code>1</code> and the maximum value found in <code>nums</code>.</li>
+<li>We continuously narrow down the search space based on the number of operations required to achieve the <code>mid</code> size.</li>
+</ul>
+</li>
+<li>
+<p><strong>Operation Counting</strong>:</p>
+<ul>
+<li>For each candidate size <code>mid</code>, we calculate how many operations are needed to ensure that all bags are less than or equal to <code>mid</code>.</li>
+<li>If the total operations needed to reduce all bags is within the allowed <code>mxOps</code>, then <code>mid</code> is a feasible size, and we continue searching for a potentially smaller size. If it exceeds <code>mxOps</code>, we need to search for a larger size.</li>
+</ul>
+</li>
+<li>
+<p><strong>Termination</strong>:</p>
+<ul>
+<li>The search continues until the lower and upper bounds converge, at which point the minimum size of the largest bag that can be achieved with the allowed operations is found.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the <code>minimumSize</code> function:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The method is defined within the class <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Public Method</strong>: The <code>minimumSize</code> method takes two parameters: a vector of integers <code>nums</code> and an integer <code>mxOps</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">minimumSize</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mxOps</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>The lower bound <code>l</code> is initialized to <code>1</code>.</li>
+<li>The upper bound <code>r</code> is initialized to the maximum element in <code>nums</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="o">*</span><span class="n">max_element</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Binary Search Loop</strong>: A <code>while</code> loop continues until <code>l</code> is less than <code>r</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Midpoint</strong>: Inside the loop, calculate the midpoint <code>mid</code> as the average of <code>l</code> and <code>r</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Count Operations</strong>: Initialize a counter <code>cnt</code> to zero. For each bag size <code>a</code> in <code>nums</code>, calculate how many operations would be required to reduce that bag size to <code>mid</code> or less. This is done using the formula <code>(a - 1) / mid</code>, which gives the number of full <code>mid</code> sizes that can fit into <code>a</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">a</span><span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cnt</span> <span class="o">+=</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">mid</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Adjust Search Bounds</strong>:</p>
+<ul>
+<li>If the total operations <code>cnt</code> is less than or equal to <code>mxOps</code>, it means we can afford to make <code>mid</code> the maximum size, so we try to find a smaller possible size by setting <code>r = mid</code>.</li>
+<li>Otherwise, we need a larger size, so we set <code>l = mid + 1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">cnt</span> <span class="o">&lt;=</span> <span class="n">mxOps</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return Result</strong>: When the loop terminates, <code>l</code> will point to the smallest maximum size that can be achieved with the allowed operations, which is returned as the result.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">l</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n \log m)), where (n) is the number of elements in <code>nums</code> and (m) is the maximum element in <code>nums</code>. The logarithmic factor arises from the binary search over the range of possible sizes, while the linear scan through <code>nums</code> for counting operations contributes to the (n) factor.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) as no additional data structures that grow with input size are used.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>minimumSize</code> function effectively finds the minimum possible size of the largest bag after performing a limited number of operations on an array of integers. By employing a binary search strategy, the solution efficiently narrows down the feasible sizes based on the required operations for each potential size. This approach demonstrates an effective method for solving optimization problems involving constraints and searching for optimal values within a defined range.</p>
+<p>The clear structure of the code and the logical flow of the binary search make it an elegant solution to the problem, ensuring both correctness and efficiency. This algorithmic technique can be applied to a variety of problems that require optimizing a variable under certain constraints, showcasing its versatility and utility in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode859s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1761"  class="external-link" target="_blank" rel="noopener">LeetCode #1761: Minimum Degree of a Connected Trio in a Graph</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1761"  class="external-link" target="_blank" rel="noopener">LeetCode #1761: Minimum Degree of a Connected Trio in a Graph</a></th>
       </tr>
   </thead>
   <tbody>
@@ -238,66 +370,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

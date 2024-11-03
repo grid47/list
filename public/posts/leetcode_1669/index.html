@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -215,11 +215,132 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">list1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode757s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to merge two singly-linked lists in such a way that the second list is inserted in the first list at a specified position. Specifically, given two linked lists, <code>list1</code> and <code>list2</code>, along with two integers <code>a</code> and <code>b</code>, we want to remove all nodes from <code>list1</code> starting at position <code>a</code> up to and including position <code>b</code> and insert <code>list2</code> in that position. The positions are zero-indexed, meaning that the first node of <code>list1</code> is at index 0.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The approach to solving this problem involves the following steps:</p>
+<ol>
+<li><strong>Locate the Nodes</strong>: First, we need to find the node in <code>list1</code> just before the starting index <code>a</code> (let&rsquo;s call it <code>f</code>), and the node at index <code>b</code> (let&rsquo;s call it <code>s</code>).</li>
+<li><strong>Disconnect the Nodes</strong>: After locating these nodes, we will disconnect the section of <code>list1</code> that goes from index <code>a</code> to index <code>b</code>.</li>
+<li><strong>Link List2</strong>: Next, we will connect <code>list2</code> to the <code>next</code> of the <code>f</code> node (the node before the segment we are removing).</li>
+<li><strong>Connect the Tail of List2</strong>: Finally, we will find the tail of <code>list2</code> and connect it to the node that follows <code>s</code> in <code>list1</code>, effectively merging the two lists.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for singly-linked list.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct ListNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode *next;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode() : val(0), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x) : val(x), next(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span></code></pre></div><ul>
+<li>The <code>ListNode</code> structure defines the building blocks of our linked list, with each node containing a value (<code>val</code>) and a pointer to the next node (<code>next</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ListNode</span><span class="o">*</span> <span class="n">mergeInBetween</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">list1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">,</span> <span class="n">ListNode</span><span class="o">*</span> <span class="n">list2</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a public method <code>mergeInBetween</code>. This method takes four parameters: two linked lists (<code>list1</code> and <code>list2</code>), and two integers <code>a</code> and <code>b</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">ListNode</span><span class="o">*</span> <span class="n">f</span> <span class="o">=</span> <span class="n">list1</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">list1</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We create two pointers, <code>f</code> and <code>s</code>, both initialized to point to the head of <code>list1</code>. These will be used to find the relevant nodes for merging.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We move the <code>f</code> pointer to the node just before the index <code>a</code>. This loop runs <code>a-1</code> times to position <code>f</code> correctly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We advance the <code>s</code> pointer <code>b</code> times to reach the node at index <code>b</code> in <code>list1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">f</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">list2</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We link the <code>next</code> of the <code>f</code> node to the head of <code>list2</code>, effectively connecting the first part of <code>list1</code> with <code>list2</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">list2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="n">list2</span> <span class="o">=</span> <span class="n">list2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We traverse <code>list2</code> to find its tail node. This loop continues until <code>list2</code> points to the last node of <code>list2</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">list2</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">s</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We link the tail of <code>list2</code> to the node that comes after the <code>s</code> node in <code>list1</code>, effectively connecting the second part of <code>list1</code> back to <code>list2</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">list1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, we return <code>list1</code>, which now contains the merged result.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n + m)), where (n) is the length of <code>list1</code> and (m) is the length of <code>list2</code>. We need to traverse parts of <code>list1</code> to locate the necessary nodes and also traverse <code>list2</code> to find its tail.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) because we are not using any additional data structures that grow with input size; we are only using a fixed amount of space for our pointers.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>mergeInBetween</code> function provides a clear and efficient solution to merging two singly-linked lists by removing a specified segment from the first list and inserting the second list in its place.</p>
+<p><strong>Key Insights</strong>:</p>
+<ol>
+<li><strong>Pointer Manipulation</strong>: The solution effectively utilizes pointer manipulation to achieve the desired merging without needing to create new nodes or lists.</li>
+<li><strong>Efficiency</strong>: The approach maintains efficiency in terms of both time and space, making it suitable for larger lists.</li>
+<li><strong>Readability</strong>: The code is structured in a way that is easy to follow, with clear separation of steps that contribute to the overall merging process.</li>
+</ol>
+<p>Overall, this code demonstrates a solid understanding of linked list operations and provides a straightforward implementation for merging lists based on specified indices.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode757s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1670"  class="external-link" target="_blank" rel="noopener">LeetCode #1670: Design Front Middle Back Queue</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1670"  class="external-link" target="_blank" rel="noopener">LeetCode #1670: Design Front Middle Back Queue</a></th>
       </tr>
   </thead>
   <tbody>
@@ -240,66 +361,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

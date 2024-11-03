@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -233,11 +233,193 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode787s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem revolves around determining whether there exists a path between pairs of nodes in a graph, given a set of edges and distance constraints. Specifically, you are given:</p>
+<ul>
+<li>An integer <code>n</code> representing the number of nodes (numbered from <code>0</code> to <code>n-1</code>).</li>
+<li>A list of edges, where each edge is represented by a triplet <code>[u, v, w]</code>, indicating that there is an undirected edge between nodes <code>u</code> and <code>v</code> with a weight of <code>w</code>.</li>
+<li>A list of queries, each asking if there is a path between two nodes <code>x</code> and <code>y</code> such that all edges in that path have weights less than a specified limit.</li>
+</ul>
+<p>The task is to efficiently determine the answers to these queries.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use the Union-Find (or Disjoint Set Union, DSU) data structure combined with sorting techniques. Here’s the general approach broken down into steps:</p>
+<ol>
+<li>
+<p><strong>Data Structure Initialization</strong>: Create a Union-Find structure to manage the connected components of the graph.</p>
+</li>
+<li>
+<p><strong>Augment Queries</strong>: Modify each query to keep track of its original index for output purposes.</p>
+</li>
+<li>
+<p><strong>Sorting</strong>:</p>
+<ul>
+<li>Sort the edges based on their weights.</li>
+<li>Sort the queries based on their distance limits.</li>
+</ul>
+</li>
+<li>
+<p><strong>Union-Find Logic</strong>:</p>
+<ul>
+<li>Iterate through the sorted queries, and for each query, add all edges with weights less than the query&rsquo;s limit to the Union-Find structure.</li>
+<li>After processing the edges, check if the two nodes in the query are connected using the Union-Find structure.</li>
+</ul>
+</li>
+<li>
+<p><strong>Output Results</strong>: Store and return the results based on the original query order.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">UF</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Constructor initializes the Union-Find structure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">UF</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="o">:</span> <span class="n">id</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">iota</span><span class="p">(</span><span class="n">id</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">id</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// Initialize each node as its own parent
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Joins two components
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="nf">join</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">q</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">id</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span> <span class="c1">// Attach tree rooted at p to tree rooted at q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// Return true if a union was made
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// No union was made
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Checks if two nodes are connected
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">bool</span> <span class="nf">conn</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Finds the root of the component (with path compression)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span> <span class="o">?</span> <span class="nl">x</span> <span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">x</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Union-Find Class</strong>: This class implements the necessary functionality to manage connected components. It initializes the parent array for nodes, allows joining of nodes, checks connectivity, and finds the root with path compression for efficiency.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">distanceLimitedPathsExist</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">edge</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="c1">// Attach the index to each query
+</span></span></span></code></pre></div><ul>
+<li><strong>Solution Class</strong>: The main solution class which will contain the method <code>distanceLimitedPathsExist</code>. We initialize the answer array to store results and augment the queries with their indices for easy output.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">edge</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">edge</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">];});</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sort</span><span class="p">(</span><span class="n">q</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">q</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">];});</span>
+</span></span></code></pre></div><ul>
+<li><strong>Sorting Edges and Queries</strong>: Both edges and queries are sorted based on their weights and limits respectively. This will help in efficiently processing edges while answering queries.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">UF</span> <span class="nf">uf</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c1">// Initialize Union-Find structure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// Edge index
+</span></span></span></code></pre></div><ul>
+<li><strong>Union-Find Initialization</strong>: A Union-Find instance is created for <code>n</code> nodes, and an index <code>i</code> is initialized to track the current edge being processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">limit</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">edge</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">limit</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">uf</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ans</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">uf</span><span class="p">.</span><span class="n">conn</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Processing Queries</strong>:
+<ul>
+<li>For each query, retrieve the limit and index.</li>
+<li>While there are edges with weights less than the current query&rsquo;s limit, join them in the Union-Find structure.</li>
+<li>After processing the edges, check if the two nodes in the query are connected and store the result.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span> <span class="c1">// Return the result array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Returning Results</strong>: Finally, we return the filled answer array.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Sorting the edges takes (O(E \log E)) and sorting the queries takes (O(Q \log Q)).</li>
+<li>Each union and find operation is nearly constant time (O(\alpha(N))), where (\alpha) is the inverse Ackermann function, which grows very slowly.</li>
+<li>Thus, the overall complexity can be approximated to (O((E + Q) \log(E + Q))).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(N + E + Q)) due to the storage of the Union-Find structure, edges, and queries.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively utilizes the Union-Find data structure combined with sorting to answer path existence queries under distance constraints efficiently. Here are the key takeaways:</p>
+<ol>
+<li>
+<p><strong>Union-Find Efficiency</strong>: The Union-Find structure allows us to manage connected components dynamically, enabling quick connectivity checks.</p>
+</li>
+<li>
+<p><strong>Sorting for Order</strong>: By sorting both edges and queries, we ensure that we can incrementally build the graph and answer queries in an organized manner.</p>
+</li>
+<li>
+<p><strong>Scalability</strong>: The algorithm is designed to handle large graphs efficiently, making it suitable for competitive programming and real-world applications.</p>
+</li>
+</ol>
+<p>In conclusion, the approach not only provides correct results but also optimizes performance, showcasing the powerful combination of sorting and efficient data structures in algorithm design.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode787s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1698"  class="external-link" target="_blank" rel="noopener">LeetCode #1698: Number of Distinct Substrings in a String</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1698"  class="external-link" target="_blank" rel="noopener">LeetCode #1698: Number of Distinct Substrings in a String</a></th>
       </tr>
   </thead>
   <tbody>
@@ -258,66 +440,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

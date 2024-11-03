@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -236,11 +236,180 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode688s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The task is to determine whether a binary tree satisfies the conditions of an &ldquo;Even-Odd Tree.&rdquo; An Even-Odd Tree has the following properties:</p>
+<ol>
+<li>The tree must alternate between even and odd levels. The root node is considered level 0 (even).</li>
+<li>At even levels (0, 2, 4, &hellip;), the node values must be odd and strictly increasing from left to right.</li>
+<li>At odd levels (1, 3, 5, &hellip;), the node values must be even and strictly decreasing from left to right.</li>
+</ol>
+<p>Given a binary tree represented by its root node, the objective is to return <code>true</code> if the tree satisfies the Even-Odd conditions; otherwise, return <code>false</code>.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we will use a level-order traversal (BFS) of the tree. During this traversal, we will maintain a boolean flag to indicate whether we are currently at an even level or an odd level. For each level, we will validate the conditions for either the even or odd levels based on the current flag state.</p>
+<p>The steps for the algorithm are as follows:</p>
+<ol>
+<li><strong>Initialize a Queue</strong>: We will use a queue to facilitate the level-order traversal of the tree.</li>
+<li><strong>Track Level Information</strong>: We need a boolean flag to indicate whether the current level is even or odd.</li>
+<li><strong>Process Each Level</strong>: For each level:
+<ul>
+<li>Check the node values according to the Even-Odd conditions:
+<ul>
+<li>For even levels, ensure all values are odd and strictly increasing.</li>
+<li>For odd levels, ensure all values are even and strictly decreasing.</li>
+</ul>
+</li>
+<li>Update the flag for the next level.</li>
+</ul>
+</li>
+<li><strong>Return the Result</strong>: After processing all levels, if all conditions are satisfied, return <code>true</code>; otherwise, return <code>false</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed explanation of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Definition for a binary tree node.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * struct TreeNode {
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     int val;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *left;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode *right;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * };
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isEvenOddTree</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li>The code begins with a standard definition for a binary tree node using the <code>TreeNode</code> struct.</li>
+<li>The <code>Solution</code> class contains a public method <code>isEvenOddTree</code>, which accepts the root node of the tree and returns a boolean indicating whether the tree meets the Even-Odd criteria.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="n">queue</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>We create a queue <code>q</code> and push the root node onto it to initiate the level-order traversal.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">isEI</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// Flag to track whether we are at an even (true) or odd (false) level.
+</span></span></span></code></pre></div><ul>
+<li>We initialize a boolean variable <code>isEI</code> to <code>true</code>, indicating that we start at level 0 (even).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">prv</span> <span class="o">=</span> <span class="n">isEI</span> <span class="o">?</span> <span class="nl">INT_MIN</span> <span class="p">:</span> <span class="n">INT_MAX</span><span class="p">;</span> <span class="c1">// Previous node&#39;s value for comparison
+</span></span></span></code></pre></div><ul>
+<li>We enter a loop that continues until the queue is empty. At the beginning of each iteration, we record the size of the current level (<code>sz</code>) and set the initial value of <code>prv</code> based on the current level being even or odd.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">sz</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">TreeNode</span><span class="o">*</span> <span class="n">n</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+</span></span></code></pre></div><ul>
+<li>We then enter another loop that processes each node at the current level. We retrieve the front node from the queue and remove it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">isEI</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Check if value is even
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;=</span> <span class="n">prv</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>   <span class="c1">// Check if value is strictly increasing
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Check if value is odd
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&gt;=</span> <span class="n">prv</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>   <span class="c1">// Check if value is strictly decreasing
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Inside this inner loop, we validate the node value according to the Even-Odd conditions:
+<ul>
+<li>If on an even level, the value must be odd and strictly greater than the previous value.</li>
+<li>If on an odd level, the value must be even and strictly less than the previous value.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">prv</span> <span class="o">=</span> <span class="n">n</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">;</span> <span class="c1">// Update the previous value to the current node&#39;s value
+</span></span></span></code></pre></div><ul>
+<li>We update <code>prv</code> to the current node’s value for the next comparison.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">n</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">isEI</span> <span class="o">=</span> <span class="o">!</span><span class="n">isEI</span><span class="p">;</span> <span class="c1">// Toggle the flag for the next level
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>If the current node has a left or right child, we push them onto the queue for processing in the next level.</li>
+<li>After processing all nodes in the current level, we toggle <code>isEI</code> to switch to the next level.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// All conditions satisfied
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Finally, if all levels are processed without returning <code>false</code>, we return <code>true</code>, indicating that the tree satisfies the Even-Odd conditions.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this solution is (O(N)), where (N) is the number of nodes in the binary tree. We visit each node exactly once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(W)), where (W) is the maximum width of the tree. In the worst case (for a complete binary tree), this could be (O(N)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided implementation effectively determines whether a binary tree is an Even-Odd Tree by using level-order traversal to check the required conditions for even and odd levels. The approach is efficient, with a linear time complexity relative to the number of nodes in the tree.</p>
+<p><strong>Key Aspects of the Solution</strong>:</p>
+<ol>
+<li><strong>Level-Order Traversal</strong>: Utilizes a queue to traverse the tree level by level, making it easy to validate the conditions for each level.</li>
+<li><strong>Condition Checking</strong>: Clearly checks conditions based on the current level&rsquo;s parity, ensuring strict adherence to the Even-Odd Tree rules.</li>
+<li><strong>Toggle Mechanism</strong>: Efficiently toggles between even and odd levels with a simple boolean flag, reducing complexity and enhancing clarity.</li>
+</ol>
+<p>In summary, this implementation provides a concise and efficient solution to the Even-Odd Tree problem, demonstrating the utility of BFS in tree-related challenges.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode688s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1610"  class="external-link" target="_blank" rel="noopener">LeetCode #1610: Maximum Number of Visible Points</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1610"  class="external-link" target="_blank" rel="noopener">LeetCode #1610: Maximum Number of Visible Points</a></th>
       </tr>
   </thead>
   <tbody>
@@ -261,66 +430,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

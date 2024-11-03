@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -221,11 +221,127 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode679s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires finding the maximum number of requests that can be accommodated in a system where multiple requests are made between <code>n</code> different servers. Each request indicates that one server wants to send data to another server. The challenge is to ensure that the total number of incoming requests to each server equals the total number of outgoing requests from that server after selecting the maximum number of requests.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a bitmasking approach to explore all possible combinations of requests. The idea is to iterate through all subsets of requests and check if a particular subset can be satisfied based on the incoming and outgoing request criteria. Here are the steps we will follow:</p>
+<ol>
+<li><strong>Iterate through all subsets of requests</strong> using bitmasking.</li>
+<li><strong>Count incoming and outgoing requests</strong> for each server based on the current subset represented by the bitmask.</li>
+<li><strong>Check if the incoming requests match outgoing requests</strong> for each server.</li>
+<li><strong>Keep track of the maximum number of requests</strong> that can be fulfilled based on the above checks.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here is a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">maximumRequests</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">req</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// Variable to hold the maximum number of requests
+</span></span></span></code></pre></div><ul>
+<li>The <code>maximumRequests</code> method is defined, which takes the number of servers <code>n</code> and a list of requests <code>req</code>. We initialize <code>ans</code> to zero to keep track of the maximum number of fulfilled requests.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">msk</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">msk</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">req</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="n">msk</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">out</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">msk</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>We start a loop that iterates over all possible subsets of requests using a bitmask <code>msk</code>. The range of <code>msk</code> is from <code>1</code> to (2^{\text{req.size()}} - 1).</li>
+<li>Inside this loop, we create two vectors, <code>in</code> and <code>out</code>, initialized to zero, to count the incoming and outgoing requests for each server.</li>
+<li>We also initialize an index variable <code>idx</code> to keep track of the current request in the subset being processed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">m</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">in</span><span class="p">[</span><span class="n">req</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">out</span><span class="p">[</span><span class="n">req</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>                    
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">m</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>We use another loop to process each bit of the bitmask <code>m</code>. If the least significant bit (LSB) is set (<code>m &amp; 1</code>), it means that the request at <code>idx</code> is included in the current subset. We increment the <code>in</code> count for the source server (<code>req[idx][0]</code>) and the <code>out</code> count for the destination server (<code>req[idx][1]</code>).</li>
+<li>We then right-shift <code>m</code> by one bit to check the next bit in the following iteration, and increment the <code>idx</code> to move to the next request.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">in</span> <span class="o">==</span> <span class="n">out</span><span class="p">)</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">__builtin_popcount</span><span class="p">(</span><span class="n">msk</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>After processing all requests in the current subset, we check if the <code>in</code> vector is equal to the <code>out</code> vector. If they are equal, it indicates that the number of incoming requests matches the number of outgoing requests for all servers involved in the subset.</li>
+<li>We then update <code>ans</code> with the maximum of its current value and the count of bits set in <code>msk</code> (which corresponds to the number of requests included in this subset) using <code>__builtin_popcount(msk)</code>.</li>
+<li>Finally, we return <code>ans</code>, which contains the maximum number of requests that can be fulfilled while satisfying the incoming and outgoing request constraints.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The overall time complexity of this solution is (O(2^m \cdot n)), where (m) is the number of requests and (n) is the number of servers. This is due to the fact that we are iterating over all subsets of requests (which is (2^m)) and checking the counts of incoming and outgoing requests (which involves looping through the servers).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n)) because we are using two arrays of size <code>n</code> (<code>in</code> and <code>out</code>) to count incoming and outgoing requests for each server.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>maximumRequests</code> function effectively uses a bitmasking approach to explore all possible subsets of requests to determine the maximum number that can be satisfied. The key features of this implementation include:</p>
+<ol>
+<li>
+<p><strong>Exhaustive Search</strong>: By using bitmasking, we can evaluate all possible combinations of requests, ensuring that we consider every potential subset.</p>
+</li>
+<li>
+<p><strong>Matching Logic</strong>: The use of the <code>in</code> and <code>out</code> vectors allows for a straightforward check of the constraints, ensuring that requests are only counted when they can be satisfied.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: Despite the exponential time complexity, this method is efficient for reasonably sized inputs and provides a clear and understandable solution to the problem.</p>
+</li>
+</ol>
+<p>In summary, this solution to the &ldquo;maximum number of requests&rdquo; problem demonstrates a practical application of bit manipulation and array manipulation techniques to handle a combinatorial problem effectively.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode679s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1602"  class="external-link" target="_blank" rel="noopener">LeetCode #1602: Find Nearest Right Node in Binary Tree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1602"  class="external-link" target="_blank" rel="noopener">LeetCode #1602: Find Nearest Right Node in Binary Tree</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +362,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

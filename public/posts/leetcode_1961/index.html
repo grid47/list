@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              5-minute read
             </span>
           </div>
           
@@ -212,11 +212,164 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode1079s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem at hand is to determine if a given string <code>s</code> is a prefix of the concatenation of a list of words <code>w</code>. A prefix is defined as a string that appears at the beginning of another string. In this case, we need to check if <code>s</code> can be formed by sequentially concatenating the strings in <code>w</code> from the start, in the given order.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a straightforward iterative approach to simulate the concatenation of the words in <code>w</code> and check if it matches the string <code>s</code>. The algorithm will work by maintaining two pointers: one for the string <code>s</code> and another for the current word in <code>w</code>. The key steps of the approach are:</p>
+<ol>
+<li>
+<p><strong>Initialize Pointers</strong>: Set up counters for tracking positions in the string <code>s</code> and the current word in <code>w</code>.</p>
+</li>
+<li>
+<p><strong>Iterate Through the String</strong>: Loop through each character of the string <code>s</code>, and compare it with the characters of the current word from <code>w</code>.</p>
+</li>
+<li>
+<p><strong>Character Comparison</strong>: If the characters match, move forward in the current word. If the end of the current word is reached, switch to the next word in <code>w</code>.</p>
+</li>
+<li>
+<p><strong>Final Checks</strong>: After traversing through <code>s</code>, ensure that the entire string has been matched and that the current word pointer is in a state that indicates a complete match.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div><p>The <code>Solution</code> class is defined, which will encapsulate our function.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">isPrefixString</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>The function <code>isPrefixString</code> takes two parameters:</p>
+<ul>
+<li><code>s</code>: the string we want to check.</li>
+<li><code>w</code>: a vector of strings representing the list of words.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><p>We initialize three variables:</p>
+<ul>
+<li><code>k</code>: to track the current word index in <code>w</code>.</li>
+<li><code>l</code>: to track the character index within the current word.</li>
+<li><code>i</code>: to track the character index within the string <code>s</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">w</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><p>We enter a loop that continues until we&rsquo;ve processed all characters in <code>s</code> or have exhausted all words in <code>w</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">w</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">l</span><span class="p">])</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div><p>We compare the current character in <code>s</code> with the current character in the current word of <code>w</code>. If they do not match, we return <code>false</code>, indicating that <code>s</code> cannot be a prefix.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="n">l</span><span class="o">++</span><span class="p">;</span>
+</span></span></code></pre></div><p>If the characters match, we move to the next character in the current word.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="n">w</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">k</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span></code></pre></div><p>We check if we have reached the end of the current word. If we have, we move to the next word in <code>w</code> and reset the character index <code>l</code> to zero.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>End of the loop.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></div><p>After the loop, we check if we have processed the entire string <code>s</code>. If not, we return <code>false</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Finally, we return <code>true</code> if the character pointer <code>l</code> is zero, indicating that the last word has been completely matched. If not, we return <code>false</code>.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n)), where (n) is the length of the string <code>s</code>. In the worst case, we may need to traverse all characters of <code>s</code> and compare them with the characters in <code>w</code>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) since we are using a constant amount of extra space (for the pointers) and not utilizing any additional data structures that scale with input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>isPrefixString</code> function effectively checks if the string <code>s</code> can be formed by the sequential concatenation of words in the vector <code>w</code>. By employing a simple iteration and character comparison approach, the solution remains efficient and easy to understand. This function can be particularly useful in scenarios involving string manipulation, parsing, or prefix matching in various applications such as text processing, search engines, or compilers.</p>
+<h3 id="key-features">
+  Key Features
+  <a class="heading-link" href="#key-features">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Direct Comparison</strong>: The algorithm directly compares characters from <code>s</code> and the words in <code>w</code>, ensuring accurate prefix validation.</p>
+</li>
+<li>
+<p><strong>Iterative Approach</strong>: Using an iterative approach simplifies the logic, making it easy to follow and implement.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: The function runs in linear time relative to the length of <code>s</code>, making it suitable for large inputs.</p>
+</li>
+</ol>
+<h3 id="use-cases">
+  Use Cases
+  <a class="heading-link" href="#use-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This function can be applied in various scenarios, such as:</p>
+<ul>
+<li><strong>Search Autocompletion</strong>: In search engines where prefix matching is crucial for suggesting search terms.</li>
+<li><strong>Text Parsing</strong>: In natural language processing tasks where prefix identification can aid in syntax analysis or tokenization.</li>
+<li><strong>Game Development</strong>: For scenarios where player input needs to match predefined commands or keywords.</li>
+</ul>
+<h3 id="example-usage">
+  Example Usage
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s an example of how to use the <code>isPrefixString</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Solution</span> <span class="n">sol</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;iloveleetcode&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">w</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;i&#34;</span><span class="p">,</span> <span class="s">&#34;love&#34;</span><span class="p">,</span> <span class="s">&#34;leet&#34;</span><span class="p">,</span> <span class="s">&#34;code&#34;</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">result</span> <span class="o">=</span> <span class="n">sol</span><span class="p">.</span><span class="n">isPrefixString</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">w</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Is prefix string: &#34;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">result</span> <span class="o">?</span> <span class="s">&#34;true&#34;</span> <span class="o">:</span> <span class="s">&#34;false&#34;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// Output: true
+</span></span></span></code></pre></div><p>In this example, we create an instance of the <code>Solution</code> class, define a string <code>s</code>, and a vector of words <code>w</code>. We then call the <code>isPrefixString</code> method and print the result, which indicates whether <code>s</code> is a prefix of the concatenated words in <code>w</code>.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode1079s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1962"  class="external-link" target="_blank" rel="noopener">LeetCode #1962: Remove Stones to Minimize the Total</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1962"  class="external-link" target="_blank" rel="noopener">LeetCode #1962: Remove Stones to Minimize the Total</a></th>
       </tr>
   </thead>
   <tbody>
@@ -237,66 +390,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

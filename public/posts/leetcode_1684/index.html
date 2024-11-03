@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
           
@@ -208,11 +208,143 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>        
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode774s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires us to determine the number of strings in a list (or vector) that are considered &ldquo;consistent.&rdquo; A string is defined as consistent if all of its characters are present in a specified set of allowed characters. Given a string of allowed characters and a vector of words, the task is to count how many of these words are consistent according to the defined criteria.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem, we can utilize a straightforward approach leveraging a boolean array (or a map) to keep track of which characters are allowed. Here&rsquo;s the step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We will initialize a variable to count the number of consistent strings (initially set to the total number of words). We will also create a boolean array to mark the allowed characters.</p>
+</li>
+<li>
+<p><strong>Mark Allowed Characters</strong>: Iterate through the allowed string, marking the corresponding indices in the boolean array to indicate which characters are permitted.</p>
+</li>
+<li>
+<p><strong>Count Consistent Strings</strong>: For each word in the list of words:</p>
+<ul>
+<li>Check each character of the word against the boolean array.</li>
+<li>If any character is not allowed, decrement the count of consistent strings and break out of the loop for that word.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>: After checking all words, return the count of consistent strings.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the implementation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">countConsistentStrings</span><span class="p">(</span><span class="n">string</span> <span class="n">allowed</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div><ul>
+<li><strong>Class Definition</strong>: We define a class named <code>Solution</code> and create a public method <code>countConsistentStrings</code>, which takes a string <code>allowed</code> and a vector of strings <code>words</code> as parameters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">mp</span><span class="p">[</span><span class="mi">26</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>:
+<ul>
+<li>We initialize <code>res</code> with the size of <code>words</code>, assuming all words are consistent initially.</li>
+<li>We also declare a boolean array <code>mp</code> of size 26 (for each letter of the alphabet) to track the allowed characters.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="nl">c</span><span class="p">:</span> <span class="n">allowed</span><span class="p">)</span> <span class="n">mp</span><span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Mark Allowed Characters</strong>: We iterate through each character in the <code>allowed</code> string. For each character <code>c</code>, we set <code>mp[c - 'a']</code> to <code>true</code>, indicating that this character is allowed. This allows us to use the character&rsquo;s ASCII value to index into the boolean array, where &lsquo;a&rsquo; corresponds to index 0, &lsquo;b&rsquo; to index 1, and so on.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">string</span> <span class="nl">word</span><span class="p">:</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="nl">c</span><span class="p">:</span> <span class="n">word</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">mp</span><span class="p">[</span><span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;a&#39;</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">res</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li><strong>Count Consistent Strings</strong>:
+<ul>
+<li>We loop through each <code>word</code> in the <code>words</code> vector.</li>
+<li>For each <code>word</code>, we check each character <code>c</code>.</li>
+<li>If <code>c</code> is not allowed (i.e., <code>mp[c - 'a']</code> is <code>false</code>), we decrement <code>res</code> since this word is not consistent, and we break out of the inner loop to stop checking the rest of the characters in that word.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>        
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li><strong>Return Result</strong>: After checking all words, we return <code>res</code>, which now contains the number of consistent strings.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is ( O(n \times m) ), where ( n ) is the number of words in the <code>words</code> vector and ( m ) is the average length of the words. We check each character of each word against the allowed characters.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) since the size of the boolean array <code>mp</code> is fixed at 26, regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively counts the number of consistent strings in the given list of words using a boolean array to track allowed characters.</p>
+<p>Key highlights include:</p>
+<ol>
+<li>
+<p><strong>Simplicity</strong>: The approach is intuitive and easy to understand, utilizing basic data structures to achieve the desired result.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: The algorithm efficiently checks each character against allowed characters, ensuring optimal performance even with larger inputs.</p>
+</li>
+<li>
+<p><strong>Versatility</strong>: The solution can handle any combination of allowed characters and words, making it adaptable to different scenarios.</p>
+</li>
+</ol>
+<p>Overall, the code demonstrates a clear and efficient method to solve the problem, focusing on leveraging simple data structures to manage and verify character consistency.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode774s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1685"  class="external-link" target="_blank" rel="noopener">LeetCode #1685: Sum of Absolute Differences in a Sorted Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1685"  class="external-link" target="_blank" rel="noopener">LeetCode #1685: Sum of Absolute Differences in a Sorted Array</a></th>
       </tr>
   </thead>
   <tbody>
@@ -233,66 +365,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

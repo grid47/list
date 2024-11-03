@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -221,11 +221,142 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rbegin</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">rend</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode989s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The objective of this problem is to identify the three largest unique sums of diamonds that can be formed in a given grid of integers. A diamond shape in this context is defined as a collection of cells where the center of the diamond is at a specific cell in the grid, and it expands outward symmetrically. The size of the diamond can vary, allowing it to encompass more cells as long as it remains within the boundaries of the grid. The task is to compute the sums of these diamond shapes and return the three largest unique sums.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, the following steps are performed:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>: Set up the dimensions of the grid and a set to store the unique sums of the diamonds.</p>
+</li>
+<li>
+<p><strong>Iterate Over Each Cell</strong>: For each cell in the grid, treat it as the potential center of a diamond.</p>
+</li>
+<li>
+<p><strong>Expand the Diamond</strong>: For each cell, expand the diamond shape:</p>
+<ul>
+<li>Use a nested loop to increase the size of the diamond until it reaches the boundaries of the grid.</li>
+<li>Compute the sum of the values in the diamond shape by traversing the required cells.</li>
+</ul>
+</li>
+<li>
+<p><strong>Store Unique Sums</strong>: Store each computed sum in a set to ensure all values are unique.</p>
+</li>
+<li>
+<p><strong>Limit the Size of the Set</strong>: If the set exceeds three elements, remove the smallest sum to keep only the three largest sums.</p>
+</li>
+<li>
+<p><strong>Return the Results</strong>: Convert the set of sums to a vector and return it in descending order.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The code is encapsulated within a class named <code>Solution</code>, which follows the structure used in competitive programming.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">typedef</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">ll</span><span class="p">;</span> <span class="c1">// Using typedef for long long type for large sums
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Declaration</strong>: The <code>getBiggestThree</code> function is declared, taking a 2D vector of integers ( grid ) as input and returning a vector of integers.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">getBiggestThree</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Initialize Variables</strong>: The dimensions of the grid ( m ) and ( n ) are determined. A set ( s ) is created to store unique sums.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterate Over Each Cell</strong>: A nested loop iterates through each cell in the grid, treating each cell as the potential center of a diamond.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Expand the Diamond</strong>: A third loop is used to determine the size ( sz ) of the diamond while ensuring that the diamond stays within the grid boundaries.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">sz</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">sz</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">-</span> <span class="n">sz</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sz</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">sz</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Compute Diamond Sums</strong>: Within the size loop, variables ( x ) and ( y ) are initialized to the current cell coordinates. The variable ( rsum ) is initialized to zero to accumulate the sum of the diamond&rsquo;s values.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ll</span> <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">j</span><span class="p">,</span> <span class="n">rsum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The first <code>do-while</code> loop accumulates the sum of the left side of the diamond.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">do</span> <span class="n">rsum</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="o">++</span><span class="p">][</span><span class="n">y</span><span class="o">++</span><span class="p">];</span> <span class="k">while</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">sz</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>If the diamond size is greater than zero, the following loops calculate the remaining sides of the diamond.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">sz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="n">rsum</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="o">--</span><span class="p">][</span><span class="n">y</span><span class="o">++</span><span class="p">];</span> <span class="k">while</span><span class="p">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sz</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="n">rsum</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="o">--</span><span class="p">][</span><span class="n">y</span><span class="o">--</span><span class="p">];</span> <span class="k">while</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">-</span> <span class="n">sz</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="n">rsum</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="o">++</span><span class="p">][</span><span class="n">y</span><span class="o">--</span><span class="p">];</span> <span class="k">while</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Store Unique Sums</strong>: The computed sum is inserted into the set ( s ). If the size of the set exceeds three, the smallest element is removed.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">rsum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">s</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Results</strong>: Finally, convert the set into a vector, returning it in descending order using reverse iterators.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">return</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rbegin</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">rend</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this solution is ( O(m \times n \times \min(m, n)) ), where ( m ) is the number of rows and ( n ) is the number of columns in the grid. This complexity arises because for each cell in the grid, the algorithm potentially examines a diamond of increasing size until it hits the boundary of the grid. The space complexity is ( O(1) ) for the output vector and ( O(k) ) for the set ( s ), where ( k ) is limited to 3 since we are only storing the three largest sums.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <code>getBiggestThree</code> function effectively identifies the three largest unique sums of diamond shapes in a grid of integers. This approach demonstrates a systematic way to explore possible shapes within a 2D array while efficiently managing and tracking unique sums. The use of nested loops to explore each cell and its potential diamonds illustrates fundamental algorithmic techniques that can be applied to various grid-based problems.</p>
+<p>This solution not only provides a clear path to finding the desired sums but also serves as a great example of utilizing data structures like sets for uniqueness and efficiency in tracking results. By understanding and applying these techniques, programmers can enhance their problem-solving skills in both competitive programming and real-world applications where grid manipulation is common. Overall, this problem showcases the combination of mathematical reasoning and programming logic to solve complex challenges efficiently.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode989s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1879"  class="external-link" target="_blank" rel="noopener">LeetCode #1879: Minimum XOR Sum of Two Arrays</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1879"  class="external-link" target="_blank" rel="noopener">LeetCode #1879: Minimum XOR Sum of Two Arrays</a></th>
       </tr>
   </thead>
   <tbody>
@@ -246,66 +377,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {

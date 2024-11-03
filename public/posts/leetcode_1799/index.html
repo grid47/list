@@ -181,7 +181,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              6-minute read
             </span>
           </div>
           
@@ -228,7 +228,151 @@
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></div>
-<hr>
+<h2 id="hahahugoshortcode901s1hbhb">
+  
+
+  
+  <div class="markdown-body">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem requires maximizing the score obtained by pairing elements from an array. Given an array of integers, the objective is to select pairs of elements and calculate a score based on their greatest common divisor (GCD) multiplied by the round index of the pairing. The challenge is to perform this operation optimally, ensuring that all elements are used exactly once in pairs.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution utilizes a dynamic programming (DP) approach with bitmasking to efficiently track used elements. The main steps of the approach include:</p>
+<ol>
+<li>
+<p><strong>Understanding the Problem</strong>: We need to form pairs from the given list of numbers. For each pair formed at index <code>idx</code>, the score is computed as ((\text{idx} + 1) \times \text{GCD}(\text{num}_i, \text{num}_j)).</p>
+</li>
+<li>
+<p><strong>Using Bitmasking</strong>: A bitmask is used to represent the state of which numbers have been used. If we have <code>n</code> numbers, the bitmask will be an integer where each bit corresponds to an index in the <code>nums</code> array, indicating whether that number has been paired or not.</p>
+</li>
+<li>
+<p><strong>Dynamic Programming</strong>: The DP function <code>dp(idx, msk)</code> recursively computes the maximum score for the current state defined by <code>idx</code> (the current pairing round) and <code>msk</code> (the current state of used numbers). If <code>idx</code> reaches <code>n</code>, it means all pairs have been formed, and the function returns 0.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: To avoid recalculating results for the same state, a memoization table <code>memo[idx][msk]</code> is used to store already computed results.</p>
+</li>
+<li>
+<p><strong>Iterating through Pairs</strong>: For each pair of numbers that can still be used, the GCD is calculated, and the DP function is called recursively to explore further pairing options.</p>
+</li>
+<li>
+<p><strong>Final Score Calculation</strong>: The final result is obtained by calling the <code>maxScore</code> function, which initializes the memoization table and begins the recursive process.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code can be broken down into several sections:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">memo</span><span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="mi">20000</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span></code></pre></div><ul>
+<li>A class named <code>Solution</code> is defined with public access.</li>
+<li>Three member variables are declared: <code>n</code> to store half the size of the <code>nums</code> vector, <code>nums</code> to hold the input values, and <code>memo</code> for memoization.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">dp</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">msk</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function is defined, which takes the current index <code>idx</code> and the bitmask <code>msk</code> as parameters.</li>
+<li>If <code>idx</code> equals <code>n</code>, the function returns 0, indicating no more pairs can be formed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>The memoization check is performed. If a result for the current state exists, it is returned immediately.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(((</span><span class="n">msk</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The <code>ans</code> variable is initialized to track the maximum score.</li>
+<li>The first loop iterates through all numbers. If the current number has already been used (as determined by checking the corresponding bit in <code>msk</code>), it skips to the next iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(((</span><span class="n">msk</span> <span class="o">&gt;&gt;</span> <span class="n">j</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li>The second loop iterates through all numbers again to find a valid pair. It ensures that <code>i</code> is not equal to <code>j</code> and that the number at index <code>j</code> has not been used yet.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span>
+</span></span></code></pre></div><ul>
+<li>Both bits corresponding to the indices <code>i</code> and <code>j</code> are set in <code>msk</code>, indicating that these numbers are now used.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">__gcd</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">msk</span><span class="p">));</span>
+</span></span></code></pre></div><ul>
+<li>The score for the current pairing is calculated as ((\text{idx} + 1) \times \text{GCD}(\text{num}_i, \text{num}_j)), and the result of the recursive call for the next index is added.</li>
+<li>The maximum score found so far is stored in <code>ans</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">msk</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">j</span><span class="p">);</span>                
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">msk</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>The bitmask is reset for the next iteration by clearing the bits for <code>i</code> and <code>j</code>.</li>
+<li>The computed result is stored in <code>memo</code> for the current state.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">maxScore</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">-&gt;</span><span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">memset</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">memo</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>The <code>maxScore</code> function initializes <code>n</code>, sets the <code>nums</code> vector, clears the memoization table with <code>memset</code>, and begins the recursive DP process by calling <code>dp(0, 0)</code>.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is (O(n^2 \cdot 2^{2n})), where (n) is half the size of the input vector <code>nums</code>. This is because we explore all combinations of pairs using bitmasking. The bitmask allows us to represent the state of each number, leading to (2^{2n}) states, and for each state, we perform (O(n^2)) checks to find valid pairs.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n + 2^{2n})) due to the memoization table and the storage required for the input vector. The size of the memoization table is directly influenced by the number of states created by the bitmasking.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The presented solution effectively utilizes dynamic programming and bitmasking to solve the problem of maximizing scores from pairing integers based on their GCDs. By combining these techniques, the algorithm efficiently explores all possible combinations while leveraging memoization to optimize performance.</p>
+<p>This approach demonstrates the power of combining different algorithmic strategies—dynamic programming for optimization and bitmasking for state representation. Such techniques are invaluable in competitive programming and problem-solving contexts, showcasing how complex problems can be broken down into manageable components.</p>
+<p>In summary, the code is a clear and efficient solution to a classic pairing problem, embodying key principles of computer science and algorithm design. The ability to understand and implement such solutions is crucial for developers, particularly in domains that require optimization and combinatorial logic, such as game development, algorithm design, and data analysis.</p>
+ 
+</div>
+  
+
+  <a class="heading-link" href="#hahahugoshortcode901s1hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 
 
     
@@ -240,7 +384,7 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/posts/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1800"  class="external-link" target="_blank" rel="noopener">LeetCode #1800: Maximum Ascending Subarray Sum</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Exercise Compilation</a> / Next : <a href="https://grid47.xyz/posts/leetcode_1800"  class="external-link" target="_blank" rel="noopener">LeetCode #1800: Maximum Ascending Subarray Sum</a></th>
       </tr>
   </thead>
   <tbody>
@@ -261,66 +405,6 @@
 
       <footer>
         
-
-<section class="see-also">
-  
-    
-    
-    
-      <h3 id="see-also-in-leetcode">
-        See also in Leetcode
-        <a class="heading-link" href="#see-also-in-leetcode">
-          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-          <span class="sr-only">Link to heading</span>
-        </a>
-      </h3>
-      <nav>
-        <ul>
-        
-        
-          
-            <li>
-              <a href="/posts/leetcode_1/">Leetcode 1: Two Sum</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_2/">Leetcode 2: Add Two Numbers</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_3/">Leetcode 3: Longest Substring Without Repeating Characters</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_4/">Leetcode 4: Median of Two Sorted Arrays</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_5/">Leetcode 5: Longest Palindromic Substring</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="/posts/leetcode_6/">Leetcode 6: Zigzag Conversion</a>
-            </li>
-          
-        
-        </ul>
-      </nav>
-    
-  
-</section>
-
-
         <div id="disqus_thread"></div>
 <script>
   window.disqus_config = function () {
