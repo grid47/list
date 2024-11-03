@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3102: Minimize Manhattan Distances"
-date = "2016-05-06"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3102: Minimize Manhattan Distances in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

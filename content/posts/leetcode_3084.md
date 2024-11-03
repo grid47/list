@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3084: Count Substrings Starting and Ending with Given Character"
-date = "2016-05-24"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3084: Count Substrings Starting and Ending with Given Character in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

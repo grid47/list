@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 641: Design Circular Deque"
-date = "2023-01-31"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 641: Design Circular Deque in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3106: Lexicographically Smallest String After Operations With Constraint"
-date = "2016-05-02"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3106: Lexicographically Smallest String After Operations With Constraint in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

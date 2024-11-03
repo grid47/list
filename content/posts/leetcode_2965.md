@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2965: Find Missing and Repeated Values"
-date = "2016-09-20"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2965: Find Missing and Repeated Values in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

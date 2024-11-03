@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3101: Count Alternating Subarrays"
-date = "2016-05-07"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3101: Count Alternating Subarrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

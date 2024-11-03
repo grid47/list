@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2079: Watering Plants"
-date = "2019-02-23"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2079: Watering Plants in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

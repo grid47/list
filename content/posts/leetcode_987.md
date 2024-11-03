@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 987: Vertical Order Traversal of a Binary Tree"
-date = "2022-02-19"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 987: Vertical Order Traversal of a Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

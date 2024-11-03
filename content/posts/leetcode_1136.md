@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1136: Parallel Courses"
-date = "2021-09-23"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1136: Parallel Courses in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

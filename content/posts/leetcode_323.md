@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 323: Number of Connected Components in an Undirected Graph"
-date = "2023-12-15"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 323: Number of Connected Components in an Undirected Graph in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 487: Max Consecutive Ones II"
-date = "2023-07-04"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 487: Max Consecutive Ones II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

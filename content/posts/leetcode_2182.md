@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2182: Construct String With Repeat Limit"
-date = "2018-11-12"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2182: Construct String With Repeat Limit in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

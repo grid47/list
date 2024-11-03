@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 971: Flip Binary Tree To Match Preorder Traversal"
-date = "2022-03-07"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 971: Flip Binary Tree To Match Preorder Traversal in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

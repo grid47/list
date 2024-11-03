@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1196: How Many Apples Can You Put into the Basket"
-date = "2021-07-25"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1196: How Many Apples Can You Put into the Basket in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1725: Number Of Rectangles That Can Form The Largest Square"
-date = "2020-02-12"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1725: Number Of Rectangles That Can Form The Largest Square in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

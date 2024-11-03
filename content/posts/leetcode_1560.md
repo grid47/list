@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1560: Most Visited Sector in  a Circular Track"
-date = "2020-07-26"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1560: Most Visited Sector in  a Circular Track in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2217: Find Palindrome With Fixed Length"
-date = "2018-10-08"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2217: Find Palindrome With Fixed Length in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

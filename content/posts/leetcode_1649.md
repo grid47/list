@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1649: Create Sorted Array through Instructions"
-date = "2020-04-28"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1649: Create Sorted Array through Instructions in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

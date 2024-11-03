@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 214: Shortest Palindrome"
-date = "2024-04-02"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 214: Shortest Palindrome in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2372: Calculate the Influence of Each Salesperson"
-date = "2018-05-06"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2372: Calculate the Influence of Each Salesperson in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

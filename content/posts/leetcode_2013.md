@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2013: Detect Squares"
-date = "2019-04-30"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2013: Detect Squares in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

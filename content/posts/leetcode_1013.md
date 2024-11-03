@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1013: Partition Array Into Three Parts With Equal Sum"
-date = "2022-01-24"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1013: Partition Array Into Three Parts With Equal Sum in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

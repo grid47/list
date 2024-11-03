@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1779: Find Nearest Point That Has the Same X or Y Coordinate"
-date = "2019-12-20"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1779: Find Nearest Point That Has the Same X or Y Coordinate in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

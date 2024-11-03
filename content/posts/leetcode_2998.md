@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2998: Minimum Number of Operations to Make X and Y Equal"
-date = "2016-08-18"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2998: Minimum Number of Operations to Make X and Y Equal in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

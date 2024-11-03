@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2962: Count Subarrays Where Max Element Appears at Least K Times"
-date = "2016-09-23"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2962: Count Subarrays Where Max Element Appears at Least K Times in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

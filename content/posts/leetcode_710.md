@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 710: Random Pick with Blacklist"
-date = "2022-11-23"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 710: Random Pick with Blacklist in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

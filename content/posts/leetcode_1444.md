@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1444: Number of Ways of Cutting a Pizza"
-date = "2020-11-19"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1444: Number of Ways of Cutting a Pizza in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

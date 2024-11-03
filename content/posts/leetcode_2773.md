@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2773: Height of Special Binary Tree"
-date = "2017-03-31"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2773: Height of Special Binary Tree in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

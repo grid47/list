@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2399: Check Distances Between Same Letters"
-date = "2018-04-09"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2399: Check Distances Between Same Letters in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

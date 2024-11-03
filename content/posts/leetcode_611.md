@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 611: Valid Triangle Number"
-date = "2023-03-02"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 611: Valid Triangle Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

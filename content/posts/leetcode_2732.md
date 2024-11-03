@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2732: Find a Good Subset of the Matrix"
-date = "2017-05-11"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2732: Find a Good Subset of the Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

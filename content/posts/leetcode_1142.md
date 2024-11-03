@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1142: User Activity for the Past 30 Days II"
-date = "2021-09-17"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1142: User Activity for the Past 30 Days II in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

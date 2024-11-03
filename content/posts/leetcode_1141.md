@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1141: User Activity for the Past 30 Days I"
-date = "2021-09-18"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1141: User Activity for the Past 30 Days I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2369: Check if There is a Valid Partition For The Array"
-date = "2018-05-09"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2369: Check if There is a Valid Partition For The Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

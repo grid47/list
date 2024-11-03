@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1112: Highest Grade For Each Student"
-date = "2021-10-17"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1112: Highest Grade For Each Student in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

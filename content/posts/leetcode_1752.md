@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1752: Check if Array Is Sorted and Rotated"
-date = "2020-01-16"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1752: Check if Array Is Sorted and Rotated in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

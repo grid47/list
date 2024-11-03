@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 821: Shortest Distance to a Character"
-date = "2022-08-04"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 821: Shortest Distance to a Character in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

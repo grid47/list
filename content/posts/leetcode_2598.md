@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2598: Smallest Missing Non-negative Integer After Operations"
-date = "2017-09-22"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2598: Smallest Missing Non-negative Integer After Operations in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

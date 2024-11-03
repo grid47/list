@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2316: Count Unreachable Pairs of Nodes in an Undirected Graph"
-date = "2018-07-01"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2316: Count Unreachable Pairs of Nodes in an Undirected Graph in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3153: Sum of Digit Differences of All Pairs"
-date = "2016-03-16"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3153: Sum of Digit Differences of All Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

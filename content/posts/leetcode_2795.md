@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2795: Parallel Execution of Promises for Individual Results Retrieval"
-date = "2017-03-09"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2795: Parallel Execution of Promises for Individual Results Retrieval in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

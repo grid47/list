@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2494: Merge Overlapping Events in the Same Hall"
-date = "2018-01-04"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2494: Merge Overlapping Events in the Same Hall in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

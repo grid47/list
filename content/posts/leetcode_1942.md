@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1942: The Number of the Smallest Unoccupied Chair"
-date = "2019-07-10"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1942: The Number of the Smallest Unoccupied Chair in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

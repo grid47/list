@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 594: Longest Harmonious Subsequence"
-date = "2023-03-19"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 594: Longest Harmonious Subsequence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2246: Longest Path With Different Adjacent Characters"
-date = "2018-09-09"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2246: Longest Path With Different Adjacent Characters in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2794: Create Object from Two Arrays"
-date = "2017-03-10"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2794: Create Object from Two Arrays in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

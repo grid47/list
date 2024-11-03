@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 801: Minimum Swaps To Make Sequences Increasing"
-date = "2022-08-24"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 801: Minimum Swaps To Make Sequences Increasing in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

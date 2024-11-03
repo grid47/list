@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3301: Maximize the Total Height of Unique Towers"
-date = "2015-10-20"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3301: Maximize the Total Height of Unique Towers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

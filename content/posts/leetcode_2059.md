@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2059: Minimum Operations to Convert Number"
-date = "2019-03-15"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2059: Minimum Operations to Convert Number in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

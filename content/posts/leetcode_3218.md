@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3218: Minimum Cost for Cutting Cake I"
-date = "2016-01-11"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3218: Minimum Cost for Cutting Cake I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

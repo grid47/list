@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1467: Probability of a Two Boxes Having The Same Number of Distinct Balls"
-date = "2020-10-27"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1467: Probability of a Two Boxes Having The Same Number of Distinct Balls in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3283: Maximum Number of Moves to Kill All Pawns"
-date = "2015-11-07"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3283: Maximum Number of Moves to Kill All Pawns in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

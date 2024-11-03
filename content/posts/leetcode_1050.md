@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1050: Actors and Directors Who Cooperated At Least Three Times"
-date = "2021-12-18"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1050: Actors and Directors Who Cooperated At Least Three Times in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

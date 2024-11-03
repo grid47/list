@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1851: Minimum Interval to Include Each Query"
-date = "2019-10-09"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1851: Minimum Interval to Include Each Query in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

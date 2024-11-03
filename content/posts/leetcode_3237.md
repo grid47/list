@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3237: Alt and Tab Simulation"
-date = "2015-12-23"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3237: Alt and Tab Simulation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

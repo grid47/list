@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1285: Find the Start and End Number of Continuous Ranges"
-date = "2021-04-27"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1285: Find the Start and End Number of Continuous Ranges in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

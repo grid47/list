@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 160: Intersection of Two Linked Lists"
-date = "2024-05-26"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 160: Intersection of Two Linked Lists in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

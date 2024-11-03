@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1977: Number of Ways to Separate Numbers"
-date = "2019-06-05"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1977: Number of Ways to Separate Numbers in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

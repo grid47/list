@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2500: Delete Greatest Value in Each Row"
-date = "2017-12-29"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2500: Delete Greatest Value in Each Row in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 954: Array of Doubled Pairs"
-date = "2022-03-24"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 954: Array of Doubled Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

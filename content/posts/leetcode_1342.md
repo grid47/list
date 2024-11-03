@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1342: Number of Steps to Reduce a Number to Zero"
-date = "2021-03-01"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1342: Number of Steps to Reduce a Number to Zero in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 58: Length of Last Word"
-date = "2024-09-05"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 58: Length of Last Word in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2911: Minimum Changes to Make K Semi-palindromes"
-date = "2016-11-13"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2911: Minimum Changes to Make K Semi-palindromes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

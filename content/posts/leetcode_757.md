@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 757: Set Intersection Size At Least Two"
-date = "2022-10-07"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 757: Set Intersection Size At Least Two in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

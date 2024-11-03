@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2104: Sum of Subarray Ranges"
-date = "2019-01-29"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2104: Sum of Subarray Ranges in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

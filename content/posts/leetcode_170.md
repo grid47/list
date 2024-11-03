@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 170: Two Sum III - Data structure design"
-date = "2024-05-16"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 170: Two Sum III - Data structure design in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

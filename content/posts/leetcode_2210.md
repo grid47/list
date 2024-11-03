@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2210: Count Hills and Valleys in an Array"
-date = "2018-10-15"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2210: Count Hills and Valleys in an Array in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

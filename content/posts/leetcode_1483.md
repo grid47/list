@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1483: Kth Ancestor of a Tree Node"
-date = "2020-10-11"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1483: Kth Ancestor of a Tree Node in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

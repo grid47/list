@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2994: Friday Purchases II "
-date = "2016-08-22"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2994: Friday Purchases II  in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

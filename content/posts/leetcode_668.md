@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 668: Kth Smallest Number in Multiplication Table"
-date = "2023-01-04"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 668: Kth Smallest Number in Multiplication Table in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

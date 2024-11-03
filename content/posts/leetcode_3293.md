@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3293: Calculate Product Final Price"
-date = "2015-10-28"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3293: Calculate Product Final Price in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

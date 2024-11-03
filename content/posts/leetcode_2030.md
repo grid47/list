@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2030: Smallest K-Length Subsequence With Occurrences of a Letter"
-date = "2019-04-13"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2030: Smallest K-Length Subsequence With Occurrences of a Letter in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

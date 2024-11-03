@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2114: Maximum Number of Words Found in Sentences"
-date = "2019-01-19"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2114: Maximum Number of Words Found in Sentences in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

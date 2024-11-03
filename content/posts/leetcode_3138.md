@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 3138: Minimum Length of Anagram Concatenation"
-date = "2016-03-31"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 3138: Minimum Length of Anagram Concatenation in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

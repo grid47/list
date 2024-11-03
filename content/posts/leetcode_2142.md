@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2142: The Number of Passengers in Each Bus I"
-date = "2018-12-22"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2142: The Number of Passengers in Each Bus I in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

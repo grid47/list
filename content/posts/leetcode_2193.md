@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2193: Minimum Number of Moves to Make Palindrome"
-date = "2018-11-01"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2193: Minimum Number of Moves to Make Palindrome in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

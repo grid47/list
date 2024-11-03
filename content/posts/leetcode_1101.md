@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1101: The Earliest Moment When Everyone Become Friends"
-date = "2021-10-28"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1101: The Earliest Moment When Everyone Become Friends in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 830: Positions of Large Groups"
-date = "2022-07-26"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 830: Positions of Large Groups in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

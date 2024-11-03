@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 585: Investments in 2016"
-date = "2023-03-28"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 585: Investments in 2016 in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

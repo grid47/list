@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 903: Valid Permutations for DI Sequence"
-date = "2022-05-14"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 903: Valid Permutations for DI Sequence in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

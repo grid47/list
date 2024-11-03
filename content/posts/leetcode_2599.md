@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2599: Make the Prefix Sum Non-negative"
-date = "2017-09-21"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2599: Make the Prefix Sum Non-negative in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

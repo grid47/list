@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 343: Integer Break"
-date = "2023-11-25"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 343: Integer Break in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

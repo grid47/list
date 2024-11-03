@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2359: Find Closest Node to Given Two Nodes"
-date = "2018-05-19"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2359: Find Closest Node to Given Two Nodes in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

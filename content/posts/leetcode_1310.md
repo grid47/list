@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 1310: XOR Queries of a Subarray"
-date = "2021-04-02"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 1310: XOR Queries of a Subarray in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     

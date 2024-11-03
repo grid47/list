@@ -2,7 +2,7 @@
 +++
 authors = ["Crafted by Me"]
 title = "Leetcode 2713: Maximum Strictly Increasing Cells in a Matrix"
-date = "2017-05-30"
+date = "2024-11-01"
 description = "In-depth solution and explanation for Leetcode 2713: Maximum Strictly Increasing Cells in a Matrix in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis—more insightful than official and community solutions."
 tags = [
     
